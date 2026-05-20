@@ -18,6 +18,7 @@ npx vercel build --prod --token "$TOKEN" 2>&1 | tail -1
 
 echo "🧹 Removing extensionless files (they shadow .html)..."
 rm -f .vercel/output/static/index .vercel/output/static/panel-tecnicos 2>/dev/null
+rm -f .vercel/output/static/legal/aviso-legal .vercel/output/static/legal/privacidad .vercel/output/static/legal/cookies 2>/dev/null
 
 echo "🚀 Deploying..."
 npx vercel deploy --prebuilt --prod --yes --token "$TOKEN" 2>&1 | tail -5
