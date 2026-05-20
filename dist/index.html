@@ -360,12 +360,81 @@
       line-height: 1.6;
       max-width: 540px;
     }
+    /* Hero layout: imagen + copy lado a lado */
+    .hero-inner {
+      display: flex;
+      align-items: flex-start;
+      gap: 1.5rem;
+    }
     .hero-image {
-      margin-bottom: 1.5rem;
+      flex-shrink: 0;
     }
     .hero-image svg {
       max-width: 100%;
       height: auto;
+    }
+    .hero-copy {
+      flex: 1;
+    }
+    /* Badge verificado */
+    .verified-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: .35rem;
+      background: #f0fdf4;
+      border: 1px solid #bbf7d0;
+      color: #15803d;
+      font-size: .8rem;
+      font-weight: 600;
+      padding: .3rem .7rem;
+      border-radius: 20px;
+      margin-top: .5rem;
+    }
+    .verified-badge svg {
+      width: 14px;
+      height: 14px;
+    }
+    /* Avatares testimonios */
+    .testimonio-header {
+      display: flex;
+      align-items: center;
+      gap: .75rem;
+      margin-bottom: .75rem;
+    }
+    .testimonio-avatar {
+      width: 42px;
+      height: 42px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      font-size: 1rem;
+      color: white;
+      flex-shrink: 0;
+    }
+    .testimonio-name {
+      font-weight: 600;
+      color: var(--gray-800);
+      font-size: .9rem;
+    }
+    .testimonio-loc {
+      color: #999;
+      font-size: .78rem;
+    }
+    @media (max-width: 768px) {
+      .hero-inner {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+      }
+      .hero-copy {
+        text-align: center;
+      }
+      .hero-image svg {
+        width: 180px;
+        height: 234px;
+      }
     }
 
     /* Testimonios / reseñas */
@@ -471,29 +540,48 @@
   <!-- ====== HERO + CALCULADORA ====== -->
   <section class="hero">
     <div class="hero-text">
-      <!-- Imagen indexable: etiqueta energética -->
-      <div class="hero-image" aria-label="Etiqueta de eficiencia energética de la A a la G" role="img">
-        <svg width="320" height="240" viewBox="0 0 320 240" xmlns="http://www.w3.org/2000/svg">
-          <rect width="320" height="240" fill="#f0fdf4" rx="12"/>
-          <rect x="20" y="20" width="40" height="180" rx="4" fill="#00873d"/><text x="40" y="125" text-anchor="middle" fill="white" font-size="28" font-weight="bold" font-family="sans-serif">A</text>
-          <rect x="62" y="20" width="40" height="180" rx="4" fill="#4ba53d"/><text x="82" y="125" text-anchor="middle" fill="white" font-size="28" font-weight="bold" font-family="sans-serif">B</text>
-          <rect x="104" y="20" width="40" height="180" rx="4" fill="#b5c93b"/><text x="124" y="125" text-anchor="middle" fill="white" font-size="28" font-weight="bold" font-family="sans-serif">C</text>
-          <rect x="146" y="20" width="40" height="180" rx="4" fill="#fceb3c"/><text x="166" y="125" text-anchor="middle" fill="#333" font-size="28" font-weight="bold" font-family="sans-serif">D</text>
-          <rect x="188" y="20" width="40" height="180" rx="4" fill="#f7b731"/><text x="208" y="125" text-anchor="middle" fill="white" font-size="28" font-weight="bold" font-family="sans-serif">E</text>
-          <rect x="230" y="20" width="40" height="180" rx="4" fill="#ee7f34"/><text x="250" y="125" text-anchor="middle" fill="white" font-size="28" font-weight="bold" font-family="sans-serif">F</text>
-          <rect x="272" y="20" width="40" height="180" rx="4" fill="#e32f2f"/><text x="292" y="125" text-anchor="middle" fill="white" font-size="28" font-weight="bold" font-family="sans-serif">G</text>
-          <text x="160" y="225" text-anchor="middle" fill="#15803d" font-size="11" font-family="sans-serif">Etiqueta de eficiencia energética</text>
-        </svg>
-      </div>
-      <h1>Tu <span>certificado energético (CEE)</span> en 24 horas</h1>
+      <div class="hero-inner">
+        <!-- Imagen indexable: etiqueta energética -->
+        <div class="hero-image" aria-label="Etiqueta de eficiencia energética de la A a la G" role="img">
+          <svg width="200" height="260" viewBox="0 0 200 260" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <linearGradient id="g" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0%" stop-color="#00873d"/><stop offset="16%" stop-color="#4ba53d"/><stop offset="33%" stop-color="#b5c93b"/><stop offset="50%" stop-color="#fceb3c"/><stop offset="66%" stop-color="#f7b731"/><stop offset="83%" stop-color="#ee7f34"/><stop offset="100%" stop-color="#e32f2f"/>
+              </linearGradient>
+            </defs>
+            <rect width="200" height="260" fill="#f0fdf4" rx="10"/>
+            <rect x="15" y="15" width="35" height="160" rx="4" fill="url(#g)"/>
+            <text x="32" y="105" text-anchor="middle" fill="white" font-size="24" font-weight="bold" font-family="sans-serif">A</text>
+            <rect x="52" y="15" width="35" height="160" rx="4" fill="url(#g)"/>
+            <text x="69" y="105" text-anchor="middle" fill="white" font-size="24" font-weight="bold" font-family="sans-serif">B</text>
+            <rect x="89" y="15" width="35" height="160" rx="4" fill="url(#g)"/>
+            <text x="106" y="105" text-anchor="middle" fill="white" font-size="24" font-weight="bold" font-family="sans-serif">C</text>
+            <rect x="126" y="15" width="35" height="160" rx="4" fill="url(#g)"/>
+            <text x="143" y="105" text-anchor="middle" fill="#333" font-size="24" font-weight="bold" font-family="sans-serif">D</text>
+            <rect x="163" y="15" width="35" height="160" rx="4" fill="url(#g)"/>
+            <text x="180" y="105" text-anchor="middle" fill="white" font-size="24" font-weight="bold" font-family="sans-serif">E</text>
+            <text x="32" y="195" text-anchor="middle" fill="#00873d" font-size="18" font-weight="bold" font-family="sans-serif">A</text>
+            <text x="69" y="195" text-anchor="middle" fill="#4ba53d" font-size="18" font-weight="bold" font-family="sans-serif">B</text>
+            <text x="106" y="195" text-anchor="middle" fill="#b5c93b" font-size="18" font-weight="bold" font-family="sans-serif">C</text>
+            <text x="143" y="195" text-anchor="middle" fill="#fceb3c" font-size="18" font-weight="bold" font-family="sans-serif">D</text>
+            <text x="180" y="195" text-anchor="middle" fill="#f7b731" font-size="18" font-weight="bold" font-family="sans-serif">E</text>
+            <text x="32" y="220" text-anchor="middle" fill="#ee7f34" font-size="18" font-weight="bold" font-family="sans-serif">F</text>
+            <text x="69" y="220" text-anchor="middle" fill="#e32f2f" font-size="18" font-weight="bold" font-family="sans-serif">G</text>
+            <text x="100" y="252" text-anchor="middle" fill="#15803d" font-size="10" font-family="sans-serif">Etiqueta de eficiencia energética</text>
+          </svg>
+        </div>
+        <div class="hero-copy">
+          <h1>Tu <span>certificado energético (CEE)</span> en 24 horas</h1>
       <p>Presupuesto al instante. Sin formularios largos. Sin esperas. Los mejores técnicos de tu zona, desde <strong>45€</strong>.</p>
       <p class="hero-extra">El certificado de eficiencia energética es <strong>obligatorio por ley</strong> para vender o alquilar tu vivienda en España. Obtén tu calificación energética con técnicos colegiados verificados en menos de 48 horas. Sin papeleos, sin sorpresas.</p>
-      <div class="hero-badges">
-        <div class="badge">⚡ Presupuesto inmediato</div>
-        <div class="badge">✅ Técnicos verificados</div>
-        <div class="badge">📍 Toda España</div>
-      </div>
-    </div>
+        <div class="hero-badges">
+          <div class="badge">⚡ Presupuesto inmediato</div>
+          <div class="badge">✅ Técnicos verificados</div>
+          <div class="badge">📍 Toda España</div>
+        </div>
+      </div><!-- .hero-copy -->
+    </div><!-- .hero-inner -->
+    </div><!-- .hero-text -->
 
     <div class="presupuesto-card" id="presupuesto-card">
       <h3>🧮 Calcula tu presupuesto</h3>
@@ -769,26 +857,47 @@
     <p class="subtitle">Más de 500 certificados emitidos. Técnicos verificados en toda España.</p>
     <div class="testimonios-grid">
       <div class="testimonio-card">
+        <div class="testimonio-header">
+          <div class="testimonio-avatar" style="background:#8b5cf6">MG</div>
+          <div>
+            <div class="testimonio-name">María G.</div>
+            <div class="testimonio-loc">Madrid · Piso 80 m²</div>
+          </div>
+        </div>
         <div class="testimonio-stars">★★★★★</div>
         <p class="testimonio-text">"Rápidos y muy profesionales. Pedí presupuesto un lunes y el miércoles ya tenía el certificado registrado. El técnico fue puntual y me explicó todo."</p>
-        <div class="testimonio-author">María G.</div>
-        <div class="testimonio-location">Madrid · Piso 80 m²</div>
       </div>
       <div class="testimonio-card">
+        <div class="testimonio-header">
+          <div class="testimonio-avatar" style="background:#059669">CL</div>
+          <div>
+            <div class="testimonio-name">Carlos L.</div>
+            <div class="testimonio-loc">Barcelona · Piso 65 m²</div>
+          </div>
+        </div>
         <div class="testimonio-stars">★★★★★</div>
         <p class="testimonio-text">"Necesitaba el CEE urgente para la venta del piso de mi madre. En 48h lo tenía todo listo. Precio justo, sin sorpresas."</p>
-        <div class="testimonio-author">Carlos L.</div>
-        <div class="testimonio-location">Barcelona · Piso 65 m²</div>
       </div>
       <div class="testimonio-card">
+        <div class="testimonio-header">
+          <div class="testimonio-avatar" style="background:#dc2626">AR</div>
+          <div>
+            <div class="testimonio-name">Ana R.</div>
+            <div class="testimonio-loc">Valencia · Unifamiliar 120 m²</div>
+          </div>
+        </div>
         <div class="testimonio-stars">★★★★★</div>
         <p class="testimonio-text">"Tenía dudas sobre cómo mejorar la letra de mi casa. El técnico me hizo recomendaciones prácticas y me salió una C. Muy contento."</p>
-        <div class="testimonio-author">Ana R.</div>
-        <div class="testimonio-location">Valencia · Unifamiliar 120 m²</div>
       </div>
     </div>
     <div class="rating-overall">
       ⭐ <strong>4,9</strong> / 5 — valoración media de nuestros clientes
+      <div style="margin-top:.5rem">
+        <span class="verified-badge">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z"/></svg>
+          Verificado por Google
+        </span>
+      </div>
     </div>
   </section>
   <!-- JSON-LD: AggregateRating -->
