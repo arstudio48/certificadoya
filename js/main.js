@@ -217,16 +217,10 @@ async function confirmarLead() {
 }
 
 // ============================================================
-// MODO TECNICO: Registro / Login (placeholder)
+// MODO TECNICO: Redirigir a página de registro
 // ============================================================
-if (window.location.pathname === '/tecnicos' || window.location.hash === '#tecnicos') {
-  document.body.innerHTML = `
-    <div style="max-width:500px;margin:4rem auto;padding:2rem;text-align:center">
-      <h2>👷 Panel de técnicos</h2>
-      <p style="color:#666;margin:1rem 0">Próximamente: registro y acceso para técnicos certificadores.</p>
-      <p style="color:#16a34a">Si eres arquitecto, aparejador o ingeniero y quieres darte de alta, contáctanos.</p>
-    </div>
-  `;
+if (window.location.pathname === '/tecnicos' || window.location.pathname === '/tecnicos/') {
+  window.location.replace('/panel-tecnicos.html');
 }
 
 // ============================================================
@@ -236,5 +230,75 @@ window.calcularPresupuesto = calcularPresupuesto;
 window.solicitarLead = solicitarLead;
 window.confirmarLead = confirmarLead;
 window.cerrarLeadModal = cerrarLeadModal;
+window.registrarTecnico = registrarTecnico;
+
+// ============================================================
+// REGISTRAR TECNICO (formulario en /panel-tecnicos.html)
+// ============================================================
+async function registrarTecnico() {
+  const nombre = document.getElementById('reg-nombre').value.trim();
+  const email = document.getElementById('reg-email').value.trim();
+  const telefono = document.getElementById('reg-telefono').value.trim();
+  const titulacion = document.getElementById('reg-titulacion').value;
+  const colegiado = document.getElementById('reg-colegiado').value.trim() || null;
+  const provincias = document.getElementById('reg-provincias').value.trim();
+  
+  let cpRaw = document.getElementById('reg-cp').value.trim();
+  // Parsear CPs (comas o saltos de línea)
+  const cpCobertura = cpRaw.split(/[\n,]+/).map(s => s.trim()).filter(s => /^\d{2,3}$/.test(s));
+
+  // Validar
+  if (!nombre || !email || !telefono || !titulacion || !provincias) {
+    alert('Por favor, completa todos los campos obligatorios.');
+    return;
+  }
+  if (cpCobertura.length === 0) {
+    alert('Indica al menos un código postal (prefijo de 3 dígitos).');
+    return;
+  }
+  if (!/^\d{6,12}$/.test(telefono.replace(/\s/g,''))) {
+    alert('Introduce un teléfono válido.');
+    return;
+  }
+
+  const btn = document.getElementById('reg-btn');
+  btn.textContent = '⏳ Enviando...';
+  btn.disabled = true;
+
+  try {
+    if (!window.supabase) {
+      const { createClient } = await import('https://esm.sh/@supabase/supabase-js@2');
+      window.supabase = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+    }
+    const { error } = await window.supabase.from('tecnicos').insert([{
+      email, nombre, telefono, titulacion,
+      numero_colegiado: colegiado,
+      provincia: provincias,
+      cp_cobertura: cpCobertura,
+      verificado: false,
+      activo: false
+    }]);
+    if (error) {
+      if (error.code === '23505') {
+        alert('Este email ya está registrado. Si crees que es un error, contáctanos.');
+      } else {
+        console.error('Error Supabase:', error);
+        alert('Error al enviar la solicitud. Inténtalo de nuevo.');
+      }
+      btn.textContent = 'Enviar solicitud →';
+      btn.disabled = false;
+      return;
+    }
+    // Éxito
+    document.getElementById('reg-form').style.display = 'none';
+    document.getElementById('reg-exito').classList.add('visible');
+    document.getElementById('reg-email-conf').textContent = email;
+  } catch (err) {
+    console.error('Error:', err);
+    alert('Error de conexión. Inténtalo de nuevo.');
+    btn.textContent = 'Enviar solicitud →';
+    btn.disabled = false;
+  }
+}
 
 console.log('⚡ CertificadoYa listo');
