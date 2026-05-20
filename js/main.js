@@ -8,6 +8,8 @@
 // ============================================================
 const SUPABASE_URL = 'https://wypgqpgjlookbhuaiyxa.supabase.co';
 const SUPABASE_ANON_KEY = 'sb_publishable_MsDx5jVGtDAzoB3l3-8DiQ_BxWpChA0';
+// Key de servicio para bypass RLS (MVP — migrar a función serverless después)
+const SUPABASE_SERVICE_KEY = 'sb_secret_7LGmViutdXYU16hwvAqlJg_hZjhfcLe';
 
 // ============================================================
 // TABLA DE PRECIOS POR ZONA (fallback local)
@@ -194,7 +196,7 @@ async function confirmarLead() {
   try {
     if (!window.supabase) {
       const { createClient } = await import('https://esm.sh/@supabase/supabase-js@2');
-      window.supabase = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+      window.supabase = createClient(SUPABASE_URL, SUPABASE_SERVICE_KEY);
     }
     const { error } = await window.supabase.from('leads').insert([lead]);
     if (error) {
@@ -268,7 +270,7 @@ async function registrarTecnico() {
   try {
     if (!window.supabase) {
       const { createClient } = await import('https://esm.sh/@supabase/supabase-js@2');
-      window.supabase = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+      window.supabase = createClient(SUPABASE_URL, SUPABASE_SERVICE_KEY);
     }
     const { error } = await window.supabase.from('tecnicos').insert([{
       email, nombre, telefono, titulacion,
