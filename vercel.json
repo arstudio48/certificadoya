@@ -2,10 +2,8 @@
   "version": 2,
   "buildCommand": "",
   "outputDirectory": ".",
-  "cleanUrls": true,
   "rewrites": [
     { "source": "/tecnicos", "destination": "/tecnicos/index.html" },
-    { "source": "/tecnicos/", "destination": "/tecnicos/index.html" },
-    { "source": "/legal/:path*", "destination": "/legal/:path*" }
+    { "source": "/legal", "destination": "/legal/aviso-legal.html" }
   ]
 }
