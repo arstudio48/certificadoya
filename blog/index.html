@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Blog de Certificación Energética — CertificadoYa</title>
+  <meta name="description" content="Artículos sobre certificación energética: qué es el CEE, precios, cómo mejorar tu eficiencia energética y ahorrar en facturas.">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://certificadoya.es/blog/">
+  <link rel="stylesheet" href="/css/style.css">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⚡</text></svg>">
+  <style>
+    /* ====== BLOG INDEX PAGE STYLES ====== */
+
+    /* Breadcrumb */
+    .breadcrumb {
+      max-width: 1200px;
+      margin: 1.5rem auto 0;
+      padding: 0 2rem;
+      font-size: .88rem;
+      color: var(--gray-600);
+    }
+    .breadcrumb a {
+      color: var(--green);
+      text-decoration: none;
+    }
+    .breadcrumb a:hover {
+      text-decoration: underline;
+    }
+    .breadcrumb span {
+      color: var(--gray-600);
+    }
+    .breadcrumb .sep {
+      margin: 0 .5rem;
+      color: var(--gray-400, #9ca3af);
+    }
+
+    /* Blog header */
+    .blog-header {
+      max-width: 1200px;
+      margin: 1.5rem auto 2.5rem;
+      padding: 0 2rem;
+    }
+    .blog-header h1 {
+      font-size: 2.2rem;
+      font-weight: 800;
+      color: var(--gray-900);
+      line-height: 1.2;
+      margin-bottom: .5rem;
+    }
+    .blog-header h1 span {
+      color: var(--green);
+    }
+    .blog-header .blog-subtitle {
+      font-size: 1.05rem;
+      color: var(--gray-600);
+    }
+
+    /* Blog grid */
+    .blog-grid {
+      max-width: 1200px;
+      margin: 0 auto 3rem;
+      padding: 0 2rem;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.75rem;
+    }
+
+    /* Blog card */
+    .blog-card {
+      background: var(--white);
+      border: 1px solid var(--gray-200);
+      border-radius: var(--radius);
+      overflow: hidden;
+      box-shadow: var(--shadow);
+      transition: box-shadow .25s, transform .25s;
+      display: flex;
+      flex-direction: column;
+    }
+    .blog-card:hover {
+      box-shadow: var(--shadow-lg);
+      transform: translateY(-2px);
+    }
+
+    /* Card image placeholder */
+    .blog-card-img {
+      height: 180px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 3.5rem;
+      position: relative;
+      flex-shrink: 0;
+    }
+    .blog-card-img.bg-basico {
+      background: linear-gradient(135deg, #dcfce7 0%, #bbf7d0 50%, #86efac 100%);
+    }
+    .blog-card-img.bg-precios {
+      background: linear-gradient(135deg, #fef3c7 0%, #fde68a 50%, #fcd34d 100%);
+    }
+    .blog-card-img.bg-ahorro {
+      background: linear-gradient(135deg, #dbeafe 0%, #bfdbfe 50%, #93c5fd 100%);
+    }
+    .blog-card-img .emoji {
+      filter: drop-shadow(0 2px 4px rgba(0,0,0,.1));
+      line-height: 1;
+    }
+
+    /* Card category badge */
+    .blog-card-cat {
+      position: absolute;
+      top: .75rem;
+      left: .75rem;
+      display: inline-block;
+      padding: .3rem .7rem;
+      border-radius: 100px;
+      font-size: .72rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: .03em;
+      background: rgba(255,255,255,.85);
+      backdrop-filter: blur(4px);
+      color: var(--gray-800);
+    }
+
+    /* Card body */
+    .blog-card-body {
+      padding: 1.25rem 1.25rem 1.5rem;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+    }
+    .blog-card-body h2 {
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: var(--gray-900);
+      line-height: 1.35;
+      margin-bottom: .5rem;
+    }
+    .blog-card-body h2 a {
+      color: inherit;
+      text-decoration: none;
+    }
+    .blog-card-body h2 a:hover {
+      color: var(--green);
+    }
+
+    .blog-card-meta {
+      display: flex;
+      align-items: center;
+      gap: .75rem;
+      font-size: .8rem;
+      color: var(--gray-600);
+      margin-bottom: .65rem;
+      flex-wrap: wrap;
+    }
+    .blog-card-meta .meta-date {
+      display: inline-flex;
+      align-items: center;
+      gap: .3rem;
+    }
+    .blog-card-meta .meta-read {
+      display: inline-flex;
+      align-items: center;
+      gap: .3rem;
+      background: var(--gray-100);
+      padding: .2rem .55rem;
+      border-radius: 100px;
+      font-weight: 600;
+    }
+
+    .blog-card-desc {
+      font-size: .9rem;
+      color: var(--gray-600);
+      line-height: 1.55;
+      margin-bottom: 1rem;
+      flex: 1;
+    }
+
+    /* Read more link */
+    .blog-card-link {
+      display: inline-flex;
+      align-items: center;
+      gap: .35rem;
+      color: var(--green);
+      font-weight: 700;
+      font-size: .9rem;
+      text-decoration: none;
+      transition: gap .2s;
+    }
+    .blog-card-link:hover {
+      gap: .55rem;
+    }
+    .blog-card-link .arrow {
+      font-size: 1.1rem;
+      transition: transform .2s;
+    }
+    .blog-card-link:hover .arrow {
+      transform: translateX(3px);
+    }
+
+    /* Empty state */
+    .blog-empty {
+      text-align: center;
+      padding: 3rem 2rem;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    .blog-empty .emoji {
+      font-size: 3rem;
+      margin-bottom: 1rem;
+    }
+    .blog-empty h2 {
+      font-size: 1.3rem;
+      color: var(--gray-800);
+      margin-bottom: .5rem;
+    }
+    .blog-empty p {
+      color: var(--gray-600);
+    }
+
+    /* ====== RESPONSIVE ====== */
+    @media (max-width: 900px) {
+      .blog-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1.25rem;
+      }
+    }
+
+    @media (max-width: 600px) {
+      .blog-grid {
+        grid-template-columns: 1fr;
+        max-width: 480px;
+        margin-left: auto;
+        margin-right: auto;
+      }
+
+      .blog-header h1 {
+        font-size: 1.55rem;
+      }
+      .blog-header .blog-subtitle {
+        font-size: .92rem;
+      }
+
+      .breadcrumb {
+        padding: 0 1rem;
+        margin-top: 1rem;
+      }
+      .blog-header {
+        padding: 0 1rem;
+        margin-bottom: 1.5rem;
+      }
+
+      .blog-card-img {
+        height: 150px;
+        font-size: 2.8rem;
+      }
+      .blog-card-body h2 {
+        font-size: 1rem;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .blog-grid {
+        padding: 0 .75rem;
+      }
+      .breadcrumb {
+        padding: 0 .75rem;
+      }
+      .blog-header {
+        padding: 0 .75rem;
+      }
+      .blog-header h1 {
+        font-size: 1.35rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ====== NAV ====== -->
+  <nav>
+    <a href="/" class="logo">⚡ Certificado<span>Ya</span></a>
+    <input type="checkbox" id="nav-toggle" class="nav-toggle">
+    <label for="nav-toggle" class="nav-toggle-label">☰</label>
+    <div class="nav-links">
+      <a href="/#como-funciona">Cómo funciona</a>
+      <a href="/#ventajas">Ventajas</a>
+      <a href="/blog/">Blog</a>
+      <a href="/panel-tecnicos.html">¿Eres técnico?</a>
+    </div>
+  </nav>
+
+  <!-- ====== BREADCRUMB ====== -->
+  <div class="breadcrumb">
+    <a href="/">Inicio</a>
+    <span class="sep">›</span>
+    <span>Blog</span>
+  </div>
+
+  <!-- ====== BLOG HEADER ====== -->
+  <div class="blog-header">
+    <h1>Blog de <span>Certificación Energética</span></h1>
+    <p class="blog-subtitle">Artículos prácticos sobre el certificado energético, precios, normativa y cómo ahorrar en tus facturas.</p>
+  </div>
+
+  <!-- ====== BLOG GRID ====== -->
+  <div class="blog-grid">
+
+    <!-- Post: ¿Qué es el certificado energético? -->
+    <article class="blog-card">
+      <div class="blog-card-img bg-basico">
+        <span class="emoji">📘</span>
+        <span class="blog-card-cat">Básico</span>
+      </div>
+      <div class="blog-card-body">
+        <h2><a href="/blog/que-es-certificado-energetico.html">¿Qué es el certificado energético y por qué es obligatorio?</a></h2>
+        <div class="blog-card-meta">
+          <span class="meta-date">📅 15 de mayo de 2026</span>
+          <span class="meta-read">⏱️ 5 min</span>
+        </div>
+        <p class="blog-card-desc">Todo lo que necesitas saber sobre el Certificado de Eficiencia Energética (CEE): qué es, cuándo es obligatorio, quién puede emitirlo y qué pasa si no lo tienes.</p>
+        <a href="/blog/que-es-certificado-energetico.html" class="blog-card-link">
+          Leer más <span class="arrow">→</span>
+        </a>
+      </div>
+    </article>
+
+    <!-- Post: Precio certificado energético 2026 -->
+    <article class="blog-card">
+      <div class="blog-card-img bg-precios">
+        <span class="emoji">💰</span>
+        <span class="blog-card-cat">Precios</span>
+      </div>
+      <div class="blog-card-body">
+        <h2><a href="/blog/precio-certificado-energetico-2026.html">¿Cuánto cuesta un certificado energético en 2026? Guía de precios</a></h2>
+        <div class="blog-card-meta">
+          <span class="meta-date">📅 18 de mayo de 2026</span>
+          <span class="meta-read">⏱️ 8 min</span>
+        </div>
+        <p class="blog-card-desc">Analizamos los precios del certificado energético por m², por ciudad y por tipo de inmueble. Comparativa Madrid, Barcelona, Asturias y resto de España.</p>
+        <a href="/blog/precio-certificado-energetico-2026.html" class="blog-card-link">
+          Leer más <span class="arrow">→</span>
+        </a>
+      </div>
+    </article>
+
+    <!-- Post: Mejorar eficiencia energética -->
+    <article class="blog-card">
+      <div class="blog-card-img bg-ahorro">
+        <span class="emoji">💡</span>
+        <span class="blog-card-cat">Ahorro</span>
+      </div>
+      <div class="blog-card-body">
+        <h2><a href="/blog/mejorar-eficiencia-energetica-vivienda.html">7 formas de mejorar la eficiencia energética de tu vivienda (y ahorrar en facturas)</a></h2>
+        <div class="blog-card-meta">
+          <span class="meta-date">📅 20 de mayo de 2026</span>
+          <span class="meta-read">⏱️ 7 min</span>
+        </div>
+        <p class="blog-card-desc">De la A a la G: cómo subir la letra de tu certificado energético con mejoras prácticas. Aislamiento, ventanas, aerotermia y más.</p>
+        <a href="/blog/mejorar-eficiencia-energetica-vivienda.html" class="blog-card-link">
+          Leer más <span class="arrow">→</span>
+        </a>
+      </div>
+    </article>
+
+  </div>
+
+  <!-- ====== CTA ====== -->
+  <section class="cta">
+    <h3>¿Necesitas tu certificado energético?</h3>
+    <p>Presupuesto gratis en 5 segundos. Sin compromiso.</p>
+    <a href="/#presupuesto-card" class="btn btn-white">Calcular presupuesto ahora ⚡</a>
+  </section>
+
+  <!-- ====== FOOTER ====== -->
+  <footer>
+    <p>© 2026 <strong>CertificadoYa</strong> — Marketplace de certificación energética</p>
+    <p style="margin-top:.5rem">
+      <a href="/legal/aviso-legal">Aviso legal</a> ·
+      <a href="/legal/privacidad">Privacidad</a> ·
+      <a href="/legal/cookies">Cookies</a> ·
+      <a href="/blog/">Blog</a> ·
+      <a href="/panel-tecnicos.html">¿Eres técnico?</a>
+    </p>
+  </footer>
+
+</body>
+</html>
