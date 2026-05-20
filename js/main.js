@@ -302,3 +302,19 @@ async function registrarTecnico() {
 }
 
 console.log('⚡ CertificadoYa listo');
+
+/* ====== COOKIE CONSENT ====== */
+function aceptarCookies() {
+  localStorage.setItem('cookie-consent', 'all');
+  document.getElementById('cookie-banner').style.display = 'none';
+}
+function rechazarCookies() {
+  localStorage.setItem('cookie-consent', 'essential');
+  document.getElementById('cookie-banner').style.display = 'none';
+}
+// Mostrar banner si no hay decisión previa
+(function() {
+  if (!localStorage.getItem('cookie-consent')) {
+    document.getElementById('cookie-banner').style.display = 'block';
+  }
+})();
