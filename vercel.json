@@ -1,10 +1,7 @@
 {
   "version": 2,
   "cleanUrls": false,
-  "rewrites": [
-    { "source": "/tecnicos", "destination": "/tecnicos/index.html" },
-    { "source": "/legal/aviso-legal", "destination": "/legal/aviso-legal.html" },
-    { "source": "/legal/privacidad", "destination": "/legal/privacidad.html" },
-    { "source": "/legal/cookies", "destination": "/legal/cookies.html" }
+  "headers": [
+    { "source": "/legal/(.*)", "headers": [{ "key": "Content-Type", "value": "text/html; charset=utf-8" }] }
   ]
 }
