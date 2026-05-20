@@ -1,196 +1,31 @@
 {
-  "version": 2,
-  "cleanUrls": false,
-  "headers": [
-    {
-      "source": "/",
-      "headers": [
-        {
-          "key": "Content-Type",
-          "value": "text/html; charset=utf-8"
-        }
-      ]
-    },
-    {
-      "source": "/panel-tecnicos.html",
-      "headers": [
-        {
-          "key": "Content-Type",
-          "value": "text/html; charset=utf-8"
-        }
-      ]
-    },
-    {
-      "source": "/privacidad",
-      "headers": [
-        {
-          "key": "Content-Type",
-          "value": "text/html; charset=utf-8"
-        }
-      ]
-    },
-    {
-      "source": "/privacidad.html",
-      "headers": [
-        {
-          "key": "Content-Type",
-          "value": "text/html; charset=utf-8"
-        }
-      ]
-    },
-    {
-      "source": "/cookies",
-      "headers": [
-        {
-          "key": "Content-Type",
-          "value": "text/html; charset=utf-8"
-        }
-      ]
-    },
-    {
-      "source": "/cookies.html",
-      "headers": [
-        {
-          "key": "Content-Type",
-          "value": "text/html; charset=utf-8"
-        }
-      ]
-    },
-    {
-      "source": "/legal",
-      "headers": [
-        {
-          "key": "Content-Type",
-          "value": "text/html; charset=utf-8"
-        }
-      ]
-    },
+  "redirects": [
     {
       "source": "/legal/aviso-legal",
-      "headers": [
-        {
-          "key": "Content-Type",
-          "value": "text/html; charset=utf-8"
-        }
-      ]
-    },
-    {
-      "source": "/legal/aviso-legal.html",
-      "headers": [
-        {
-          "key": "Content-Type",
-          "value": "text/html; charset=utf-8"
-        }
-      ]
+      "destination": "/legal/aviso-legal.html",
+      "permanent": true
     },
     {
       "source": "/legal/privacidad",
-      "headers": [
-        {
-          "key": "Content-Type",
-          "value": "text/html; charset=utf-8"
-        }
-      ]
-    },
-    {
-      "source": "/legal/privacidad.html",
-      "headers": [
-        {
-          "key": "Content-Type",
-          "value": "text/html; charset=utf-8"
-        }
-      ]
+      "destination": "/legal/privacidad.html",
+      "permanent": true
     },
     {
       "source": "/legal/cookies",
-      "headers": [
-        {
-          "key": "Content-Type",
-          "value": "text/html; charset=utf-8"
-        }
-      ]
+      "destination": "/legal/cookies.html",
+      "permanent": true
     },
     {
-      "source": "/legal/cookies.html",
-      "headers": [
-        {
-          "key": "Content-Type",
-          "value": "text/html; charset=utf-8"
-        }
-      ]
+      "source": "/certificado-energetico-madrid",
+      "destination": "/certificado-energetico-madrid/",
+      "permanent": true
     },
     {
-      "source": "/blog",
-      "headers": [
-        {
-          "key": "Content-Type",
-          "value": "text/html; charset=utf-8"
-        }
-      ]
-    },
-    {
-      "source": "/blog/",
-      "headers": [
-        {
-          "key": "Content-Type",
-          "value": "text/html; charset=utf-8"
-        }
-      ]
-    },
-    {
-      "source": "/organismos-contacto",
-      "headers": [
-        {
-          "key": "Content-Type",
-          "value": "text/html; charset=utf-8"
-        }
-      ]
+      "source": "/certificado-energetico-barcelona",
+      "destination": "/certificado-energetico-barcelona/",
+      "permanent": true
     }
   ],
-  "rewrites": [
-    {
-      "source": "/tecnicos",
-      "destination": "/tecnicos/index.html"
-    },
-    {
-      "source": "/panel-tecnicos",
-      "destination": "/panel-tecnicos.html"
-    },
-    {
-      "source": "/privacidad",
-      "destination": "/privacidad.html"
-    },
-    {
-      "source": "/cookies",
-      "destination": "/cookies.html"
-    },
-    {
-      "source": "/legal",
-      "destination": "/legal/index.html"
-    },
-    {
-      "source": "/legal/aviso-legal",
-      "destination": "/legal/aviso-legal.html"
-    },
-    {
-      "source": "/legal/privacidad",
-      "destination": "/legal/privacidad.html"
-    },
-    {
-      "source": "/legal/cookies",
-      "destination": "/legal/cookies.html"
-    },
-    {
-      "source": "/blog",
-      "destination": "/blog/index.html"
-    },
-    {
-      "source": "/blog/",
-      "destination": "/blog/index.html"
-    },
-    {
-      "source": "/organismos-contacto",
-      "destination": "/organismos-contacto.html"
-    }
-  ]
+  "cleanUrls": true,
+  "trailingSlash": false
 }
