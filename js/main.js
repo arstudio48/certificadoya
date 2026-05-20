@@ -6,8 +6,8 @@
 // ============================================================
 // CONFIGURACIÓN — Cambiar cuando tengas credenciales de Supabase
 // ============================================================
-const SUPABASE_URL = 'https://TU_PROYECTO.supabase.co';
-const SUPABASE_ANON_KEY = 'TU_ANON_KEY';
+const SUPABASE_URL = 'https://cttlfuktfuvzszwzwnue.supabase.co';
+const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImN0dGxmdWt0ZnV2enN6d3p3bnVlIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDc3Mjc1MjYsImV4cCI6MjA2MzMwMzUyNn0.nzB3bRZS5FYfHDkRTDP_-eyvCdfJYjfNm-0hy75m-GA';
 
 // ============================================================
 // TABLA DE PRECIOS POR ZONA (fallback local)
