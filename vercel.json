@@ -1,6 +1,21 @@
 {
   "version": 2,
   "cleanUrls": false,
+  "headers": [
+    { "source": "/", "headers": [{ "key": "Content-Type", "value": "text/html; charset=utf-8" }] },
+    { "source": "/panel-tecnicos.html", "headers": [{ "key": "Content-Type", "value": "text/html; charset=utf-8" }] },
+    { "source": "/privacidad", "headers": [{ "key": "Content-Type", "value": "text/html; charset=utf-8" }] },
+    { "source": "/privacidad.html", "headers": [{ "key": "Content-Type", "value": "text/html; charset=utf-8" }] },
+    { "source": "/cookies", "headers": [{ "key": "Content-Type", "value": "text/html; charset=utf-8" }] },
+    { "source": "/cookies.html", "headers": [{ "key": "Content-Type", "value": "text/html; charset=utf-8" }] },
+    { "source": "/legal", "headers": [{ "key": "Content-Type", "value": "text/html; charset=utf-8" }] },
+    { "source": "/legal/aviso-legal", "headers": [{ "key": "Content-Type", "value": "text/html; charset=utf-8" }] },
+    { "source": "/legal/aviso-legal.html", "headers": [{ "key": "Content-Type", "value": "text/html; charset=utf-8" }] },
+    { "source": "/legal/privacidad", "headers": [{ "key": "Content-Type", "value": "text/html; charset=utf-8" }] },
+    { "source": "/legal/privacidad.html", "headers": [{ "key": "Content-Type", "value": "text/html; charset=utf-8" }] },
+    { "source": "/legal/cookies", "headers": [{ "key": "Content-Type", "value": "text/html; charset=utf-8" }] },
+    { "source": "/legal/cookies.html", "headers": [{ "key": "Content-Type", "value": "text/html; charset=utf-8" }] }
+  ],
   "rewrites": [
     { "source": "/tecnicos", "destination": "/tecnicos/index.html" },
     { "source": "/panel-tecnicos", "destination": "/panel-tecnicos.html" },
