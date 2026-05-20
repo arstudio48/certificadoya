@@ -107,6 +107,11 @@ def asignar_auto():
     dry = '--dry-run' in sys.argv or '-n' in sys.argv
     asignar_leads(dry_run=dry)
 
+def notificar():
+    """Enviar notificaciones por email"""
+    from notify import notify as _notify
+    _notify()
+
 def help():
     print(f"""
 {BOLD}CERTIFICADOYA - Panel de Administracion{W}
@@ -122,6 +127,7 @@ def help():
   {G}python admin.py {B}stats{W}               Estadisticas rapidas
   {G}python admin.py {B}asignar_auto{W}        Asignar leads nuevos a tecnicos (por CP)
   {G}python admin.py {B}asignar_auto --dry-run{W}  Simular sin guardar cambios
+  {G}python admin.py {B}notify{W}              Enviar notificaciones email pendientes
 """)
 
 if __name__ == '__main__':
@@ -150,5 +156,7 @@ if __name__ == '__main__':
         stats()
     elif cmd == 'asignar_auto':
         asignar_auto()
+    elif cmd == 'notify':
+        notificar()
     else:
         help()
