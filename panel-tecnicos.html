@@ -3,321 +3,164 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Panel de Técnicos — CertificadoYa</title>
-  <meta name="robots" content="noindex">
+  <title>CertificadoYa — ¿Eres técnico certificador?</title>
+  <meta name="description" content="Únete a CertificadoYa como técnico certificador. Recibe leads cualificados en tu zona. Arquitectos, aparejadores e ingenieros.">
   <link rel="stylesheet" href="/css/style.css">
   <style>
-    .panel-container {
-      max-width: 520px;
+    .registro-section {
+      max-width: 600px;
       margin: 3rem auto;
       padding: 2rem;
     }
-    .panel-card {
-      background: white;
-      border: 1px solid #e5e7eb;
-      border-radius: 12px;
-      padding: 2rem;
-      box-shadow: 0 10px 25px rgba(0,0,0,.08);
+    .registro-card {
+      background: var(--white);
+      border: 1px solid var(--gray-200);
+      border-radius: var(--radius);
+      padding: 2.5rem;
+      box-shadow: var(--shadow-lg);
     }
-    .panel-card h2 {
-      font-size: 1.5rem;
-      font-weight: 700;
-      margin-bottom: .5rem;
+    .registro-card h2 {
+      font-size: 1.6rem;
+      margin-bottom: 0.5rem;
     }
-    .panel-card .subtitle {
-      color: #6b7280;
-      font-size: .9rem;
-      margin-bottom: 1.5rem;
+    .registro-card .subtitle {
+      color: var(--gray-600);
+      margin-bottom: 2rem;
+      font-size: 0.95rem;
     }
-    .form-group {
-      margin-bottom: 1rem;
-    }
-    .form-group label {
-      display: block;
-      font-weight: 600;
-      font-size: .85rem;
-      margin-bottom: .3rem;
-    }
-    .form-group input,
-    .form-group select,
-    .form-group textarea {
-      width: 100%;
-      padding: .7rem .9rem;
-      border: 2px solid #e5e7eb;
+    .beneficios {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0.75rem;
+      margin-bottom: 2rem;
+      padding: 1.25rem;
+      background: var(--green-light);
       border-radius: 8px;
-      font-size: .95rem;
-      font-family: inherit;
     }
-    .form-group input:focus,
-    .form-group select:focus {
-      outline: none;
-      border-color: #16a34a;
-    }
-    .btn {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      gap: .5rem;
-      padding: .75rem 1.5rem;
-      border-radius: 8px;
-      font-weight: 600;
-      font-size: 1rem;
-      cursor: pointer;
-      border: none;
-      width: 100%;
-    }
-    .btn-green { background: #16a34a; color: white; }
-    .btn-green:hover { background: #15803d; }
-    .btn-outline {
-      background: transparent;
-      color: #16a34a;
-      border: 2px solid #16a34a;
-    }
-    .msg {
-      padding: .75rem 1rem;
-      border-radius: 8px;
-      margin: 1rem 0;
-      font-size: .9rem;
-      display: none;
-    }
-    .msg-success { display: block; background: #dcfce7; color: #166534; }
-    .msg-error { display: block; background: #fef2f2; color: #991b1b; }
-    .toggle-link {
-      text-align: center;
-      margin-top: 1rem;
-      color: #6b7280;
-      font-size: .9rem;
-    }
-    .toggle-link a { color: #16a34a; cursor: pointer; font-weight: 600; }
-    .checkbox-group {
+    .beneficio {
+      font-size: 0.9rem;
       display: flex;
-      flex-wrap: wrap;
-      gap: .5rem;
+      align-items: flex-start;
+      gap: 0.5rem;
     }
-    .chip {
-      padding: .4rem .8rem;
-      border: 2px solid #e5e7eb;
-      border-radius: 100px;
-      font-size: .85rem;
-      cursor: pointer;
-      user-select: none;
+    .beneficio span { font-size: 1.1rem; }
+    .form-row-3 {
+      display: grid;
+      grid-template-columns: 2fr 1fr;
+      gap: 1rem;
     }
-    .chip.selected {
-      background: #dcfce7;
-      border-color: #16a34a;
-      color: #166534;
-    }
-    .benefits {
-      background: #f0fdf4;
+    textarea {
+      width: 100%;
+      padding: 0.75rem 1rem;
+      border: 2px solid var(--gray-200);
       border-radius: 8px;
-      padding: 1rem;
-      margin: 1rem 0;
-      font-size: .85rem;
-      color: #166534;
+      font-size: 1rem;
+      font-family: inherit;
+      resize: vertical;
     }
-    .benefits li { margin-bottom: .3rem; }
+    textarea:focus {
+      outline: none;
+      border-color: var(--green);
+    }
+    .exito-box {
+      display: none;
+      text-align: center;
+      padding: 2rem;
+    }
+    .exito-box.visible { display: block; }
+    .exito-box .icono { font-size: 3rem; margin-bottom: 1rem; }
+    .exito-box h3 { color: var(--green-dark); margin-bottom: 0.5rem; }
   </style>
 </head>
 <body>
 
-  <nav style="border-bottom:1px solid #e5e7eb">
+  <nav>
     <a href="/" class="logo">⚡ Certificado<span>Ya</span></a>
     <div class="nav-links">
       <a href="/">Inicio</a>
     </div>
   </nav>
 
-  <div class="panel-container">
+  <section class="registro-section">
+    <!-- FORMULARIO -->
+    <div class="registro-card" id="registro-form">
+      <h2>👷 Únete como técnico certificador</h2>
+      <p class="subtitle">Recibe leads cualificados en tu zona. Solo para arquitectos, aparejadores e ingenieros colegiados.</p>
 
-    <!-- ====== REGISTRO ====== -->
-    <div class="panel-card" id="form-registro">
-      <h2>👷 Regístrate como técnico</h2>
-      <p class="subtitle">Recibe leads cualificados de clientes que necesitan certificado energético en tu zona. Comisión: solo el 18%.</p>
-
-      <div class="benefits">
-        <strong>✅ Ventajas:</strong>
-        <ul>
-          <li>Clientes pre-cualificados con presupuesto</li>
-          <li>Sin cuota fija — solo pagas si cierras</li>
-          <li>Visible en Google Maps y SEO local</li>
-          <li>Comisión 18% frente al 25-30% de la competencia</li>
-        </ul>
+      <div class="beneficios">
+        <div class="beneficio"><span>📥</span> Leads en tu zona sin buscarlos</div>
+        <div class="beneficio"><span>💰</span> Tú pones tu precio (sin comisiones ocultas)</div>
+        <div class="beneficio"><span>⚡</span> Clientes que ya saben lo que cuesta</div>
+        <div class="beneficio"><span>📍</span> Filtrando por código postal</div>
       </div>
 
       <div class="form-group">
-        <label>Nombre completo *</label>
-        <input type="text" id="reg-nombre" placeholder="Arturo Briceño">
+        <label for="reg-nombre">Nombre completo *</label>
+        <input type="text" id="reg-nombre" placeholder="Ej: Carlos López García" required>
       </div>
-      <div class="form-group">
-        <label>Email *</label>
-        <input type="email" id="reg-email" placeholder="arturo@ejemplo.com">
-      </div>
-      <div class="form-group">
-        <label>Teléfono *</label>
-        <input type="tel" id="reg-telefono" placeholder="600 000 000">
-      </div>
-      <div class="form-group">
-        <label>Titulación *</label>
-        <select id="reg-titulacion">
-          <option value="">Selecciona...</option>
-          <option value="arquitecto">Arquitecto</option>
-          <option value="aparejador">Aparejador / Arquitecto técnico</option>
-          <option value="ingeniero">Ingeniero</option>
-          <option value="otro">Otro</option>
-        </select>
-      </div>
-      <div class="form-group">
-        <label>Provincias donde operas *</label>
-        <div class="checkbox-group" id="provincias-chips">
-          <span class="chip" data-prov="Madrid">Madrid</span>
-          <span class="chip" data-prov="Asturias">Asturias</span>
-          <span class="chip" data-prov="Barcelona">Barcelona</span>
-          <span class="chip" data-prov="Valencia">Valencia</span>
-          <span class="chip" data-prov="Sevilla">Sevilla</span>
-          <span class="chip" data-prov="Bilbao">Bilbao</span>
-          <span class="chip" data-prov="Málaga">Málaga</span>
-          <span class="chip" data-prov="Zaragoza">Zaragoza</span>
+
+      <div class="form-row-3">
+        <div class="form-group">
+          <label for="reg-email">Email *</label>
+          <input type="email" id="reg-email" placeholder="tu@email.com" required>
+        </div>
+        <div class="form-group">
+          <label for="reg-telefono">Teléfono *</label>
+          <input type="tel" id="reg-telefono" placeholder="612345678" required>
         </div>
       </div>
-      <div class="form-group">
-        <label>Tu precio por m² (opcional)</label>
-        <input type="number" id="reg-precio" placeholder="Ej: 0.75" step="0.01" min="0.3" max="2">
-        <small style="color:#6b7280">Si lo dejas vacío, usamos el precio estándar de tu zona.</small>
+
+      <div class="form-row-3">
+        <div class="form-group">
+          <label for="reg-titulacion">Titulación *</label>
+          <select id="reg-titulacion" required>
+            <option value="">Selecciona...</option>
+            <option value="arquitecto">Arquitecto</option>
+            <option value="aparejador">Aparejador / Arquitecto técnico</option>
+            <option value="ingeniero">Ingeniero</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="reg-colegiado">Nº Colegiado</label>
+          <input type="text" id="reg-colegiado" placeholder="COAM-12345">
+        </div>
       </div>
-
-      <div class="msg" id="reg-msg"></div>
-
-      <button class="btn btn-green" onclick="registrarTecnico()">
-        📝 Solicitar registro
-      </button>
-
-      <div class="toggle-link">
-        ¿Ya tienes cuenta? <a onclick="togglePanel('login')">Inicia sesión</a>
-      </div>
-    </div>
-
-    <!-- ====== LOGIN ====== -->
-    <div class="panel-card" id="form-login" style="display:none">
-      <h2>🔐 Acceso técnicos</h2>
-      <p class="subtitle">Accede a tu panel para ver tus leads y gestionar tu perfil.</p>
 
       <div class="form-group">
-        <label>Email</label>
-        <input type="email" id="login-email" placeholder="tu@email.com">
+        <label for="reg-provincias">Provincias donde trabajas *</label>
+        <input type="text" id="reg-provincias" placeholder="Ej: Madrid, Asturias" required>
+        <small style="color:#888;font-size:.8rem">Separa con comas</small>
       </div>
 
-      <div class="msg" id="login-msg"></div>
+      <div class="form-group">
+        <label for="reg-cp">Códigos postales que cubres *</label>
+        <textarea id="reg-cp" rows="2" placeholder="Ej: 280, 281, 282, 332, 333&#10;(Prefijos de 3 dígitos, uno por línea o separados por comas)" required></textarea>
+        <small style="color:#888;font-size:.8rem">Prefijos de 3 dígitos. Ej: 280 cubre todo Madrid capital.</small>
+      </div>
 
-      <button class="btn btn-green" onclick="loginTecnico()">
-        📧 Enviar enlace de acceso
+      <button class="btn btn-green btn-full" id="reg-btn" onclick="registrarTecnico()">
+        Enviar solicitud →
       </button>
-      <p style="font-size:.8rem;color:#6b7280;margin-top:.5rem;text-align:center">
-        Te enviaremos un enlace mágico a tu email. Sin contraseñas.
+
+      <p style="text-align:center;color:#888;font-size:.8rem;margin-top:1rem">
+        Verificaremos tu colegiación y te daremos acceso en 24-48h.
       </p>
-
-      <div class="toggle-link">
-        ¿No tienes cuenta? <a onclick="togglePanel('registro')">Regístrate</a>
-      </div>
     </div>
-  </div>
 
-  <script type="module">
-    import { createClient } from 'https://esm.sh/@supabase/supabase-js@2';
+    <!-- CONFIRMACIÓN -->
+    <div class="registro-card exito-box" id="reg-exito">
+      <div class="icono">✅</div>
+      <h3>¡Solicitud recibida!</h3>
+      <p style="color:#666;line-height:1.6">Revisaremos tu colegiación y te enviaremos un email a <strong id="reg-email-conf"></strong> en 24-48h con las instrucciones de acceso.</p>
+      <p style="color:#888;font-size:.9rem;margin-top:1rem">Mientras tanto, si tienes dudas: <a href="mailto:info@certificadoya.es">info@certificadoya.es</a></p>
+      <a href="/" class="btn btn-outline" style="display:inline-flex;margin-top:1.5rem">← Volver al inicio</a>
+    </div>
+  </section>
 
-    const SUPABASE_URL = 'https://wypgqpgjlookbhuaiyxa.supabase.co';
-    const SUPABASE_ANON_KEY = 'sb_publishable_MsDx5jVGtDAzoB3l3-8DiQ_BxWpChA0';
-    const supabase = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+  <footer>
+    <p>© 2026 <strong>CertificadoYa</strong> — Marketplace de certificación energética</p>
+  </footer>
 
-    // ====== Chips de provincias ======
-    document.querySelectorAll('#provincias-chips .chip').forEach(chip => {
-      chip.addEventListener('click', () => chip.classList.toggle('selected'));
-    });
-
-    // ====== Toggle registro/login ======
-    window.togglePanel = (panel) => {
-      document.getElementById('form-registro').style.display = panel === 'registro' ? '' : 'none';
-      document.getElementById('form-login').style.display = panel === 'login' ? '' : 'none';
-    };
-
-    // ====== REGISTRO ======
-    window.registrarTecnico = async () => {
-      const msg = document.getElementById('reg-msg');
-      const nombre = document.getElementById('reg-nombre').value.trim();
-      const email = document.getElementById('reg-email').value.trim();
-      const telefono = document.getElementById('reg-telefono').value.trim();
-      const titulacion = document.getElementById('reg-titulacion').value;
-      const precio = document.getElementById('reg-precio').value;
-
-      if (!nombre || !email || !telefono || !titulacion) {
-        msg.className = 'msg msg-error';
-        msg.textContent = 'Por favor, rellena todos los campos obligatorios.';
-        return;
-      }
-
-      const provincias = [...document.querySelectorAll('#provincias-chips .chip.selected')].map(c => c.dataset.prov);
-
-      if (provincias.length === 0) {
-        msg.className = 'msg msg-error';
-        msg.textContent = 'Selecciona al menos una provincia donde operes.';
-        return;
-      }
-
-      const tecnico = {
-        nombre,
-        email,
-        telefono,
-        titulacion,
-        provincia: provincias.join(', '),
-        cp_cobertura: provincias,
-        precio_m2: precio ? parseFloat(precio) : null,
-        verificado: false,
-        activo: true
-      };
-
-      const { data, error } = await supabase.from('tecnicos').insert([tecnico]).select();
-
-      if (error) {
-        msg.className = 'msg msg-error';
-        if (error.message.includes('unique') || error.message.includes('duplicate')) {
-          msg.textContent = 'Este email ya está registrado. ¿Quieres iniciar sesión?';
-        } else {
-          msg.textContent = 'Error al registrar: ' + error.message;
-        }
-        return;
-      }
-
-      msg.className = 'msg msg-success';
-      msg.innerHTML = '✅ <strong>¡Solicitud enviada!</strong><br><br>Revisaremos tu perfil en 24-48h y te enviaremos un email de confirmación. Mientras tanto, tu perfil ya está en nuestra base de datos.<br><br>Cuando estés verificado, empezarás a recibir leads de tu zona.';
-      
-      document.getElementById('reg-nombre').value = '';
-      document.getElementById('reg-email').value = '';
-      document.getElementById('reg-telefono').value = '';
-    };
-
-    // ====== LOGIN ======
-    window.loginTecnico = async () => {
-      const msg = document.getElementById('login-msg');
-      const email = document.getElementById('login-email').value.trim();
-
-      if (!email) {
-        msg.className = 'msg msg-error';
-        msg.textContent = 'Introduce tu email.';
-        return;
-      }
-
-      const { error } = await supabase.auth.signInWithOtp({ email });
-
-      if (error) {
-        msg.className = 'msg msg-error';
-        msg.textContent = 'Error: ' + error.message;
-        return;
-      }
-
-      msg.className = 'msg msg-success';
-      msg.textContent = '✅ Te hemos enviado un enlace mágico a tu email. Haz clic para acceder a tu panel.';
-    };
-
-    console.log('👷 Panel técnicos listo');
-  </script>
+  <script type="module" src="/js/main.js"></script>
 </body>
 </html>

@@ -101,6 +101,12 @@ def stats():
     print(f"  ✅ Completados:  {completados.count}")
     print(f"  👨‍🔧 Tecnicos:     {tecnicos.count}")
 
+def asignar_auto():
+    """Asignacion automatica de leads por CP"""
+    from auto_assign import asignar_leads
+    dry = '--dry-run' in sys.argv or '-n' in sys.argv
+    asignar_leads(dry_run=dry)
+
 def help():
     print(f"""
 {BOLD}CERTIFICADOYA - Panel de Administracion{W}
@@ -114,6 +120,8 @@ def help():
   {G}python admin.py {B}estado <id> <e>{W}     Cambiar a estado personalizado
   {G}python admin.py {B}tecnicos{W}            Listar tecnicos
   {G}python admin.py {B}stats{W}               Estadisticas rapidas
+  {G}python admin.py {B}asignar_auto{W}        Asignar leads nuevos a tecnicos (por CP)
+  {G}python admin.py {B}asignar_auto --dry-run{W}  Simular sin guardar cambios
 """)
 
 if __name__ == '__main__':
@@ -140,5 +148,7 @@ if __name__ == '__main__':
         listar_tecnicos()
     elif cmd == 'stats':
         stats()
+    elif cmd == 'asignar_auto':
+        asignar_auto()
     else:
         help()
