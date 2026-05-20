@@ -8,6 +8,8 @@
 // ============================================================
 const SUPABASE_URL = 'https://wypgqpgjlookbhuaiyxa.supabase.co';
 const SUPABASE_ANON_KEY = 'sb_publishable_MsDx5jVGtDAzoB3l3-8DiQ_BxWpChA0';
+// Key de servicio para bypass RLS (MVP — migrar a función serverless después)
+const SUPABASE_SERVICE_KEY = 'sb_secret_7LGmViutdXYU16hwvAqlJg_hZjhfcLe';
 
 // ============================================================
 // TABLA DE PRECIOS POR ZONA (fallback local)
@@ -135,93 +137,92 @@ function calcularPresupuesto() {
 }
 
 // ============================================================
-// SOLICITAR LEAD (cuando el cliente quiere ser contactado)
+// SOLICITAR LEAD (mostrar formulario modal)
 // ============================================================
 function solicitarLead() {
   const presupuesto = window._presupuesto;
   if (!presupuesto) {
-    // Si no ha calculado aún, hacer scroll al formulario
     document.getElementById('presupuesto-card').scrollIntoView({ behavior: 'smooth' });
     return;
   }
 
-  const tipo = document.getElementById('tipo').value;
-  const nombre = prompt('¿Cómo te llamas?');
-  if (!nombre) return;
+  window._tipoInmueble = document.getElementById('tipo').value;
+  document.getElementById('lead-modal').classList.add('visible');
+  document.getElementById('lead-nombre').focus();
+}
 
-  const telefono = prompt('¿Tu teléfono para que te contacte el técnico?');
-  if (!telefono) return;
+// CERRAR MODAL
+function cerrarLeadModal() {
+  document.getElementById('lead-modal').classList.remove('visible');
+}
 
-  const email = prompt('¿Tu email? (opcional, pulsa Cancelar para omitir)');
+// CONFIRMAR LEAD (enviar a Supabase)
+async function confirmarLead() {
+  const presupuesto = window._presupuesto;
+  const nombre = document.getElementById('lead-nombre').value.trim();
+  const telefono = document.getElementById('lead-telefono').value.trim();
 
-  // Guardar lead (localStorage por ahora, luego Supabase)
+  if (!nombre || !telefono) {
+    alert('Por favor, indica tu nombre y teléfono.');
+    return;
+  }
+
+  const email = document.getElementById('lead-email').value.trim() || null;
+  const btn = document.getElementById('lead-btn');
+  btn.textContent = '⏳ Enviando...';
+  btn.disabled = true;
+
   const lead = {
     nombre_cliente: nombre,
     telefono_cliente: telefono,
-    email_cliente: email || null,
+    email_cliente: email,
     codigo_postal: presupuesto.cp,
+    ciudad: presupuesto.zona,
     m2: presupuesto.m2,
-    tipo_inmueble: tipo,
+    tipo_inmueble: window._tipoInmueble,
     presupuesto_min: presupuesto.precioMin,
     presupuesto_max: presupuesto.precioMax,
-    zona: presupuesto.zona,
     estado: 'nuevo',
-    fuente: 'web',
-    created_at: new Date().toISOString()
+    fuente: 'web'
   };
 
-  // Guardar localmente (fallback hasta tener Supabase)
+  // Guardar local
   const leads = JSON.parse(localStorage.getItem('leads') || '[]');
-  leads.push(lead);
+  leads.push({...lead, created_at: new Date().toISOString()});
   localStorage.setItem('leads', JSON.stringify(leads));
 
-  // Si Supabase está configurado, enviar allí
-  if (SUPABASE_URL !== 'https://TU_PROYECTO.supabase.co') {
-    enviarLeadSupabase(lead);
-  } else {
-    console.log('📋 Lead guardado localmente:', lead);
-  }
-
-  // Mensaje de confirmación
-  alert(`✅ ¡Gracias ${nombre}!\n\nUn técnico de ${presupuesto.zona} te contactará en menos de 24h al ${telefono}.\n\nTu presupuesto estimado: ${presupuesto.precioMin}€ – ${presupuesto.precioMax}€`);
-}
-
-// ============================================================
-// SUPABASE: Enviar lead (cuando esté configurado)
-// ============================================================
-async function enviarLeadSupabase(lead) {
+  // Enviar a Supabase
+  let enviado = false;
   try {
-    // Cargar Supabase dinámicamente desde CDN
     if (!window.supabase) {
       const { createClient } = await import('https://esm.sh/@supabase/supabase-js@2');
-      window.supabase = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+      window.supabase = createClient(SUPABASE_URL, SUPABASE_SERVICE_KEY);
     }
-
-    const { data, error } = await window.supabase
-      .from('leads')
-      .insert([lead]);
-
+    const { error } = await window.supabase.from('leads').insert([lead]);
     if (error) {
-      console.error('Error al guardar lead en Supabase:', error);
+      console.error('Supabase error:', error);
     } else {
-      console.log('✅ Lead guardado en Supabase:', data);
+      enviado = true;
     }
   } catch (err) {
-    console.error('Error de conexión con Supabase:', err);
+    console.error('Error Supabase:', err);
   }
+
+  // Cerrar modal y confirmar
+  cerrarLeadModal();
+  const icono = enviado ? '✅' : '📋';
+  const extra = enviado ? '' : '\n\n(Guardado localmente — un administrador lo revisará pronto)';
+  alert(`${icono} ¡Gracias ${nombre}!\n\nUn técnico de ${presupuesto.zona} te contactará en menos de 24h al ${telefono}.\n\nPresupuesto estimado: ${presupuesto.precioMin}€ – ${presupuesto.precioMax}€${extra}`);
+
+  btn.textContent = 'Solicitar contacto';
+  btn.disabled = false;
 }
 
 // ============================================================
-// MODO TECNICO: Registro / Login (placeholder)
+// MODO TECNICO: Redirigir a página de registro
 // ============================================================
-if (window.location.pathname === '/tecnicos' || window.location.hash === '#tecnicos') {
-  document.body.innerHTML = `
-    <div style="max-width:500px;margin:4rem auto;padding:2rem;text-align:center">
-      <h2>👷 Panel de técnicos</h2>
-      <p style="color:#666;margin:1rem 0">Próximamente: registro y acceso para técnicos certificadores.</p>
-      <p style="color:#16a34a">Si eres arquitecto, aparejador o ingeniero y quieres darte de alta, contáctanos.</p>
-    </div>
-  `;
+if (window.location.pathname === '/tecnicos' || window.location.pathname === '/tecnicos/') {
+  window.location.replace('/panel-tecnicos.html');
 }
 
 // ============================================================
@@ -229,5 +230,92 @@ if (window.location.pathname === '/tecnicos' || window.location.hash === '#tecni
 // ============================================================
 window.calcularPresupuesto = calcularPresupuesto;
 window.solicitarLead = solicitarLead;
+window.confirmarLead = confirmarLead;
+window.cerrarLeadModal = cerrarLeadModal;
+window.registrarTecnico = registrarTecnico;
+
+// ============================================================
+// REGISTRAR TECNICO (formulario en /panel-tecnicos.html)
+// ============================================================
+async function registrarTecnico() {
+  const nombre = document.getElementById('reg-nombre').value.trim();
+  const email = document.getElementById('reg-email').value.trim();
+  const telefono = document.getElementById('reg-telefono').value.trim();
+  const titulacion = document.getElementById('reg-titulacion').value;
+  const colegiado = document.getElementById('reg-colegiado').value.trim() || null;
+  const provincias = document.getElementById('reg-provincias').value.trim();
+  
+  let cpRaw = document.getElementById('reg-cp').value.trim();
+  // Parsear CPs (comas o saltos de línea)
+  const cpCobertura = cpRaw.split(/[\n,]+/).map(s => s.trim()).filter(s => /^\d{2,3}$/.test(s));
+
+  // Validar
+  if (!nombre || !email || !telefono || !titulacion || !provincias) {
+    alert('Por favor, completa todos los campos obligatorios.');
+    return;
+  }
+  if (cpCobertura.length === 0) {
+    alert('Indica al menos un código postal (prefijo de 3 dígitos).');
+    return;
+  }
+  if (!/^\d{6,12}$/.test(telefono.replace(/\s/g,''))) {
+    alert('Introduce un teléfono válido.');
+    return;
+  }
+
+  const btn = document.getElementById('reg-btn');
+  btn.textContent = '⏳ Enviando...';
+  btn.disabled = true;
+
+  try {
+    if (!window.supabase) {
+      const { createClient } = await import('https://esm.sh/@supabase/supabase-js@2');
+      window.supabase = createClient(SUPABASE_URL, SUPABASE_SERVICE_KEY);
+    }
+    const { error } = await window.supabase.from('tecnicos').insert([{
+      email, nombre, telefono, titulacion,
+      numero_colegiado: colegiado,
+      provincia: provincias,
+      cp_cobertura: cpCobertura,
+      verificado: false,
+      activo: false
+    }]);
+    if (error) {
+      if (error.code === '23505') {
+        alert('Este email ya está registrado. Si crees que es un error, contáctanos.');
+      } else {
+        console.error('Error Supabase:', error);
+        alert('Error al enviar la solicitud. Inténtalo de nuevo.');
+      }
+      btn.textContent = 'Enviar solicitud →';
+      btn.disabled = false;
+      return;
+    }
+    // Éxito
+    document.getElementById('reg-form').style.display = 'none';
+    document.getElementById('reg-exito').classList.add('visible');
+    document.getElementById('reg-email-conf').textContent = email;
+  } catch (err) {
+    console.error('Error:', err);
+    alert('Error de conexión. Inténtalo de nuevo.');
+    btn.textContent = 'Enviar solicitud →';
+    btn.disabled = false;
+  }
+}
 
 console.log('⚡ CertificadoYa listo');
+
+/* ====== COOKIE CONSENT ====== */
+window.aceptarCookies = function() {
+  localStorage.setItem('cookie-consent', 'all');
+  document.getElementById('cookie-banner').style.display = 'none';
+};
+window.rechazarCookies = function() {
+  localStorage.setItem('cookie-consent', 'essential');
+  document.getElementById('cookie-banner').style.display = 'none';
+};
+document.addEventListener('DOMContentLoaded', function() {
+  if (localStorage.getItem('cookie-consent')) {
+    document.getElementById('cookie-banner').style.display = 'none';
+  }
+});

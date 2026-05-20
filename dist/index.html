@@ -3,6 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- v2.1 mobile-responsive | force-deploy -->
   <title>CertificadoYa — Certificado Energético en 24h | Presupuesto al Instante</title>
   <meta name="description" content="Consigue tu certificado de eficiencia energética (CEE) en 24 horas. Presupuesto instantáneo por m². Los mejores técnicos en Madrid, Asturias y toda España. Desde 45€.">
   <meta name="keywords" content="certificado energético, certificado de eficiencia energética, CEE, precio certificado energético, presupuesto certificado energético, técnico certificador, Madrid, Gijón, Asturias">
@@ -21,17 +22,19 @@
   <!-- ====== NAV ====== -->
   <nav>
     <a href="/" class="logo">⚡ Certificado<span>Ya</span></a>
+    <input type="checkbox" id="nav-toggle" class="nav-toggle">
+    <label for="nav-toggle" class="nav-toggle-label">☰</label>
     <div class="nav-links">
       <a href="#como-funciona">Cómo funciona</a>
       <a href="#ventajas">Ventajas</a>
-<a href="/tecnicos">¿Eres técnico?</a>
+      <a href="/panel-tecnicos.html">¿Eres técnico?</a>
     </div>
   </nav>
 
   <!-- ====== HERO ====== -->
   <section class="hero">
     <div class="hero-text">
-      <h1>Tu <span>certificado energético</span> en 24 horas</h1>
+      <h1>Tu <span>certificado energético (CEE)</span> en 24 horas</h1>
       <p>Presupuesto al instante. Sin formularios largos. Sin esperas. Los mejores técnicos de tu zona, desde <strong>45€</strong>.</p>
       <div class="hero-badges">
         <div class="badge">⚡ Presupuesto inmediato</div>
@@ -165,10 +168,47 @@
       <a href="/legal/aviso-legal">Aviso legal</a> ·
       <a href="/legal/privacidad">Privacidad</a> ·
       <a href="/legal/cookies">Cookies</a> ·
-<a href="/tecnicos">¿Eres técnico?</a>
+<a href="/panel-tecnicos.html">¿Eres técnico?</a>
     </p>
   </footer>
 
   <script type="module" src="/js/main.js"></script>
+
+  <!-- MODAL LEAD -->
+  <div class="modal-overlay" id="lead-modal">
+    <div class="modal-box">
+      <button class="modal-close" onclick="cerrarLeadModal()">✕</button>
+      <h3>📞 Solicitar contacto</h3>
+      <p style="color:#666;margin-bottom:1rem">Un técnico de tu zona te llamará en menos de 24h</p>
+      <div class="form-group">
+        <label for="lead-nombre">Nombre *</label>
+        <input type="text" id="lead-nombre" placeholder="Tu nombre completo" required>
+      </div>
+      <div class="form-group">
+        <label for="lead-telefono">Teléfono *</label>
+        <input type="tel" id="lead-telefono" placeholder="Ej: 612345678" required>
+      </div>
+      <div class="form-group">
+        <label for="lead-email">Email (opcional)</label>
+        <input type="email" id="lead-email" placeholder="tu@email.com">
+      </div>
+      <button class="btn btn-green btn-full" id="lead-btn" onclick="confirmarLead()">
+        Solicitar contacto →
+      </button>
+    </div>
+  </div>
+
+<!-- ====== COOKIE BANNER ====== -->
+<div id="cookie-banner" class="cookie-banner">
+  <div class="cookie-banner-content">
+    <p><span class="cookie-text-full">🍪 Usamos cookies esenciales para que la web funcione. También cookies de terceros (Supabase, Stripe) solo si interactúas con el panel de técnicos o pagos. Sin publicidad. Sin seguimiento.</span><span class="cookie-text-short">🍪 Esta web usa cookies esenciales y de terceros (Supabase, Stripe). Sin publicidad.</span></p>
+    <div class="cookie-buttons">
+      <button class="btn btn-green btn-sm" onclick="aceptarCookies()">Aceptar</button>
+      <button class="btn btn-outline btn-sm" onclick="rechazarCookies()">Solo esenciales</button>
+      <a href="/cookies" class="cookie-link">Más info</a>
+    </div>
+  </div>
+</div>
+
 </body>
 </html>
