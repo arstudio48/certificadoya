@@ -90,8 +90,7 @@ def asignar_leads(dry_run: bool = False):
         # 4. Asignar
         update = supabase.table('leads').update({
             'tecnico_asignado': mejor_tecnico['id'],
-            'estado': 'asignado',
-            'updated_at': datetime.now(timezone.utc).isoformat()
+            'estado': 'asignado'
         }).eq('id', lead['id']).execute()
 
         if update.data:
