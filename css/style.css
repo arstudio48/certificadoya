@@ -619,6 +619,10 @@ footer a {
   text-decoration: underline;
 }
 @media (max-width: 768px) {
-  .cookie-banner-content { flex-direction: column; text-align: center; }
-  .cookie-buttons { justify-content: center; }
+  .cookie-banner { padding: .5rem .75rem; }
+  .cookie-banner-content { flex-direction: column; text-align: center; gap: .4rem; }
+  .cookie-banner-content p { font-size: .72rem; line-height: 1.3; }
+  .cookie-buttons { justify-content: center; gap: .4rem; }
+  .btn-sm { font-size: .72rem; padding: .35rem .7rem; }
+  .cookie-link { font-size: .72rem; }
 }
