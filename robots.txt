@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+Disallow: /legal/
+Disallow: /tecnicos/
+Sitemap: https://certificadoya.es/sitemap.xml
