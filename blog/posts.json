@@ -88,5 +88,14 @@
     "descripcion": "Guía visual de la etiqueta energética A-G: qué significa cada letra, rangos de consumo, emisiones CO₂, cómo se calcula y diferencias entre zonas climáticas en España.",
     "categoria": "básico",
     "lectura": 6
+  },
+  {
+    "slug": "rd-659-2025-fp-superior-certificado-energetico",
+    "titulo": "RD 659/2025: La FP Superior ya puede emitir certificados energéticos",
+    "fecha": "2026-05-20",
+    "autor": "CertificadoYa",
+    "descripcion": "El Real Decreto 659/2025 permite que titulados de FP Superior, Certificados Profesionales y Cursos de Especialización emitan el certificado de eficiencia energética (CEE). Entrará en vigor el 23 de julio de 2026.",
+    "categoria": "normativa",
+    "lectura": 7
   }
 ]
