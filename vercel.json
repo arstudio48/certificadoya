@@ -1,4 +1,6 @@
 {
+  "cleanUrls": true,
+  "trailingSlash": false,
   "redirects": [
     {
       "source": "/legal/aviso-legal",
@@ -14,18 +16,6 @@
       "source": "/legal/cookies",
       "destination": "/legal/cookies.html",
       "permanent": true
-    },
-    {
-      "source": "/certificado-energetico-madrid",
-      "destination": "/certificado-energetico-madrid/",
-      "permanent": true
-    },
-    {
-      "source": "/certificado-energetico-barcelona",
-      "destination": "/certificado-energetico-barcelona/",
-      "permanent": true
     }
-  ],
-  "cleanUrls": true,
-  "trailingSlash": false
+  ]
 }
