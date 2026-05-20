@@ -1,4 +1,7 @@
 {
-  "version": 2,
-  "cleanUrls": false
+  "cleanUrls": false,
+  "rewrites": [
+    { "source": "/tecnicos", "destination": "/tecnicos.html" },
+    { "source": "/legal", "destination": "/legal/aviso-legal.html" }
+  ]
 }
