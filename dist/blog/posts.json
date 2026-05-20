@@ -1,0 +1,29 @@
+[
+  {
+    "slug": "que-es-certificado-energetico",
+    "titulo": "¿Qué es el certificado energético y por qué es obligatorio?",
+    "fecha": "2026-05-15",
+    "autor": "CertificadoYa",
+    "descripcion": "Todo lo que necesitas saber sobre el Certificado de Eficiencia Energética (CEE): qué es, cuándo es obligatorio, quién puede emitirlo y qué pasa si no lo tienes.",
+    "categoria": "básico",
+    "lectura": 5
+  },
+  {
+    "slug": "precio-certificado-energetico-2026",
+    "titulo": "¿Cuánto cuesta un certificado energético en 2026? Guía de precios",
+    "fecha": "2026-05-18",
+    "autor": "CertificadoYa",
+    "descripcion": "Analizamos los precios del certificado energético por m², por ciudad y por tipo de inmueble. Comparativa Madrid, Barcelona, Asturias y resto de España.",
+    "categoria": "precios",
+    "lectura": 6
+  },
+  {
+    "slug": "mejorar-eficiencia-energetica-vivienda",
+    "titulo": "7 formas de mejorar la eficiencia energética de tu vivienda (y ahorrar en facturas)",
+    "fecha": "2026-05-20",
+    "autor": "CertificadoYa",
+    "descripcion": "De la A a la G: cómo subir la letra de tu certificado energético con mejoras prácticas. Aislamiento, ventanas, aerotermia y más.",
+    "categoria": "ahorro",
+    "lectura": 7
+  }
+]

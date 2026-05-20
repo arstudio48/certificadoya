@@ -1,0 +1,669 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>¿Qué es el certificado energético y por qué es obligatorio? | CertificadoYa</title>
+  <meta name="description" content="Todo lo que necesitas saber sobre el Certificado de Eficiencia Energética (CEE): qué es, cuándo es obligatorio, quién puede emitirlo, normativa, sanciones y cómo se calcula.">
+  <meta name="keywords" content="certificado energético, certificado de eficiencia energética, CEE, qué es certificado energético, obligatorio vender alquilar, normativa certificado energético, etiqueta energética, RD 390/2021">
+  <meta name="author" content="CertificadoYa">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://certificadoya.es/blog/que-es-certificado-energetico">
+  <meta property="og:title" content="¿Qué es el certificado energético y por qué es obligatorio? | CertificadoYa">
+  <meta property="og:description" content="Todo lo que necesitas saber sobre el Certificado de Eficiencia Energética (CEE): qué es, cuándo es obligatorio, quién puede emitirlo, normativa, sanciones y cómo se calcula.">
+  <meta property="og:url" content="https://certificadoya.es/blog/que-es-certificado-energetico">
+  <meta property="og:type" content="article">
+  <meta property="article:published_time" content="2026-05-15">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⚡</text></svg>">
+  <style>
+    :root {
+      --green: #16a34a;
+      --green-dark: #15803d;
+      --green-light: #dcfce7;
+      --blue: #2563eb;
+      --blue-light: #dbeafe;
+      --gray-50: #f9fafb;
+      --gray-100: #f3f4f6;
+      --gray-200: #e5e7eb;
+      --gray-300: #d1d5db;
+      --gray-400: #9ca3af;
+      --gray-500: #6b7280;
+      --gray-600: #4b5563;
+      --gray-700: #374151;
+      --gray-800: #1f2937;
+      --gray-900: #111827;
+      --white: #ffffff;
+      --radius: 12px;
+      --radius-sm: 8px;
+      --shadow: 0 1px 3px rgba(0,0,0,.08), 0 1px 2px rgba(0,0,0,.06);
+      --shadow-lg: 0 10px 25px rgba(0,0,0,.08);
+    }
+
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+      color: var(--gray-800);
+      background: var(--white);
+      line-height: 1.7;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ====== NAV ====== */
+    nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1rem 2rem;
+      max-width: 1200px;
+      margin: 0 auto;
+      border-bottom: 1px solid var(--gray-100);
+    }
+
+    .logo {
+      font-size: 1.4rem;
+      font-weight: 700;
+      color: var(--green);
+      text-decoration: none;
+    }
+    .logo span { color: var(--gray-800); }
+
+    .nav-links { display: flex; gap: 1.5rem; align-items: center; }
+    .nav-links a {
+      text-decoration: none;
+      color: var(--gray-600);
+      font-size: .95rem;
+      transition: color .2s;
+    }
+    .nav-links a:hover { color: var(--green); }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: .5rem;
+      padding: .65rem 1.5rem;
+      border-radius: 8px;
+      font-weight: 600;
+      font-size: .95rem;
+      cursor: pointer;
+      border: none;
+      transition: all .2s;
+      text-decoration: none;
+    }
+
+    .btn-green {
+      background: var(--green);
+      color: white;
+    }
+    .btn-green:hover { background: var(--green-dark); transform: translateY(-1px); }
+
+    .btn-outline {
+      background: transparent;
+      color: var(--green);
+      border: 2px solid var(--green);
+    }
+    .btn-outline:hover { background: var(--green-light); }
+
+    /* ====== BLOG LAYOUT ====== */
+    .blog-container {
+      max-width: 860px;
+      margin: 0 auto;
+      padding: 2rem;
+    }
+
+    /* Breadcrumb */
+    .breadcrumb {
+      display: flex;
+      align-items: center;
+      gap: .5rem;
+      flex-wrap: wrap;
+      font-size: .85rem;
+      color: var(--gray-500);
+      margin-bottom: 1.5rem;
+      padding-bottom: 1rem;
+      border-bottom: 1px solid var(--gray-100);
+    }
+    .breadcrumb a {
+      color: var(--green);
+      text-decoration: none;
+      font-weight: 500;
+    }
+    .breadcrumb a:hover { text-decoration: underline; }
+    .breadcrumb .sep { color: var(--gray-400); font-size: .75rem; }
+
+    /* Article header */
+    .article-header { margin-bottom: 2.5rem; }
+
+    .article-category {
+      display: inline-block;
+      background: var(--green-light);
+      color: var(--green-dark);
+      padding: .3rem .85rem;
+      border-radius: 100px;
+      font-size: .8rem;
+      font-weight: 600;
+      margin-bottom: .75rem;
+      text-transform: uppercase;
+      letter-spacing: .5px;
+    }
+
+    .article-header h1 {
+      font-size: 2.2rem;
+      font-weight: 800;
+      line-height: 1.25;
+      color: var(--gray-900);
+      margin-bottom: 1rem;
+    }
+
+    .article-meta {
+      display: flex;
+      align-items: center;
+      gap: 1.25rem;
+      flex-wrap: wrap;
+      font-size: .88rem;
+      color: var(--gray-500);
+    }
+    .article-meta span {
+      display: flex;
+      align-items: center;
+      gap: .3rem;
+    }
+
+    /* Article body */
+    .article-body {
+      font-size: 1.08rem;
+      line-height: 1.8;
+    }
+
+    .article-body h2 {
+      font-size: 1.55rem;
+      font-weight: 700;
+      color: var(--gray-900);
+      margin: 2.5rem 0 1rem;
+      padding-bottom: .5rem;
+      border-bottom: 2px solid var(--green-light);
+    }
+
+    .article-body h3 {
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: var(--gray-800);
+      margin: 2rem 0 .75rem;
+    }
+
+    .article-body p {
+      margin-bottom: 1.25rem;
+      color: var(--gray-700);
+    }
+
+    .article-body ul, .article-body ol {
+      margin: 0 0 1.5rem 1.5rem;
+      color: var(--gray-700);
+    }
+    .article-body li { margin-bottom: .5rem; }
+
+    .article-body strong { color: var(--gray-900); }
+
+    .article-body a {
+      color: var(--green);
+      text-decoration: none;
+      font-weight: 500;
+    }
+    .article-body a:hover { text-decoration: underline; }
+
+    /* Info box / callout */
+    .callout {
+      background: var(--blue-light);
+      border-left: 4px solid var(--blue);
+      border-radius: var(--radius-sm);
+      padding: 1.25rem 1.5rem;
+      margin: 1.5rem 0 2rem;
+    }
+    .callout p { margin: 0; color: #1e40af; font-size: .95rem; }
+    .callout strong { color: #1e3a8a; }
+
+    .callout-warning {
+      background: #fef3c7;
+      border-left: 4px solid #d97706;
+    }
+    .callout-warning p { color: #92400e; }
+    .callout-warning strong { color: #78350f; }
+
+    .callout-green {
+      background: var(--green-light);
+      border-left: 4px solid var(--green);
+    }
+    .callout-green p { color: var(--green-dark); }
+    .callout-green strong { color: #14532d; }
+
+    /* Escala energética */
+    .escala-grid {
+      display: grid;
+      grid-template-columns: repeat(7, 1fr);
+      gap: .5rem;
+      margin: 1.5rem 0 2rem;
+      text-align: center;
+    }
+    .escala-letra {
+      padding: .75rem .25rem;
+      border-radius: var(--radius-sm);
+      font-weight: 800;
+      font-size: 1.4rem;
+      color: white;
+    }
+    .escala-label {
+      font-size: .7rem;
+      font-weight: 600;
+      color: var(--gray-600);
+      margin-top: .25rem;
+    }
+    .escala-a { background: #15803d; }
+    .escala-b { background: #4caf50; }
+    .escala-c { background: #8bc34a; }
+    .escala-d { background: #fdd835; }
+    .escala-e { background: #ffb300; }
+    .escala-f { background: #ff8f00; }
+    .escala-g { background: #d32f2f; }
+
+    .escala-row {
+      display: grid;
+      grid-template-columns: repeat(7, 1fr);
+      gap: .5rem;
+      font-size: .72rem;
+      color: var(--gray-600);
+    }
+
+    /* Key points list */
+    .checklist {
+      list-style: none;
+      margin: 1rem 0 1.5rem 0 !important;
+      padding: 0;
+    }
+    .checklist li {
+      padding: .5rem 0 .5rem 1.75rem;
+      position: relative;
+      margin-bottom: .25rem;
+    }
+    .checklist li::before {
+      content: '✅';
+      position: absolute;
+      left: 0;
+      top: .5rem;
+      font-size: .85rem;
+    }
+
+    /* Separator */
+    .article-sep {
+      border: none;
+      border-top: 1px solid var(--gray-200);
+      margin: 2.5rem 0;
+    }
+
+    /* Related posts */
+    .related-posts {
+      background: var(--gray-50);
+      border-radius: var(--radius);
+      padding: 2rem;
+      margin: 2rem 0;
+    }
+    .related-posts h3 {
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: var(--gray-900);
+      margin-bottom: 1rem;
+    }
+    .related-links {
+      display: flex;
+      flex-direction: column;
+      gap: .75rem;
+    }
+    .related-links a {
+      display: flex;
+      align-items: center;
+      gap: .5rem;
+      padding: .85rem 1rem;
+      background: var(--white);
+      border: 1px solid var(--gray-200);
+      border-radius: var(--radius-sm);
+      text-decoration: none;
+      color: var(--gray-800);
+      font-weight: 600;
+      transition: all .2s;
+    }
+    .related-links a:hover {
+      border-color: var(--green);
+      color: var(--green);
+      background: var(--green-light);
+    }
+
+    /* CTA */
+    .blog-cta {
+      background: var(--green);
+      color: white;
+      text-align: center;
+      padding: 2.5rem 2rem;
+      border-radius: var(--radius);
+      margin: 2.5rem 0;
+    }
+    .blog-cta h3 {
+      font-size: 1.4rem;
+      font-weight: 800;
+      margin-bottom: .5rem;
+    }
+    .blog-cta p {
+      font-size: 1rem;
+      opacity: .9;
+      margin-bottom: 1.25rem;
+    }
+    .btn-white {
+      background: white;
+      color: var(--green);
+      font-weight: 700;
+    }
+    .btn-white:hover { background: var(--green-light); transform: translateY(-1px); }
+
+    /* FOOTER */
+    footer {
+      background: var(--gray-900);
+      color: var(--gray-200);
+      padding: 3rem 2rem;
+      text-align: center;
+      font-size: .9rem;
+      margin-top: 3rem;
+    }
+    footer a {
+      color: var(--green);
+      text-decoration: none;
+    }
+    footer a:hover { text-decoration: underline; }
+
+    /* ====== RESPONSIVE ====== */
+    @media (max-width: 768px) {
+      nav { padding: 1rem; }
+      .nav-links { display: none; }
+      .blog-container { padding: 1.5rem 1rem; }
+      .article-header h1 { font-size: 1.6rem; }
+      .article-body { font-size: 1rem; }
+      .article-body h2 { font-size: 1.3rem; }
+      .escala-grid, .escala-row { grid-template-columns: repeat(7, 1fr); gap: .25rem; }
+      .escala-letra { font-size: 1.1rem; padding: .5rem .15rem; }
+      .escala-label, .escala-row { font-size: .6rem; }
+      .blog-cta { padding: 2rem 1.25rem; }
+      .blog-cta h3 { font-size: 1.2rem; }
+      .related-posts { padding: 1.5rem; }
+    }
+
+    @media (max-width: 480px) {
+      nav { padding: .75rem 1rem; }
+      .logo { font-size: 1.15rem; }
+      .blog-container { padding: 1rem .75rem; }
+      .article-header h1 { font-size: 1.4rem; }
+      .article-body h2 { font-size: 1.15rem; }
+      .article-body h3 { font-size: 1.05rem; }
+      .escala-grid, .escala-row { grid-template-columns: repeat(7, 1fr); gap: .15rem; }
+      .escala-letra { font-size: .9rem; padding: .4rem .1rem; }
+      .escala-label, .escala-row { font-size: .55rem; }
+      footer { padding: 2rem 1rem; font-size: .8rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ====== NAV ====== -->
+  <nav>
+    <a href="/" class="logo">⚡ Certificado<span>Ya</span></a>
+    <div class="nav-links">
+      <a href="/#como-funciona">Cómo funciona</a>
+      <a href="/#ventajas">Ventajas</a>
+      <a href="/blog/">Blog</a>
+      <a href="/panel-tecnicos.html">¿Eres técnico?</a>
+      <a href="/#presupuesto-card" class="btn btn-green">Calcular presupuesto</a>
+    </div>
+  </nav>
+
+  <!-- ====== BLOG CONTENT ====== -->
+  <main class="blog-container">
+    <!-- Breadcrumb -->
+    <nav class="breadcrumb" aria-label="Breadcrumb">
+      <a href="/">Inicio</a>
+      <span class="sep">›</span>
+      <a href="/blog/">Blog</a>
+      <span class="sep">›</span>
+      <span>¿Qué es el certificado energético?</span>
+    </nav>
+
+    <!-- Header -->
+    <header class="article-header">
+      <span class="article-category">✏️ Básico</span>
+      <h1>¿Qué es el certificado energético y por qué es obligatorio?</h1>
+      <div class="article-meta">
+        <span>📅 15 de mayo de 2026</span>
+        <span>✍️ CertificadoYa</span>
+        <span>⏱️ 8 min de lectura</span>
+      </div>
+    </header>
+
+    <!-- Article body -->
+    <div class="article-body">
+
+      <p>Si estás pensando en <strong>vender o alquilar tu vivienda</strong>, hay un documento que vas a necesitar sí o sí: el <strong>Certificado de Eficiencia Energética</strong> (CEE). Quizás hayas oído hablar de él como «certificado energético», «etiqueta energética» o «el papelito de las letras de colores». Sea cual sea el nombre, es obligatorio y no tenerlo puede salirte caro.</p>
+
+      <p>En esta guía te explicamos <strong>todo lo que necesitas saber</strong>: qué es exactamente el CEE, para qué sirve, cómo interpretar la etiqueta energética, cuándo es obligatorio, qué normativa lo regula (incluyendo el Real Decreto 390/2021), quién puede emitirlo, cómo se calcula, cuánto dura y qué sanciones arriesgas si no lo tienes. Vamos al grano.</p>
+
+      <h2>¿Qué es el Certificado de Eficiencia Energética (CEE)?</h2>
+
+      <p>El <strong>Certificado de Eficiencia Energética</strong> es un documento oficial que evalúa <strong>cuánta energía consume un edificio o vivienda</strong> en condiciones normales de uso. Es decir, mide lo eficiente que es tu casa desde el punto de vista energético: calefacción, refrigeración, agua caliente sanitaria (ACS), ventilación e iluminación.</p>
+
+      <p>El resultado se expresa con una <strong>letra de la A a la G</strong>, donde la <strong>A</strong> es la más eficiente (menor consumo, menores emisiones de CO₂) y la <strong>G</strong> la menos eficiente. Esta escala es visualmente idéntica a la que ves en electrodomésticos como neveras o lavadoras, lo que facilita la comparación a simple vista.</p>
+
+      <p>Pero el certificado es mucho más que una letra. Incluye un <strong>informe detallado</strong> con los datos constructivos de la vivienda, el consumo estimado de energía primaria (kWh/m² año) y las emisiones de dióxido de carbono (kg CO₂/m² año). Además, incorpora un anexo con <strong>recomendaciones de mejora</strong> valoradas técnicamente que indican cuánto podrías ahorrar si realizas determinadas reformas.</p>
+
+      <!-- Escala energética visual -->
+      <div class="escala-grid">
+        <div class="escala-letra escala-a">A</div>
+        <div class="escala-letra escala-b">B</div>
+        <div class="escala-letra escala-c">C</div>
+        <div class="escala-letra escala-d">D</div>
+        <div class="escala-letra escala-e">E</div>
+        <div class="escala-letra escala-f">F</div>
+        <div class="escala-letra escala-g">G</div>
+      </div>
+      <div class="escala-row">
+        <span>Máxima eficiencia</span>
+        <span>Muy buena</span>
+        <span>Buena</span>
+        <span>Media</span>
+        <span>Baja</span>
+        <span>Muy baja</span>
+        <span>Mínima</span>
+      </div>
+
+      <h3>La etiqueta energética: qué significa cada letra</h3>
+
+      <p>La etiqueta energética de una vivienda refleja dos indicadores clave: el <strong>consumo de energía primaria no renovable</strong> y las <strong>emisiones de CO₂</strong>. Cada letra de la escala corresponde a un rango de valores, y la diferencia entre una categoría y otra puede ser enorme:</p>
+
+      <ul>
+        <li><strong>Letra A:</strong> La vivienda consume menos de 44,6 kWh/m² año en calefacción y refrigeración. Son inmuebles de consumo casi nulo, típicos de obra nueva con altos estándares de eficiencia (passivhaus, edificios NZEB). Pueden ahorrar hasta un 90% en factura energética respecto a una vivienda G.</li>
+        <li><strong>Letra B:</strong> Consumo entre 44,6 y 72,3 kWh/m² año. Viviendas con buen aislamiento térmico, ventanas con doble acristalamiento y sistemas de climatización eficientes como aerotermia.</li>
+        <li><strong>Letra C:</strong> Consumo entre 72,3 y 112 kWh/m² año. Equivalente a la mayoría de edificios construidos después de 2006, cuando entró en vigor el Código Técnico de la Edificación (CTE).</li>
+        <li><strong>Letra D:</strong> Consumo entre 112 y 172,3 kWh/m² año. Rango más habitual en España: aproximadamente la mitad de las viviendas certificadas obtienen una D o una E.</li>
+        <li><strong>Letra E:</strong> Consumo entre 172,3 y 263,5 kWh/m² año. Viviendas construidas entre los años 80 y principios de los 2000, sin aislamiento térmico suficiente y con ventanales antiguos.</li>
+        <li><strong>Letra F:</strong> Consumo entre 263,5 y 386,6 kWh/m² año. Edificaciones anteriores a 1979, sin ningún tipo de aislamiento y con carpinterías metálicas sin rotura de puente térmico.</li>
+        <li><strong>Letra G:</strong> Consumo superior a 386,6 kWh/m² año. Las más ineficientes. Generalmente inmuebles muy antiguos, sin aislar, con calderas de gasoil o carbón y ventanas de vidrio simple. La factura energética puede ser hasta 10 veces mayor que la de una vivienda A.</li>
+      </ul>
+
+      <div class="callout callout-green">
+        <p><strong>💡 Dato clave:</strong> La etiqueta energética tiene una validez de <strong>10 años</strong>. Pasado ese tiempo, debes renovarla si el inmueble sigue en venta o alquiler. Pero si realizas mejoras que suben la letra, puedes renovarla antes para reflejar la nueva calificación y revalorizar tu vivienda.</p>
+      </div>
+
+      <h2>¿Para qué sirve realmente el certificado energético?</h2>
+
+      <p>El certificado energético no es un trámite burocrático más. Tiene <strong>tres funciones fundamentales</strong> que conviene entender:</p>
+
+      <h3>1. Informar al comprador o inquilino</h3>
+      <p>Antes de comprar o alquilar, el futuro ocupante tiene derecho a saber cuánto va a gastar en energía cada mes. Una vivienda con certificado A puede gastar hasta <strong>10 veces menos</strong> en calefacción que una con certificado G. Es información real que impacta directamente en la economía familiar y que puede condicionar la decisión de compra o alquiler. De hecho, cada vez más compradores descartan viviendas por debajo de la letra E.</p>
+
+      <h3>2. Fomentar la rehabilitación energética</h3>
+      <p>El certificado incluye un paquete de medidas de mejora con su correspondiente estimación de ahorro. La idea es que el mercado premie las viviendas eficientes y penalice las ineficientes, incentivando a los propietarios a rehabilitar. En 2026 existen <strong>ayudas europeas Next Generation</strong>, deducciones en el IRPF de hasta el 60% por obras de mejora energética, y bonificaciones en el IBI en muchos municipios para viviendas con letra A o B.</p>
+
+      <h3>3. Cumplir con la normativa europea y española</h3>
+      <p>El CEE nace de la <strong>Directiva Europea 2010/31/UE</strong>, que obliga a todos los países miembros a certificar energéticamente los edificios. El objetivo es reducir el consumo energético del parque edificatorio europeo, responsable de aproximadamente el 40% del consumo total de energía de la UE y del 36% de las emisiones de gases de efecto invernadero.</p>
+
+      <h2>Normativa: del RD 235/2013 al RD 390/2021</h2>
+
+      <p>España incorporó la directiva europea en dos fases legislativas clave que todo propietario debería conocer:</p>
+
+      <h3>Real Decreto 235/2013: el punto de partida</h3>
+      <p>En 2013 se aprobó el <strong>Real Decreto 235/2013</strong>, que estableció el procedimiento básico para la certificación energética de edificios en España. Este decreto definió la obligatoriedad del certificado para la venta y el alquiler, la escala de calificación de la A a la G, los programas informáticos reconocidos para realizar los cálculos (CE3X, CEX y HULC), y el registro obligatorio del certificado en el organismo competente de cada Comunidad Autónoma.</p>
+
+      <h3>Real Decreto 390/2021: la actualización clave</h3>
+      <p>En 2021 entró en vigor el <strong>Real Decreto 390/2021</strong>, que actualizó y endureció los criterios de certificación. Los cambios más relevantes son:</p>
+
+      <ul>
+        <li><strong>Nuevo procedimiento unificado:</strong> El RD 390/2021 deroga el procedimiento anterior y establece uno nuevo adaptado al Código Técnico de la Edificación (CTE) de 2019, que eleva las exigencias de eficiencia energética para edificios de nueva construcción.</li>
+        <li><strong>Indicadores más estrictos:</strong> La calificación ya no solo considera el consumo de energía primaria, sino también las emisiones de CO₂. Ambos indicadores deben cumplir los umbrales correspondientes para obtener una determinada letra.</li>
+        <li><strong>Registro único:</strong> Se refuerza la obligación de inscribir el certificado en el registro autonómico antes de que tenga validez legal. Sin registro, el certificado no existe a efectos jurídicos.</li>
+        <li><strong>Mayor transparencia:</strong> Los certificados pasan a ser documentos públicos accesibles en los registros autonómicos, lo que permite a compradores e inquilinos verificar la calificación de cualquier inmueble certificado.</li>
+        <li><strong>Control de técnicos:</strong> Se establecen mecanismos de control más rigurosos para evitar certificados fraudulentos o emitidos por personal no cualificado.</li>
+      </ul>
+
+      <div class="callout">
+        <p><strong>📋 En la práctica:</strong> Si tu certificado se emitió con el RD 235/2013 y tiene menos de 10 años, sigue siendo válido. Pero si tienes que hacer uno nuevo a partir de 2021, se aplicarán los criterios más exigentes del RD 390/2021, lo que puede resultar en una letra ligeramente inferior a la que habrías obtenido con la normativa anterior.</p>
+      </div>
+
+      <h2>¿Cuándo es obligatorio el certificado energético?</h2>
+
+      <p>El certificado es <strong>obligatorio en los siguientes casos</strong>:</p>
+
+      <ul class="checklist">
+        <li><strong>Venta de vivienda:</strong> Debes entregar el certificado original al comprador en el momento de la firma. Sin él, el notario puede rechazar la escritura.</li>
+        <li><strong>Alquiler:</strong> Obligatorio para cualquier contrato de arrendamiento, sea por meses o por años. Debes mostrarlo al inquilino antes de firmar y entregar una copia junto con el contrato.</li>
+        <li><strong>Edificios de nueva construcción:</strong> El promotor está obligado a obtenerlo e incorporarlo a la documentación del inmueble antes de la entrega al comprador.</li>
+        <li><strong>Edificios de la administración pública con superficie útil superior a 250 m²:</strong> Deben exhibir la etiqueta energética en un lugar destacado y visible para el público.</li>
+        <li><strong>Anuncios inmobiliarios:</strong> Desde 2013, cualquier anuncio de venta o alquiler —ya sea en portales web, prensa o escaparates— debe incluir la calificación energética del inmueble.</li>
+      </ul>
+
+      <div class="callout callout-warning">
+        <p><strong>⚠️ Excepciones:</strong> No necesitan CEE los edificios protegidos oficialmente cuando la mejora energética alterase su carácter arquitectónico, los de uso religioso, las construcciones temporales (vida útil inferior a 2 años), los edificios industriales o agrícolas de baja demanda energética, los aislados con superficie útil inferior a 50 m², los que se adquieren para demoler, y las viviendas que se ocupen menos de 4 meses al año. El resto, todos obligados sin excepción.</p>
+      </div>
+
+      <h2>¿Quién puede emitir un certificado energético?</h2>
+
+      <p>El certificado debe ser emitido por un <strong>técnico competente</strong> habilitado legalmente. Esto incluye exclusivamente a:</p>
+
+      <ul>
+        <li><strong>Arquitectos</strong> y arquitectos técnicos (<strong>aparejadores</strong>)</li>
+        <li><strong>Ingenieros</strong> (industriales, de caminos, de edificación, de minas, aeronáuticos, navales, etc.)</li>
+        <li><strong>Ingenieros técnicos</strong> en sus respectivas especialidades</li>
+      </ul>
+
+      <p>No pueden emitir certificados válidos los electricistas, instaladores de climatización, agentes inmobiliarios ni cualquier otro profesional sin la titulación universitaria habilitante. Un certificado emitido por alguien sin la titulación adecuada <strong>no tiene validez legal</strong> aunque esté registrado, y las sanciones por falsedad documental pueden recaer tanto sobre el técnico como sobre el propietario.</p>
+
+      <h2>¿Cómo se calcula un certificado energético?</h2>
+
+      <p>El cálculo de la calificación energética es un proceso técnico que sigue una metodología estandarizada. El técnico debe:</p>
+
+      <ol>
+        <li><strong>Visitar la vivienda:</strong> Tomar medidas in situ de todas las estancias, medir los huecos de ventanas, comprobar la orientación de las fachadas, identificar los materiales constructivos de cerramientos y cubiertas, y verificar los sistemas de climatización y ACS existentes.</li>
+        <li><strong>Introducir los datos en el programa oficial:</strong> Los tres programas reconocidos por el Ministerio para la Transición Ecológica son <strong>CE3X</strong> (el más usado para viviendas existentes, gratuito y con interfaz simplificada), <strong>CEX</strong> (para edificios de mayor complejidad) y <strong>HULC</strong> (Herramienta Unificada LIDER-CALENER, la más precisa, utilizada para edificios de obra nueva).</li>
+        <li><strong>Simular el comportamiento energético:</strong> El programa calcula la demanda de calefacción y refrigeración en función de la zona climática (España está dividida en 17 zonas climáticas diferentes), los sistemas de climatización instalados, la permeabilidad al aire de los cerramientos, la transmitancia térmica de muros y ventanas, y los patrones de uso normalizados.</li>
+        <li><strong>Obtener la calificación:</strong> El programa devuelve dos valores: el consumo de <strong>energía primaria no renovable</strong> (kWh/m² año) y las <strong>emisiones de CO₂</strong> (kg CO₂/m² año). La letra final se asigna según la peor calificación de ambos indicadores.</li>
+        <li><strong>Registrar el certificado:</strong> Una vez emitido, el certificado debe inscribirse en el <strong>registro autonómico</strong> correspondiente. Solo tras el registro tiene validez legal. El técnico entrega al propietario el archivo PDF registrado y la etiqueta energética.</li>
+      </ol>
+
+      <p>El tiempo total del proceso, desde la visita hasta la entrega del certificado registrado, suele oscilar entre <strong>48 y 72 horas</strong> en condiciones normales, aunque puede alargarse si el registro autonómico tiene demoras administrativas.</p>
+
+      <h2>Validez del certificado: 10 años y renovación</h2>
+
+      <p>El certificado energético tiene una <strong>validez máxima de 10 años</strong> desde su fecha de emisión. Transcurrido ese plazo, si el inmueble sigue en venta o alquiler, el propietario está obligado a renovarlo. Pero hay matices importantes:</p>
+
+      <ul>
+        <li><strong>Antes de los 10 años:</strong> Puedes renovar voluntariamente el certificado si has realizado reformas de mejora energética que justifiquen una calificación superior. Por ejemplo, si cambiaste la caldera por aerotermia, aislaste la fachada o sustituiste las ventanas y quieres que la nueva etiqueta refleje esa mejora de cara a una futura venta.</li>
+        <li><strong>Caducidad:</strong> Una vez cumplidos los 10 años, el certificado deja de tener efectos legales. Si realizas una venta o un nuevo contrato de alquiler con un certificado caducado, la operación se considera irregular y puedes enfrentarte a las mismas sanciones que si no tuvieras certificado.</li>
+        <li><strong>Actualización normativa:</strong> Si durante la vigencia del certificado cambia la normativa (como ocurrió en 2021), el certificado sigue siendo válido hasta su fecha de caducidad, pero al renovarlo se aplicarán los criterios de la nueva normativa.</li>
+      </ul>
+
+      <div class="callout callout-green">
+        <p><strong>🔍 Consejo práctico:</strong> Si tu certificado se acerca a los 10 años y tienes previsto vender o alquilar, no esperes al último momento. Solicita la renovación con antelación para evitar retrasos en la operación inmobiliaria.</p>
+      </div>
+
+      <h2>¿Qué pasa si no tienes el certificado energético? Sanciones y consecuencias</h2>
+
+      <p>No tener el CEE cuando es obligatorio puede acarrear <strong>sanciones económicas importantes</strong>. Las multas, tipificadas en la Ley 8/2013 de rehabilitación, regeneración y renovación urbanas, varían según la gravedad:</p>
+
+      <ul>
+        <li><strong>Infracción leve:</strong> no exhibir la etiqueta en edificios públicos obligados o no incluir la calificación en los anuncios de venta o alquiler. Multa de <strong>300 € a 600 €</strong>.</li>
+        <li><strong>Infracción grave:</strong> vender o alquilar sin certificado, falsear los datos del certificado, o anunciar una calificación energética sin tener el certificado registrado. Multa de <strong>601 € a 1.000 €</strong>.</li>
+        <li><strong>Infracción muy grave:</strong> falsear información de forma reiterada, emitir certificados sin la cualificación técnica requerida, o negarse a facilitar el certificado a la administración en una inspección. Multa de <strong>1.001 € a 6.000 €</strong>.</li>
+      </ul>
+
+      <p>Además de la multa, vender o alquilar sin certificado puede <strong>paralizar por completo la operación inmobiliaria</strong>: el notario no autorizará la escritura sin el certificado original, el Registro de la Propiedad puede rechazar la inscripción, y muchos portales inmobiliarios (Idealista, Fotocasa, etc.) ni siquiera admiten anuncios sin la etiqueta energética.</p>
+
+      <div class="callout callout-warning">
+        <p><strong>🚨 Importante:</strong> Si vendes sin certificado, el comprador puede exigirte una rebaja en el precio o incluso emprender acciones legales por vicios ocultos si demuestra que el inmueble es más ineficiente de lo razonablemente esperado. La jurisprudencia ya ha dado la razón a compradores en varios casos.</p>
+      </div>
+
+      <h2>Preguntas frecuentes sobre el certificado energético</h2>
+
+      <h3>¿Puedo vender sin certificado si el comprador firma que lo acepta?</h3>
+      <p><strong>No.</strong> La ley no permite eximir la obligación ni aunque ambas partes estén de acuerdo. Es una obligación <em>imperativa</em>: no se puede renunciar a ella ni pactar en contra. El notario exigirá el certificado para la escritura pública de compraventa.</p>
+
+      <h3>¿El certificado energético es lo mismo que la cédula de habitabilidad?</h3>
+      <p><strong>No.</strong> Son documentos completamente distintos. La cédula de habitabilidad certifica que la vivienda cumple las condiciones mínimas para ser habitada (dimensiones, ventilación, salubridad, etc.). El certificado energético evalúa exclusivamente la eficiencia energética. Ambos son obligatorios para vender, pero los regula normativa diferente.</p>
+
+      <h3>¿Necesito certificado energético para un local comercial?</h3>
+      <p><strong>Sí</strong>, si el local se vende o alquila y tiene una superficie útil superior a 50 m² con instalaciones de climatización. Los locales pequeños sin sistemas de calefacción o refrigeración propios están exentos.</p>
+
+      <h3>¿Qué diferencia hay entre el certificado energético y la Inspección Técnica de Edificios (ITE)?</h3>
+      <p>Son trámites distintos. La ITE evalúa el estado de conservación del edificio (estructura, fachadas, instalaciones comunes) y es obligatoria para edificios de cierta antigüedad. El CEE evalúa solo la eficiencia energética. Un edificio puede pasar la ITE y tener una calificación energética muy baja, y viceversa.</p>
+
+      <h3>¿Puedo mejorar la letra de mi certificado?</h3>
+      <p>Por supuesto. De hecho, es una de las mejores inversiones que puedes hacer en tu vivienda. Medidas como aislar la envolvente térmica, cambiar ventanas, instalar aerotermia o colocar paneles solares pueden hacerte subir una o dos letras. Te contamos cómo en nuestra guía de <a href="/blog/mejorar-eficiencia-energetica-vivienda.html">7 formas de mejorar la eficiencia energética de tu vivienda</a>.</p>
+
+      <h3>¿Cuánto cuesta un certificado energético?</h3>
+      <p>El precio varía según el tamaño de la vivienda, la zona geográfica y el tipo de inmueble. Como referencia, en 2026 los precios suelen oscilar entre <strong>45 €</strong> para un piso pequeño y <strong>250 €</strong> para viviendas grandes o unifamiliares. Para una comparativa detallada por ciudades, consulta nuestro artículo: <a href="/blog/precio-certificado-energetico-2026.html">Guía de precios del certificado energético en 2026</a>.</p>
+
+      <hr class="article-sep">
+
+      <h2>Conclusión: el certificado energético, obligatorio pero también una oportunidad</h2>
+
+      <p>El certificado energético es <strong>obligatorio para vender o alquilar</strong> cualquier vivienda en España. Se expresa con una letra de la A (máxima eficiencia) a la G (mínima). Lo emite un técnico competente —arquitecto, aparejador o ingeniero— tras visitar el inmueble y realizar los cálculos con programas oficiales (CE3X, CEX o HULC). Está regulado por el Real Decreto 390/2021, tiene una validez de 10 años y debe registrarse en el organismo autonómico para tener efectos legales. No tenerlo conlleva multas de entre 300 € y 6.000 € y puede bloquear la operación de venta o alquiler.</p>
+
+      <p>Pero más allá de la obligación legal, el certificado energético es una <strong>herramienta de transparencia</strong> que beneficia tanto a vendedores como a compradores. Para el vendedor, una buena calificación es un argumento de venta que revaloriza la vivienda. Para el comprador, es una garantía de que no se encontrará facturas energéticas desorbitadas al llegar el invierno.</p>
+
+      <p>En <strong>CertificadoYa</strong> te lo ponemos fácil: presupuesto inmediato por m², técnico colegiado en menos de 24 horas, certificado emitido y registrado en 48-72 horas. Sin papeleos, sin demoras, sin sorpresas.</p>
+
+    </div>
+
+    <!-- Related posts -->
+    <aside class="related-posts">
+      <h3>📚 Artículos relacionados</h3>
+      <div class="related-links">
+        <a href="/blog/precio-certificado-energetico-2026.html">💰 ¿Cuánto cuesta un certificado energético en 2026? Guía de precios →</a>
+        <a href="/blog/mejorar-eficiencia-energetica-vivienda.html">🏠 7 formas de mejorar la eficiencia energética de tu vivienda →</a>
+      </div>
+    </aside>
+
+    <!-- CTA -->
+    <div class="blog-cta">
+      <h3>¿Necesitas tu certificado energético?</h3>
+      <p>Presupuesto al instante por m². Sin compromiso. Técnico en 24h.</p>
+      <a href="/#presupuesto-card" class="btn btn-white">⚡ Calcular presupuesto ahora</a>
+    </div>
+
+  </main>
+
+  <!-- ====== FOOTER ====== -->
+  <footer>
+    <p>© 2026 <strong>CertificadoYa</strong> — Marketplace de certificación energética</p>
+    <p style="margin-top:.5rem">
+      <a href="/legal/aviso-legal">Aviso legal</a> ·
+      <a href="/legal/privacidad">Privacidad</a> ·
+      <a href="/legal/cookies">Cookies</a> ·
+      <a href="/blog/">Blog</a> ·
+      <a href="/panel-tecnicos.html">¿Eres técnico?</a>
+    </p>
+  </footer>
+
+</body>
+</html>
