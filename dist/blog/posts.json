@@ -25,5 +25,68 @@
     "descripcion": "De la A a la G: cómo subir la letra de tu certificado energético con mejoras prácticas. Aislamiento, ventanas, aerotermia y más.",
     "categoria": "ahorro",
     "lectura": 7
+  },
+  {
+    "slug": "certificado-energetico-alquiler",
+    "titulo": "Certificado energético para alquilar: guía completa para caseros",
+    "fecha": "2026-05-22",
+    "autor": "CertificadoYa",
+    "descripcion": "Todo lo que un casero debe saber sobre el certificado energético obligatorio para alquilar. Obligaciones legales, sanciones y cómo conseguirlo rápido.",
+    "categoria": "básico",
+    "lectura": 6
+  },
+  {
+    "slug": "normativa-certificacion-energetica-espana",
+    "titulo": "Normativa de certificación energética en España: historia y actualidad",
+    "fecha": "2026-05-23",
+    "autor": "CertificadoYa",
+    "descripcion": "Recorrido por la normativa española de certificación energética: del RD 235/2013 al RD 390/2021. Directivas europeas, CTE y obligaciones actuales.",
+    "categoria": "normativa",
+    "lectura": 8
+  },
+  {
+    "slug": "aerotermia-certificado-energetico",
+    "titulo": "Aerotermia y certificado energético: cómo mejorar tu letra",
+    "fecha": "2026-05-24",
+    "autor": "CertificadoYa",
+    "descripcion": "Qué es la aerotermia, cuánto ahorra en calefacción y agua caliente, cómo mejora la calificación energética de tu vivienda y subvenciones disponibles.",
+    "categoria": "tecnologia",
+    "lectura": 7
+  },
+  {
+    "slug": "placas-solares-certificado-energetico",
+    "titulo": "Placas solares y certificado energético: guía de instalación y ahorro",
+    "fecha": "2026-05-25",
+    "autor": "CertificadoYa",
+    "descripcion": "Cómo las placas solares mejoran la letra de tu certificado energético. Instalación, ahorro en facturas, subvenciones y amortización.",
+    "categoria": "tecnologia",
+    "lectura": 7
+  },
+  {
+    "slug": "certificado-energetico-venta",
+    "titulo": "Certificado energético para vender tu vivienda: obligaciones y plazos",
+    "fecha": "2026-05-26",
+    "autor": "CertificadoYa",
+    "descripcion": "Todo lo que necesitas saber si vas a vender tu casa: obligación legal del CEE, plazos, cómo afecta al precio de venta y qué pasa si no lo tienes.",
+    "categoria": "básico",
+    "lectura": 5
+  },
+  {
+    "slug": "rehabilitacion-energetica-edificios",
+    "titulo": "Rehabilitación energética de edificios: ayudas Next Generation y cómo financiarla",
+    "fecha": "2026-05-27",
+    "autor": "CertificadoYa",
+    "descripcion": "Guía sobre rehabilitación energética: fondos Next Generation, deducciones fiscales, ayudas autonómicas y cómo financiar las obras de mejora energética de tu comunidad.",
+    "categoria": "ahorro",
+    "lectura": 8
+  },
+  {
+    "slug": "etiqueta-energetica-edificios",
+    "titulo": "La etiqueta energética de edificios: entiende la escala A-G",
+    "fecha": "2026-05-28",
+    "autor": "CertificadoYa",
+    "descripcion": "Guía visual de la etiqueta energética A-G: qué significa cada letra, rangos de consumo, emisiones CO₂, cómo se calcula y diferencias entre zonas climáticas en España.",
+    "categoria": "básico",
+    "lectura": 6
   }
 ]

@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>La etiqueta energética de edificios: entiende la escala A-G — CertificadoYa</title>
+  <meta name="description" content="Guía visual de la etiqueta energética A-G: qué significa cada letra, rangos de consumo, emisiones CO₂, cómo se calcula y diferencias entre zonas climáticas en España.">
+  <meta name="keywords" content="etiqueta energética, escala A-G, calificación energética, consumo kWh, emisiones CO2, zonas climáticas">
+  <meta name="author" content="CertificadoYa">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://certificadoya.es/blog/etiqueta-energetica-edificios.html">
+  <meta property="og:title" content="La etiqueta energética de edificios: entiende la escala A-G — CertificadoYa">
+  <meta property="og:description" content="Guía visual de la etiqueta energética A-G: qué significa cada letra, rangos de consumo, emisiones CO₂, cómo se calcula y diferencias entre zonas climáticas en España.">
+  <meta property="og:url" content="https://certificadoya.es/blog/etiqueta-energetica-edificios.html">
+  <meta property="og:type" content="article">
+  <link rel="stylesheet" href="/css/style.css">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⚡</text></svg>">
+  <style>
+    :root { --green: #16a34a; --green-dark: #15803d; --green-light: #dcfce7; --gray-50: #f9fafb; --gray-100: #f3f4f6; --gray-200: #e5e7eb; --gray-600: #4b5563; --gray-800: #1f2937; --gray-900: #111827; --white: #ffffff; --radius: 12px; --shadow: 0 1px 3px rgba(0,0,0,.08); --shadow-lg: 0 10px 25px rgba(0,0,0,.08); }
+    * { margin:0; padding:0; box-sizing:border-box; }
+    body { font-family:system-ui,-apple-system,'Segoe UI',Roboto,sans-serif; color:var(--gray-800); background:var(--white); line-height:1.7; }
+    nav { display:flex; justify-content:space-between; align-items:center; padding:1rem 2rem; max-width:1200px; margin:0 auto; border-bottom:1px solid var(--gray-200); }
+    .logo { font-size:1.4rem; font-weight:700; color:var(--green); text-decoration:none; }
+    .logo span { color:var(--gray-800); }
+    .nav-links { display:flex; gap:1.5rem; align-items:center; }
+    .nav-links a { text-decoration:none; color:var(--gray-600); font-size:.95rem; }
+    .nav-links a:hover { color:var(--green); }
+    .breadcrumb { max-width:800px; margin:1.5rem auto 0; padding:0 2rem; font-size:.88rem; color:var(--gray-600); }
+    .breadcrumb a { color:var(--green); text-decoration:none; }
+    .breadcrumb a:hover { text-decoration:underline; }
+    article { max-width:800px; margin:1rem auto 3rem; padding:0 2rem; }
+    .post-header { margin-bottom:2rem; }
+    .cat-badge { display:inline-block; font-size:.78rem; text-transform:uppercase; font-weight:700; color:var(--green); background:var(--green-light); padding:.2rem .7rem; border-radius:4px; margin-bottom:1rem; }
+    .post-header h1 { font-size:2rem; line-height:1.3; margin-bottom:.75rem; color:var(--gray-900); }
+    .post-meta { color:#999; font-size:.85rem; margin-bottom:1.5rem; }
+    .post-meta span { margin-right:1.5rem; }
+    .post-thumb { width:100%; height:200px; border-radius:var(--radius); margin-bottom:2rem; display:flex; align-items:center; justify-content:center; font-size:4rem; }
+    .post-body h2 { font-size:1.4rem; margin:2rem 0 .75rem; color:var(--green-dark); }
+    .post-body h3 { font-size:1.15rem; margin:1.5rem 0 .5rem; }
+    .post-body p { margin-bottom:1rem; color:var(--gray-600); line-height:1.8; }
+    .post-body ul, .post-body ol { margin:0 0 1.5rem 1.5rem; color:var(--gray-600); }
+    .post-body li { margin-bottom:.5rem; line-height:1.7; }
+    .post-body strong { color:var(--gray-800); }
+    .callout { padding:1.25rem 1.5rem; border-radius:var(--radius); margin:1.5rem 0; }
+    .callout-info { background:var(--green-light); border-left:4px solid var(--green); }
+    .callout-warning { background:#fef3c7; border-left:4px solid #f59e0b; }
+    .cta-box { background:linear-gradient(135deg,var(--green),#0d9488); color:white; padding:2rem; border-radius:var(--radius); text-align:center; margin:2.5rem 0; }
+    .cta-box h3 { margin-bottom:.5rem; }
+    .cta-box p { color:rgba(255,255,255,.9); margin-bottom:1rem; }
+    .btn { display:inline-flex; align-items:center; gap:.5rem; padding:.65rem 1.5rem; border-radius:8px; font-weight:600; font-size:.95rem; text-decoration:none; transition:all .2s; }
+    .btn-green { background:var(--green); color:white; }
+    .btn-green:hover { background:var(--green-dark); }
+    .btn-white { background:white; color:var(--green-dark); }
+    .related { margin:3rem 0; }
+    .related h3 { margin-bottom:1rem; }
+    .related-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(200px,1fr)); gap:1rem; }
+    .related-card { border:1px solid var(--gray-200); border-radius:8px; padding:1rem; text-decoration:none; color:inherit; transition:all .2s; }
+    .related-card:hover { border-color:var(--green); transform:translateY(-2px); }
+    .related-card h4 { font-size:.95rem; margin-bottom:.25rem; }
+    .related-card p { font-size:.8rem; color:var(--gray-600); }
+    footer { text-align:center; padding:2rem; color:var(--gray-600); font-size:.85rem; border-top:1px solid var(--gray-200); margin-top:3rem; }
+    footer a { color:var(--green); text-decoration:none; }
+    @media (max-width:768px) {
+      nav { padding:1rem; }
+      .nav-links { gap:.75rem; }
+      .nav-links a { font-size:.82rem; }
+      article { padding:0 1rem; }
+      .post-header h1 { font-size:1.5rem; }
+      .post-thumb { height:140px; font-size:3rem; }
+    }
+    @media (max-width:480px) {
+      .nav-links { flex-wrap:wrap; gap:.5rem; }
+      .post-header h1 { font-size:1.3rem; }
+    }
+  </style>
+</head>
+<body>
+  <nav>
+    <a href="/" class="logo">⚡ Certificado<span>Ya</span></a>
+    <div class="nav-links">
+      <a href="/#como-funciona">Cómo funciona</a>
+      <a href="/#faq">FAQ</a>
+      <a href="/blog/">Blog</a>
+      <a href="/panel-tecnicos.html">¿Eres técnico?</a>
+    </div>
+  </nav>
+
+  <div class="breadcrumb">
+    <a href="/">Inicio</a> › <a href="/blog/">Blog</a> › La etiqueta energética de edificios: entiende la escala A-G
+  </div>
+
+  <article>
+    <div class="post-header">
+      <span class="cat-badge">Básico</span>
+      <h1>La etiqueta energética de edificios: entiende la escala A-G</h1>
+      <div class="post-meta">
+        <span>📅 28 may 2026</span>
+        <span>⏱️ 6 min lectura</span>
+      </div>
+    </div>
+
+    <div class="post-thumb" style="background:linear-gradient(135deg, #e0f2fe, #bae6fd)">
+      🏷️
+    </div>
+
+    <div class="post-body">
+      <p>La etiqueta energética es el resultado más visible del certificado energético. Esa pegatina con letras de colores que ves al entrar a un edificio público o en los anuncios de venta esconde mucha información. Vamos a descifrarla.</p>
+
+      <h2>¿Qué significan las letras A, B, C, D, E, F, G?</h2>
+      <p>La escala va de la <strong>A</strong> (color verde oscuro, máxima eficiencia) a la <strong>G</strong> (color rojo, mínima eficiencia). Cada letra representa un rango de consumo de energía primaria no renovable (kWh/m²/año) y de emisiones de CO₂ (kgCO₂/m²/año).</p>
+      <p>Los rangos exactos varían ligeramente según la zona climática (no es lo mismo calentar una casa en Burgos que en Cádiz), pero una referencia orientativa para la zona D (Madrid, interior peninsular):</p>
+      <ul>
+        <li><strong>A:</strong> menos de 44,6 kWh/m²/año — edificio de consumo casi nulo (nZEB)</li>
+        <li><strong>B:</strong> 44,6 – 72,3 kWh/m²/año — edificio de alta eficiencia</li>
+        <li><strong>C:</strong> 72,3 – 112,0 kWh/m²/año — edificio eficiente, cumple CTE actual</li>
+        <li><strong>D:</strong> 112,0 – 172,0 kWh/m²/año — edificio promedio de los años 2000</li>
+        <li><strong>E:</strong> 172,0 – 303,0 kWh/m²/año — edificio de los años 80-90, necesita mejoras</li>
+        <li><strong>F:</strong> 303,0 – 383,0 kWh/m²/año — edificio antiguo sin aislamiento</li>
+        <li><strong>G:</strong> más de 383,0 kWh/m²/año — edificio muy ineficiente, gasto energético muy alto</li>
+      </ul>
+
+      <h2>¿Cómo se calcula la letra?</h2>
+      <p>El técnico introduce en el software oficial (CE3X o HULC) los datos del edificio: orientación, materiales de fachada y cubierta, tipo y estado de ventanas, sistema de calefacción, refrigeración, ACS, ventilación, y zona climática. El programa simula cuánta energía consumiría el edificio en condiciones normales de uso y genera dos indicadores:</p>
+      <ol>
+        <li><strong>Consumo de energía primaria no renovable (kWh/m²/año):</strong> mide la cantidad de energía procedente de fuentes fósiles (gas, gasoil, carbón) que consume el edificio.</li>
+        <li><strong>Emisiones de CO₂ (kgCO₂/m²/año):</strong> mide las toneladas de dióxido de carbono emitidas a la atmósfera como consecuencia del consumo energético del edificio.</li>
+      </ol>
+      <p>La letra final del edificio es la <strong>peor de los dos indicadores</strong>. Es decir, si en consumo sale B pero en emisiones sale D, la letra final es D.</p>
+
+      <div class="callout callout-warning">
+        <strong>🔍 Ojo al dato:</strong> Una caldera de gas natural emite 0,20 kgCO₂ por kWh consumido. Un radiador eléctrico puede emitir 0,40 kgCO₂/kWh (dependiendo del mix eléctrico). La aerotermia ronda los 0,08 kgCO₂/kWh. Por eso cambiar de gas a aerotermia reduce drásticamente las emisiones y sube la letra.
+      </div>
+
+      <h2>Zonas climáticas en España</h2>
+      <p>España se divide en zonas climáticas según la severidad del clima en invierno (letra mayúscula: A, B, C, D, E) y en verano (número: 1, 2, 3, 4). Por ejemplo:</p>
+      <ul>
+        <li><strong>Madrid:</strong> D3 (invierno frío, verano muy caluroso). Exigencia alta en calefacción y refrigeración.</li>
+        <li><strong>Barcelona:</strong> C2 (invierno moderado, verano suave por la brisa marina).</li>
+        <li><strong>Asturias:</strong> D1 (invierno frío pero verano fresco). Más exigente en calefacción.</li>
+        <li><strong>Sevilla:</strong> B4 (invierno suave, verano extremo). La demanda de refrigeración domina.</li>
+        <li><strong>Burgos:</strong> E1 (invierno muy severo, verano fresco). Máxima exigencia en calefacción.</li>
+      </ul>
+      <p>Esto explica por qué un mismo edificio puede tener letras distintas si se construye en diferentes ciudades. En Burgos, la demanda de calefacción es tan alta que es muy difícil conseguir letras A o B sin un aislamiento excepcional.</p>
+
+      <h2>¿Qué letra tiene la mayoría de viviendas en España?</h2>
+      <p>Según datos del IDAE y el MITECO, la distribución aproximada es: A (1%), B (3%), C (8%), D (12%), <strong>E (35%), F (25%), G (16%)</strong>. Es decir, más del 75% de las viviendas tienen letras E, F o G. Esto cambiará drásticamente en los próximos años con las exigencias de la nueva EPBD 2024 y los fondos Next Generation.</p>
+    </div>
+
+    <div class="cta-box">
+      <h3>¿Necesitas tu certificado energético?</h3>
+      <p>Calcula tu presupuesto en 5 segundos. El mejor técnico de tu zona, en menos de 24h.</p>
+      <a href="/#presupuesto-card" class="btn btn-white">Calcular presupuesto ahora ⚡</a>
+    </div>
+
+    <div class="related">
+      <h3>Artículos relacionados</h3>
+      <div class="related-grid">
+        <a href="/blog/que-es-certificado-energetico.html" class="related-card"><h4>¿Qué es el CEE?</h4><p>Guía completa</p></a>
+        <a href="/blog/mejorar-eficiencia-energetica-vivienda.html" class="related-card"><h4>7 mejoras de eficiencia</h4><p>Sube tu letra</p></a>
+      </div>
+    </div>
+  </article>
+
+  <footer>
+    <p>© 2026 <strong>CertificadoYa</strong> — Marketplace de certificación energética</p>
+    <p style="margin-top:.5rem">
+      <a href="/legal/aviso-legal">Aviso legal</a> ·
+      <a href="/legal/privacidad">Privacidad</a> ·
+      <a href="/legal/cookies">Cookies</a> ·
+      <a href="/blog/">Blog</a>
+    </p>
+  </footer>
+</body>
+</html>
