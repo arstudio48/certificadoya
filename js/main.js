@@ -177,7 +177,7 @@ async function confirmarLead() {
     telefono_cliente: telefono,
     email_cliente: email,
     codigo_postal: presupuesto.cp,
-    ciudad: presupuesto.zona,
+    zona: presupuesto.zona,
     m2: presupuesto.m2,
     tipo_inmueble: window._tipoInmueble,
     presupuesto_min: presupuesto.precioMin,
@@ -196,7 +196,7 @@ async function confirmarLead() {
   try {
     if (!window.supabase) {
       const { createClient } = await import('https://esm.sh/@supabase/supabase-js@2');
-      window.supabase = createClient(SUPABASE_URL, SUPABASE_SERVICE_KEY);
+      window.supabase = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
     }
     const { error } = await window.supabase.from('leads').insert([lead]);
     if (error) {
@@ -270,7 +270,7 @@ async function registrarTecnico() {
   try {
     if (!window.supabase) {
       const { createClient } = await import('https://esm.sh/@supabase/supabase-js@2');
-      window.supabase = createClient(SUPABASE_URL, SUPABASE_SERVICE_KEY);
+      window.supabase = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
     }
     const { error } = await window.supabase.from('tecnicos').insert([{
       email, nombre, telefono, titulacion,
