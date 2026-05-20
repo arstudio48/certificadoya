@@ -356,3 +356,56 @@ footer a {
 
   .nav-links { display: none; }
 }
+
+/* ============================================================
+   MODAL LEAD
+   ============================================================ */
+.modal-overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.6);
+  z-index: 1000;
+  align-items: center;
+  justify-content: center;
+}
+.modal-overlay.visible {
+  display: flex;
+}
+.modal-box {
+  background: #fff;
+  border-radius: 12px;
+  padding: 2rem;
+  max-width: 420px;
+  width: 90%;
+  position: relative;
+  box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+}
+.modal-close {
+  position: absolute;
+  top: 0.5rem;
+  right: 0.75rem;
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  cursor: pointer;
+  color: #666;
+}
+.modal-close:hover { color: #000; }
+.modal-box h3 { margin-top: 0; }
+.modal-box .form-group { margin-bottom: 1rem; }
+.modal-box .form-group label {
+  display: block;
+  margin-bottom: .25rem;
+  font-weight: 600;
+  font-size: .9rem;
+}
+.modal-box .form-group input {
+  width: 100%;
+  padding: .7rem;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  font-size: 1rem;
+  box-sizing: border-box;
+}
+.modal-box .btn { margin-top: .5rem; }
