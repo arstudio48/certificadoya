@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CertificadoYa — Certificado Energético en 24h | Presupuesto al Instante</title>
+  <meta name="description" content="Consigue tu certificado de eficiencia energética (CEE) en 24 horas. Presupuesto instantáneo por m². Los mejores técnicos en Madrid, Asturias y toda España. Desde 45€.">
+  <meta name="keywords" content="certificado energético, certificado de eficiencia energética, CEE, precio certificado energético, presupuesto certificado energético, técnico certificador, Madrid, Gijón, Asturias">
+  <meta name="author" content="CertificadoYa">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://certificadoya.es">
+  <meta property="og:title" content="CertificadoYa — Presupuesto de Certificado Energético en 24h">
+  <meta property="og:description" content="Presupuesto instantáneo por m². Sin formularios largos. Los mejores técnicos en Madrid, Asturias y toda España.">
+  <meta property="og:url" content="https://certificadoya.es">
+  <meta property="og:type" content="website">
+  <link rel="stylesheet" href="/css/style.css">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⚡</text></svg>">
+</head>
+<body>
+
+  <!-- ====== NAV ====== -->
+  <nav>
+    <a href="/" class="logo">⚡ Certificado<span>Ya</span></a>
+    <div class="nav-links">
+      <a href="#como-funciona">Cómo funciona</a>
+      <a href="#ventajas">Ventajas</a>
+<a href="/panel-tecnicos.html">¿Eres técnico?</a>
+    </div>
+  </nav>
+
+  <!-- ====== HERO ====== -->
+  <section class="hero">
+    <div class="hero-text">
+      <h1>Tu <span>certificado energético</span> en 24 horas</h1>
+      <p>Presupuesto al instante. Sin formularios largos. Sin esperas. Los mejores técnicos de tu zona, desde <strong>45€</strong>.</p>
+      <div class="hero-badges">
+        <div class="badge">⚡ Presupuesto inmediato</div>
+        <div class="badge">✅ Técnicos verificados</div>
+        <div class="badge">📍 Madrid + Asturias</div>
+      </div>
+    </div>
+
+    <!-- ====== FORMULARIO PRESUPUESTO ====== -->
+    <div class="presupuesto-card" id="presupuesto-card">
+      <h3>🧮 Calcula tu presupuesto</h3>
+      <p class="subtitle">Introduce tu código postal y los metros cuadrados</p>
+
+      <div class="form-group">
+        <label for="cp">Código postal</label>
+        <input type="text" id="cp" placeholder="Ej: 28001" maxlength="5" inputmode="numeric" pattern="[0-9]{5}">
+      </div>
+
+      <div class="form-row">
+        <div class="form-group">
+          <label for="m2">Metros cuadrados (m²)</label>
+          <input type="number" id="m2" placeholder="Ej: 80" min="20" max="5000">
+        </div>
+        <div class="form-group">
+          <label for="tipo">Tipo de inmueble</label>
+          <select id="tipo">
+            <option value="piso">Piso</option>
+            <option value="unifamiliar">Unifamiliar / Chalet</option>
+            <option value="adosado">Adosado</option>
+            <option value="local">Local comercial</option>
+          </select>
+        </div>
+      </div>
+
+      <button class="btn btn-green btn-full" onclick="calcularPresupuesto()">
+        💶 Calcular presupuesto
+      </button>
+
+      <div class="resultado-box" id="resultado">
+        <div class="resultado-precio" id="precio-rango">—</div>
+        <div class="resultado-texto" id="precio-texto"></div>
+        <button class="btn btn-green btn-full" style="margin-top:1rem" onclick="solicitarLead()">
+          Quiero que me contacte un técnico →
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ====== CÓMO FUNCIONA ====== -->
+  <section class="como-funciona" id="como-funciona">
+    <h2 class="section-title">Cómo funciona</h2>
+    <div class="pasos">
+      <div class="paso">
+        <div class="paso-num">1</div>
+        <h4>Calcula tu precio</h4>
+        <p>Introduce tu código postal y los m². En segundos ves el precio estimado de tu certificado energético.</p>
+      </div>
+      <div class="paso">
+        <div class="paso-num">2</div>
+        <h4>Te contacta un técnico</h4>
+        <p>El mejor técnico de tu zona se pone en contacto contigo en menos de 24 horas.</p>
+      </div>
+      <div class="paso">
+        <div class="paso-num">3</div>
+        <h4>Certificado listo</h4>
+        <p>El técnico visita tu vivienda y te entrega el certificado energético registrado. Sin papeleos.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ====== VENTAJAS ====== -->
+  <section class="ventajas" id="ventajas">
+    <h2 class="section-title">¿Por qué CertificadoYa?</h2>
+    <div class="ventajas-grid">
+      <div class="ventaja">
+        <div class="ventaja-icono">⚡</div>
+        <div>
+          <h4>Presupuesto al instante</h4>
+          <p>Somos la única plataforma que te da precio inmediato por m². Sin formularios eternos ni esperas de días.</p>
+        </div>
+      </div>
+      <div class="ventaja">
+        <div class="ventaja-icono">🛡️</div>
+        <div>
+          <h4>Técnicos verificados</h4>
+          <p>Todos nuestros técnicos están colegiados y verificados. Arquitectos, aparejadores e ingenieros cualificados.</p>
+        </div>
+      </div>
+      <div class="ventaja">
+        <div class="ventaja-icono">💰</div>
+        <div>
+          <h4>Desde 45€</h4>
+          <p>El precio más competitivo. Sin sorpresas. Sabes lo que pagas antes de comprometerte.</p>
+        </div>
+      </div>
+      <div class="ventaja">
+        <div class="ventaja-icono">⏱️</div>
+        <div>
+          <h4>En 24 horas</h4>
+          <p>Un técnico te contacta en menos de un día. El certificado, listo en 48-72h tras la visita.</p>
+        </div>
+      </div>
+      <div class="ventaja">
+        <div class="ventaja-icono">📍</div>
+        <div>
+          <h4>Cobertura nacional</h4>
+          <p>Empezamos por Madrid y Asturias, expandiendo a toda España. Siempre un técnico cerca de ti.</p>
+        </div>
+      </div>
+      <div class="ventaja">
+        <div class="ventaja-icono">📋</div>
+        <div>
+          <h4>Obligatorio por ley</h4>
+          <p>Necesitas el CEE para vender o alquilar. Nosotros te lo ponemos fácil, rápido y barato.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ====== CTA ====== -->
+  <section class="cta">
+    <h3>¿Listo para tu certificado energético?</h3>
+    <p>Presupuesto gratis en 5 segundos. Sin compromiso.</p>
+    <a href="#presupuesto-card" class="btn btn-white">Calcular presupuesto ahora ⚡</a>
+  </section>
+
+  <!-- ====== FOOTER ====== -->
+  <footer>
+    <p>© 2026 <strong>CertificadoYa</strong> — Marketplace de certificación energética</p>
+    <p style="margin-top:.5rem">
+      <a href="/legal/aviso-legal">Aviso legal</a> ·
+      <a href="/legal/privacidad">Privacidad</a> ·
+      <a href="/legal/cookies">Cookies</a> ·
+<a href="/panel-tecnicos.html">¿Eres técnico?</a>
+    </p>
+  </footer>
+
+  <script type="module" src="/js/main.js"></script>
+</body>
+</html>
