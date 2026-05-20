@@ -1,3 +1,9 @@
 {
-  "cleanUrls": true
+  "cleanUrls": false,
+  "rewrites": [
+    { "source": "/tecnicos", "destination": "/tecnicos/index.html" },
+    { "source": "/legal/aviso-legal", "destination": "/legal/aviso-legal.html" },
+    { "source": "/legal/privacidad", "destination": "/legal/privacidad.html" },
+    { "source": "/legal/cookies", "destination": "/legal/cookies.html" }
+  ]
 }
