@@ -1,11 +1,13 @@
 {
   "version": 2,
   "rewrites": [
+    { "source": "/tecnicos", "destination": "/tecnicos/index.html" },
     { "source": "/panel-tecnicos", "destination": "/panel-tecnicos.html" },
-    { "source": "/legal/:path*", "destination": "/legal/:path*" }
-  ],
-  "headers": [
-    { "source": "/panel-tecnicos", "headers": [{ "key": "Content-Type", "value": "text/html; charset=utf-8" }] },
-    { "source": "/legal/(.*)", "headers": [{ "key": "Content-Type", "value": "text/html; charset=utf-8" }] }
+    { "source": "/privacidad", "destination": "/privacidad.html" },
+    { "source": "/cookies", "destination": "/cookies.html" },
+    { "source": "/legal", "destination": "/legal/index.html" },
+    { "source": "/legal/aviso-legal", "destination": "/legal/aviso-legal.html" },
+    { "source": "/legal/privacidad", "destination": "/legal/privacidad.html" },
+    { "source": "/legal/cookies", "destination": "/legal/cookies.html" }
   ]
 }
