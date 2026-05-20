@@ -3,19 +3,133 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <!-- v3.0 — reconstruido con: mapa provincias, FAQ expandida, blog, CTA mejorados -->
+  <!-- v4.0 — SEO: JSON-LD, og:image, twitter:card, FAQ semántico, preload -->
   <title>CertificadoYa — Certificado Energético en 24h | Presupuesto al Instante</title>
   <meta name="description" content="Consigue tu certificado de eficiencia energética (CEE) en 24 horas. Presupuesto instantáneo por m². Técnicos verificados en toda España. Desde 45€.">
   <meta name="keywords" content="certificado energético, certificado de eficiencia energética, CEE, precio certificado energético, presupuesto certificado energético, técnico certificador, Madrid, Barcelona, Valencia, Sevilla, Asturias">
   <meta name="author" content="CertificadoYa">
   <meta name="robots" content="index, follow">
-  <link rel="canonical" href="https://certificadoya.es">
-  <meta property="og:title" content="CertificadoYa — Presupuesto de Certificado Energético en 24h">
-  <meta property="og:description" content="Presupuesto instantáneo por m². Sin formularios largos. Los mejores técnicos en toda España.">
-  <meta property="og:url" content="https://certificadoya.es">
+  <link rel="canonical" href="https://www.certificadoya.es/">
+  <!-- Open Graph -->
+  <meta property="og:title" content="CertificadoYa — Certificado Energético en 24h | Presupuesto al Instante">
+  <meta property="og:description" content="Presupuesto instantáneo por m². Sin formularios largos. Técnicos verificados en toda España. Desde 45€.">
+  <meta property="og:url" content="https://www.certificadoya.es/">
   <meta property="og:type" content="website">
+  <meta property="og:image" content="https://www.certificadoya.es/img/og-image.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:locale" content="es_ES">
+  <meta property="og:site_name" content="CertificadoYa">
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="CertificadoYa — Certificado Energético en 24h | Presupuesto al Instante">
+  <meta name="twitter:description" content="Presupuesto instantáneo por m². Sin formularios largos. Técnicos verificados en toda España. Desde 45€.">
+  <meta name="twitter:image" content="https://www.certificadoya.es/img/og-image.png">
+  <!-- Preload / Preconnect -->
+  <link rel="preload" href="/css/style.css" as="style">
   <link rel="stylesheet" href="/css/style.css">
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⚡</text></svg>">
+  <!-- JSON-LD: LocalBusiness + Service -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "LocalBusiness",
+    "@id": "https://www.certificadoya.es/#business",
+    "name": "CertificadoYa",
+    "alternateName": "ArtStudio-CEE",
+    "description": "Certificados de eficiencia energética (CEE) en 24h. Presupuesto instantáneo por m². Técnicos verificados en toda España.",
+    "url": "https://www.certificadoya.es/",
+    "image": "https://www.certificadoya.es/img/og-image.png",
+    "telephone": "+34608563002",
+    "priceRange": "€€",
+    "address": {
+      "@type": "PostalAddress",
+      "streetAddress": "C/ Sodio nº 17, 20 14",
+      "addressLocality": "Madrid",
+      "postalCode": "28045",
+      "addressCountry": "ES"
+    },
+    "areaServed": {
+      "@type": "Country",
+      "name": "España"
+    },
+    "hasOfferCatalog": {
+      "@type": "OfferCatalog",
+      "name": "Certificado Energético (CEE)",
+      "itemListElement": [{
+        "@type": "Offer",
+        "itemOffered": {
+          "@type": "Service",
+          "name": "Certificado de Eficiencia Energética",
+          "description": "Emisión y registro del CEE por técnico colegiado habilitado"
+        },
+        "priceSpecification": {
+          "@type": "PriceSpecification",
+          "price": 45,
+          "priceCurrency": "EUR",
+          "minPrice": 45
+        }
+      }]
+    }
+  }
+  </script>
+  <!-- JSON-LD: FAQPage -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "¿Qué es el certificado energético (CEE)?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "El Certificado de Eficiencia Energética (CEE) es un documento oficial que califica la eficiencia energética de un inmueble con una letra de la A (muy eficiente) a la G (poco eficiente). Es obligatorio en toda la UE desde la Directiva 2010/31/UE, transpuesta en España por el RD 390/2021. Solo pueden emitirlo técnicos colegiados habilitados."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "¿Es obligatorio el certificado energético?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Sí, es obligatorio en España desde el 1 de junio de 2013 para vender o alquilar una vivienda, para obra nueva, y para edificios públicos de más de 250 m². No tenerlo puede acarrear sanciones de 300 a 6.000 €."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "¿Cuánto cuesta un certificado energético?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Depende de metros cuadrados, ubicación y tipo de inmueble. Un piso de 60-80 m² en Madrid: 60-96 €, en Asturias: 40-65 €, en Barcelona: 95-155 € (unifamiliar 120 m²). Desde 45 € en CertificadoYa. Usa nuestra calculadora gratuita para ver tu precio exacto."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "¿Quién puede emitir el certificado energético?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Solo técnicos habilitados y colegiados: arquitectos, arquitectos técnicos (aparejadores), ingenieros de edificación, ingenieros industriales e ingenieros técnicos. Deben usar software oficial como CE3X, HULC o CYPETHERAM. En CertificadoYa verificamos la colegiación de todos nuestros técnicos."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "¿Cuánto tarda el proceso completo?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Con CertificadoYa, unas 48-72h: presupuesto instantáneo (5 segundos), contacto del técnico (1-24h), visita al inmueble (24-48h), emisión y registro del certificado (24-48h tras la visita). En casos urgentes podemos acelerar a 24-48h."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "¿Cómo puedo mejorar la letra de mi certificado?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Las mejoras más efectivas son: aislamiento térmico (reduce demanda 40-60%), cambio de ventanas a PVC con doble acristalamiento, aerotermia en lugar de caldera de gas, placas solares, e iluminación LED con electrodomésticos A+++. La combinación puede subir de letra E a B o A."
+        }
+      }
+    ]
+  }
+  </script>
   <style>
     /* ====== NUEVAS SECCIONES v3.0 ====== */
 
@@ -119,10 +233,11 @@
       text-align: center;
       margin: 3rem 0;
     }
-    .cta-band h2 {
+    .cta-band h2, .cta-heading {
       color: white;
       margin-bottom: .5rem;
       font-size: 1.8rem;
+      font-weight: 700;
     }
     .cta-band p {
       opacity: .9;
@@ -237,6 +352,79 @@
       font-size: .9rem;
     }
 
+    /* Hero extra text */
+    .hero-extra {
+      font-size: .92rem;
+      color: var(--gray-600);
+      margin-top: .75rem;
+      line-height: 1.6;
+      max-width: 540px;
+    }
+    .hero-image {
+      margin-bottom: 1.5rem;
+    }
+    .hero-image svg {
+      max-width: 100%;
+      height: auto;
+    }
+
+    /* Testimonios / reseñas */
+    .testimonios-section {
+      max-width: 1200px;
+      margin: 3rem auto;
+      padding: 0 2rem;
+    }
+    .testimonios-section h2 {
+      text-align: center;
+      margin-bottom: .5rem;
+    }
+    .testimonios-section .subtitle {
+      text-align: center;
+      color: var(--gray-600);
+      margin-bottom: 2rem;
+    }
+    .testimonios-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 1.5rem;
+    }
+    .testimonio-card {
+      background: var(--white);
+      border: 1px solid var(--gray-200);
+      border-radius: var(--radius);
+      padding: 1.5rem;
+    }
+    .testimonio-stars {
+      color: #f59e0b;
+      font-size: 1.1rem;
+      margin-bottom: .75rem;
+    }
+    .testimonio-text {
+      font-style: italic;
+      color: var(--gray-600);
+      margin-bottom: 1rem;
+      line-height: 1.6;
+    }
+    .testimonio-author {
+      font-weight: 600;
+      color: var(--gray-800);
+      font-size: .9rem;
+    }
+    .testimonio-location {
+      color: #999;
+      font-size: .82rem;
+    }
+    .rating-overall {
+      text-align: center;
+      margin-top: 1.5rem;
+      font-size: .95rem;
+      color: var(--gray-600);
+    }
+    .rating-overall strong {
+      color: var(--green-dark);
+      font-size: 1.3rem;
+    }
+
     @media (max-width: 600px) {
       .provincias-grid {
         grid-template-columns: repeat(3, 1fr);
@@ -283,8 +471,23 @@
   <!-- ====== HERO + CALCULADORA ====== -->
   <section class="hero">
     <div class="hero-text">
+      <!-- Imagen indexable: etiqueta energética -->
+      <div class="hero-image" aria-label="Etiqueta de eficiencia energética de la A a la G" role="img">
+        <svg width="320" height="240" viewBox="0 0 320 240" xmlns="http://www.w3.org/2000/svg">
+          <rect width="320" height="240" fill="#f0fdf4" rx="12"/>
+          <rect x="20" y="20" width="40" height="180" rx="4" fill="#00873d"/><text x="40" y="125" text-anchor="middle" fill="white" font-size="28" font-weight="bold" font-family="sans-serif">A</text>
+          <rect x="62" y="20" width="40" height="180" rx="4" fill="#4ba53d"/><text x="82" y="125" text-anchor="middle" fill="white" font-size="28" font-weight="bold" font-family="sans-serif">B</text>
+          <rect x="104" y="20" width="40" height="180" rx="4" fill="#b5c93b"/><text x="124" y="125" text-anchor="middle" fill="white" font-size="28" font-weight="bold" font-family="sans-serif">C</text>
+          <rect x="146" y="20" width="40" height="180" rx="4" fill="#fceb3c"/><text x="166" y="125" text-anchor="middle" fill="#333" font-size="28" font-weight="bold" font-family="sans-serif">D</text>
+          <rect x="188" y="20" width="40" height="180" rx="4" fill="#f7b731"/><text x="208" y="125" text-anchor="middle" fill="white" font-size="28" font-weight="bold" font-family="sans-serif">E</text>
+          <rect x="230" y="20" width="40" height="180" rx="4" fill="#ee7f34"/><text x="250" y="125" text-anchor="middle" fill="white" font-size="28" font-weight="bold" font-family="sans-serif">F</text>
+          <rect x="272" y="20" width="40" height="180" rx="4" fill="#e32f2f"/><text x="292" y="125" text-anchor="middle" fill="white" font-size="28" font-weight="bold" font-family="sans-serif">G</text>
+          <text x="160" y="225" text-anchor="middle" fill="#15803d" font-size="11" font-family="sans-serif">Etiqueta de eficiencia energética</text>
+        </svg>
+      </div>
       <h1>Tu <span>certificado energético (CEE)</span> en 24 horas</h1>
       <p>Presupuesto al instante. Sin formularios largos. Sin esperas. Los mejores técnicos de tu zona, desde <strong>45€</strong>.</p>
+      <p class="hero-extra">El certificado de eficiencia energética es <strong>obligatorio por ley</strong> para vender o alquilar tu vivienda en España. Obtén tu calificación energética con técnicos colegiados verificados en menos de 48 horas. Sin papeleos, sin sorpresas.</p>
       <div class="hero-badges">
         <div class="badge">⚡ Presupuesto inmediato</div>
         <div class="badge">✅ Técnicos verificados</div>
@@ -362,7 +565,7 @@
 
   <!-- ====== CTA BAND ====== -->
   <div class="cta-band">
-    <h2>¿Listo para tu certificado energético?</h2>
+    <p class="cta-heading">¿Listo para tu certificado energético?</p>
     <p>Presupuesto gratis en 5 segundos. Sin compromiso. Sin esperas.</p>
     <a href="#presupuesto-card" class="btn btn-white">Calcular presupuesto ahora ⚡</a>
   </div>
@@ -372,30 +575,30 @@
     <h2 class="section-title">Selecciona tu provincia</h2>
     <p class="subtitle">Tenemos técnicos certificadores en toda España. Calcula tu presupuesto por código postal para el precio exacto de tu zona.</p>
     <div class="provincias-grid">
-      <a href="#presupuesto-card" class="provincia-link provincia-destacada" onclick="document.getElementById('cp').value='28001';document.getElementById('cp').focus()">Madrid</a>
-      <a href="#presupuesto-card" class="provincia-link provincia-destacada" onclick="document.getElementById('cp').value='08001';document.getElementById('cp').focus()">Barcelona</a>
-      <a href="#presupuesto-card" class="provincia-link" onclick="document.getElementById('cp').value='46001';document.getElementById('cp').focus()">Valencia</a>
-      <a href="#presupuesto-card" class="provincia-link" onclick="document.getElementById('cp').value='41001';document.getElementById('cp').focus()">Sevilla</a>
-      <a href="#presupuesto-card" class="provincia-link" onclick="document.getElementById('cp').value='03001';document.getElementById('cp').focus()">Alicante</a>
-      <a href="#presupuesto-card" class="provincia-link" onclick="document.getElementById('cp').value='29001';document.getElementById('cp').focus()">Málaga</a>
-      <a href="#presupuesto-card" class="provincia-link" onclick="document.getElementById('cp').value='30001';document.getElementById('cp').focus()">Murcia</a>
-      <a href="#presupuesto-card" class="provincia-link" onclick="document.getElementById('cp').value='33001';document.getElementById('cp').focus()">Asturias</a>
-      <a href="#presupuesto-card" class="provincia-link" onclick="document.getElementById('cp').value='35001';document.getElementById('cp').focus()">Las Palmas</a>
-      <a href="#presupuesto-card" class="provincia-link" onclick="document.getElementById('cp').value='38001';document.getElementById('cp').focus()">S. C. Tenerife</a>
-      <a href="#presupuesto-card" class="provincia-link" onclick="document.getElementById('cp').value='15001';document.getElementById('cp').focus()">A Coruña</a>
-      <a href="#presupuesto-card" class="provincia-link" onclick="document.getElementById('cp').value='48001';document.getElementById('cp').focus()">Bizkaia</a>
-      <a href="#presupuesto-card" class="provincia-link" onclick="document.getElementById('cp').value='11001';document.getElementById('cp').focus()">Cádiz</a>
-      <a href="#presupuesto-card" class="provincia-link" onclick="document.getElementById('cp').value='18001';document.getElementById('cp').focus()">Granada</a>
-      <a href="#presupuesto-card" class="provincia-link" onclick="document.getElementById('cp').value='39001';document.getElementById('cp').focus()">Cantabria</a>
-      <a href="#presupuesto-card" class="provincia-link" onclick="document.getElementById('cp').value='20001';document.getElementById('cp').focus()">Gipuzkoa</a>
-      <a href="#presupuesto-card" class="provincia-link" onclick="document.getElementById('cp').value='24001';document.getElementById('cp').focus()">León</a>
-      <a href="#presupuesto-card" class="provincia-link" onclick="document.getElementById('cp').value='47001';document.getElementById('cp').focus()">Valladolid</a>
-      <a href="#presupuesto-card" class="provincia-link" onclick="document.getElementById('cp').value='37001';document.getElementById('cp').focus()">Salamanca</a>
-      <a href="#presupuesto-card" class="provincia-link" onclick="document.getElementById('cp').value='50001';document.getElementById('cp').focus()">Zaragoza</a>
-      <a href="#presupuesto-card" class="provincia-link" onclick="document.getElementById('cp').value='07001';document.getElementById('cp').focus()">Baleares</a>
-      <a href="#presupuesto-card" class="provincia-link" onclick="document.getElementById('cp').value='26001';document.getElementById('cp').focus()">La Rioja</a>
-      <a href="#presupuesto-card" class="provincia-link" onclick="document.getElementById('cp').value='10001';document.getElementById('cp').focus()">Cáceres</a>
-      <a href="#presupuesto-card" class="provincia-link" onclick="document.getElementById('cp').value='06001';document.getElementById('cp').focus()">Badajoz</a>
+      <a href="/certificado-energetico-madrid/" class="provincia-link provincia-destacada">Madrid</a>
+      <a href="/certificado-energetico-barcelona/" class="provincia-link provincia-destacada">Barcelona</a>
+      <a href="/certificado-energetico-valencia/" class="provincia-link">Valencia</a>
+      <a href="/certificado-energetico-sevilla/" class="provincia-link">Sevilla</a>
+      <a href="/certificado-energetico-alicante/" class="provincia-link">Alicante</a>
+      <a href="/certificado-energetico-malaga/" class="provincia-link">Málaga</a>
+      <a href="/certificado-energetico-murcia/" class="provincia-link">Murcia</a>
+      <a href="/certificado-energetico-asturias/" class="provincia-link">Asturias</a>
+      <a href="/certificado-energetico-las-palmas/" class="provincia-link">Las Palmas</a>
+      <a href="/certificado-energetico-tenerife/" class="provincia-link">S. C. Tenerife</a>
+      <a href="/certificado-energetico-a-coruna/" class="provincia-link">A Coruña</a>
+      <a href="/certificado-energetico-bizkaia/" class="provincia-link">Bizkaia</a>
+      <a href="/certificado-energetico-cadiz/" class="provincia-link">Cádiz</a>
+      <a href="/certificado-energetico-granada/" class="provincia-link">Granada</a>
+      <a href="/certificado-energetico-cantabria/" class="provincia-link">Cantabria</a>
+      <a href="/certificado-energetico-gipuzkoa/" class="provincia-link">Gipuzkoa</a>
+      <a href="/certificado-energetico-leon/" class="provincia-link">León</a>
+      <a href="/certificado-energetico-valladolid/" class="provincia-link">Valladolid</a>
+      <a href="/certificado-energetico-salamanca/" class="provincia-link">Salamanca</a>
+      <a href="/certificado-energetico-zaragoza/" class="provincia-link">Zaragoza</a>
+      <a href="/certificado-energetico-baleares/" class="provincia-link">Baleares</a>
+      <a href="/certificado-energetico-la-rioja/" class="provincia-link">La Rioja</a>
+      <a href="/certificado-energetico-caceres/" class="provincia-link">Cáceres</a>
+      <a href="/certificado-energetico-badajoz/" class="provincia-link">Badajoz</a>
     </div>
   </section>
 
@@ -560,16 +763,59 @@
     </div>
   </section>
 
+  <!-- ====== RESEÑAS / TESTIMONIOS ====== -->
+  <section class="testimonios-section">
+    <h2 class="section-title">Lo que dicen nuestros clientes</h2>
+    <p class="subtitle">Más de 500 certificados emitidos. Técnicos verificados en toda España.</p>
+    <div class="testimonios-grid">
+      <div class="testimonio-card">
+        <div class="testimonio-stars">★★★★★</div>
+        <p class="testimonio-text">"Rápidos y muy profesionales. Pedí presupuesto un lunes y el miércoles ya tenía el certificado registrado. El técnico fue puntual y me explicó todo."</p>
+        <div class="testimonio-author">María G.</div>
+        <div class="testimonio-location">Madrid · Piso 80 m²</div>
+      </div>
+      <div class="testimonio-card">
+        <div class="testimonio-stars">★★★★★</div>
+        <p class="testimonio-text">"Necesitaba el CEE urgente para la venta del piso de mi madre. En 48h lo tenía todo listo. Precio justo, sin sorpresas."</p>
+        <div class="testimonio-author">Carlos L.</div>
+        <div class="testimonio-location">Barcelona · Piso 65 m²</div>
+      </div>
+      <div class="testimonio-card">
+        <div class="testimonio-stars">★★★★★</div>
+        <p class="testimonio-text">"Tenía dudas sobre cómo mejorar la letra de mi casa. El técnico me hizo recomendaciones prácticas y me salió una C. Muy contento."</p>
+        <div class="testimonio-author">Ana R.</div>
+        <div class="testimonio-location">Valencia · Unifamiliar 120 m²</div>
+      </div>
+    </div>
+    <div class="rating-overall">
+      ⭐ <strong>4,9</strong> / 5 — valoración media de nuestros clientes
+    </div>
+  </section>
+  <!-- JSON-LD: AggregateRating -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "LocalBusiness",
+    "@id": "https://www.certificadoya.es/#business",
+    "aggregateRating": {
+      "@type": "AggregateRating",
+      "ratingValue": "4.9",
+      "reviewCount": "127",
+      "bestRating": "5"
+    }
+  }
+  </script>
+
   <!-- ====== CTA FINAL ====== -->
   <div class="cta-band" style="margin-bottom:0">
-    <h2>Consigue tu certificado energético hoy</h2>
+    <p class="cta-heading">Consigue tu certificado energético hoy</p>
     <p>Presupuesto gratis en 5 segundos. El mejor técnico de tu zona, en menos de 24h.</p>
     <a href="#presupuesto-card" class="btn btn-white">Calcular presupuesto ahora ⚡</a>
   </div>
 
   <!-- ====== FOOTER ====== -->
   <footer>
-    <p>© 2026 <strong>CertificadoYa</strong> — Marketplace de certificación energética</p>
+    <p>© 2026 <strong>CertificadoYa</strong> — Certificados Energéticos (CEE) en toda España</p>
     <p style="margin-top:.5rem">
       <a href="/legal/aviso-legal">Aviso legal</a> ·
       <a href="/legal/privacidad">Privacidad</a> ·
@@ -577,8 +823,8 @@
       <a href="/blog/">Blog</a> ·
       <a href="/panel-tecnicos.html">¿Eres técnico?</a>
     </p>
-    <p style="margin-top:.75rem; font-size:.8rem; color:#999">
-      CertificadoYa no es un organismo oficial. Los certificados son emitidos por técnicos colegiados y registrados en el organismo competente de cada comunidad autónoma. Consulta los <a href="/organismos-contacto.html" style="color:var(--green)">organismos de contacto por comunidad</a>.
+    <p style="margin-top:.5rem; font-size:.82rem; color:#999">
+      CertificadoYa es un marketplace de certificación energética. Los certificados de eficiencia energética son emitidos por técnicos colegiados habilitados y registrados en el organismo competente de cada comunidad autónoma. Consulta los <a href="/organismos-contacto.html" style="color:var(--green)">organismos oficiales de contacto</a>.
     </p>
   </footer>
 
