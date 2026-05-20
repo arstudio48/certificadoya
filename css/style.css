@@ -618,7 +618,10 @@ footer a {
   font-size: .85rem;
   text-decoration: underline;
 }
+.cookie-text-short { display: none; }
 @media (max-width: 768px) {
+  .cookie-text-full { display: none; }
+  .cookie-text-short { display: inline; }
   .cookie-banner { padding: .5rem .75rem; }
   .cookie-banner-content { flex-direction: column; text-align: center; gap: .4rem; }
   .cookie-banner-content p { font-size: .72rem; line-height: 1.3; }
