@@ -1,9 +1,5 @@
 {
   "version": 2,
   "buildCommand": "",
-  "outputDirectory": ".",
-  "rewrites": [
-    { "source": "/tecnicos", "destination": "/tecnicos/index.html" },
-    { "source": "/legal", "destination": "/legal/aviso-legal.html" }
-  ]
+  "outputDirectory": "."
 }
