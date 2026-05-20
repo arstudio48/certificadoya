@@ -246,6 +246,23 @@
         padding: .4rem .5rem;
       }
     }
+
+    /* Form validation */
+    input:invalid:not(:placeholder-shown), input.error {
+      border-color: #ef4444 !important;
+      background: #fef2f2;
+    }
+    input:valid:not(:placeholder-shown) {
+      border-color: #16a34a !important;
+      background: #f0fdf4;
+    }
+    .input-error {
+      display: block;
+      color: #ef4444;
+      font-size: .78rem;
+      margin-top: .25rem;
+      min-height: 1.2em;
+    }
   </style>
 </head>
 <body>
@@ -281,13 +298,15 @@
 
       <div class="form-group">
         <label for="cp">Código postal</label>
-        <input type="text" id="cp" placeholder="Ej: 28001" maxlength="5" inputmode="numeric" pattern="[0-9]{5}">
+        <input type="text" id="cp" placeholder="Ej: 28001" maxlength="5" inputmode="numeric" pattern="[0-9]{5}" aria-required="true" aria-describedby="cp-error" oninput="validarCP()">
+        <span class="input-error" id="cp-error" role="alert"></span>
       </div>
 
       <div class="form-row">
         <div class="form-group">
           <label for="m2">Metros cuadrados (m²)</label>
-          <input type="number" id="m2" placeholder="Ej: 80" min="20" max="5000">
+          <input type="number" id="m2" placeholder="Ej: 80" min="20" max="5000" aria-required="true" aria-describedby="m2-error" oninput="validarM2()">
+          <span class="input-error" id="m2-error" role="alert"></span>
         </div>
         <div class="form-group">
           <label for="tipo">Tipo de inmueble</label>
@@ -436,63 +455,78 @@
     <details class="faq-item">
       <summary class="faq-question">¿Qué es el certificado energético (CEE)?</summary>
       <div class="faq-answer">
-        <p>El Certificado de Eficiencia Energética (CEE) es un documento oficial que evalúa la eficiencia energética de un inmueble. Asigna una letra de la A (más eficiente) a la G (menos eficiente), similar al etiquetado de electrodomésticos. Es <strong>obligatorio por ley</strong> para vender o alquilar una vivienda desde 2013 (Real Decreto 390/2021). Lo emite un técnico certificador colegiado (arquitecto, aparejador o ingeniero) tras visitar el inmueble.</p>
+        <p>El Certificado de Eficiencia Energética (CEE) es un documento oficial que califica la eficiencia energética de un inmueble. Asigna una letra de la <strong>A</strong> (muy eficiente, menos de 44,6 kWh/m²/año) a la <strong>G</strong> (poco eficiente, más de 383 kWh/m²/año), siguiendo el mismo sistema de etiquetado que usan los electrodomésticos. La escala usa siete letras y siete colores: verde oscuro (A) hasta rojo (G).</p>
+        <p>El certificado analiza cuánta energía consume el edificio para mantener unas condiciones normales de ocupación (calefacción, refrigeración, agua caliente, ventilación e iluminación). También incluye recomendaciones de mejora con su viabilidad técnica y económica. Es obligatorio en toda la Unión Europea desde la Directiva 2010/31/UE, transpuesta en España mediante el <strong>Real Decreto 390/2021</strong>.</p>
+        <p>Solo pueden emitirlo técnicos colegiados habilitados —arquitectos, aparejadores, ingenieros— utilizando software oficial como CE3X, HULC o CYPETHERM. El certificado se registra en el organismo competente de cada comunidad autónoma y tiene una <strong>validez de 10 años</strong>, salvo que se hagan reformas sustanciales. El propietario es el responsable de obtenerlo y debe entregarlo al comprador o inquilino.</p>
       </div>
     </details>
 
     <details class="faq-item">
       <summary class="faq-question">¿Es obligatorio el certificado energético?</summary>
       <div class="faq-answer">
-        <p><strong>Sí</strong>, es obligatorio en los siguientes casos:</p>
+        <p><strong>Sí</strong>, absolutamente. El CEE es obligatorio en España desde el 1 de junio de 2013 (Real Decreto 235/2013, actualizado por el RD 390/2021). Es obligatorio en los siguientes casos:</p>
         <ul style="margin: .5rem 0 .5rem 1.5rem; line-height: 1.8;">
-          <li>Vender una vivienda o local</li>
-          <li>Alquilar un inmueble (desde junio 2013)</li>
-          <li>Edificios de nueva construcción</li>
-          <li>Edificios públicos de más de 250 m²</li>
+          <li><strong>Venta de vivienda o local:</strong> el vendedor debe entregar el certificado al comprador. Sin él, no se puede formalizar la escritura pública.</li>
+          <li><strong>Alquiler:</strong> el casero debe mostrar el certificado al inquilino antes de firmar el contrato.</li>
+          <li><strong>Obra nueva:</strong> todas las edificaciones nuevas necesitan CEE antes de la licencia de primera ocupación.</li>
+          <li><strong>Edificios públicos:</strong> los de más de 250 m² deben exhibir la etiqueta energética en lugar visible.</li>
         </ul>
-        <p>No tenerlo puede acarrear <strong>multas de hasta 6.000€</strong>. La responsabilidad es del propietario.</p>
+        <p>Hay excepciones: edificios protegidos oficialmente, lugares de culto, construcciones provisionales (menos de 2 años), y viviendas que se usen menos de 4 meses al año. Pero para el 99% de los casos, <strong>es obligatorio</strong>. No tenerlo puede acarrear sanciones: leves (300-600€), graves (601-1.000€) o muy graves (1.001-6.000€). Además, notarios y registradores pueden rechazar la operación. En portales como Idealista ya se muestra la letra del CEE como factor clave para compradores e inquilinos.</p>
       </div>
     </details>
 
     <details class="faq-item">
       <summary class="faq-question">¿Cuánto cuesta un certificado energético?</summary>
       <div class="faq-answer">
-        <p>El precio depende de los m² y la ubicación. En CertificadoYa:</p>
+        <p>No existe una tarifa oficial. El precio depende de tres factores: <strong>metros cuadrados, ubicación geográfica y tipo de inmueble</strong>. En CertificadoYa ofrecemos los precios más competitivos del mercado:</p>
         <ul style="margin: .5rem 0 .5rem 1.5rem; line-height: 1.8;">
-          <li>Piso de 60-80 m² en Madrid: <strong>45€ – 75€</strong></li>
-          <li>Piso de 60-80 m² en Gijón/Oviedo: <strong>40€ – 65€</strong></li>
-          <li>Unifamiliar de 120 m² en Barcelona: <strong>95€ – 155€</strong></li>
-          <li>Piso de 60-80 m² en Valencia: <strong>48€ – 75€</strong></li>
+          <li>Piso 60-80 m² en <strong>Madrid</strong>: 60€ – 96€</li>
+          <li>Piso 60-80 m² en <strong>Asturias</strong>: 40€ – 65€</li>
+          <li>Unifamiliar 120 m² en <strong>Barcelona</strong>: 95€ – 155€</li>
+          <li>Piso 60-80 m² en <strong>Valencia</strong>: 48€ – 75€</li>
+          <li>Piso 60-80 m² en <strong>Sevilla</strong>: 48€ – 72€</li>
         </ul>
-        <p>Usa nuestra <a href="#presupuesto-card">calculadora gratuita</a> para ver tu precio exacto en segundos.</p>
+        <p>¿Por qué tanta diferencia? Las grandes ciudades tienen más demanda, los desplazamientos son más costosos, y el precio por m² sube. En zonas rurales los precios bajan significativamente. Un piso de 50 m² en una capital puede costar 45-70€, mientras que uno de 200 m² en zona rural puede rondar los 90-120€. Las viviendas unifamiliares siempre son más caras que los pisos porque requieren más superficie de medición (fachadas, cubierta, sótano).</p>
+        <p>Usa nuestra <a href="#presupuesto-card">calculadora gratuita</a> para ver tu precio exacto en 5 segundos según tu código postal y metros cuadrados. Sin compromiso. Sin sorpresas.</p>
       </div>
     </details>
 
     <details class="faq-item">
       <summary class="faq-question">¿Quién puede emitir el certificado energético?</summary>
       <div class="faq-answer">
-        <p>Solo técnicos habilitados: <strong>arquitectos, arquitectos técnicos (aparejadores), ingenieros e ingenieros técnicos</strong>. Deben estar colegiados y usar software oficial reconocido (CE3X, CE3, HULC, etc.). En CertificadoYa todos nuestros técnicos están verificados.</p>
+        <p>Solo <strong>técnicos habilitados y colegiados</strong> pueden emitir un CEE válido. Las titulaciones reconocidas son: arquitecto, arquitecto técnico (aparejador), ingeniero de edificación, ingeniero industrial, ingeniero técnico industrial, ingeniero de caminos, e ingeniero técnico de obras públicas. No basta con tener la titulación — deben estar <strong>colegiados</strong> en su colegio profesional correspondiente.</p>
+        <p>El técnico utiliza programas informáticos reconocidos por el Ministerio para la Transición Ecológica: <strong>CE3X</strong> (el más común, gratuito), <strong>HULC</strong> (Herramienta Unificada LIDER-CALENER, obligatorio para obra nueva), o <strong>CYPETHERM</strong>. Estos programas simulan el comportamiento térmico del edificio con datos climáticos de la zona.</p>
+        <p>Desconfía de anuncios que ofrecen certificados por 20-30€ sin visita — es ilegal. La normativa exige visita presencial al inmueble. En CertificadoYa todos nuestros técnicos pasan por un proceso de verificación: comprobamos su colegiación, experiencia y cualificación antes de aceptarlos en la plataforma. Puedes ver su perfil y valoraciones antes de elegir.</p>
       </div>
     </details>
 
     <details class="faq-item">
       <summary class="faq-question">¿Cuánto tarda el proceso completo?</summary>
       <div class="faq-answer">
-        <p>Con CertificadoYa, el proceso es el más rápido del mercado:</p>
+        <p>Con CertificadoYa, hemos optimizado el proceso para que sea el más rápido del mercado:</p>
         <ul style="margin: .5rem 0 .5rem 1.5rem; line-height: 1.8;">
-          <li>Presupuesto: <strong>5 segundos</strong></li>
-          <li>Contacto del técnico: <strong>menos de 24h</strong></li>
-          <li>Visita al inmueble: <strong>24-48h</strong></li>
-          <li>Certificado registrado: <strong>24-48h tras visita</strong></li>
+          <li><strong>Presupuesto:</strong> 5 segundos — introduces CP y m², ves el precio al instante.</li>
+          <li><strong>Contacto del técnico:</strong> 1-24 horas — el mejor técnico de tu zona te llama o escribe.</li>
+          <li><strong>Visita al inmueble:</strong> 24-48 horas — el técnico acude, mide, fotografía y toma datos.</li>
+          <li><strong>Emisión del certificado:</strong> 24-48 horas tras la visita — se calcula con software oficial.</li>
+          <li><strong>Registro oficial:</strong> inmediato tras la emisión — el técnico lo registra telemáticamente.</li>
         </ul>
-        <p>Total: 2-4 días desde el primer contacto.</p>
+        <p><strong>Tiempo total estimado: 2-4 días</strong> desde que pides presupuesto hasta que tienes el certificado registrado. En casos urgentes (venta inminente, notaría ya citada), podemos acelerar a 24-48h con recargo de urgencia. Lo normal sin urgencia son 3-4 días. La competencia suele tardar 1-2 semanas porque dependen de agendas más saturadas.</p>
       </div>
     </details>
 
     <details class="faq-item">
       <summary class="faq-question">¿Cómo puedo mejorar la letra de mi certificado?</summary>
       <div class="faq-answer">
-        <p>Hay muchas mejoras que pueden subir tu letra y ahorrarte dinero en facturas. Lee nuestra <a href="/blog/mejorar-eficiencia-energetica-vivienda.html">guía completa con 7 mejoras prácticas</a>. Las más efectivas: cambiar ventanas, mejorar el aislamiento, instalar aerotermia y poner placas solares.</p>
+        <p>Subir de letra (por ejemplo, de E a C) puede aumentar el valor de tu vivienda hasta un 10% y ahorrarte cientos de euros al año en facturas. Estas son las mejoras más efectivas, ordenadas por relación coste-beneficio:</p>
+        <ol style="margin: .5rem 0 .5rem 1.5rem; line-height: 1.8;">
+          <li><strong>Aislamiento térmico (fachada/cubierta):</strong> reduce la demanda energética un 40-60%. Coste: 4.000-12.000€. Amortización: 8-15 años.</li>
+          <li><strong>Cambio de ventanas:</strong> pasar de aluminio sin rotura a PVC con doble acristalamiento elimina puentes térmicos. Ahorro: 150-350€/año.</li>
+          <li><strong>Aerotermia:</strong> sustituye caldera de gas/gasoil por bomba de calor de alta eficiencia. Ahorro: 400-800€/año. Subvenciones Next Generation disponibles.</li>
+          <li><strong>Placas solares:</strong> reducen el consumo eléctrico un 50-70%. Ahorro: 500-900€/año. Amortización en solo 5-8 años.</li>
+          <li><strong>Iluminación LED + electrodomésticos A+++:</strong> lo más barato y rápido. Ahorro: 100-300€/año combinado.</li>
+        </ol>
+        <p>La combinación de aislamiento + aerotermia + placas solares puede llevar una vivienda de letra E a letra B o incluso A. Consulta nuestra <a href="/blog/mejorar-eficiencia-energetica-vivienda.html">guía completa con 7 mejoras prácticas</a> con datos de ahorro y costes detallados, y los <a href="/organismos-contacto.html">organismos de tu comunidad</a> donde tramitar las ayudas.</p>
       </div>
     </details>
   </section>

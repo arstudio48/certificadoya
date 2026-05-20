@@ -101,6 +101,12 @@
     .blog-card-img.bg-ahorro {
       background: linear-gradient(135deg, #dbeafe 0%, #bfdbfe 50%, #93c5fd 100%);
     }
+    .blog-card-img.bg-normativa {
+      background: linear-gradient(135deg, #f3e8ff 0%, #e9d5ff 50%, #c4b5fd 100%);
+    }
+    .blog-card-img.bg-tecnologia {
+      background: linear-gradient(135deg, #fce7f3 0%, #fbcfe8 50%, #f9a8d4 100%);
+    }
     .blog-card-img .emoji {
       filter: drop-shadow(0 2px 4px rgba(0,0,0,.1));
       line-height: 1;
@@ -219,6 +225,98 @@
       color: var(--gray-600);
     }
 
+    /* ====== TOOLBAR: Search + Filters ====== */
+    .blog-toolbar {
+      max-width: 1200px;
+      margin: 0 auto 1.75rem;
+      padding: 0 2rem;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      align-items: center;
+    }
+    .blog-search {
+      flex: 1;
+      min-width: 220px;
+      position: relative;
+    }
+    .blog-search input {
+      width: 100%;
+      padding: .65rem 1rem .65rem 2.6rem;
+      border: 1.5px solid var(--gray-200);
+      border-radius: 100px;
+      font-size: .92rem;
+      font-family: inherit;
+      color: var(--gray-800);
+      background: var(--white);
+      transition: border-color .2s, box-shadow .2s;
+      outline: none;
+    }
+    .blog-search input:focus {
+      border-color: var(--green);
+      box-shadow: 0 0 0 3px rgba(22,163,74,.12);
+    }
+    .blog-search input::placeholder {
+      color: var(--gray-400, #9ca3af);
+    }
+    .blog-search .search-icon {
+      position: absolute;
+      left: 1rem;
+      top: 50%;
+      transform: translateY(-50%);
+      color: var(--gray-400, #9ca3af);
+      font-size: 1rem;
+      pointer-events: none;
+    }
+    .blog-filters {
+      display: flex;
+      flex-wrap: wrap;
+      gap: .4rem;
+    }
+    .blog-filters button {
+      padding: .45rem .95rem;
+      border: 1.5px solid var(--gray-200);
+      border-radius: 100px;
+      background: var(--white);
+      color: var(--gray-600);
+      font-size: .82rem;
+      font-weight: 600;
+      font-family: inherit;
+      cursor: pointer;
+      transition: all .2s;
+      white-space: nowrap;
+    }
+    .blog-filters button:hover {
+      border-color: var(--green);
+      color: var(--green);
+      background: var(--green-light, #dcfce7);
+    }
+    .blog-filters button.active {
+      background: var(--green);
+      color: #fff;
+      border-color: var(--green);
+    }
+    /* Hidden card — applied by JS */
+    .blog-card.hidden {
+      display: none;
+    }
+    /* No-results message */
+    .blog-no-results {
+      display: none;
+      text-align: center;
+      padding: 2rem;
+      max-width: 1200px;
+      margin: 0 auto;
+      color: var(--gray-600);
+    }
+    .blog-no-results.visible {
+      display: block;
+    }
+    .blog-no-results .emoji {
+      font-size: 2.5rem;
+      margin-bottom: .5rem;
+    }
+
     /* ====== RESPONSIVE ====== */
     @media (max-width: 900px) {
       .blog-grid {
@@ -304,11 +402,27 @@
     <p class="blog-subtitle">Artículos prácticos sobre el certificado energético, precios, normativa y cómo ahorrar en tus facturas.</p>
   </div>
 
+  <!-- ====== TOOLBAR: Search + Category Filters ====== -->
+  <div class="blog-toolbar">
+    <div class="blog-search">
+      <span class="search-icon">🔍</span>
+      <input type="text" id="blog-search-input" placeholder="Buscar artículos…" aria-label="Buscar en el blog">
+    </div>
+    <div class="blog-filters" id="blog-filters">
+      <button data-category="todos" class="active">Todos</button>
+      <button data-category="basico">Básico</button>
+      <button data-category="precios">Precios</button>
+      <button data-category="ahorro">Ahorro</button>
+      <button data-category="normativa">Normativa</button>
+      <button data-category="tecnologia">Tecnología</button>
+    </div>
+  </div>
+
   <!-- ====== BLOG GRID ====== -->
   <div class="blog-grid">
 
     <!-- Post: ¿Qué es el certificado energético? -->
-    <article class="blog-card">
+    <article class="blog-card" data-category="basico" data-title="¿Qué es el certificado energético y por qué es obligatorio?">
       <div class="blog-card-img bg-basico">
         <span class="emoji">📘</span>
         <span class="blog-card-cat">Básico</span>
@@ -327,7 +441,7 @@
     </article>
 
     <!-- Post: Precio certificado energético 2026 -->
-    <article class="blog-card">
+    <article class="blog-card" data-category="precios" data-title="¿Cuánto cuesta un certificado energético en 2026? Guía de precios">
       <div class="blog-card-img bg-precios">
         <span class="emoji">💰</span>
         <span class="blog-card-cat">Precios</span>
@@ -346,7 +460,7 @@
     </article>
 
     <!-- Post: Mejorar eficiencia energética -->
-    <article class="blog-card">
+    <article class="blog-card" data-category="ahorro" data-title="7 formas de mejorar la eficiencia energética de tu vivienda (y ahorrar en facturas)">
       <div class="blog-card-img bg-ahorro">
         <span class="emoji">💡</span>
         <span class="blog-card-cat">Ahorro</span>
@@ -364,6 +478,132 @@
       </div>
     </article>
 
+    <!-- Post: Certificado energético alquiler -->
+    <article class="blog-card" data-category="basico" data-title="Certificado energético para alquilar: guía completa para caseros">
+      <div class="blog-card-img bg-basico">
+        <span class="emoji">🏠</span>
+        <span class="blog-card-cat">Básico</span>
+      </div>
+      <div class="blog-card-body">
+        <h2><a href="/blog/certificado-energetico-alquiler.html">Certificado energético para alquilar: guía completa para caseros</a></h2>
+        <div class="blog-card-meta">
+          <span class="meta-date">📅 22 de mayo de 2026</span>
+          <span class="meta-read">⏱️ 6 min</span>
+        </div>
+        <p class="blog-card-desc">Todo lo que un casero debe saber sobre el certificado energético obligatorio para alquilar. Obligaciones legales, sanciones y cómo conseguirlo rápido.</p>
+        <a href="/blog/certificado-energetico-alquiler.html" class="blog-card-link">Leer más <span class="arrow">→</span></a>
+      </div>
+    </article>
+
+    <!-- Post: Normativa certificación energética -->
+    <article class="blog-card" data-category="normativa" data-title="Normativa de certificación energética en España: historia y actualidad">
+      <div class="blog-card-img bg-normativa">
+        <span class="emoji">📜</span>
+        <span class="blog-card-cat">Normativa</span>
+      </div>
+      <div class="blog-card-body">
+        <h2><a href="/blog/normativa-certificacion-energetica-espana.html">Normativa de certificación energética en España: historia y actualidad</a></h2>
+        <div class="blog-card-meta">
+          <span class="meta-date">📅 23 de mayo de 2026</span>
+          <span class="meta-read">⏱️ 8 min</span>
+        </div>
+        <p class="blog-card-desc">Recorrido por la normativa española: del RD 235/2013 al RD 390/2021. Directivas europeas, CTE y obligaciones actuales.</p>
+        <a href="/blog/normativa-certificacion-energetica-espana.html" class="blog-card-link">Leer más <span class="arrow">→</span></a>
+      </div>
+    </article>
+
+    <!-- Post: Aerotermia -->
+    <article class="blog-card" data-category="tecnologia" data-title="Aerotermia y certificado energético: cómo mejorar tu letra">
+      <div class="blog-card-img bg-tecnologia">
+        <span class="emoji">🌬️</span>
+        <span class="blog-card-cat">Tecnología</span>
+      </div>
+      <div class="blog-card-body">
+        <h2><a href="/blog/aerotermia-certificado-energetico.html">Aerotermia y certificado energético: cómo mejorar tu letra</a></h2>
+        <div class="blog-card-meta">
+          <span class="meta-date">📅 24 de mayo de 2026</span>
+          <span class="meta-read">⏱️ 7 min</span>
+        </div>
+        <p class="blog-card-desc">Qué es la aerotermia, cuánto ahorra, cómo mejora la calificación energética de tu vivienda y subvenciones disponibles.</p>
+        <a href="/blog/aerotermia-certificado-energetico.html" class="blog-card-link">Leer más <span class="arrow">→</span></a>
+      </div>
+    </article>
+
+    <!-- Post: Placas solares -->
+    <article class="blog-card" data-category="tecnologia" data-title="Placas solares y certificado energético: guía de instalación y ahorro">
+      <div class="blog-card-img bg-tecnologia">
+        <span class="emoji">☀️</span>
+        <span class="blog-card-cat">Tecnología</span>
+      </div>
+      <div class="blog-card-body">
+        <h2><a href="/blog/placas-solares-certificado-energetico.html">Placas solares y certificado energético: guía de instalación y ahorro</a></h2>
+        <div class="blog-card-meta">
+          <span class="meta-date">📅 25 de mayo de 2026</span>
+          <span class="meta-read">⏱️ 7 min</span>
+        </div>
+        <p class="blog-card-desc">Cómo las placas solares mejoran la letra de tu certificado. Instalación, ahorro en facturas, subvenciones y amortización.</p>
+        <a href="/blog/placas-solares-certificado-energetico.html" class="blog-card-link">Leer más <span class="arrow">→</span></a>
+      </div>
+    </article>
+
+    <!-- Post: CEE para venta -->
+    <article class="blog-card" data-category="basico" data-title="Certificado energético para vender tu vivienda: obligaciones y plazos">
+      <div class="blog-card-img bg-basico">
+        <span class="emoji">💰</span>
+        <span class="blog-card-cat">Básico</span>
+      </div>
+      <div class="blog-card-body">
+        <h2><a href="/blog/certificado-energetico-venta.html">Certificado energético para vender tu vivienda: obligaciones y plazos</a></h2>
+        <div class="blog-card-meta">
+          <span class="meta-date">📅 26 de mayo de 2026</span>
+          <span class="meta-read">⏱️ 5 min</span>
+        </div>
+        <p class="blog-card-desc">Todo si vas a vender tu casa: obligación legal del CEE, plazos, cómo afecta al precio de venta y qué pasa si no lo tienes.</p>
+        <a href="/blog/certificado-energetico-venta.html" class="blog-card-link">Leer más <span class="arrow">→</span></a>
+      </div>
+    </article>
+
+    <!-- Post: Rehabilitación energética -->
+    <article class="blog-card" data-category="ahorro" data-title="Rehabilitación energética de edificios: ayudas Next Generation y cómo financiarla">
+      <div class="blog-card-img bg-ahorro">
+        <span class="emoji">🏗️</span>
+        <span class="blog-card-cat">Ahorro</span>
+      </div>
+      <div class="blog-card-body">
+        <h2><a href="/blog/rehabilitacion-energetica-edificios.html">Rehabilitación energética de edificios: ayudas Next Generation y cómo financiarla</a></h2>
+        <div class="blog-card-meta">
+          <span class="meta-date">📅 27 de mayo de 2026</span>
+          <span class="meta-read">⏱️ 8 min</span>
+        </div>
+        <p class="blog-card-desc">Fondos Next Generation, deducciones fiscales, ayudas autonómicas y cómo financiar las obras de mejora energética de tu edificio o comunidad.</p>
+        <a href="/blog/rehabilitacion-energetica-edificios.html" class="blog-card-link">Leer más <span class="arrow">→</span></a>
+      </div>
+    </article>
+
+    <!-- Post: Etiqueta energética -->
+    <article class="blog-card" data-category="basico" data-title="La etiqueta energética de edificios: entiende la escala A-G">
+      <div class="blog-card-img bg-basico">
+        <span class="emoji">🏷️</span>
+        <span class="blog-card-cat">Básico</span>
+      </div>
+      <div class="blog-card-body">
+        <h2><a href="/blog/etiqueta-energetica-edificios.html">La etiqueta energética de edificios: entiende la escala A-G</a></h2>
+        <div class="blog-card-meta">
+          <span class="meta-date">📅 28 de mayo de 2026</span>
+          <span class="meta-read">⏱️ 6 min</span>
+        </div>
+        <p class="blog-card-desc">Guía de la etiqueta energética A-G: significado de cada letra, rangos de consumo, emisiones CO₂ y diferencias entre zonas climáticas.</p>
+        <a href="/blog/etiqueta-energetica-edificios.html" class="blog-card-link">Leer más <span class="arrow">→</span></a>
+      </div>
+    </article>
+
+  </div>
+
+  <!-- No results message (hidden by default, shown by JS) -->
+  <div class="blog-no-results" id="blog-no-results">
+    <div class="emoji">🔎</div>
+    <p><strong>No se encontraron artículos</strong></p>
+    <p>Prueba con otros términos de búsqueda o selecciona una categoría diferente.</p>
   </div>
 
   <!-- ====== CTA ====== -->
@@ -384,6 +624,68 @@
       <a href="/panel-tecnicos.html">¿Eres técnico?</a>
     </p>
   </footer>
+
+  <!-- ====== VANILLA JS: Search + Category Filters ====== -->
+  <script>
+    (function() {
+      var searchInput = document.getElementById('blog-search-input');
+      var filterButtons = document.querySelectorAll('#blog-filters button');
+      var blogCards = document.querySelectorAll('.blog-card');
+      var noResults = document.getElementById('blog-no-results');
+
+      var currentCategory = 'todos';
+      var currentQuery = '';
+
+      function filterCards() {
+        var visibleCount = 0;
+
+        blogCards.forEach(function(card) {
+          var category = card.getAttribute('data-category');
+          var title = card.getAttribute('data-title') || '';
+
+          var matchesCategory = (currentCategory === 'todos' || category === currentCategory);
+          var matchesSearch = (currentQuery === '' || title.toLowerCase().indexOf(currentQuery) !== -1);
+
+          if (matchesCategory && matchesSearch) {
+            card.classList.remove('hidden');
+            visibleCount++;
+          } else {
+            card.classList.add('hidden');
+          }
+        });
+
+        // Show/hide no-results message
+        if (visibleCount === 0 && blogCards.length > 0) {
+          noResults.classList.add('visible');
+        } else {
+          noResults.classList.remove('visible');
+        }
+      }
+
+      // Search input listener
+      if (searchInput) {
+        searchInput.addEventListener('input', function() {
+          currentQuery = this.value.trim().toLowerCase();
+          filterCards();
+        });
+      }
+
+      // Category filter buttons
+      filterButtons.forEach(function(btn) {
+        btn.addEventListener('click', function() {
+          // Update active state
+          filterButtons.forEach(function(b) { b.classList.remove('active'); });
+          this.classList.add('active');
+
+          currentCategory = this.getAttribute('data-category');
+          filterCards();
+        });
+      });
+
+      // Initial state: everything visible (no JS classes applied by default)
+      // No hidden class on any card initially — they're all visible
+    })();
+  </script>
 
 </body>
 </html>

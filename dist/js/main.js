@@ -94,6 +94,40 @@ function obtenerPrecioZona(cp) {
 }
 
 // ============================================================
+// VALIDACIÓN VISUAL DEL FORMULARIO
+// ============================================================
+function validarCP() {
+  const input = document.getElementById('cp');
+  const error = document.getElementById('cp-error');
+  const val = input.value.trim();
+  if (val === '') { input.classList.remove('error'); error.textContent = ''; return; }
+  if (!/^\d{5}$/.test(val)) {
+    input.classList.add('error');
+    error.textContent = 'El código postal debe tener 5 dígitos';
+  } else {
+    input.classList.remove('error');
+    error.textContent = '';
+  }
+}
+
+function validarM2() {
+  const input = document.getElementById('m2');
+  const error = document.getElementById('m2-error');
+  const val = parseFloat(input.value);
+  if (input.value === '') { input.classList.remove('error'); error.textContent = ''; return; }
+  if (!val || val < 20) {
+    input.classList.add('error');
+    error.textContent = 'Mínimo 20 m²';
+  } else if (val > 5000) {
+    input.classList.add('error');
+    error.textContent = 'Máximo 5.000 m²';
+  } else {
+    input.classList.remove('error');
+    error.textContent = '';
+  }
+}
+
+// ============================================================
 // CALCULAR PRESUPUESTO (función llamada desde el botón)
 // ============================================================
 function calcularPresupuesto() {
@@ -106,7 +140,8 @@ function calcularPresupuesto() {
   // Validar código postal
   const cp = cpInput.value.trim();
   if (!/^\d{5}$/.test(cp)) {
-    alert('Por favor, introduce un código postal válido de 5 dígitos');
+    cpInput.classList.add('error');
+    document.getElementById('cp-error').textContent = 'El código postal debe tener 5 dígitos';
     cpInput.focus();
     return;
   }
@@ -114,7 +149,8 @@ function calcularPresupuesto() {
   // Validar metros cuadrados
   const m2 = parseFloat(m2Input.value);
   if (!m2 || m2 < 20 || m2 > 5000) {
-    alert('Por favor, introduce los metros cuadrados (mín. 20 m²)');
+    m2Input.classList.add('error');
+    document.getElementById('m2-error').textContent = 'Introduce los m² (entre 20 y 5.000)';
     m2Input.focus();
     return;
   }
@@ -232,6 +268,8 @@ window.calcularPresupuesto = calcularPresupuesto;
 window.solicitarLead = solicitarLead;
 window.confirmarLead = confirmarLead;
 window.cerrarLeadModal = cerrarLeadModal;
+window.validarCP = validarCP;
+window.validarM2 = validarM2;
 window.registrarTecnico = registrarTecnico;
 
 // ============================================================
