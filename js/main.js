@@ -76,6 +76,36 @@ const PRECIOS_ZONA = {
   '419': { min: 0.50, max: 0.80, ciudad: 'Sevilla periferia' },
 };
 
+// ============================================================
+// MAPEO CP → PROVINCIA (para redirigir al calcular presupuesto)
+// ============================================================
+const CP_A_PROVINCIA = {
+  '03': { slug: 'alicante', nombre: 'Alicante' },
+  '06': { slug: 'badajoz', nombre: 'Badajoz' },
+  '07': { slug: 'baleares', nombre: 'Baleares' },
+  '08': { slug: 'barcelona', nombre: 'Barcelona' },
+  '10': { slug: 'caceres', nombre: 'Cáceres' },
+  '11': { slug: 'cadiz', nombre: 'Cádiz' },
+  '15': { slug: 'a-coruna', nombre: 'A Coruña' },
+  '18': { slug: 'granada', nombre: 'Granada' },
+  '20': { slug: 'gipuzkoa', nombre: 'Gipuzkoa' },
+  '24': { slug: 'leon', nombre: 'León' },
+  '26': { slug: 'la-rioja', nombre: 'La Rioja' },
+  '28': { slug: 'madrid', nombre: 'Madrid' },
+  '29': { slug: 'malaga', nombre: 'Málaga' },
+  '30': { slug: 'murcia', nombre: 'Murcia' },
+  '33': { slug: 'asturias', nombre: 'Asturias' },
+  '35': { slug: 'las-palmas', nombre: 'Las Palmas' },
+  '37': { slug: 'salamanca', nombre: 'Salamanca' },
+  '38': { slug: 'tenerife', nombre: 'Tenerife' },
+  '39': { slug: 'cantabria', nombre: 'Cantabria' },
+  '41': { slug: 'sevilla', nombre: 'Sevilla' },
+  '46': { slug: 'valencia', nombre: 'Valencia' },
+  '47': { slug: 'valladolid', nombre: 'Valladolid' },
+  '48': { slug: 'bizkaia', nombre: 'Bizkaia' },
+  '50': { slug: 'zaragoza', nombre: 'Zaragoza' },
+};
+
 // Precio por defecto para el resto de España
 const PRECIO_DEFAULT = { min: 0.45, max: 0.85 };
 
@@ -163,10 +193,22 @@ function calcularPresupuesto() {
   // Mostrar resultado
   precioRango.textContent = `${precioMin}€ – ${precioMax}€`;
   precioTexto.textContent = `Precio estimado para ${zona.ciudad} (${m2} m²). El técnico te dará el precio exacto tras evaluar tu inmueble.`;
-  resultadoBox.classList.add('visible');
-
-  // Scroll suave al resultado
-  resultadoBox.scrollIntoView({ behavior: 'smooth', block: 'center' });
+  
+  // Redirigir a la página de la provincia si existe
+  const prefijoCp = cp.substring(0, 2);
+  const provinciaData = CP_A_PROVINCIA[prefijoCp];
+  if (provinciaData) {
+    precioTexto.innerHTML += `<br><br><span style="color:#547c24;font-weight:500">Redirigiendo a ${provinciaData.nombre}...</span>`;
+    resultadoBox.classList.add('visible');
+    resultadoBox.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    // Redirigir tras breve pausa para que el usuario vea el precio
+    setTimeout(() => {
+      window.location.href = `/certificado-energetico-${provinciaData.slug}/`;
+    }, 2000);
+  } else {
+    resultadoBox.classList.add('visible');
+    resultadoBox.scrollIntoView({ behavior: 'smooth', block: 'center' });
+  }
 
   // Guardar datos para el lead
   window._presupuesto = { cp, m2, precioMin, precioMax, zona: zona.ciudad };
@@ -277,6 +319,8 @@ window.registrarTecnico = registrarTecnico;
 // ============================================================
 async function registrarTecnico() {
   const nombre = document.getElementById('reg-nombre').value.trim();
+  const apellidosEl = document.getElementById('reg-apellidos');
+  const apellidos = apellidosEl ? apellidosEl.value.trim() : '';
   const email = document.getElementById('reg-email').value.trim();
   const telefono = document.getElementById('reg-telefono').value.trim();
   const titulacion = document.getElementById('reg-titulacion').value;
@@ -311,7 +355,7 @@ async function registrarTecnico() {
       window.supabase = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
     }
     const { error } = await window.supabase.from('tecnicos').insert([{
-      email, nombre, telefono, titulacion,
+      email, nombre: nombre + (apellidos ? ' ' + apellidos : ''), telefono, titulacion,
       numero_colegiado: colegiado,
       provincia: provincias,
       cp_cobertura: cpCobertura,

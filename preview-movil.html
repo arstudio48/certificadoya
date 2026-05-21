@@ -1,0 +1,772 @@
+     1|<!DOCTYPE html>
+     2|<html lang="es">
+     3|<head>
+     4|  <meta charset="UTF-8">
+     5|  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+     6|  <title>CertificadoYa — Certificado Energético en 24h | Presupuesto al Instante</title>
+     7|  <meta name="description" content="Consigue tu certificado de eficiencia energética (CEE) en 24 horas. Presupuesto instantáneo por m². Los mejores técnicos en Madrid, Asturias y toda España. Desde 45€.">
+     8|  <meta name="keywords" content="certificado energético, certificado de eficiencia energética, CEE, precio certificado energético, presupuesto certificado energético, técnico certificador, Madrid, Gijón, Asturias">
+     9|  <meta name="author" content="CertificadoYa">
+    10|  <meta name="robots" content="index, follow">
+    11|  <link rel="canonical" href="https://certificadoya.es">
+    12|  <meta property="og:title" content="CertificadoYa — Presupuesto de Certificado Energético en 24h">
+    13|  <meta property="og:description" content="Presupuesto instantáneo por m². Sin formularios largos. Los mejores técnicos en Madrid, Asturias y toda España.">
+    14|  <meta property="og:url" content="https://certificadoya.es">
+    15|  <meta property="og:type" content="website">
+    16|  <style>
+     1|/* ============================================================
+     2|   CERTIFICADOYA.ES — Estilos
+     3|   Diseño moderno, limpio, responsive
+     4|   ============================================================ */
+     5|
+     6|:root {
+     7|  --green: #16a34a;
+     8|  --green-dark: #15803d;
+     9|  --green-light: #dcfce7;
+    10|  --blue: #2563eb;
+    11|  --blue-light: #dbeafe;
+    12|  --gray-50: #f9fafb;
+    13|  --gray-100: #f3f4f6;
+    14|  --gray-200: #e5e7eb;
+    15|  --gray-600: #4b5563;
+    16|  --gray-800: #1f2937;
+    17|  --gray-900: #111827;
+    18|  --white: #ffffff;
+    19|  --radius: 12px;
+    20|  --shadow: 0 1px 3px rgba(0,0,0,.08), 0 1px 2px rgba(0,0,0,.06);
+    21|  --shadow-lg: 0 10px 25px rgba(0,0,0,.08);
+    22|}
+    23|
+    24|* { margin: 0; padding: 0; box-sizing: border-box; }
+    25|
+    26|body {
+    27|  font-family: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+    28|  color: var(--gray-800);
+    29|  background: var(--white);
+    30|  line-height: 1.6;
+    31|  -webkit-font-smoothing: antialiased;
+    32|}
+    33|
+    34|/* ====== NAV ====== */
+    35|nav {
+    36|  display: flex;
+    37|  justify-content: space-between;
+    38|  align-items: center;
+    39|  padding: 1rem 2rem;
+    40|  max-width: 1200px;
+    41|  margin: 0 auto;
+    42|}
+    43|
+    44|.logo {
+    45|  font-size: 1.4rem;
+    46|  font-weight: 700;
+    47|  color: var(--green);
+    48|  text-decoration: none;
+    49|}
+    50|
+    51|.logo span { color: var(--gray-800); }
+    52|
+    53|.nav-links { display: flex; gap: 1.5rem; align-items: center; }
+    54|.nav-links a { text-decoration: none; color: var(--gray-600); font-size: .95rem; }
+    55|.nav-links a:hover { color: var(--green); }
+    56|
+    57|.btn {
+    58|  display: inline-flex;
+    59|  align-items: center;
+    60|  gap: .5rem;
+    61|  padding: .65rem 1.5rem;
+    62|  border-radius: 8px;
+    63|  font-weight: 600;
+    64|  font-size: .95rem;
+    65|  cursor: pointer;
+    66|  border: none;
+    67|  transition: all .2s;
+    68|  text-decoration: none;
+    69|}
+    70|
+    71|.btn-green {
+    72|  background: var(--green);
+    73|  color: white;
+    74|}
+    75|.btn-green:hover { background: var(--green-dark); transform: translateY(-1px); }
+    76|
+    77|.btn-outline {
+    78|  background: transparent;
+    79|  color: var(--green);
+    80|  border: 2px solid var(--green);
+    81|}
+    82|.btn-outline:hover { background: var(--green-light); }
+    83|
+    84|/* ====== HERO ====== */
+    85|.hero {
+    86|  max-width: 1200px;
+    87|  margin: 3rem auto;
+    88|  padding: 0 2rem;
+    89|  display: grid;
+    90|  grid-template-columns: 1fr 1fr;
+    91|  gap: 3rem;
+    92|  align-items: center;
+    93|}
+    94|
+    95|.hero-text h1 {
+    96|  font-size: 2.8rem;
+    97|  font-weight: 800;
+    98|  line-height: 1.15;
+    99|  color: var(--gray-900);
+   100|  margin-bottom: 1rem;
+   101|}
+   102|
+   103|.hero-text h1 span { color: var(--green); }
+   104|
+   105|.hero-text p {
+   106|  font-size: 1.15rem;
+   107|  color: var(--gray-600);
+   108|  margin-bottom: 1.5rem;
+   109|}
+   110|
+   111|.hero-badges {
+   112|  display: flex;
+   113|  gap: 1rem;
+   114|  flex-wrap: wrap;
+   115|}
+   116|
+   117|.badge {
+   118|  display: flex;
+   119|  align-items: center;
+   120|  gap: .5rem;
+   121|  background: var(--green-light);
+   122|  color: var(--green-dark);
+   123|  padding: .5rem 1rem;
+   124|  border-radius: 100px;
+   125|  font-size: .85rem;
+   126|  font-weight: 600;
+   127|}
+   128|
+   129|/* ====== FORMULARIO PRESUPUESTO ====== */
+   130|.presupuesto-card {
+   131|  background: var(--white);
+   132|  border: 1px solid var(--gray-200);
+   133|  border-radius: var(--radius);
+   134|  padding: 2rem;
+   135|  box-shadow: var(--shadow-lg);
+   136|}
+   137|
+   138|.presupuesto-card h3 {
+   139|  font-size: 1.3rem;
+   140|  font-weight: 700;
+   141|  margin-bottom: .5rem;
+   142|}
+   143|
+   144|.presupuesto-card .subtitle {
+   145|  color: var(--gray-600);
+   146|  font-size: .9rem;
+   147|  margin-bottom: 1.5rem;
+   148|}
+   149|
+   150|.form-group {
+   151|  margin-bottom: 1rem;
+   152|}
+   153|
+   154|.form-group label {
+   155|  display: block;
+   156|  font-weight: 600;
+   157|  font-size: .85rem;
+   158|  margin-bottom: .35rem;
+   159|  color: var(--gray-800);
+   160|}
+   161|
+   162|.form-group input,
+   163|.form-group select {
+   164|  width: 100%;
+   165|  padding: .75rem 1rem;
+   166|  border: 2px solid var(--gray-200);
+   167|  border-radius: 8px;
+   168|  font-size: 1rem;
+   169|  transition: border .2s;
+   170|  font-family: inherit;
+   171|}
+   172|
+   173|.form-group input:focus,
+   174|.form-group select:focus {
+   175|  outline: none;
+   176|  border-color: var(--green);
+   177|}
+   178|
+   179|.form-row {
+   180|  display: grid;
+   181|  grid-template-columns: 1fr 1fr;
+   182|  gap: 1rem;
+   183|}
+   184|
+   185|.btn-full {
+   186|  width: 100%;
+   187|  justify-content: center;
+   188|  padding: .85rem;
+   189|  font-size: 1.05rem;
+   190|  margin-top: .5rem;
+   191|}
+   192|
+   193|.resultado-box {
+   194|  margin-top: 1.5rem;
+   195|  padding: 1.25rem;
+   196|  background: var(--green-light);
+   197|  border-radius: 8px;
+   198|  text-align: center;
+   199|  display: none;
+   200|}
+   201|
+   202|.resultado-box.visible { display: block; }
+   203|
+   204|.resultado-precio {
+   205|  font-size: 2rem;
+   206|  font-weight: 800;
+   207|  color: var(--green-dark);
+   208|}
+   209|
+   210|.resultado-texto {
+   211|  color: var(--gray-600);
+   212|  font-size: .9rem;
+   213|  margin-top: .25rem;
+   214|}
+   215|
+   216|/* ====== CÓMO FUNCIONA ====== */
+   217|.como-funciona {
+   218|  background: var(--gray-50);
+   219|  padding: 4rem 2rem;
+   220|}
+   221|
+   222|.section-title {
+   223|  text-align: center;
+   224|  font-size: 2rem;
+   225|  font-weight: 800;
+   226|  color: var(--gray-900);
+   227|  margin-bottom: 3rem;
+   228|}
+   229|
+   230|.pasos {
+   231|  max-width: 1000px;
+   232|  margin: 0 auto;
+   233|  display: grid;
+   234|  grid-template-columns: repeat(3, 1fr);
+   235|  gap: 2rem;
+   236|}
+   237|
+   238|.paso {
+   239|  text-align: center;
+   240|  padding: 2rem 1.5rem;
+   241|  background: var(--white);
+   242|  border-radius: var(--radius);
+   243|  box-shadow: var(--shadow);
+   244|}
+   245|
+   246|.paso-num {
+   247|  display: inline-flex;
+   248|  align-items: center;
+   249|  justify-content: center;
+   250|  width: 48px;
+   251|  height: 48px;
+   252|  background: var(--green);
+   253|  color: white;
+   254|  border-radius: 50%;
+   255|  font-size: 1.3rem;
+   256|  font-weight: 800;
+   257|  margin-bottom: 1rem;
+   258|}
+   259|
+   260|.paso h4 { margin-bottom: .5rem; }
+   261|.paso p { color: var(--gray-600); font-size: .9rem; }
+   262|
+   263|/* ====== VENTAJAS ====== */
+   264|.ventajas {
+   265|  padding: 4rem 2rem;
+   266|  max-width: 1000px;
+   267|  margin: 0 auto;
+   268|}
+   269|
+   270|.ventajas-grid {
+   271|  display: grid;
+   272|  grid-template-columns: repeat(2, 1fr);
+   273|  gap: 1.5rem;
+   274|}
+   275|
+   276|.ventaja {
+   277|  display: flex;
+   278|  gap: 1rem;
+   279|  padding: 1.5rem;
+   280|  background: var(--white);
+   281|  border: 1px solid var(--gray-200);
+   282|  border-radius: var(--radius);
+   283|}
+   284|
+   285|.ventaja-icono {
+   286|  font-size: 1.8rem;
+   287|  flex-shrink: 0;
+   288|}
+   289|
+   290|.ventaja h4 { font-size: 1.05rem; margin-bottom: .25rem; }
+   291|.ventaja p { color: var(--gray-600); font-size: .9rem; }
+   292|
+   293|/* ====== CTA ====== */
+   294|.cta {
+   295|  background: var(--green);
+   296|  color: white;
+   297|  text-align: center;
+   298|  padding: 3rem 2rem;
+   299|}
+   300|
+   301|.cta h3 {
+   302|  font-size: 1.8rem;
+   303|  font-weight: 800;
+   304|  margin-bottom: .5rem;
+   305|}
+   306|
+   307|.cta p {
+   308|  font-size: 1.05rem;
+   309|  opacity: .9;
+   310|  margin-bottom: 1.5rem;
+   311|}
+   312|
+   313|.btn-white {
+   314|  background: white;
+   315|  color: var(--green);
+   316|  font-weight: 700;
+   317|}
+   318|.btn-white:hover { background: var(--green-light); transform: translateY(-1px); }
+   319|
+   320|/* ====== FOOTER ====== */
+   321|footer {
+   322|  background: var(--gray-900);
+   323|  color: var(--gray-200);
+   324|  padding: 3rem 2rem;
+   325|  text-align: center;
+   326|  font-size: .9rem;
+   327|}
+   328|
+   329|footer a {
+   330|  color: var(--green);
+   331|  text-decoration: none;
+   332|}
+   333|
+   334|/* ====== RESPONSIVE ====== */
+   335|@media (max-width: 768px) {
+   336|  .hero {
+   337|    grid-template-columns: 1fr;
+   338|    gap: 1.5rem;
+   339|    margin: 1.5rem auto;
+   340|    padding: 0 1rem;
+   341|  }
+   342|
+   343|  .hero-text h1 { font-size: 1.8rem; }
+   344|  .hero-text p { font-size: 1rem; }
+   345|
+   346|  .hero-badges { gap: 0.5rem; }
+   347|  .badge { font-size: 0.78rem; padding: 0.4rem 0.75rem; }
+   348|
+   349|  .pasos {
+   350|    grid-template-columns: 1fr;
+   351|    max-width: 400px;
+   352|  }
+   353|
+   354|  .ventajas-grid {
+   355|    grid-template-columns: 1fr;
+   356|  }
+   357|
+   358|  .form-row {
+   359|    grid-template-columns: 1fr;
+   360|  }
+   361|
+   362|  .nav-links { display: none; }
+   363|
+   364|  .presupuesto-card {
+   365|    padding: 1.25rem;
+   366|  }
+   367|
+   368|  .como-funciona,
+   369|  .ventajas {
+   370|    padding: 2.5rem 1rem;
+   371|  }
+   372|
+   373|  .section-title {
+   374|    font-size: 1.5rem;
+   375|    margin-bottom: 2rem;
+   376|  }
+   377|
+   378|  .cta {
+   379|    padding: 2rem 1rem;
+   380|  }
+   381|  .cta h3 { font-size: 1.4rem; }
+   382|}
+   383|
+   384|/* Móvil pequeño (≤480px) */
+   385|@media (max-width: 480px) {
+   386|  nav {
+   387|    padding: 0.75rem 1rem;
+   388|  }
+   389|  .logo { font-size: 1.15rem; }
+   390|
+   391|  .hero {
+   392|    margin: 1rem auto;
+   393|    padding: 0 0.75rem;
+   394|    gap: 1rem;
+   395|  }
+   396|
+   397|  .hero-text h1 {
+   398|    font-size: 1.5rem;
+   399|    line-height: 1.2;
+   400|  }
+   401|  .hero-text p {
+   402|    font-size: 0.9rem;
+   403|    margin-bottom: 1rem;
+   404|  }
+   405|
+   406|  .badge {
+   407|    font-size: 0.72rem;
+   408|    padding: 0.3rem 0.6rem;
+   409|  }
+   410|
+   411|  .presupuesto-card {
+   412|    padding: 1rem;
+   413|    border-radius: 8px;
+   414|  }
+   415|  .presupuesto-card h3 {
+   416|    font-size: 1.1rem;
+   417|  }
+   418|  .presupuesto-card .subtitle {
+   419|    font-size: 0.82rem;
+   420|    margin-bottom: 1rem;
+   421|  }
+   422|
+   423|  .form-group label {
+   424|    font-size: 0.8rem;
+   425|  }
+   426|  .form-group input,
+   427|  .form-group select {
+   428|    padding: 0.6rem 0.75rem;
+   429|    font-size: 0.9rem;
+   430|  }
+   431|
+   432|  .btn {
+   433|    padding: 0.6rem 1rem;
+   434|    font-size: 0.9rem;
+   435|  }
+   436|  .btn-full {
+   437|    padding: 0.75rem;
+   438|    font-size: 0.95rem;
+   439|  }
+   440|
+   441|  .resultado-precio {
+   442|    font-size: 1.5rem;
+   443|  }
+   444|
+   445|  .section-title {
+   446|    font-size: 1.3rem;
+   447|    margin-bottom: 1.5rem;
+   448|  }
+   449|
+   450|  .paso {
+   451|    padding: 1.25rem 1rem;
+   452|  }
+   453|
+   454|  .ventaja {
+   455|    padding: 1rem;
+   456|    gap: 0.75rem;
+   457|  }
+   458|  .ventaja-icono { font-size: 1.4rem; }
+   459|  .ventaja h4 { font-size: 0.95rem; }
+   460|  .ventaja p { font-size: 0.82rem; }
+   461|
+   462|  .cta h3 { font-size: 1.2rem; }
+   463|  .cta p { font-size: 0.9rem; }
+   464|
+   465|  footer {
+   466|    padding: 2rem 1rem;
+   467|    font-size: 0.8rem;
+   468|  }
+   469|
+   470|  /* Modal en móvil */
+   471|  .modal-box {
+   472|    padding: 1.25rem;
+   473|    width: 94%;
+   474|    border-radius: 10px;
+   475|  }
+   476|  .modal-box h3 { font-size: 1.1rem; }
+   477|  .modal-box .form-group input {
+   478|    padding: 0.6rem;
+   479|    font-size: 0.9rem;
+   480|  }
+   481|}
+   482|
+   483|/* ============================================================
+   484|   MENÚ HAMBURGUESA (mobile)
+   485|   ============================================================ */
+   486|.nav-toggle { display: none; }
+   487|.nav-toggle-label {
+   488|  display: none;
+   489|  font-size: 1.5rem;
+   490|  cursor: pointer;
+   491|  color: var(--gray-800);
+   492|  user-select: none;
+   493|}
+   494|
+   495|@media (max-width: 768px) {
+   496|  .nav-toggle-label {
+   497|    display: block;
+   498|  }
+   499|  /* Mostrar menú cuando checkbox está checked */
+   500|  .nav-toggle:checked ~ .nav-links {
+   501|    display: flex;
+   502|    flex-direction: column;
+   503|    position: absolute;
+   504|    top: 100%;
+   505|    left: 0;
+   506|    right: 0;
+   507|    background: #fff;
+   508|    padding: 1rem 2rem;
+   509|    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+   510|    z-index: 100;
+   511|  }
+   512|  nav {
+   513|    position: relative;
+   514|  }
+   515|}
+   516|
+   517|/* ============================================================
+   518|   MODAL LEAD
+   519|   ============================================================ */
+   520|.modal-overlay {
+   521|  display: none;
+   522|  position: fixed;
+   523|  inset: 0;
+   524|  background: rgba(0,0,0,0.6);
+   525|  z-index: 1000;
+   526|  align-items: center;
+   527|  justify-content: center;
+   528|}
+   529|.modal-overlay.visible {
+   530|  display: flex;
+   531|}
+   532|.modal-box {
+   533|  background: #fff;
+   534|  border-radius: 12px;
+   535|  padding: 2rem;
+   536|  max-width: 420px;
+   537|  width: 90%;
+   538|  position: relative;
+   539|  box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+   540|}
+   541|.modal-close {
+   542|  position: absolute;
+   543|  top: 0.5rem;
+   544|  right: 0.75rem;
+   545|  background: none;
+   546|  border: none;
+   547|  font-size: 1.5rem;
+   548|  cursor: pointer;
+   549|  color: #666;
+   550|}
+   551|.modal-close:hover { color: #000; }
+   552|.modal-box h3 { margin-top: 0; }
+   553|.modal-box .form-group { margin-bottom: 1rem; }
+   554|.modal-box .form-group label {
+   555|  display: block;
+   556|  margin-bottom: .25rem;
+   557|  font-weight: 600;
+   558|  font-size: .9rem;
+   559|}
+   560|.modal-box .form-group input {
+   561|  width: 100%;
+   562|  padding: .7rem;
+   563|  border: 1px solid #ddd;
+   564|  border-radius: 6px;
+   565|  font-size: 1rem;
+   566|  box-sizing: border-box;
+   567|}
+   568|.modal-box .btn { margin-top: .5rem; }
+   569|
+</style>
+    17|  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⚡</text></svg>">
+    18|</head>
+    19|<body>
+    20|
+    21|  <!-- ====== NAV ====== -->
+    22|  <nav>
+    23|    <a href="#" class="logo">⚡ Certificado<span>Ya</span></a>
+    24|    <input type="checkbox" id="nav-toggle" class="nav-toggle">
+    25|    <label for="nav-toggle" class="nav-toggle-label">☰</label>
+    26|    <div class="nav-links">
+    27|      <a href="/#como-funciona">Cómo funciona</a>
+    28|      <a href="#ventajas">Ventajas</a>
+    29|      <a href="/panel-tecnicos.html">¿Eres técnico?</a>
+    30|    </div>
+    31|  </nav>
+    32|
+    33|  <!-- ====== HERO ====== -->
+    34|  <section class="hero">
+    35|    <div class="hero-text">
+    36|      <h1>Tu <span>certificado energético</span> en 24 horas</h1>
+    37|      <p>Presupuesto al instante. Sin formularios largos. Sin esperas. Los mejores técnicos de tu zona, desde <strong>45€</strong>.</p>
+    38|      <div class="hero-badges">
+    39|        <div class="badge">⚡ Presupuesto inmediato</div>
+    40|        <div class="badge">✅ Técnicos verificados</div>
+    41|        <div class="badge">📍 Madrid + Asturias</div>
+    42|      </div>
+    43|    </div>
+    44|
+    45|    <!-- ====== FORMULARIO PRESUPUESTO ====== -->
+    46|    <div class="presupuesto-card" id="presupuesto-card">
+    47|      <h3>🧮 Calcula tu presupuesto</h3>
+    48|      <p class="subtitle">Introduce tu código postal y los metros cuadrados</p>
+    49|
+    50|      <div class="form-group">
+    51|        <label for="cp">Código postal</label>
+    52|        <input type="text" id="cp" placeholder="Ej: 28001" maxlength="5" inputmode="numeric" pattern="[0-9]{5}">
+    53|      </div>
+    54|
+    55|      <div class="form-row">
+    56|        <div class="form-group">
+    57|          <label for="m2">Metros cuadrados (m²)</label>
+    58|          <input type="number" id="m2" placeholder="Ej: 80" min="20" max="5000">
+    59|        </div>
+    60|        <div class="form-group">
+    61|          <label for="tipo">Tipo de inmueble</label>
+    62|          <select id="tipo">
+    63|            <option value="piso">Piso</option>
+    64|            <option value="unifamiliar">Unifamiliar / Chalet</option>
+    65|            <option value="adosado">Adosado</option>
+    66|            <option value="local">Local comercial</option>
+    67|          </select>
+    68|        </div>
+    69|      </div>
+    70|
+    71|      <button class="btn btn-green btn-full" onclick="calcularPresupuesto()">
+    72|        💶 Calcular presupuesto
+    73|      </button>
+    74|
+    75|      <div class="resultado-box" id="resultado">
+    76|        <div class="resultado-precio" id="precio-rango">—</div>
+    77|        <div class="resultado-texto" id="precio-texto"></div>
+    78|        <button class="btn btn-green btn-full" style="margin-top:1rem" onclick="solicitarLead()">
+    79|          Quiero que me contacte un técnico →
+    80|        </button>
+    81|      </div>
+    82|    </div>
+    83|  </section>
+    84|
+    85|  <!-- ====== CÓMO FUNCIONA ====== -->
+    86|  <section class="como-funciona" id="como-funciona" style="scroll-margin-top:80px">
+    87|    <h2 class="section-title">Cómo funciona</h2>
+    88|    <div class="pasos">
+    89|      <div class="paso">
+    90|        <div class="paso-num">1</div>
+    91|        <h4>Calcula tu precio</h4>
+    92|        <p>Introduce tu código postal y los m². En segundos ves el precio estimado de tu certificado energético.</p>
+    93|      </div>
+    94|      <div class="paso">
+    95|        <div class="paso-num">2</div>
+    96|        <h4>Te contacta un técnico</h4>
+    97|        <p>El mejor técnico de tu zona se pone en contacto contigo en menos de 24 horas.</p>
+    98|      </div>
+    99|      <div class="paso">
+   100|        <div class="paso-num">3</div>
+   101|        <h4>Certificado listo</h4>
+   102|        <p>El técnico visita tu vivienda y te entrega el certificado energético registrado. Sin papeleos.</p>
+   103|      </div>
+   104|    </div>
+   105|  </section>
+   106|
+   107|  <!-- ====== VENTAJAS ====== -->
+   108|  <section class="ventajas" id="ventajas">
+   109|    <h2 class="section-title">¿Por qué CertificadoYa?</h2>
+   110|    <div class="ventajas-grid">
+   111|      <div class="ventaja">
+   112|        <div class="ventaja-icono">⚡</div>
+   113|        <div>
+   114|          <h4>Presupuesto al instante</h4>
+   115|          <p>Somos la única plataforma que te da precio inmediato por m². Sin formularios eternos ni esperas de días.</p>
+   116|        </div>
+   117|      </div>
+   118|      <div class="ventaja">
+   119|        <div class="ventaja-icono">🛡️</div>
+   120|        <div>
+   121|          <h4>Técnicos verificados</h4>
+   122|          <p>Todos nuestros técnicos están colegiados y verificados. Arquitectos, aparejadores e ingenieros cualificados.</p>
+   123|        </div>
+   124|      </div>
+   125|      <div class="ventaja">
+   126|        <div class="ventaja-icono">💰</div>
+   127|        <div>
+   128|          <h4>Desde 45€</h4>
+   129|          <p>El precio más competitivo. Sin sorpresas. Sabes lo que pagas antes de comprometerte.</p>
+   130|        </div>
+   131|      </div>
+   132|      <div class="ventaja">
+   133|        <div class="ventaja-icono">⏱️</div>
+   134|        <div>
+   135|          <h4>En 24 horas</h4>
+   136|          <p>Un técnico te contacta en menos de un día. El certificado, listo en 48-72h tras la visita.</p>
+   137|        </div>
+   138|      </div>
+   139|      <div class="ventaja">
+   140|        <div class="ventaja-icono">📍</div>
+   141|        <div>
+   142|          <h4>Cobertura nacional</h4>
+   143|          <p>Empezamos por Madrid y Asturias, expandiendo a toda España. Siempre un técnico cerca de ti.</p>
+   144|        </div>
+   145|      </div>
+   146|      <div class="ventaja">
+   147|        <div class="ventaja-icono">📋</div>
+   148|        <div>
+   149|          <h4>Obligatorio por ley</h4>
+   150|          <p>Necesitas el CEE para vender o alquilar. Nosotros te lo ponemos fácil, rápido y barato.</p>
+   151|        </div>
+   152|      </div>
+   153|    </div>
+   154|  </section>
+   155|
+   156|  <!-- ====== CTA ====== -->
+   157|  <section class="cta">
+   158|    <h3>¿Listo para tu certificado energético?</h3>
+   159|    <p>Presupuesto gratis en 5 segundos. Sin compromiso.</p>
+   160|    <a href="#presupuesto-card" class="btn btn-white">Calcular presupuesto ahora ⚡</a>
+   161|  </section>
+   162|
+   163|  <!-- ====== FOOTER ====== -->
+   164|  <footer>
+   165|    <p>© 2026 <strong>CertificadoYa</strong> — Marketplace de certificación energética</p>
+   166|    <p style="margin-top:.5rem">
+   167|      <a href="/legal/aviso-legal">Aviso legal</a> ·
+   168|      <a href="/legal/privacidad">Privacidad</a> ·
+   169|      <a href="/legal/cookies">Cookies</a> ·
+   170|<a href="/panel-tecnicos.html">¿Eres técnico?</a>
+   171|    </p>
+   172|  </footer>
+   173|
+   174|  <script type="module" ></script>
+   175|
+   176|  <!-- MODAL LEAD -->
+   177|  <div class="modal-overlay" id="lead-modal">
+   178|    <div class="modal-box">
+   179|      <button class="modal-close" onclick="cerrarLeadModal()">✕</button>
+   180|      <h3>📞 Solicitar contacto</h3>
+   181|      <p style="color:#666;margin-bottom:1rem">Un técnico de tu zona te llamará en menos de 24h</p>
+   182|      <div class="form-group">
+   183|        <label for="lead-nombre">Nombre *</label>
+   184|        <input type="text" id="lead-nombre" placeholder="Tu nombre completo" required>
+   185|      </div>
+   186|      <div class="form-group">
+   187|        <label for="lead-telefono">Teléfono *</label>
+   188|        <input type="tel" id="lead-telefono" placeholder="Ej: 612345678" required>
+   189|      </div>
+   190|      <div class="form-group">
+   191|        <label for="lead-email">Email (opcional)</label>
+   192|        <input type="email" id="lead-email" placeholder="tu@email.com">
+   193|      </div>
+   194|      <button class="btn btn-green btn-full" id="lead-btn" onclick="confirmarLead()">
+   195|        Solicitar contacto →
+   196|      </button>
+   197|    </div>
+   198|  </div>
+   199|
+   200|</body>
+   201|</html>
+   202|
