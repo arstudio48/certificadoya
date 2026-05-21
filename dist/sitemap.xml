@@ -1,8 +1,25 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url><loc>https://www.certificadoya.es/</loc><changefreq>weekly</changefreq><priority>1.0</priority></url>
-  <url><loc>https://www.certificadoya.es/organismos-contacto.html</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
-  <url><loc>https://www.certificadoya.es/blog/</loc><changefreq>weekly</changefreq><priority>0.9</priority></url>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
+  <url>
+    <loc>https://www.certificadoya.es/</loc>
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+    <image:image>
+      <image:loc>https://www.certificadoya.es/img/og-image.png</image:loc>
+      <image:title>CertificadoYa — Certificado Energético Rápido</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://www.certificadoya.es/organismos-contacto.html</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://www.certificadoya.es/blog/</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
   <!-- Provincias -->
   <url><loc>https://www.certificadoya.es/certificado-energetico-madrid/</loc><priority>0.8</priority></url>
   <url><loc>https://www.certificadoya.es/certificado-energetico-barcelona/</loc><priority>0.8</priority></url>
@@ -29,17 +46,62 @@
   <url><loc>https://www.certificadoya.es/certificado-energetico-caceres/</loc><priority>0.6</priority></url>
   <url><loc>https://www.certificadoya.es/certificado-energetico-badajoz/</loc><priority>0.6</priority></url>
   <!-- Blog -->
-  <url><loc>https://www.certificadoya.es/blog/que-es-certificado-energetico.html</loc><priority>0.8</priority></url>
-  <url><loc>https://www.certificadoya.es/blog/precio-certificado-energetico-2026.html</loc><priority>0.8</priority></url>
-  <url><loc>https://www.certificadoya.es/blog/mejorar-eficiencia-energetica-vivienda.html</loc><priority>0.8</priority></url>
-  <url><loc>https://www.certificadoya.es/blog/certificado-energetico-alquiler.html</loc><priority>0.7</priority></url>
-  <url><loc>https://www.certificadoya.es/blog/normativa-certificacion-energetica-espana.html</loc><priority>0.7</priority></url>
-  <url><loc>https://www.certificadoya.es/blog/aerotermia-certificado-energetico.html</loc><priority>0.7</priority></url>
-  <url><loc>https://www.certificadoya.es/blog/placas-solares-certificado-energetico.html</loc><priority>0.7</priority></url>
-  <url><loc>https://www.certificadoya.es/blog/certificado-energetico-venta.html</loc><priority>0.7</priority></url>
-  <url><loc>https://www.certificadoya.es/blog/rehabilitacion-energetica-edificios.html</loc><priority>0.7</priority></url>
-  <url><loc>https://www.certificadoya.es/blog/etiqueta-energetica-edificios.html</loc><priority>0.7</priority></url>
-  <url><loc>https://www.certificadoya.es/blog/rd-659-2025-fp-superior-certificado-energetico.html</loc><priority>0.8</priority></url>
+  <url>
+    <loc>https://www.certificadoya.es/blog/que-es-certificado-energetico.html</loc>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.certificadoya.es/blog/precio-certificado-energetico-2026.html</loc>
+    <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://www.certificadoya.es/img/blog/precio-certificado-energetico-2026.jpg</image:loc>
+      <image:title>Guía de precios del certificado energético 2026</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://www.certificadoya.es/blog/mejorar-eficiencia-energetica-vivienda.html</loc>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.certificadoya.es/blog/certificado-energetico-alquiler.html</loc>
+    <priority>0.7</priority>
+    <image:image>
+      <image:loc>https://www.certificadoya.es/img/blog/certificado-energetico-alquiler.jpg</image:loc>
+      <image:title>Certificado energético para alquiler</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://www.certificadoya.es/blog/normativa-certificacion-energetica-espana.html</loc>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://www.certificadoya.es/blog/aerotermia-certificado-energetico.html</loc>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://www.certificadoya.es/blog/placas-solares-certificado-energetico.html</loc>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://www.certificadoya.es/blog/certificado-energetico-venta.html</loc>
+    <priority>0.7</priority>
+    <image:image>
+      <image:loc>https://www.certificadoya.es/img/blog/certificado-energetico-venta.jpg</image:loc>
+      <image:title>Certificado energético para venta de vivienda</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://www.certificadoya.es/blog/rehabilitacion-energetica-edificios.html</loc>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://www.certificadoya.es/blog/etiqueta-energetica-edificios.html</loc>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://www.certificadoya.es/blog/rd-659-2025-fp-superior-certificado-energetico.html</loc>
+    <priority>0.8</priority>
+  </url>
   <!-- Legal -->
   <url><loc>https://www.certificadoya.es/legal/aviso-legal</loc><priority>0.3</priority></url>
   <url><loc>https://www.certificadoya.es/legal/privacidad</loc><priority>0.3</priority></url>
