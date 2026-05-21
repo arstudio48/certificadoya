@@ -20,6 +20,9 @@
   <meta name="twitter:title" content="Certificado Energético en Bizkaia — Desde 48€">
   <meta name="twitter:description" content="Técnicos verificados en Bilbao y provincia. Presupuesto al instante.">
   <meta name="twitter:image" content="https://www.certificadoya.es/img/og-image.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   <link rel="preload" href="/css/style.css" as="style">
   <link rel="stylesheet" href="/css/style.css">
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⚡</text></svg>">
@@ -129,14 +132,24 @@
 </head>
 <body>
 
-  <nav>
-    <a href="/" class="logo">⚡ Certificado<span>Ya</span></a>
-    <div class="nav-links">
+  <header class="header">
+  <div class="header-inner">
+    <a href="/" class="logo">
+      <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <rect width="32" height="32" rx="6" fill="#547c24"/>
+        <text x="16" y="23" text-anchor="middle" fill="white" font-size="20" font-weight="700" font-family="Montserrat,sans-serif">C</text>
+      </svg>
+      <span class="logo-text">Certificado<span class="logo-highlight">Ya</span></span>
+    </a>
+    <nav class="nav">
+      <a href="#como-funciona">Cómo funciona</a>
+      <a href="#faq">FAQ</a>
       <a href="/blog/">Blog</a>
-      <a href="/#faq">FAQ</a>
       <a href="/panel-tecnicos.html">¿Eres técnico?</a>
-    </div>
-  </nav>
+      <a href="#presupuesto" class="btn-nav">Presupuesto</a>
+    </nav>
+  </div>
+</header>
 
   <div class="breadcrumb">
     <a href="/">Inicio</a> › Certificado energético en Bizkaia
@@ -233,15 +246,27 @@
     <a href="#presupuesto-card" class="btn btn-white">Calcular presupuesto ahora ⚡</a>
   </div>
 
-  <footer>
-    <p>© 2026 <strong>CertificadoYa</strong> — Certificados Energéticos en Bizkaia y toda España</p>
-    <p style="margin-top:.5rem">
-      <a href="/legal/aviso-legal">Aviso legal</a> ·
-      <a href="/legal/privacidad">Privacidad</a> ·
-      <a href="/legal/cookies">Cookies</a> ·
+  <footer class="footer-v2">
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <span class="footer-logo">CertificadoYa</span>
+      <p>Certificados de eficiencia energética (CEE) en toda España. Técnicos colegiados verificados. Presupuesto instantáneo.</p>
+    </div>
+    <div class="footer-links">
+      <strong>Enlaces</strong>
       <a href="/blog/">Blog</a>
-    </p>
-  </footer>
+      <a href="/organismos-contacto.html">Organismos oficiales</a>
+      <a href="/panel-tecnicos.html">¿Eres técnico?</a>
+    </div>
+    <div class="footer-links">
+      <strong>Legal</strong>
+      <a href="/legal/aviso-legal.html">Aviso legal</a>
+      <a href="/legal/privacidad.html">Privacidad</a>
+      <a href="/legal/cookies.html">Cookies</a>
+    </div>
+  </div>
+  <p class="footer-bottom">© 2026 CertificadoYa — ArtStudio-CEE</p>
+</footer>
 
   <script>
     function validarCP() {
