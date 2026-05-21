@@ -51,6 +51,7 @@ body {
 .nav { display:flex; align-items:center; gap:1.5rem; }
 .nav a { text-decoration:none; color:var(--text); font-size:.9rem; font-weight:500; transition:color .15s; }
 .nav a:hover { color:var(--primary); }
+.nav a.active { color:var(--primary); font-weight:600; border-bottom:2px solid var(--primary); padding-bottom:.15rem; }
 .btn-nav {
   background:var(--accent); color:white !important; padding:.55rem 1.2rem; border-radius:var(--radius-sm);
   font-weight:600; font-size:.85rem; transition:background .15s;
