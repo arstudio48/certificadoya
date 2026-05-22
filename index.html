@@ -108,6 +108,60 @@
       <a href="#faq">FAQ</a>
       <a href="/blog/">Blog</a>
       <a href="/panel-tecnicos.html">¿Eres técnico?</a>
+      <select id="provincia-selector" class="provincia-selector" onchange="cambiarProvincia()">
+                  <option value="">Seleccionar provincia...</option>option>
+                  <option value="alava">Álava</option>option>
+                  <option value="albacete">Albacete</option>option>
+                  <option value="alicante">Alicante</option>option>
+                  <option value="almeria">Almería</option>option>
+                  <option value="asturias">Asturias</option>option>
+                  <option value="avila">Ávila</option>option>
+                  <option value="badajoz">Badajoz</option>option>
+                  <option value="baleares">Baleares</option>option>
+                  <option value="barcelona">Barcelona</option>option>
+                  <option value="burgos">Burgos</option>option>
+                  <option value="caceres">Cáceres</option>option>
+                  <option value="cadiz">Cádiz</option>option>
+                  <option value="cantabria">Cantabria</option>option>
+                  <option value="castellon">Castellón</option>option>
+                  <option value="ceuta">Ceuta</option>option>
+                  <option value="ciudad-real">Ciudad Real</option>option>
+                  <option value="cordoba">Córdoba</option>option>
+                  <option value="coruna">La Coruña</option>option>
+                  <option value="cuenca">Cuenca</option>option>
+                  <option value="guipuzcoa">Guipúzcoa</option>option>
+                  <option value="girona">Girona</option>option>
+                  <option value="granada">Granada</option>option>
+                  <option value="guadalajara">Guadalajara</option>option>
+                  <option value="huelva">Huelva</option>option>
+                  <option value="huesca">Huesca</option>option>
+                  <option value="jaen">Jaén</option>option>
+                  <option value="leon">León</option>option>
+                  <option value="lleida">Lleida</option>option>
+                  <option value="lugo">Lugo</option>option>
+                  <option value="madrid">Madrid</option>option>
+                  <option value="malaga">Málaga</option>option>
+                  <option value="melilla">Melilla</option>option>
+                  <option value="murcia">Murcia</option>option>
+                  <option value="navarra">Navarra</option>option>
+                  <option value="ourense">Ourense</option>option>
+                  <option value="palencia">Palencia</option>option>
+                  <option value="palmas">Las Palmas</option>option>
+                  <option value="pontevedra">Pontevedra</option>option>
+                  <option value="la-rioja">La Rioja</option>option>
+                  <option value="salamanca">Salamanca</option>option>
+                  <option value="segovia">Segovia</option>option>
+                  <option value="sevilla">Sevilla</option>option>
+                  <option value="soria">Soria</option>option>
+                  <option value="tarragona">Tarragona</option>option>
+                  <option value="teruel">Teruel</option>option>
+                  <option value="toledo">Toledo</option>option>
+                  <option value="valencia">Valencia</option>option>
+                  <option value="valladolid">Valladolid</option>option>
+                  <option value="vizcaya">Vizcaya</option>option>
+                  <option value="zamora">Zamora</option>option>
+                  <option value="zaragoza">Zaragoza</option>option>
+      </select>select>
       <a href="#presupuesto" class="btn-nav">Presupuesto</a>
     </nav>
   </div>
@@ -331,4 +385,5 @@
 
 <script src="/js/main.js"></script>
 </body>
+  <style>.provincia-selector {padding: 8px 12px; border: 1px solid #ccc; border-radius: 4px; font-size: 14px; background: white; cursor: pointer; margin-right: 10px;}</style><script>function cambiarProvincia() { let provincia = document.getElementById('provincia-selector').value; if(provincia) { window.location.href = '/certificado-energetico-' + provincia + '/'; } }</script></script></style>
 </html>
