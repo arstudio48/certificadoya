@@ -2,4 +2,4 @@ User-agent: *
 Allow: /
 Disallow: /panel-tecnicos.html
 
-Sitemap: https://certificadoya.es/sitemap.xml
+Sitemap: https://www.certificadoya.es/sitemap.xml
