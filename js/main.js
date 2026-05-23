@@ -194,21 +194,8 @@ function calcularPresupuesto() {
   precioRango.textContent = `${precioMin}€ – ${precioMax}€`;
   precioTexto.textContent = `Precio estimado para ${zona.ciudad} (${m2} m²). El técnico te dará el precio exacto tras evaluar tu inmueble.`;
   
-  // Redirigir a la página de la provincia si existe
-  const prefijoCp = cp.substring(0, 2);
-  const provinciaData = CP_A_PROVINCIA[prefijoCp];
-  if (provinciaData) {
-    precioTexto.innerHTML += `<br><br><span style="color:#547c24;font-weight:500">Redirigiendo a ${provinciaData.nombre}...</span>`;
-    resultadoBox.classList.add('visible');
-    resultadoBox.scrollIntoView({ behavior: 'smooth', block: 'center' });
-    // Redirigir tras breve pausa para que el usuario vea el precio
-    setTimeout(() => {
-      window.location.href = `/certificado-energetico-${provinciaData.slug}/`;
-    }, 2000);
-  } else {
-    resultadoBox.classList.add('visible');
-    resultadoBox.scrollIntoView({ behavior: 'smooth', block: 'center' });
-  }
+  resultadoBox.classList.add('visible');
+  resultadoBox.scrollIntoView({ behavior: 'smooth', block: 'center' });
 
   // Guardar datos para el lead
   window._presupuesto = { cp, m2, precioMin, precioMax, zona: zona.ciudad };
