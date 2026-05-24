@@ -78,32 +78,61 @@ const PRECIOS_ZONA = {
 
 // ============================================================
 // MAPEO CP → PROVINCIA (para redirigir al calcular presupuesto)
-// ============================================================
+// MAPEO CP → PROVINCIA (para redirigir al calcular presupuesto)
+// Los primeros 2 dígitos del CP identifican la provincia
 const CP_A_PROVINCIA = {
+  '01': { slug: 'alava', nombre: 'Álava' },
+  '02': { slug: 'albacete', nombre: 'Albacete' },
   '03': { slug: 'alicante', nombre: 'Alicante' },
+  '04': { slug: 'almeria', nombre: 'Almería' },
+  '05': { slug: 'avila', nombre: 'Ávila' },
   '06': { slug: 'badajoz', nombre: 'Badajoz' },
   '07': { slug: 'baleares', nombre: 'Baleares' },
   '08': { slug: 'barcelona', nombre: 'Barcelona' },
+  '09': { slug: 'burgos', nombre: 'Burgos' },
   '10': { slug: 'caceres', nombre: 'Cáceres' },
   '11': { slug: 'cadiz', nombre: 'Cádiz' },
+  '12': { slug: 'castellon', nombre: 'Castellón' },
+  '13': { slug: 'ciudad-real', nombre: 'Ciudad Real' },
+  '14': { slug: 'cordoba', nombre: 'Córdoba' },
   '15': { slug: 'a-coruna', nombre: 'A Coruña' },
+  '16': { slug: 'cuenca', nombre: 'Cuenca' },
+  '17': { slug: 'girona', nombre: 'Girona' },
   '18': { slug: 'granada', nombre: 'Granada' },
+  '19': { slug: 'guadalajara', nombre: 'Guadalajara' },
   '20': { slug: 'gipuzkoa', nombre: 'Gipuzkoa' },
+  '21': { slug: 'huelva', nombre: 'Huelva' },
+  '22': { slug: 'huesca', nombre: 'Huesca' },
+  '23': { slug: 'jaen', nombre: 'Jaén' },
   '24': { slug: 'leon', nombre: 'León' },
+  '25': { slug: 'lleida', nombre: 'Lleida' },
   '26': { slug: 'la-rioja', nombre: 'La Rioja' },
+  '27': { slug: 'lugo', nombre: 'Lugo' },
   '28': { slug: 'madrid', nombre: 'Madrid' },
   '29': { slug: 'malaga', nombre: 'Málaga' },
   '30': { slug: 'murcia', nombre: 'Murcia' },
+  '31': { slug: 'navarra', nombre: 'Navarra' },
+  '32': { slug: 'ourense', nombre: 'Ourense' },
   '33': { slug: 'asturias', nombre: 'Asturias' },
+  '34': { slug: 'palencia', nombre: 'Palencia' },
   '35': { slug: 'las-palmas', nombre: 'Las Palmas' },
+  '36': { slug: 'pontevedra', nombre: 'Pontevedra' },
   '37': { slug: 'salamanca', nombre: 'Salamanca' },
   '38': { slug: 'tenerife', nombre: 'Tenerife' },
   '39': { slug: 'cantabria', nombre: 'Cantabria' },
+  '40': { slug: 'segovia', nombre: 'Segovia' },
   '41': { slug: 'sevilla', nombre: 'Sevilla' },
+  '42': { slug: 'soria', nombre: 'Soria' },
+  '43': { slug: 'tarragona', nombre: 'Tarragona' },
+  '44': { slug: 'teruel', nombre: 'Teruel' },
+  '45': { slug: 'toledo', nombre: 'Toledo' },
   '46': { slug: 'valencia', nombre: 'Valencia' },
   '47': { slug: 'valladolid', nombre: 'Valladolid' },
   '48': { slug: 'bizkaia', nombre: 'Bizkaia' },
+  '49': { slug: 'zamora', nombre: 'Zamora' },
   '50': { slug: 'zaragoza', nombre: 'Zaragoza' },
+  '51': { slug: 'ceuta', nombre: 'Ceuta' },
+  '52': { slug: 'melilla', nombre: 'Melilla' },
 };
 
 // Precio por defecto para el resto de España
@@ -163,6 +192,7 @@ function validarM2() {
 function calcularPresupuesto() {
   const cpInput = document.getElementById('cp');
   const m2Input = document.getElementById('m2');
+  const tipoSelect = document.getElementById('tipo');
   const resultadoBox = document.getElementById('resultado');
   const precioRango = document.getElementById('precio-rango');
   const precioTexto = document.getElementById('precio-texto');
@@ -189,20 +219,21 @@ function calcularPresupuesto() {
   const zona = obtenerPrecioZona(cp);
   const precioMin = Math.round(m2 * zona.min);
   const precioMax = Math.round(m2 * zona.max);
+  const tipo = tipoSelect ? tipoSelect.value : 'piso';
 
   // Mostrar resultado
   precioRango.textContent = `${precioMin}€ – ${precioMax}€`;
-  precioTexto.textContent = `Precio estimado para ${zona.ciudad} (${m2} m²). El técnico te dará el precio exacto tras evaluar tu inmueble.`;
+  precioTexto.textContent = `Precio estimado para ${zona.ciudad} (${m2} m², ${tipo}). El técnico te dará el precio exacto tras evaluar tu inmueble.`;
   
   resultadoBox.classList.add('visible');
   resultadoBox.scrollIntoView({ behavior: 'smooth', block: 'center' });
 
   // Guardar datos para el lead
-  window._presupuesto = { cp, m2, precioMin, precioMax, zona: zona.ciudad };
+  window._presupuesto = { cp, m2, precioMin, precioMax, zona: zona.ciudad, tipo: tipo };
 }
 
 // ============================================================
-// SOLICITAR LEAD (mostrar formulario modal)
+// SOLICITAR LEAD → REDIRIGIR A PÁGINA DE PROVINCIA
 // ============================================================
 function solicitarLead() {
   const presupuesto = window._presupuesto;
@@ -211,9 +242,26 @@ function solicitarLead() {
     return;
   }
 
-  window._tipoInmueble = document.getElementById('tipo').value;
-  document.getElementById('lead-modal').classList.add('visible');
-  document.getElementById('lead-nombre').focus();
+  // Obtener provincia del código postal
+  const cpPrefix = presupuesto.cp.substring(0, 2);
+  const provincia = CP_A_PROVINCIA[cpPrefix];
+  
+  if (provincia) {
+    // Redirigir a la página de provincia con datos en la URL
+    const params = new URLSearchParams({
+      cp: presupuesto.cp,
+      m2: presupuesto.m2,
+      tipo: presupuesto.tipo || 'piso',
+      min: presupuesto.precioMin,
+      max: presupuesto.precioMax
+    });
+    window.location.href = `/certificado-energetico-${provincia.slug}/?${params.toString()}`;
+  } else {
+    // Si no encontramos la provincia, mostrar modal
+    window._tipoInmueble = document.getElementById('tipo').value;
+    document.getElementById('lead-modal').classList.add('visible');
+    document.getElementById('lead-nombre').focus();
+  }
 }
 
 // CERRAR MODAL

@@ -121,16 +121,30 @@ input.error { border-color:#ef4444 !important; background:#fef2f2; }
   display:grid; grid-template-columns:repeat(4, 1fr); gap:1.5rem;
 }
 .paso {
-  padding:2rem 1.25rem; background:var(--white); border:1px solid var(--border); border-radius:var(--radius);
-  transition:box-shadow .2s;
+  position:relative; padding:2rem 1.25rem; background:var(--white);
+  border:1px solid var(--border); border-radius:var(--radius);
+  transition:box-shadow .2s; overflow:hidden; min-height:200px;
+  display:flex; flex-direction:column; align-items:center; justify-content:center;
 }
+.paso::before {
+  content:''; position:absolute; inset:0;
+  background-size:cover; background-position:center; opacity:0.12;
+  z-index:0; transition:opacity .3s;
+}
+.paso:hover::before { opacity:0.2; }
 .paso:hover { box-shadow:var(--shadow-md); }
+.paso > * { position:relative; z-index:1; }
 .paso-num {
   width:40px; height:40px; border-radius:50%; background:var(--bg-green); color:var(--primary);
   display:flex; align-items:center; justify-content:center; font-weight:700; font-size:1.1rem; margin:0 auto .75rem;
 }
 .paso h4 { font-size:1rem; font-weight:700; margin-bottom:.35rem; }
 .paso p { font-size:.85rem; color:var(--text-light); line-height:1.5; }
+
+.paso-1::before { background-image:url('/img/pasos/paso01-calcula.jpg'); }
+.paso-2::before { background-image:url('/img/pasos/paso02-contacto.jpg'); }
+.paso-3::before { background-image:url('/img/pasos/paso03-visita.jpg'); }
+.paso-4::before { background-image:url('/img/pasos/paso04-certificado.jpg'); }
 
 /* ====== PROVINCIAS ====== */
 .provincias-section-v2 {
