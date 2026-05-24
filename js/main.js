@@ -281,6 +281,9 @@ async function confirmarLead() {
         name: nombre,
         email: email,
         phone: telefono,
+        m2: presupuesto.m2,
+        tipo: presupuesto.tipo,
+        cp: presupuesto.cp,
         description: `${presupuesto.tipo} de ${presupuesto.m2} m² en ${presupuesto.zona} (CP: ${presupuesto.cp})`
       })
     });
