@@ -1,0 +1,24 @@
+{
+  "name": "certificadoya",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://arstudio48: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@github.com/arstudio48/certificadoya.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/arstudio48/certificadoya/issues"
+  },
+  "homepage": "https://github.com/arstudio48/certificadoya#readme",
+  "dependencies": {
+    "@supabase/supabase-js": "^2.106.1",
+    "stripe": "^22.1.1"
+  }
+}
