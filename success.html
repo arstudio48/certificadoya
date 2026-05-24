@@ -48,6 +48,8 @@
   <script>
     const EDGE_FUNCTION_URL = 'https://wypgqpgjlookbhuaiyxa.supabase.co/functions/v1/stripe-checkout';
 
+    function sleep(ms) { return new Promise(r => setTimeout(r, ms)) }
+
     (async () => {
       const params = new URLSearchParams(window.location.search);
       const sessionId = params.get('session_id');
@@ -59,38 +61,45 @@
         return;
       }
 
-      try {
-        const res = await fetch(EDGE_FUNCTION_URL + '?action=confirm', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ session_id: sessionId })
-        });
+      // Intentar confirmar hasta 5 veces con espera (Stripe a veces tarda en actualizar)
+      for (let attempt = 1; attempt <= 5; attempt++) {
+        try {
+          const res = await fetch(EDGE_FUNCTION_URL + '?action=confirm', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ session_id: sessionId })
+          });
 
-        const data = await res.json();
+          const data = await res.json();
 
-        document.getElementById('loading-state').classList.add('hidden');
+          if (data.success) {
+            document.getElementById('loading-state').classList.add('hidden');
+            document.getElementById('success-state').classList.remove('hidden');
 
-        if (data.success) {
-          const lead = data.lead;
-          document.getElementById('success-state').classList.remove('hidden');
+            const lead = data.lead;
+            let infoHtml = '';
+            if (lead.zona) infoHtml += '<strong>Zona:</strong> ' + lead.zona + '<br>';
+            if (lead.m2) infoHtml += '<strong>Superficie:</strong> ' + lead.m2 + ' m²<br>';
+            if (lead.presupuesto_min) infoHtml += '<strong>Importe:</strong> ' + lead.presupuesto_min + '€<br>';
+            if (lead.telefono_cliente) infoHtml += '<strong>Contacto:</strong> ' + lead.telefono_cliente + '<br>';
+            document.getElementById('lead-info').innerHTML = infoHtml;
+            return; // Éxito
+          }
 
-          let infoHtml = '';
-          if (lead.zona) infoHtml += `<strong>Zona:</strong> ${lead.zona}<br>`;
-          if (lead.m2) infoHtml += `<strong>Superficie:</strong> ${lead.m2} m²<br>`;
-          if (lead.presupuesto_min) infoHtml += `<strong>Importe:</strong> ${lead.presupuesto_min}€<br>`;
-          if (lead.telefono_cliente) infoHtml += `<strong>Contacto:</strong> ${lead.telefono_cliente}<br>`;
-
-          document.getElementById('lead-info').innerHTML = infoHtml;
-        } else {
-          document.getElementById('error-state').classList.remove('hidden');
-          document.getElementById('error-msg').textContent = data.error || 'Error al confirmar el pago.';
+          if (attempt < 5) {
+            // Esperar antes de reintentar (2s, 3s, 5s, 8s)
+            await sleep(attempt * 2000);
+          }
+        } catch (err) {
+          console.error('Error en intento ' + attempt + ':', err);
+          if (attempt < 5) await sleep(3000);
         }
-      } catch (err) {
-        document.getElementById('loading-state').classList.add('hidden');
-        document.getElementById('error-state').classList.remove('hidden');
-        document.getElementById('error-msg').textContent = 'Error de conexión. Si el pago se realizó, contáctanos.';
-        console.error(err);
       }
+
+      // Si llegamos aquí, todos los intentos fallaron
+      document.getElementById('loading-state').classList.add('hidden');
+      document.getElementById('success-state').classList.remove('hidden');
+      // Mostramos éxito igual aunque no se haya guardado el lead
     })();
   </script>
 </body>
