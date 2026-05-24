@@ -1,0 +1,12 @@
+[build]
+  functions = "netlify/functions"
+
+[[redirects]]
+  from = "/tecnicos"
+  to = "/panel-tecnicos.html"
+  status = 200
+
+[[redirects]]
+  from = "/tecnicos/*"
+  to = "/panel-tecnicos.html"
+  status = 200

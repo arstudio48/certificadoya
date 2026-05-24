@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Pago recibido — CertificadoYa</title>
+  <meta name="robots" content="noindex">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/css/style.css">
+  <style>
+    .success-page { min-height: 80vh; display: flex; align-items: center; justify-content: center; padding: 2rem; background: #f7f9f6; }
+    .success-card { background: white; border-radius: 16px; padding: 3rem; max-width: 480px; text-align: center; box-shadow: 0 4px 30px rgba(0,0,0,.08); }
+    .success-icon { font-size: 4rem; margin-bottom: 1rem; }
+    .success-card h1 { color: #2d3a1f; font-size: 1.5rem; margin-bottom: .75rem; }
+    .success-card p { color: #6b7b5e; font-size: .92rem; line-height: 1.6; margin-bottom: .5rem; }
+    .success-card .highlight { color: #547c24; font-weight: 600; }
+  </style>
+</head>
+<body>
+<header class="header">
+  <div class="header-inner">
+    <a href="/" class="logo">
+      <svg width="32" height="32" viewBox="0 0 32 32" fill="none"><rect width="32" height="32" rx="6" fill="#547c24"/><text x="16" y="23" text-anchor="middle" fill="white" font-size="20" font-weight="700" font-family="Montserrat,sans-serif">C</text></svg>
+      <span class="logo-text">Certificado<span class="logo-highlight">Ya</span></span>
+    </a>
+  </div>
+</header>
+<main class="success-page">
+  <div class="success-card">
+    <div class="success-icon">✅</div>
+    <h1>¡Pago recibido!</h1>
+    <p>Tu solicitud de certificado energético está siendo procesada.</p>
+    <p>En menos de <span class="highlight">24 horas</span> un técnico de tu zona se pondrá en contacto contigo al teléfono que nos indicaste.</p>
+    <p style="margin-top:1.5rem;font-size:.82rem;color:#9aab8a">¿Dudas? Escríbenos a <a href="mailto:info@certificadoya.es">info@certificadoya.es</a></p>
+  </div>
+</main>
+<script>
+  // Opcional: registrar la conversión en analytics
+  const params = new URLSearchParams(window.location.search);
+  const sessionId = params.get('session_id');
+  if (sessionId) {
+    console.log('Stripe session:', sessionId);
+  }
+</script>
+</body>
+</html>
