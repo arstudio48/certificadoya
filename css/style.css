@@ -46,7 +46,9 @@ body {
 }
 .logo { display:flex; align-items:center; gap:.65rem; text-decoration:none; }
 .logo svg { flex-shrink:0; }
+.logo-text-wrap { display:flex; flex-direction:column; line-height:1.15; }
 .logo-text { font-size:1.3rem; font-weight:700; color:var(--text); letter-spacing:-.02em; }
+.logo-sub { font-size:.62rem; color:var(--text-muted); font-weight:400; letter-spacing:0; white-space:nowrap; }
 .logo-highlight { color:var(--primary); }
 .nav { display:flex; align-items:center; gap:1.5rem; }
 .nav a { text-decoration:none; color:var(--text); font-size:.9rem; font-weight:500; transition:color .15s; }
@@ -57,6 +59,19 @@ body {
   font-weight:600; font-size:.85rem; transition:background .15s;
 }
 .btn-nav:hover { background:var(--accent-dark); }
+
+.provincia-selector {
+  padding:.5rem 2rem .5rem .8rem;
+  border:2px solid var(--border-light);
+  border-radius:var(--radius-sm);
+  font-size:.85rem;
+  background:var(--white) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='%23547c24'%3E%3Cpath d='M7 10l5 5 5-5z'/%3E%3C/svg%3E") no-repeat right .5rem center;
+  -webkit-appearance:none; -moz-appearance:none; appearance:none;
+  cursor:pointer; transition:border-color .15s,box-shadow .15s;
+  color:var(--text); font-weight:500;
+}
+.provincia-selector:hover { border-color:var(--primary); }
+.provincia-selector:focus { border-color:var(--primary); outline:none; box-shadow:0 0 0 3px rgba(84,124,36,.15); }
 
 /* ====== HERO ====== */
 .hero-new {
