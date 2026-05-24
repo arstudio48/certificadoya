@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 140 140" fill="none">
+  <defs>
+    <filter id="lapiz" x="-10%" y="-10%" width="120%" height="120%">
+      <feTurbulence type="fractalNoise" baseFrequency="0.8" numOctaves="3" result="noise"/>
+      <feDisplacementMap in="SourceGraphic" in2="noise" scale="2.5" xChannelSelector="R" yChannelSelector="G"/>
+    </filter>
+    <filter id="lapiz-suave" x="-10%" y="-10%" width="120%" height="120%">
+      <feTurbulence type="fractalNoise" baseFrequency="0.5" numOctaves="2" result="noise"/>
+      <feDisplacementMap in="SourceGraphic" in2="noise" scale="1.5" xChannelSelector="R" yChannelSelector="G"/>
+    </filter>
+  </defs>
+  <!-- Reloj -->
+  <circle cx="70" cy="66" r="32" stroke="#2a2a2a" stroke-width="1.8" fill="none" filter="url(#lapiz)"/>
+  <circle cx="70" cy="66" r="32" stroke="#2a2a2a" stroke-width="0.7" fill="none" opacity="0.3" transform="translate(0.3,0.2)" filter="url(#lapiz)"/>
+  <circle cx="70" cy="66" r="2.5" fill="#2a2a2a"/>
+  <!-- Manecillas -->
+  <line x1="70" y1="66" x2="70" y2="46" stroke="#2a2a2a" stroke-width="2.2" stroke-linecap="round" filter="url(#lapiz)"/>
+  <line x1="70" y1="66" x2="88" y2="66" stroke="#2a2a2a" stroke-width="1.4" stroke-linecap="round" filter="url(#lapiz)"/>
+  <!-- Flecha de rapidez -->
+  <path d="M18 44 L34 40 M26 38 L34 40 L30 48" stroke="#2a2a2a" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" fill="none" filter="url(#lapiz)"/>
+  <!-- Estela de velocidad -->
+  <path d="M34 40 Q44 40 48 44" stroke="#2a2a2a" stroke-width="1" stroke-linecap="round" fill="none" opacity="0.3" filter="url(#lapiz-suave)"/>
+</svg>

@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 140 140" fill="none">
+  <defs>
+    <filter id="lapiz" x="-10%" y="-10%" width="120%" height="120%">
+      <feTurbulence type="fractalNoise" baseFrequency="0.8" numOctaves="3" result="noise"/>
+      <feDisplacementMap in="SourceGraphic" in2="noise" scale="2.5" xChannelSelector="R" yChannelSelector="G"/>
+    </filter>
+    <filter id="lapiz-suave" x="-10%" y="-10%" width="120%" height="120%">
+      <feTurbulence type="fractalNoise" baseFrequency="0.5" numOctaves="2" result="noise"/>
+      <feDisplacementMap in="SourceGraphic" in2="noise" scale="1.5" xChannelSelector="R" yChannelSelector="G"/>
+    </filter>
+  </defs>
+  <!-- Portapapeles -->
+  <rect x="34" y="22" width="72" height="96" rx="4" stroke="#2a2a2a" stroke-width="1.8" fill="none" filter="url(#lapiz)"/>
+  <rect x="34" y="22" width="72" height="96" rx="4" stroke="#2a2a2a" stroke-width="0.7" fill="none" opacity="0.35" transform="translate(-0.2,0.3)"/>
+  <!-- Clip -->
+  <path d="M48 22 V14 Q48 8 70 8 Q92 8 92 14 V22" stroke="#2a2a2a" stroke-width="1.8" stroke-linecap="round" fill="none" filter="url(#lapiz)"/>
+  <!-- Líneas de formulario -->
+  <line x1="46" y1="38" x2="94" y2="38" stroke="#2a2a2a" stroke-width="1.2" stroke-linecap="round" opacity="0.3" filter="url(#lapiz)"/>
+  <line x1="46" y1="50" x2="82" y2="50" stroke="#2a2a2a" stroke-width="1.2" stroke-linecap="round" opacity="0.3" filter="url(#lapiz)"/>
+  <line x1="46" y1="62" x2="88" y2="62" stroke="#2a2a2a" stroke-width="1.2" stroke-linecap="round" opacity="0.3" filter="url(#lapiz)"/>
+  <!-- Check grande -->
+  <path d="M52 82 L64 96 L90 66" stroke="#2a2a2a" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" fill="none" filter="url(#lapiz)"/>
+  <path d="M52 82 L64 96 L90 66" stroke="#2a2a2a" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" opacity="0.3" transform="translate(0.5,-0.3)"/>
+</svg>

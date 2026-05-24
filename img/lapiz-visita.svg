@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 140 140" fill="none">
+  <defs>
+    <filter id="lapiz" x="-10%" y="-10%" width="120%" height="120%">
+      <feTurbulence type="fractalNoise" baseFrequency="0.8" numOctaves="3" result="noise"/>
+      <feDisplacementMap in="SourceGraphic" in2="noise" scale="2.5" xChannelSelector="R" yChannelSelector="G"/>
+    </filter>
+    <filter id="lapiz-suave" x="-10%" y="-10%" width="120%" height="120%">
+      <feTurbulence type="fractalNoise" baseFrequency="0.5" numOctaves="2" result="noise"/>
+      <feDisplacementMap in="SourceGraphic" in2="noise" scale="1.5" xChannelSelector="R" yChannelSelector="G"/>
+    </filter>
+  </defs>
+  <!-- Casa -->
+  <path d="M26 74 L70 34 L114 74" stroke="#2a2a2a" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" fill="none" filter="url(#lapiz)"/>
+  <rect x="40" y="70" width="60" height="46" rx="1" stroke="#2a2a2a" stroke-width="1.8" fill="none" filter="url(#lapiz)"/>
+  <rect x="58" y="90" width="24" height="26" rx="1" stroke="#2a2a2a" stroke-width="1.6" fill="none" filter="url(#lapiz)"/>
+  <!-- Pin de mapa -->
+  <ellipse cx="100" cy="46" rx="10" ry="14" stroke="#2a2a2a" stroke-width="1.8" fill="none" filter="url(#lapiz)"/>
+  <path d="M100 60 L100 100" stroke="#2a2a2a" stroke-width="1.8" stroke-linecap="round" fill="none" filter="url(#lapiz)"/>
+  <circle cx="100" cy="46" r="5" stroke="#2a2a2a" stroke-width="1.2" fill="none" filter="url(#lapiz-suave)"/>
+  <!-- Trayectoria -->
+  <path d="M108 36 Q116 28 124 28" stroke="#2a2a2a" stroke-width="1.4" stroke-linecap="round" fill="none" opacity="0.4" filter="url(#lapiz)"/>
+  <path d="M118 24 L124 28 L118 32" stroke="#2a2a2a" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" fill="none" opacity="0.4" filter="url(#lapiz)"/>
+</svg>

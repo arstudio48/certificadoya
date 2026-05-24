@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 140 140" fill="none">
+  <defs>
+    <filter id="lapiz" x="-10%" y="-10%" width="120%" height="120%">
+      <feTurbulence type="fractalNoise" baseFrequency="0.8" numOctaves="3" result="noise"/>
+      <feDisplacementMap in="SourceGraphic" in2="noise" scale="2.5" xChannelSelector="R" yChannelSelector="G"/>
+    </filter>
+    <filter id="lapiz-suave" x="-10%" y="-10%" width="120%" height="120%">
+      <feTurbulence type="fractalNoise" baseFrequency="0.5" numOctaves="2" result="noise"/>
+      <feDisplacementMap in="SourceGraphic" in2="noise" scale="1.5" xChannelSelector="R" yChannelSelector="G"/>
+    </filter>
+  </defs>
+  <!-- Casa - tejado -->
+  <path d="M26 78 L70 36 L114 78" stroke="#2a2a2a" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" filter="url(#lapiz)"/>
+  <path d="M26 78 L70 36 L114 78" stroke="#2a2a2a" stroke-width="0.8" stroke-linecap="round" stroke-linejoin="round" opacity="0.4" transform="translate(0.5,0.3)"/>
+  <!-- Paredes -->
+  <rect x="38" y="74" width="64" height="46" rx="1" stroke="#2a2a2a" stroke-width="1.8" fill="none" filter="url(#lapiz)"/>
+  <rect x="38" y="74" width="64" height="46" rx="1" stroke="#2a2a2a" stroke-width="0.7" fill="none" opacity="0.35" transform="translate(0.3,-0.2)"/>
+  <!-- Puerta -->
+  <rect x="62" y="94" width="16" height="26" rx="1" stroke="#2a2a2a" stroke-width="1.6" fill="none" filter="url(#lapiz-suave)"/>
+  <!-- Ventana izq -->
+  <rect x="46" y="84" width="10" height="10" rx="0.5" stroke="#2a2a2a" stroke-width="1.4" fill="none" filter="url(#lapiz)"/>
+  <line x1="51" y1="84" x2="51" y2="94" stroke="#2a2a2a" stroke-width="0.8" filter="url(#lapiz-suave)"/>
+  <!-- Ventana dcha -->
+  <rect x="84" y="84" width="10" height="10" rx="0.5" stroke="#2a2a2a" stroke-width="1.4" fill="none" filter="url(#lapiz)"/>
+  <line x1="89" y1="84" x2="89" y2="94" stroke="#2a2a2a" stroke-width="0.8" filter="url(#lapiz-suave)"/>
+  <!-- Etiqueta energética -->
+  <rect x="86" y="26" width="34" height="22" rx="3" stroke="#2a2a2a" stroke-width="1.4" fill="none" filter="url(#lapiz)"/>
+  <rect x="88" y="28" width="30" height="18" rx="2" fill="#2a2a2a" opacity="0.85"/>
+  <line x1="92" y1="34" x2="114" y2="34" stroke="white" stroke-width="1.2" stroke-linecap="round"/>
+  <line x1="92" y1="39" x2="106" y2="39" stroke="white" stroke-width="1.2" stroke-linecap="round"/>
+  <!-- Línea de suelo -->
+  <line x1="22" y1="120" x2="118" y2="120" stroke="#2a2a2a" stroke-width="0.8" opacity="0.25" stroke-linecap="round" filter="url(#lapiz)"/>
+</svg>

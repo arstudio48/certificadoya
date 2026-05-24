@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 140 140" fill="none">
+  <defs>
+    <filter id="lapiz" x="-10%" y="-10%" width="120%" height="120%">
+      <feTurbulence type="fractalNoise" baseFrequency="0.8" numOctaves="3" result="noise"/>
+      <feDisplacementMap in="SourceGraphic" in2="noise" scale="2.5" xChannelSelector="R" yChannelSelector="G"/>
+    </filter>
+    <filter id="lapiz-suave" x="-10%" y="-10%" width="120%" height="120%">
+      <feTurbulence type="fractalNoise" baseFrequency="0.5" numOctaves="2" result="noise"/>
+      <feDisplacementMap in="SourceGraphic" in2="noise" scale="1.5" xChannelSelector="R" yChannelSelector="G"/>
+    </filter>
+  </defs>
+  <!-- Documento -->
+  <rect x="34" y="16" width="72" height="102" rx="3" stroke="#2a2a2a" stroke-width="1.8" fill="none" filter="url(#lapiz)"/>
+  <rect x="34" y="16" width="72" height="102" rx="3" stroke="#2a2a2a" stroke-width="0.7" fill="none" opacity="0.35" transform="translate(-0.2,0.3)"/>
+  <!-- Esquina doblada -->
+  <path d="M88 16 V30 H102" stroke="#2a2a2a" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" fill="none" filter="url(#lapiz)"/>
+  <!-- Líneas de texto -->
+  <line x1="46" y1="38" x2="94" y2="38" stroke="#2a2a2a" stroke-width="1.2" stroke-linecap="round" opacity="0.3" filter="url(#lapiz)"/>
+  <line x1="46" y1="48" x2="84" y2="48" stroke="#2a2a2a" stroke-width="1.2" stroke-linecap="round" opacity="0.3" filter="url(#lapiz)"/>
+  <line x1="46" y1="58" x2="90" y2="58" stroke="#2a2a2a" stroke-width="1.2" stroke-linecap="round" opacity="0.3" filter="url(#lapiz)"/>
+  <!-- Símbolo € -->
+  <circle cx="70" cy="82" r="18" stroke="#2a2a2a" stroke-width="1.8" fill="none" filter="url(#lapiz)"/>
+  <line x1="70" y1="64" x2="70" y2="100" stroke="#2a2a2a" stroke-width="1.8" stroke-linecap="round" filter="url(#lapiz)"/>
+  <line x1="58" y1="76" x2="82" y2="76" stroke="#2a2a2a" stroke-width="1.4" stroke-linecap="round" filter="url(#lapiz)"/>
+  <line x1="58" y1="88" x2="82" y2="88" stroke="#2a2a2a" stroke-width="1.4" stroke-linecap="round" filter="url(#lapiz)"/>
+</svg>
