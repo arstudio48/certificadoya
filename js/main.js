@@ -4,11 +4,12 @@
    ============================================================ */
 
 // ============================================================
-// CONFIGURACIÓN — Cambiar cuando tengas credenciales de Supabase
+// CONFIGURACIÓN
 // ============================================================
 const SUPABASE_URL = 'https://wypgqpgjlookbhuaiyxa.supabase.co';
 const SUPABASE_ANON_KEY = 'sb_publishable_MsDx5jVGtDAzoB3l3-8DiQ_BxWpChA0';
-const STRIPE_PUBLISHABLE_KEY = 'pk_test_51TaRD7Rty9TkFoA3itHdQj1A1TeYbK6b7XPIY8gbxAMOwUCjiEqjLhvkZb71IcsIge6b3b6cUUG319c7VWu0XdGl00jH3fl3dU';
+const STRIPE_PUBLISHABLE_KEY = 'pk_test_51TaRD7Rty9TkFoA3itHdQjA1A1TeYbK6b7XPIY8gbxAMOwUCjiEqjLhvkZb71IcsIge6b3b6cUUG319c7VWu0XdGl00jH3fl3dU';
+const EDGE_FUNCTION_URL = 'https://wypgqpgjlookbhuaiyxa.supabase.co/functions/v1/stripe-checkout';
 //const SUPABASE_SERVICE_KEY = 'eliminado — se usa solo desde serverless functions';
 
 // ============================================================
@@ -233,7 +234,7 @@ function calcularPresupuesto() {
 }
 
 // ============================================================
-// SOLICITAR LEAD → REDIRIGIR A PÁGINA DE PROVINCIA
+// SOLICITAR LEAD → PAGO CON STRIPE O FORMULARIO
 // ============================================================
 function solicitarLead() {
   const presupuesto = window._presupuesto;
@@ -241,27 +242,10 @@ function solicitarLead() {
     document.getElementById('presupuesto-card').scrollIntoView({ behavior: 'smooth' });
     return;
   }
-
-  // Obtener provincia del código postal
-  const cpPrefix = presupuesto.cp.substring(0, 2);
-  const provincia = CP_A_PROVINCIA[cpPrefix];
-  
-  if (provincia) {
-    // Redirigir a la página de provincia con datos en la URL
-    const params = new URLSearchParams({
-      cp: presupuesto.cp,
-      m2: presupuesto.m2,
-      tipo: presupuesto.tipo || 'piso',
-      min: presupuesto.precioMin,
-      max: presupuesto.precioMax
-    });
-    window.location.href = `/certificado-energetico-${provincia.slug}/?${params.toString()}`;
-  } else {
-    // Si no encontramos la provincia, mostrar modal
-    window._tipoInmueble = document.getElementById('tipo').value;
-    document.getElementById('lead-modal').classList.add('visible');
-    document.getElementById('lead-nombre').focus();
-  }
+  // Mostrar modal de contacto
+  window._tipoInmueble = document.getElementById('tipo').value;
+  document.getElementById('lead-modal').classList.add('visible');
+  document.getElementById('lead-nombre').focus();
 }
 
 // CERRAR MODAL
@@ -269,7 +253,7 @@ function cerrarLeadModal() {
   document.getElementById('lead-modal').classList.remove('visible');
 }
 
-// CONFIRMAR LEAD (enviar a Supabase)
+// CONFIRMAR LEAD → CREAR CHECKOUT SESSION EN STRIPE
 async function confirmarLead() {
   const presupuesto = window._presupuesto;
   const nombre = document.getElementById('lead-nombre').value.trim();
@@ -280,55 +264,43 @@ async function confirmarLead() {
     return;
   }
 
-  const email = document.getElementById('lead-email').value.trim() || null;
+  const email = document.getElementById('lead-email').value.trim() || '';
   const btn = document.getElementById('lead-btn');
-  btn.textContent = '⏳ Enviando...';
+  btn.textContent = '⏳ Procesando pago...';
   btn.disabled = true;
 
-  const lead = {
-    nombre_cliente: nombre,
-    telefono_cliente: telefono,
-    email_cliente: email,
-    codigo_postal: presupuesto.cp,
-    zona: presupuesto.zona,
-    m2: presupuesto.m2,
-    tipo_inmueble: window._tipoInmueble,
-    presupuesto_min: presupuesto.precioMin,
-    presupuesto_max: presupuesto.precioMax,
-    estado: 'nuevo',
-    fuente: 'web'
-  };
-
-  // Guardar local
-  const leads = JSON.parse(localStorage.getItem('leads') || '[]');
-  leads.push({...lead, created_at: new Date().toISOString()});
-  localStorage.setItem('leads', JSON.stringify(leads));
-
-  // Enviar a Supabase
-  let enviado = false;
   try {
-    if (!window.supabase) {
-      const { createClient } = await import('https://esm.sh/@supabase/supabase-js@2');
-      window.supabase = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
-    }
-    const { error } = await window.supabase.from('leads').insert([lead]);
-    if (error) {
-      console.error('Supabase error:', error);
+    // Crear Checkout Session vía Edge Function
+    const res = await fetch(EDGE_FUNCTION_URL, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        price: presupuesto.precioMin,
+        service: `Certificado de eficiencia energética (${presupuesto.m2} m², ${presupuesto.tipo})`,
+        city: presupuesto.zona,
+        name: nombre,
+        email: email,
+        phone: telefono,
+        description: `${presupuesto.tipo} de ${presupuesto.m2} m² en ${presupuesto.zona} (CP: ${presupuesto.cp})`
+      })
+    });
+
+    const data = await res.json();
+
+    if (data.url) {
+      // Redirigir a Stripe Checkout
+      window.location.href = data.url;
     } else {
-      enviado = true;
+      alert('Error al crear el pago: ' + (data.error || 'Inténtalo de nuevo'));
+      btn.textContent = 'Pagar ahora →';
+      btn.disabled = false;
     }
   } catch (err) {
-    console.error('Error Supabase:', err);
+    console.error('Error:', err);
+    alert('Error de conexión. Inténtalo de nuevo.');
+    btn.textContent = 'Pagar ahora →';
+    btn.disabled = false;
   }
-
-  // Cerrar modal y confirmar
-  cerrarLeadModal();
-  const icono = enviado ? '✅' : '📋';
-  const extra = enviado ? '' : '\n\n(Guardado localmente — un administrador lo revisará pronto)';
-  alert(`${icono} ¡Gracias ${nombre}!\n\nUn técnico de ${presupuesto.zona} te contactará en menos de 24h al ${telefono}.\n\nPresupuesto estimado: ${presupuesto.precioMin}€ – ${presupuesto.precioMax}€${extra}`);
-
-  btn.textContent = 'Solicitar contacto';
-  btn.disabled = false;
 }
 
 // ============================================================
