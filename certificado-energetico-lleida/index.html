@@ -284,7 +284,7 @@
       if (v < 20 || v > 5000) { m2.classList.add('error'); err.textContent = 'Mínimo 20 m², máximo 5.000 m²'; }
       else { m2.classList.remove('error'); err.textContent = ''; }
     }
-    function calcularPresupuesto() {
+        function calcularPresupuesto() {
       var m2 = parseInt(document.getElementById('m2').value) || 0;
       var tipo = document.getElementById('tipo').value;
       if (m2 < 20 || m2 > 5000) { alert('Introduce metros cuadrados válidos (20-5000 m²)'); return; }
@@ -292,11 +292,31 @@
       var factor = tipo === 'unifamiliar' ? 1.4 : tipo === 'local' ? 1.2 : 1.0;
       var min = Math.round(base * factor);
       var max = Math.round(base * factor * 1.35);
-      document.getElementById('precio-rango').textContent = min + '€ – ' + max + '€';
-      document.getElementById('precio-texto').textContent = 'Presupuesto estimado para ' + m2 + ' m² en Lleida';
-      document.getElementById('resultado').style.display = 'block';
-      window._presupuesto = { cp: document.getElementById('cp').value || '25001', m2: m2, precioMin: min, precioMax: max, zona: 'Lleida' };
+      mostrarPresupuesto(min, max, m2, tipo, document.getElementById('cp').value || '28001');
     }
+    function mostrarPresupuesto(min, max, m2, tipo, cp) {
+      document.getElementById('precio-rango').textContent = min + '€ – ' + max + '€';
+      document.getElementById('precio-texto').textContent = 'Presupuesto estimado para ' + m2 + ' m² (' + tipo + ') en Lleida';
+      document.getElementById('resultado').style.display = 'block';
+      window._presupuesto = { cp: cp || '28001', m2: m2, precioMin: min, precioMax: max, zona: 'Lleida', tipo: tipo };
+      document.getElementById('resultado').scrollIntoView({ behavior: 'smooth', block: 'center' });
+    }
+    // Auto-cargar desde parámetros de la URL (viene de la home)
+    (function() {
+      var params = new URLSearchParams(window.location.search);
+      if (params.has('m2') && params.has('min')) {
+        document.getElementById('cp').value = params.get('cp') || '28001';
+        document.getElementById('m2').value = params.get('m2');
+        document.getElementById('tipo').value = params.get('tipo') || 'piso';
+        mostrarPresupuesto(
+          parseInt(params.get('min')),
+          parseInt(params.get('max')),
+          parseInt(params.get('m2')),
+          params.get('tipo') || 'piso',
+          params.get('cp') || '28001'
+        );
+      }
+    })();
     async function solicitarLead() {
       var p = window._presupuesto;
       if (!p) { alert('Calcula primero tu presupuesto'); return; }
@@ -312,11 +332,11 @@
         var supabase = createClient(SUPABASE_URL, SUPABASE_KEY);
         await supabase.from('leads').insert([{
           nombre_cliente: nombre, telefono_cliente: tlf, email_cliente: email || null,
-          codigo_postal: p.cp, m2: p.m2, tipo_inmueble: document.getElementById('tipo').value,
+          codigo_postal: p.cp, m2: p.m2, tipo_inmueble: p.tipo || document.getElementById('tipo').value,
           presupuesto_min: p.precioMin, presupuesto_max: p.precioMax, provincia: 'Lleida', estado: 'nuevo', fuente: 'web'
         }]);
       } catch(e) { console.error(e); }
-      alert('✅ ¡Gracias ' + nombre + '! Un técnico en Lleida te contactará en menos de 24h al ' + tlf + '.\\n\\nPresupuesto: ' + p.precioMin + '€ – ' + p.precioMax + '€');
+      alert('✅ ¡Gracias ' + nombre + '! Un técnico en Lleida te contactará en menos de 24h al ' + tlf + '.\n\nPresupuesto: ' + p.precioMin + '€ – ' + p.precioMax + '€');
     }
   </script>
 
