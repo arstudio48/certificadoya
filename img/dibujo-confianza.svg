@@ -1,6 +1,6 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" fill="none">
-  <!-- Escudo minimal -->
-  <path d="M60 16 L96 30 V58 Q96 82 60 104 Q24 82 24 58 V30Z" stroke="#1a1a1a" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
-  <!-- Check dentro -->
-  <path d="M46 60 L56 70 L76 50" stroke="#1a1a1a" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+  <!-- Escudo clásico -->
+  <path d="M60 14 L96 30 V58 Q96 82 60 106 Q24 82 24 58 V30Z" stroke="#1a1a1a" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
+  <!-- Check -->
+  <path d="M46 60 L56 72 L76 50" stroke="#1a1a1a" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
 </svg>
