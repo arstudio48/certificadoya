@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>🎨 3 Estilos - CertificadoYa</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+    * { margin:0; padding:0; box-sizing:border-box; }
+    body { font-family:'Inter',sans-serif; background:#f5f5f5; padding:2rem; }
+    h1 { text-align:center; color:#1a1a1a; margin-bottom:0.5rem; font-size:1.3rem; font-weight:600; }
+    .subtitle { text-align:center; color:#888; font-size:.85rem; margin-bottom:2rem; }
+
+    .style-section { margin-bottom:2.5rem; }
+    .style-header { display:flex; align-items:center; gap:.75rem; margin-bottom:1rem; }
+    .style-name { font-weight:600; font-size:1rem; color:#1a1a1a; }
+    .style-desc { font-size:.78rem; color:#888; }
+    .style-badge { background:#1a1a1a; color:white; font-size:.65rem; padding:2px 10px; border-radius:4px; font-weight:500; }
+
+    .grid { display:flex; gap:1rem; justify-content:center; flex-wrap:wrap; }
+    .item { background:white; border-radius:12px; padding:1.2rem; width:128px; text-align:center;
+            box-shadow:0 1px 4px rgba(0,0,0,.04); border:1px solid #eee; transition:border-color .2s; }
+    .item:hover { border-color:#ccc; }
+    .item svg { width:70px; height:70px; display:block; margin:0 auto .5rem; }
+    .item span { display:block; font-size:.72rem; color:#555; font-weight:500; line-height:1.3; }
+
+    .divider { border:none; border-top:1px solid #e0e0e0; margin:1.5rem 0; }
+  </style>
+</head>
+<body>
+  <h1>🎨 3 estilos profesionales para CertificadoYa</h1>
+  <p class="subtitle">Cada fila = un estilo. Cada columna = un concepto. Todos con trazo negro, sin rellenos.</p>
+
+  <!-- ESTILO 1: Lucide / Moderno -->
+  <div class="style-section">
+    <div class="style-header">
+      <span class="style-badge">Estilo A</span>
+      <span class="style-name">Moderno · trazo 1.5px · esquinas suaves</span>
+      <span class="style-desc">→ Como Lucide / Heroicons</span>
+    </div>
+    <div class="grid">
+      <div class="item"><img src="/img/estilo1-certificado.svg" alt="Casa"><span>Certificado</span></div>
+      <div class="item"><img src="/img/estilo1-presupuesto.svg" alt="Presupuesto"><span>Presupuesto</span></div>
+      <div class="item"><img src="/img/estilo1-rapido.svg" alt="Rápido"><span>24-48h</span></div>
+      <div class="item"><img src="/img/estilo1-tecnico.svg" alt="Técnico"><span>Técnicos</span></div>
+      <div class="item"><img src="/img/estilo1-visita.svg" alt="Visita"><span>Visita</span></div>
+      <div class="item"><img src="/img/estilo1-ahorro.svg" alt="Ahorro"><span>Precio justo</span></div>
+      <div class="item"><img src="/img/estilo1-confianza.svg" alt="Confianza"><span>Confianza</span></div>
+      <div class="item"><img src="/img/estilo1-legal.svg" alt="Legal"><span>Legal</span></div>
+    </div>
+  </div>
+
+  <hr class="divider">
+
+  <!-- ESTILO 2: Feather / Limpio -->
+  <div class="style-section">
+    <div class="style-header">
+      <span class="style-badge">Estilo B</span>
+      <span class="style-name">Feather · trazo 1.8px · esquinas rectas</span>
+      <span class="style-desc">→ Estilo Feather Icons</span>
+    </div>
+    <div class="grid">
+      <div class="item"><img src="/img/estilo2-certificado.svg" alt="Casa"><span>Certificado</span></div>
+      <div class="item"><img src="/img/estilo2-presupuesto.svg" alt="Presupuesto"><span>Presupuesto</span></div>
+      <div class="item"><img src="/img/estilo2-rapido.svg" alt="Rápido"><span>24-48h</span></div>
+      <div class="item"><img src="/img/estilo2-tecnico.svg" alt="Técnico"><span>Técnicos</span></div>
+      <div class="item"><img src="/img/estilo2-visita.svg" alt="Visita"><span>Visita</span></div>
+      <div class="item"><img src="/img/estilo2-ahorro.svg" alt="Ahorro"><span>Precio justo</span></div>
+      <div class="item"><img src="/img/estilo2-confianza.svg" alt="Confianza"><span>Confianza</span></div>
+      <div class="item"><img src="/img/estilo2-legal.svg" alt="Legal"><span>Legal</span></div>
+    </div>
+  </div>
+
+  <hr class="divider">
+
+  <!-- ESTILO 3: Corporate / Serio -->
+  <div class="style-section">
+    <div class="style-header">
+      <span class="style-badge">Estilo C</span>
+      <span class="style-name">Corporate · trazo 1.2px · ultra preciso</span>
+      <span class="style-desc">→ Estilo banca / seguros / arquitectura</span>
+    </div>
+    <div class="grid">
+      <div class="item"><img src="/img/estilo3-certificado.svg" alt="Casa"><span>Certificado</span></div>
+      <div class="item"><img src="/img/estilo3-presupuesto.svg" alt="Presupuesto"><span>Presupuesto</span></div>
+      <div class="item"><img src="/img/estilo3-rapido.svg" alt="Rápido"><span>24-48h</span></div>
+      <div class="item"><img src="/img/estilo3-tecnico.svg" alt="Técnico"><span>Técnicos</span></div>
+      <div class="item"><img src="/img/estilo3-visita.svg" alt="Visita"><span>Visita</span></div>
+      <div class="item"><img src="/img/estilo3-ahorro.svg" alt="Ahorro"><span>Precio justo</span></div>
+      <div class="item"><img src="/img/estilo3-confianza.svg" alt="Confianza"><span>Confianza</span></div>
+      <div class="item"><img src="/img/estilo3-legal.svg" alt="Legal"><span>Legal</span></div>
+    </div>
+  </div>
+</body>
+</html>

@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" fill="none">
+  <!-- Feather: documento plegado -->
+  <path d="M34 18 L34 102 H86 V34 L76 18Z" stroke="#1a1a1a" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M76 18 V34 H86" stroke="#1a1a1a" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+  <text x="60" y="72" text-anchor="middle" fill="#1a1a1a" font-size="22" font-weight="300" font-family="serif">€</text>
+</svg>

@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" fill="none">
+  <!-- Estilo Feather - casa minimal -->
+  <path d="M20 66 L60 30 L100 66" stroke="#1a1a1a" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+  <rect x="32" y="62" width="56" height="42" rx="0" stroke="#1a1a1a" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+  <rect x="52" y="80" width="16" height="24" rx="0" stroke="#1a1a1a" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>
