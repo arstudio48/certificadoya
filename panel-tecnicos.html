@@ -423,13 +423,9 @@
         </div>
 
         <div class="form-grid">
-          <div class="form-group">
-            <label for="reg-nombre">Nombre *</label>
-            <input type="text" id="reg-nombre" placeholder="Carlos" required>
-          </div>
-          <div class="form-group">
-            <label for="reg-apellidos">Apellidos *</label>
-            <input type="text" id="reg-apellidos" placeholder="López García" required>
+          <div class="form-group form-full">
+            <label for="reg-nombre">Nombre completo *</label>
+            <input type="text" id="reg-nombre" placeholder="Carlos López García" required>
           </div>
           <div class="form-group">
             <label for="reg-email">Correo electrónico *</label>
@@ -439,7 +435,7 @@
             <label for="reg-telefono">Teléfono móvil *</label>
             <input type="tel" id="reg-telefono" placeholder="612 345 678" required>
           </div>
-          <div class="form-group">
+          <div class="form-group form-full">
             <label for="reg-titulacion">Titulación *</label>
             <select id="reg-titulacion" required>
               <option value="">Selecciona...</option>
@@ -448,25 +444,15 @@
               <option value="ingeniero-edificacion">Ingeniero de Edificación</option>
               <option value="ingeniero-industrial">Ingeniero Industrial</option>
               <option value="ingeniero-tecnico">Ingeniero Técnico</option>
+              <option value="fp-edificacion">FP Edificación y Obra Civil</option>
               <option value="otro">Otra titulación habilitante</option>
             </select>
           </div>
-          <div class="form-group">
-            <label for="reg-colegiado">Nº Colegiado</label>
-            <input type="text" id="reg-colegiado" placeholder="COAM-12345">
-            <span class="input-hint">Verificaremos tu habilitación</span>
-          </div>
-          <div class="form-group form-full">
-            <label for="reg-provincias">Provincias donde trabajas *</label>
-            <input type="text" id="reg-provincias" placeholder="Madrid, Asturias, Barcelona" required>
-            <span class="input-hint">Separa con comas</span>
-          </div>
-          <div class="form-group form-full">
-            <label for="reg-cp">Códigos postales que cubres *</label>
-            <textarea id="reg-cp" rows="2" placeholder="280, 281, 282, 332, 333" required></textarea>
-            <span class="input-hint">Prefijos de 3 dígitos. Una línea o separados por comas.</span>
-          </div>
         </div>
+
+        <p style="font-size:.78rem;color:#9aab8a;margin-top:.75rem;line-height:1.5">
+          🔒 Tus datos se guardan de forma segura. Después del registro recibirás un email para activar tu cuenta y completar tu perfil profesional (provincias, IBAN, experiencia).
+        </p>
 
         <button class="btn-submit" id="reg-btn" onclick="registrarTecnico()">
           Crear cuenta gratis →
@@ -486,9 +472,9 @@
       <!-- Success state -->
       <div class="registro-card exito-state hidden" id="reg-exito">
         <div class="exito-icon">✅</div>
-        <h3>¡Solicitud recibida!</h3>
-        <p>Revisaremos tu colegiación y te enviaremos un email a <strong id="reg-email-conf"></strong> en 24-48h con las instrucciones para activar tu perfil y empezar a recibir clientes.</p>
-        <p style="margin-top:1rem;font-size:.82rem">¿Dudas? Escríbenos a <a href="mailto:info@certificadoya.es" style="color:#547c24;font-weight:600">info@certificadoya.es</a></p>
+        <h3>¡Registro completado!</h3>
+        <p>Te hemos enviado un email a <strong id="reg-email-conf"></strong> con un enlace para activar tu cuenta y completar tu perfil profesional.</p>
+        <p style="margin-top:1rem;font-size:.82rem">¿No recibes el email? Revisa tu carpeta de spam o escríbenos a <a href="mailto:info@certificadoya.es" style="color:#547c24;font-weight:600">info@certificadoya.es</a></p>
         <a href="/" class="btn-submit" style="display:inline-block;margin-top:1.5rem;background:white;color:#547c24;border:2px solid #547c24;width:auto;padding:.75rem 1.5rem">← Volver al inicio</a>
       </div>
     </div>

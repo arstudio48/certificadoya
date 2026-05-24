@@ -306,60 +306,49 @@ window.registrarTecnico = registrarTecnico;
 // ============================================================
 async function registrarTecnico() {
   const nombre = document.getElementById('reg-nombre').value.trim();
-  const apellidosEl = document.getElementById('reg-apellidos');
-  const apellidos = apellidosEl ? apellidosEl.value.trim() : '';
   const email = document.getElementById('reg-email').value.trim();
   const telefono = document.getElementById('reg-telefono').value.trim();
   const titulacion = document.getElementById('reg-titulacion').value;
-  const colegiado = document.getElementById('reg-colegiado').value.trim() || null;
-  const provincias = document.getElementById('reg-provincias').value.trim();
-  
-  let cpRaw = document.getElementById('reg-cp').value.trim();
-  // Parsear CPs (comas o saltos de línea)
-  const cpCobertura = cpRaw.split(/[\n,]+/).map(s => s.trim()).filter(s => /^\d{2,3}$/.test(s));
 
   // Validar
-  if (!nombre || !email || !telefono || !titulacion || !provincias) {
-    alert('Por favor, completa todos los campos obligatorios.');
+  if (!nombre || !email || !telefono || !titulacion) {
+    alert('Por favor, completa todos los campos.');
     return;
   }
-  if (cpCobertura.length === 0) {
-    alert('Indica al menos un código postal (prefijo de 3 dígitos).');
+  if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+    alert('Introduce un email válido.');
     return;
   }
-  if (!/^\d{6,12}$/.test(telefono.replace(/\s/g,''))) {
-    alert('Introduce un teléfono válido.');
+  if (!/^\d{9}$/.test(telefono.replace(/\s/g, ''))) {
+    alert('Introduce un teléfono válido (9 dígitos).');
     return;
   }
 
   const btn = document.getElementById('reg-btn');
+  const originalText = btn.textContent;
   btn.textContent = '⏳ Enviando...';
   btn.disabled = true;
 
   try {
-    if (!window.supabase) {
-      const { createClient } = await import('https://esm.sh/@supabase/supabase-js@2');
-      window.supabase = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
-    }
-    const { error } = await window.supabase.from('tecnicos').insert([{
-      email, nombre: nombre + (apellidos ? ' ' + apellidos : ''), telefono, titulacion,
-      numero_colegiado: colegiado,
-      provincia: provincias,
-      cp_cobertura: cpCobertura,
-      verificado: false,
-      activo: false
-    }]);
-    if (error) {
-      if (error.code === '23505') {
+    const res = await fetch('/.netlify/functions/registro-tecnico', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ nombre, email, telefono, titulacion })
+    });
+
+    const data = await res.json();
+
+    if (!res.ok) {
+      if (res.status === 409) {
         alert('Este email ya está registrado. Si crees que es un error, contáctanos.');
       } else {
-        console.error('Error Supabase:', error);
-        alert('Error al enviar la solicitud. Inténtalo de nuevo.');
+        alert(data.error || 'Error al registrar. Inténtalo de nuevo.');
       }
-      btn.textContent = 'Enviar solicitud →';
+      btn.textContent = originalText;
       btn.disabled = false;
       return;
     }
+
     // Éxito
     document.getElementById('reg-form').style.display = 'none';
     document.getElementById('reg-exito').classList.add('visible');
@@ -367,7 +356,7 @@ async function registrarTecnico() {
   } catch (err) {
     console.error('Error:', err);
     alert('Error de conexión. Inténtalo de nuevo.');
-    btn.textContent = 'Enviar solicitud →';
+    btn.textContent = originalText;
     btn.disabled = false;
   }
 }
