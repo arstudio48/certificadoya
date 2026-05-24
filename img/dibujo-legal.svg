@@ -1,17 +1,12 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" fill="none">
-  <!-- Document -->
-  <rect x="28" y="14" width="64" height="88" rx="4" stroke="#1a1a1a" stroke-width="2.5" fill="none"/>
-  <!-- Folded corner -->
-  <path d="M76 14 V28 H92" stroke="#1a1a1a" stroke-width="2.5" fill="none" stroke-linejoin="round"/>
-  <!-- Lines of text -->
-  <line x1="38" y1="32" x2="82" y2="32" stroke="#1a1a1a" stroke-width="2" stroke-linecap="round"/>
-  <line x1="38" y1="44" x2="82" y2="44" stroke="#1a1a1a" stroke-width="2" stroke-linecap="round"/>
-  <line x1="38" y1="56" x2="70" y2="56" stroke="#1a1a1a" stroke-width="2" stroke-linecap="round"/>
-  <!-- Seal/stamp -->
-  <circle cx="60" cy="75" r="18" stroke="#1a1a1a" stroke-width="2" fill="none"/>
-  <circle cx="60" cy="75" r="14" stroke="#1a1a1a" stroke-width="1" fill="none"/>
-  <text x="60" y="79" text-anchor="middle" fill="#1a1a1a" font-size="7" font-weight="700" font-family="Montserrat,sans-serif">OK</text>
-  <!-- Pen -->
-  <line x1="92" y1="36" x2="106" y2="22" stroke="#1a1a1a" stroke-width="2.5" stroke-linecap="round"/>
-  <line x1="100" y1="28" x2="108" y2="20" stroke="#1a1a1a" stroke-width="2.5" stroke-linecap="round"/>
+  <!-- Documento con pliegue -->
+  <rect x="30" y="14" width="60" height="92" rx="4" stroke="#1a1a1a" stroke-width="1.6" stroke-linejoin="round"/>
+  <path d="M74 14 V32 H90" stroke="#1a1a1a" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+  <!-- Líneas de texto -->
+  <line x1="42" y1="38" x2="76" y2="38" stroke="#1a1a1a" stroke-width="1.2" stroke-linecap="round" opacity="0.3"/>
+  <line x1="42" y1="48" x2="68" y2="48" stroke="#1a1a1a" stroke-width="1.2" stroke-linecap="round" opacity="0.3"/>
+  <line x1="42" y1="58" x2="78" y2="58" stroke="#1a1a1a" stroke-width="1.2" stroke-linecap="round" opacity="0.3"/>
+  <!-- Sello / check legal -->
+  <circle cx="60" cy="78" r="16" stroke="#1a1a1a" stroke-width="1.4" opacity="0.3"/>
+  <path d="M52 78 L58 84 L68 74" stroke="#1a1a1a" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
 </svg>

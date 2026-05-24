@@ -1,24 +1,14 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" fill="none">
-  <!-- Piggy bank -->
-  <ellipse cx="60" cy="60" rx="32" ry="24" stroke="#1a1a1a" stroke-width="2.5" fill="none"/>
-  <!-- Ear -->
-  <ellipse cx="36" cy="42" rx="8" ry="14" stroke="#1a1a1a" stroke-width="2" fill="none"/>
-  <!-- Snout -->
-  <ellipse cx="82" cy="62" rx="12" ry="8" stroke="#1a1a1a" stroke-width="2" fill="none"/>
-  <ellipse cx="86" cy="60" rx="4" ry="3" stroke="#1a1a1a" stroke-width="1.5" fill="none"/>
-  <!-- Eye -->
-  <circle cx="58" cy="52" r="3" stroke="#1a1a1a" stroke-width="2" fill="none"/>
-  <!-- Coin slot -->
-  <line x1="68" y1="36" x2="72" y2="36" stroke="#1a1a1a" stroke-width="2"/>
-  <!-- Tail -->
-  <path d="M28 58 Q18 50 22 42 Q26 36 20 34" stroke="#1a1a1a" stroke-width="2" fill="none" stroke-linecap="round"/>
-  <!-- Coin going in -->
-  <circle cx="82" cy="30" r="8" stroke="#1a1a1a" stroke-width="2" fill="none"/>
-  <text x="82" y="33" text-anchor="middle" fill="#1a1a1a" font-size="7" font-weight="700" font-family="Montserrat,sans-serif">€</text>
-  <!-- Arrow down -->
-  <line x1="82" y1="38" x2="78" y2="44" stroke="#1a1a1a" stroke-width="1.5" stroke-linecap="round"/>
-  <line x1="82" y1="38" x2="86" y2="44" stroke="#1a1a1a" stroke-width="1.5" stroke-linecap="round"/>
-  <!-- Small coin on ground -->
-  <circle cx="50" cy="90" r="6" stroke="#1a1a1a" stroke-width="1.5" fill="none"/>
-  <text x="50" y="93" text-anchor="middle" fill="#1a1a1a" font-size="5">€</text>
+  <!-- Tag de precio minimal -->
+  <rect x="36" y="20" width="40" height="80" rx="6" stroke="#1a1a1a" stroke-width="1.6" stroke-linejoin="round"/>
+  <!-- Agujero tag -->
+  <circle cx="48" cy="34" r="4" stroke="#1a1a1a" stroke-width="1.4"/>
+  <!-- Símbolo € -->
+  <circle cx="56" cy="64" r="12" stroke="#1a1a1a" stroke-width="1.5"/>
+  <line x1="56" y1="52" x2="56" y2="76" stroke="#1a1a1a" stroke-width="1.5" stroke-linecap="round"/>
+  <line x1="49" y1="60" x2="63" y2="60" stroke="#1a1a1a" stroke-width="1.3" stroke-linecap="round"/>
+  <line x1="49" y1="68" x2="63" y2="68" stroke="#1a1a1a" stroke-width="1.3" stroke-linecap="round"/>
+  <!-- Flecha hacia abajo (precio justo) -->
+  <path d="M88 44 L96 52 L104 44" stroke="#1a1a1a" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+  <line x1="96" y1="52" x2="96" y2="82" stroke="#1a1a1a" stroke-width="1.6" stroke-linecap="round"/>
 </svg>
