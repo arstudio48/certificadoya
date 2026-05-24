@@ -5,8 +5,16 @@
   from = "/tecnicos"
   to = "/panel-tecnicos.html"
   status = 200
+  headers = {Content-Type = "text/html"}
 
 [[redirects]]
   from = "/tecnicos/*"
   to = "/panel-tecnicos.html"
   status = 200
+  headers = {Content-Type = "text/html"}
+
+[[redirects]]
+  from = "/panel-tecnicos"
+  to = "/panel-tecnicos.html"
+  status = 200
+  headers = {Content-Type = "text/html"}
