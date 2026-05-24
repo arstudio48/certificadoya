@@ -1,0 +1,73 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#fafafa"/>
+      <stop offset="100%" stop-color="#f0f5ea"/>
+    </linearGradient>
+    <linearGradient id="accent" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#547c24"/>
+      <stop offset="100%" stop-color="#43631d"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Background -->
+  <rect width="1200" height="630" fill="url(#bg)"/>
+
+  <!-- Accent bar top -->
+  <rect width="1200" height="6" fill="#547c24"/>
+
+  <!-- Left decorative element -->
+  <circle cx="100" cy="315" r="280" fill="#547c24" opacity="0.04"/>
+  <circle cx="80" cy="280" r="180" fill="#547c24" opacity="0.06"/>
+
+  <!-- Right decorative element -->
+  <circle cx="1100" cy="400" r="200" fill="#547c24" opacity="0.04"/>
+
+  <!-- Logo -->
+  <rect x="80" y="80" width="70" height="70" rx="14" fill="#547c24"/>
+  <text x="115" y="128" text-anchor="middle" fill="white" font-size="44" font-family="sans-serif" font-weight="700">C</text>
+  <text x="170" y="122" fill="#20201f" font-size="40" font-family="'Montserrat', sans-serif" font-weight="700">Certificado</text>
+  <text x="170" y="148" fill="#547c24" font-size="40" font-family="'Montserrat', sans-serif" font-weight="700">Ya</text>
+
+  <!-- Main headline -->
+  <text x="80" y="280" fill="#20201f" font-size="52" font-family="'Montserrat', sans-serif" font-weight="700" letter-spacing="-1">Certificado Energético</text>
+  <text x="80" y="345" fill="#547c24" font-size="52" font-family="'Montserrat', sans-serif" font-weight="700" letter-spacing="-1">Rápido y Sin Complicaciones</text>
+
+  <!-- Badge -->
+  <rect x="80" y="390" width="260" height="44" rx="22" fill="#547c24" opacity="0.1"/>
+  <text x="210" y="420" text-anchor="middle" fill="#547c24" font-size="20" font-family="'Montserrat', sans-serif" font-weight="600">Presupuesto instantáneo · Desde 45€</text>
+
+  <!-- Features -->
+  <circle cx="80" cy="500" r="8" fill="#547c24" opacity="0.3"/>
+  <text x="100" y="506" fill="#6b7280" font-size="22" font-family="'Montserrat', sans-serif">En 24 horas</text>
+
+  <circle cx="280" cy="500" r="8" fill="#547c24" opacity="0.3"/>
+  <text x="300" y="506" fill="#6b7280" font-size="22" font-family="'Montserrat', sans-serif">Técnicos verificados</text>
+
+  <circle cx="510" cy="500" r="8" fill="#547c24" opacity="0.3"/>
+  <text x="530" y="506" fill="#6b7280" font-size="22" font-family="'Montserrat', sans-serif">Toda España</text>
+
+  <!-- Energy label A+ badge -->
+  <rect x="900" y="220" width="220" height="280" rx="16" fill="white" stroke="#e5e7eb" stroke-width="2"/>
+  <rect x="920" y="240" width="180" height="50" rx="8" fill="#22c55e"/>
+  <text x="1010" y="260" text-anchor="middle" fill="white" font-size="16" font-family="'Montserrat', sans-serif" font-weight="600">ENERGÍA</text>
+  <text x="1010" y="284" text-anchor="middle" fill="white" font-size="20" font-family="'Montserrat', sans-serif" font-weight="700">A+</text>
+  <rect x="920" y="298" width="180" height="22" rx="4" fill="#e5e7eb"/>
+  <text x="1010" y="314" text-anchor="middle" fill="#6b7280" font-size="12" font-family="'Montserrat', sans-serif">A</text>
+  <rect x="920" y="324" width="180" height="22" rx="4" fill="#e5e7eb"/>
+  <text x="1010" y="340" text-anchor="middle" fill="#6b7280" font-size="12" font-family="'Montserrat', sans-serif">B</text>
+  <rect x="920" y="350" width="180" height="22" rx="4" fill="#e5e7eb"/>
+  <text x="1010" y="366" text-anchor="middle" fill="#6b7280" font-size="12" font-family="'Montserrat', sans-serif">C</text>
+  <rect x="920" y="376" width="180" height="22" rx="4" fill="#e5e7eb"/>
+  <text x="1010" y="392" text-anchor="middle" fill="#6b7280" font-size="12" font-family="'Montserrat', sans-serif">D</text>
+  <rect x="920" y="402" width="180" height="22" rx="4" fill="#e5e7eb"/>
+  <text x="1010" y="418" text-anchor="middle" fill="#6b7280" font-size="12" font-family="'Montserrat', sans-serif">E</text>
+  <rect x="920" y="428" width="180" height="22" rx="4" fill="#e5e7eb"/>
+  <text x="1010" y="444" text-anchor="middle" fill="#6b7280" font-size="12" font-family="'Montserrat', sans-serif">F</text>
+  <rect x="920" y="454" width="180" height="22" rx="4" fill="#e5e7eb"/>
+  <text x="1010" y="470" text-anchor="middle" fill="#6b7280" font-size="12" font-family="'Montserrat', sans-serif">G</text>
+
+  <!-- Footer -->
+  <rect x="0" y="600" width="1200" height="30" fill="#547c24"/>
+  <text x="600" y="620" text-anchor="middle" fill="white" font-size="14" font-family="'Montserrat', sans-serif" opacity="0.8">www.certificadoya.es</text>
+</svg>
