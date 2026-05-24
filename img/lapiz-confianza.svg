@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 140 140" fill="none">
+  <defs>
+    <filter id="lapiz" x="-10%" y="-10%" width="120%" height="120%">
+      <feTurbulence type="fractalNoise" baseFrequency="0.8" numOctaves="3" result="noise"/>
+      <feDisplacementMap in="SourceGraphic" in2="noise" scale="2.5" xChannelSelector="R" yChannelSelector="G"/>
+    </filter>
+    <filter id="lapiz-suave" x="-10%" y="-10%" width="120%" height="120%">
+      <feTurbulence type="fractalNoise" baseFrequency="0.5" numOctaves="2" result="noise"/>
+      <feDisplacementMap in="SourceGraphic" in2="noise" scale="1.5" xChannelSelector="R" yChannelSelector="G"/>
+    </filter>
+  </defs>
+  <!-- Escudo -->
+  <path d="M70 16 L110 34 V62 Q110 88 70 116 Q30 88 30 62 V34Z" stroke="#2a2a2a" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" fill="none" filter="url(#lapiz)"/>
+  <path d="M70 16 L110 34 V62 Q110 88 70 116 Q30 88 30 62 V34Z" stroke="#2a2a2a" stroke-width="0.7" fill="none" opacity="0.3" transform="translate(0.3,0.2)" filter="url(#lapiz)"/>
+  <!-- Check -->
+  <path d="M52 66 L64 80 L90 54" stroke="#2a2a2a" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round" fill="none" filter="url(#lapiz)"/>
+  <path d="M52 66 L64 80 L90 54" stroke="#2a2a2a" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" opacity="0.3" transform="translate(-0.3,0.4)"/>
+</svg>
