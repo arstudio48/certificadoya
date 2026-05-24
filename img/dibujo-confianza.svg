@@ -1,13 +1,6 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" fill="none">
-  <!-- Shield outline -->
-  <path d="M60 14 L90 26 V52 Q90 78 60 106 Q30 78 30 52 V26Z" stroke="#1a1a1a" stroke-width="2.5" fill="none" stroke-linejoin="round"/>
-  <!-- Checkmark -->
-  <path d="M46 60 L56 72 L76 48" stroke="#1a1a1a" stroke-width="3" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
-  <!-- Stars rating -->
-  <path d="M30 90 L33 84 L38 84 L34 80 L36 74 L30 78 L24 74 L26 80 L22 84 L27 84Z" stroke="#1a1a1a" stroke-width="1.5" fill="none"/>
-  <path d="M45 92 L47 88 L51 88 L48 85 L49 81 L45 83 L41 81 L42 85 L39 88 L43 88Z" stroke="#1a1a1a" stroke-width="1.5" fill="none"/>
-  <!-- Badge ribbon -->
-  <path d="M60 14 L65 20 L60 26 L55 20Z" stroke="#1a1a1a" stroke-width="1.5" fill="none"/>
-  <!-- Handshake below -->
-  <path d="M28 108 Q32 104 38 106 Q44 108 48 104 Q52 108 58 106 Q64 104 70 106 Q76 108 80 104 L85 108" stroke="#1a1a1a" stroke-width="2" fill="none" stroke-linecap="round"/>
+  <!-- Escudo minimal -->
+  <path d="M60 16 L96 30 V58 Q96 82 60 104 Q24 82 24 58 V30Z" stroke="#1a1a1a" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+  <!-- Check dentro -->
+  <path d="M46 60 L56 70 L76 50" stroke="#1a1a1a" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
 </svg>

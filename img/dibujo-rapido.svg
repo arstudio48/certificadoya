@@ -1,13 +1,13 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" fill="none">
-  <!-- Lightning bolt -->
-  <path d="M62 20 L36 58 H54 L48 96 L80 52 H62L66 24Z" stroke="#1a1a1a" stroke-width="2.5" fill="none" stroke-linejoin="round"/>
-  <!-- Clock -->
-  <circle cx="78" cy="80" r="22" stroke="#1a1a1a" stroke-width="2.5" fill="none"/>
-  <line x1="78" y1="80" x2="78" y2="66" stroke="#1a1a1a" stroke-width="2.5" stroke-linecap="round"/>
-  <line x1="78" y1="80" x2="90" y2="80" stroke="#1a1a1a" stroke-width="2" stroke-linecap="round"/>
-  <!-- Small 24h text -->
-  <text x="78" y="88" text-anchor="middle" fill="#1a1a1a" font-size="7" font-weight="600" font-family="Montserrat,sans-serif">24h</text>
-  <!-- Arrow -->
-  <line x1="22" y1="30" x2="42" y2="30" stroke="#1a1a1a" stroke-width="2" stroke-linecap="round"/>
-  <path d="M36 24 L42 30 L36 36" stroke="#1a1a1a" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+  <!-- Reloj minimal -->
+  <circle cx="60" cy="62" r="28" stroke="#1a1a1a" stroke-width="1.6"/>
+  <!-- Centro -->
+  <circle cx="60" cy="62" r="2" fill="#1a1a1a"/>
+  <!-- Manecilla hora -->
+  <line x1="60" y1="62" x2="60" y2="46" stroke="#1a1a1a" stroke-width="1.8" stroke-linecap="round"/>
+  <!-- Manecilla minuto -->
+  <line x1="60" y1="62" x2="76" y2="62" stroke="#1a1a1a" stroke-width="1.2" stroke-linecap="round"/>
+  <!-- Flecha "rápido" -->
+  <path d="M12 30 L28 30 M20 22 L28 30 L20 38" stroke="#1a1a1a" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+  <line x1="28" y1="30" x2="38" y2="30" stroke="#1a1a1a" stroke-width="1.6" stroke-linecap="round" stroke-dasharray="3,3"/>
 </svg>
