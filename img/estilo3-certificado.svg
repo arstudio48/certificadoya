@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" fill="none">
+  <!-- Estilo Corporate - casa con línea de suelo -->
+  <rect x="22" y="68" width="76" height="38" stroke="#1a1a1a" stroke-width="1.2"/>
+  <path d="M22 68 L60 28 L98 68" stroke="#1a1a1a" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/>
+  <rect x="50" y="80" width="20" height="26" stroke="#1a1a1a" stroke-width="1.2"/>
+  <rect x="36" y="74" width="10" height="10" stroke="#1a1a1a" stroke-width="1"/>
+  <rect x="74" y="74" width="10" height="10" stroke="#1a1a1a" stroke-width="1"/>
+</svg>
