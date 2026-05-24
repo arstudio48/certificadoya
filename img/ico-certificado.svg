@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="120" height="120" viewBox="0 0 120 120" fill="none">
+  <path d="M12 72 L60 24 L108 72" fill="#D1E9B3" stroke="#547C24" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+  <rect x="24" y="68" width="72" height="42" rx="3" fill="#FAFDF7" stroke="#547C24" stroke-width="1.8" stroke-linejoin="round"/>
+  <rect x="50" y="84" width="20" height="26" rx="2" fill="#D1E9B3" stroke="#547C24" stroke-width="1.6" stroke-linejoin="round"/>
+  <rect x="32" y="76" width="12" height="12" rx="1.5" fill="white" stroke="#547C24" stroke-width="1.4" stroke-linejoin="round"/>
+  <line x1="38" y1="76" x2="38" y2="88" stroke="#547C24" stroke-width="1" opacity="0.5"/>
+  <line x1="32" y1="82" x2="44" y2="82" stroke="#547C24" stroke-width="1" opacity="0.5"/>
+  <rect x="76" y="76" width="12" height="12" rx="1.5" fill="white" stroke="#547C24" stroke-width="1.4" stroke-linejoin="round"/>
+  <line x1="82" y1="76" x2="82" y2="88" stroke="#547C24" stroke-width="1" opacity="0.5"/>
+  <line x1="76" y1="82" x2="88" y2="82" stroke="#547C24" stroke-width="1" opacity="0.5"/>
+  <rect x="72" y="10" width="40" height="28" rx="6" fill="#547C24"/>
+  <text x="92" y="28" text-anchor="middle" fill="white" font-size="10" font-weight="700" font-family="Arial,sans-serif">A+</text>
+  <path d="M20 36 Q28 28 34 34 Q28 32 26 38 Q30 42 24 46 Q22 40 20 36Z" fill="#A3D368"/>
+  <path d="M20 36 L20 30" stroke="#547C24" stroke-width="1.2" stroke-linecap="round"/>
+</svg>
