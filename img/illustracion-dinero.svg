@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" fill="none">
+  <circle cx="100" cy="100" r="96" fill="#edf4e5"/>
+  
+  <!-- Big coin -->
+  <circle cx="100" cy="100" r="48" fill="#f0b429"/>
+  <circle cx="100" cy="100" r="42" fill="#fef3c7"/>
+  <circle cx="100" cy="100" r="48" fill="none" stroke="#e09e1a" stroke-width="2"/>
+  
+  <!-- Euro symbol on coin -->
+  <text x="100" y="111" text-anchor="middle" fill="#547c24" font-size="36" font-weight="700" font-family="Montserrat,sans-serif">€</text>
+  
+  <!-- Small coins around -->
+  <circle cx="52" cy="130" r="14" fill="#f0b429"/>
+  <circle cx="52" cy="130" r="11" fill="#fef3c7"/>
+  <circle cx="52" cy="130" r="14" fill="none" stroke="#e09e1a" stroke-width="1.5"/>
+  
+  <circle cx="148" cy="75" r="12" fill="#f0b429"/>
+  <circle cx="148" cy="75" r="9" fill="#fef3c7"/>
+  <circle cx="148" cy="75" r="12" fill="none" stroke="#e09e1a" stroke-width="1.5"/>
+  
+  <!-- Upward trend arrow -->
+  <path d="M42 170 L70 140 L95 150 L120 120" stroke="#547c24" stroke-width="3" stroke-linecap="round" fill="none"/>
+  <path d="M108 120 L120 120 L120 132" stroke="#547c24" stroke-width="3" stroke-linecap="round" fill="none"/>
+</svg>

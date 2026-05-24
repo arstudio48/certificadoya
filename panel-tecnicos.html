@@ -126,9 +126,9 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 1.2rem;
       flex-shrink: 0;
     }
+    .benefit-icon img { width:40px; height:40px; display:block; }
     
     .benefit-text h4 {
       font-size: .92rem;
@@ -295,6 +295,7 @@
     /* Success state */
     .registro-card.exito-state { text-align: center; padding: 3rem 2rem; }
     .registro-card.exito-state .exito-icon { font-size: 3.5rem; margin-bottom: 1rem; }
+    .registro-card.exito-state .exito-icon img { width:56px; height:56px; }
     .registro-card.exito-state h3 { color: #2d3a1f; font-size: 1.3rem; margin-bottom: .75rem; }
     .registro-card.exito-state p { color: #6b7b5e; font-size: .9rem; line-height: 1.6; }
     
@@ -386,28 +387,28 @@
 
       <div class="registro-benefits">
         <div class="benefit-item">
-          <div class="benefit-icon">📥</div>
+          <div class="benefit-icon"><img src="/img/illustracion-leads.svg" width="40" height="40" alt="Leads"></div>
           <div class="benefit-text">
             <h4>Leads cualificados sin esfuerzo</h4>
             <p>Clientes que ya saben lo que cuesta y quieren que les contactes. Tú decides qué trabajos aceptar.</p>
           </div>
         </div>
         <div class="benefit-item">
-          <div class="benefit-icon">💰</div>
+          <div class="benefit-icon"><img src="/img/illustracion-dinero.svg" width="40" height="40" alt="Dinero"></div>
           <div class="benefit-text">
             <h4>Tú pones tus tarifas. Sin comisiones.</h4>
             <p>No cobramos porcentaje de tu trabajo. Pagas una cuota plana solo por los leads que recibes. El resto es tuyo.</p>
           </div>
         </div>
         <div class="benefit-item">
-          <div class="benefit-icon">📍</div>
+          <div class="benefit-icon"><img src="/img/illustracion-ubicacion.svg" width="40" height="40" alt="Ubicación"></div>
           <div class="benefit-text">
             <h4>Solo trabajos en tu zona</h4>
             <p>Filtramos cada lead por código postal. Solo recibes clientes en las provincias y CPs que tú eliges.</p>
           </div>
         </div>
         <div class="benefit-item">
-          <div class="benefit-icon">⭐</div>
+          <div class="benefit-icon"><img src="/img/illustracion-verificado.svg" width="40" height="40" alt="Verificado"></div>
           <div class="benefit-text">
             <h4>Perfil profesional verificado</h4>
             <p>Verificamos tu colegiación. Los clientes confían porque saben que eres un profesional habilitado.</p>
@@ -420,7 +421,7 @@
     <div class="registro-right">
       <div class="registro-card" id="reg-form">
         <div class="registro-card-header">
-          <div class="icon-circle">👷</div>
+          <div class="icon-circle"><img src="/img/illustracion-tecnico.svg" width="56" height="56" alt="Técnico"></div>
           <h2>Crea tu cuenta gratis</h2>
           <p>Regístrate, crea tu perfil profesional y empieza a recibir solicitudes de trabajo en tu zona.</p>
         </div>
@@ -454,7 +455,7 @@
         </div>
 
         <p style="font-size:.78rem;color:#9aab8a;margin-top:.75rem;line-height:1.5">
-          🔒 Tus datos se guardan de forma segura. Después del registro recibirás un email para activar tu cuenta y completar tu perfil profesional (provincias, IBAN, experiencia).
+          <img src="/img/illustracion-candado.svg" width="14" height="14" alt="" style="vertical-align:middle;margin-right:3px"> Tus datos se guardan de forma segura. Después del registro recibirás un email para activar tu cuenta y completar tu perfil profesional (provincias, IBAN, experiencia).
         </p>
 
         <button class="btn-submit" id="reg-btn" onclick="registrarTecnico()">
@@ -462,9 +463,9 @@
         </button>
 
         <div class="trust-bar">
-          <span>🔒 Datos protegidos</span>
-          <span>✅ Sin permanencia</span>
-          <span>⚡ Alta en 24-48h</span>
+          <span><img src="/img/illustracion-candado.svg" width="16" height="16" alt="Seguro"> Datos protegidos</span>
+          <span><img src="/img/illustracion-check.svg" width="16" height="16" alt="Sin permanencia"> Sin permanencia</span>
+          <span><img src="/img/illustracion-rayo.svg" width="16" height="16" alt="Rápido"> Alta en 24-48h</span>
         </div>
 
         <p class="form-footer">
@@ -474,7 +475,7 @@
 
       <!-- Success state -->
       <div class="registro-card exito-state hidden" id="reg-exito">
-        <div class="exito-icon">✅</div>
+        <div class="exito-icon"><img src="/img/illustracion-check.svg" width="56" height="56" alt="Completado"></div>
         <h3>¡Registro completado!</h3>
         <p>Te hemos enviado un email a <strong id="reg-email-conf"></strong> con un enlace para activar tu cuenta y completar tu perfil profesional.</p>
         <p style="margin-top:1rem;font-size:.82rem">¿No recibes el email? Revisa tu carpeta de spam o escríbenos a <a href="mailto:info@certificadoya.es" style="color:#547c24;font-weight:600">info@certificadoya.es</a></p>
