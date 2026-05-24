@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" fill="none">
+  <rect width="64" height="64" rx="14" fill="#edf4e5"/>
+  <!-- Document -->
+  <rect x="16" y="8" width="32" height="44" rx="4" fill="white" stroke="#547c24" stroke-width="2"/>
+  <!-- Folded corner -->
+  <path d="M40 8 V16 H48" fill="white" stroke="#547c24" stroke-width="2"/>
+  <!-- Lines on document -->
+  <line x1="22" y1="20" x2="42" y2="20" stroke="#d4d9d0" stroke-width="1.5" stroke-linecap="round"/>
+  <line x1="22" y1="28" x2="42" y2="28" stroke="#d4d9d0" stroke-width="1.5" stroke-linecap="round"/>
+  <line x1="22" y1="36" x2="36" y2="36" stroke="#d4d9d0" stroke-width="1.5" stroke-linecap="round"/>
+  <!-- Checkmark -->
+  <circle cx="46" cy="46" r="12" fill="#22c55e"/>
+  <path d="M40 46 L44 50 L52 42" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+</svg>

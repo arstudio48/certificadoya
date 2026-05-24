@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" fill="none">
+  <rect width="64" height="64" rx="14" fill="#edf4e5"/>
+  <!-- House -->
+  <path d="M14 32 L32 14 L50 32" stroke="#547c24" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+  <rect x="24" y="28" width="16" height="20" rx="2" fill="none" stroke="#547c24" stroke-width="2"/>
+  <rect x="28" y="34" width="8" height="14" rx="1" fill="#547c24" opacity="0.2" stroke="#547c24" stroke-width="1.5"/>
+  <!-- Magnifying glass -->
+  <circle cx="48" cy="46" r="8" fill="none" stroke="#f0b429" stroke-width="2.5"/>
+  <line x1="54" y1="52" x2="58" y2="56" stroke="#f0b429" stroke-width="2.5" stroke-linecap="round"/>
+</svg>
