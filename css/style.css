@@ -48,7 +48,7 @@ body {
 .logo svg { flex-shrink:0; }
 .logo-text-wrap { display:flex; flex-direction:column; line-height:1.15; }
 .logo-text { font-size:1.3rem; font-weight:700; color:var(--text); letter-spacing:-.02em; }
-.logo-sub { font-size:.62rem; color:var(--text-muted); font-weight:400; letter-spacing:0; white-space:nowrap; }
+.logo-sub { font-size:.45rem; color:#333; font-weight:400; letter-spacing:0; white-space:nowrap; line-height:1; }
 .logo-highlight { color:var(--primary); }
 .nav { display:flex; align-items:center; gap:1.5rem; }
 .nav a { text-decoration:none; color:var(--text); font-size:.9rem; font-weight:500; transition:color .15s; }
