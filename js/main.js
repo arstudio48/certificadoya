@@ -8,8 +8,8 @@
 // ============================================================
 const SUPABASE_URL = 'https://wypgqpgjlookbhuaiyxa.supabase.co';
 const SUPABASE_ANON_KEY = 'sb_publishable_MsDx5jVGtDAzoB3l3-8DiQ_BxWpChA0';
-// Key de servicio para bypass RLS (MVP — migrar a función serverless después)
-const SUPABASE_SERVICE_KEY = 'sb_secret_7LGmViutdXYU16hwvAqlJg_hZjhfcLe';
+const STRIPE_PUBLISHABLE_KEY = 'pk_test_51TaRD7Rty9TkFoA3itHdQj1A1TeYbK6b7XPIY8gbxAMOwUCjiEqjLhvkZb71IcsIge6b3b6cUUG319c7VWu0XdGl00jH3fl3dU';
+//const SUPABASE_SERVICE_KEY = 'eliminado — se usa solo desde serverless functions';
 
 // ============================================================
 // TABLA DE PRECIOS POR ZONA (fallback local)
