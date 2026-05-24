@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" fill="none">
+  <rect width="64" height="64" rx="14" fill="#edf4e5"/>
+  <!-- Lightning bolt -->
+  <path d="M38 12 L22 34 H32 L28 52 L46 28 H36L38 12Z" fill="#f0b429"/>
+  <!-- Clock hands -->
+  <circle cx="44" cy="46" r="12" fill="none" stroke="#547c24" stroke-width="2"/>
+  <line x1="44" y1="46" x2="44" y2="38" stroke="#547c24" stroke-width="2" stroke-linecap="round"/>
+  <line x1="44" y1="46" x2="50" y2="46" stroke="#547c24" stroke-width="1.5" stroke-linecap="round"/>
+</svg>

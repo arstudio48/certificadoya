@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" fill="none">
+  <rect width="64" height="64" rx="14" fill="#edf4e5"/>
+  <!-- Leaf -->
+  <path d="M32 16 Q42 18 46 30 Q38 24 32 28 Q38 36 36 46 Q30 36 32 16Z" fill="#22c55e"/>
+  <!-- Stem -->
+  <path d="M32 16 L32 50" stroke="#16a34a" stroke-width="2" stroke-linecap="round"/>
+  <!-- Euro symbol -->
+  <text x="32" y="56" text-anchor="middle" fill="#547c24" font-size="10" font-weight="700" font-family="Montserrat,sans-serif">€</text>
+</svg>
