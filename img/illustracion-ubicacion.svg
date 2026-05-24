@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" fill="none">
+  <circle cx="100" cy="100" r="96" fill="#edf4e5"/>
+  
+  <!-- Map pin shape -->
+  <path d="M100 45 C72 45 55 65 55 85 C55 115 100 155 100 155 C100 155 145 115 145 85 C145 65 128 45 100 45Z" fill="#547c24"/>
+  
+  <!-- Inner circle on pin -->
+  <circle cx="100" cy="85" r="20" fill="white"/>
+  
+  <!-- House icon inside -->
+  <rect x="88" y="75" width="24" height="18" rx="2" fill="#547c24"/>
+  <path d="M85 78 L100 66 L115 78" stroke="white" stroke-width="2" fill="none"/>
+  <rect x="94" y="82" width="7" height="8" rx="1" fill="white" opacity="0.6"/>
+  
+  <!-- Pulse ring -->
+  <circle cx="100" cy="85" r="20" fill="none" stroke="#547c24" stroke-width="1.5" opacity="0.3"/>
+  <circle cx="100" cy="85" r="30" fill="none" stroke="#547c24" stroke-width="1" opacity="0.15"/>
+</svg>

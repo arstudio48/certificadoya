@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" fill="none">
+  <circle cx="100" cy="100" r="96" fill="#edf4e5"/>
+  
+  <!-- Star shape -->
+  <path d="M100 30 L117 72 L163 72 L126 98 L138 142 L100 118 L62 142 L74 98 L37 72 L83 72Z" fill="#f0b429"/>
+  <path d="M100 38 L113 72 L153 72 L121 94 L131 133 L100 112 L69 133 L79 94 L47 72 L87 72Z" fill="#fef3c7"/>
+  
+  <!-- Checkmark in center -->
+  <circle cx="100" cy="98" r="28" fill="#547c24"/>
+  <path d="M85 98 L95 108 L115 88" stroke="white" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+  
+  <!-- Small sparkles -->
+  <circle cx="148" cy="55" r="4" fill="#f0b429" opacity="0.6"/>
+  <circle cx="165" cy="105" r="3" fill="#f0b429" opacity="0.4"/>
+  <circle cx="40" cy="130" r="3" fill="#f0b429" opacity="0.5"/>
+</svg>

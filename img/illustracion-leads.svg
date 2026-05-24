@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" fill="none">
+  <!-- Background -->
+  <circle cx="100" cy="100" r="96" fill="#edf4e5"/>
+  
+  <!-- Inbox/envelope base -->
+  <rect x="50" y="68" width="100" height="80" rx="10" fill="white" stroke="#547c24" stroke-width="2"/>
+  
+  <!-- Envelope flap -->
+  <path d="M50 75 L100 115 L150 75" stroke="#547c24" stroke-width="2" fill="none"/>
+  
+  <!-- Arrow going down into inbox -->
+  <path d="M100 38 L100 62" stroke="#f0b429" stroke-width="3" stroke-linecap="round"/>
+  <path d="M88 52 L100 62 L112 52" stroke="#f0b429" stroke-width="3" stroke-linecap="round" fill="none"/>
+  
+  <!-- Bottom paper lines -->
+  <rect x="70" y="125" width="60" height="3" rx="1.5" fill="#d4d9d0"/>
+  <rect x="75" y="132" width="50" height="3" rx="1.5" fill="#d4d9d0"/>
+  
+  <!-- Notification dot -->
+  <circle cx="130" cy="75" r="10" fill="#547c24"/>
+  <text x="130" y="79" text-anchor="middle" fill="white" font-size="10" font-weight="700">!</text>
+</svg>
