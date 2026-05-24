@@ -176,3 +176,22 @@ CREATE POLICY "Backoffice puede leer leads"
 CREATE POLICY "Técnico lee su perfil"
   ON tecnicos FOR SELECT
   USING (email = current_setting('request.jwt.claims', true)::json->>'email');
+
+-- ============================================================
+-- TABLA: whatsapp_conversations
+-- Registro de conversaciones del bot de WhatsApp
+-- ============================================================
+CREATE TABLE IF NOT EXISTS whatsapp_conversations (
+  id              UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
+  wa_id          TEXT NOT NULL,           -- ID de WhatsApp del usuario
+  nombre         TEXT,
+  mensaje        TEXT NOT NULL,           -- Último mensaje
+  respuesta       TEXT NOT NULL,          -- Respuesta del bot
+  opcion         TEXT,                    -- Opción del menú seleccionada
+  requiere_humano BOOLEAN DEFAULT false,  -- Si pidió hablar con persona
+  created_at     TIMESTAMPTZ DEFAULT NOW()
+);
+
+CREATE INDEX IF NOT EXISTS idx_wp_waid ON whatsapp_conversations(wa_id);
+CREATE INDEX IF NOT EXISTS idx_wp_created ON whatsapp_conversations(created_at DESC);
+
