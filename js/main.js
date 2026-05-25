@@ -335,7 +335,7 @@ async function registrarTecnico() {
 
   // Validar
   if (!nombre || !email || !telefono || !titulacion) {
-    alert('Por favor, completa todos los campos.');
+    alert('Por favor, completa todos los campos requeridos.');
     return;
   }
   if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
@@ -348,40 +348,27 @@ async function registrarTecnico() {
   }
 
   const btn = document.getElementById('reg-btn');
-  const originalText = btn.textContent;
-  btn.textContent = '⏳ Enviando...';
+  btn.textContent = '⏳ Creando cuenta...';
   btn.disabled = true;
 
-  try {
-    const res = await fetch('/.netlify/functions/registro-tecnico', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ nombre, email, telefono, titulacion })
-    });
+  // Guardar en localStorage
+  const token = 'tok_' + Date.now().toString(36) + '_' + Math.random().toString(36).substr(2, 8);
+  localStorage.setItem('registro_' + token, JSON.stringify({
+    nombre: nombre,
+    email: email,
+    telefono: telefono,
+    titulacion: titulacion
+  }));
 
-    const data = await res.json();
+  // Mostrar éxito y redirigir al paso 2
+  document.getElementById('reg-form').style.display = 'none';
+  document.getElementById('reg-exito').classList.remove('hidden');
+  document.getElementById('reg-email-conf').textContent = email;
 
-    if (!res.ok) {
-      if (res.status === 409) {
-        alert('Este email ya está registrado. Si crees que es un error, contáctanos.');
-      } else {
-        alert(data.error || 'Error al registrar. Inténtalo de nuevo.');
-      }
-      btn.textContent = originalText;
-      btn.disabled = false;
-      return;
-    }
-
-    // Éxito
-    document.getElementById('reg-form').style.display = 'none';
-    document.getElementById('reg-exito').classList.add('visible');
-    document.getElementById('reg-email-conf').textContent = email;
-  } catch (err) {
-    console.error('Error:', err);
-    alert('Error de conexión. Inténtalo de nuevo.');
-    btn.textContent = originalText;
-    btn.disabled = false;
-  }
+  // Enlace al paso 2
+  document.getElementById('btn-ir-paso2').onclick = function() {
+    window.location.href = '/panel-tecnicos/completar-perfil.html?token=' + token + '&email=' + encodeURIComponent(email);
+  };
 }
 
 console.log('⚡ CertificadoYa listo');
