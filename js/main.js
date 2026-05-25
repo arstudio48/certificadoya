@@ -351,24 +351,43 @@ async function registrarTecnico() {
   btn.textContent = '⏳ Creando cuenta...';
   btn.disabled = true;
 
-  // Guardar en localStorage
-  const token = 'tok_' + Date.now().toString(36) + '_' + Math.random().toString(36).substr(2, 8);
-  localStorage.setItem('registro_' + token, JSON.stringify({
-    nombre: nombre,
-    email: email,
-    telefono: telefono,
-    titulacion: titulacion
-  }));
+  const supabaseUrl = 'https://wypgqpgjlookbhuaiyxa.supabase.co';
 
-  // Mostrar éxito y redirigir al paso 2
-  document.getElementById('reg-form').style.display = 'none';
-  document.getElementById('reg-exito').classList.remove('hidden');
-  document.getElementById('reg-email-conf').textContent = email;
+  try {
+    const res = await fetch(supabaseUrl + '/functions/v1/registro-tecnico', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ nombre, email, telefono, titulacion })
+    });
 
-  // Enlace al paso 2
-  document.getElementById('btn-ir-paso2').onclick = function() {
-    window.location.href = '/panel-tecnicos/completar-perfil.html?token=' + token + '&email=' + encodeURIComponent(email);
-  };
+    const data = await res.json();
+
+    if (!res.ok) {
+      if (res.status === 409) {
+        alert('Este email ya está registrado. Si crees que es un error, contáctanos.');
+      } else {
+        alert(data.error || 'Error al registrar. Inténtalo de nuevo.');
+      }
+      btn.disabled = false;
+      btn.textContent = 'Crear cuenta gratis →';
+      return;
+    }
+
+    // Éxito
+    document.getElementById('reg-form').style.display = 'none';
+    document.getElementById('reg-exito').classList.remove('hidden');
+    document.getElementById('reg-email-conf').textContent = email;
+
+    // Enlace al paso 2 con token real
+    document.getElementById('btn-ir-paso2').onclick = function() {
+      window.location.href = '/panel-tecnicos/completar-perfil.html?token=' + data.token + '&email=' + encodeURIComponent(email);
+    };
+  } catch (err) {
+    console.error('Error:', err);
+    alert('Error de conexión. Inténtalo de nuevo.');
+    btn.disabled = false;
+    btn.textContent = 'Crear cuenta gratis →';
+  }
 }
 
 console.log('⚡ CertificadoYa listo');
