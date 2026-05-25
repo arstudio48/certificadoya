@@ -320,7 +320,7 @@ function guardarPerfil(e) {
   
   const data = {
     token: token,
-    email: email,
+    email: userEmail,
     titulacion: document.getElementById('titulacion').value,
     colegiado: document.getElementById('colegiado').value,
     colegio: document.getElementById('colegio').value,
@@ -329,16 +329,34 @@ function guardarPerfil(e) {
     plan: plan
   };
 
-  // Guardar en Supabase (vía edge function)
   const btn = document.getElementById('btn-guardar');
   btn.disabled = true;
   btn.textContent = 'Guardando...';
 
-  // Simular éxito (en producción iría a Supabase Edge Function)
-  setTimeout(function() {
-    document.getElementById('form-card').classList.add('hidden');
-    document.getElementById('exito-card').classList.remove('hidden');
-  }, 1000);
+  const supabaseUrl = 'https://wypgqpgjlookbhuaiyxa.supabase.co';
+
+  fetch(supabaseUrl + '/functions/v1/completar-perfil', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(data)
+  })
+  .then(res => res.json())
+  .then(result => {
+    if (result.success) {
+      document.getElementById('form-card').classList.add('hidden');
+      document.getElementById('exito-card').classList.remove('hidden');
+    } else {
+      alert(result.error || 'Error al guardar. Inténtalo de nuevo.');
+      btn.disabled = false;
+      btn.textContent = 'Guardar perfil y activar cuenta';
+    }
+  })
+  .catch(err => {
+    console.error('Error:', err);
+    alert('Error de conexión. Inténtalo de nuevo.');
+    btn.disabled = false;
+    btn.textContent = 'Guardar perfil y activar cuenta';
+  });
 
   return false;
 }
