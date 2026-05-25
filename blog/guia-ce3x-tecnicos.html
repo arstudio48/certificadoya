@@ -70,113 +70,185 @@
 
   <h1>Guía CE3X para técnicos certificadores: cómo usarlo paso a paso</h1>
 
-<a href="/blog/guia-ce3x-tecnicos.html"><img src="/img/blog/ce3x-guia.jpg" alt="Guía CE3X para técnicos certificadores" loading="lazy" style="width:100%;display:block"></a>
+<a href="/blog/guia-ce3x-tecnicos.html"><img src="/img/blog/ce3x-guia.jpg" alt="Guía CE3X para técnicos certificadores" loading="lazy" style="width:100%;display:block;border-radius:12px"></a>
 
-<p>El <strong>CE3X</strong> es el software oficial más usado en España para emitir Certificados de Eficiencia Energética (CEE). Es gratuito, está reconocido por el Ministerio y lo utilizan la mayoría de arquitectos, aparejadores e ingenieros. En esta guía te explicamos todo lo que necesitas saber para sacarle el máximo partido.</p>
+<p>Si eres arquitecto técnico, aparejador o ingeniero y te dedicas a la certificación energética, el <strong>CE3X</strong> es tu herramienta del día a día. Es el software del Ministerio para edificios existentes y el que más se usa en España. Pero ojo: usarlo bien marca la diferencia entre un certificado que se registra sin problemas y uno que te devuelven.</p>
 
-  <h2>¿Qué es CE3X?</h2>
-  <p>CE3X (Certificación Energética de Edificios Existentes) es un programa desarrollado por el Ministerio para la Transición Ecológica que permite calcular la calificación energética de un edificio existente siguiendo el procedimiento simplificado. Es el método más extendido porque es gratuito y razonablemente rápido.</p>
-  <p>Alternativas: <strong>HULC</strong> (Herramienta Unificada LIDER-CALENER, más precisa pero más compleja) y <strong>CYPETHERM</strong> (de Cype, muy completo para obra nueva).</p>
+<p>Esta guía no es el manual oficial —es lo que aprendes después de 500 certificados: trucos, atajos, errores que te ahorrarán horas y cómo evitar que el registro autonómico te lo rechace.</p>
 
-  <div class="tip-box">
-    <strong><img src="/img/ico-confianza.svg" alt="Consejo" width="16" height="16" style="vertical-align:middle"> Tip:</strong> Para edificios existentes, CE3X es la opción más práctica. Usa HULC o CYPETHERM solo si el cliente pide un estudio más detallado o si es obra nueva.
-  </div>
+<div class="tip-box">
+  <strong><img src="/img/ico-confianza.svg" alt="Consejo" width="16" height="16" style="vertical-align:middle"> La clave:</strong> CE3X es un software de cálculo simplificado. No necesitas ser ingeniero de caminos para usarlo, pero sí necesitas conocer bien la construcción del edificio. Un dato mal puesto puede cambiarte la letra de la B a la E.
+</div>
 
-  <h2>Cómo descargar e instalar CE3X</h2>
-  <ol>
-    <li>Ve a la web del <a href="https://energia.gob.es/desarrollo/EficienciaEnergetica/CertificacionEnergetica/ProgramaCE3X/Paginas/programa-ce3x.aspx" target="_blank" rel="noopener">Ministerio</a></li>
-    <li>Descarga la última versión (CE3X v2.3+)</li>
-    <li>Ejecuta el instalador (Windows). También funciona con Wine en Linux/Mac</li>
-    <li>Al abrirlo, selecciona "Nuevo certificado" y elige la opción "Edificio existente"</li>
-  </ol>
+<h2>¿Qué es CE3X exactamente?</h2>
+<p>CE3X (Certificación Energética de Edificios Existentes) es un programa gratuito del Ministerio que sigue un <strong>método simplificado</strong> —no simula el comportamiento real del edificio como HULC, sino que aplica coeficientes y tablas predefinidas. Por eso es más rápido y requiere menos datos de entrada.</p>
+<ul>
+  <li><strong>Ventaja:</strong> Rápido, gratuito, aceptado en TODAS las comunidades autónomas.</li>
+  <li><strong>Limitación:</strong> No permite modelar geometrías complejas ni sistemas innovadores. Para eso necesitas HULC o CYPETHERM.</li>
+  <li><strong>Cuándo usarlo:</strong> Siempre en existentes salvo que el cliente pida un estudio detallado o sea un edificio singular.</li>
+</ul>
 
-  <h2>Datos que necesitas del inmueble</h2>
-  <p>Antes de empezar, asegúrate de tener:</p>
-  <ul>
-    <li><strong>Dirección y referencia catastral</strong> del inmueble</li>
-    <li><strong>Año de construcción</strong> y si ha tenido rehabilitaciones</li>
-    <li><strong>Superficie útil</strong> de cada planta</li>
-    <li><strong>Cerramientos</strong>: tipo de muros, cubiertas, suelos (con espesores si es posible)</li>
-    <li><strong>Huecos</strong>: número, dimensiones, tipo de vidrio y marco de cada ventana</li>
-    <li><strong>Sistemas</strong>: calefacción, ACS, refrigeración (marca, modelo, año, combustible)</li>
-    <li><strong>Iluminación</strong> (solo para edificios terciarios)</li>
-  </ul>
+<h2>Qué necesitas antes de abrir CE3X</h2>
+<p>No empieces a teclear sin esto. El 90% de las devoluciones en el registro son por datos incorrectos del inmueble.</p>
 
-  <h2>Zonas climáticas en CE3X</h2>
-  <p>España está dividida en zonas climáticas según el CTE. CE3X las asigna automáticamente al introducir el código postal. Las zonas van de <strong>α (alfa)</strong> a <strong>E</strong>:</p>
-  <ul>
-    <li>Zona α: Canarias (templado)</li>
-    <li>Zona A: Costa mediterránea sur, Baleares</li>
-    <li>Zona B: Costa mediterránea norte, sur peninsular</li>
-    <li>Zona C: Meseta sur, valle del Ebro</li>
-    <li>Zona D: Meseta norte, interior de Cataluña</li>
-    <li>Zona E: Alta montaña, Pirineos, Sistema Central</li>
-  </ul>
+<h3>Del inmueble (imprescindible):</h3>
+<ul>
+  <li><strong>Referencia catastral</strong> — la necesitas para el registro autonómico. Consíguela en la sede catastral con la dirección.</li>
+  <li><strong>Año de construcción exacto</strong> — si no lo sabes, búscalo en el catastro. Una diferencia de 5 años puede cambiar la zona climática.</li>
+  <li><strong>Superficie útil por planta</strong> — no la construida. El CE3X pide superficie útil.</li>
+  <li><strong>Cerramientos:</strong> tipo de muro, espesor, si tiene cámara de aire, si está aislado. Pregunta al propietario o mira en la documentación del edificio.</li>
+  <li><strong>Huecos:</strong> cuenta todas las ventanas. Si son muchas iguales, agrupa por tipo.</li>
+  <li><strong>Sistemas:</strong> caldera (marca, modelo, año), aire acondicionado, ACS (termo, caldera, aerotermia). Si no hay, se asume "sin instalación".</li>
+</ul>
 
-  <div class="warning-box">
-    <strong><img src="/img/ico-confianza.svg" alt="Aviso" width="16" height="16" style="vertical-align:middle"> Error común:</strong> No verificar la zona climática asignada. Si el código postal está mal, la zona climática será incorrecta y la calificación energética puede variar hasta 2 letras.
-  </div>
+<div class="warning-box">
+  <strong><img src="/img/ico-confianza.svg" alt="Aviso" width="16" height="16" style="vertical-align:middle"> Error de novato:</strong> Poner "sin aislamiento" en todos los cerramientos porque no tienes los datos. Si el edificio es posterior a 1979 (NBE-CT-79), ya tiene algún tipo de aislamiento. Usa los valores por defecto del CTE para el año de construcción. Es mejor aproximar con criterio que poner cero aislamiento —te cargas la calificación.
+</div>
 
-  <h2>Paso a paso para emitir un certificado con CE3X</h2>
+<h2>Descarga e instalación</h2>
+<ol>
+  <li>Descárgalo de la web oficial del <a href="https://energia.gob.es/desarrollo/EficienciaEnergetica/CertificacionEnergetica/ProgramaCE3X/Paginas/programa-ce3x.aspx" target="_blank" rel="noopener">Ministerio</a> (versión 2.3+)</li>
+  <li>Instalador clásico de Windows. Sin complicaciones.</li>
+  <li>Si usas Mac, con Wine o máquina virtual funciona.</li>
+  <li>Importante: <strong>después de instalar, ejecuta el actualizador</strong> desde el menú de CE3X. La versión de instalación suele estar desactualizada.</li>
+</ol>
+
+<div class="tip-box">
+  <strong><img src="/img/confianza.svg" alt="Consejo" width="16" height="16" style="vertical-align:middle"> Tip:</strong> Cada vez que el Ministerio actualiza los factores de paso (emisiones de CO₂ por kWh), CE3X se actualiza. Si notas que las calificaciones te salen raras, comprueba la versión. Pasa cada 1-2 años.
+</div>
+
+<h2>Zonas climáticas: el error más común</h2>
+<p>CE3X asigna la zona climática según el código postal. Pero no siempre acierta. <strong>La zona climática es CRÍTICA</strong>: una zona mal asignada puede variar la calificación hasta 2 letras.</p>
+
+<p>Las zonas en España (según CTE DB-HE):</p>
+<ul>
+  <li><strong>Zona α (alfa):</strong> Canarias — clima suave todo el año</li>
+  <li><strong>Zona A:</strong> Costa mediterránea sur (Almería, Murcia, Alicante), Baleares</li>
+  <li><strong>Zona B:</strong> Costa mediterránea norte (Valencia, Barcelona, Girona), sur peninsular (Sevilla, Cádiz)</li>
+  <li><strong>Zona C:</strong> Meseta sur (Madrid, Toledo, Ciudad Real), valle del Ebro</li>
+  <li><strong>Zona D:</strong> Meseta norte (Valladolid, Burgos, León), interior de Cataluña</li>
+  <li><strong>Zona E:</strong> Alta montaña (Pirineos, Sistema Central, Sierra Nevada)</li>
+</ul>
+
+<div class="warning-box">
+  <strong><img src="/img/ico-confianza.svg" alt="Aviso" width="16" height="16" style="vertical-align:middle"> Caso real:</strong> Un piso en la Sierra de Madrid (Cercedilla, 28470) tiene zona E, pero el catastro pone "Madrid" y CE3X asigna zona D. Hay que corregirlo manualmente. Siempre verifica la zona antes de calcular.
+</div>
+
+<h2>Paso a paso: cómo hacer un certificado en CE3X</h2>
+
+<h3>1. Datos generales</h3>
+<p>Rellena: dirección exacta (como aparecerá en el registro), referencia catastral, año construcción, año de la última rehabilitación (si la hay), superficie útil total, número de plantas sobre rasante y bajo rasante.</p>
+<p><strong>Importante:</strong> el tipo de edificio (unifamiliar, piso en bloque, etc.) afecta a la demanda de referencia. No marques "bloque" si es un chalet.</p>
+
+<h3>2. Envolvente térmica</h3>
+<p>Aquí se decide el 60% de la calificación. Tómate tu tiempo:</p>
+<ul>
+  <li><strong>Muros de fachada:</strong> si el edificio tiene cámara de aire (posteriores a 1979 aproximadamente), indícalo. La cámara de aire mejora mucho la transmitancia aunque no tenga aislamiento añadido.</li>
+  <li><strong>Cubierta:</strong> plana o inclinada. Si es plana transitable o no. Si tiene aislamiento o cámara.</li>
+  <li><strong>Suelo:</strong> contacto con terreno o con cámara sanitaria. Si es vivienda en bloque, la planta baja da al terreno y las superiores a viviendas (esa partición no cuenta como cerramiento).</li>
+  <li><strong>Puentes térmicos:</strong> no te olvides. CE3X los calcula automáticamente según el tipo de fachada. Si pones "fachada sin puente térmico" en un edificio real, estás maquillando la calificación.</li>
+</ul>
+
+<div class="tip-box">
+  <strong><img src="/img/ico-confianza.svg" alt="Consejo" width="16" height="16" style="vertical-align:middle"> Atajo:</strong> Si el edificio tiene <strong>fachada ventilada</strong> o <strong>SATE</strong> (aislamiento exterior), puedes reflejarlo como "fachada con aislamiento exterior" en los materiales. Esto mejora bastante la calificación frente a aislamiento interior.
+</div>
+
+<h3>3. Huecos y ventanas</h3>
+<p>Agrupa por tipo de ventana. No pongas una a una si hay 50 iguales. <strong>El factor más importante aquí es el tipo de vidrio</strong>:</p>
+<ul>
+  <li>Vidrio sencillo (U ≈ 5.7 W/m²K) — típico de edificios anteriores a 1990</li>
+  <li>Vidrio doble (U ≈ 2.8-3.3 W/m²K) — a partir de los 90</li>
+  <li>Vidrio bajo emisivo (U ≈ 1.8-2.2 W/m²K) — edificios modernos o rehabilitaciones recientes</li>
+</ul>
+<p>El marco también importa: aluminio sin rotura de puente térmico es lo peor; PVC y madera son mejores; aluminio con RPT es aceptable.</p>
+
+<h3>4. Instalaciones</h3>
+<p>Calefacción, ACS y refrigeración. Si no hay refrigeración (muchas viviendas en el norte no tienen), marca "sin instalación" (no "equipo inexistente" que es otra cosa).</p>
+
+<p>Para <strong>calderas</strong>: si no sabes el rendimiento exacto, CE3X tiene valores por defecto según año de instalación. Son conservadores pero aceptables:</p>
+<ul>
+  <li>Caldera anterior a 2000: rendimiento ≈ 70-80%</li>
+  <li>Caldera 2000-2010: ≈ 80-85%</li>
+  <li>Caldera posterior a 2010 (condensación): ≈ 90-98%</li>
+  <li>Bomba de calor aerotermia: rendimiento ≈ 250-400% (según modelo y temperatura exterior)</li>
+</ul>
+
+<div class="warning-box">
+  <strong><img src="/img/ico-confianza.svg" alt="Aviso" width="16" height="16" style="vertical-align:middle"> Error frecuente:</strong> Poner bomba de calor aerotermia con rendimiento del 100% porque no sabes qué significa el COP. Una bomba de calor con COP=4 tiene un rendimiento del 400%. Si pones 100% estás infravalorando la instalación y la calificación será peor de lo que corresponde.
+</div>
+
+<h3>5. Cálculo</h3>
+<p>Pulsa "Calcular". CE3X te da dos calificaciones: <strong>Consumo de energía primaria</strong> (kWh/m² año) y <strong>Emisiones de CO₂</strong> (kg CO₂/m² año). La normativa exige que ambas estén dentro de los límites; la peor de las dos es la que cuenta para la letra final.</p>
+
+<p><strong>Interpretación rápida:</strong></p>
+<ul>
+  <li>A y B: edificios muy eficientes (normal en obra nueva o rehabilitaciones integrales)</li>
+  <li>C: eficiencia media-alta (edificio bien conservado con mejoras)</li>
+  <li>D y E: lo más habitual en edificios existentes sin rehabilitar</li>
+  <li>F y G: edificios antiguos sin aislamiento o con sistemas ineficientes</li>
+</ul>
+
+<div class="tip-box">
+  <strong><img src="/img/ico-confianza.svg" alt="Consejo" width="16" height="16" style="vertical-align:middle"> Truco:</strong> Si la calificación te sale muy baja (F o G) y sabes que el edificio no está tan mal, revisa: 1) zona climática, 2) que los cerramientos no estén con espesor 0, 3) que los huecos estén contabilizados correctamente. Muchas veces el error está ahí.
+</div>
+
+<h3>6. Medidas de mejora</h3>
+<p>CE3X genera automáticamente propuestas de mejora. <strong>No las copies sin criterio.</strong> El programa sugiere mejoras genéricas que a veces no son viables (como poner aislamiento exterior en un edificio protegido). Selecciona las que realmente sean aplicables y presupuestables.</p>
+<p>Un buen conjunto de medidas de mejora suele incluir: 1) mejora de fachada (SATE o aislamiento interior), 2) sustitución de ventanas, 3) mejora de caldera a condensación o aerotermia. Con estas tres sueles pasar de una E a una C.</p>
+
+<h3>7. Generar PDF y registrar</h3>
+<p>CE3X genera un PDF con todo el informe técnico. Ese PDF lo presentas en el registro autonómico correspondiente. <strong>Cada comunidad tiene su propio procedimiento</strong> — algunas tienen plataforma online, otras piden el PDF firmado electrónicamente, otras requieren presentación presencial.</p>
+
+<div class="tip-box">
+  <strong><img src="/img/ico-visita.svg" alt="Nota" width="18" height="18" style="vertical-align:middle"> Recuerda:</strong> Antes de registrar, consulta el organismo de tu comunidad. Algunas cobran tasa (desde 0€ hasta 40€ aprox). En <a href="/organismos-contacto.html">nuestra página de organismos oficiales</a> tienes los enlaces directos.
+</div>
+
+<h2>Errores frecuentes que te harán perder tiempo</h2>
+<ul>
+  <li><strong>"El edificio no cumple los requisitos mínimos"</strong> — te falta llenar alguna pestaña. Revisa que cada sección tenga todos los campos obligatorios. Especialmente la de iluminación (si marcaste terciario) y la de instalaciones.</li>
+  <li><strong>Calificación demasiado baja para lo que esperabas</strong> — casi siempre es la envolvente. Revisa espesores de cerramientos y tipo de vidrio. Un muro de ladrillo macizo de 30cm sin aislar tiene una transmitancia muy alta.</li>
+  <li><strong>CE3X se cuelga o da error al calcular</strong> — normalmente es la versión. Actualiza el programa. Si sigue fallando, reinstala.</li>
+  <li><strong>Diferencia grande entre letra de consumo y emisiones</strong> — típico de viviendas con calefacción eléctrica. El consumo primario es alto (la electricidad tiene factor de paso alto) pero las emisiones pueden ser bajas si la electricidad es renovable. Es normal.</li>
+  <li><strong>El registro autonómico rechaza el PDF</strong> — suele ser por: referencia catastral incorrecta, dirección que no coincide con el catastro, falta de firma del técnico, o que el PDF esté bloqueado para editar. Asegúrate de que el PDF sea el original de CE3X sin modificaciones posteriores.</li>
+</ul>
+
+<h2>CE3X vs HULC vs CYPETHERM: cuándo usar cada uno</h2>
+<p>Cada herramienta tiene su momento:</p>
+<ul>
+  <li><strong>CE3X:</strong> para el 90% de los CEE de edificios existentes. Rápido, fiable, aceptado en todos los registros.</li>
+  <li><strong>HULC (LIDER-CALENER):</strong> cuando el edificio tiene geometría compleja (varias orientaciones, formas irregulares) o necesitas un cálculo más preciso. Obligatorio para obra nueva.</li>
+  <li><strong>CYPETHERM:</strong> si trabajas con Cype habitualmente, es muy completo. Bueno para obra nueva y rehabilitaciones con modelado BIM.</li>
+</ul>
+
+<div class="tip-box">
+  <strong><img src="/img/ico-confianza.svg" alt="Consejo" width="16" height="16" style="vertical-align:middle"> Mi recomendación:</strong> Ten los tres instalados. Usa CE3X para el día a día, HULC para casos especiales y CYPETHERM si el proyecto viene de Cype. Pero si solo vas a usar uno, que sea CE3X.
+</div>
+
+<h2>Preguntas frecuentes de técnicos</h2>
+
+<h3>¿Puedo hacer el certificado sin visitar el inmueble?</h3>
+<p>Legalmente, el técnico debe visitar el inmueble para levantar los datos de cerramientos, huecos e instalaciones. Hacerlo sin visita es una irresponsabilidad profesional y puedes tener problemas si te reclaman.</p>
+
+<h3>¿CE3X funciona en Mac?</h3>
+<p>Oficialmente no. Con Wine o una máquina virtual (Parallels, VirtualBox) funciona sin problemas. No recomiendo versiones online no oficiales — no sabes qué hacen con los datos del certificado.</p>
+
+<h3>¿Qué hago si el registro autonómico no acepta el PDF?</h3>
+<p>Primero verifica que el PDF no esté dañado. Luego comprueba que los datos del inmueble en el PDF coinciden con los del catastro (referencia, dirección). Si todo está bien, contacta con el soporte del registro autonómico — a veces es un error del sistema.</p>
+
+<h3>¿CE3X calcula correctamente con aerotermia?</h3>
+<p>CE3X v2.3+ ya tiene perfiles para bomba de calor y aerotermia. El rendimiento lo puedes ajustar según el COP declarado por el fabricante. Si introduces un COP de 4.5, el rendimiento estacional será aproximadamente del 350-400%.</p>
+
+<h3>¿Puedo presentar el mismo certificado en varias comunidades?</h3>
+<p>No. El certificado se registra en la comunidad donde está ubicado el inmueble. Si el edificio está en Madrid, se registra en Madrid. No puedes registrar el mismo certificado en dos comunidades.</p>
+
   
-  <h3>1. Datos generales</h3>
-  <p>Introduce dirección, referencia catastral, año construcción, superficie. Selecciona "Uso" según el tipo de inmueble (vivienda, terciario, etc.).</p>
 
-  <h3>2. Envolvente térmica</h3>
-  <p>Define los cerramientos del edificio: muros de fachada, cubiertas, suelos, particiones interiores. Para cada uno debes indicar el material y espesor. <strong>Si no conoces los materiales exactos, usa los valores por defecto del CTE para el año de construcción.</strong></p>
-
-  <h3>3. Huecos y ventanas</h3>
-  <p>Introduce cada tipo de ventana: dimensiones, tipo de marco (madera, PVC, aluminio sin rotura, aluminio con rotura), tipo de vidrio (sencillo, doble, bajo emisivo). Si hay muchas iguales, puedes agruparlas.</p>
-
-  <h3>4. Instalaciones</h3>
-  <p>Define los sistemas de calefacción, ACS y refrigeración. Necesitas:</p>
-  <ul>
-    <li>Tipo de generador (caldera, bomba de calor, aerotermia, etc.)</li>
-    <li>Combustible (gas natural, gasóleo, electricidad, biomasa, etc.)</li>
-    <li>Rendimiento estacional</li>
-    <li>Año de instalación</li>
-  </ul>
-
-  <div class="tip-box">
-    <strong><img src="/img/ico-confianza.svg" alt="Consejo" width="16" height="16" style="vertical-align:middle"> Tip:</strong> Si no conoces el rendimiento exacto, usa los valores por defecto del programa según el año de instalación. Para calderas antiguas (anteriores a 2000), el rendimiento suele rondar el 70-80%.
+<div class="cta-tecnicos">
+    <h3><img src="/img/ico-tecnicos.svg" alt="Técnico" width="18" height="18" style="vertical-align:middle"> ¿Eres técnico certificador?</h3>
+    <p>Únete a CertificadoYa y recibe clientes en tu zona sin invertir en publicidad. Sin cuotas de entrada.</p>
+    <a href="/panel-tecnicos.html" class="btn-cta">Crear cuenta gratis →</a>
   </div>
 
-  <h3>5. Cálculo y calificación</h3>
-  <p>Una vez introducidos todos los datos, pulsa "Calcular". CE3X te dará la calificación energética (letra de la A a la G) para consumo de energía primaria y emisiones de CO₂. También genera las <strong>medidas de mejora</strong> recomendadas.</p>
-
-  <h3>6. Generar el certificado</h3>
-  <p>CE3X genera un PDF con el informe completo: datos del edificio, calificación, etiqueta energética, medidas de mejora. Este PDF se presenta en el <strong>registro autonómico</strong> correspondiente para su validación.</p>
-
-  <h2>Errores frecuentes en CE3X</h2>
-  <ul>
-    <li><strong>"El edificio no cumple con los requisitos mínimos"</strong>: Suele ser porque falta algún dato obligatorio. Revisa que todas las pestañas estén completas.</li>
-    <li><strong>Calificación demasiado baja</strong>: Revisa los cerramientos. Un error común es poner muros sin aislamiento cuando en realidad el edificio tiene cámara de aire.</li>
-    <li><strong>El programa no deja seleccionar un material</strong>: A veces la versión desactualizada da problemas. Asegúrate de tener la última versión.</li>
-    <li><strong>Diferencia de letra entre consumo y emisiones</strong>: Normal si la fuente de energía es eléctrica (bajas emisiones pero alto consumo primario).</li>
-  </ul>
-
-  <h2>Cómo registrar el certificado en cada comunidad</h2>
-  <p>Cada comunidad autónoma tiene su propio registro telemático. El PDF generado por CE3X se sube junto con los datos del técnico y del inmueble. Algunas comunidades cobran tasa por el registro y otras no.</p>
-
-  <div class="tip-box">
-    <strong><img src="/img/ico-visita.svg" alt="Nota" width="18" height="18" style="vertical-align:middle"> Recuerda:</strong> Consulta el organismo de tu comunidad para saber si hay que pagar tasa antes de registrar. En <a href="/organismos-contacto.html">nuestra página de organismos oficiales</a> tienes los enlaces a cada comunidad.
-  </div>
-
-  <h2>Preguntas frecuentes</h2>
-  
-  <h3>¿CE3X es obligatorio?</h3>
-  <p>No es obligatorio, pero es el más usado y aceptado por todas las comunidades autónomas. Puedes usar HULC o CYPETHERM si lo prefieres.</p>
-
-  <h3>¿Puedo usar CE3X en Mac o Linux?</h3>
-  <p>Oficialmente solo Windows. En Mac funciona con Wine o máquina virtual. También hay versiones online no oficiales, pero no recomendamos usarlas.</p>
-
-  <h3>¿Cada cuánto se actualiza?</h3>
-  <p>El Ministerio actualiza CE3X periódicamente cuando hay cambios normativos. La última versión importante incorporó el RD 390/2021 y los nuevos factores de paso.</p>
-
-  <h3>¿El certificado generado por CE3X tiene validez legal?</h3>
-  <p>Sí, siempre que lo firme un técnico colegiado habilitado y se registre en el organismo autonómico correspondiente. El PDF de CE3X es el documento oficial.</p>
-
-  
 <div class="autor-box">
   <img src="/img/autor-javier.jpg" alt="Javier Martínez" class="autor-img" loading="lazy">
   <div class="autor-info">
@@ -193,11 +265,6 @@
 .autor-bio { font-size: .82rem; color: #6b7b5e; line-height: 1.5; margin: 0; }
 @media (max-width: 500px) { .autor-box { flex-direction: column; align-items: center; text-align: center; } }
 </style>
-<div class="cta-tecnicos">
-    <h3><img src="/img/ico-tecnicos.svg" alt="Técnico" width="18" height="18" style="vertical-align:middle"> ¿Eres técnico certificador?</h3>
-    <p>Únete a CertificadoYa y recibe clientes en tu zona sin invertir en publicidad. Sin cuotas de entrada.</p>
-    <a href="/panel-tecnicos.html" class="btn-cta">Crear cuenta gratis →</a>
-  </div>
 
 </main>
 
