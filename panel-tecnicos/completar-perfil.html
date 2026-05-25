@@ -296,13 +296,20 @@
 </main>
 
 <script>
-// Leer token de la URL (pasado desde el email de confirmación)
+// Leer token y email de la URL
 const params = new URLSearchParams(window.location.search);
 const token = params.get('token');
 const email = params.get('email');
 
-if (email) {
-  document.getElementById('email-display').textContent = email;
+// Cargar datos guardados en localStorage
+const savedData = token ? JSON.parse(localStorage.getItem('registro_' + token)) : null;
+const userEmail = email || (savedData ? savedData.email : 'tu@email.com');
+
+document.getElementById('email-display').textContent = userEmail;
+
+// Si no hay token, mostrar aviso y deshabilitar
+if (!token) {
+  document.getElementById('perfil-form').innerHTML = '<div style="text-align:center;padding:2rem;color:#9aab8a"><p>No se encontró un registro activo.</p><a href="/panel-tecnicos.html" class="btn-submit" style="display:inline-block;margin-top:1rem;background:white;color:#547c24;border:2px solid #547c24;width:auto;padding:.75rem 1.5rem">← Registrarse primero</a></div>';
 }
 
 function guardarPerfil(e) {
