@@ -10,6 +10,8 @@ const WHATSAPP_TOKEN = Deno.env.get("WHATSAPP_TOKEN") || "";
 const WHATSAPP_PHONE_ID = Deno.env.get("WHATSAPP_PHONE_ID") || "";
 const RESEND_API_KEY = Deno.env.get("RESEND_API_KEY") || "";
 const NOTIFY_EMAIL = "artbriher@gmail.com";
+const SUPABASE_URL = Deno.env.get("SUPABASE_URL") || "";
+const SERVICE_ROLE_KEY = Deno.env.get("SERVICE_ROLE_KEY") || "";
 
 // ── Tipos ──
 interface WhatsAppMessage {
@@ -152,6 +154,31 @@ async function notifyEmail(userName: string, phone: string, message: string) {
   }
 }
 
+// ── Helper: guardar conversación en Supabase ──
+async function saveConversation(waId: string, nombre: string, mensaje: string, respuesta: string, opcion: string | null, requiereHumano: boolean) {
+  if (!SUPABASE_URL || !SERVICE_ROLE_KEY) return;
+  try {
+    await fetch(`${SUPABASE_URL}/rest/v1/whatsapp_conversations`, {
+      method: "POST",
+      headers: {
+        "Authorization": `Bearer ${SERVICE_ROLE_KEY}`,
+        "Content-Type": "application/json",
+        "Prefer": "return=minimal",
+      },
+      body: JSON.stringify({
+        wa_id: waId,
+        nombre,
+        mensaje,
+        respuesta,
+        opcion,
+        requiere_humano: requiereHumano,
+      }),
+    });
+  } catch {
+    // Silencio
+  }
+}
+
 // ── Lógica del bot ──
 function processMessage(text: string): string {
   const t = text.trim().toLowerCase();
@@ -243,11 +270,22 @@ serve(async (req) => {
             // Procesar mensaje
             const reply = processMessage(text);
 
+            // Determinar opción para BD
+            let selectedOption: string | null = null;
+            const trimmed = text.trim();
+            if (/^[12345]$/.test(trimmed)) {
+              selectedOption = trimmed;
+            }
+
+            // Guardar en BD
+            const requiereHumano = trimmed === "4" || /humano|persona|hablar/i.test(text);
+            await saveConversation(from, userName, text, reply, selectedOption, requiereHumano);
+
             // Enviar respuesta
             await sendWhatsApp(from, reply);
 
             // Si pide humano, notificar por email
-            if (text.trim() === "4" || /humano|persona|hablar/i.test(text)) {
+            if (requiereHumano) {
               await notifyEmail(userName, from, text);
             }
           }
