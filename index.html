@@ -494,19 +494,12 @@
 
 <script src="/js/main.js"></script>
 <script>function cambiarProvincia() { let provincia = document.getElementById('provincia-selector').value; if(provincia) { window.location.href = '/certificado-energetico-' + provincia + '/'; } }
-// Scroll reveal
-(function(){
+document.addEventListener('DOMContentLoaded',function(){
   var elems = document.querySelectorAll('.pasos-section,.ventajas-v2,.provincias-section-v2,.faq-v2,.cta-v2,.tecnicos-home');
-  var observer = new IntersectionObserver(function(entries){
-    entries.forEach(function(e){
-      if(e.isIntersecting){e.target.style.opacity='1';e.target.style.transform='translateY(0)';observer.unobserve(e.target)}
-    })
-  },{threshold:0.1});
-  elems.forEach(function(el){
-    el.style.opacity='0';el.style.transform='translateY(20px)';el.style.transition='opacity .6s ease,transform .6s ease';
-    observer.observe(el)
-  })
-})();
+  elems.forEach(function(el){el.style.opacity='0';el.style.transform='translateY(30px)';el.style.transition='opacity .8s ease,transform .8s ease'});
+  var observer = new IntersectionObserver(function(entries){entries.forEach(function(e){if(e.isIntersecting){e.target.style.opacity='1';e.target.style.transform='translateY(0)';observer.unobserve(e.target)}})},{threshold:0.15});
+  setTimeout(function(){elems.forEach(function(el){observer.observe(el)})},200)
+});
 </script>
 
 <!-- WhatsApp floating button -->
