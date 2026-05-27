@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Plantilla de Informe de Certificación Energética | CertificadoYa</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap');
+  :root { --primary: #547c24; --primary-dark: #43631d; --text: #20201f; --text-light: #4a5a3a; --border: #e5e7eb; --bg-green: #f3f9eb; }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: 'Montserrat', sans-serif; color: var(--text); line-height: 1.7; font-size: 10pt; max-width: 210mm; margin: 0 auto; padding: 0; }
+  .page { padding: 20mm 18mm; page-break-after: always; }
+  .page:last-child { page-break-after: avoid; }
+
+  .portada { text-align: center; padding-top: 40mm; }
+  .portada .logo { margin-bottom: 20mm; }
+  .portada .logo svg { width: 80px; height: 80px; }
+  .portada .logo-text { font-size: 28pt; font-weight: 700; color: var(--primary-dark); }
+  .portada .logo-sub { font-size: 8pt; color: #6b7b5e; display: block; margin-top: 2mm; }
+  .portada h1 { font-size: 18pt; font-weight: 700; margin: 15mm 0 5mm; color: var(--text); }
+  .portada .ref-box { display: inline-block; text-align: left; margin-top: 20mm; font-size: 10pt; color: var(--text-light); border: 1px solid var(--border); padding: 8mm 12mm; border-radius: 6px; }
+  .portada .ref-box div { margin-bottom: 2mm; }
+  .portada .ref-box strong { color: var(--text); display: inline-block; width: 55mm; }
+
+  h2 { font-size: 14pt; font-weight: 700; color: var(--primary-dark); border-bottom: 2px solid var(--primary); padding-bottom: 2mm; margin: 10mm 0 5mm; }
+  h3 { font-size: 11pt; font-weight: 600; color: var(--text); margin: 6mm 0 3mm; }
+  p { margin-bottom: 3mm; color: var(--text-light); }
+  ul { margin: 2mm 0 5mm 6mm; }
+  li { margin-bottom: 1.5mm; color: var(--text-light); }
+  table { width: 100%; border-collapse: collapse; margin: 4mm 0 8mm; }
+  th, td { border: 1px solid var(--border); padding: 2.5mm 3mm; text-align: left; font-size: 9pt; }
+  th { background: var(--bg-green); font-weight: 600; color: var(--primary-dark); }
+  td { color: var(--text-light); }
+  .etiqueta { width: 120px; height: 180px; border: 2px solid var(--primary); border-radius: 8px; margin: 6mm auto; display: flex; flex-direction: column; align-items: center; text-align: center; padding: 3mm; }
+  .etiqueta .letra { font-size: 48pt; font-weight: 800; color: var(--primary); line-height: 1; }
+  .etiqueta .label { font-size: 7pt; color: var(--text-light); margin-top: 1mm; }
+  .etiqueta .consumo { font-size: 9pt; color: var(--text); margin-top: 2mm; font-weight: 600; }
+  .firma-box { margin-top: 20mm; display: flex; justify-content: space-between; }
+  .firma-item { text-align: center; width: 45%; }
+  .firma-item .linea { border-top: 1px solid var(--text); margin: 15mm 0 3mm; }
+  .firma-item .nombre { font-size: 10pt; font-weight: 600; }
+  .firma-item .titulo { font-size: 8pt; color: var(--text-light); }
+  .medida-box { background: var(--bg-green); border-left: 3px solid var(--primary); padding: 3mm 5mm; margin: 4mm 0; border-radius: 0 4px 4px 0; }
+  .medida-box strong { color: var(--primary-dark); }
+  .footer-note { font-size: 7pt; color: #9aa; text-align: center; margin-top: 5mm; border-top: 1px solid var(--border); padding-top: 3mm; }
+  .header-bar { background: var(--primary); height: 3mm; }
+  .header-logo { display: flex; align-items: center; gap: 3mm; padding: 5mm 0 3mm; }
+  .header-logo .mini-logo svg { width: 24px; height: 24px; }
+  .header-logo .mini-text { font-size: 12pt; font-weight: 700; color: var(--primary-dark); }
+  .header-logo .mini-sub { font-size: 5pt; color: #9aa; margin-left: 2mm; }
+
+  @media print {
+    body { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+    .page { box-shadow: none; }
+  }
+</style>
+</head>
+<body>
+
+<!-- PORTADA -->
+<div class="page">
+  <div class="header-bar"></div>
+  <div class="portada">
+    <div class="logo">
+      <svg width="80" height="80" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
+        <rect width="32" height="32" rx="6" fill="#547c24"/>
+        <text x="16" y="23" text-anchor="middle" fill="white" font-size="20" font-weight="700" font-family="Montserrat,sans-serif">C</text>
+      </svg>
+      <div class="logo-text">Certificado<span style="color:#547c24">Ya</span></div>
+      <div class="logo-sub">certificación energética de edificios existentes (CEE)</div>
+    </div>
+    <h1>Informe de Certificación<br>de Eficiencia Energética</h1>
+    <p style="font-size:9pt;color:#6b7b5e">RD 390/2021 · Directiva 2010/31/UE</p>
+    <div class="ref-box">
+      <div><strong>Inmueble:</strong> ________________________________</div>
+      <div><strong>Dirección:</strong> ________________________________</div>
+      <div><strong>Ref. catastral:</strong> ________________________________</div>
+      <div><strong>Fecha emisión:</strong> ____/____/________</div>
+      <div><strong>Expediente:</strong> CEE-________/________</div>
+    </div>
+  </div>
+  <div class="footer-note" style="margin-top:30mm">Plantilla profesional de CertificadoYa · certificadoya.es</div>
+</div>
+
+<!-- DATOS DEL TÉCNICO -->
+<div class="page">
+  <div class="header-bar"></div>
+  <div class="header-logo">
+    <div class="mini-logo"><svg width="24" height="24" viewBox="0 0 32 32"><rect width="32" height="32" rx="6" fill="#547c24"/><text x="16" y="23" text-anchor="middle" fill="white" font-size="18" font-weight="700" font-family="Montserrat,sans-serif">C</text></svg></div>
+    <div class="mini-text">CertificadoYa</div>
+    <div class="mini-sub">Plantilla profesional CEE</div>
+  </div>
+  <h2>1. Datos del técnico certificador</h2>
+  <table>
+    <tr><td style="width:45mm;font-weight:600">Nombre completo</td><td>________________________________</td></tr>
+    <tr><td style="font-weight:600">Titulación</td><td>________________________________</td></tr>
+    <tr><td style="font-weight:600">Nº colegiado</td><td>________________________________</td></tr>
+    <tr><td style="font-weight:600">Colegio profesional</td><td>________________________________</td></tr>
+    <tr><td style="font-weight:600">Teléfono</td><td>________________________________</td></tr>
+    <tr><td style="font-weight:600">Email</td><td>________________________________</td></tr>
+  </table>
+
+  <h2>2. Datos del cliente</h2>
+  <table>
+    <tr><td style="width:45mm;font-weight:600">Nombre / Razón social</td><td>________________________________</td></tr>
+    <tr><td style="font-weight:600">DNI / CIF</td><td>________________________________</td></tr>
+    <tr><td style="font-weight:600">Teléfono</td><td>________________________________</td></tr>
+    <tr><td style="font-weight:600">Email</td><td>________________________________</td></tr>
+  </table>
+
+  <h2>3. Descripción del inmueble</h2>
+  <table>
+    <tr><td style="width:45mm;font-weight:600">Tipo de inmueble</td><td>☐ Vivienda unifamiliar &nbsp; ☐ Piso &nbsp; ☐ Local comercial &nbsp; ☐ Oficina</td></tr>
+    <tr><td style="font-weight:600">Uso</td><td>☐ Vivienda habitual &nbsp; ☐ Alquiler &nbsp; ☐ Venta &nbsp; ☐ Otro: ________</td></tr>
+    <tr><td style="font-weight:600">Año construcción</td><td>________________________________</td></tr>
+    <tr><td style="font-weight:600">Superficie útil (m²)</td><td>________________________________</td></tr>
+    <tr><td style="font-weight:600">Superficie construida (m²)</td><td>________________________________</td></tr>
+    <tr><td style="font-weight:600">Nº de plantas</td><td>________________________________</td></tr>
+    <tr><td style="font-weight:600">Orientación principal</td><td>________________________________</td></tr>
+    <tr><td style="font-weight:600">Zona climática</td><td>________________________________</td></tr>
+  </table>
+
+  <h2>4. Sistemas energéticos</h2>
+  <table>
+    <tr><th style="width:45mm">Sistema</th><th>Descripción</th></tr>
+    <tr><td style="font-weight:600">Calefacción</td><td>________________________________</td></tr>
+    <tr><td style="font-weight:600">Refrigeración</td><td>________________________________</td></tr>
+    <tr><td style="font-weight:600">Agua caliente (ACS)</td><td>________________________________</td></tr>
+    <tr><td style="font-weight:600">Ventilación</td><td>________________________________</td></tr>
+    <tr><td style="font-weight:600">Iluminación</td><td>________________________________</td></tr>
+    <tr><td style="font-weight:600">Energías renovables</td><td>________________________________</td></tr>
+  </table>
+
+  <h2>5. Envolvente térmica</h2>
+  <table>
+    <tr><th style="width:45mm">Elemento</th><th>Material / Composición</th></tr>
+    <tr><td style="font-weight:600">Fachada</td><td>________________________________</td></tr>
+    <tr><td style="font-weight:600">Cubierta</td><td>________________________________</td></tr>
+    <tr><td style="font-weight:600">Suelo</td><td>________________________________</td></tr>
+    <tr><td style="font-weight:600">Ventanas</td><td>________________________________</td></tr>
+    <tr><td style="font-weight:600">Puertas exteriores</td><td>________________________________</td></tr>
+    <tr><td style="font-weight:600">Puentes térmicos</td><td>________________________________</td></tr>
+  </table>
+  <div class="footer-note">Plantilla profesional de CertificadoYa · certificadoya.es</div>
+</div>
+
+<!-- CALIFICACIÓN ENERGÉTICA -->
+<div class="page">
+  <div class="header-bar"></div>
+  <div class="header-logo">
+    <div class="mini-logo"><svg width="24" height="24" viewBox="0 0 32 32"><rect width="32" height="32" rx="6" fill="#547c24"/><text x="16" y="23" text-anchor="middle" fill="white" font-size="18" font-weight="700" font-family="Montserrat,sans-serif">C</text></svg></div>
+    <div class="mini-text">CertificadoYa</div>
+    <div class="mini-sub">Plantilla profesional CEE</div>
+  </div>
+
+  <h2>6. Calificación energética obtenida</h2>
+
+  <table style="width:60%;margin:5mm auto">
+    <tr><td style="font-weight:600;width:50mm">Software utilizado</td><td>________________________________</td></tr>
+    <tr><td style="font-weight:600">Calificación consumo</td><td style="font-size:14pt;font-weight:700;color:var(--primary)">______</td></tr>
+    <tr><td style="font-weight:600">Consumo energía primaria</td><td>________ kWh/m²·año</td></tr>
+    <tr><td style="font-weight:600">Calificación emisiones</td><td style="font-size:14pt;font-weight:700;color:var(--primary)">______</td></tr>
+    <tr><td style="font-weight:600">Emisiones CO₂</td><td>________ kgCO₂/m²·año</td></tr>
+  </table>
+
+  <h3>Indicadores de demanda</h3>
+  <table>
+    <tr><th>Indicador</th><th>Valor</th><th>Límite reglamentario</th></tr>
+    <tr><td>Demanda calefacción</td><td>________ kWh/m²·año</td><td>________</td></tr>
+    <tr><td>Demanda refrigeración</td><td>________ kWh/m²·año</td><td>________</td></tr>
+  </table>
+
+  <p style="font-size:8pt;color:#9aa;margin-top:3mm"><em>Nota: Adjuntar la etiqueta energética oficial generada por el software reconocido (CE3X, HULC, CYPETHERM, etc.).</em></p>
+
+  <h2>7. Medidas de mejora recomendadas</h2>
+
+  <h3>Medida 1</h3>
+  <div class="medida-box">
+    <p><strong>Descripción:</strong> ________________________________________________</p>
+    <p><strong>Coste estimado:</strong> ________________ € &nbsp;&nbsp; <strong>Ahorro esperado:</strong> ________ kWh/año</p>
+    <p><strong>Mejora de letra tras intervención:</strong> de ________ a ________</p>
+  </div>
+
+  <h3>Medida 2</h3>
+  <div class="medida-box">
+    <p><strong>Descripción:</strong> ________________________________________________</p>
+    <p><strong>Coste estimado:</strong> ________________ € &nbsp;&nbsp; <strong>Ahorro esperado:</strong> ________ kWh/año</p>
+    <p><strong>Mejora de letra tras intervención:</strong> de ________ a ________</p>
+  </div>
+
+  <h3>Medida 3 (opcional)</h3>
+  <div class="medida-box">
+    <p><strong>Descripción:</strong> ________________________________________________</p>
+    <p><strong>Coste estimado:</strong> ________________ € &nbsp;&nbsp; <strong>Ahorro esperado:</strong> ________ kWh/año</p>
+  </div>
+
+  <div class="tip-box" style="background:#f3f9eb;border-left:3px solid #547c24;padding:3mm 5mm;margin:5mm 0;border-radius:0 4px 4px 0">
+    <p style="margin:0"><strong>Consejo:</strong> Incluye al menos 2 medidas de mejora. Una combinación de aislamiento térmico + cambio de sistema de climatización suele dar el mejor resultado coste/beneficio.</p>
+  </div>
+
+  <h2>8. Observaciones y notas del técnico</h2>
+  <div style="border:1px solid var(--border);min-height:50mm;padding:3mm;margin:3mm 0;border-radius:4px;color:#999">
+  ________________________________________________________________________________<br>
+  ________________________________________________________________________________<br>
+  ________________________________________________________________________________<br>
+  ________________________________________________________________________________
+  </div>
+
+  <h2>9. Firmas</h2>
+  <div class="firma-box">
+    <div class="firma-item">
+      <div class="linea"></div>
+      <div class="nombre">________________________________</div>
+      <div class="titulo">Técnico certificador</div>
+      <div class="titulo" style="margin-top:2mm">Nº colegiado: ________________</div>
+    </div>
+    <div class="firma-item">
+      <div class="linea"></div>
+      <div class="nombre">________________________________</div>
+      <div class="titulo">Propietario / Solicitante</div>
+      <div class="titulo" style="margin-top:2mm">DNI: ________________</div>
+    </div>
+  </div>
+
+  <p style="text-align:center;margin-top:15mm;font-size:8pt;color:#9aa">
+    El presente informe se emite conforme al RD 390/2021 y la Directiva 2010/31/UE.<br>
+    El certificado debe registrarse en el órgano competente de la comunidad autónoma correspondiente.
+  </p>
+  <div class="footer-note">Plantilla profesional de CertificadoYa · certificadoya.es &nbsp;|&nbsp; Página 3/3</div>
+</div>
+
+</body>
+</html>
