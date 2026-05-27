@@ -1,325 +1,329 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
-        xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
-  <url>
-    <loc>https://www.certificadoya.es/</loc>
+     1|<?xml version="1.0" encoding="UTF-8"?>
+     2|<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+     3|        xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
+     4|  <url>
+     5|    <loc>https://www.certificadoya.es/</loc>
+     6|    <lastmod>2026-05-27</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>1.0</priority>
-    <image:image>
-      <image:loc>https://www.certificadoya.es/img/og-image.png</image:loc>
-      <image:title>CertificadoYa — Certificado Energético Rápido</image:title>
-    </image:image>
-  </url>
-  <url>
-    <loc>https://www.certificadoya.es/organismos-contacto.html</loc>
+     7|    <priority>1.0</priority>
+     8|    <image:image>
+     9|      <image:loc>https://www.certificadoya.es/img/og-image.png</image:loc>
+    10|      <image:title>CertificadoYa — Certificado Energético Rápido</image:title>
+    11|    </image:image>
+    12|  </url>
+    13|  <url>
+    14|    <loc>https://www.certificadoya.es/organismos-contacto.html</loc>
+    15|    <lastmod>2026-05-27</lastmod>
     <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://www.certificadoya.es/blog/</loc>
+    16|    <priority>0.7</priority>
+    17|  </url>
+    18|  <url>
+    19|    <loc>https://www.certificadoya.es/blog/</loc>
+    20|    <lastmod>2026-05-27</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.9</priority>
-  </url>
-  <!-- Provincias -->
-  <url><loc>https://www.certificadoya.es/certificado-energetico-madrid/</loc><priority>0.8</priority></url>
-  <url><loc>https://www.certificadoya.es/certificado-energetico-barcelona/</loc><priority>0.8</priority></url>
-  <url><loc>https://www.certificadoya.es/certificado-energetico-valencia/</loc><priority>0.7</priority></url>
-  <url><loc>https://www.certificadoya.es/certificado-energetico-sevilla/</loc><priority>0.7</priority></url>
-  <url><loc>https://www.certificadoya.es/certificado-energetico-alicante/</loc><priority>0.7</priority></url>
-  <url><loc>https://www.certificadoya.es/certificado-energetico-malaga/</loc><priority>0.7</priority></url>
-  <url><loc>https://www.certificadoya.es/certificado-energetico-murcia/</loc><priority>0.7</priority></url>
-  <url><loc>https://www.certificadoya.es/certificado-energetico-asturias/</loc><priority>0.7</priority></url>
-  <url><loc>https://www.certificadoya.es/certificado-energetico-las-palmas/</loc><priority>0.6</priority></url>
-  <url><loc>https://www.certificadoya.es/certificado-energetico-tenerife/</loc><priority>0.6</priority></url>
-  <url><loc>https://www.certificadoya.es/certificado-energetico-a-coruna/</loc><priority>0.6</priority></url>
-  <url><loc>https://www.certificadoya.es/certificado-energetico-bizkaia/</loc><priority>0.6</priority></url>
-  <url><loc>https://www.certificadoya.es/certificado-energetico-cadiz/</loc><priority>0.6</priority></url>
-  <url><loc>https://www.certificadoya.es/certificado-energetico-granada/</loc><priority>0.6</priority></url>
-  <url><loc>https://www.certificadoya.es/certificado-energetico-cantabria/</loc><priority>0.6</priority></url>
-  <url><loc>https://www.certificadoya.es/certificado-energetico-gipuzkoa/</loc><priority>0.6</priority></url>
-  <url><loc>https://www.certificadoya.es/certificado-energetico-leon/</loc><priority>0.6</priority></url>
-  <url><loc>https://www.certificadoya.es/certificado-energetico-valladolid/</loc><priority>0.6</priority></url>
-  <url><loc>https://www.certificadoya.es/certificado-energetico-salamanca/</loc><priority>0.6</priority></url>
-  <url><loc>https://www.certificadoya.es/certificado-energetico-zaragoza/</loc><priority>0.6</priority></url>
-  <url><loc>https://www.certificadoya.es/certificado-energetico-baleares/</loc><priority>0.6</priority></url>
-  <url><loc>https://www.certificadoya.es/certificado-energetico-la-rioja/</loc><priority>0.6</priority></url>
-  <url><loc>https://www.certificadoya.es/certificado-energetico-caceres/</loc><priority>0.6</priority></url>
-  <url><loc>https://www.certificadoya.es/certificado-energetico-badajoz/</loc><priority>0.6</priority></url>
-  <url><loc>https://www.certificadoya.es/certificado-energetico-alava/</loc><priority>0.6</priority></url>
-  <url><loc>https://www.certificadoya.es/certificado-energetico-albacete/</loc><priority>0.6</priority></url>
-  <url><loc>https://www.certificadoya.es/certificado-energetico-almeria/</loc><priority>0.6</priority></url>
-  <url><loc>https://www.certificadoya.es/certificado-energetico-avila/</loc><priority>0.6</priority></url>
-  <url><loc>https://www.certificadoya.es/certificado-energetico-burgos/</loc><priority>0.6</priority></url>
-  <url><loc>https://www.certificadoya.es/certificado-energetico-castellon/</loc><priority>0.6</priority></url>
-  <url><loc>https://www.certificadoya.es/certificado-energetico-ceuta/</loc><priority>0.6</priority></url>
-  <url><loc>https://www.certificadoya.es/certificado-energetico-ciudad-real/</loc><priority>0.6</priority></url>
-  <url><loc>https://www.certificadoya.es/certificado-energetico-cordoba/</loc><priority>0.6</priority></url>
-  <url><loc>https://www.certificadoya.es/certificado-energetico-cuenca/</loc><priority>0.6</priority></url>
-  <url><loc>https://www.certificadoya.es/certificado-energetico-girona/</loc><priority>0.6</priority></url>
-  <url><loc>https://www.certificadoya.es/certificado-energetico-guadalajara/</loc><priority>0.6</priority></url>
-  <url><loc>https://www.certificadoya.es/certificado-energetico-huelva/</loc><priority>0.6</priority></url>
-  <url><loc>https://www.certificadoya.es/certificado-energetico-huesca/</loc><priority>0.6</priority></url>
-  <url><loc>https://www.certificadoya.es/certificado-energetico-jaen/</loc><priority>0.6</priority></url>
-  <url><loc>https://www.certificadoya.es/certificado-energetico-lleida/</loc><priority>0.6</priority></url>
-  <url><loc>https://www.certificadoya.es/certificado-energetico-lugo/</loc><priority>0.6</priority></url>
-  <url><loc>https://www.certificadoya.es/certificado-energetico-melilla/</loc><priority>0.6</priority></url>
-  <url><loc>https://www.certificadoya.es/certificado-energetico-navarra/</loc><priority>0.6</priority></url>
-  <url><loc>https://www.certificadoya.es/certificado-energetico-ourense/</loc><priority>0.6</priority></url>
-  <url><loc>https://www.certificadoya.es/certificado-energetico-palencia/</loc><priority>0.6</priority></url>
-  <url><loc>https://www.certificadoya.es/certificado-energetico-pontevedra/</loc><priority>0.6</priority></url>
-  <url><loc>https://www.certificadoya.es/certificado-energetico-segovia/</loc><priority>0.6</priority></url>
-  <url><loc>https://www.certificadoya.es/certificado-energetico-soria/</loc><priority>0.6</priority></url>
-  <url><loc>https://www.certificadoya.es/certificado-energetico-tarragona/</loc><priority>0.6</priority></url>
-  <url><loc>https://www.certificadoya.es/certificado-energetico-teruel/</loc><priority>0.6</priority></url>
-  <url><loc>https://www.certificadoya.es/certificado-energetico-toledo/</loc><priority>0.6</priority></url>
-  <url><loc>https://www.certificadoya.es/certificado-energetico-zamora/</loc><priority>0.6</priority></url>
-  <!-- Blog -->
-  <url><loc>https://www.certificadoya.es/blog/que-es-certificado-energetico.html</loc><lastmod>2026-05-24</lastmod><priority>0.8</priority></url>
-  <url><loc>https://www.certificadoya.es/blog/precio-certificado-energetico-2026.html</loc><lastmod>2026-05-24</lastmod><priority>0.8</priority></url>
-  <url><loc>https://www.certificadoya.es/blog/certificado-energetico-online.html</loc><lastmod>2026-05-24</lastmod><priority>0.8</priority></url>
-  <url><loc>https://www.certificadoya.es/blog/certificado-energetico-obligatorio-2026.html</loc><lastmod>2026-05-24</lastmod><priority>0.8</priority></url>
-  <url><loc>https://www.certificadoya.es/blog/certificado-energetico-alquiler.html</loc><lastmod>2026-05-24</lastmod><priority>0.7</priority></url>
-  <url><loc>https://www.certificadoya.es/blog/certificado-energetico-venta.html</loc><lastmod>2026-05-24</lastmod><priority>0.7</priority></url>
-  <url><loc>https://www.certificadoya.es/blog/mejorar-eficiencia-energetica-vivienda.html</loc><lastmod>2026-05-24</lastmod><priority>0.8</priority></url>
-  <url><loc>https://www.certificadoya.es/blog/etiqueta-energetica-edificios.html</loc><lastmod>2026-05-24</lastmod><priority>0.7</priority></url>
-  <url><loc>https://www.certificadoya.es/blog/placas-solares-certificado-energetico.html</loc><lastmod>2026-05-24</lastmod><priority>0.7</priority></url>
-  <url><loc>https://www.certificadoya.es/blog/aerotermia-certificado-energetico.html</loc><lastmod>2026-05-24</lastmod><priority>0.7</priority></url>
-  <url><loc>https://www.certificadoya.es/blog/sanciones-certificado-energetico-2026.html</loc><lastmod>2026-05-24</lastmod><priority>0.7</priority></url>
-  <url><loc>https://www.certificadoya.es/blog/normativa-certificacion-energetica-espana.html</loc><lastmod>2026-05-24</lastmod><priority>0.7</priority></url>
-  <url><loc>https://www.certificadoya.es/blog/rehabilitacion-energetica-edificios.html</loc><lastmod>2026-05-24</lastmod><priority>0.8</priority></url>
-  <url><loc>https://www.certificadoya.es/blog/rd-659-2025-fp-superior-certificado-energetico.html</loc><lastmod>2026-05-24</lastmod><priority>0.8</priority></url>
-  <url><loc>https://www.certificadoya.es/blog/guia-ce3x-tecnicos.html</loc><lastmod>2026-05-25</lastmod><priority>0.8</priority></url>
-  <url><loc>https://www.certificadoya.es/blog/hulc-cype-vs-ce3x.html</loc><lastmod>2026-05-26</lastmod><priority>0.8</priority></url>
-  <url><loc>https://www.certificadoya.es/blog/registro-cee-comunidades-autonomas.html</loc><lastmod>2026-05-26</lastmod><priority>0.8</priority></url>
-  <url><loc>https://www.certificadoya.es/blog/errores-comunes-cee.html</loc><lastmod>2026-05-26</lastmod><priority>0.8</priority></url>
-  <url><loc>https://www.certificadoya.es/blog/plantilla-informe-energetico.html</loc><lastmod>2026-05-26</lastmod><priority>0.8</priority></url>
-  <url><loc>https://www.certificadoya.es/blog/normativa-cee-2026.html</loc><lastmod>2026-05-26</lastmod><priority>0.8</priority></url>
-  <!-- Legal -->
-  <url><loc>https://www.certificadoya.es/legal/aviso-legal.html</loc><priority>0.3</priority></url>
-  <url><loc>https://www.certificadoya.es/legal/privacidad.html</loc><priority>0.3</priority></url>
-  <url><loc>https://www.certificadoya.es/legal/cookies.html</loc><priority>0.3</priority></url>
-  <url><loc>https://www.certificadoya.es/panel-tecnicos.html</loc><priority>0.5</priority></url>
-  <url>
-    <loc>https://www.certificadoya.es/certificado-energetico-gijon/</loc>
-    <lastmod>2026-05-27</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://www.certificadoya.es/certificado-energetico-oviedo/</loc>
-    <lastmod>2026-05-27</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://www.certificadoya.es/certificado-energetico-aviles/</loc>
-    <lastmod>2026-05-27</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://www.certificadoya.es/certificado-energetico-siero/</loc>
-    <lastmod>2026-05-27</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://www.certificadoya.es/certificado-energetico-langreo/</loc>
-    <lastmod>2026-05-27</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://www.certificadoya.es/certificado-energetico-mieres/</loc>
-    <lastmod>2026-05-27</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://www.certificadoya.es/certificado-energetico-precio-asturias/</loc>
-    <lastmod>2026-05-27</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://www.certificadoya.es/certificado-energetico-urgente-asturias/</loc>
-    <lastmod>2026-05-27</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://www.certificadoya.es/certificado-energetico-alquiler-asturias/</loc>
-    <lastmod>2026-05-27</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://www.certificadoya.es/certificado-energetico-venta-vivienda-asturias/</loc>
-    <lastmod>2026-05-27</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://www.certificadoya.es/multa-no-tener-certificado-energetico-asturias/</loc>
-    <lastmod>2026-05-27</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://www.certificadoya.es/certificado-energetico-urgente-madrid/</loc>
-    <lastmod>2026-05-27</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://www.certificadoya.es/precio-certificado-energetico-madrid/</loc>
-    <lastmod>2026-05-27</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://www.certificadoya.es/certificado-energetico-barato-madrid/</loc>
-    <lastmod>2026-05-27</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://www.certificadoya.es/certificado-energetico-alquiler-madrid/</loc>
-    <lastmod>2026-05-27</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://www.certificadoya.es/certificado-energetico-venta-vivienda-madrid/</loc>
-    <lastmod>2026-05-27</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://www.certificadoya.es/certificado-energetico-mismo-dia-madrid/</loc>
-    <lastmod>2026-05-27</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://www.certificadoya.es/contacto.html</loc>
-    <lastmod>2026-05-27</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://www.certificadoya.es/certificado-energetico-madrid-centro/</loc>
-    <lastmod>2026-05-27</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://www.certificadoya.es/certificado-energetico-chamberi/</loc>
-    <lastmod>2026-05-27</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://www.certificadoya.es/certificado-energetico-salamanca-madrid/</loc>
-    <lastmod>2026-05-27</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://www.certificadoya.es/certificado-energetico-retiro/</loc>
-    <lastmod>2026-05-27</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://www.certificadoya.es/certificado-energetico-chamartin/</loc>
-    <lastmod>2026-05-27</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://www.certificadoya.es/certificado-energetico-tetuan/</loc>
-    <lastmod>2026-05-27</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://www.certificadoya.es/certificado-energetico-mostoles/</loc>
-    <lastmod>2026-05-27</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://www.certificadoya.es/certificado-energetico-getafe/</loc>
-    <lastmod>2026-05-27</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://www.certificadoya.es/certificado-energetico-leganes/</loc>
-    <lastmod>2026-05-27</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://www.certificadoya.es/certificado-energetico-alcala-de-henares/</loc>
-    <lastmod>2026-05-27</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://www.certificadoya.es/certificado-energetico-alcorcon/</loc>
-    <lastmod>2026-05-27</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://www.certificadoya.es/certificado-energetico-fuenlabrada/</loc>
-    <lastmod>2026-05-27</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://www.certificadoya.es/certificado-energetico-pozuelo/</loc>
-    <lastmod>2026-05-27</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://www.certificadoya.es/certificado-energetico-alcobendas/</loc>
-    <lastmod>2026-05-27</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://www.certificadoya.es/blog/certificado-energetico-locales-comerciales.html</loc>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://www.certificadoya.es/blog/guia-subvenciones-rehabilitacion-energetica-2026.html</loc>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://www.certificadoya.es/blog/como-darse-de-alta-tecnico-certificador.html</loc>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://www.certificadoya.es/blog/registro-centralizado-tecnicos-certificadores.html</loc>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://www.certificadoya.es/blog/caducidad-certificado-energetico.html</loc>
-    <lastmod>2026-05-27</lastmod>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://www.certificadoya.es/blog/garaje-trasero-necesita-certificado-energetico.html</loc>
-    <lastmod>2026-05-27</lastmod>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://www.certificadoya.es/blog/cee-hipoteca-banco.html</loc>
-    <lastmod>2026-05-27</lastmod>
-    <priority>0.8</priority>
-  </url>
-</urlset>
+    21|    <priority>0.9</priority>
+    22|  </url>
+    23|  <!-- Provincias -->
+    24|  <url><loc>https://www.certificadoya.es/certificado-energetico-madrid/</loc><priority>0.8</priority></url>
+    25|  <url><loc>https://www.certificadoya.es/certificado-energetico-barcelona/</loc><priority>0.8</priority></url>
+    26|  <url><loc>https://www.certificadoya.es/certificado-energetico-valencia/</loc><priority>0.7</priority></url>
+    27|  <url><loc>https://www.certificadoya.es/certificado-energetico-sevilla/</loc><priority>0.7</priority></url>
+    28|  <url><loc>https://www.certificadoya.es/certificado-energetico-alicante/</loc><priority>0.7</priority></url>
+    29|  <url><loc>https://www.certificadoya.es/certificado-energetico-malaga/</loc><priority>0.7</priority></url>
+    30|  <url><loc>https://www.certificadoya.es/certificado-energetico-murcia/</loc><priority>0.7</priority></url>
+    31|  <url><loc>https://www.certificadoya.es/certificado-energetico-asturias/</loc><priority>0.7</priority></url>
+    32|  <url><loc>https://www.certificadoya.es/certificado-energetico-las-palmas/</loc><priority>0.6</priority></url>
+    33|  <url><loc>https://www.certificadoya.es/certificado-energetico-tenerife/</loc><priority>0.6</priority></url>
+    34|  <url><loc>https://www.certificadoya.es/certificado-energetico-a-coruna/</loc><priority>0.6</priority></url>
+    35|  <url><loc>https://www.certificadoya.es/certificado-energetico-bizkaia/</loc><priority>0.6</priority></url>
+    36|  <url><loc>https://www.certificadoya.es/certificado-energetico-cadiz/</loc><priority>0.6</priority></url>
+    37|  <url><loc>https://www.certificadoya.es/certificado-energetico-granada/</loc><priority>0.6</priority></url>
+    38|  <url><loc>https://www.certificadoya.es/certificado-energetico-cantabria/</loc><priority>0.6</priority></url>
+    39|  <url><loc>https://www.certificadoya.es/certificado-energetico-gipuzkoa/</loc><priority>0.6</priority></url>
+    40|  <url><loc>https://www.certificadoya.es/certificado-energetico-leon/</loc><priority>0.6</priority></url>
+    41|  <url><loc>https://www.certificadoya.es/certificado-energetico-valladolid/</loc><priority>0.6</priority></url>
+    42|  <url><loc>https://www.certificadoya.es/certificado-energetico-salamanca/</loc><priority>0.6</priority></url>
+    43|  <url><loc>https://www.certificadoya.es/certificado-energetico-zaragoza/</loc><priority>0.6</priority></url>
+    44|  <url><loc>https://www.certificadoya.es/certificado-energetico-baleares/</loc><priority>0.6</priority></url>
+    45|  <url><loc>https://www.certificadoya.es/certificado-energetico-la-rioja/</loc><priority>0.6</priority></url>
+    46|  <url><loc>https://www.certificadoya.es/certificado-energetico-caceres/</loc><priority>0.6</priority></url>
+    47|  <url><loc>https://www.certificadoya.es/certificado-energetico-badajoz/</loc><priority>0.6</priority></url>
+    48|  <url><loc>https://www.certificadoya.es/certificado-energetico-alava/</loc><priority>0.6</priority></url>
+    49|  <url><loc>https://www.certificadoya.es/certificado-energetico-albacete/</loc><priority>0.6</priority></url>
+    50|  <url><loc>https://www.certificadoya.es/certificado-energetico-almeria/</loc><priority>0.6</priority></url>
+    51|  <url><loc>https://www.certificadoya.es/certificado-energetico-avila/</loc><priority>0.6</priority></url>
+    52|  <url><loc>https://www.certificadoya.es/certificado-energetico-burgos/</loc><priority>0.6</priority></url>
+    53|  <url><loc>https://www.certificadoya.es/certificado-energetico-castellon/</loc><priority>0.6</priority></url>
+    54|  <url><loc>https://www.certificadoya.es/certificado-energetico-ceuta/</loc><priority>0.6</priority></url>
+    55|  <url><loc>https://www.certificadoya.es/certificado-energetico-ciudad-real/</loc><priority>0.6</priority></url>
+    56|  <url><loc>https://www.certificadoya.es/certificado-energetico-cordoba/</loc><priority>0.6</priority></url>
+    57|  <url><loc>https://www.certificadoya.es/certificado-energetico-cuenca/</loc><priority>0.6</priority></url>
+    58|  <url><loc>https://www.certificadoya.es/certificado-energetico-girona/</loc><priority>0.6</priority></url>
+    59|  <url><loc>https://www.certificadoya.es/certificado-energetico-guadalajara/</loc><priority>0.6</priority></url>
+    60|  <url><loc>https://www.certificadoya.es/certificado-energetico-huelva/</loc><priority>0.6</priority></url>
+    61|  <url><loc>https://www.certificadoya.es/certificado-energetico-huesca/</loc><priority>0.6</priority></url>
+    62|  <url><loc>https://www.certificadoya.es/certificado-energetico-jaen/</loc><priority>0.6</priority></url>
+    63|  <url><loc>https://www.certificadoya.es/certificado-energetico-lleida/</loc><priority>0.6</priority></url>
+    64|  <url><loc>https://www.certificadoya.es/certificado-energetico-lugo/</loc><priority>0.6</priority></url>
+    65|  <url><loc>https://www.certificadoya.es/certificado-energetico-melilla/</loc><priority>0.6</priority></url>
+    66|  <url><loc>https://www.certificadoya.es/certificado-energetico-navarra/</loc><priority>0.6</priority></url>
+    67|  <url><loc>https://www.certificadoya.es/certificado-energetico-ourense/</loc><priority>0.6</priority></url>
+    68|  <url><loc>https://www.certificadoya.es/certificado-energetico-palencia/</loc><priority>0.6</priority></url>
+    69|  <url><loc>https://www.certificadoya.es/certificado-energetico-pontevedra/</loc><priority>0.6</priority></url>
+    70|  <url><loc>https://www.certificadoya.es/certificado-energetico-segovia/</loc><priority>0.6</priority></url>
+    71|  <url><loc>https://www.certificadoya.es/certificado-energetico-soria/</loc><priority>0.6</priority></url>
+    72|  <url><loc>https://www.certificadoya.es/certificado-energetico-tarragona/</loc><priority>0.6</priority></url>
+    73|  <url><loc>https://www.certificadoya.es/certificado-energetico-teruel/</loc><priority>0.6</priority></url>
+    74|  <url><loc>https://www.certificadoya.es/certificado-energetico-toledo/</loc><priority>0.6</priority></url>
+    75|  <url><loc>https://www.certificadoya.es/certificado-energetico-zamora/</loc><priority>0.6</priority></url>
+    76|  <!-- Blog -->
+    77|  <url><loc>https://www.certificadoya.es/blog/que-es-certificado-energetico.html</loc><lastmod>2026-05-24</lastmod><priority>0.8</priority></url>
+    78|  <url><loc>https://www.certificadoya.es/blog/precio-certificado-energetico-2026.html</loc><lastmod>2026-05-24</lastmod><priority>0.8</priority></url>
+    79|  <url><loc>https://www.certificadoya.es/blog/certificado-energetico-online.html</loc><lastmod>2026-05-24</lastmod><priority>0.8</priority></url>
+    80|  <url><loc>https://www.certificadoya.es/blog/certificado-energetico-obligatorio-2026.html</loc><lastmod>2026-05-24</lastmod><priority>0.8</priority></url>
+    81|  <url><loc>https://www.certificadoya.es/blog/certificado-energetico-alquiler.html</loc><lastmod>2026-05-24</lastmod><priority>0.7</priority></url>
+    82|  <url><loc>https://www.certificadoya.es/blog/certificado-energetico-venta.html</loc><lastmod>2026-05-24</lastmod><priority>0.7</priority></url>
+    83|  <url><loc>https://www.certificadoya.es/blog/mejorar-eficiencia-energetica-vivienda.html</loc><lastmod>2026-05-24</lastmod><priority>0.8</priority></url>
+    84|  <url><loc>https://www.certificadoya.es/blog/etiqueta-energetica-edificios.html</loc><lastmod>2026-05-24</lastmod><priority>0.7</priority></url>
+    85|  <url><loc>https://www.certificadoya.es/blog/placas-solares-certificado-energetico.html</loc><lastmod>2026-05-24</lastmod><priority>0.7</priority></url>
+    86|  <url><loc>https://www.certificadoya.es/blog/aerotermia-certificado-energetico.html</loc><lastmod>2026-05-24</lastmod><priority>0.7</priority></url>
+    87|  <url><loc>https://www.certificadoya.es/blog/sanciones-certificado-energetico-2026.html</loc><lastmod>2026-05-24</lastmod><priority>0.7</priority></url>
+    88|  <url><loc>https://www.certificadoya.es/blog/normativa-certificacion-energetica-espana.html</loc><lastmod>2026-05-24</lastmod><priority>0.7</priority></url>
+    89|  <url><loc>https://www.certificadoya.es/blog/rehabilitacion-energetica-edificios.html</loc><lastmod>2026-05-24</lastmod><priority>0.8</priority></url>
+    90|  <url><loc>https://www.certificadoya.es/blog/rd-659-2025-fp-superior-certificado-energetico.html</loc><lastmod>2026-05-24</lastmod><priority>0.8</priority></url>
+    91|  <url><loc>https://www.certificadoya.es/blog/guia-ce3x-tecnicos.html</loc><lastmod>2026-05-25</lastmod><priority>0.8</priority></url>
+    92|  <url><loc>https://www.certificadoya.es/blog/hulc-cype-vs-ce3x.html</loc><lastmod>2026-05-26</lastmod><priority>0.8</priority></url>
+    93|  <url><loc>https://www.certificadoya.es/blog/registro-cee-comunidades-autonomas.html</loc><lastmod>2026-05-26</lastmod><priority>0.8</priority></url>
+    94|  <url><loc>https://www.certificadoya.es/blog/errores-comunes-cee.html</loc><lastmod>2026-05-26</lastmod><priority>0.8</priority></url>
+    95|  <url><loc>https://www.certificadoya.es/blog/plantilla-informe-energetico.html</loc><lastmod>2026-05-26</lastmod><priority>0.8</priority></url>
+    96|  <url><loc>https://www.certificadoya.es/blog/normativa-cee-2026.html</loc><lastmod>2026-05-26</lastmod><priority>0.8</priority></url>
+    97|  <!-- Legal -->
+    98|  <url><loc>https://www.certificadoya.es/legal/aviso-legal.html</loc><priority>0.3</priority></url>
+    99|  <url><loc>https://www.certificadoya.es/legal/privacidad.html</loc><priority>0.3</priority></url>
+   100|  <url><loc>https://www.certificadoya.es/legal/cookies.html</loc><priority>0.3</priority></url>
+   101|  <url><loc>https://www.certificadoya.es/panel-tecnicos.html</loc><priority>0.5</priority></url>
+   102|  <url>
+   103|    <loc>https://www.certificadoya.es/certificado-energetico-gijon/</loc>
+   104|    <lastmod>2026-05-27</lastmod>
+   105|    <changefreq>weekly</changefreq>
+   106|    <priority>0.7</priority>
+   107|  </url>
+   108|  <url>
+   109|    <loc>https://www.certificadoya.es/certificado-energetico-oviedo/</loc>
+   110|    <lastmod>2026-05-27</lastmod>
+   111|    <changefreq>weekly</changefreq>
+   112|    <priority>0.7</priority>
+   113|  </url>
+   114|  <url>
+   115|    <loc>https://www.certificadoya.es/certificado-energetico-aviles/</loc>
+   116|    <lastmod>2026-05-27</lastmod>
+   117|    <changefreq>weekly</changefreq>
+   118|    <priority>0.7</priority>
+   119|  </url>
+   120|  <url>
+   121|    <loc>https://www.certificadoya.es/certificado-energetico-siero/</loc>
+   122|    <lastmod>2026-05-27</lastmod>
+   123|    <changefreq>weekly</changefreq>
+   124|    <priority>0.6</priority>
+   125|  </url>
+   126|  <url>
+   127|    <loc>https://www.certificadoya.es/certificado-energetico-langreo/</loc>
+   128|    <lastmod>2026-05-27</lastmod>
+   129|    <changefreq>weekly</changefreq>
+   130|    <priority>0.6</priority>
+   131|  </url>
+   132|  <url>
+   133|    <loc>https://www.certificadoya.es/certificado-energetico-mieres/</loc>
+   134|    <lastmod>2026-05-27</lastmod>
+   135|    <changefreq>weekly</changefreq>
+   136|    <priority>0.6</priority>
+   137|  </url>
+   138|  <url>
+   139|    <loc>https://www.certificadoya.es/certificado-energetico-precio-asturias/</loc>
+   140|    <lastmod>2026-05-27</lastmod>
+   141|    <changefreq>weekly</changefreq>
+   142|    <priority>0.6</priority>
+   143|  </url>
+   144|  <url>
+   145|    <loc>https://www.certificadoya.es/certificado-energetico-urgente-asturias/</loc>
+   146|    <lastmod>2026-05-27</lastmod>
+   147|    <changefreq>weekly</changefreq>
+   148|    <priority>0.6</priority>
+   149|  </url>
+   150|  <url>
+   151|    <loc>https://www.certificadoya.es/certificado-energetico-alquiler-asturias/</loc>
+   152|    <lastmod>2026-05-27</lastmod>
+   153|    <changefreq>weekly</changefreq>
+   154|    <priority>0.6</priority>
+   155|  </url>
+   156|  <url>
+   157|    <loc>https://www.certificadoya.es/certificado-energetico-venta-vivienda-asturias/</loc>
+   158|    <lastmod>2026-05-27</lastmod>
+   159|    <changefreq>weekly</changefreq>
+   160|    <priority>0.6</priority>
+   161|  </url>
+   162|  <url>
+   163|    <loc>https://www.certificadoya.es/multa-no-tener-certificado-energetico-asturias/</loc>
+   164|    <lastmod>2026-05-27</lastmod>
+   165|    <changefreq>weekly</changefreq>
+   166|    <priority>0.6</priority>
+   167|  </url>
+   168|  <url>
+   169|    <loc>https://www.certificadoya.es/certificado-energetico-urgente-madrid/</loc>
+   170|    <lastmod>2026-05-27</lastmod>
+   171|    <changefreq>weekly</changefreq>
+   172|    <priority>0.7</priority>
+   173|  </url>
+   174|  <url>
+   175|    <loc>https://www.certificadoya.es/precio-certificado-energetico-madrid/</loc>
+   176|    <lastmod>2026-05-27</lastmod>
+   177|    <changefreq>weekly</changefreq>
+   178|    <priority>0.7</priority>
+   179|  </url>
+   180|  <url>
+   181|    <loc>https://www.certificadoya.es/certificado-energetico-barato-madrid/</loc>
+   182|    <lastmod>2026-05-27</lastmod>
+   183|    <changefreq>weekly</changefreq>
+   184|    <priority>0.7</priority>
+   185|  </url>
+   186|  <url>
+   187|    <loc>https://www.certificadoya.es/certificado-energetico-alquiler-madrid/</loc>
+   188|    <lastmod>2026-05-27</lastmod>
+   189|    <changefreq>weekly</changefreq>
+   190|    <priority>0.7</priority>
+   191|  </url>
+   192|  <url>
+   193|    <loc>https://www.certificadoya.es/certificado-energetico-venta-vivienda-madrid/</loc>
+   194|    <lastmod>2026-05-27</lastmod>
+   195|    <changefreq>weekly</changefreq>
+   196|    <priority>0.7</priority>
+   197|  </url>
+   198|  <url>
+   199|    <loc>https://www.certificadoya.es/certificado-energetico-mismo-dia-madrid/</loc>
+   200|    <lastmod>2026-05-27</lastmod>
+   201|    <changefreq>weekly</changefreq>
+   202|    <priority>0.7</priority>
+   203|  </url>
+   204|  <url>
+   205|    <loc>https://www.certificadoya.es/contacto.html</loc>
+   206|    <lastmod>2026-05-27</lastmod>
+   207|    <changefreq>weekly</changefreq>
+   208|    <priority>0.6</priority>
+   209|  </url>
+   210|  <url>
+   211|    <loc>https://www.certificadoya.es/certificado-energetico-madrid-centro/</loc>
+   212|    <lastmod>2026-05-27</lastmod>
+   213|    <changefreq>weekly</changefreq>
+   214|    <priority>0.7</priority>
+   215|  </url>
+   216|  <url>
+   217|    <loc>https://www.certificadoya.es/certificado-energetico-chamberi/</loc>
+   218|    <lastmod>2026-05-27</lastmod>
+   219|    <changefreq>weekly</changefreq>
+   220|    <priority>0.7</priority>
+   221|  </url>
+   222|  <url>
+   223|    <loc>https://www.certificadoya.es/certificado-energetico-salamanca-madrid/</loc>
+   224|    <lastmod>2026-05-27</lastmod>
+   225|    <changefreq>weekly</changefreq>
+   226|    <priority>0.7</priority>
+   227|  </url>
+   228|  <url>
+   229|    <loc>https://www.certificadoya.es/certificado-energetico-retiro/</loc>
+   230|    <lastmod>2026-05-27</lastmod>
+   231|    <changefreq>weekly</changefreq>
+   232|    <priority>0.7</priority>
+   233|  </url>
+   234|  <url>
+   235|    <loc>https://www.certificadoya.es/certificado-energetico-chamartin/</loc>
+   236|    <lastmod>2026-05-27</lastmod>
+   237|    <changefreq>weekly</changefreq>
+   238|    <priority>0.7</priority>
+   239|  </url>
+   240|  <url>
+   241|    <loc>https://www.certificadoya.es/certificado-energetico-tetuan/</loc>
+   242|    <lastmod>2026-05-27</lastmod>
+   243|    <changefreq>weekly</changefreq>
+   244|    <priority>0.7</priority>
+   245|  </url>
+   246|  <url>
+   247|    <loc>https://www.certificadoya.es/certificado-energetico-mostoles/</loc>
+   248|    <lastmod>2026-05-27</lastmod>
+   249|    <changefreq>weekly</changefreq>
+   250|    <priority>0.7</priority>
+   251|  </url>
+   252|  <url>
+   253|    <loc>https://www.certificadoya.es/certificado-energetico-getafe/</loc>
+   254|    <lastmod>2026-05-27</lastmod>
+   255|    <changefreq>weekly</changefreq>
+   256|    <priority>0.7</priority>
+   257|  </url>
+   258|  <url>
+   259|    <loc>https://www.certificadoya.es/certificado-energetico-leganes/</loc>
+   260|    <lastmod>2026-05-27</lastmod>
+   261|    <changefreq>weekly</changefreq>
+   262|    <priority>0.7</priority>
+   263|  </url>
+   264|  <url>
+   265|    <loc>https://www.certificadoya.es/certificado-energetico-alcala-de-henares/</loc>
+   266|    <lastmod>2026-05-27</lastmod>
+   267|    <changefreq>weekly</changefreq>
+   268|    <priority>0.7</priority>
+   269|  </url>
+   270|  <url>
+   271|    <loc>https://www.certificadoya.es/certificado-energetico-alcorcon/</loc>
+   272|    <lastmod>2026-05-27</lastmod>
+   273|    <changefreq>weekly</changefreq>
+   274|    <priority>0.7</priority>
+   275|  </url>
+   276|  <url>
+   277|    <loc>https://www.certificadoya.es/certificado-energetico-fuenlabrada/</loc>
+   278|    <lastmod>2026-05-27</lastmod>
+   279|    <changefreq>weekly</changefreq>
+   280|    <priority>0.7</priority>
+   281|  </url>
+   282|  <url>
+   283|    <loc>https://www.certificadoya.es/certificado-energetico-pozuelo/</loc>
+   284|    <lastmod>2026-05-27</lastmod>
+   285|    <changefreq>weekly</changefreq>
+   286|    <priority>0.7</priority>
+   287|  </url>
+   288|  <url>
+   289|    <loc>https://www.certificadoya.es/certificado-energetico-alcobendas/</loc>
+   290|    <lastmod>2026-05-27</lastmod>
+   291|    <changefreq>weekly</changefreq>
+   292|    <priority>0.7</priority>
+   293|  </url>
+   294|  <url>
+   295|    <loc>https://www.certificadoya.es/blog/certificado-energetico-locales-comerciales.html</loc>
+   296|    <priority>0.8</priority>
+   297|  </url>
+   298|  <url>
+   299|    <loc>https://www.certificadoya.es/blog/guia-subvenciones-rehabilitacion-energetica-2026.html</loc>
+   300|    <priority>0.8</priority>
+   301|  </url>
+   302|  <url>
+   303|    <loc>https://www.certificadoya.es/blog/como-darse-de-alta-tecnico-certificador.html</loc>
+   304|    <priority>0.8</priority>
+   305|  </url>
+   306|  <url>
+   307|    <loc>https://www.certificadoya.es/blog/registro-centralizado-tecnicos-certificadores.html</loc>
+   308|    <priority>0.8</priority>
+   309|  </url>
+   310|  <url>
+   311|    <loc>https://www.certificadoya.es/blog/caducidad-certificado-energetico.html</loc>
+   312|    <lastmod>2026-05-27</lastmod>
+   313|    <priority>0.8</priority>
+   314|  </url>
+   315|  <url>
+   316|    <loc>https://www.certificadoya.es/blog/garaje-trasero-necesita-certificado-energetico.html</loc>
+   317|    <lastmod>2026-05-27</lastmod>
+   318|    <priority>0.8</priority>
+   319|  </url>
+   320|  <url>
+   321|    <loc>https://www.certificadoya.es/blog/cee-hipoteca-banco.html</loc>
+   322|    <lastmod>2026-05-27</lastmod>
+   323|    <priority>0.8</priority>
+   324|  </url>
+   325|</urlset>
+   326|
