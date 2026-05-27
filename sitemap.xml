@@ -17,6 +17,11 @@
     <changefreq>monthly</changefreq>
     16|    <priority>0.7</priority>
     17|  </url>
+  <url>
+    <loc>https://www.certificadoya.es/descargables/plantilla-informe-energetico.html</loc>
+    <lastmod>2026-05-27</lastmod>
+    <priority>0.7</priority>
+  </url>
     18|  <url>
     19|    <loc>https://www.certificadoya.es/blog/</loc>
     20|    <lastmod>2026-05-27</lastmod>
