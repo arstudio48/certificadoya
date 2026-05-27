@@ -124,5 +124,14 @@
     "descripcion": "Todo lo que necesitas saber sobre el certificado energético para locales comerciales, oficinas y negocios. Obligaciones, plazos, precios y diferencias con viviendas.",
     "categoria": "básico",
     "lectura": 8
+  },
+  {
+    "slug": "registro-centralizado-tecnicos-certificadores",
+    "titulo": "Registro centralizado de técnicos certificadores: ¿realidad o proyecto?",
+    "fecha": "2026-05-31",
+    "autor": "CertificadoYa",
+    "descripcion": "Estado actual del registro centralizado de técnicos certificadores en España. RD 390/2021, situación por CCAA y perspectivas con la transposición de la EPBD 2024.",
+    "categoria": "técnicos",
+    "lectura": 7
   }
 ]
