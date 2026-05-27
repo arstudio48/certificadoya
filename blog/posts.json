@@ -97,5 +97,32 @@
     "descripcion": "El Real Decreto 659/2025 abre la puerta a que titulados de FP Superior, Certificados Profesionales y Cursos de Especialización puedan emitir el certificado de eficiencia energética (CEE). Entrará en vigor el 23 de julio de 2026.",
     "categoria": "normativa",
     "lectura": 7
+  },
+  {
+    "slug": "como-darse-de-alta-tecnico-certificador",
+    "titulo": "Cómo darse de alta como técnico certificador en cada comunidad autónoma",
+    "fecha": "2026-05-28",
+    "autor": "CertificadoYa",
+    "descripcion": "Guía completa para arquitectos, aparejadores e ingenieros que quieren darse de alta como técnicos certificadores energéticos. Requisitos por CCAA, software homologado y registro paso a paso.",
+    "categoria": "técnicos",
+    "lectura": 10
+  },
+  {
+    "slug": "guia-subvenciones-rehabilitacion-energetica-2026",
+    "titulo": "Guía completa de subvenciones para rehabilitación energética 2026",
+    "fecha": "2026-05-29",
+    "autor": "CertificadoYa",
+    "descripcion": "Todas las ayudas disponibles en 2026 para rehabilitación energética: Next Generation, deducciones IRPF hasta 60%, bonificaciones IBI y subvenciones autonómicas.",
+    "categoria": "ahorro",
+    "lectura": 12
+  },
+  {
+    "slug": "certificado-energetico-locales-comerciales",
+    "titulo": "Certificado energético para locales comerciales y oficinas: guía completa",
+    "fecha": "2026-05-30",
+    "autor": "CertificadoYa",
+    "descripcion": "Todo lo que necesitas saber sobre el certificado energético para locales comerciales, oficinas y negocios. Obligaciones, plazos, precios y diferencias con viviendas.",
+    "categoria": "básico",
+    "lectura": 8
   }
 ]
