@@ -614,8 +614,18 @@
       </div>
     </div>
   </div>
-
-  <h3 style="text-align:center;margin-bottom:1.5rem">❓ Preguntas frecuentes para técnicos</h3>
+<style>
+@media (max-width:768px){
+  #planes [style*="grid-template-columns:1fr 1fr"]{grid-template-columns:1fr!important}
+  #planes h3{font-size:1.1rem!important}
+  .registro-hero{flex-direction:column!important;padding:1rem!important}
+  .registro-right{width:100%!important;position:static!important}
+}
+@media (max-width:480px){
+  #planes{padding:1.5rem!important}
+  #planes h3{font-size:1rem!important}
+}
+</style>
   <div style="max-width:700px;margin:0 auto">
     <details style="border:1px solid #e8ece6;border-radius:10px;padding:1rem;margin-bottom:.75rem">
       <summary style="font-weight:600;cursor:pointer;color:#2d3a1f">¿Cuánto cuesta darse de alta?</summary>
