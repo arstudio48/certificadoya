@@ -200,7 +200,11 @@
       </div>
       <div class="hero-new-card">
         <div class="presupuesto-card-v2">
-          <h3>Calcula tu presupuesto</h3>
+          <div class="precio-destacado" style="text-align:center;margin-bottom:1rem;background:linear-gradient(135deg,#f3f9eb,#e8f0dc);padding:.75rem;border-radius:10px">
+            <div style="font-size:.75rem;color:#6b7b5e;font-weight:500;text-transform:uppercase;letter-spacing:.05em">Precio desde</div>
+            <div style="font-size:2.4rem;font-weight:800;color:#547c24;line-height:1.1">45<span style="font-size:1.2rem;font-weight:500">€</span></div>
+            <div style="font-size:.7rem;color:#9aab8a">para un piso estándar · sin sorpresas</div>
+          </div>
           <div class="form-group">
             <label for="cp">Código postal</label>
             <input type="text" id="cp" placeholder="Ej: 28001" maxlength="5" inputmode="numeric" pattern="[0-9]{5}" aria-required="true" aria-describedby="cp-error" oninput="validarCP()">
@@ -214,7 +218,7 @@
             </div>
             <div class="form-group">
               <label for="tipo">Tipo</label>
-              <select id="tipo">
+              <select id="tipo" onchange="calcularPresupuesto()">
                 <option value="piso">Piso</option>
                 <option value="unifamiliar">Unifamiliar</option>
                 <option value="adosado">Adosado</option>
@@ -228,7 +232,6 @@
             <div class="resultado-texto" id="precio-texto"></div>
             <button class="btn-cta btn-cta-outline" onclick="solicitarLead()">Solicitar servicio en →</button>
           </div>
-          <p class="presupuesto-note">Sin compromiso. Sin sorpresas.</p>
         </div>
       </div>
     </div>
@@ -240,23 +243,23 @@
     <div class="pasos-grid">
       <div class="paso paso-1">
         <div class="paso-num">1</div>
-        <h4>Calcula tu precio</h4>
-        <p>Introduce tu CP y m². Ves el precio al instante.</p>
+        <h4>Calcula tu precio en 5 seg</h4>
+        <p>CP y m². Precio al instante. Sin registros.</p>
       </div>
       <div class="paso paso-2">
         <div class="paso-num">2</div>
-        <h4>Te contactamos</h4>
-        <p>Un técnico de tu zona te llama en menos de 24h.</p>
+        <h4>Un técnico de tu zona te llama</h4>
+        <p>Contacto en menos de 24h. Verificado y colegiado.</p>
       </div>
       <div class="paso paso-3">
         <div class="paso-num">3</div>
-        <h4>Visita técnica</h4>
-        <p>El técnico va a tu vivienda y toma los datos.</p>
+        <h4>Visita y medición in situ</h4>
+        <p>Toma de datos, fotos y mediciones en tu inmueble.</p>
       </div>
       <div class="paso paso-4">
         <div class="paso-num">4</div>
-        <h4>Certificado listo</h4>
-        <p>Recibes tu CEE registrado. Sin papeleos.</p>
+        <h4>Recibe tu CEE por email</h4>
+        <p>Certificado registrado. Sin papeleos. En 48-72h.</p>
       </div>
     </div>
   </section>
@@ -340,6 +343,13 @@
     </details>
   </section>
 
+  <!-- CTA -->
+  <section class="cta-v2">
+    <h2>¿Necesitas tu certificado energético?</h2>
+    <p>Presupuesto gratis en 5 segundos. Sin compromiso. Sin esperas.</p>
+    <a href="#presupuesto-card" class="btn-cta-large">Calcular presupuesto ahora</a>
+  </section>
+
   <!-- TECNICOS -->
   <section class="tecnicos-home" id="para-tecnicos" style="scroll-margin-top:80px">
     <div class="tecnicos-home-inner">
@@ -378,35 +388,40 @@
       </div>
     </div>
   </section>
-
-  <!-- CTA -->
-  <section class="cta-v2">
-    <h2>¿Necesitas tu certificado energético?</h2>
-    <p>Presupuesto gratis en 5 segundos. Sin compromiso. Sin esperas.</p>
-    <a href="#presupuesto-card" class="btn-cta-large">Calcular presupuesto ahora</a>
-  </section>
 </main>
 
 <footer class="footer-v2">
   <div class="footer-grid">
     <div class="footer-brand">
-      <span class="footer-logo">CertificadoYa</span>
-      <p>Certificados de eficiencia energética (CEE) en toda España. Técnicos colegiados verificados. Presupuesto instantáneo.</p>
+      <span class="footer-logo" style="display:flex;align-items:center;gap:.5rem">
+        <svg width="28" height="28" viewBox="0 0 32 32"><rect width="32" height="32" rx="6" fill="#547c24"/><text x="16" y="23" text-anchor="middle" fill="white" font-size="18" font-weight="700" font-family="Montserrat,sans-serif">C</text></svg>
+        CertificadoYa
+      </span>
+      <p>Certificados de eficiencia energética (CEE) en toda España. Técnicos colegiados verificados. Presupuesto instantáneo desde 45€.</p>
+      <p style="font-size:.78rem;margin-top:.5rem">📞 <a href="tel:+34641450068" style="color:#547c24;text-decoration:none">641 45 00 68</a> · 📧 <a href="mailto:info@certificadoya.es" style="color:#547c24;text-decoration:none">info@certificadoya.es</a></p>
     </div>
     <div class="footer-links">
-      <strong>Enlaces</strong>
-      <a href="/blog/">Blog</a>
+      <strong>Servicios</strong>
+      <a href="/">Certificado energético</a>
+      <a href="/#presupuesto">Presupuesto instantáneo</a>
       <a href="/organismos-contacto.html">Organismos oficiales</a>
-      <a href="/panel-tecnicos.html">¿Eres técnico?</a>
+      <a href="/descargables/plantilla-informe-energetico.html">Plantilla descargable</a>
+    </div>
+    <div class="footer-links">
+      <strong>Para técnicos</strong>
+      <a href="/panel-tecnicos.html">Registro de técnicos</a>
+      <a href="/blog/?cat=tecnicos">Blog técnico</a>
+      <a href="/blog/guia-ce3x-tecnicos.html">Guía CE3X</a>
     </div>
     <div class="footer-links">
       <strong>Legal</strong>
       <a href="/legal/aviso-legal.html">Aviso legal</a>
       <a href="/legal/privacidad.html">Privacidad</a>
       <a href="/legal/cookies.html">Cookies</a>
+      <a href="/contacto.html">Contacto</a>
     </div>
   </div>
-  <p class="footer-bottom">© 2026 CertificadoYa — ArtStudio-CEE</p>
+  <p class="footer-bottom">© 2026 CertificadoYa — ArtStudio-CEE · Todas las provincias de España</p>
 </footer>
 
 <!-- Modal lead -->
@@ -434,24 +449,20 @@
 <script>function cambiarProvincia() { let provincia = document.getElementById('provincia-selector').value; if(provincia) { window.location.href = '/certificado-energetico-' + provincia + '/'; } }</script>
 
 <!-- WhatsApp floating button -->
-<div id="whatsapp-btn" onclick="window.open('https://wa.me/34641450068?text=' + encodeURIComponent('Hola, quiero un presupuesto de certificado energético'), '_blank')">
-  <svg viewBox="0 0 32 32" fill="white" width="28" height="28"><path d="M16 2C8.2 2 2 8.2 2 16c0 2.8.8 5.4 2.2 7.6L2 30l6.6-2.2C10.8 29.2 13.4 30 16 30c7.8 0 14-6.2 14-14S23.8 2 16 2zm7.2 20.2c-.4 1-1.4 1.8-2.4 2-1 .2-2 .2-3.2-.4-1-.4-2.2-1-3.4-2.2-1.2-1.2-2-2.4-2.4-3.6-.4-1.2-.2-2 .2-2.8.2-.4.4-.6.8-.8h.4c.2 0 .4 0 .6.4l.8 1.8c.2.4.2.6 0 .8-.2.2-.2.4-.4.6-.2.2-.4.4-.6.6-.2.2-.4.4-.2.6.8 1 1.6 1.8 2.6 2.4.2.2.4.2.6 0 .2-.2.4-.4.6-.6.2-.2.4-.4.6-.4.2 0 .4.2.6.4l1.2 1.2c.2.2.4.4.2.6-.2.4-.2.6-.4.6z"/></svg>
-  <span>WhatsApp</span>
+<div id="whatsapp-btn" onclick="window.open('https://wa.me/34641450068?text=' + encodeURIComponent('Hola, quiero un presupuesto de certificado energético'), '_blank')" title="Consultar por WhatsApp">
+  <svg viewBox="0 0 32 32" fill="white" width="24" height="24"><path d="M16 2C8.2 2 2 8.2 2 16c0 2.8.8 5.4 2.2 7.6L2 30l6.6-2.2C10.8 29.2 13.4 30 16 30c7.8 0 14-6.2 14-14S23.8 2 16 2zm7.2 20.2c-.4 1-1.4 1.8-2.4 2-1 .2-2 .2-3.2-.4-1-.4-2.2-1-3.4-2.2-1.2-1.2-2-2.4-2.4-3.6-.4-1.2-.2-2 .2-2.8.2-.4.4-.6.8-.8h.4c.2 0 .4 0 .6.4l.8 1.8c.2.4.2.6 0 .8-.2.2-.2.4-.4.6-.2.2-.4.4-.6.6-.2.2-.4.4-.2.6.8 1 1.6 1.8 2.6 2.4.2.2.4.2.6 0 .2-.2.4-.4.6-.6.2-.2.4-.4.6-.4.2 0 .4.2.6.4l1.2 1.2c.2.2.4.4.2.6-.2.4-.2.6-.4.6z"/></svg>
 </div>
 <style>
 #whatsapp-btn {
-  position: fixed; bottom: 20px; right: 20px; z-index: 999;
-  display: flex; align-items: center; gap: 8px;
-  background: #25D366; color: white; border: none; border-radius: 50px;
-  padding: 12px 20px; cursor: pointer; box-shadow: 0 4px 15px rgba(37,211,102,.4);
-  font-family: 'Montserrat', sans-serif; font-size: 14px; font-weight: 600;
+  position: fixed; bottom: 24px; right: 24px; z-index: 999;
+  display: flex; align-items: center; justify-content: center;
+  background: #25D366; color: white; border: none; border-radius: 50%;
+  width: 48px; height: 48px; cursor: pointer; box-shadow: 0 2px 12px rgba(37,211,102,.35);
   transition: transform .15s, box-shadow .15s;
 }
-#whatsapp-btn:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(37,211,102,.5); }
+#whatsapp-btn:hover { transform: scale(1.08); box-shadow: 0 4px 18px rgba(37,211,102,.45); }
 @media (max-width: 600px) {
-  #whatsapp-btn { padding: 10px 14px; font-size: 12px; bottom: 15px; right: 15px; }
-  #whatsapp-btn span { display: none; }
-  #whatsapp-btn { padding: 12px; border-radius: 50%; }
+  #whatsapp-btn { width: 44px; height: 44px; bottom: 16px; right: 16px; }
 }
 </style>
 
