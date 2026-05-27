@@ -307,4 +307,19 @@
     <loc>https://www.certificadoya.es/blog/registro-centralizado-tecnicos-certificadores.html</loc>
     <priority>0.8</priority>
   </url>
+  <url>
+    <loc>https://www.certificadoya.es/blog/caducidad-certificado-energetico.html</loc>
+    <lastmod>2026-05-27</lastmod>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.certificadoya.es/blog/garaje-trasero-necesita-certificado-energetico.html</loc>
+    <lastmod>2026-05-27</lastmod>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.certificadoya.es/blog/cee-hipoteca-banco.html</loc>
+    <lastmod>2026-05-27</lastmod>
+    <priority>0.8</priority>
+  </url>
 </urlset>
