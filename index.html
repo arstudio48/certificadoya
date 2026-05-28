@@ -30,7 +30,7 @@
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='6' fill='%23547c24'/><text x='16' y='23' text-anchor='middle' fill='white' font-size='18' font-family='sans-serif'>C</text></svg>">
   <style>
 @media (max-width:768px){.header-inner{padding:0 1rem}.nav{gap:.6rem}.nav a{font-size:.78rem}.btn-nav{padding:.4rem .8rem;font-size:.78rem}.logo-text{font-size:1.1rem}.logo-sub{display:none}.hero-content h1{font-size:1.5rem}.hero-content p{font-size:.9rem}.pasos-grid{grid-template-columns:1fr 1fr;gap:.8rem}.provincias-grid-v2{grid-template-columns:1fr 1fr;gap:.4rem}.ventajas-grid-v2{grid-template-columns:1fr}.faq-item-v2{padding:.85rem 1rem}.registro-hero{flex-direction:column;padding:1rem}.registro-right{flex:1;width:100%;position:static}.registro-card{padding:1.25rem}.registro-card .form-grid{grid-template-columns:1fr}.tecnicos-home-inner{flex-direction:column;gap:1.5rem}.footer-grid{grid-template-columns:1fr}}
-@media (max-width:480px){.nav a{font-size:.7rem}.nav{gap:.4rem}.btn-nav{padding:.35rem .6rem;font-size:.7rem}.hero-content h1{font-size:1.2rem}.pasos-grid{grid-template-columns:1fr}.provincias-grid-v2{grid-template-columns:1fr 1fr}section{padding:2rem 1rem!important}}
+@media (max-width:480px){.nav a{font-size:.7rem}.nav{gap:.4rem}.btn-nav{padding:.35rem .6rem;font-size:.7rem}.hero-content h1{font-size:1.2rem}.pasos-grid{grid-template-columns:1fr}.provincias-grid-v2{grid-template-columns:1fr 1fr}.tecnicos-grid-3{grid-template-columns:1fr!important}.tecnicos-grid-2{grid-template-columns:1fr!important}.tecnicos-home h2{font-size:1.4rem!important}section{padding:2rem 1rem!important}}
 /* Buscador provincias */
 .buscador-wrapper{position:relative;display:inline-block}.buscador-icono{position:absolute;left:10px;top:50%;transform:translateY(-50%);pointer-events:none;z-index:1}.buscador-input{width:170px;padding:7px 10px 7px 32px;border:1px solid #ddd;border-radius:8px;font-family:Outfit,sans-serif;font-size:.82rem;background:#f8f9fa;transition:border-color .2s,box-shadow .2s;outline:none;vertical-align:middle}.buscador-input:focus{border-color:#547c24;box-shadow:0 0 0 3px rgba(84,124,36,.15);background:#fff}.buscador-resultados{position:absolute;top:100%;left:0;right:0;background:#fff;border:1px solid #e0e0e0;border-radius:8px;box-shadow:0 4px 16px rgba(0,0,0,.1);max-height:280px;overflow-y:auto;z-index:9999;margin-top:4px;display:block}.buscador-item{padding:8px 14px;cursor:pointer;font-size:.85rem;font-family:Outfit,sans-serif;color:#333;transition:background .15s}.buscador-item:hover{background:#f0f5ea;color:#547c24}.buscador-item:not(:last-child){border-bottom:1px solid #f0f0f0}@media(max-width:768px){.buscador-input{width:140px;font-size:.75rem;padding:5px 8px 5px 28px}.buscador-icono{left:7px;width:14px;height:14px}}@media(max-width:480px){.buscador-input{width:120px;font-size:.7rem;padding:4px 6px 4px 24px}.buscador-icono{left:5px;width:12px;height:12px}}
 /* Mobile: sección técnicos */
@@ -363,7 +363,7 @@ const provincias = [
       <p style="font-size:1rem;color:#6b7b5e;max-width:600px;margin:0 auto 2rem">Si eres arquitecto, aparejador o ingeniero, te enviamos clientes que ya saben lo que cuesta y quieren que les contactes. <strong>Tú solo haces tu trabajo.</strong></p>
 
       <!-- Cómo funciona -->
-      <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:1.25rem;margin-bottom:2.5rem;text-align:left">
+      <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:1.25rem;margin-bottom:2.5rem;text-align:left" class="tecnicos-grid-3">
         <div style="background:white;border-radius:12px;padding:1.5rem;border:1px solid #dce8d0">
           <div style="width:40px;height:40px;background:#f3f9eb;border-radius:50%;display:flex;align-items:center;justify-content:center;margin-bottom:.75rem;font-weight:700;color:#547c24;font-size:1.1rem">1</div>
           <h4 style="font-size:.95rem;color:#2d3a1f;margin-bottom:.35rem">Te registras gratis</h4>
@@ -382,7 +382,7 @@ const provincias = [
       </div>
 
       <!-- Planes -->
-      <div style="display:grid;grid-template-columns:1fr 1fr;gap:1.25rem;max-width:700px;margin:0 auto 2rem">
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:1.25rem;max-width:700px;margin:0 auto 2rem" class="tecnicos-grid-2">
         <a href="/panel-tecnicos.html#planes" style="text-decoration:none;color:inherit">
         <div style="background:white;border:2px solid #547c24;border-radius:12px;padding:1.5rem;text-align:center;position:relative;cursor:pointer;transition:transform .15s,box-shadow .15s" onmouseover="this.style.transform='translateY(-2px)';this.style.boxShadow='0 6px 20px rgba(0,0,0,.1)'" onmouseout="this.style.transform='';this.style.boxShadow=''">
           <div style="position:absolute;top:-12px;left:50%;transform:translateX(-50%);background:#547c24;color:white;font-size:.7rem;font-weight:700;padding:.25rem .8rem;border-radius:10px;text-transform:uppercase;letter-spacing:.03em">Más popular</div>
