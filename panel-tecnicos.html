@@ -634,6 +634,72 @@
       </div>
     </div>
   </div>
+
+  <!-- FORMULARIO DE REGISTRO DE TECNICOS -->
+  <div class="registro-right" style="position:sticky;top:90px;align-self:start">
+    <div class="registro-card">
+      <h3>📝 Regístrate como técnico</h3>
+      <p style="font-size:.82rem;color:#6b7b5e;margin-bottom:1rem">Completa el formulario y te creamos tu perfil público automáticamente.</p>
+      <form id="form-registro-tecnico" onsubmit="return false;">
+        <div class="form-grid" style="display:grid;gap:.75rem">
+          <input type="text" name="nombre" placeholder="Nombre completo" required style="padding:.7rem;border:1px solid #dce8d0;border-radius:8px;font-family:Outfit,sans-serif;font-size:.88rem">
+          <input type="email" name="email" placeholder="Email profesional" required style="padding:.7rem;border:1px solid #dce8d0;border-radius:8px;font-family:Outfit,sans-serif;font-size:.88rem">
+          <input type="tel" name="telefono" placeholder="Teléfono" required style="padding:.7rem;border:1px solid #dce8d0;border-radius:8px;font-family:Outfit,sans-serif;font-size:.88rem">
+          <select name="profesion" required style="padding:.7rem;border:1px solid #dce8d0;border-radius:8px;font-family:Outfit,sans-serif;font-size:.88rem;background:white;color:#333">
+            <option value="">Selecciona tu profesión</option>
+            <option>Arquitecto</option>
+            <option>Arquitecto Técnico / Aparejador</option>
+            <option>Ingeniero de Edificación</option>
+            <option>Ingeniero Industrial</option>
+            <option>Ingeniero Técnico Industrial</option>
+          </select>
+          <input type="text" name="colegiado" placeholder="Nº de colegiado" required style="padding:.7rem;border:1px solid #dce8d0;border-radius:8px;font-family:Outfit,sans-serif;font-size:.88rem">
+          <input type="text" name="provincias" placeholder="Provincias donde trabajas (ej: Madrid, Toledo)" required style="padding:.7rem;border:1px solid #dce8d0;border-radius:8px;font-family:Outfit,sans-serif;font-size:.88rem">
+          <input type="url" name="web" placeholder="Tu web (opcional)" style="padding:.7rem;border:1px solid #dce8d0;border-radius:8px;font-family:Outfit,sans-serif;font-size:.88rem">
+          <button type="submit" style="padding:.8rem;background:#547c24;color:white;border:none;border-radius:8px;font-weight:600;font-size:.9rem;cursor:pointer;font-family:Outfit,sans-serif">Enviar solicitud →</button>
+        </div>
+      </form>
+      <p id="msg-registro" style="font-size:.82rem;color:#6b7b5e;margin-top:.75rem;display:none"></p>
+    </div>
+  </div>
+
+<script>
+document.getElementById('form-registro-tecnico').addEventListener('submit', async function(e) {
+  e.preventDefault();
+  const btn = this.querySelector('button[type=submit]');
+  const msg = document.getElementById('msg-registro');
+  const data = {tecnico: {}};
+  Array.from(this.elements).forEach(el => { if(el.name) data.tecnico[el.name] = el.value; });
+  
+  btn.textContent = 'Enviando...';
+  btn.disabled = true;
+  
+  try {
+    const r = await fetch('https://hermes-worker.artbrice.workers.dev/api/registro-tecnico', {
+      method: 'POST',
+      headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify(data)
+    });
+    const res = await r.json();
+    if(res.ok) {
+      msg.style.display = 'block';
+      msg.style.color = '#547c24';
+      msg.innerHTML = '✅ Solicitud enviada. Te confirmaremos por email en 24-48h.';
+      this.reset();
+    } else {
+      msg.style.display = 'block';
+      msg.style.color = '#cc3333';
+      msg.textContent = res.error || 'Error al enviar. Intenta de nuevo.';
+    }
+  } catch(err) {
+    msg.style.display = 'block';
+    msg.style.color = '#cc3333';
+    msg.textContent = 'Error de conexión. Intenta de nuevo.';
+  }
+  btn.textContent = 'Enviar solicitud →';
+  btn.disabled = false;
+});
+</script>
 <style>
 @media (max-width:768px){
   #planes [style*="grid-template-columns:1fr 1fr"]{grid-template-columns:1fr!important}
