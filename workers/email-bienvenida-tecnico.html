@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bienvenido a CertificadoYa</title>
+</head>
+<body style="margin:0;padding:0;background-color:#f5f7f2;font-family:'Outfit','Segoe UI',Arial,sans-serif">
+  <table width="100%" cellpadding="0" cellspacing="0" style="background-color:#f5f7f2">
+    <tr>
+      <td align="center" style="padding:30px 15px">
+        <table width="600" max-width="100%%" cellpadding="0" cellspacing="0" style="background-color:#ffffff;border-radius:16px;overflow:hidden;box-shadow:0 2px 12px rgba(0,0,0,.06)">
+          
+          <!-- HEADER with logo and brand -->
+          <tr>
+            <td style="background:linear-gradient(135deg,#547c24,#3d5e1a);padding:30px 40px;text-align:center">
+              <table width="100%%" cellpadding="0" cellspacing="0">
+                <tr>
+                  <td align="center">
+                    <!-- Logo as text since SVGs in email clients are tricky -->
+                    <div style="font-size:28px;font-weight:700;color:#ffffff;letter-spacing:-.5px">CertificadoYa</div>
+                    <div style="font-size:13px;color:#b8d4a0;margin-top:4px">Certificado de Eficiencia Energética</div>
+                  </td>
+                </tr>
+              </table>
+            </td>
+          </tr>
+          
+          <!-- HERO -->
+          <tr>
+            <td style="padding:35px 40px 10px 40px">
+              <h1 style="font-size:22px;font-weight:700;color:#1a1a1a;margin:0 0 6px 0">¡Bienvenido a CertificadoYa, {{NOMBRE}}!</h1>
+              <p style="font-size:15px;color:#6b7b5e;line-height:1.5;margin:0">Gracias por unirte a nuestra red de técnicos certificadores. Ya estamos revisando tu solicitud.</p>
+            </td>
+          </tr>
+          
+          <!-- PROFILE SECTION -->
+          <tr>
+            <td style="padding:20px 40px">
+              <table width="100%%" cellpadding="0" cellspacing="0" style="background:#f8faf5;border-radius:12px;padding:20px">
+                <tr>
+                  <td style="padding:0 0 12px 0">
+                    <div style="font-size:13px;font-weight:600;color:#547c24;text-transform:uppercase;letter-spacing:.5px">Tu perfil público</div>
+                  </td>
+                </tr>
+                <tr>
+                  <td style="padding:0 0 16px 0">
+                    <p style="font-size:14px;color:#4a5a3a;line-height:1.5;margin:0">Cuando verifiquemos tus datos, tu perfil estará disponible en:</p>
+                  </td>
+                </tr>
+                <tr>
+                  <td style="padding:0 0 5px 0">
+                    <a href="{{PERFIL_URL}}" style="display:inline-block;padding:10px 20px;background:#547c24;color:#ffffff;border-radius:8px;font-size:14px;font-weight:600;text-decoration:none">Ver mi perfil →</a>
+                  </td>
+                </tr>
+              </table>
+            </td>
+          </tr>
+          
+          <!-- BACKLINK SECTION - the snippet they copy -->
+          <tr>
+            <td style="padding:10px 40px">
+              <table width="100%%" cellpadding="0" cellspacing="0" style="background:#f0f5ea;border:2px dashed #b8d4a0;border-radius:12px;padding:20px">
+                <tr>
+                  <td style="padding:0 0 10px 0">
+                    <div style="font-size:13px;font-weight:600;color:#3d5e1a">🔗 Comparte tu perfil en tu web</div>
+                  </td>
+                </tr>
+                <tr>
+                  <td style="padding:0 0 14px 0">
+                    <p style="font-size:13px;color:#4a5a3a;line-height:1.5;margin:0">
+                      Si tienes web, solo tienes que copiar y pegar este código donde quieras mostrar tu colaboración:<br><br>
+                      <code style="display:block;background:#ffffff;padding:12px;border-radius:8px;font-size:12px;color:#333;word-break:break-all;border:1px solid #dce8d0">
+                        &lt;a href="{{PERFIL_URL}}" target="_blank"&gt;Colaboro con CertificadoYa&lt;/a&gt;
+                      </code>
+                    </p>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <p style="font-size:12px;color:#9aab8a;margin:0">Esto ayuda a que más clientes te encuentren. Cada visita desde tu web cuenta.</p>
+                  </td>
+                </tr>
+              </table>
+            </td>
+          </tr>
+          
+          <!-- BENEFITS GRID -->
+          <tr>
+            <td style="padding:25px 40px 10px 40px">
+              <h2 style="font-size:16px;font-weight:600;color:#1a1a1a;margin:0 0 14px 0">¿Qué sigue ahora?</h2>
+              <table width="100%%" cellpadding="0" cellspacing="0">
+                <tr>
+                  <td width="50%%" style="padding:0 8px 12px 0;vertical-align:top">
+                    <table width="100%%" cellpadding="0" cellspacing="0" style="background:#f8faf5;border-radius:10px;padding:14px">
+                      <tr><td style="font-size:18px;padding:0 0 4px 0">✅</td></tr>
+                      <tr><td style="font-size:13px;font-weight:600;color:#1a1a1a;padding:0 0 3px 0">Verificación</td></tr>
+                      <tr><td style="font-size:12px;color:#6b7b5e;line-height:1.4">Revisamos tu colegiación en 24-48h</td></tr>
+                    </table>
+                  </td>
+                  <td width="50%%" style="padding:0 0 12px 8px;vertical-align:top">
+                    <table width="100%%" cellpadding="0" cellspacing="0" style="background:#f8faf5;border-radius:10px;padding:14px">
+                      <tr><td style="font-size:18px;padding:0 0 4px 0">📋</td></tr>
+                      <tr><td style="font-size:13px;font-weight:600;color:#1a1a1a;padding:0 0 3px 0">Leads</td></tr>
+                      <tr><td style="font-size:12px;color:#6b7b5e;line-height:1.4">Recibirás clientes de tu zona</td></tr>
+                    </table>
+                  </td>
+                </tr>
+                <tr>
+                  <td width="50%%" style="padding:0 8px 0 0;vertical-align:top">
+                    <table width="100%%" cellpadding="0" cellspacing="0" style="background:#f8faf5;border-radius:10px;padding:14px">
+                      <tr><td style="font-size:18px;padding:0 0 4px 0">💰</td></tr>
+                      <tr><td style="font-size:13px;font-weight:600;color:#1a1a1a;padding:0 0 3px 0">Sin cuotas</td></tr>
+                      <tr><td style="font-size:12px;color:#6b7b5e;line-height:1.4">Tú pones tus tarifas. Pagas solo por lead</td></tr>
+                    </table>
+                  </td>
+                  <td width="50%%" style="padding:0 0 0 8px;vertical-align:top">
+                    <table width="100%%" cellpadding="0" cellspacing="0" style="background:#f8faf5;border-radius:10px;padding:14px">
+                      <tr><td style="font-size:18px;padding:0 0 4px 0">🕐</td></tr>
+                      <tr><td style="font-size:13px;font-weight:600;color:#1a1a1a;padding:0 0 3px 0">Tú decides</td></tr>
+                      <tr><td style="font-size:12px;color:#6b7b5e;line-height:1.4">Aceptas o rechazas cada trabajo</td></tr>
+                    </table>
+                  </td>
+                </tr>
+              </table>
+            </td>
+          </tr>
+          
+          <!-- CTA -->
+          <tr>
+            <td style="padding:25px 40px 35px 40px;text-align:center">
+              <p style="font-size:14px;color:#4a5a3a;margin:0 0 16px 0">Mientras tanto, puedes ir familiarizándote con tu panel:</p>
+              <a href="https://www.certificadoya.es/panel-tecnicos.html" style="display:inline-block;padding:12px 30px;background:#547c24;color:#ffffff;border-radius:8px;font-size:14px;font-weight:600;text-decoration:none">Acceder al panel de técnico →</a>
+            </td>
+          </tr>
+          
+          <!-- FAQ -->
+          <tr>
+            <td style="padding:0 40px 20px 40px">
+              <table width="100%%" cellpadding="0" cellspacing="0" style="border-top:1px solid #e8ece6">
+                <tr><td style="padding:18px 0 6px 0;font-size:14px;font-weight:600;color:#1a1a1a">❓ Preguntas frecuentes</td></tr>
+                <tr><td style="padding:4px 0;font-size:13px;color:#6b7b5e;line-height:1.5"><strong>¿Cuándo empiezo a recibir leads?</strong><br>En cuanto verifiquemos tu colegiación y actives tu plan. Normalmente 24-48h.</td></tr>
+                <tr><td style="padding:4px 0;font-size:13px;color:#6b7b5e;line-height:1.5"><strong>¿Puedo cambiar de plan?</strong><br>Sí, puedes cambiar entre plan mensual y pago por lead cuando quieras desde tu panel.</td></tr>
+                <tr><td style="padding:4px 0;font-size:13px;color:#6b7b5e;line-height:1.5"><strong>¿Cómo recibo los avisos de nuevos leads?</strong><br>Por email y SMS al número que nos has indicado.</td></tr>
+              </table>
+            </td>
+          </tr>
+          
+          <!-- FOOTER -->
+          <tr>
+            <td style="background:#1a1a1a;padding:25px 40px;text-align:center">
+              <table width="100%%" cellpadding="0" cellspacing="0">
+                <tr>
+                  <td align="center" style="padding:0 0 14px 0">
+                    <a href="https://www.certificadoya.es" style="font-size:18px;font-weight:700;color:#ffffff;text-decoration:none">CertificadoYa</a>
+                  </td>
+                </tr>
+                <tr>
+                  <td align="center" style="padding:0 0 14px 0">
+                    <a href="https://www.certificadoya.es" style="color:#b8d4a0;font-size:12px;text-decoration:none;padding:0 8px">Web</a>
+                    <span style="color:#4a5a3a;font-size:12px">|</span>
+                    <a href="https://www.certificadoya.es/blog/" style="color:#b8d4a0;font-size:12px;text-decoration:none;padding:0 8px">Blog</a>
+                    <span style="color:#4a5a3a;font-size:12px">|</span>
+                    <a href="https://www.certificadoya.es/panel-tecnicos.html" style="color:#b8d4a0;font-size:12px;text-decoration:none;padding:0 8px">Técnicos</a>
+                    <span style="color:#4a5a3a;font-size:12px">|</span>
+                    <a href="https://www.certificadoya.es/legal/privacidad.html" style="color:#b8d4a0;font-size:12px;text-decoration:none;padding:0 8px">Privacidad</a>
+                  </td>
+                </tr>
+                <tr>
+                  <td align="center" style="padding:0">
+                    <p style="font-size:11px;color:#6b7b5e;margin:0;line-height:1.5">© 2026 CertificadoYa — ArtStudio-CEE · Certificados de eficiencia energética en toda España</p>
+                  </td>
+                </tr>
+              </table>
+            </td>
+          </tr>
+          
+        </table>
+        <p style="font-size:11px;color:#9aab8a;margin-top:20px;text-align:center">Este email se ha enviado automáticamente al registrarte en CertificadoYa.</p>
+      </td>
+    </tr>
+  </table>
+</body>
+</html>
