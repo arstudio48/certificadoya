@@ -253,7 +253,7 @@ function cerrarLeadModal() {
   document.getElementById('lead-modal').classList.remove('visible');
 }
 
-// CONFIRMAR LEAD → Guardar solicitud SIN cobro, notificar técnicos
+// CONFIRMAR LEAD → Guardar solicitud en Supabase + notificar técnicos
 async function confirmarLead() {
   const presupuesto = window._presupuesto;
   const nombre = document.getElementById('lead-nombre').value.trim();
@@ -270,47 +270,80 @@ async function confirmarLead() {
   btn.disabled = true;
 
   try {
-    // Guardar lead SIN cobro
-    const res = await fetch(EDGE_FUNCTION_URL + '?action=solicitar', {
+    // 1. Guardar lead en Supabase REST API directamente
+    const leadData = {
+      nombre_cliente: nombre,
+      telefono_cliente: telefono,
+      email_cliente: email,
+      codigo_postal: presupuesto.cp,
+      zona: presupuesto.zona,
+      m2: presupuesto.m2,
+      tipo_inmueble: presupuesto.tipo,
+      presupuesto_min: presupuesto.precioMin,
+      presupuesto_max: presupuesto.precioMax,
+      fuente: 'web'
+    };
+
+    const insertRes = await fetch(SUPABASE_URL + '/rest/v1/leads', {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        name: nombre,
-        email: email,
-        phone: telefono,
-        cp: presupuesto.cp,
-        m2: presupuesto.m2,
-        tipo: presupuesto.tipo,
-        zona: presupuesto.zona,
-        precioMin: presupuesto.precioMin,
-        precioMax: presupuesto.precioMax,
-        descripcion: `${presupuesto.tipo} de ${presupuesto.m2} m² en ${presupuesto.zona} (CP: ${presupuesto.cp})`
-      })
+      headers: {
+        'apikey': SUPABASE_ANON_KEY,
+        'Authorization': 'Bearer ' + SUPABASE_ANON_KEY,
+        'Content-Type': 'application/json',
+        'Prefer': 'return=representation'
+      },
+      body: JSON.stringify(leadData)
     });
 
-    const data = await res.json();
-
-    if (data.success) {
-      // Cerrar modal y mostrar mensaje de espera
-      document.getElementById('lead-modal').classList.remove('visible');
-      document.getElementById('resultado-solicitud').innerHTML = `
-        <div style="background:#edf4e5;border:2px solid #547c24;border-radius:12px;padding:2rem;text-align:center;margin-top:1rem">
-          <div style="font-size:2.5rem;margin-bottom:.5rem">✅</div>
-          <h3 style="color:#2d3a1f;font-size:1.2rem;margin-bottom:.5rem">Solicitud enviada</h3>
-          <p style="color:#6b7b5e;font-size:.9rem;line-height:1.5">
-            Hemos notificado a los técnicos de tu zona.<br>
-            <strong>Te contactarán pronto</strong> para concretar el servicio.<br><br>
-            Sin compromiso — solo pagas cuando un técnico acepte el encargo.
-          </p>
-          <button class="btn-cta" style="margin-top:1rem" onclick="this.parentElement.remove()">Entendido</button>
-        </div>
-      `;
-      document.getElementById('resultado-solicitud').scrollIntoView({ behavior: 'smooth', block: 'center' });
-    } else {
-      alert('Error: ' + (data.error || 'Inténtalo de nuevo'));
-      btn.textContent = 'Solicitar servicio →';
+    if (!insertRes.ok) {
+      const errText = await insertRes.text();
+      console.error('Error guardando lead:', errText);
+      alert('Error al enviar la solicitud. Inténtalo de nuevo.');
       btn.disabled = false;
+      btn.textContent = 'Solicitar servicio →';
+      return;
     }
+
+    const savedLeads = await insertRes.json();
+    const savedLead = Array.isArray(savedLeads) ? savedLeads[0] : savedLeads;
+    const leadId = savedLead?.id;
+
+    // 2. Llamar a Edge Function para notificar técnicos (no crítico si falla)
+    if (leadId) {
+      fetch(EDGE_FUNCTION_URL + '?action=solicitar', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          leadId: leadId,
+          name: nombre,
+          email: email,
+          phone: telefono,
+          cp: presupuesto.cp,
+          m2: presupuesto.m2,
+          tipo: presupuesto.tipo,
+          zona: presupuesto.zona,
+          precioMin: presupuesto.precioMin,
+          precioMax: presupuesto.precioMax
+        })
+      }).catch(e => console.error('Error notificando técnicos:', e));
+    }
+
+    // Mostrar éxito
+    document.getElementById('lead-modal').classList.remove('visible');
+    document.getElementById('resultado-solicitud').innerHTML = `
+      <div style="background:#edf4e5;border:2px solid #547c24;border-radius:12px;padding:2rem;text-align:center;margin-top:1rem">
+        <div style="font-size:2.5rem;margin-bottom:.5rem">✅</div>
+        <h3 style="color:#2d3a1f;font-size:1.2rem;margin-bottom:.5rem">Solicitud enviada</h3>
+        <p style="color:#6b7b5e;font-size:.9rem;line-height:1.5">
+          Hemos notificado a los técnicos de tu zona.<br>
+          <strong>Te contactarán pronto</strong> para concretar el servicio.<br><br>
+          Sin compromiso — solo pagas cuando un técnico acepte el encargo.
+        </p>
+        <button class="btn-cta" style="margin-top:1rem" onclick="this.parentElement.remove()">Entendido</button>
+      </div>
+    `;
+    document.getElementById('resultado-solicitud').scrollIntoView({ behavior: 'smooth', block: 'center' });
+
   } catch (err) {
     console.error('Error:', err);
     alert('Error de conexión. Inténtalo de nuevo.');
