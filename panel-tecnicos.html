@@ -412,7 +412,7 @@
       <div class="registro-img-wrapper">
 <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=800&h=420&fit=crop&q=80" alt="Arquitecto técnico revisando documentación de certificado energético" width="800" height="420" loading="eager">
         <div class="registro-img-overlay">
-          <h2>Tú haces lo que mejor sabes hacer. Lo demás lo hacemos nosotros.</h2>
+          <h2>Tú céntrate en certificar. Del resto nos encargamos nosotros.</h2>
           <p>Recibe solicitudes de certificados energéticos. Sin invertir en publicidad.</p>
         </div>
       </div>
@@ -422,7 +422,7 @@
           <div class="benefit-icon"><img src="/img/ico-presupuesto.svg" width="40" height="40" alt="Leads"></div>
           <div class="benefit-text">
             <h4>Leads cualificados sin esfuerzo</h4>
-            <p>Clientes que ya saben lo que cuesta y quieren que les contactes. Tú decides qué trabajos aceptar.</p>
+            <p>Clientes que ya saben lo que cuesta y quieren que los contactes. Tú decides qué trabajos aceptar.</p>
           </div>
         </div>
         <div class="benefit-item">
@@ -490,13 +490,27 @@
           <img src="/img/ico-confianza.svg" width="14" height="14" alt="" style="vertical-align:middle;margin-right:3px"> Tus datos se guardan de forma segura. Después del registro podrás completar tu perfil profesional (colegiación, provincias y datos de cobro).
         </p>
 
+        <div style="background:#f9fbf6;border-radius:10px;padding:1rem;margin:.5rem 0">
+          <p style="font-size:.82rem;font-weight:600;color:#2d3a1f;margin-bottom:.5rem">Elige tu plan</p>
+          <div style="display:flex;gap:.5rem;flex-wrap:wrap">
+            <label style="flex:1;min-width:150px;display:flex;align-items:flex-start;gap:.4rem;padding:.6rem .75rem;border:2px solid #547c24;border-radius:8px;cursor:pointer;background:#f3f9eb;font-size:.82rem" onclick="this.style.borderColor='#547c24';this.style.background='#f3f9eb';this.parentElement.querySelectorAll('label')[1].style.borderColor='#e5e7eb';this.parentElement.querySelectorAll('label')[1].style.background='#fff'">
+              <input type="radio" name="plan" value="mensual" checked style="margin-top:2px">
+              <div><strong>29 €/mes</strong><br><span style="font-size:.72rem;color:#6b7280">Leads ilimitados</span></div>
+            </label>
+            <label style="flex:1;min-width:150px;display:flex;align-items:flex-start;gap:.4rem;padding:.6rem .75rem;border:2px solid #e5e7eb;border-radius:8px;cursor:pointer;background:#fff;font-size:.82rem" onclick="this.style.borderColor='#547c24';this.style.background='#f3f9eb';this.parentElement.querySelectorAll('label')[0].style.borderColor='#e5e7eb';this.parentElement.querySelectorAll('label')[0].style.background='#fff'">
+              <input type="radio" name="plan" value="por_lead" style="margin-top:2px">
+              <div><strong>4 €/lead</strong><br><span style="font-size:.72rem;color:#6b7280">Pagas solo si aceptas</span></div>
+            </label>
+          </div>
+        </div>
+
         <button class="btn-submit" id="reg-btn" onclick="registrarTecnico()">
           Regístrate gratis →
         </button>
 
         <div class="trust-bar">
           <span><img src="/img/ico-confianza.svg" width="16" height="16" alt="Seguro"> Datos protegidos</span>
-          <span><img src="/img/ico-confianza.svg" width="16" height="16" alt="Sin permanencia"> Sin permanencia</span>
+          <span><img src="/img/ico-rapido.svg" width="16" height="16" alt="Sin permanencia"> Sin permanencia</span>
           <span><img src="/img/ico-rapido.svg" width="16" height="16" alt="Rápido"> Alta en 24-48h</span>
         </div>
 
@@ -546,7 +560,7 @@
       <ol style="color:#4a5a3a;line-height:2;padding-left:1.2rem">
         <li>El cliente calcula su presupuesto en la web</li>
         <li>El lead se asigna al técnico de su zona</li>
-        <li>Te contactamos y aceptas o rechazas</li>
+        <li>Recibes un aviso y decides si aceptar o rechazar</li>
         <li>Realizas la visita y emites el certificado</li>
         <li>Cobras directamente al cliente</li>
       </ol>
@@ -633,7 +647,7 @@
   <div style="max-width:700px;margin:0 auto">
     <details style="border:1px solid #e8ece6;border-radius:10px;padding:1rem;margin-bottom:.75rem">
       <summary style="font-weight:600;cursor:pointer;color:#2d3a1f">¿Cuánto cuesta darse de alta?</summary>
-      <p style="margin-top:.75rem;color:#6b7b5e;line-height:1.6">El registro es completamente gratis. No cobramos cuota de entrada ni mensualidad fija. Solo pagas cuando recibes leads cualificados, con un coste por lead que tú puedes consultar antes de aceptar.</p>
+      <p style="margin-top:.75rem;color:#6b7b5e;line-height:1.6">El registro es completamente gratis. Puedes elegir entre dos planes: <strong>29 €/mes con leads ilimitados</strong> o <strong>4 € por lead aceptado</strong> sin cuota fija. Sin compromisos: en el plan de pago por lead, si un mes no aceptas ninguno, no pagas nada.</p>
     </details>
     <details style="border:1px solid #e8ece6;border-radius:10px;padding:1rem;margin-bottom:.75rem">
       <summary style="font-weight:600;cursor:pointer;color:#2d3a1f">¿Puedo elegir qué trabajos acepto?</summary>
