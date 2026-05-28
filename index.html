@@ -495,24 +495,27 @@ const provincias = [
 
 <script src="/js/main.js"></script>
 <script>
-const input = document.getElementById('buscador-provincia');
-const resultados = document.getElementById('buscador-resultados');
-input.addEventListener('input', function() {
-  const q = this.value.toLowerCase().trim();
-  resultados.innerHTML = '';
-  if (!q) return;
-  const filtradas = provincias.filter(p => p.nombre.toLowerCase().includes(q));
-  filtradas.forEach(p => {
-    const div = document.createElement('div');
-    div.className = 'buscador-item';
-    div.textContent = p.nombre;
-    div.onclick = function() { window.location.href = '/certificado-energetico-' + p.slug + '/'; };
-    resultados.appendChild(div);
+(function(){
+  var input = document.getElementById('buscador-provincia');
+  var resultados = document.getElementById('buscador-resultados');
+  if (!input || !resultados) return;
+  input.oninput = function() {
+    var q = this.value.toLowerCase().trim();
+    resultados.innerHTML = '';
+    if (!q) return;
+    var filtradas = provincias.filter(function(p){return p.nombre.toLowerCase().includes(q);});
+    filtradas.forEach(function(p){
+      var div = document.createElement('div');
+      div.className = 'buscador-item';
+      div.textContent = p.nombre;
+      div.onclick = function(){window.location.href='/certificado-energetico-'+p.slug+'/';};
+      resultados.appendChild(div);
+    });
+  };
+  document.addEventListener('click', function(e) {
+    if (!e.target.closest('.buscador-wrapper')) resultados.innerHTML = '';
   });
-});
-document.addEventListener('click', function(e) {
-  if (!e.target.closest('.buscador-wrapper')) resultados.innerHTML = '';
-});
+})();
 
 // Scroll reveal animation
 var elems = document.querySelectorAll('.pasos-section,.ventajas-v2,.provincias-section-v2,.faq-v2,.cta-v2,.tecnicos-home');
