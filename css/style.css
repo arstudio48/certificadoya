@@ -338,3 +338,17 @@ input.error { border-color:#ef4444 !important; background:#fef2f2; }
   .posts-grid { grid-template-columns:1fr; }
   .filters-v2 { flex-direction:column; }
 }
+
+/* ─── COOKIES BANNER ─── */
+.cookies-banner{position:fixed;bottom:24px;left:50%;transform:translateX(-50%) translateY(calc(100% + 40px));z-index:1000;background:var(--white);border:1px solid var(--border);border-radius:16px;padding:1.25rem 1.75rem;box-shadow:0 12px 48px rgba(0,0,0,0.15),0 4px 12px rgba(0,0,0,0.06);max-width:520px;width:calc(100% - 48px);transition:transform .35s cubic-bezier(.34,1.56,.64,1);display:none}
+.cookies-banner.visible{transform:translateX(-50%) translateY(0)}
+.cookies-inner{display:flex;flex-direction:column;align-items:flex-start;gap:1rem}
+.cookies-inner p{font-size:.85rem;color:var(--text-light);margin:0;line-height:1.5}
+.cookies-inner p a{color:var(--primary);text-decoration:underline;font-weight:500}
+.cookies-buttons{display:flex;gap:.75rem;width:100%}
+.cookies-btn{padding:.6rem 1.25rem;border-radius:var(--radius-sm);font-family:var(--font);font-size:.85rem;font-weight:600;cursor:pointer;border:none;transition:all .2s;flex:1;text-align:center}
+.cookies-btn-accept{background:var(--primary);color:white;box-shadow:0 2px 6px rgba(84,124,36,.2)}
+.cookies-btn-accept:hover{background:var(--primary-dark);transform:translateY(-1px);box-shadow:0 4px 12px rgba(84,124,36,.3)}
+.cookies-btn-essential{background:transparent;color:var(--text-light);border:1.5px solid var(--border)}
+.cookies-btn-essential:hover{border-color:var(--text-lighter);color:var(--text);background:var(--bg)}
+@media(max-width:480px){.cookies-banner{bottom:12px;padding:1rem 1.25rem;width:calc(100% - 24px)}.cookies-buttons{flex-direction:column;gap:.5rem}}
