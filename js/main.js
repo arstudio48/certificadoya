@@ -451,7 +451,12 @@ document.addEventListener('DOMContentLoaded', function() {
   if (!localStorage.getItem('cookie-consent')) {
     setTimeout(function() {
       var el = document.getElementById('cookies-banner');
-      if (el) el.classList.add('visible');
+      if (el) {
+        el.style.display = 'block';
+        // Force reflow for transition
+        void el.offsetHeight;
+        el.classList.add('visible');
+      }
     }, 800);
   }
 });
