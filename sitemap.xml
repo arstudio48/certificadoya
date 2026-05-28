@@ -1,4 +1,4 @@
-     1|     1|<?xml version="1.0" encoding="UTF-8"?>
+1|     1|<?xml version="1.0" encoding="UTF-8"?>
      2|     2|<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
      3|     3|        xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
      4|     4|  <url>
@@ -338,3 +338,21 @@
    334|   324|  </url>
    335|   325|</urlset>
    336|   326|
+  <!-- Tecnicos -->
+  <url><loc>https://www.certificadoya.es/tecnicos/</loc><lastmod>2026-05-28</lastmod><priority>0.7</priority></url>
+  <url><loc>https://www.certificadoya.es/tecnicos/manuel-garcia-lopez/</loc><lastmod>2026-05-28</lastmod><priority>0.5</priority></url>
+  <url><loc>https://www.certificadoya.es/tecnicos/ana-martinez-ruiz/</loc><lastmod>2026-05-28</lastmod><priority>0.5</priority></url>
+  <url><loc>https://www.certificadoya.es/tecnicos/carlos-fernandez-perez/</loc><lastmod>2026-05-28</lastmod><priority>0.5</priority></url>
+  <url><loc>https://www.certificadoya.es/tecnicos/laura-sanchez-diaz/</loc><lastmod>2026-05-28</lastmod><priority>0.5</priority></url>
+  <url><loc>https://www.certificadoya.es/tecnicos/david-rodriguez-gomez/</loc><lastmod>2026-05-28</lastmod><priority>0.5</priority></url>
+  <url><loc>https://www.certificadoya.es/tecnicos/elena-garcia-fernandez/</loc><lastmod>2026-05-28</lastmod><priority>0.5</priority></url>
+  <url><loc>https://www.certificadoya.es/tecnicos/javier-lopez-martinez/</loc><lastmod>2026-05-28</lastmod><priority>0.5</priority></url>
+  <url><loc>https://www.certificadoya.es/tecnicos/marta-gonzalez-ruiz/</loc><lastmod>2026-05-28</lastmod><priority>0.5</priority></url>
+  <url><loc>https://www.certificadoya.es/tecnicos/pablo-hernandez-torres/</loc><lastmod>2026-05-28</lastmod><priority>0.5</priority></url>
+  <url><loc>https://www.certificadoya.es/tecnicos/sara-diaz-moreno/</loc><lastmod>2026-05-28</lastmod><priority>0.5</priority></url>
+  <url><loc>https://www.certificadoya.es/tecnicos/alejandro-ruiz-sanchez/</loc><lastmod>2026-05-28</lastmod><priority>0.5</priority></url>
+  <url><loc>https://www.certificadoya.es/tecnicos/cristina-perez-garcia/</loc><lastmod>2026-05-28</lastmod><priority>0.5</priority></url>
+  <url><loc>https://www.certificadoya.es/tecnicos/roberto-martin-navarro/</loc><lastmod>2026-05-28</lastmod><priority>0.5</priority></url>
+  <url><loc>https://www.certificadoya.es/tecnicos/natalia-romero-blanco/</loc><lastmod>2026-05-28</lastmod><priority>0.5</priority></url>
+  <url><loc>https://www.certificadoya.es/tecnicos/fernando-torres-gil/</loc><lastmod>2026-05-28</lastmod><priority>0.5</priority></url>
+</urlset>
