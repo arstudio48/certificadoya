@@ -31,6 +31,8 @@
   <style>
 @media (max-width:768px){.header-inner{padding:0 1rem}.nav{gap:.6rem}.nav a{font-size:.78rem}.btn-nav{padding:.4rem .8rem;font-size:.78rem}.logo-text{font-size:1.1rem}.logo-sub{display:none}.hero-content h1{font-size:1.5rem}.hero-content p{font-size:.9rem}.pasos-grid{grid-template-columns:1fr 1fr;gap:.8rem}.provincias-grid-v2{grid-template-columns:1fr 1fr;gap:.4rem}.ventajas-grid-v2{grid-template-columns:1fr}.faq-item-v2{padding:.85rem 1rem}.registro-hero{flex-direction:column;padding:1rem}.registro-right{flex:1;width:100%;position:static}.registro-card{padding:1.25rem}.registro-card .form-grid{grid-template-columns:1fr}.tecnicos-home-inner{flex-direction:column;gap:1.5rem}.footer-grid{grid-template-columns:1fr}}
 @media (max-width:480px){.nav a{font-size:.7rem}.nav{gap:.4rem}.btn-nav{padding:.35rem .6rem;font-size:.7rem}.hero-content h1{font-size:1.2rem}.pasos-grid{grid-template-columns:1fr}.provincias-grid-v2{grid-template-columns:1fr 1fr}section{padding:2rem 1rem!important}}
+/* Buscador provincias */
+.buscador-wrapper{position:relative;display:inline-block}.buscador-icono{position:absolute;left:10px;top:50%;transform:translateY(-50%);pointer-events:none;z-index:1}.buscador-input{width:170px;padding:7px 10px 7px 32px;border:1px solid #ddd;border-radius:8px;font-family:Outfit,sans-serif;font-size:.82rem;background:#f8f9fa;transition:border-color .2s,box-shadow .2s;outline:none;vertical-align:middle}.buscador-input:focus{border-color:#547c24;box-shadow:0 0 0 3px rgba(84,124,36,.15);background:#fff}.buscador-resultados{position:absolute;top:100%;left:0;right:0;background:#fff;border:1px solid #e0e0e0;border-radius:8px;box-shadow:0 4px 16px rgba(0,0,0,.1);max-height:280px;overflow-y:auto;z-index:9999;margin-top:4px;display:block}.buscador-item{padding:8px 14px;cursor:pointer;font-size:.85rem;font-family:Outfit,sans-serif;color:#333;transition:background .15s}.buscador-item:hover{background:#f0f5ea;color:#547c24}.buscador-item:not(:last-child){border-bottom:1px solid #f0f0f0}@media(max-width:768px){.buscador-input{width:140px;font-size:.75rem;padding:5px 8px 5px 28px}.buscador-icono{left:7px;width:14px;height:14px}}@media(max-width:480px){.buscador-input{width:120px;font-size:.7rem;padding:4px 6px 4px 24px}.buscador-icono{left:5px;width:12px;height:12px}}
 /* Mobile: sección técnicos */
 @media (max-width:768px){
   #para-tecnicos [style*="grid-template-columns:repeat(3,1fr)"]{grid-template-columns:1fr!important}
@@ -128,60 +130,11 @@
       <a href="/blog/">Blog</a>
       <a href="/panel-tecnicos.html">¿Eres técnico?</a>
       <a href="/pool-encargos.html">Pool</a>
-      <select id="provincia-selector" class="provincia-selector" onchange="cambiarProvincia()">
-                  <option value="">Seleccionar provincia...</option>
-                  <option value="alava">Álava</option>
-                  <option value="albacete">Albacete</option>
-                  <option value="alicante">Alicante</option>
-                  <option value="almeria">Almería</option>
-                  <option value="asturias">Asturias</option>
-                  <option value="avila">Ávila</option>
-                  <option value="badajoz">Badajoz</option>
-                  <option value="baleares">Baleares</option>
-                  <option value="barcelona">Barcelona</option>
-                  <option value="burgos">Burgos</option>
-                  <option value="caceres">Cáceres</option>
-                  <option value="cadiz">Cádiz</option>
-                  <option value="cantabria">Cantabria</option>
-                  <option value="castellon">Castellón</option>
-                  <option value="ceuta">Ceuta</option>
-                  <option value="ciudad-real">Ciudad Real</option>
-                  <option value="cordoba">Córdoba</option>
-                  <option value="a-coruna">A Coruña</option>
-                  <option value="cuenca">Cuenca</option>
-                  <option value="gipuzkoa">Gipuzkoa</option>
-                  <option value="girona">Girona</option>
-                  <option value="granada">Granada</option>
-                  <option value="guadalajara">Guadalajara</option>
-                  <option value="huelva">Huelva</option>
-                  <option value="huesca">Huesca</option>
-                  <option value="jaen">Jaén</option>
-                  <option value="leon">León</option>
-                  <option value="lleida">Lleida</option>
-                  <option value="lugo">Lugo</option>
-                  <option value="madrid">Madrid</option>
-                  <option value="malaga">Málaga</option>
-                  <option value="melilla">Melilla</option>
-                  <option value="murcia">Murcia</option>
-                  <option value="navarra">Navarra</option>
-                  <option value="ourense">Ourense</option>
-                  <option value="palencia">Palencia</option>
-                  <option value="las-palmas">Las Palmas</option>
-                  <option value="pontevedra">Pontevedra</option>
-                  <option value="la-rioja">La Rioja</option>
-                  <option value="salamanca">Salamanca</option>
-                  <option value="segovia">Segovia</option>
-                  <option value="sevilla">Sevilla</option>
-                  <option value="soria">Soria</option>
-                  <option value="tarragona">Tarragona</option>
-                  <option value="teruel">Teruel</option>
-                  <option value="toledo">Toledo</option>
-                  <option value="valencia">Valencia</option>
-                  <option value="valladolid">Valladolid</option>
-                  <option value="bizkaia">Bizkaia</option>
-                  <option value="zamora">Zamora</option>
-                  <option value="zaragoza">Zaragoza</option>
-      </select>
+      <div class="buscador-wrapper">
+        <svg class="buscador-icono" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#888" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+        <input type="text" id="buscador-provincia" class="buscador-input" placeholder="Busca tu provincia..." autocomplete="off">
+        <div id="buscador-resultados" class="buscador-resultados"></div>
+      </div>
       <a href="#presupuesto-card" class="btn-nav">Presupuesto</a>
     </nav>
   </div>
@@ -511,7 +464,45 @@
 </div>
 
 <script src="/js/main.js"></script>
-<script>function cambiarProvincia() { let provincia = document.getElementById('provincia-selector').value; if(provincia) { window.location.href = '/certificado-energetico-' + provincia + '/'; } }
+<script>
+const provincias = [
+  {slug:"alava", nombre:"Álava"}, {slug:"albacete", nombre:"Albacete"}, {slug:"alicante", nombre:"Alicante"},
+  {slug:"almeria", nombre:"Almería"}, {slug:"asturias", nombre:"Asturias"}, {slug:"avila", nombre:"Ávila"},
+  {slug:"badajoz", nombre:"Badajoz"}, {slug:"baleares", nombre:"Baleares"}, {slug:"barcelona", nombre:"Barcelona"},
+  {slug:"burgos", nombre:"Burgos"}, {slug:"caceres", nombre:"Cáceres"}, {slug:"cadiz", nombre:"Cádiz"},
+  {slug:"cantabria", nombre:"Cantabria"}, {slug:"castellon", nombre:"Castellón"}, {slug:"ceuta", nombre:"Ceuta"},
+  {slug:"ciudad-real", nombre:"Ciudad Real"}, {slug:"cordoba", nombre:"Córdoba"}, {slug:"a-coruna", nombre:"A Coruña"},
+  {slug:"cuenca", nombre:"Cuenca"}, {slug:"gipuzkoa", nombre:"Gipuzkoa"}, {slug:"girona", nombre:"Girona"},
+  {slug:"granada", nombre:"Granada"}, {slug:"guadalajara", nombre:"Guadalajara"}, {slug:"huelva", nombre:"Huelva"},
+  {slug:"huesca", nombre:"Huesca"}, {slug:"jaen", nombre:"Jaén"}, {slug:"leon", nombre:"León"},
+  {slug:"lleida", nombre:"Lleida"}, {slug:"lugo", nombre:"Lugo"}, {slug:"madrid", nombre:"Madrid"},
+  {slug:"malaga", nombre:"Málaga"}, {slug:"melilla", nombre:"Melilla"}, {slug:"murcia", nombre:"Murcia"},
+  {slug:"navarra", nombre:"Navarra"}, {slug:"ourense", nombre:"Ourense"}, {slug:"palencia", nombre:"Palencia"},
+  {slug:"las-palmas", nombre:"Las Palmas"}, {slug:"pontevedra", nombre:"Pontevedra"}, {slug:"la-rioja", nombre:"La Rioja"},
+  {slug:"salamanca", nombre:"Salamanca"}, {slug:"segovia", nombre:"Segovia"}, {slug:"sevilla", nombre:"Sevilla"},
+  {slug:"soria", nombre:"Soria"}, {slug:"tarragona", nombre:"Tarragona"}, {slug:"teruel", nombre:"Teruel"},
+  {slug:"toledo", nombre:"Toledo"}, {slug:"valencia", nombre:"Valencia"}, {slug:"valladolid", nombre:"Valladolid"},
+  {slug:"bizkaia", nombre:"Bizkaia"}, {slug:"zamora", nombre:"Zamora"}, {slug:"zaragoza", nombre:"Zaragoza"}
+];
+const input = document.getElementById('buscador-provincia');
+const resultados = document.getElementById('buscador-resultados');
+input.addEventListener('input', function() {
+  const q = this.value.toLowerCase().trim();
+  resultados.innerHTML = '';
+  if (!q) return;
+  const filtradas = provincias.filter(p => p.nombre.toLowerCase().includes(q));
+  filtradas.forEach(p => {
+    const div = document.createElement('div');
+    div.className = 'buscador-item';
+    div.textContent = p.nombre;
+    div.onclick = function() { window.location.href = '/certificado-energetico-' + p.slug + '/'; };
+    resultados.appendChild(div);
+  });
+});
+document.addEventListener('click', function(e) {
+  if (!e.target.closest('.buscador-wrapper')) resultados.innerHTML = '';
+});
+</script>
 document.addEventListener('DOMContentLoaded',function(){
   var elems = document.querySelectorAll('.pasos-section,.ventajas-v2,.provincias-section-v2,.faq-v2,.cta-v2,.tecnicos-home');
   elems.forEach(function(el){el.style.opacity='0';el.style.transform='translateY(30px)';el.style.transition='opacity .8s ease,transform .8s ease'});
