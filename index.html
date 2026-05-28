@@ -460,11 +460,23 @@
   <div class="cookies-inner">
     <p>🍪 Usamos cookies esenciales y de terceros (Supabase, Stripe). Sin publicidad. <a href="/legal/cookies.html">Más info</a></p>
     <div class="cookies-buttons">
-      <button class="cookies-btn cookies-btn-accept" onclick="acceptCookies()">Aceptar</button>
-      <button class="cookies-btn cookies-btn-essential" onclick="acceptEssentialCookies()">Solo esenciales</button>
+      <button class="cookies-btn cookies-btn-accept" onclick="localStorage.setItem('cookie-consent','all');document.getElementById('cookies-banner').remove()">Aceptar</button>
+      <button class="cookies-btn cookies-btn-essential" onclick="localStorage.setItem('cookie-consent','essential');document.getElementById('cookies-banner').remove()">Solo esenciales</button>
     </div>
   </div>
 </div>
+<script>
+(function(){
+  var cb = document.getElementById('cookies-banner');
+  if(cb && !localStorage.getItem('cookie-consent')){
+    setTimeout(function(){
+      cb.style.display = 'block';
+      void cb.offsetHeight;
+      cb.classList.add('visible');
+    }, 800);
+  }
+})();
+</script>
 
 <script src="/js/main.js"></script>
 <script>
