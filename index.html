@@ -455,26 +455,20 @@
 <!-- Contenedor para mensaje de confirmación de solicitud -->
 <div id="resultado-solicitud"></div>
 
-<!-- ═══ COOKIES BANNER ═══ -->
-<div class="cookies-banner" id="cookies-banner" style="position:fixed;bottom:24px;left:50%;transform:translateX(-50%) translateY(calc(100% + 40px));z-index:1000;background:var(--white,#fff);border:1px solid var(--border,#e5e7eb);border-radius:16px;padding:1.25rem 1.75rem;box-shadow:0 12px 48px rgba(0,0,0,0.15);max-width:520px;width:calc(100% - 48px);transition:transform .35s cubic-bezier(.34,1.56,.64,1);display:none;font-family:Outfit,system-ui,sans-serif;color:var(--text,#20201f)">
-  <div class="cookies-inner" style="display:flex;flex-direction:column;align-items:flex-start;gap:1rem">
-    <p style="font-size:.85rem;color:var(--text-light,#6b7280);margin:0;line-height:1.5">🍪 Usamos cookies esenciales y de terceros (Supabase, Stripe). Sin publicidad. <a href="/legal/cookies.html" style="color:var(--primary,#547c24);text-decoration:underline;font-weight:500">Más info</a></p>
-    <div style="display:flex;gap:.75rem;width:100%">
-      <button class="cookies-btn cookies-btn-accept" onclick="localStorage.setItem('cookie-consent','all');document.getElementById('cookies-banner').remove()" style="flex:1;padding:.6rem 1.25rem;border-radius:var(--radius-sm,6px);font-family:Outfit,system-ui,sans-serif;font-size:.85rem;font-weight:600;cursor:pointer;border:none;background:var(--primary,#547c24);color:white;text-align:center">Aceptar</button>
-      <button class="cookies-btn cookies-btn-essential" onclick="localStorage.setItem('cookie-consent','essential');document.getElementById('cookies-banner').remove()" style="flex:1;padding:.6rem 1.25rem;border-radius:var(--radius-sm,6px);font-family:Outfit,system-ui,sans-serif;font-size:.85rem;font-weight:600;cursor:pointer;border:1.5px solid var(--border,#e5e7eb);background:transparent;color:var(--text-light,#6b7280);text-align:center">Solo esenciales</button>
+<!-- Cookie banner -->
+<div id="cookies-banner" style="position:fixed;bottom:24px;left:50%;transform:translateX(-50%);z-index:1000;background:white;border:1px solid #e5e7eb;border-radius:12px;padding:14px 20px;box-shadow:0 8px 30px rgba(0,0,0,0.12);max-width:460px;width:calc(100%-40px);display:none;font-family:Outfit,system-ui,sans-serif">
+  <div style="display:flex;flex-direction:column;gap:10px">
+    <p style="margin:0;font-size:13px;color:#6b7280;line-height:1.5">🍪 Usamos cookies esenciales. Sin publicidad. <a href="/legal/cookies.html" style="color:#547c24;text-decoration:underline;font-weight:500">Más info</a></p>
+    <div style="display:flex;gap:8px">
+      <button onclick="localStorage.setItem('cookie-consent','all');document.getElementById('cookies-banner').remove()" style="flex:1;padding:8px 16px;border-radius:6px;border:none;background:#547c24;color:white;font-size:13px;font-weight:600;cursor:pointer">Aceptar</button>
+      <button onclick="localStorage.setItem('cookie-consent','essential');document.getElementById('cookies-banner').remove()" style="flex:1;padding:8px 16px;border-radius:6px;border:1px solid #e5e7eb;background:transparent;color:#6b7280;font-size:13px;font-weight:600;cursor:pointer">Solo esenciales</button>
     </div>
   </div>
 </div>
 <script>
 (function(){
-  var cb = document.getElementById('cookies-banner');
-  if(cb && !localStorage.getItem('cookie-consent')){
-    setTimeout(function(){
-      cb.style.display = 'block';
-      void cb.offsetHeight;
-      cb.classList.add('visible');
-    }, 800);
-  }
+  var b=document.getElementById('cookies-banner');
+  if(b&&!localStorage.getItem('cookie-consent'))setTimeout(function(){b.style.display='block'},800);
 })();
 </script>
   </div>
