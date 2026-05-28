@@ -32,45 +32,18 @@ serve(async (req) => {
   // ============================================================
   if (action === 'solicitar' || !action) {
     try {
-      const { name, email, phone, cp, m2, tipo, zona, precioMin, precioMax, descripcion } = await req.json()
+      const { name, email, phone, cp, m2, tipo, zona, precioMin, precioMax, descripcion, leadId } = await req.json()
 
-      if (!name || !phone || !cp) {
-        return new Response(JSON.stringify({ error: 'Nombre, teléfono y CP son obligatorios' }), {
+      if (!leadId) {
+        return new Response(JSON.stringify({ error: 'Falta el ID del lead' }), {
           status: 400,
           headers: { ...corsHeaders, 'Content-Type': 'application/json' }
         })
       }
 
-      // 1. Guardar lead en Supabase con estado 'pendiente'
-      const lead = {
-        nombre_cliente: name,
-        telefono_cliente: phone,
-        email_cliente: email || '',
-        codigo_postal: cp,
-        zona: zona || '',
-        m2: m2 ? parseInt(m2) : null,
-        tipo_inmueble: tipo || '',
-        presupuesto_min: precioMin ? parseInt(precioMin) : null,
-        presupuesto_max: precioMax ? parseInt(precioMax) : null,
-        estado: 'pendiente',
-        fuente: 'web'
-      }
-
-      const { data: leadData, error: insertError } = await supabase
-        .from('leads')
-        .insert([lead])
-        .select()
-        .single()
-
-      if (insertError) {
-        console.error('Error saving lead:', insertError)
-        return new Response(JSON.stringify({ error: 'Error al guardar la solicitud' }), {
-          status: 500,
-          headers: { ...corsHeaders, 'Content-Type': 'application/json' }
-        })
-      }
-
-      // 2. Buscar técnicos en la misma provincia (por CP)
+      // El frontend ya guardó el lead en Supabase. Aquí solo notificamos a técnicos.
+      
+      // 1. Buscar técnicos en la misma provincia (por CP)
       const provinciaCP = cp.substring(0, 2)
       const { data: tecnicos } = await supabase
         .from('tecnicos')
@@ -154,7 +127,7 @@ serve(async (req) => {
 
       return new Response(JSON.stringify({
         success: true,
-        leadId: leadData?.id,
+        leadId: leadId,
         tecnicosNotificados: tecnicosNotificados.length,
         mensaje: tecnicosNotificados.length > 0
           ? 'Solicitud enviada. Un técnico te contactará pronto.'
