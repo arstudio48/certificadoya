@@ -1,0 +1,75 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 320" width="400" height="320">
+  <defs>
+    <linearGradient id="gradA" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#009940;stop-opacity:1"/>
+      <stop offset="100%" style="stop-color:#007733;stop-opacity:1"/>
+    </linearGradient>
+    <linearGradient id="gradB" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#4CB848;stop-opacity:1"/>
+      <stop offset="100%" style="stop-color:#3a9e3a;stop-opacity:1"/>
+    </linearGradient>
+    <linearGradient id="gradC" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#A0CD3A;stop-opacity:1"/>
+      <stop offset="100%" style="stop-color:#86b82e;stop-opacity:1"/>
+    </linearGradient>
+    <linearGradient id="gradD" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#FFF200;stop-opacity:1"/>
+      <stop offset="100%" style="stop-color:#e6d900;stop-opacity:1"/>
+    </linearGradient>
+    <linearGradient id="gradE" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#F9A01B;stop-opacity:1"/>
+      <stop offset="100%" style="stop-color:#e88f0f;stop-opacity:1"/>
+    </linearGradient>
+    <linearGradient id="gradF" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#E98024;stop-opacity:1"/>
+      <stop offset="100%" style="stop-color:#d4701a;stop-opacity:1"/>
+    </linearGradient>
+    <linearGradient id="gradG" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#E31A1C;stop-opacity:1"/>
+      <stop offset="100%" style="stop-color:#cc1416;stop-opacity:1"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Title -->
+  <text x="200" y="25" text-anchor="middle" font-family="Outfit, Arial, sans-serif" font-size="16" font-weight="700" fill="#1a1a1a">ETIQUETA ENERGÉTICA</text>
+  <text x="200" y="44" text-anchor="middle" font-family="Outfit, Arial, sans-serif" font-size="10" fill="#666">CONSUMO DE ENERGÍA PRIMARIA NO RENOVABLE</text>
+  <text x="200" y="56" text-anchor="middle" font-family="Outfit, Arial, sans-serif" font-size="9" fill="#666">kWh/m² año</text>
+
+  <!-- A - verde oscuro -->
+  <rect x="20" y="65" width="360" height="30" rx="4" fill="url(#gradA)"/>
+  <text x="36" y="85" font-family="Outfit, Arial, sans-serif" font-size="18" font-weight="700" fill="white">A</text>
+  <text x="340" y="85" font-family="Outfit, Arial, sans-serif" font-size="12" fill="white" text-anchor="end">&lt; 44,6</text>
+
+  <!-- B - verde -->
+  <rect x="20" y="97" width="320" height="30" rx="4" fill="url(#gradB)"/>
+  <text x="36" y="117" font-family="Outfit, Arial, sans-serif" font-size="18" font-weight="700" fill="white">B</text>
+  <text x="324" y="117" font-family="Outfit, Arial, sans-serif" font-size="12" fill="white" text-anchor="end">44,6 – 72,3</text>
+
+  <!-- C - verde claro -->
+  <rect x="20" y="129" width="270" height="30" rx="4" fill="url(#gradC)"/>
+  <text x="36" y="149" font-family="Outfit, Arial, sans-serif" font-size="18" font-weight="700" fill="white">C</text>
+  <text x="274" y="149" font-family="Outfit, Arial, sans-serif" font-size="12" fill="white" text-anchor="end">72,3 – 112,0</text>
+
+  <!-- D - amarillo -->
+  <rect x="20" y="161" width="220" height="30" rx="4" fill="url(#gradD)"/>
+  <text x="36" y="181" font-family="Outfit, Arial, sans-serif" font-size="18" font-weight="700" fill="#333">D</text>
+  <text x="224" y="181" font-family="Outfit, Arial, sans-serif" font-size="12" fill="#333" text-anchor="end">112,0 – 172,0</text>
+
+  <!-- E - naranja -->
+  <rect x="20" y="193" width="170" height="30" rx="4" fill="url(#gradE)"/>
+  <text x="36" y="213" font-family="Outfit, Arial, sans-serif" font-size="18" font-weight="700" fill="white">E</text>
+  <text x="174" y="213" font-family="Outfit, Arial, sans-serif" font-size="12" fill="white" text-anchor="end">172,0 – 303,0</text>
+
+  <!-- F - naranja oscuro -->
+  <rect x="20" y="225" width="120" height="30" rx="4" fill="url(#gradF)"/>
+  <text x="36" y="245" font-family="Outfit, Arial, sans-serif" font-size="18" font-weight="700" fill="white">F</text>
+  <text x="124" y="245" font-family="Outfit, Arial, sans-serif" font-size="12" fill="white" text-anchor="end">303,0 – 383,0</text>
+
+  <!-- G - rojo -->
+  <rect x="20" y="257" width="70" height="30" rx="4" fill="url(#gradG)"/>
+  <text x="36" y="277" font-family="Outfit, Arial, sans-serif" font-size="18" font-weight="700" fill="white">G</text>
+  <text x="74" y="277" font-family="Outfit, Arial, sans-serif" font-size="12" fill="white" text-anchor="end">&gt; 383</text>
+
+  <!-- Footer -->
+  <text x="200" y="310" text-anchor="middle" font-family="Outfit, Arial, sans-serif" font-size="9" fill="#999">Zona climática D (Madrid, interior peninsular) · Reglamento (UE) 2017/1369</text>
+</svg>
