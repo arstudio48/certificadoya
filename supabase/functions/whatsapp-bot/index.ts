@@ -5,9 +5,9 @@
 import { serve } from "https://deno.land/std@0.168.0/http/server.ts";
 
 // ── Config ──
-const VERIFY_TOKEN = Deno.env.get("WHATSAPP_VERIFY_TOKEN") || "certificadoya2026";
 const WHATSAPP_TOKEN = Deno.env.get("WHATSAPP_TOKEN") || "";
 const WHATSAPP_PHONE_ID = Deno.env.get("WHATSAPP_PHONE_ID") || "";
+const VERIFY_TOKEN = Deno.env.get("WHATSAPP_VERIFY_TOKEN") || "certificadoya2026";
 const RESEND_API_KEY = Deno.env.get("RESEND_API_KEY") || "";
 const NOTIFY_EMAIL = "artbriher@gmail.com";
 const SUPABASE_URL = Deno.env.get("SUPABASE_URL") || "";
