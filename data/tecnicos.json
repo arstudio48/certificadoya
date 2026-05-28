@@ -1,0 +1,169 @@
+{
+  "tecnicos": [
+    {
+      "id": 1,
+      "nombre": "Manuel García López",
+      "profesion": "Arquitecto Técnico",
+      "ciudad": "Madrid",
+      "provincia": "madrid",
+      "web": "https://ejemplo.com/manuel-garcia",
+      "especialidad": "CE3X, certificación residencial",
+      "experiencia": 8,
+      "disponible": true
+    },
+    {
+      "id": 2,
+      "nombre": "Ana Martínez Ruiz",
+      "profesion": "Ingeniera Industrial",
+      "ciudad": "Barcelona",
+      "provincia": "barcelona",
+      "web": "https://ejemplo.com/ana-martinez",
+      "especialidad": "HULC, edificios terciarios",
+      "experiencia": 6,
+      "disponible": true
+    },
+    {
+      "id": 3,
+      "nombre": "Carlos Fernández Pérez",
+      "profesion": "Arquitecto",
+      "ciudad": "Valencia",
+      "provincia": "valencia",
+      "web": "https://ejemplo.com/carlos-fernandez",
+      "especialidad": "CE3X, certificación viviendas",
+      "experiencia": 10,
+      "disponible": true
+    },
+    {
+      "id": 4,
+      "nombre": "Laura Sánchez Díaz",
+      "profesion": "Arquitecta Técnica",
+      "ciudad": "Sevilla",
+      "provincia": "sevilla",
+      "web": "https://ejemplo.com/laura-sanchez",
+      "especialidad": "CE3X, rehabilitación",
+      "experiencia": 5,
+      "disponible": true
+    },
+    {
+      "id": 5,
+      "nombre": "David Rodríguez Gómez",
+      "profesion": "Ingeniero de Edificación",
+      "ciudad": "Málaga",
+      "provincia": "malaga",
+      "web": "https://ejemplo.com/david-rodriguez",
+      "especialidad": "CYPETHERAM, edificios nuevos",
+      "experiencia": 7,
+      "disponible": true
+    },
+    {
+      "id": 6,
+      "nombre": "Elena García Fernández",
+      "profesion": "Arquitecta",
+      "ciudad": "Bilbao",
+      "provincia": "bizkaia",
+      "web": "https://ejemplo.com/elena-garcia",
+      "especialidad": "CE3X, certificación industrial",
+      "experiencia": 9,
+      "disponible": true
+    },
+    {
+      "id": 7,
+      "nombre": "Javier López Martínez",
+      "profesion": "Arquitecto Técnico",
+      "ciudad": "Zaragoza",
+      "provincia": "zaragoza",
+      "web": "https://ejemplo.com/javier-lopez",
+      "especialidad": "CE3X, viviendas unifamiliares",
+      "experiencia": 4,
+      "disponible": true
+    },
+    {
+      "id": 8,
+      "nombre": "Marta González Ruiz",
+      "profesion": "Ingeniera Técnica Industrial",
+      "ciudad": "Murcia",
+      "provincia": "murcia",
+      "web": "https://ejemplo.com/marta-gonzalez",
+      "especialidad": "CE3X, locales comerciales",
+      "experiencia": 6,
+      "disponible": true
+    },
+    {
+      "id": 9,
+      "nombre": "Pablo Hernández Torres",
+      "profesion": "Arquitecto",
+      "ciudad": "Palma",
+      "provincia": "baleares",
+      "web": "https://ejemplo.com/pablo-hernandez",
+      "especialidad": "HULC, certificación hotelera",
+      "experiencia": 11,
+      "disponible": true
+    },
+    {
+      "id": 10,
+      "nombre": "Sara Díaz Moreno",
+      "profesion": "Arquitecta Técnica",
+      "ciudad": "Las Palmas",
+      "provincia": "las-palmas",
+      "web": "https://ejemplo.com/sara-diaz",
+      "especialidad": "CE3X, certificación vacacional",
+      "experiencia": 5,
+      "disponible": true
+    },
+    {
+      "id": 11,
+      "nombre": "Alejandro Ruiz Sánchez",
+      "profesion": "Ingeniero de Edificación",
+      "ciudad": "Alicante",
+      "provincia": "alicante",
+      "web": "https://ejemplo.com/alejandro-ruiz",
+      "especialidad": "CE3X, apartamentos turísticos",
+      "experiencia": 7,
+      "disponible": true
+    },
+    {
+      "id": 12,
+      "nombre": "Cristina Pérez García",
+      "profesion": "Arquitecta",
+      "ciudad": "Oviedo",
+      "provincia": "asturias",
+      "web": "https://ejemplo.com/cristina-perez",
+      "especialidad": "CE3X, cédulas habitabilidad",
+      "experiencia": 8,
+      "disponible": true
+    },
+    {
+      "id": 13,
+      "nombre": "Roberto Martín Navarro",
+      "profesion": "Arquitecto Técnico",
+      "ciudad": "Granada",
+      "provincia": "granada",
+      "web": "https://ejemplo.com/roberto-martin",
+      "especialidad": "CE3X, rehabilitación energética",
+      "experiencia": 6,
+      "disponible": false
+    },
+    {
+      "id": 14,
+      "nombre": "Natalia Romero Blanco",
+      "profesion": "Ingeniera Industrial",
+      "ciudad": "Valladolid",
+      "provincia": "valladolid",
+      "web": "https://ejemplo.com/natalia-romero",
+      "especialidad": "CYPETHERAM, certificación terciario",
+      "experiencia": 9,
+      "disponible": true
+    },
+    {
+      "id": 15,
+      "nombre": "Fernando Torres Gil",
+      "profesion": "Arquitecto",
+      "ciudad": "San Sebastián",
+      "provincia": "gipuzkoa",
+      "web": "https://ejemplo.com/fernando-torres",
+      "especialidad": "CE3X, Passivhaus",
+      "experiencia": 12,
+      "disponible": true
+    }
+  ]
+}
