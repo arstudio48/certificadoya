@@ -456,9 +456,9 @@
 <div id="resultado-solicitud"></div>
 
 <!-- Cookie banner -->
-<div id="cookies-banner" style="position:fixed;bottom:24px;left:50%;transform:translateX(-50%);z-index:1000;background:white;border:1px solid #e5e7eb;border-radius:12px;padding:14px 20px;box-shadow:0 8px 30px rgba(0,0,0,0.12);max-width:460px;width:calc(100%-40px);display:none;font-family:Outfit,system-ui,sans-serif">
+<div id="cookies-banner" style="position:fixed;bottom:24px;left:50%;transform:translateX(-50%);z-index:1000;background:white;border:1px solid #e5e7eb;border-radius:12px;padding:14px 20px;box-shadow:0 8px 30px rgba(0,0,0,0.12);max-width:460px;width:calc(100%-48px);display:none;font-family:Outfit,system-ui,sans-serif">
   <div style="display:flex;flex-direction:column;gap:10px">
-    <p style="margin:0;font-size:13px;color:#6b7280;line-height:1.5">🍪 Usamos cookies esenciales. Sin publicidad. <a href="/legal/cookies.html" style="color:#547c24;text-decoration:underline;font-weight:500">Más info</a></p>
+    <p style="margin:0;font-size:13px;color:#6b7280;line-height:1.5">🍪 Usamos cookies esenciales y de terceros (Supabase, Stripe). Sin publicidad. <a href="/legal/cookies.html" style="color:#547c24;text-decoration:underline;font-weight:500">Más info</a></p>
     <div style="display:flex;gap:8px">
       <button onclick="localStorage.setItem('cookie-consent','all');document.getElementById('cookies-banner').remove()" style="flex:1;padding:8px 16px;border-radius:6px;border:none;background:#547c24;color:white;font-size:13px;font-weight:600;cursor:pointer">Aceptar</button>
       <button onclick="localStorage.setItem('cookie-consent','essential');document.getElementById('cookies-banner').remove()" style="flex:1;padding:8px 16px;border-radius:6px;border:1px solid #e5e7eb;background:transparent;color:#6b7280;font-size:13px;font-weight:600;cursor:pointer">Solo esenciales</button>
@@ -471,8 +471,6 @@
   if(b&&!localStorage.getItem('cookie-consent'))setTimeout(function(){b.style.display='block'},800);
 })();
 </script>
-  </div>
-</div>
 
 <script src="/js/main.js"></script>
 <script>
