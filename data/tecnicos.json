@@ -141,7 +141,7 @@
       "web": "https://ejemplo.com/roberto-martin",
       "especialidad": "CE3X, rehabilitación energética",
       "experiencia": 6,
-      "disponible": false
+      "disponible": true
     },
     {
       "id": 14,
@@ -163,6 +163,171 @@
       "web": "https://ejemplo.com/fernando-torres",
       "especialidad": "CE3X, Passivhaus",
       "experiencia": 12,
+      "disponible": true
+    },
+    {
+      "id": 16,
+      "nombre": "Isabel Moreno Castillo",
+      "profesion": "Arquitecta Técnica",
+      "ciudad": "Córdoba",
+      "provincia": "cordoba",
+      "web": "https://ejemplo.com/isabel-moreno",
+      "especialidad": "CE3X, certificación viviendas históricas",
+      "experiencia": 7,
+      "disponible": true
+    },
+    {
+      "id": 17,
+      "nombre": "Antonio Ramírez Vega",
+      "profesion": "Ingeniero de Edificación",
+      "ciudad": "Cádiz",
+      "provincia": "cadiz",
+      "web": "https://ejemplo.com/antonio-ramirez",
+      "especialidad": "CE3X, rehabilitación energética",
+      "experiencia": 6,
+      "disponible": true
+    },
+    {
+      "id": 18,
+      "nombre": "Patricia Herrera Jiménez",
+      "profesion": "Arquitecta",
+      "ciudad": "Toledo",
+      "provincia": "toledo",
+      "web": "https://ejemplo.com/patricia-herrera",
+      "especialidad": "CYPETHERAM, certificación industrial",
+      "experiencia": 8,
+      "disponible": true
+    },
+    {
+      "id": 19,
+      "nombre": "Alberto Molina Serrano",
+      "profesion": "Arquitecto Técnico",
+      "ciudad": "Salamanca",
+      "provincia": "salamanca",
+      "web": "https://ejemplo.com/alberto-molina",
+      "especialidad": "CE3X, viviendas rurales",
+      "experiencia": 5,
+      "disponible": true
+    },
+    {
+      "id": 20,
+      "nombre": "Beatriz Castillo Ruiz",
+      "profesion": "Ingeniera Técnica Industrial",
+      "ciudad": "Santander",
+      "provincia": "cantabria",
+      "web": "https://ejemplo.com/beatriz-castillo",
+      "especialidad": "CE3X, certificación terciario",
+      "experiencia": 9,
+      "disponible": true
+    },
+    {
+      "id": 21,
+      "nombre": "Daniel Navarro López",
+      "profesion": "Arquitecto",
+      "ciudad": "Pamplona",
+      "provincia": "navarra",
+      "web": "https://ejemplo.com/daniel-navarro",
+      "especialidad": "HULC, Passivhaus",
+      "experiencia": 11,
+      "disponible": true
+    },
+    {
+      "id": 22,
+      "nombre": "Carmen Ortiz Aguilar",
+      "profesion": "Arquitecta Técnica",
+      "ciudad": "A Coruña",
+      "provincia": "a-coruna",
+      "web": "https://ejemplo.com/carmen-ortiz",
+      "especialidad": "CE3X, certificación vacacional",
+      "experiencia": 6,
+      "disponible": true
+    },
+    {
+      "id": 23,
+      "nombre": "Víctor Delgado Ramírez",
+      "profesion": "Ingeniero Industrial",
+      "ciudad": "Almería",
+      "provincia": "almeria",
+      "web": "https://ejemplo.com/victor-delgado",
+      "especialidad": "CYPETHERAM, invernaderos y agrícola",
+      "experiencia": 8,
+      "disponible": true
+    },
+    {
+      "id": 24,
+      "nombre": "Raquel Santos Ferrer",
+      "profesion": "Arquitecta",
+      "ciudad": "Tarragona",
+      "provincia": "tarragona",
+      "web": "https://ejemplo.com/raquel-santos",
+      "especialidad": "CE3X, edificios turísticos",
+      "experiencia": 7,
+      "disponible": true
+    },
+    {
+      "id": 25,
+      "nombre": "Jorge Bravo Muñoz",
+      "profesion": "Arquitecto Técnico",
+      "ciudad": "León",
+      "provincia": "leon",
+      "web": "https://ejemplo.com/jorge-bravo",
+      "especialidad": "CE3X, rehabilitación edificios antiguos",
+      "experiencia": 10,
+      "disponible": true
+    },
+    {
+      "id": 26,
+      "nombre": "Eva Campos Gil",
+      "profesion": "Ingeniera de Edificación",
+      "ciudad": "Huesca",
+      "provincia": "huesca",
+      "web": "https://ejemplo.com/eva-campos",
+      "especialidad": "CE3X, certificación rural",
+      "experiencia": 4,
+      "disponible": true
+    },
+    {
+      "id": 27,
+      "nombre": "Hugo Montero Paz",
+      "profesion": "Arquitecto",
+      "ciudad": "Badajoz",
+      "provincia": "badajoz",
+      "web": "https://ejemplo.com/hugo-montero",
+      "especialidad": "CE3X, edificios extremeños",
+      "experiencia": 6,
+      "disponible": true
+    },
+    {
+      "id": 28,
+      "nombre": "Lucía Serrano Ortega",
+      "profesion": "Arquitecta Técnica",
+      "ciudad": "Logroño",
+      "provincia": "la-rioja",
+      "web": "https://ejemplo.com/lucia-serrano",
+      "especialidad": "CE3X, bodegas y agroindustrial",
+      "experiencia": 7,
+      "disponible": true
+    },
+    {
+      "id": 29,
+      "nombre": "Sergio Calvo Méndez",
+      "profesion": "Ingeniero Industrial",
+      "ciudad": "Burgos",
+      "provincia": "burgos",
+      "web": "https://ejemplo.com/sergio-calvo",
+      "especialidad": "CYPETHERAM, certificación industrial",
+      "experiencia": 9,
+      "disponible": true
+    },
+    {
+      "id": 30,
+      "nombre": "Mónica Gallego Rivas",
+      "profesion": "Arquitecta",
+      "ciudad": "Jaén",
+      "provincia": "jaen",
+      "web": "https://ejemplo.com/monica-gallego",
+      "especialidad": "CE3X, certificación olivarera",
+      "experiencia": 5,
       "disponible": true
     }
   ]
