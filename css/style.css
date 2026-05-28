@@ -352,3 +352,8 @@ input.error { border-color:#ef4444 !important; background:#fef2f2; }
 .cookies-btn-essential{background:transparent;color:var(--text-light);border:1.5px solid var(--border)}
 .cookies-btn-essential:hover{border-color:var(--text-lighter);color:var(--text);background:var(--bg)}
 @media(max-width:480px){.cookies-banner{bottom:12px;padding:1rem 1.25rem;width:calc(100% - 24px)}.cookies-buttons{flex-direction:column;gap:.5rem}}
+
+/* Etiqueta energética CEE - responsive */
+.etiqueta-cee-box { text-align:center; margin-bottom:1.5rem; background:#f8faf8; border:1px solid #e0e8e0; border-radius:12px; padding:1rem; }
+.etiqueta-cee-box img { width:100%; max-width:400px; height:auto; display:inline-block; }
+@media (max-width:480px) { .etiqueta-cee-box { padding:0.5rem; } .etiqueta-cee-box img { max-width:280px; } }
