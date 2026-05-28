@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Aceptar encargo — CertificadoYa</title>
+  <meta name="robots" content="noindex, nofollow">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: 'Outfit', sans-serif; background: #f3f9eb; min-height: 100vh; display: flex; align-items: center; justify-content: center; padding: 1rem; }
+    .card { background: white; border-radius: 16px; padding: 2.5rem; max-width: 480px; width: 100%; text-align: center; box-shadow: 0 4px 24px rgba(0,0,0,.08); }
+    .card h2 { color: #2d3a1f; font-size: 1.3rem; margin-bottom: .5rem; }
+    .card p { color: #6b7b5e; font-size: .9rem; line-height: 1.6; margin-bottom: 1.5rem; }
+    .btn { display: inline-block; background: #547c24; color: white; border: none; border-radius: 10px; padding: .85rem 2rem; font-size: 1rem; font-weight: 600; cursor: pointer; text-decoration: none; transition: background .15s; }
+    .btn:hover { background: #43691e; }
+    .btn:disabled { opacity: .6; cursor: not-allowed; }
+    .btn-outline { background: transparent; border: 2px solid #547c24; color: #547c24; margin-left: .75rem; }
+    .spinner { display: inline-block; width: 20px; height: 20px; border: 3px solid #e3f0d3; border-top-color: #547c24; border-radius: 50%; animation: spin .6s linear infinite; margin-right: .5rem; vertical-align: middle; }
+    @keyframes spin { to { transform: rotate(360deg); } }
+    .success { color: #2d3a1f; }
+    .success-icon { font-size: 3rem; margin-bottom: .5rem; }
+    .error { color: #c0392b; }
+    .datos-cliente { background: #f7f9f6; border-radius: 12px; padding: 1.25rem; text-align: left; margin-bottom: 1.5rem; }
+    .datos-cliente p { margin-bottom: .35rem; font-size: .85rem; }
+    .datos-cliente strong { color: #2d3a1f; }
+  </style>
+</head>
+<body>
+  <div class="card" id="app">
+    <div id="loading">
+      <div class="spinner" style="width:32px;height:32px;border-width:4px;margin:0 auto 1rem"></div>
+      <p style="color:#9aab8a">Verificando encargo...</p>
+    </div>
+    <div id="contenido" style="display:none"></div>
+  </div>
+
+  <script>
+  const EDGE_FUNCTION_URL = 'https://wypgqpgjlookbhuaiyxa.supabase.co/functions/v1/solicitar-servicio';
+
+  document.addEventListener('DOMContentLoaded', async function() {
+    const params = new URLSearchParams(window.location.search);
+    const leadId = params.get('lead');
+    const tecnicoEmail = params.get('tec');
+    const nombre = params.get('nombre') || '';
+    const telefono = params.get('telefono') || '';
+    const zona = params.get('zona') || '';
+    const m2 = params.get('m2') || '';
+    const tipo = params.get('tipo') || '';
+    const presupuesto = params.get('precio') || '';
+
+    if (!leadId) {
+      document.getElementById('loading').style.display = 'none';
+      document.getElementById('contenido').innerHTML = '<div class="error"><div class="success-icon">❌</div><h2>Enlace inválido</h2><p>Este enlace no es válido o ha caducado.</p></div>';
+      document.getElementById('contenido').style.display = 'block';
+      return;
+    }
+
+    // Si viene con parámetros del lead, mostrar directamente
+    // Si no, intentar obtenerlos de la API
+    if (nombre && telefono) {
+      mostrarEncargo(leadId, tecnicoEmail, { nombre, telefono, zona, m2, tipo, presupuesto });
+    } else {
+      // Intentar obtener datos del lead desde URL de administración
+      // Por ahora mostrar formulario para que el técnico ponga su email
+      mostrarFormulario(leadId, tecnicoEmail);
+    }
+  });
+
+  function mostrarFormulario(leadId, tecnicoEmail) {
+    document.getElementById('loading').style.display = 'none';
+    document.getElementById('contenido').innerHTML = `
+      <div class="success-icon">📋</div>
+      <h2>Nuevo encargo disponible</h2>
+      <p>Un cliente ha solicitado un certificado energético en tu zona. Confirma tu email para aceptar.</p>
+      <div style="margin-bottom: 1rem;">
+        <input type="email" id="email-tecnico" value="${tecnicoEmail || ''}" placeholder="Tu email registrado" style="width:100%;padding:.75rem;border:2px solid #dce8d0;border-radius:8px;font-size:.9rem;text-align:center;font-family:inherit">
+      </div>
+      <button class="btn" onclick="aceptarEncargo(${leadId})">✅ Aceptar encargo</button>
+    `;
+    document.getElementById('contenido').style.display = 'block';
+  }
+
+  function mostrarEncargo(leadId, tecnicoEmail, datos) {
+    document.getElementById('loading').style.display = 'none';
+    document.getElementById('contenido').innerHTML = `
+      <div class="success-icon">📋</div>
+      <h2>Nuevo encargo disponible</h2>
+      <p>Un cliente ha solicitado un certificado en tu zona.</p>
+      <div class="datos-cliente">
+        <p><strong>Cliente:</strong> ${datos.nombre}</p>
+        <p><strong>Teléfono:</strong> ${datos.telefono}</p>
+        <p><strong>Zona:</strong> ${datos.zona || '—'}</p>
+        <p><strong>Inmueble:</strong> ${datos.m2 || '?'} m² (${datos.tipo || '—'})</p>
+        <p><strong>Presupuesto:</strong> ${datos.presupuesto || '—'}€</p>
+      </div>
+      <p style="font-size:.82rem;color:#9aab8a">Al aceptar, se cobrará al cliente y recibirás sus datos de contacto completos.</p>
+      <button class="btn" onclick="aceptarEncargo(${leadId})">✅ Aceptar encargo y cobrar</button>
+    `;
+    document.getElementById('contenido').style.display = 'block';
+  }
+
+  async function aceptarEncargo(leadId) {
+    const emailInput = document.getElementById('email-tecnico');
+    const tecnicoEmail = emailInput ? emailInput.value.trim() : '${tecnicoEmail || ''}';
+
+    if (!tecnicoEmail) {
+      alert('Introduce tu email registrado.');
+      return;
+    }
+
+    const btn = document.querySelector('.btn');
+    btn.innerHTML = '<span class="spinner"></span> Procesando...';
+    btn.disabled = true;
+
+    try {
+      const res = await fetch(EDGE_FUNCTION_URL + '?action=aceptar', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ leadId: parseInt(leadId), tecnicoEmail })
+      });
+
+      const data = await res.json();
+
+      if (data.url) {
+        // Redirigir al cliente a Stripe
+        document.getElementById('contenido').innerHTML = `
+          <div class="success-icon">✅</div>
+          <h2>Encargo aceptado</h2>
+          <p>Redirigiendo al cliente al pago...</p>
+          <p style="font-size:.82rem;color:#9aab8a;margin-top:.5rem">El cliente pagará ${leadId ? '' : ''} y recibirás sus datos.</p>
+        `;
+        window.location.href = data.url;
+      } else {
+        btn.innerHTML = '✅ Intentar de nuevo';
+        btn.disabled = false;
+        document.getElementById('contenido').innerHTML += `<p style="color:#c0392b;margin-top:1rem">${data.error || 'Error al procesar'}</p>`;
+      }
+    } catch (err) {
+      btn.innerHTML = '✅ Intentar de nuevo';
+      btn.disabled = false;
+      alert('Error de conexión: ' + err.message);
+    }
+  }
+  </script>
+</body>
+</html>

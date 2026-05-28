@@ -489,14 +489,17 @@
 <div class="modal-overlay" id="lead-modal">
   <div class="modal-box">
     <button class="modal-close" onclick="cerrarLeadModal()">✕</button>
-    <h3><img src="/img/ico-confianza.svg" alt="Pago seguro verificado" loading="lazy" style="width:22px;height:22px;vertical-align:middle;margin-right:6px"> Pago seguro</h3>
-    <p>Completa tus datos para ir al pago por Stripe (Tarjeta, Bizum, Apple Pay)</p>
+    <h3><img src="/img/ico-confianza.svg" alt="Solicitud" loading="lazy" style="width:22px;height:22px;vertical-align:middle;margin-right:6px"> Solicitar servicio</h3>
+    <p>Indica tus datos y buscaremos un técnico en tu zona. <strong>Sin pago hasta que un técnico acepte.</strong></p>
     <div class="form-group"><label for="lead-nombre">Nombre *</label><input type="text" id="lead-nombre" placeholder="Tu nombre completo" required></div>
     <div class="form-group"><label for="lead-telefono">Teléfono *</label><input type="tel" id="lead-telefono" placeholder="Ej: 612345678" required></div>
     <div class="form-group"><label for="lead-email">Email (opcional)</label><input type="email" id="lead-email" placeholder="tu@email.com"></div>
-    <button class="btn-cta" id="lead-btn" onclick="confirmarLead()">Pagar ahora →</button>
+    <button class="btn-cta" id="lead-btn" onclick="confirmarLead()">Solicitar servicio →</button>
   </div>
 </div>
+
+<!-- Contenedor para mensaje de confirmación de solicitud -->
+<div id="resultado-solicitud"></div>
 
 <!-- Cookie banner -->
 <div id="cookie-banner" class="cookie-banner">

@@ -9,7 +9,7 @@
 const SUPABASE_URL = 'https://wypgqpgjlookbhuaiyxa.supabase.co';
 const SUPABASE_ANON_KEY = 'sb_publishable_MsDx5jVGtDAzoB3l3-8DiQ_BxWpChA0';
 const STRIPE_PUBLISHABLE_KEY = 'pk_test_51TaRD7Rty9TkFoA3itHdQjA1A1TeYbK6b7XPIY8gbxAMOwUCjiEqjLhvkZb71IcsIge6b3b6cUUG319c7VWu0XdGl00jH3fl3dU';
-const EDGE_FUNCTION_URL = 'https://wypgqpgjlookbhuaiyxa.supabase.co/functions/v1/stripe-checkout';
+const EDGE_FUNCTION_URL = 'https://wypgqpgjlookbhuaiyxa.supabase.co/functions/v1/solicitar-servicio';
 //const SUPABASE_SERVICE_KEY = 'eliminado — se usa solo desde serverless functions';
 
 // ============================================================
@@ -253,7 +253,7 @@ function cerrarLeadModal() {
   document.getElementById('lead-modal').classList.remove('visible');
 }
 
-// CONFIRMAR LEAD → CREAR CHECKOUT SESSION EN STRIPE
+// CONFIRMAR LEAD → Guardar solicitud SIN cobro, notificar técnicos
 async function confirmarLead() {
   const presupuesto = window._presupuesto;
   const nombre = document.getElementById('lead-nombre').value.trim();
@@ -266,42 +266,55 @@ async function confirmarLead() {
 
   const email = document.getElementById('lead-email').value.trim() || '';
   const btn = document.getElementById('lead-btn');
-  btn.textContent = '⏳ Procesando pago...';
+  btn.textContent = '⏳ Enviando solicitud...';
   btn.disabled = true;
 
   try {
-    // Crear Checkout Session vía Edge Function
-    const res = await fetch(EDGE_FUNCTION_URL, {
+    // Guardar lead SIN cobro
+    const res = await fetch(EDGE_FUNCTION_URL + '?action=solicitar', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
-        price: presupuesto.precioMin,
-        service: `Certificado de eficiencia energética (${presupuesto.m2} m², ${presupuesto.tipo})`,
-        city: presupuesto.zona,
         name: nombre,
         email: email,
         phone: telefono,
+        cp: presupuesto.cp,
         m2: presupuesto.m2,
         tipo: presupuesto.tipo,
-        cp: presupuesto.cp,
-        description: `${presupuesto.tipo} de ${presupuesto.m2} m² en ${presupuesto.zona} (CP: ${presupuesto.cp})`
+        zona: presupuesto.zona,
+        precioMin: presupuesto.precioMin,
+        precioMax: presupuesto.precioMax,
+        descripcion: `${presupuesto.tipo} de ${presupuesto.m2} m² en ${presupuesto.zona} (CP: ${presupuesto.cp})`
       })
     });
 
     const data = await res.json();
 
-    if (data.url) {
-      // Redirigir a Stripe Checkout
-      window.location.href = data.url;
+    if (data.success) {
+      // Cerrar modal y mostrar mensaje de espera
+      document.getElementById('lead-modal').classList.remove('visible');
+      document.getElementById('resultado-solicitud').innerHTML = `
+        <div style="background:#edf4e5;border:2px solid #547c24;border-radius:12px;padding:2rem;text-align:center;margin-top:1rem">
+          <div style="font-size:2.5rem;margin-bottom:.5rem">✅</div>
+          <h3 style="color:#2d3a1f;font-size:1.2rem;margin-bottom:.5rem">Solicitud enviada</h3>
+          <p style="color:#6b7b5e;font-size:.9rem;line-height:1.5">
+            Hemos notificado a los técnicos de tu zona.<br>
+            <strong>Te contactarán pronto</strong> para concretar el servicio.<br><br>
+            Sin compromiso — solo pagas cuando un técnico acepte el encargo.
+          </p>
+          <button class="btn-cta" style="margin-top:1rem" onclick="this.parentElement.remove()">Entendido</button>
+        </div>
+      `;
+      document.getElementById('resultado-solicitud').scrollIntoView({ behavior: 'smooth', block: 'center' });
     } else {
-      alert('Error al crear el pago: ' + (data.error || 'Inténtalo de nuevo'));
-      btn.textContent = 'Pagar ahora →';
+      alert('Error: ' + (data.error || 'Inténtalo de nuevo'));
+      btn.textContent = 'Solicitar servicio →';
       btn.disabled = false;
     }
   } catch (err) {
     console.error('Error:', err);
     alert('Error de conexión. Inténtalo de nuevo.');
-    btn.textContent = 'Pagar ahora →';
+    btn.textContent = 'Solicitar servicio →';
     btn.disabled = false;
   }
 }
