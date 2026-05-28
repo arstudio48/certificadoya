@@ -44,11 +44,11 @@ body {
   max-width: 1200px; margin:0 auto; padding: 0 2rem;
   display: flex; align-items: center; justify-content: space-between; height: 64px;
 }
-.logo { display:flex; align-items:center; gap:.65rem; text-decoration:none; }
-.logo svg { flex-shrink:0; }
-.logo-text-wrap { display:flex; flex-direction:column; line-height:1.15; }
-.logo-text { font-size:1.3rem; font-weight:700; color:var(--text); letter-spacing:-.02em; }
-.logo-sub { font-size:.45rem; color:#333; font-weight:400; letter-spacing:0; white-space:nowrap; line-height:1; }
+.logo { display:flex; align-items:center; gap:.75rem; text-decoration:none; }
+.logo svg { flex-shrink:0; width:36px; height:36px; }
+.logo-text-wrap { display:flex; flex-direction:column; line-height:1.2; }
+.logo-text { font-size:1.5rem; font-weight:700; color:var(--text); letter-spacing:-.02em; }
+.logo-sub { font-size:.55rem; color:#333; font-weight:400; letter-spacing:0; white-space:nowrap; line-height:1.1; }
 .logo-highlight { color:var(--primary); }
 .nav { display:flex; align-items:center; gap:1.5rem; }
 .nav a { text-decoration:none; color:var(--text); font-size:.9rem; font-weight:500; transition:color .15s; }
