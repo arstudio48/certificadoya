@@ -75,7 +75,7 @@ body {
 
 /* ====== HERO ====== */
 .hero-new {
-  background: linear-gradient(135deg, rgba(84,124,36,.50) 0%, rgba(60,95,25,.45) 100%), url('/img/hero-building.jpg') center/cover no-repeat;
+  background: linear-gradient(135deg, rgba(84,124,36,.50) 0%, rgba(60,95,25,.45) 100%), url('/img/hero-tecnicos.jpg') center/cover no-repeat;
   color: #fff;
   padding: 3rem 2rem 4rem;
 }
