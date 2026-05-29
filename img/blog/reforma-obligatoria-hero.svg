@@ -1,0 +1,104 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#1b4332"/>
+      <stop offset="100%" style="stop-color:#1a365d"/>
+    </linearGradient>
+    <linearGradient id="house-grad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#52b788"/>
+      <stop offset="100%" style="stop-color:#2d6a4f"/>
+    </linearGradient>
+    <linearGradient id="energy-grad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#95d5b2"/>
+      <stop offset="100%" style="stop-color:#52b788"/>
+    </linearGradient>
+  </defs>
+  <rect width="800" height="500" fill="url(#bg)" rx="12"/>
+  
+  <!-- Grid background subtle -->
+  <g opacity="0.05">
+    <line x1="0" y1="100" x2="800" y2="100" stroke="white" stroke-width="1"/>
+    <line x1="0" y1="200" x2="800" y2="200" stroke="white" stroke-width="1"/>
+    <line x1="0" y1="300" x2="800" y2="300" stroke="white" stroke-width="1"/>
+    <line x1="0" y1="400" x2="800" y2="400" stroke="white" stroke-width="1"/>
+    <line x1="200" y1="0" x2="200" y2="500" stroke="white" stroke-width="1"/>
+    <line x1="400" y1="0" x2="400" y2="500" stroke="white" stroke-width="1"/>
+    <line x1="600" y1="0" x2="600" y2="500" stroke="white" stroke-width="1"/>
+  </g>
+
+  <!-- Main house -->
+  <g transform="translate(200, 80)">
+    <!-- House body -->
+    <rect x="40" y="100" width="220" height="180" rx="4" fill="url(#house-grad)" opacity="0.9"/>
+    <!-- Roof -->
+    <polygon points="10,100 150,20 290,100" fill="#40916c" stroke="#2d6a4f" stroke-width="3"/>
+    <!-- Window -->
+    <rect x="75" y="140" width="60" height="60" rx="4" fill="#d8f3dc" stroke="#2d6a4f" stroke-width="2"/>
+    <line x1="105" y1="140" x2="105" y2="200" stroke="#2d6a4f" stroke-width="1.5"/>
+    <line x1="75" y1="170" x2="135" y2="170" stroke="#2d6a4f" stroke-width="1.5"/>
+    <!-- Door -->
+    <rect x="165" y="160" width="55" height="120" rx="3" fill="#1b4332"/>
+    <circle cx="208" cy="225" r="4" fill="#95d5b2"/>
+    <!-- Chimney -->
+    <rect x="200" y="20" width="25" height="55" rx="2" fill="#2d6a4f"/>
+    <!-- Smoke -->
+    <circle cx="215" cy="8" r="8" fill="#95d5b2" opacity="0.4">
+      <animate attributeName="cy" values="8;-12" dur="3s" repeatCount="indefinite"/>
+      <animate attributeName="opacity" values="0.4;0" dur="3s" repeatCount="indefinite"/>
+    </circle>
+    <circle cx="222" cy="0" r="5" fill="#95d5b2" opacity="0.3">
+      <animate attributeName="cy" values="0;-18" dur="3s" begin="1s" repeatCount="indefinite"/>
+      <animate attributeName="opacity" values="0.3;0" dur="3s" begin="1s" repeatCount="indefinite"/>
+    </circle>
+  </g>
+
+  <!-- Energy label -->
+  <g transform="translate(500, 100)">
+    <rect x="0" y="0" width="90" height="120" rx="6" fill="#d8f3dc" stroke="#52b788" stroke-width="2"/>
+    <text x="45" y="25" text-anchor="middle" fill="#1b4332" font-size="11" font-weight="bold" font-family="Arial">ENERGÍA</text>
+    <!-- Arrow A -->
+    <rect x="15" y="35" width="60" height="20" rx="3" fill="#2d6a4f"/>
+    <text x="45" y="50" text-anchor="middle" fill="white" font-size="14" font-weight="bold" font-family="Arial">A</text>
+    <!-- Arrow B -->
+    <rect x="20" y="58" width="50" height="14" rx="3" fill="#52b788" opacity="0.5"/>
+    <text x="45" y="70" text-anchor="middle" fill="white" font-size="10" font-weight="bold" font-family="Arial">B</text>
+    <!-- Arrow C -->
+    <rect x="25" y="75" width="40" height="14" rx="3" fill="#74c69d" opacity="0.4"/>
+    <text x="45" y="87" text-anchor="middle" fill="white" font-size="10" font-weight="bold" font-family="Arial">C</text>
+    <!-- Text -->
+    <text x="45" y="108" text-anchor="middle" fill="#1b4332" font-size="8" font-family="Arial">2026-2030</text>
+  </g>
+
+  <!-- Hammer tool icon -->
+  <g transform="translate(550, 260)">
+    <!-- Handle -->
+    <rect x="55" y="0" width="10" height="80" rx="4" fill="#c77d32" transform="rotate(-20, 60, 80)"/>
+    <!-- Head -->
+    <rect x="15" y="65" width="80" height="24" rx="4" fill="#64748b" transform="rotate(-20, 55, 77)"/>
+    <!-- Claw -->
+    <path d="M15 72 L0 60 L8 68 Z" fill="#64748b" stroke="#4a5568" stroke-width="1" transform="rotate(-20, 55, 77)"/>
+  </g>
+
+  <!-- Calendar 2026-2030 -->
+  <g transform="translate(550, 370)">
+    <rect x="0" y="0" width="180" height="50" rx="8" fill="#1b4332" stroke="#52b788" stroke-width="1.5"/>
+    <text x="12" y="22" fill="#52b788" font-size="10" font-weight="bold" font-family="Arial">DIRECTIVA EPBD</text>
+    <text x="12" y="40" fill="#d8f3dc" font-size="8" font-family="Arial">2026 · 2028 · 2030 · 2033</text>
+    <line x1="128" y1="5" x2="128" y2="45" stroke="#52b788" stroke-width="1" opacity="0.3"/>
+    <circle cx="160" cy="25" r="12" fill="#40916c">
+      <animate attributeName="r" values="12;14;12" dur="2s" repeatCount="indefinite"/>
+    </circle>
+    <text x="160" y="29" text-anchor="middle" fill="white" font-size="10" font-weight="bold" font-family="Arial">!</text>
+  </g>
+
+  <!-- Decorative elements -->
+  <g opacity="0.15">
+    <circle cx="680" cy="60" r="40" fill="#95d5b2"/>
+    <circle cx="720" cy="50" r="20" fill="#52b788"/>
+    <circle cx="100" cy="420" r="60" fill="#95d5b2"/>
+    <circle cx="130" cy="400" r="30" fill="#52b788"/>
+  </g>
+
+  <!-- Title text under the house -->
+  <text x="310" y="460" text-anchor="middle" fill="white" font-size="16" font-weight="bold" font-family="Arial">Obligación de reformar viviendas 2026-2030</text>
+</svg>
