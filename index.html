@@ -56,11 +56,11 @@
 .mobile-menu a:hover{background:#f3f9eb;color:#547c24}
 .mobile-menu .btn-nav{margin:.5rem 1rem}
 @media(max-width:600px){.hamburger{display:flex}.nav>.nav-item,.nav>.buscador-wrapper,.nav>.btn-nav,.nav>.dropdown-pro{display:none}.header-inner{position:relative}}
-/* Dropdown Para profesionales */
+/* Dropdown Técnicos */
 .dropdown-pro{position:relative;display:inline-block}
 .dropdown-pro-btn{background:none;border:none;font-family:var(--font);font-size:.9rem;font-weight:500;color:var(--text);cursor:pointer;padding:0;transition:color .15s}
 .dropdown-pro-btn:hover{color:var(--primary)}
-.dropdown-pro-menu{display:none;position:absolute;top:100%;left:50%;transform:translateX(-50%);background:#fff;border:1px solid #e5e7eb;border-radius:10px;box-shadow:0 4px 16px rgba(0,0,0,.1);min-width:210px;z-index:999;padding:.35rem 0;margin-top:8px}
+.dropdown-pro-menu{display:none;position:absolute;top:100%;left:50%;transform:translateX(-50%);background:#fff;border:1px solid #e5e7eb;border-radius:10px;box-shadow:0 4px 16px rgba(0,0,0,.1);min-width:210px;z-index:999;padding:.65rem 0 0;margin-top:0}.dropdown-pro-menu-inner{padding:.35rem 0}
 .dropdown-pro-menu::before{content:'';position:absolute;top:-6px;left:50%;transform:translateX(-50%);width:0;height:0;border-left:6px solid transparent;border-right:6px solid transparent;border-bottom:6px solid #fff;filter:drop-shadow(0 -1px 1px rgba(0,0,0,.05))}
 .dropdown-pro:hover .dropdown-pro-menu,.dropdown-pro-menu:hover{display:block}
 .dropdown-pro-menu a{display:block;padding:.6rem 1rem;font-size:.85rem;color:#20201f;text-decoration:none;white-space:nowrap;transition:background .15s}
@@ -173,13 +173,13 @@ const provincias = [
       <a href="#faq">FAQ</a>
       <a href="/blog/">Blog</a>
       <div class="dropdown-pro">
-        <button class="dropdown-pro-btn">Para profesionales ▾</button>
-        <div class="dropdown-pro-menu">
+        <button class="dropdown-pro-btn">Técnicos ▾</button>
+        <div class="dropdown-pro-menu"><div class="dropdown-pro-menu-inner">
           <a href="/panel-tecnicos.html">Registro de técnicos</a>
           <a href="/pool-encargos.html">Pool de encargos</a>
           <a href="/blog/?cat=tecnicos">Blog técnico</a>
           <a href="/tecnicos/">Directorio de técnicos</a>
-        </div>
+        </div></div>
       </div>
       <div class="buscador-wrapper">
         <svg class="buscador-icono" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#888" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
@@ -195,7 +195,7 @@ const provincias = [
       <a href="#como-funciona">Cómo funciona</a>
       <a href="#faq">FAQ</a>
       <a href="/blog/">Blog</a>
-      <strong style="display:block;padding:.6rem 1.2rem;font-size:.82rem;color:#9aab8a;text-transform:uppercase;letter-spacing:.05em;border-bottom:1px solid #f0f0f0">Para profesionales</strong>
+      <strong style="display:block;padding:.6rem 1.2rem;font-size:.82rem;color:#9aab8a;text-transform:uppercase;letter-spacing:.05em;border-bottom:1px solid #f0f0f0">Técnicos</strong>
       <a href="/panel-tecnicos.html">Registro de técnicos</a>
       <a href="/pool-encargos.html">Pool de encargos</a>
       <a href="/blog/?cat=tecnicos">Blog técnico</a>
@@ -414,7 +414,7 @@ const provincias = [
   <!-- TECNICOS -->
   <section class="tecnicos-home" id="para-tecnicos" style="scroll-margin-top:80px;background:#f3f9eb;padding:4rem 2rem">
     <div style="max-width:1000px;margin:0 auto;text-align:center">
-      <span style="display:inline-block;background:#e3f0d3;color:#3d5a1e;font-size:.82rem;font-weight:600;padding:.35rem .85rem;border-radius:20px;margin-bottom:1rem"><img src="/img/ico-tecnicos.svg" alt="Técnico" width="18" height="18" style="vertical-align:middle"> Para profesionales</span>
+      <span style="display:inline-block;background:#e3f0d3;color:#3d5a1e;font-size:.82rem;font-weight:600;padding:.35rem .85rem;border-radius:20px;margin-bottom:1rem"><img src="/img/ico-tecnicos.svg" alt="Técnico" width="18" height="18" style="vertical-align:middle"> Técnicos</span>
       <h2 style="font-size:1.8rem;font-weight:700;color:#2d3a1f;margin-bottom:.5rem">Consigue clientes sin hacer publicidad</h2>
       <p style="font-size:1rem;color:#6b7b5e;max-width:600px;margin:0 auto 2rem">Si eres arquitecto, aparejador o ingeniero, te enviamos clientes que ya saben lo que cuesta y quieren que les contactes. <strong>Tú solo haces tu trabajo.</strong></p>
 
