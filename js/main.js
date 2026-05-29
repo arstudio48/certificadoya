@@ -270,28 +270,22 @@ async function confirmarLead() {
   btn.disabled = true;
 
   try {
-    // 1. Guardar lead en Supabase REST API directamente
+    // 1. Guardar lead via Edge Function (con service key, evita RLS)
     const leadData = {
-      nombre_cliente: nombre,
-      telefono_cliente: telefono,
-      email_cliente: email,
-      codigo_postal: presupuesto.cp,
+      name: nombre,
+      email: email,
+      phone: telefono,
+      cp: presupuesto.cp,
       zona: presupuesto.zona,
-      m2: presupuesto.m2,
-      tipo_inmueble: presupuesto.tipo,
-      presupuesto_min: presupuesto.precioMin,
-      presupuesto_max: presupuesto.precioMax,
-      fuente: 'web'
+      m2: parseInt(presupuesto.m2) || 0,
+      tipo: presupuesto.tipo,
+      precioMin: presupuesto.precioMin,
+      precioMax: presupuesto.precioMax
     };
 
-    const insertRes = await fetch(SUPABASE_URL + '/rest/v1/leads', {
+    const insertRes = await fetch(EDGE_FUNCTION_URL, {
       method: 'POST',
-      headers: {
-        'apikey': SUPABASE_ANON_KEY,
-        'Authorization': 'Bearer ' + SUPABASE_ANON_KEY,
-        'Content-Type': 'application/json',
-        'Prefer': 'return=representation'
-      },
+      headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(leadData)
     });
 
