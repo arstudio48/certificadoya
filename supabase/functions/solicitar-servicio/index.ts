@@ -34,14 +34,44 @@ serve(async (req) => {
     try {
       const { name, email, phone, cp, m2, tipo, zona, precioMin, precioMax, descripcion, leadId } = await req.json()
 
-      if (!leadId) {
+      // Si no hay leadId, crear el lead aquí mismo (el frontend ya no escribe directo a Supabase)
+      let leadIdFinal = leadId
+      if (!leadIdFinal) {
+        const { data: newLead, error: createError } = await supabase
+          .from('leads')
+          .insert({
+            nombre_cliente: name,
+            telefono_cliente: phone,
+            email_cliente: email || null,
+            codigo_postal: cp,
+            zona: zona,
+            m2: parseInt(m2) || 0,
+            tipo_inmueble: tipo,
+            presupuesto_min: precioMin,
+            presupuesto_max: precioMax,
+            fuente: 'web',
+            estado: 'pendiente'
+          })
+          .select('id')
+          .single()
+
+        if (createError) {
+          return new Response(JSON.stringify({ error: 'Error al crear lead: ' + createError.message }), {
+            status: 500,
+            headers: { ...corsHeaders, 'Content-Type': 'application/json' }
+          })
+        }
+        leadIdFinal = newLead.id
+      }
+
+      if (!leadIdFinal) {
         return new Response(JSON.stringify({ error: 'Falta el ID del lead' }), {
           status: 400,
           headers: { ...corsHeaders, 'Content-Type': 'application/json' }
         })
       }
 
-      // El frontend ya guardó el lead en Supabase. Aquí solo notificamos a técnicos.
+      // El frontend ya guardó el lead (o lo acabamos de crear). Aquí solo notificamos a técnicos.
       
       // 1. Buscar técnicos en la misma provincia (por CP)
       const provinciaCP = cp.substring(0, 2)
@@ -54,7 +84,7 @@ serve(async (req) => {
       // 3. Notificar técnicos disponibles por email
       const tecnicosNotificados: string[] = []
       if (tecnicos && tecnicos.length > 0) {
-        const leadId = leadData?.id
+        const leadIdEnlace = leadIdFinal
         const textoLead = `
           <div style="font-family: sans-serif; max-width: 560px; margin: 0 auto;">
             <h2 style="color: #547c24;">🆕 Nuevo cliente disponible</h2>
@@ -67,7 +97,7 @@ serve(async (req) => {
               <tr><td style="padding: 8px; border-bottom: 1px solid #eee; font-weight: 600;">Presupuesto</td><td style="padding: 8px; border-bottom: 1px solid #eee;">${precioMin || '?'}€ — ${precioMax || '?'}€</td></tr>
             </table>
             <div style="margin: 20px 0; text-align: center;">
-              <a href="https://certificadoya.es/aceptar-encargo.html?lead=${leadId}&tec=${encodeURIComponent('{{EMAIL}}')}"
+              <a href="https://certificadoya.es/aceptar-encargo.html?lead=${leadIdEnlace}&tec=${encodeURIComponent('{{EMAIL}}')}"
                  style="display: inline-block; background: #547c24; color: white; padding: 12px 28px; border-radius: 8px; text-decoration: none; font-weight: 600; font-size: 16px;">
                 ✅ Aceptar encargo
               </a>
