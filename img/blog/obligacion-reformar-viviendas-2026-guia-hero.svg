@@ -1,0 +1,167 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#1a365d"/>
+      <stop offset="100%" style="stop-color:#2d6a4f"/>
+    </linearGradient>
+    <linearGradient id="calGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#e8f5e9"/>
+      <stop offset="100%" style="stop-color:#c8e6c9"/>
+    </linearGradient>
+    <linearGradient id="roofGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#d32f2f"/>
+      <stop offset="100%" style="stop-color:#b71c1c"/>
+    </linearGradient>
+    <filter id="shadow">
+      <feDropShadow dx="2" dy="4" stdDeviation="4" flood-opacity="0.3"/>
+    </filter>
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="3" result="blur"/>
+      <feMerge>
+        <feMergeNode in="blur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+
+  <!-- Background -->
+  <rect width="800" height="500" fill="url(#bg)" rx="12"/>
+
+  <!-- Abstract decorative circles -->
+  <circle cx="680" cy="80" r="60" fill="white" opacity="0.04"/>
+  <circle cx="100" cy="420" r="80" fill="white" opacity="0.03"/>
+  <circle cx="750" cy="400" r="50" fill="white" opacity="0.05"/>
+
+  <!-- ===== HOUSE UNDER CONSTRUCTION ===== -->
+  <g transform="translate(280, 140)" filter="url(#shadow)">
+    <!-- House body -->
+    <rect x="0" y="60" width="180" height="150" rx="3" fill="#f5f0e8" stroke="#c4b998" stroke-width="2"/>
+    <!-- Roof -->
+    <polygon points="-10,60 90,10 190,60" fill="#8B4513" stroke="#6b3410" stroke-width="2"/>
+    <!-- Roof tiles pattern -->
+    <line x1="40" y1="42" x2="140" y2="42" stroke="#a0522d" stroke-width="1" opacity="0.5"/>
+    <line x1="15" y1="54" x2="165" y2="54" stroke="#a0522d" stroke-width="1" opacity="0.5"/>
+    <!-- Chimney -->
+    <rect x="130" y="20" width="25" height="40" rx="2" fill="#a0522d" stroke="#6b3410" stroke-width="1.5"/>
+    <!-- Door -->
+    <rect x="68" y="130" width="44" height="80" rx="4" fill="#5d4037" stroke="#3e2723" stroke-width="1.5"/>
+    <circle cx="100" cy="172" r="3" fill="#ffd700"/>
+    <!-- Windows -->
+    <rect x="15" y="80" width="40" height="40" rx="2" fill="#b3d9f2" stroke="#8B4513" stroke-width="1.5"/>
+    <line x1="35" y1="80" x2="35" y2="120" stroke="#8B4513" stroke-width="1"/>
+    <line x1="15" y1="100" x2="55" y2="100" stroke="#8B4513" stroke-width="1"/>
+    <rect x="125" y="80" width="40" height="40" rx="2" fill="#b3d9f2" stroke="#8B4513" stroke-width="1.5"/>
+    <line x1="145" y1="80" x2="145" y2="120" stroke="#8B4513" stroke-width="1"/>
+    <line x1="125" y1="100" x2="165" y2="100" stroke="#8B4513" stroke-width="1"/>
+
+    <!-- Scaffolding left side -->
+    <line x1="-20" y1="30" x2="-20" y2="220" stroke="#ff8c00" stroke-width="4"/>
+    <line x1="12" y1="30" x2="12" y2="220" stroke="#ff8c00" stroke-width="4"/>
+    <line x1="-20" y1="80" x2="12" y2="80" stroke="#ff8c00" stroke-width="3"/>
+    <line x1="-20" y1="130" x2="12" y2="130" stroke="#ff8c00" stroke-width="3"/>
+    <line x1="-20" y1="180" x2="12" y2="180" stroke="#ff8c00" stroke-width="3"/>
+
+    <!-- Scaffolding right side -->
+    <line x1="168" y1="30" x2="168" y2="220" stroke="#ff8c00" stroke-width="4"/>
+    <line x1="200" y1="30" x2="200" y2="220" stroke="#ff8c00" stroke-width="4"/>
+    <line x1="168" y1="80" x2="200" y2="80" stroke="#ff8c00" stroke-width="3"/>
+    <line x1="168" y1="130" x2="200" y2="130" stroke="#ff8c00" stroke-width="3"/>
+    <line x1="168" y1="180" x2="200" y2="180" stroke="#ff8c00" stroke-width="3"/>
+
+    <!-- Scaffolding diagonal braces -->
+    <line x1="-20" y1="80" x2="12" y2="130" stroke="#ff8c00" stroke-width="2" opacity="0.7"/>
+    <line x1="-20" y1="130" x2="12" y2="80" stroke="#ff8c00" stroke-width="2" opacity="0.7"/>
+    <line x1="168" y1="80" x2="200" y2="130" stroke="#ff8c00" stroke-width="2" opacity="0.7"/>
+    <line x1="168" y1="130" x2="200" y2="80" stroke="#ff8c00" stroke-width="2" opacity="0.7"/>
+
+    <!-- Scaffolding planks -->
+    <rect x="-22" y="65" width="36" height="5" rx="1" fill="#e65100" opacity="0.8"/>
+    <rect x="-22" y="115" width="36" height="5" rx="1" fill="#e65100" opacity="0.8"/>
+    <rect x="-22" y="165" width="36" height="5" rx="1" fill="#e65100" opacity="0.8"/>
+    <rect x="166" y="65" width="36" height="5" rx="1" fill="#e65100" opacity="0.8"/>
+    <rect x="166" y="115" width="36" height="5" rx="1" fill="#e65100" opacity="0.8"/>
+    <rect x="166" y="165" width="36" height="5" rx="1" fill="#e65100" opacity="0.8"/>
+
+    <!-- Construction worker figure on scaffolding -->
+    <circle cx="-4" cy="70" r="6" fill="#ffcc80"/>
+    <rect x="-10" y="76" width="12" height="20" rx="3" fill="#1565c0"/>
+    <line x1="10" y1="85" x2="18" y2="80" stroke="#ff8c00" stroke-width="2"/>
+    <line x1="-10" y1="85" x2="-18" y2="80" stroke="#ff8c00" stroke-width="2"/>
+
+    <!-- New brick texture on left wall -->
+    <rect x="0" y="60" width="60" height="150" rx="3" fill="#c62828" opacity="0.3"/>
+    <line x1="0" y1="90" x2="60" y2="90" stroke="#b71c1c" stroke-width="1" opacity="0.4"/>
+    <line x1="0" y1="120" x2="60" y2="120" stroke="#b71c1c" stroke-width="1" opacity="0.4"/>
+    <line x1="0" y1="150" x2="60" y2="150" stroke="#b71c1c" stroke-width="1" opacity="0.4"/>
+    <line x1="0" y1="180" x2="60" y2="180" stroke="#b71c1c" stroke-width="1" opacity="0.4"/>
+    <line x1="30" y1="60" x2="30" y2="90" stroke="#b71c1c" stroke-width="1" opacity="0.4"/>
+    <line x1="15" y1="90" x2="15" y2="120" stroke="#b71c1c" stroke-width="1" opacity="0.4"/>
+    <line x1="45" y1="90" x2="45" y2="120" stroke="#b71c1c" stroke-width="1" opacity="0.4"/>
+    <line x1="30" y1="120" x2="30" y2="150" stroke="#b71c1c" stroke-width="1" opacity="0.4"/>
+    <line x1="15" y1="150" x2="15" y2="180" stroke="#b71c1c" stroke-width="1" opacity="0.4"/>
+    <line x1="45" y1="150" x2="45" y2="180" stroke="#b71c1c" stroke-width="1" opacity="0.4"/>
+  </g>
+
+  <!-- ===== CALENDAR ===== -->
+  <g transform="translate(55, 75)" filter="url(#shadow)">
+    <!-- Calendar body -->
+    <rect x="0" y="0" width="130" height="155" rx="8" fill="white" stroke="#c8e6c9" stroke-width="2"/>
+    <!-- Calendar header -->
+    <rect x="0" y="0" width="130" height="40" rx="8" fill="#2e7d32"/>
+    <rect x="0" y="20" width="130" height="20" fill="#2e7d32"/>
+    <!-- Ring holes -->
+    <circle cx="20" cy="-4" r="5" fill="none" stroke="#2e7d32" stroke-width="2"/>
+    <circle cx="65" cy="-4" r="5" fill="none" stroke="#2e7d32" stroke-width="2"/>
+    <circle cx="110" cy="-4" r="5" fill="none" stroke="#2e7d32" stroke-width="2"/>
+    <!-- Month -->
+    <text x="65" y="26" text-anchor="middle" fill="white" font-size="14" font-weight="bold" font-family="Arial, sans-serif">MAYO</text>
+    <!-- Year 2026 big -->
+    <text x="65" y="85" text-anchor="middle" fill="#1a365d" font-size="32" font-weight="bold" font-family="Arial, sans-serif">2026</text>
+    <!-- Date highlight -->
+    <circle cx="65" cy="120" r="18" fill="#ff5722" opacity="0.9"/>
+    <text x="65" y="126" text-anchor="middle" fill="white" font-size="16" font-weight="bold" font-family="Arial, sans-serif">28</text>
+    <!-- Calendar grid lines -->
+    <line x1="10" y1="100" x2="120" y2="100" stroke="#e0e0e0" stroke-width="0.5"/>
+    <!-- Week days -->
+    <text x="22" y="115" text-anchor="middle" fill="#9e9e9e" font-size="7" font-family="Arial, sans-serif">L</text>
+    <text x="43" y="115" text-anchor="middle" fill="#9e9e9e" font-size="7" font-family="Arial, sans-serif">M</text>
+    <text x="65" y="115" text-anchor="middle" fill="white" font-size="7" font-weight="bold" font-family="Arial, sans-serif">J</text>
+    <text x="87" y="115" text-anchor="middle" fill="#9e9e9e" font-size="7" font-family="Arial, sans-serif">V</text>
+    <text x="108" y="115" text-anchor="middle" fill="#9e9e9e" font-size="7" font-family="Arial, sans-serif">S</text>
+    <!-- Subtitle -->
+    <text x="65" y="145" text-anchor="middle" fill="#e53935" font-size="9" font-weight="bold" font-family="Arial, sans-serif">NUEVA LEY</text>
+  </g>
+
+  <!-- ===== STAMP "OBLIGATORIO" ===== -->
+  <g transform="translate(560, 310)" filter="url(#shadow)">
+    <!-- Stamp shape -->
+    <rect x="0" y="0" width="180" height="130" rx="12" fill="#e53935" stroke="#b71c1c" stroke-width="3" opacity="0.95"/>
+    <!-- White inner border -->
+    <rect x="8" y="8" width="164" height="114" rx="8" fill="none" stroke="white" stroke-width="2" stroke-dasharray="6,4" opacity="0.7"/>
+    <!-- Icon inside stamp -->
+    <circle cx="90" cy="40" r="18" fill="white" opacity="0.25"/>
+    <text x="90" y="48" text-anchor="middle" fill="white" font-size="22" font-family="Arial, sans-serif">⚠</text>
+    <!-- Text -->
+    <text x="90" y="78" text-anchor="middle" fill="white" font-size="16" font-weight="bold" font-family="Arial, sans-serif" letter-spacing="1">OBLIGATORIO</text>
+    <text x="90" y="98" text-anchor="middle" fill="white" font-size="11" font-family="Arial, sans-serif" opacity="0.9">POR LEY UE 2026</text>
+    <!-- Star decoration -->
+    <text x="40" y="120" text-anchor="middle" fill="white" font-size="10" opacity="0.5">★</text>
+    <text x="90" y="120" text-anchor="middle" fill="white" font-size="10" opacity="0.5">★</text>
+    <text x="140" y="120" text-anchor="middle" fill="white" font-size="10" opacity="0.5">★</text>
+  </g>
+
+  <!-- ===== TITLE TEXT ===== -->
+  <text x="400" y="460" text-anchor="middle" fill="white" font-size="15" font-weight="bold" font-family="Arial, sans-serif" opacity="0.7" letter-spacing="1">REFORMA OBLIGATORIA DE VIVIENDAS · DIRECTIVA EPBD</text>
+
+  <!-- ===== ARROW connecting elements ===== -->
+  <g opacity="0.2">
+    <line x1="185" y1="150" x2="270" y2="180" stroke="white" stroke-width="2" stroke-dasharray="5,3"/>
+    <polygon points="270,178 260,185 270,182" fill="white"/>
+  </g>
+
+  <!-- Decorative dots -->
+  <circle cx="30" cy="30" r="3" fill="white" opacity="0.1"/>
+  <circle cx="770" cy="470" r="3" fill="white" opacity="0.1"/>
+  <circle cx="750" cy="30" r="2" fill="white" opacity="0.1"/>
+  <circle cx="50" cy="470" r="2" fill="white" opacity="0.1"/>
+</svg>
