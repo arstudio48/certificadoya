@@ -43,24 +43,27 @@ serve(async (req: Request) => {
     const precioMinVal = precioMin != null ? Math.round(Number(precioMin)) : null
     const precioMaxVal = precioMax != null ? Math.round(Number(precioMax)) : null
 
-    const res = await fetch(`${SUPABASE_URL}/rest/v1/rpc/insert_lead`, {
+    // INSERT directo en la tabla leads (evita RPC que no existe)
+    const res = await fetch(`${SUPABASE_URL}/rest/v1/leads`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
         'apikey': token,
-        'Authorization': `Bearer ${token}`
+        'Authorization': `Bearer ${token}`,
+        'Prefer': 'return=representation'
       },
       body: JSON.stringify({
-        p_nombre: nombre,
-        p_telefono: telefono,
-        p_email: emailVal,
-        p_cp: cpVal,
-        p_provincia: zonaVal,
-        p_m2: m2Val,
-        p_tipo_inmueble: tipo || 'piso',
-        p_presupuesto_min: precioMinVal,
-        p_presupuesto_max: precioMaxVal,
-        p_fuente: 'web'
+        nombre_cliente: nombre,
+        telefono_cliente: telefono,
+        email_cliente: emailVal,
+        codigo_postal: cpVal,
+        provincia: zonaVal,
+        m2: m2Val,
+        tipo_inmueble: tipo || 'piso',
+        presupuesto_min: precioMinVal,
+        presupuesto_max: precioMaxVal,
+        fuente: 'web',
+        estado: 'nuevo'
       })
     })
 
@@ -77,7 +80,7 @@ serve(async (req: Request) => {
 
     return new Response(JSON.stringify({
       success: true,
-      leadId: data,
+      leadId: data.id || data[0]?.id,
       mensaje: 'Solicitud recibida. Te contactaremos pronto.'
     }), {
       headers: { ...corsHeaders, 'Content-Type': 'application/json' }
