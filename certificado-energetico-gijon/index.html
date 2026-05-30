@@ -217,7 +217,7 @@
 
     <details class="faq-item">
       <summary class="faq-question">¿Cuánto cuesta un certificado energético en Gijón?</summary>
-      <div class="faq-answer"><p>El precio de un certificado energético en Madrid oscila entre <strong>55-71€</strong> para un piso de 60-80 m². Las viviendas unifamiliares son algo más caras por la mayor superficie a medir. Usa nuestra calculadora gratuita para obtener tu precio exacto según tu código postal y metros cuadrados.</p></div>
+      <div class="faq-answer"><p>El precio de un certificado energético en Gijón oscila entre <strong>55-71€</strong> para un piso de 60-80 m². Las viviendas unifamiliares son algo más caras por la mayor superficie a medir. Usa nuestra calculadora gratuita para obtener tu precio exacto según tu código postal y metros cuadrados.</p></div>
     </details>
 
     <details class="faq-item">
@@ -270,9 +270,9 @@
     }
     function mostrarPresupuesto(min, max, m2, tipo, cp) {
       document.getElementById('precio-rango').textContent = min + '€ – ' + max + '€';
-      document.getElementById('precio-texto').textContent = 'Presupuesto estimado para ' + m2 + ' m² (' + tipo + ') en Madrid';
+      document.getElementById('precio-texto').textContent = 'Presupuesto estimado para ' + m2 + ' m² (' + tipo + ') en Gijón';
       document.getElementById('resultado').style.display = 'block';
-      window._presupuesto = { cp: cp || '28001', m2: m2, precioMin: min, precioMax: max, zona: 'Madrid', tipo: tipo };
+      window._presupuesto = { cp: cp || '28001', m2: m2, precioMin: min, precioMax: max, zona: 'Asturias', tipo: tipo };
       document.getElementById('resultado').scrollIntoView({ behavior: 'smooth', block: 'center' });
     }
     // Auto-cargar desde parámetros de la URL (viene de la home)
