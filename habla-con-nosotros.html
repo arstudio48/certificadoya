@@ -54,12 +54,18 @@ let mediaRecorder = null;
 let audioChunks = [];
 let isRecording = false;
 let reconnectTimer = null;
+let audioCtx = null;
 
 const talkBtn = document.getElementById("talkBtn");
 const stopBtn = document.getElementById("stopBtn");
 const statusDiv = document.getElementById("status");
 const messagesDiv = document.getElementById("messages");
 const transcriptDiv = document.getElementById("transcript");
+
+function getAudioCtx() {
+    if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+    return audioCtx;
+}
 
 function connect() {
   statusDiv.textContent = "Conectando...";
@@ -109,36 +115,52 @@ function addMessage(role, text) {
 }
 
 function playAudio(base64PCM) {
-  const pcmBytes = Uint8Array.from(atob(base64PCM), c => c.charCodeAt(0));
-  const sampleRate = 16000;
-  const numChannels = 1;
-  const bitsPerSample = 16;
-  
-  // Build WAV header
-  const buffer = new ArrayBuffer(44 + pcmBytes.length);
-  const view = new DataView(buffer);
-  const writeStr = (off, str) => { for (let i = 0; i < str.length; i++) view.setUint8(off + i, str.charCodeAt(i)); };
-  
-  writeStr(0, "RIFF");
-  view.setUint32(4, 36 + pcmBytes.length, true);
-  writeStr(8, "WAVE");
-  writeStr(12, "fmt ");
-  view.setUint32(16, 16, true);
-  view.setUint16(20, 1, true); // PCM
-  view.setUint16(22, numChannels, true);
-  view.setUint32(24, sampleRate, true);
-  view.setUint32(28, sampleRate * numChannels * bitsPerSample / 8, true);
-  view.setUint16(32, numChannels * bitsPerSample / 8, true);
-  view.setUint16(34, bitsPerSample, true);
-  writeStr(36, "data");
-  view.setUint32(40, pcmBytes.length, true);
-  new Uint8Array(buffer, 44).set(pcmBytes);
-  
-  const blob = new Blob([buffer], { type: "audio/wav" });
-  const url = URL.createObjectURL(blob);
-  const audio = new Audio(url);
-  audio.play().catch(e => console.log("Audio play error:", e));
-  audio.onended = () => URL.revokeObjectURL(url);
+    try {
+        const pcmBytes = Uint8Array.from(atob(base64PCM), c => c.charCodeAt(0));
+        const sampleRate = 16000;
+        const numChannels = 1;
+        const bitsPerSample = 16;
+        
+        const buffer = new ArrayBuffer(44 + pcmBytes.length);
+        const view = new DataView(buffer);
+        const writeStr = (off, str) => { for (let i = 0; i < str.length; i++) view.setUint8(off + i, str.charCodeAt(i)); };
+        
+        writeStr(0, "RIFF");
+        view.setUint32(4, 36 + pcmBytes.length, true);
+        writeStr(8, "WAVE");
+        writeStr(12, "fmt ");
+        view.setUint32(16, 16, true);
+        view.setUint16(20, 1, true);
+        view.setUint16(22, numChannels, true);
+        view.setUint32(24, sampleRate, true);
+        view.setUint32(28, sampleRate * numChannels * bitsPerSample / 8, true);
+        view.setUint16(32, numChannels * bitsPerSample / 8, true);
+        view.setUint16(34, bitsPerSample, true);
+        writeStr(36, "data");
+        view.setUint32(40, pcmBytes.length, true);
+        new Uint8Array(buffer, 44).set(pcmBytes);
+        
+        const blob = new Blob([buffer], { type: "audio/wav" });
+        const url = URL.createObjectURL(blob);
+        
+        // iOS fix: AudioContext instead of Audio() for reliable playback
+        const ctx = getAudioCtx();
+        if (ctx.state === "suspended") ctx.resume();
+        
+        fetch(url)
+            .then(r => r.arrayBuffer())
+            .then(buf => ctx.decodeAudioData(buf))
+            .then(audioBuf => {
+                const source = ctx.createBufferSource();
+                source.buffer = audioBuf;
+                source.connect(ctx.destination);
+                source.start(0);
+                source.onended = () => URL.revokeObjectURL(url);
+            })
+            .catch(e => console.log("Audio error:", e));
+    } catch (e) {
+        console.log("Audio error:", e);
+    }
 }
 
 async function startRecording() {
@@ -148,8 +170,8 @@ async function startRecording() {
     const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
     audioChunks = [];
     
-    // Use AudioContext to get PCM f32 at 16kHz
-    const audioContext = new AudioContext({ sampleRate: 16000 });
+    // Pre-create AudioContext on user gesture (required for iOS)
+    const audioContext = getAudioCtx();
     const source = audioContext.createMediaStreamSource(stream);
     const processor = audioContext.createScriptProcessor(4096, 1, 1);
     
@@ -164,7 +186,6 @@ async function startRecording() {
     processor.onaudioprocess = (e) => {
       if (!isRecording) return;
       const input = e.inputBuffer.getChannelData(0);
-      // Copy to chunks
       const chunk = new Float32Array(input);
       audioChunks.push(chunk);
     };
@@ -187,19 +208,14 @@ function stopRecording() {
   if (!isRecording) return;
   isRecording = false;
   
-  // Stop mic
   if (window._audioStream) {
     window._audioStream.getTracks().forEach(t => t.stop());
-  }
-  if (window._audioContext) {
-    window._audioContext.close();
   }
   
   talkBtn.textContent = "🎤 Hablar";
   talkBtn.className = "btn btn-talk";
   stopBtn.disabled = true;
   
-  // Combine chunks
   if (audioChunks.length === 0) return;
   
   const totalLen = audioChunks.reduce((acc, c) => acc + c.length, 0);
@@ -218,11 +234,9 @@ function stopRecording() {
   }
   const b64 = btoa(binary);
   
-  transcriptDiv.textContent = "Procesando...";
+  transcriptDiv.textContent = "⏳ Procesando...";
   
-  // Send to server
   ws.send(JSON.stringify({ type: "audio", audio: b64 }));
-  
   audioChunks = [];
 }
 
