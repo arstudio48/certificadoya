@@ -152,6 +152,22 @@ async function sendText() {
   sendBtn.disabled = false;
 }
 
+// Resample audio Float32Array to 16kHz using OfflineAudioContext
+async function resampleTo16k(audioData, inputSampleRate) {
+  if (inputSampleRate === 16000) return audioData;
+  const ratio = 16000 / inputSampleRate;
+  const outLen = Math.floor(audioData.length * ratio);
+  const ctx = new OfflineAudioContext(1, outLen, 16000);
+  const buf = ctx.createBuffer(1, audioData.length, inputSampleRate);
+  buf.getChannelData(0).set(audioData);
+  const src = ctx.createBufferSource();
+  src.buffer = buf;
+  src.connect(ctx.destination);
+  src.start();
+  const rendered = await ctx.startRendering();
+  return new Float32Array(rendered.getChannelData(0));
+}
+
 async function startRecording() {
   if (isRecording || isProcessing) return;
   try {
@@ -192,32 +208,35 @@ function stopRecording() {
   for (const chunk of audioChunks) { combined.set(chunk, offset); offset += chunk.length; }
   transcriptDiv.textContent = "⏳ Procesando audio...";
   isProcessing = true;
-  fetch(`${API_URL}/api/voice`, {
-    method: "POST",
-    headers: { "Content-Type": "application/octet-stream" },
-    body: combined.buffer,
-    signal: AbortSignal.timeout(60000)
-  })
-  .then(r => r.json())
-  .then(data => {
-    transcriptDiv.textContent = "";
-    if (data.type === "response") {
-      addMessage("user", data.transcript_text || "(voz)");
-      addMessage("bot", data.text, data.audio_b64);
-    } else {
-      addMessage("bot", data.text || "No te he entendido");
-    }
-  })
-  .catch(e => {
-    transcriptDiv.textContent = "⚠️ Error de conexión";
-    addMessage("system", "Error: " + (e.message || "timeout"));
-  })
-  .finally(() => {
-    isProcessing = false;
-    audioChunks = [];
+  // Resample to 16kHz and send
+  const sr = getAudioCtx().sampleRate;
+  resampleTo16k(combined, sr).then(resampled => {
+    fetch(`${API_URL}/api/voice`, {
+      method: "POST",
+      headers: { "Content-Type": "application/octet-stream" },
+      body: resampled.buffer,
+      signal: AbortSignal.timeout(60000)
+    })
+    .then(r => r.json())
+    .then(data => {
+      transcriptDiv.textContent = "";
+      if (data.type === "response") {
+        addMessage("user", data.transcript_text || "(voz)");
+        addMessage("bot", data.text, data.audio_b64);
+      } else {
+        addMessage("bot", data.text || "No te he entendido");
+      }
+    })
+    .catch(e => {
+      transcriptDiv.textContent = "⚠️ Error de conexión";
+      addMessage("system", "Error: " + (e.message || "timeout"));
+    })
+    .finally(() => {
+      isProcessing = false;
+      audioChunks = [];
+    });
   });
 }
-
 function addMessage(role, text, audioB64) {
   const div = document.createElement("div");
   div.className = `msg-${role}`;
