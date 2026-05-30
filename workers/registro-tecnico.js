@@ -127,7 +127,7 @@ export default {
               <a href="https://www.certificadoya.es/blog/" style="color:#b8d4a0;font-size:12px;text-decoration:none;padding:0 8px">Blog</a>
               <a href="https://www.certificadoya.es/panel-tecnicos.html" style="color:#b8d4a0;font-size:12px;text-decoration:none;padding:0 8px">Tecnicos</a>
             </div>
-            <p style="font-size:11px;color:#6b7b5e;margin:12px 0 0 0;line-height:1.5">&copy; 2026 CertificadoYa &mdash; ArtStudio-CEE</p>
+            <p style="font-size:11px;color:#6b7b5e;margin:12px 0 0 0;line-height:1.5">&copy; 2026 CertificadoYa &mdash; ArtStudio</p>
           </td>
         </tr>
       </table>
