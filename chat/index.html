@@ -102,6 +102,16 @@ function getAudioCtx() {
   return audioCtx;
 }
 
+// Session ID for conversation memory
+function getSessionId() {
+  let sid = localStorage.getItem("chat_session_id");
+  if (!sid) {
+    sid = crypto.randomUUID ? crypto.randomUUID() : Date.now().toString(36) + Math.random().toString(36).slice(2);
+    localStorage.setItem("chat_session_id", sid);
+  }
+  return sid;
+}
+
 async function checkService() {
   try {
     let r = await fetch(`${API_URL}/health`, { method: "GET", signal: AbortSignal.timeout(5000) });
@@ -134,7 +144,7 @@ async function sendText() {
     let r = await fetch(`${API_URL}/api/chat`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ text }),
+      body: JSON.stringify({ text, session_id: getSessionId() }),
       signal: AbortSignal.timeout(60000)
     });
     let data = await r.json();
@@ -213,7 +223,7 @@ function stopRecording() {
   resampleTo16k(combined, sr).then(resampled => {
     fetch(`${API_URL}/api/voice`, {
       method: "POST",
-      headers: { "Content-Type": "application/octet-stream" },
+      headers: { "Content-Type": "application/octet-stream", "X-Session-Id": getSessionId() },
       body: resampled.buffer,
       signal: AbortSignal.timeout(60000)
     })
