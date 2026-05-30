@@ -3,10 +3,273 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta http-equiv="refresh" content="0; url=https://www.certificadoya.es/habla-con-nosotros">
-  <title>Chat CertificadoYa</title>
+  <title>Habla con CertificadoYa</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: Outfit, sans-serif; background: #f5f7f4; display: flex; justify-content: center; align-items: center; min-height: 100vh; }
+    .chat-box { width: 380px; max-width: 100%; background: white; border-radius: 16px; box-shadow: 0 8px 32px rgba(0,0,0,0.1); padding: 24px; }
+    h1 { font-size: 1.3rem; color: #1a5c2e; margin-bottom: 4px; }
+    p.sub { font-size: 0.85rem; color: #666; margin-bottom: 20px; }
+    .messages { height: 300px; overflow-y: auto; background: #fafbfa; border-radius: 10px; padding: 12px; margin-bottom: 16px; font-size: 0.9rem; }
+    .msg-user { background: #e3f0da; padding: 8px 12px; border-radius: 12px 12px 4px 12px; margin-bottom: 8px; text-align: right; }
+    .msg-bot { background: white; border: 1px solid #e0e8e0; padding: 8px 12px; border-radius: 12px 12px 12px 4px; margin-bottom: 8px; }
+    .msg-system { text-align: center; font-size: 0.75rem; color: #999; margin: 8px 0; }
+    .status { font-size: 0.75rem; color: #888; margin-bottom: 12px; }
+    .status.connected { color: #2e7d32; }
+    .status.disconnected { color: #c62828; }
+    .btn-group { display: flex; gap: 8px; }
+    .btn { flex: 1; padding: 12px; border: none; border-radius: 10px; font-size: 1rem; cursor: pointer; font-weight: 600; transition: all 0.2s; }
+    .btn-talk { background: #1a5c2e; color: white; }
+    .btn-talk:hover { background: #2e8b47; }
+    .btn-talk:disabled { background: #ccc; cursor: not-allowed; }
+    .btn-talk.recording { background: #c62828; animation: pulse 1s infinite; }
+    .btn-stop { background: #f0f0f0; color: #333; }
+    .btn-stop:hover { background: #e0e0e0; }
+    .btn-stop:disabled { opacity: 0.5; cursor: not-allowed; }
+    .transcript { font-size: 0.8rem; color: #888; font-style: italic; margin-top: 8px; }
+    @keyframes pulse { 50% { opacity: 0.7; } }
+    .thinking .dots::after { content: '...'; animation: dots 1.5s steps(3) infinite; }
+    @keyframes dots { 33% { content: '.'; } 66% { content: '..'; } }
+  </style>
 </head>
 <body>
-  <p>Redirigiendo a <a href="https://www.certificadoya.es/habla-con-nosotros">certificadoya.es/habla-con-nosotros</a>...</p>
+<div class="chat-box">
+  <h1>🎙️ CertificadoYa</h1>
+  <p class="sub">Pregúntame sobre certificados energéticos</p>
+  <div class="messages" id="messages">
+    <div class="msg-bot">¡Hola! Soy el asistente de CertificadoYa. Pregúntame lo que quieras sobre certificados energéticos: precios, proceso, obligatoriedad... ¡lo que necesites!</div>
+  </div>
+  <div class="status disconnected" id="status">Desconectado</div>
+  <div class="btn-group">
+    <button class="btn btn-talk" id="talkBtn" disabled>🎤 Hablar</button>
+    <button class="btn btn-stop" id="stopBtn" disabled>⏹ Enviar</button>
+  </div>
+  <div class="transcript" id="transcript"></div>
+</div>
+
+<script>
+const WS_URL = "wss://families-clinton-karaoke-titten.trycloudflare.com";
+let ws = null;
+let mediaRecorder = null;
+let audioChunks = [];
+let isRecording = false;
+let reconnectTimer = null;
+let reconnectDelay = 1000;
+const MAX_RECONNECT_DELAY = 30000;
+let keepaliveTimer = null;
+let pingInterval = null;
+let audioCtx = null;
+
+const talkBtn = document.getElementById("talkBtn");
+const stopBtn = document.getElementById("stopBtn");
+const statusDiv = document.getElementById("status");
+const messagesDiv = document.getElementById("messages");
+const transcriptDiv = document.getElementById("transcript");
+
+function getAudioCtx() {
+    if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+    return audioCtx;
+}
+
+function connect() {
+  statusDiv.textContent = "Conectando...";
+  statusDiv.className = "status";
+  
+  ws = new WebSocket(WS_URL);
+  
+  ws.onopen = () => {
+    statusDiv.textContent = "Conectado 🟢";
+    statusDiv.className = "status connected";
+    talkBtn.disabled = false;
+    reconnectDelay = 1000; // Reset backoff on success
+    if (reconnectTimer) { clearTimeout(reconnectTimer); reconnectTimer = null; }
+    // Keepalive ping cada 30s para evitar timeout Cloudflare (100s idle)
+    if (keepaliveTimer) clearInterval(keepaliveTimer);
+    keepaliveTimer = setInterval(() => {
+      if (ws && ws.readyState === WebSocket.OPEN) ws.send(JSON.stringify({ type: "ping" }));
+    }, 30000);
+  };
+  
+  ws.onclose = () => {
+    statusDiv.textContent = `Desconectado. Reconectando en ${reconnectDelay / 1000}s...`;
+    statusDiv.className = "status disconnected";
+    talkBtn.disabled = true;
+    stopBtn.disabled = true;
+    if (keepaliveTimer) { clearInterval(keepaliveTimer); keepaliveTimer = null; }
+    // Exponential backoff: 1s, 2s, 4s, 8s, 16s, max 30s
+    reconnectTimer = setTimeout(connect, reconnectDelay);
+    reconnectDelay = Math.min(reconnectDelay * 2, MAX_RECONNECT_DELAY);
+  };
+  
+  ws.onmessage = (event) => {
+    const data = JSON.parse(event.data);
+    clearTimeout(window._responseTimeout);
+    
+    // Ignorar pong
+    if (data.type === "pong") return;
+    
+    if (data.type === "transcript") {
+      transcriptDiv.textContent = `"${data.text}"`;
+    } else if (data.type === "response") {
+      addMessage("bot", data.text);
+      if (data.audio_b64) {
+        playAudio(data.audio_b64);
+      }
+      transcriptDiv.textContent = "";
+    } else if (data.type === "error") {
+      addMessage("bot", data.text);
+      transcriptDiv.textContent = "";
+    }
+  };
+}
+
+function addMessage(role, text) {
+  const div = document.createElement("div");
+  div.className = `msg-${role}`;
+  div.textContent = text;
+  messagesDiv.appendChild(div);
+  messagesDiv.scrollTop = messagesDiv.scrollHeight;
+}
+
+function playAudio(base64PCM) {
+    try {
+        const pcmBytes = Uint8Array.from(atob(base64PCM), c => c.charCodeAt(0));
+        const sampleRate = 16000;
+        const numChannels = 1;
+        const bitsPerSample = 16;
+        
+        const buffer = new ArrayBuffer(44 + pcmBytes.length);
+        const view = new DataView(buffer);
+        const writeStr = (off, str) => { for (let i = 0; i < str.length; i++) view.setUint8(off + i, str.charCodeAt(i)); };
+        
+        writeStr(0, "RIFF");
+        view.setUint32(4, 36 + pcmBytes.length, true);
+        writeStr(8, "WAVE");
+        writeStr(12, "fmt ");
+        view.setUint32(16, 16, true);
+        view.setUint16(20, 1, true);
+        view.setUint16(22, numChannels, true);
+        view.setUint32(24, sampleRate, true);
+        view.setUint32(28, sampleRate * numChannels * bitsPerSample / 8, true);
+        view.setUint16(32, numChannels * bitsPerSample / 8, true);
+        view.setUint16(34, bitsPerSample, true);
+        writeStr(36, "data");
+        view.setUint32(40, pcmBytes.length, true);
+        new Uint8Array(buffer, 44).set(pcmBytes);
+        
+        const blob = new Blob([buffer], { type: "audio/wav" });
+        const url = URL.createObjectURL(blob);
+        
+        // iOS fix: AudioContext instead of Audio() for reliable playback
+        const ctx = getAudioCtx();
+        if (ctx.state === "suspended") ctx.resume();
+        
+        fetch(url)
+            .then(r => r.arrayBuffer())
+            .then(buf => ctx.decodeAudioData(buf))
+            .then(audioBuf => {
+                const source = ctx.createBufferSource();
+                source.buffer = audioBuf;
+                source.connect(ctx.destination);
+                source.start(0);
+                source.onended = () => URL.revokeObjectURL(url);
+            })
+            .catch(e => console.log("Audio error:", e));
+    } catch (e) {
+        console.log("Audio error:", e);
+    }
+}
+
+async function startRecording() {
+  if (!ws || ws.readyState !== WebSocket.OPEN) return;
+  
+  try {
+    const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+    audioChunks = [];
+    
+    // Pre-create AudioContext on user gesture (required for iOS)
+    const audioContext = getAudioCtx();
+    const source = audioContext.createMediaStreamSource(stream);
+    const processor = audioContext.createScriptProcessor(4096, 1, 1);
+    
+    source.connect(processor);
+    processor.connect(audioContext.destination);
+    
+    isRecording = true;
+    talkBtn.textContent = "🔴 Grabando...";
+    talkBtn.className = "btn btn-talk recording";
+    stopBtn.disabled = false;
+    
+    processor.onaudioprocess = (e) => {
+      if (!isRecording) return;
+      const input = e.inputBuffer.getChannelData(0);
+      const chunk = new Float32Array(input);
+      audioChunks.push(chunk);
+    };
+    
+    // Store for cleanup
+    window._audioStream = stream;
+    window._audioContext = audioContext;
+    window._processor = processor;
+    window._source = source;
+    
+    transcriptDiv.textContent = "🎤 Escuchando...";
+    
+  } catch (err) {
+    console.error("Mic error:", err);
+    addMessage("system", "Error al acceder al micrófono. ¿Has dado permiso?");
+  }
+}
+
+function stopRecording() {
+  if (!isRecording) return;
+  isRecording = false;
+  
+  if (window._audioStream) {
+    window._audioStream.getTracks().forEach(t => t.stop());
+  }
+  
+  talkBtn.textContent = "🎤 Hablar";
+  talkBtn.className = "btn btn-talk";
+  stopBtn.disabled = true;
+  
+  if (audioChunks.length === 0) return;
+  
+  const totalLen = audioChunks.reduce((acc, c) => acc + c.length, 0);
+  const combined = new Float32Array(totalLen);
+  let offset = 0;
+  for (const chunk of audioChunks) {
+    combined.set(chunk, offset);
+    offset += chunk.length;
+  }
+  
+  // Encode as base64
+  const bytes = new Uint8Array(combined.buffer);
+  let binary = "";
+  for (let i = 0; i < bytes.length; i++) {
+    binary += String.fromCharCode(bytes[i]);
+  }
+  const b64 = btoa(binary);
+  
+  transcriptDiv.textContent = "⏳ Procesando...";
+  
+  // Timeout: si tarda >20s, avisar al usuario
+  window._responseTimeout = setTimeout(() => {
+    if (transcriptDiv.textContent === "⏳ Procesando...") {
+      transcriptDiv.textContent = "⚠️ El servidor está tardando... pulsa Hablar de nuevo";
+      stopBtn.disabled = false;
+    }
+  }, 20000);
+  
+  ws.send(JSON.stringify({ type: "audio", audio: b64 }));
+  audioChunks = [];
+}
+
+talkBtn.addEventListener("click", startRecording);
+stopBtn.addEventListener("click", stopRecording);
+
+// Connect on load
+connect();
+</script>
 </body>
 </html>
