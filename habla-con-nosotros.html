@@ -48,12 +48,16 @@
 </div>
 
 <script>
-const WS_URL = "wss://tba-mac-services-penguin.trycloudflare.com";
+const WS_URL = "wss://families-clinton-karaoke-titten.trycloudflare.com";
 let ws = null;
 let mediaRecorder = null;
 let audioChunks = [];
 let isRecording = false;
 let reconnectTimer = null;
+let reconnectDelay = 1000;
+const MAX_RECONNECT_DELAY = 30000;
+let keepaliveTimer = null;
+let pingInterval = null;
 let audioCtx = null;
 
 const talkBtn = document.getElementById("talkBtn");
@@ -77,20 +81,32 @@ function connect() {
     statusDiv.textContent = "Conectado 🟢";
     statusDiv.className = "status connected";
     talkBtn.disabled = false;
+    reconnectDelay = 1000; // Reset backoff on success
     if (reconnectTimer) { clearTimeout(reconnectTimer); reconnectTimer = null; }
+    // Keepalive ping cada 30s para evitar timeout Cloudflare (100s idle)
+    if (keepaliveTimer) clearInterval(keepaliveTimer);
+    keepaliveTimer = setInterval(() => {
+      if (ws && ws.readyState === WebSocket.OPEN) ws.send(JSON.stringify({ type: "ping" }));
+    }, 30000);
   };
   
   ws.onclose = () => {
-    statusDiv.textContent = "Desconectado. Reconectando en 3s...";
+    statusDiv.textContent = `Desconectado. Reconectando en ${reconnectDelay / 1000}s...`;
     statusDiv.className = "status disconnected";
     talkBtn.disabled = true;
     stopBtn.disabled = true;
-    reconnectTimer = setTimeout(connect, 3000);
+    if (keepaliveTimer) { clearInterval(keepaliveTimer); keepaliveTimer = null; }
+    // Exponential backoff: 1s, 2s, 4s, 8s, 16s, max 30s
+    reconnectTimer = setTimeout(connect, reconnectDelay);
+    reconnectDelay = Math.min(reconnectDelay * 2, MAX_RECONNECT_DELAY);
   };
   
   ws.onmessage = (event) => {
     const data = JSON.parse(event.data);
     clearTimeout(window._responseTimeout);
+    
+    // Ignorar pong
+    if (data.type === "pong") return;
     
     if (data.type === "transcript") {
       transcriptDiv.textContent = `"${data.text}"`;
