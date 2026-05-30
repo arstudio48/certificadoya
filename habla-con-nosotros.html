@@ -90,6 +90,7 @@ function connect() {
   
   ws.onmessage = (event) => {
     const data = JSON.parse(event.data);
+    clearTimeout(window._responseTimeout);
     
     if (data.type === "transcript") {
       transcriptDiv.textContent = `"${data.text}"`;
@@ -235,6 +236,14 @@ function stopRecording() {
   const b64 = btoa(binary);
   
   transcriptDiv.textContent = "⏳ Procesando...";
+  
+  // Timeout: si tarda >20s, avisar al usuario
+  window._responseTimeout = setTimeout(() => {
+    if (transcriptDiv.textContent === "⏳ Procesando...") {
+      transcriptDiv.textContent = "⚠️ El servidor está tardando... pulsa Hablar de nuevo";
+      stopBtn.disabled = false;
+    }
+  }, 20000);
   
   ws.send(JSON.stringify({ type: "audio", audio: b64 }));
   audioChunks = [];
