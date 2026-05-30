@@ -1,0 +1,24 @@
+{
+  "provincias": [
+    "Madrid", "Barcelona", "Valencia", "Sevilla", "Málaga", "Alicante",
+    "Bilbao", "Zaragoza", "Murcia", "Palma", "Las Palmas", "Granada",
+    "Pamplona", "San Sebastián", "La Coruña", "Vigo", "Gijón", "Oviedo",
+    "Santander", "Valladolid", "Burgos", "Toledo", "Albacete", "Almería",
+    "Cádiz", "Córdoba", "Huelva", "Jaén", "Lleida", "Tarragona", "Girona",
+    "Badajoz", "Cáceres", "León", "Salamanca", "Zamora", "Lugo", "Ourense",
+    "Pontevedra", "Huesca", "Teruel", "Ciudad Real", "Cuenca", "Guadalajara",
+    "Ávila", "Segovia", "Soria", "Palencia", "Logroño", "Ceuta", "Melilla"
+  ],
+  "indice_actual": 0,
+  "provincias_hoy": ["Madrid", "Barcelona"],
+  "ultimo_scraping": "2026-05-30",
+  "proximo_dia": "2026-05-31",
+  "proximas_provincias": ["Valencia", "Sevilla"],
+  "scraping_posible": false,
+  "motivo": "Todas las plataformas bloquean scraping server-side (CAPTCHA/SPA JS). Google también bloquea headless desde esta IP. Requiere navegador manual o cuentas pre-autenticadas.",
+  "alternativas": [
+    "Extraer técnicos manualmente desde navegador y pegar URLs aquí",
+    "Usar Google Business Profile (GMB) search para encontrar técnicos locales",
+    "Usar modelo_local.py para generar borradores de email para leads de sesiones anteriores"
+  ]
+}

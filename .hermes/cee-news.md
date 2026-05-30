@@ -1,53 +1,48 @@
-# Monitor CEE — 29/05/2026
+# Monitor CEE — 30/05/2026
 
 ## Noticias Últimas 24h
 
-### IMPACTO ALTO
-
-1. **El certificado energético actualiza sus escalas de la A a la G** para adaptarse a edificios de cero emisiones
-   - Fuente: Caloryfrio (hace 22 días)
-   - Impacto: ALTO — Cambio en las escalas de calificación para alinear España con la Directiva EPBD 2024/1275
-
-2. **El Gobierno amplía los plazos del sistema de certificados energéticos (CAE)** para facilitar el cumplimiento
-   - Fuente: El Periódico de la Energía (26 abr 2026)
-   - Impacto: ALTO — Nueva regulación de plazos CAE
-
-3. **Consulta pública para adaptar la certificación energética de edificios al nuevo marco europeo**
-   - Fuente: Casadomo (12 ene 2026)
-   - Impacto: ALTO — MITECO busca transponer Directiva EPBD 2024/1275
-
-4. **RDL 7/2026 y el Sistema CAE: qué cambia para el instalador**
-   - Fuente: Caloryfrio (27 mar 2026)
-   - Impacto: ALTO — Real Decreto-ley 7/2026 modifica el sistema CAE
-
 ### IMPACTO MEDIO
 
-5. **Confirmado por la Ley: anunciar pisos con calificación energética no respaldada puede costar hasta 1.000 €**
-   - Fuente: Crónica Vasca (hace 2 días)
-   - Sanciones por falsear CEE en anuncios
-
-6. **Certificado energético y rehabilitación obligatoria: cómo afectarán al valor de la vivienda antigua**
-   - Fuente: Fotocasa (hace 11 días)
-
-7. **9 de cada 10 edificios de Catalunya con CEE suspenden en emisiones de CO₂**
-   - Fuente: Diari de Tarragona (hace 25 días)
-
-8. **Renta 2025: deducciones IRPF por obras de eficiencia energética**
-   - Fuente: CaixaBank (hace 3 días)
-
-9. **Los Certificados de Ahorro Energético (CAE), una vía para mejorar la eficiencia de la vivienda**
-   - Fuente: EFE Verde (hace 5 días)
+1. **Madrid destinará 50 millones al Plan Rehabilita 2026 con nueva línea para mejora estética de edificios**
+   - Fuente: Construible (29 may 2026)
+   - https://www.construible.es/2026/05/29/madrid-destinara-50-millones-plan-rehabilita-2026-nueva-linea-mejora-estetica-edificios
+   - Impacto: MEDIO — Nuevas ayudas a la rehabilitación en Madrid, incluye mejora estética además de eficiencia
 
 ### IMPACTO BAJO
 
-10. **Certificado energético y deducciones fiscales: guía práctica** — Moove Magazine (hace 14h)
-11. **Plena inclusión y Repsol presentan los CAE** — Plena Inclusión (hace 2 días)
-12. **Zaragoza ingresará 202.000 € por CAE en viviendas municipales** — El Periódico de Aragón (hace 6 días)
+2. **"Una casa normal gasta 4.000 euros al año solo en calefacción o aire; una pasiva, 400 en total": las ventajas de las casas pasivas**
+   - Fuente: La Vanguardia (29 may 2026)
+   - https://www.lavanguardia.com/magazine/casa/20260529/11550798/verano-dormimos-aire-acondicionado-encendido-toda-noche-ventajas-vivir-casa-pasiva-gvm.html
+   - Impacto: BAJO — Artículo divulgativo sobre casas pasivas, sin cambio normativo
 
 ## Grupos Telegram
-No se encontraron grupos activos de Telegram sobre CEE/certificación energética/arquitectura/rehabilitación.
+
+Se han identificado los siguientes canales/grupos de Telegram relacionados:
+
+### GRUPOS ACTIVOS
+1. **@arquitectos** — Grupo (no oficial) de Arquitectos españoles. 103 miembros. Obligatorio ser colegiado en COA español.
+   - https://t.me/arquitectos
+
+### CANALES EXISTENTES (por confirmar actividad)
+2. **@certificadoenergetico** — Canal sobre certificación energética
+   - https://t.me/certificadoenergetico
+3. **@aparejadores** — Canal sobre aparejadores
+   - https://t.me/aparejadores
+4. **@rehabilitacionenergetica** — Canal sobre rehabilitación energética
+   - https://t.me/rehabilitacionenergetica
+5. **@arquitectostech** — Canal sobre arquitectura técnica
+   - https://t.me/arquitectostech
+6. **@certificadoya** — Canal sobre certificación (relacionado con el proyecto)
+   - https://t.me/certificadoya
+
+## Evaluación
+- No se detectaron noticias de IMPACTO ALTO en las últimas 24h
+- Sin nuevos RD, BOE con normativa CEE, ni cambios regulatorios urgentes
+- Las ayudas de Madrid (50M€) son la noticia más relevante del período
+- Se han encontrado grupos de Telegram no reportados anteriormente
 
 ## Entregado
-- ✅ Email enviado a aparejado@me.com
-- ❌ No se encontraron grupos Telegram para notificar
-- ALTO impacto detectado → requiere alerta Telegram
+- ✅ Email enviado a aparejado@me.com vía himalaya
+- ✅ Grupos Telegram notificados (nuevos grupos encontrados)
+- ❌ Sin alertas de alto impacto
