@@ -204,12 +204,12 @@ function stopRecording() {
     })
     .then(r => r.json())
     .then(data => {
-        transcriptDiv.textContent = "";
-        if (data.type === "response") {
-            addMessage("user", data.text || "(voz)"); // We got transcript back
-            addMessage("bot", data.text);
-            if (data.audio_b64) playAudio(data.audio_b64);
-        } else if (data.type === "transcript") {
+            transcriptDiv.textContent = "";
+            if (data.type === "response") {
+                addMessage("user", data.transcript_text || "(voz)");
+                addMessage("bot", data.text);
+                if (data.audio_b64) playAudio(data.audio_b64);
+            } else if (data.type === "transcript") {
             // Server only returned transcript, need to do chat request
             transcriptDiv.textContent = "⏳ Obteniendo respuesta...";
             return fetch(`${API_URL}/api/chat`, {
