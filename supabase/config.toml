@@ -3,3 +3,18 @@ verify_jwt = false
 
 [functions.newsletter-subscribe]
 verify_jwt = false
+
+[functions.login-tecnico]
+verify_jwt = false
+
+[functions.verificar-login]
+verify_jwt = false
+
+[functions.pool-leads]
+verify_jwt = false
+
+[functions.crear-lead]
+verify_jwt = false
+
+[functions.blog-preguntas]
+verify_jwt = false

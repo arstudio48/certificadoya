@@ -52,7 +52,7 @@ serve(async (req) => {
         provincia: provinciaStr,
         iban: iban || null,
         plan: plan || 'por-lead',
-        verificado: false
+        verificado: true
       })
       .eq('id', tecnico.id)
 

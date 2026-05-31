@@ -4,6 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Tecnicos Certificadores CertificadoYa - Expertos en CEE en toda Espana</title>
+  <meta name="robots" content="noindex, nofollow">
   <meta name="description" content="Directorio de tecnicos certificadores de eficiencia energetica en Espana. Arquitectos, ingenieros y arquitectos tecnicos verificados en todas las provincias.">
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='6' fill='%23547c24'/><text x='16' y='23' text-anchor='middle' fill='white' font-size='18' font-family='sans-serif'>C</text></svg>">
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -25,11 +26,64 @@
     .cta-btn{display:inline-block;padding:.7rem 1.8rem;background:#547c24;color:#fff;border-radius:8px;font-weight:600;text-decoration:none;margin-top:.8rem;transition:background .2s}
     .cta-btn:hover{background:#3d5e1a}
     @media(max-width:480px){h1{font-size:1.4rem}.grid-tecnicos{grid-template-columns:1fr}}
+    .dir-protegido { position:relative; }
+    .dir-login-overlay {
+      position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(243,249,235,.95);z-index:9999;
+      display:flex;align-items:center;justify-content:center;
+    }
+    .dir-login-card {
+      background:white;border-radius:16px;padding:2.5rem;max-width:420px;width:90%;text-align:center;
+      box-shadow:0 4px 24px rgba(0,0,0,.08);
+    }
+    .dir-login-card h2{font-size:1.3rem;margin-bottom:.5rem;color:#2d3a1f}
+    .dir-login-card p{color:#6b7b5e;font-size:.9rem;margin-bottom:1.5rem;line-height:1.5}
+    .dir-login-card input{width:100%;padding:.75rem 1rem;border:2px solid #dce8d0;border-radius:10px;font-size:.95rem;font-family:inherit;margin-bottom:.75rem;text-align:center}
+    .dir-login-card input:focus{outline:none;border-color:#547c24;box-shadow:0 0 0 3px rgba(84,124,36,.1)}
+    .dir-login-card .btn{width:100%;padding:.8rem;background:#547c24;color:white;border:none;border-radius:10px;font-size:1rem;font-weight:600;cursor:pointer;font-family:inherit}
+    .dir-login-card .btn:hover{background:#45691d}
+    .dir-login-card .btn:disabled{background:#a0b88a;cursor:not-allowed}
+    .dir-login-card .msg{font-size:.82rem;margin-bottom:.75rem}
+    .dir-login-card .msg.ok{color:#547c24}
+    .dir-login-card .msg.err{color:#c0392b}
+    .codigo-inputs{display:flex;gap:.5rem;justify-content:center;margin-bottom:1rem}
+    .codigo-inputs input{width:48px;height:52px;text-align:center;font-size:1.4rem;font-weight:700;border:2px solid #dce8d0;border-radius:10px}
+    .codigo-inputs input:focus{border-color:#547c24}
+    .dir-content{display:none}
+    .dir-content.visible{display:block}
   </style>
 <script data-goatcounter="https://certificadoya.goatcounter.com/count"
         async src="//gc.zgo.at/count.js"></script>
 </head>
 <body>
+<!-- Login overlay (protegido) -->
+<div class="dir-login-overlay" id="dir-login-overlay">
+  <div class="dir-login-card">
+    <h2>🔐 Directorio de técnicos</h2>
+    <p>Inicia sesión para ver el listado completo de técnicos certificadores verificados.</p>
+    <div id="dir-login-step1">
+      <input type="email" id="dir-login-email" placeholder="Tu email" autocomplete="email">
+      <div class="msg" id="dir-login-msg1"></div>
+      <button class="btn" id="dir-login-btn-send">Enviar código</button>
+    </div>
+    <div id="dir-login-step2" style="display:none">
+      <p style="margin-bottom:.5rem">Código enviado a <strong id="dir-login-email-display"></strong></p>
+      <div class="codigo-inputs">
+        <input type="text" maxlength="1" class="dir-digit" data-idx="0">
+        <input type="text" maxlength="1" class="dir-digit" data-idx="1">
+        <input type="text" maxlength="1" class="dir-digit" data-idx="2">
+        <input type="text" maxlength="1" class="dir-digit" data-idx="3">
+        <input type="text" maxlength="1" class="dir-digit" data-idx="4">
+        <input type="text" maxlength="1" class="dir-digit" data-idx="5">
+      </div>
+      <div class="msg" id="dir-login-msg2"></div>
+      <button class="btn" id="dir-login-btn-verify" style="display:none">Verificar</button><br>
+      <a href="#" id="dir-login-resend" style="font-size:.78rem;color:#9aab8a;margin-top:.5rem;display:inline-block">Reenviar código</a>
+    </div>
+    <a href="/" style="display:block;margin-top:1.25rem;color:#9aab8a;font-size:.82rem;text-decoration:none">← Volver a CertificadoYa</a>
+  </div>
+</div>
+
+<div class="dir-content" id="dir-content">
   <div class="container">
     <div class="breadcrumb">
       <a href="/">Inicio</a> &gt; Tecnicos
@@ -496,5 +550,69 @@
       <a href="/panel-tecnicos.html" class="cta-btn">Registrarme como tecnico</a>
     </div>
   </div>
+</div>
+
+<script>
+(function(){
+  var API = 'https://wypgqpgjlookbhuaiyxa.supabase.co/functions/v1/blog-preguntas';
+  var STORAGE_KEY = 'certificadoya_dir_user';
+  var currentUser = null;
+  try { var s = localStorage.getItem(STORAGE_KEY); if(s) currentUser = JSON.parse(s); } catch(e){}
+
+  function showLogin(){ document.getElementById('dir-login-overlay').style.display='flex'; }
+  function hideLogin(){ document.getElementById('dir-login-overlay').style.display='none'; document.getElementById('dir-content').classList.add('visible'); }
+
+  async function sendCode(e){
+    var email = document.getElementById('dir-login-email').value.trim();
+    if(!email||!email.includes('@')){ showMsg('dir-login-msg1','Email inválido','err'); return; }
+    e.disabled=true; e.textContent='Enviando...';
+    var r = await fetch(API+'?action=enviar-login',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({email:email})});
+    var d = await r.json();
+    if(d.success){
+      document.getElementById('dir-login-step1').style.display='none';
+      document.getElementById('dir-login-step2').style.display='block';
+      document.getElementById('dir-login-email-display').textContent=email;
+      document.querySelector('.dir-digit').focus();
+    } else { showMsg('dir-login-msg1','Error al enviar','err'); e.disabled=false; e.textContent='Enviar código'; }
+  }
+
+  async function verifyCode(){
+    var code = ''; document.querySelectorAll('.dir-digit').forEach(function(d){ code+=d.value; });
+    if(code.length!==6){ showMsg('dir-login-msg2','Código completo requerido','err'); return; }
+    var btn = document.getElementById('dir-login-btn-verify'); btn.disabled=true; btn.textContent='Verificando...';
+    var email = document.getElementById('dir-login-email-display').textContent;
+    var r = await fetch(API+'?action=verificar-login',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({email:email,codigo:code})});
+    var d = await r.json();
+    if(d.success){
+      currentUser = d.user; try{localStorage.setItem(STORAGE_KEY,JSON.stringify(d.user))}catch(e){}
+      hideLogin();
+    } else {
+      showMsg('dir-login-msg2',d.error||'Código incorrecto','err');
+      btn.disabled=false; btn.textContent='Verificar';
+      document.querySelectorAll('.dir-digit').forEach(function(d){ d.value=''; });
+      document.querySelector('.dir-digit').focus();
+    }
+  }
+
+  function showMsg(id,txt,tp){ var el=document.getElementById(id); if(el){ el.textContent=txt; el.className='msg '+(tp||''); } }
+
+  document.getElementById('dir-login-btn-send').onclick=function(){ sendCode(this); };
+  document.getElementById('dir-login-btn-verify').onclick=verifyCode;
+  document.getElementById('dir-login-resend').onclick=function(e){
+    e.preventDefault();
+    var email=document.getElementById('dir-login-email-display').textContent;
+    fetch(API+'?action=enviar-login',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({email:email})});
+    showMsg('dir-login-msg2','Código reenviado','ok');
+  };
+  document.querySelectorAll('.dir-digit').forEach(function(inp,i){
+    inp.addEventListener('input',function(){ if(this.value&&i<5) document.querySelectorAll('.dir-digit')[i+1].focus(); });
+    inp.addEventListener('keydown',function(e){
+      if(e.key==='Backspace'&&!this.value&&i>0){ document.querySelectorAll('.dir-digit')[i-1].focus(); document.querySelectorAll('.dir-digit')[i-1].value=''; }
+    });
+  });
+
+  if(currentUser){ hideLogin(); } else { showLogin(); }
+})();
+</script>
 </body>
 </html>
