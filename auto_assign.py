@@ -11,13 +11,20 @@ Algoritmo:
   4. Si no hay técnico en la zona, el lead queda en 'nuevo' para revisión manual
 """
 
+import os
 import sys
 from datetime import datetime, timezone
 from collections import defaultdict
 from supabase import create_client
+from dotenv import load_dotenv
 
-URL = "https://wypgqpgjlookbhuaiyxa.supabase.co"
-KEY = "sb_secret_7LGmViutdXYU16hwvAqlJg_hZjhfcLe"
+load_dotenv()
+
+URL = os.environ.get("SUPABASE_URL", "https://wypgqpgjlookbhuaiyxa.supabase.co")
+KEY = os.environ.get("SUPABASE_SERVICE_KEY")
+if not KEY:
+    print("ERROR: SUPABASE_SERVICE_KEY no está configurada.")
+    sys.exit(1)
 
 supabase = create_client(URL, KEY)
 
