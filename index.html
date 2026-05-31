@@ -567,12 +567,11 @@ var provSlugs = {}; provincias.forEach(function(p){provSlugs[p.slug]=p.nombre;})
   display: grid; grid-template-columns: 1fr 1fr; gap: .8rem;
   margin-bottom: 1.5rem;
 }
-.newsletter-track {
-  background: #f8faf5; border: 1px solid #dce8d0; border-radius: 12px;
-  padding: 1rem; text-align: center; transition: all .2s;
-}
-.newsletter-track.selected { border-color: #547c24; background: #eef6e5; }
-.newsletter-track-icon { font-size: 1.6rem; margin-bottom: .3rem; }
+.newsletter-track { cursor: pointer; background: #f8faf5; border: 2px solid #dce8d0; border-radius: 12px; padding: 1rem; text-align: center; transition: all .2s; }
+.newsletter-track:hover { border-color: #a0c878; background: #f0f5ea; transform: translateY(-1px); }
+.newsletter-track.selected { border-color: #547c24; background: #eef6e5; box-shadow: 0 0 0 3px rgba(84,124,36,0.12); }
+.newsletter-track-icon { width: 48px; height: 48px; margin: 0 auto .5rem; display: block; }
+.newsletter-track-icon svg { width: 48px; height: 48px; }
 .newsletter-track h4 { font-size: .9rem; font-weight: 600; color: #20201f; margin: 0 0 .2rem; }
 .newsletter-track p { font-size: .76rem; color: #6b7762; margin: 0; line-height: 1.4; }
 
@@ -930,20 +929,45 @@ setTimeout(function(){elems.forEach(function(el){observer.observe(el)})},200)
   <div class="newsletter-modal">
     <button class="newsletter-modal-close" onclick="cerrarNewsletter()" aria-label="Cerrar">✕</button>
     <h2>📬 Mantente informado</h2>
-    <p class="sub">Recibe contenido adaptado a tu perfil, directamente en tu email.</p>
+    <p class="sub" style="margin-bottom:.5rem">Selecciona tu perfil y recibe contenido adaptado a ti.</p>
 
     <div class="newsletter-tracks">
       <div class="newsletter-track" id="track-tecnico" onclick="seleccionarTrack('technician')">
-        <div class="newsletter-track-icon">👷</div>
+        <div class="newsletter-track-icon">
+          <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <rect width="48" height="48" rx="10" fill="#EEF6E5"/>
+            <path d="M14 34V20l10-6 10 6v14H14z" stroke="#547c24" stroke-width="1.8" fill="none"/>
+            <path d="M24 14v6" stroke="#547c24" stroke-width="1.8"/>
+            <rect x="20" y="26" width="8" height="8" rx="1" fill="#547c24" opacity=".15"/>
+            <rect x="22" y="28" width="4" height="4" rx=".5" stroke="#547c24" stroke-width="1.2" fill="white"/>
+            <circle cx="24" cy="18" r="2" fill="#547c24" opacity=".3"/>
+            <path d="M20 24h8M24 20v4" stroke="#547c24" stroke-width="1.2" stroke-linecap="round"/>
+            <path d="M13 35h22v1a1 1 0 01-1 1H14a1 1 0 01-1-1v-1z" fill="#547c24" opacity=".12"/>
+          </svg>
+        </div>
         <h4>Para técnicos</h4>
-        <p>Normativa CEE, software CE3X, pool de encargos, novedades del sector y guías técnicas</p>
+        <p>Normativa CEE, software, pool de encargos, guías y novedades</p>
       </div>
       <div class="newsletter-track" id="track-propietario" onclick="seleccionarTrack('owner')">
-        <div class="newsletter-track-icon">🏠</div>
+        <div class="newsletter-track-icon">
+          <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <rect width="48" height="48" rx="10" fill="#EEF6E5"/>
+            <path d="M12 26l12-10 12 10" stroke="#547c24" stroke-width="1.8" fill="none" stroke-linecap="round"/>
+            <path d="M16 24v10h16V24" stroke="#547c24" stroke-width="1.6" fill="none"/>
+            <rect x="20" y="28" width="8" height="6" rx="1" fill="#547c24" opacity=".12"/>
+            <path d="M22 28v6M26 28v6" stroke="#547c24" stroke-width=".8" opacity=".3"/>
+            <path d="M30 22l-6-5-6 5" stroke="#547c24" stroke-width="1.2" fill="none"/>
+            <circle cx="24" cy="20" r="3" fill="#547c24" opacity=".12"/>
+            <circle cx="24" cy="20" r="1.5" fill="#547c24" opacity=".3"/>
+            <path d="M14 36h20v.5a.5.5 0 01-.5.5h-19a.5.5 0 01-.5-.5V36z" fill="#547c24" opacity=".08"/>
+          </svg>
+        </div>
         <h4>Para propietarios</h4>
-        <p>Precios, subvenciones, consejos para vender/alquilar, ahorro energético y obligaciones</p>
+        <p>Precios, subvenciones, ahorro energético, venta y obligaciones</p>
       </div>
     </div>
+
+    <p style="font-size:.78rem;color:#8a9973;text-align:center;margin:0 0 1rem;font-style:italic">Elige uno de los dos perfiles para continuar ↓</p>
 
     <form id="newsletter-form" class="newsletter-form">
       <!-- Hidden radio inputs (checked by track clicks) -->
@@ -1006,7 +1030,8 @@ document.addEventListener('keydown', function(e) {
     var userType = document.querySelector('input[name="userType"]:checked')?.value;
     var consent = document.getElementById('privacy-consent').checked;
     if (!email || !userType || !consent) {
-      mostrarMsg('Por favor, selecciona tu perfil e introduce tu email', 'error');
+      var errorMsg = !userType ? 'Selecciona uno de los dos perfiles arriba 👆' : 'Completa tu email y acepta la privacidad';
+      mostrarMsg(errorMsg, 'error');
       return;
     }
     try {
