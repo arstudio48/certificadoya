@@ -98,426 +98,493 @@
             "@type": "Service",
             "name": "Certificado de Eficiencia Energética",
             "description": "Emisión y registro del CEE por técnico colegiado habilitado. Incluye visita al inmueble, certificación energética, registro en el órgano autonómico."
-          },
-          "price": "45",
-          "priceCurrency": "EUR",
-          "minPrice": "45",
-          "maxPrice": "150",
-          "priceSpecification": {
-            "@type": "PriceSpecification",
-            "price": "45",
-            "priceCurrency": "EUR",
-            "minPrice": "45",
-            "maxPrice": "150"
-          },
-          "eligibleRegion": {"@type": "Country", "name": "ES"},
-          "availability": "https://schema.org/InStock",
-          "areaServed": {"@type": "Country", "name": "España"}
+          }
         }
       ]
     }
   }
   </script>
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "FAQPage",
-    "mainEntity": [
-      {"@type": "Question", "name": "¿Qué es el certificado energético (CEE)?", "acceptedAnswer": {"@type": "Answer", "text": "El Certificado de Eficiencia Energética (CEE) es un documento oficial que califica la eficiencia energética de un inmueble con una letra de la A (muy eficiente) a la G (poco eficiente). Es obligatorio en toda la UE desde la Directiva 2010/31/UE, transpuesta en España por el RD 390/2021."}},
-      {"@type": "Question", "name": "¿Es obligatorio el certificado energético?", "acceptedAnswer": {"@type": "Answer", "text": "Sí, es obligatorio en España desde el 1 de junio de 2013 para vender o alquilar una vivienda, para obra nueva, y para edificios públicos de más de 250 m². No tenerlo puede acarrear sanciones de 300 a 6.000 €."}},
-      {"@type": "Question", "name": "¿Cuánto cuesta un certificado energético?", "acceptedAnswer": {"@type": "Answer", "text": "Depende de metros cuadrados, ubicación y tipo de inmueble. Un piso de 60-80 m² en Madrid: 60-96 €, en Asturias: 40-65 €. Desde 45 € en CertificadoYa. Usa nuestra calculadora gratuita para ver tu precio exacto."}},
-      {"@type": "Question", "name": "¿Quién puede emitir el certificado energético?", "acceptedAnswer": {"@type": "Answer", "text": "Solo técnicos habilitados y colegiados: arquitectos, arquitectos técnicos (aparejadores), ingenieros de edificación, ingenieros industriales e ingenieros técnicos. Deben usar software oficial como CE3X, HULC o CYPETHERAM."}},
-      {"@type": "Question", "name": "¿Cuánto tarda el proceso completo?", "acceptedAnswer": {"@type": "Answer", "text": "Con CertificadoYa, unas 48-72h: presupuesto instantáneo (5 segundos), contacto del técnico (1-24h), visita al inmueble (24-48h), emisión y registro del certificado (24-48h tras la visita). En casos urgentes podemos acelerar a 24-48h."}},
-      {"@type": "Question", "name": "¿Cómo puedo mejorar la letra de mi certificado?", "acceptedAnswer": {"@type": "Answer", "text": "Las mejoras más efectivas son: aislamiento térmico (reduce demanda 40-60%), cambio de ventanas a PVC con doble acristalamiento, aerotermia en lugar de caldera de gas, placas solares, e iluminación LED con electrodomésticos A+++. La combinación puede subir de letra E a B o A."}}
-    ]
-  }
-  </script>
-<script data-goatcounter="https://certificadoya.goatcounter.com/count"
-        async src="//gc.zgo.at/count.js"></script>
 </head>
 <body>
-<script>
-const provincias = [
-  {slug:"alava", nombre:"Álava"}, {slug:"albacete", nombre:"Albacete"}, {slug:"alicante", nombre:"Alicante"},
-  {slug:"almeria", nombre:"Almería"}, {slug:"asturias", nombre:"Asturias"}, {slug:"avila", nombre:"Ávila"},
-  {slug:"badajoz", nombre:"Badajoz"}, {slug:"baleares", nombre:"Baleares"}, {slug:"barcelona", nombre:"Barcelona"},
-  {slug:"burgos", nombre:"Burgos"}, {slug:"caceres", nombre:"Cáceres"}, {slug:"cadiz", nombre:"Cádiz"},
-  {slug:"cantabria", nombre:"Cantabria"}, {slug:"castellon", nombre:"Castellón"}, {slug:"ceuta", nombre:"Ceuta"},
-  {slug:"ciudad-real", nombre:"Ciudad Real"}, {slug:"cordoba", nombre:"Córdoba"}, {slug:"a-coruna", nombre:"A Coruña"},
-  {slug:"cuenca", nombre:"Cuenca"}, {slug:"gipuzkoa", nombre:"Gipuzkoa"}, {slug:"girona", nombre:"Girona"},
-  {slug:"granada", nombre:"Granada"}, {slug:"guadalajara", nombre:"Guadalajara"}, {slug:"huelva", nombre:"Huelva"},
-  {slug:"huesca", nombre:"Huesca"}, {slug:"jaen", nombre:"Jaén"}, {slug:"leon", nombre:"León"},
-  {slug:"lleida", nombre:"Lleida"}, {slug:"lugo", nombre:"Lugo"}, {slug:"madrid", nombre:"Madrid"},
-  {slug:"malaga", nombre:"Málaga"}, {slug:"melilla", nombre:"Melilla"}, {slug:"murcia", nombre:"Murcia"},
-  {slug:"navarra", nombre:"Navarra"}, {slug:"ourense", nombre:"Ourense"}, {slug:"palencia", nombre:"Palencia"},
-  {slug:"las-palmas", nombre:"Las Palmas"}, {slug:"pontevedra", nombre:"Pontevedra"}, {slug:"la-rioja", nombre:"La Rioja"},
-  {slug:"salamanca", nombre:"Salamanca"}, {slug:"segovia", nombre:"Segovia"}, {slug:"sevilla", nombre:"Sevilla"},
-  {slug:"soria", nombre:"Soria"}, {slug:"tarragona", nombre:"Tarragona"}, {slug:"teruel", nombre:"Teruel"},
-  {slug:"toledo", nombre:"Toledo"}, {slug:"valencia", nombre:"Valencia"}, {slug:"valladolid", nombre:"Valladolid"},
-  {slug:"bizkaia", nombre:"Bizkaia"}, {slug:"zamora", nombre:"Zamora"}, {slug:"zaragoza", nombre:"Zaragoza"}
-];
-// Ciudades/pueblos con página propia
-const ciudades = [
-  {slug:"gijon", nombre:"Gijón", provincia:"asturias"},
-  {slug:"oviedo", nombre:"Oviedo", provincia:"asturias"},
-  {slug:"aviles", nombre:"Avilés", provincia:"asturias"},
-  {slug:"siero", nombre:"Siero", provincia:"asturias"},
-  {slug:"langreo", nombre:"Langreo", provincia:"asturias"},
-  {slug:"mieres", nombre:"Mieres", provincia:"asturias"},
-  {slug:"villaviciosa", nombre:"Villaviciosa", provincia:"asturias"},
-  {slug:"alcala-de-henares", nombre:"Alcalá de Henares", provincia:"madrid"},
-  {slug:"alcobendas", nombre:"Alcobendas", provincia:"madrid"},
-  {slug:"alcorcon", nombre:"Alcorcón", provincia:"madrid"},
-  {slug:"fuenlabrada", nombre:"Fuenlabrada", provincia:"madrid"},
-  {slug:"getafe", nombre:"Getafe", provincia:"madrid"},
-  {slug:"leganes", nombre:"Leganés", provincia:"madrid"},
-  {slug:"mostoles", nombre:"Móstoles", provincia:"madrid"},
-  {slug:"pozuelo", nombre:"Pozuelo de Alarcón", provincia:"madrid"},
-  {slug:"chamartin", nombre:"Chamartín", provincia:"madrid"},
-  {slug:"chamberi", nombre:"Chamberí", provincia:"madrid"},
-  {slug:"retiro", nombre:"Retiro", provincia:"madrid"},
-  {slug:"tetuan", nombre:"Tetuán", provincia:"madrid"},
-  {slug:"salamanca-madrid", nombre:"Salamanca (Madrid)", provincia:"madrid"},
-  {slug:"benidorm", nombre:"Benidorm", provincia:"alicante"}
-];
-// Agrupar ciudades por provincia para búsqueda
-var provSlugs = {}; provincias.forEach(function(p){provSlugs[p.slug]=p.nombre;});
-</script>
-
-<header class="header">
-  <div class="header-inner">
-    <a href="/" class="logo">
-      <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <rect width="32" height="32" rx="6" fill="#547c24"/>
-        <text x="16" y="23" text-anchor="middle" fill="white" font-size="20" font-weight="700" font-family="Outfit,sans-serif">C</text>
-      </svg>
-      <div class="logo-text-wrap">
-        <span class="logo-text">Certificado<span class="logo-highlight">Ya</span></span>
-        <span class="logo-sub">certificación energética de edificios existentes (CEE)</span>
-      </div>
-    </a>
-    <nav class="nav">
-      <a href="#como-funciona">Cómo funciona</a>
-      <a href="#faq">FAQ</a>
-      <a href="/blog/">Blog</a>
-      <div class="dropdown-pro">
-        <button class="dropdown-pro-btn">Técnicos ▾</button>
-        <div class="dropdown-pro-menu"><div class="dropdown-pro-menu-inner">
-          <a href="/panel-tecnicos.html">Registro de técnicos</a>
-          <a href="/pool-encargos.html">Pool de encargos</a>
-          <a href="/blog/?cat=tecnicos">Blog técnico</a>
-          <a href="/tecnicos/">Directorio de técnicos</a>
-        </div></div>
-      </div>
-      <div class="buscador-wrapper">
-        <svg class="buscador-icono" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#888" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
-        <input type="text" id="buscador-provincia" class="buscador-input" placeholder="Busca tu provincia..." autocomplete="off">
-        <div id="buscador-resultados" class="buscador-resultados"></div>
-      </div>
-      <a href="#presupuesto-card" class="btn-nav">Presupuesto</a>
-      <button class="hamburger" id="hamburger-btn" aria-label="Menú" aria-expanded="false">
-        <span></span><span></span><span></span>
-      </button>
-    </nav>
-    <div class="mobile-menu" id="mobile-menu">
-      <a href="#como-funciona">Cómo funciona</a>
-      <a href="#faq">FAQ</a>
-      <a href="/blog/">Blog</a>
-      <strong style="display:block;padding:.6rem 1.2rem;font-size:.82rem;color:#9aab8a;text-transform:uppercase;letter-spacing:.05em;border-bottom:1px solid #f0f0f0">Técnicos</strong>
-      <a href="/panel-tecnicos.html">Registro de técnicos</a>
-      <a href="/pool-encargos.html">Pool de encargos</a>
-      <a href="/blog/?cat=tecnicos">Blog técnico</a>
-      <a href="/tecnicos/">Directorio de técnicos</a>
-      <div class="buscador-wrapper" style="margin:.75rem 1rem">
-        <svg class="buscador-icono" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#888" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
-        <input type="text" id="buscador-provincia-mobile" class="buscador-input" placeholder="Busca tu provincia..." autocomplete="off" style="width:100%">
-        <div id="buscador-resultados-mobile" class="buscador-resultados"></div>
-      </div>
-      <a href="#presupuesto-card" class="btn-nav" style="margin:0 1rem 1rem;text-align:center">Presupuesto</a>
-    </div>
-  </div>
-</header>
-
-<main>
-  <!-- HERO -->
-  <section class="hero-new" id="presupuesto-card" style="scroll-margin-top:80px">
-    <div class="hero-new-grid">
-      <div class="hero-new-text">
-        <div class="hero-badge"><img src="/img/ico-rapido.svg" alt="Presupuesto rápido" loading="lazy" style="width:28px;height:28px;vertical-align:middle;margin-right:8px"> Presupuesto en 5 segundos</div>
-        <h1>Certificado energético <span>rápido y sin complicaciones</span></h1>
-        <p class="hero-lead">Consigue tu CEE en 24 horas con técnicos verificados en toda España. Presupuesto instantáneo, sin papeleo, desde <strong>45 €</strong>.</p>
-        <div class="hero-trust">
-          <div class="trust-item">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="#547c24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z"/></svg>
-            Técnicos colegiados verificados
-          </div>
-          <div class="trust-item">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="#547c24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z"/></svg>
-            Cobertura en toda España
-          </div>
-          <div class="trust-item">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="#547c24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z"/></svg>
-            4,9 ★ de valoración media
+  <header class="header-v2" style="background:white;border-bottom:1px solid #e5e7eb;position:sticky;top:0;z-index:50">
+    <div class="header-inner" style="max-width:1100px;margin:0 auto;padding:0 2rem;height:64px;display:flex;align-items:center;justify-content:space-between">
+      <a href="/" style="text-decoration:none;display:flex;align-items:center;gap:.6rem">
+        <span class="logo-text" style="font-size:1.35rem;font-weight:700;color:#20201f">Certificado<span style="color:#547c24">Ya</span></span>
+        <span class="logo-sub" style="font-size:.72rem;color:#8a9973;background:#f0f5ea;padding:2px 8px;border-radius:4px">Energético</span>
+      </a>
+      <nav class="nav" style="display:flex;align-items:center;gap:1.2rem">
+        <a href="/" class="nav-item" style="font-size:.9rem;font-weight:500;color:var(--text,#20201f);text-decoration:none;border-bottom:2px solid #547c24;padding-bottom:2px">Inicio</a>
+        <a href="/#provincias" class="nav-item" style="font-size:.9rem;font-weight:500;color:var(--text,#20201f);text-decoration:none;transition:color .15s">Precios</a>
+        <div class="dropdown-pro">
+          <button class="dropdown-pro-btn">Técnicos ▾</button>
+          <div class="dropdown-pro-menu" style="padding-top:0">
+            <div class="dropdown-pro-menu-inner">
+              <a href="/panel-tecnicos.html">Panel de técnicos</a>
+              <a href="/#para-tecnicos">Para técnicos</a>
+              <a href="/pool-encargos.html">Pool de encargos</a>
+              <a href="/blog/?cat=tecnicos" style="border-bottom:1px solid #f0f0f0;padding-bottom:.8rem;margin-bottom:0">Guías y recursos</a>
+              <span style="display:block;font-size:.7rem;color:#9aab8a;padding:.5rem 1rem .3rem;text-transform:uppercase;letter-spacing:.5px;font-weight:600'>elegir provincia</span>
+              <a href="/#provincias">Todas las provincias</a>
+            </div>
           </div>
         </div>
+        <a href="/habla-con-nosotros.html" class="nav-item" style="font-size:.9rem;font-weight:500;color:var(--text,#20201f);text-decoration:none;transition:color .15s">Contacto</a>
+        <div class="buscador-wrapper"><svg class="buscador-icono" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#999" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg><input type="search" class="buscador-input" id="buscador-input" placeholder="Provincia..." aria-label="Buscar provincia" autocomplete="off"><div class="buscador-resultados" id="buscador-resultados" style="display:none"></div></div>
+        <a href="/#presupuesto" class="btn-nav" style="display:inline-block;padding:.5rem 1rem;background:#547c24;color:white;border-radius:6px;font-size:.82rem;font-weight:600;text-decoration:none;white-space:nowrap">Presupuesto →</a>
+      </nav>
+      <script>
+      const provinciasLista = [
+        "A Coruña","Álava","Albacete","Alicante","Almería","Asturias","Ávila","Badajoz","Baleares",
+        "Barcelona","Bizkaia","Burgos","Cáceres","Cádiz","Cantabria","Castellón","Ceuta","Ciudad Real",
+        "Córdoba","Cuenca","Gipuzkoa","Girona","Granada","Guadalajara","Huelva","Huesca","Jaén",
+        "La Rioja","Las Palmas","León","Lleida","Lugo","Madrid","Málaga","Melilla","Murcia","Navarra",
+        "Ourense","Palencia","Pontevedra","Salamanca","Segovia","Sevilla","Soria","Tarragona",
+        "Tenerife","Teruel","Toledo","Valencia","Valladolid","Zamora","Zaragoza"
+      ];
+      // Mapa de provincias a slugs de página
+      const provSlugs = {
+        "a coruña":"coruna","álava":"alava","albacete":"albacete","alicante":"alicante","almería":"almeria",
+        "asturias":"asturias","ávila":"avila","badajoz":"badajoz","baleares":"baleares","barcelona":"barcelona",
+        "bizkaia":"bizkaia","burgos":"burgos","cáceres":"caceres","cádiz":"cadiz","cantabria":"cantabria",
+        "castellón":"castellon","ceuta":"ceuta","ciudad real":"ciudad-real","córdoba":"cordoba","cuenca":"cuenca",
+        "gipuzkoa":"gipuzkoa","girona":"girona","granada":"granada","guadalajara":"guadalajara","huelva":"huelva",
+        "huesca":"huesca","jaén":"jaen","la rioja":"la-rioja","las palmas":"las-palmas","león":"leon",
+        "lleida":"lleida","lugo":"lugo","madrid":"madrid","málaga":"malaga","melilla":"melilla","murcia":"murcia",
+        "navarra":"navarra","ourense":"ourense","palencia":"palencia","pontevedra":"pontevedra","salamanca":"salamanca",
+        "segovia":"segovia","sevilla":"sevilla","soria":"soria","tarragona":"tarragona","tenerife":"tenerife",
+        "teruel":"teruel","toledo":"toledo","valencia":"valencia","valladolid":"valladolid","zamora":"zamora",
+        "zaragoza":"zaragoza"
+      };
+      const input = document.getElementById('buscador-input');
+      const resultados = document.getElementById('buscador-resultados');
+      input.addEventListener('input', () => {
+        const q = input.value.trim().toLowerCase();
+        if (!q) { resultados.style.display = 'none'; return; }
+        const filtradas = provinciasLista.filter(p => p.toLowerCase().includes(q));
+        if (filtradas.length === 0) { resultados.style.display = 'none'; return; }
+        let html = '';
+        filtradas.forEach(p => {
+          const slug = provSlugs[p.toLowerCase()] || p.toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g,'').replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,'');
+          html += `<div class="buscador-item" onclick="window.location.href='/precio-certificado-energetico-${slug}/'">${p}</div>`;
+        });
+        resultados.innerHTML = html;
+        resultados.style.display = 'block';
+      });
+      document.addEventListener('click', e => { if (!e.target.closest('.buscador-wrapper')) resultados.style.display = 'none'; });
+      </script>
+      <button class="hamburger" id="hamburger" aria-label="Menú">
+        <span></span><span></span><span></span>
+      </button>
+      <div class="mobile-menu" id="mobile-menu">
+        <a href="/">Inicio</a>
+        <a href="/#provincias">Precios</a>
+        <a href="/panel-tecnicos.html">Panel de técnicos</a>
+        <a href="/#para-tecnicos">Para técnicos</a>
+        <a href="/pool-encargos.html">Pool de encargos</a>
+        <a href="/habla-con-nosotros.html">Contacto</a>
+        <a href="/blog/?cat=tecnicos">Guías y recursos</a>
+        <a href="/#presupuesto" class="btn-nav" style="display:block;padding:.6rem 1rem;background:#547c24;color:white;border-radius:6px;font-size:.85rem;font-weight:600;text-align:center;margin:.3rem 1rem .8rem">Presupuesto →</a>
       </div>
-      <div class="hero-new-card">
-        <div class="presupuesto-card-v2">
-          <div class="precio-destacado" style="text-align:center;margin-bottom:1rem;background:linear-gradient(135deg,#f3f9eb,#e8f0dc);padding:.75rem;border-radius:10px">
-            <div style="font-size:.75rem;color:#6b7b5e;font-weight:500;text-transform:uppercase;letter-spacing:.05em">Precio desde</div>
-            <div style="font-size:2.4rem;font-weight:800;color:#547c24;line-height:1.1">45<span style="font-size:1.2rem;font-weight:500">€</span></div>
-            <div style="font-size:.7rem;color:#9aab8a">para un piso estándar · sin sorpresas</div>
-          </div>
-          <div class="form-group">
-            <label for="cp">Código postal</label>
-            <input type="text" id="cp" placeholder="Ej: 28001" maxlength="5" inputmode="numeric" pattern="[0-9]{5}" aria-required="true" aria-describedby="cp-error" oninput="validarCP()">
-            <span class="input-error" id="cp-error" role="alert"></span>
-          </div>
-          <div class="form-row">
-            <div class="form-group">
-              <label for="m2">m²</label>
-              <input type="number" id="m2" placeholder="80" min="20" max="5000" aria-required="true" aria-describedby="m2-error" oninput="validarM2()">
-              <span class="input-error" id="m2-error" role="alert"></span>
-            </div>
-            <div class="form-group">
-              <label for="tipo">Tipo</label>
-              <select id="tipo" onchange="calcularPresupuesto()">
-                <option value="piso">Piso</option>
-                <option value="unifamiliar">Unifamiliar</option>
-                <option value="adosado">Adosado</option>
-                <option value="local">Local</option>
-              </select>
-            </div>
-          </div>
-          <button class="btn-cta" onclick="calcularPresupuesto()">Calcular presupuesto</button>
-          <div style="display:flex;gap:.75rem;justify-content:center;margin-top:.75rem;flex-wrap:wrap">
-            <span style="display:inline-flex;align-items:center;gap:.3rem;font-size:.7rem;color:#9aab8a"><svg width="14" height="14" viewBox="0 0 24 24" fill="#547c24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z"/></svg> Pago seguro Stripe</span>
-            <span style="display:inline-flex;align-items:center;gap:.3rem;font-size:.7rem;color:#9aab8a"><svg width="14" height="14" viewBox="0 0 24 24" fill="#547c24"><path d="M18 8h-1V6c0-2.76-2.24-5-5-5S7 3.24 7 6v2H6c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V10c0-1.1-.9-2-2-2zm-6 9c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2zm3.1-9H8.9V6c0-1.71 1.39-3.1 3.1-3.1 1.71 0 3.1 1.39 3.1 3.1v2z"/></svg> SSL encriptado</span>
-            <span style="display:inline-flex;align-items:center;gap:.3rem;font-size:.7rem;color:#9aab8a"><svg width="14" height="14" viewBox="0 0 24 24" fill="#547c24"><path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm-2 16l-4-4 1.41-1.41L10 14.17l6.59-6.59L18 9l-8 8z"/></svg> Técnicos verificados</span>
-          </div>
-          <div class="resultado-box" id="resultado">
-            <div class="resultado-precio" id="precio-rango">—</div>
-            <div class="resultado-texto" id="precio-texto"></div>
-            <button class="btn-cta btn-cta-outline" onclick="solicitarLead()">Solicitar servicio ahora →</button>
-          </div>
+      <script>
+        document.getElementById('hamburger').addEventListener('click', () => {
+          const menu = document.getElementById('mobile-menu');
+          const btn = document.getElementById('hamburger');
+          menu.classList.toggle('open');
+          btn.classList.toggle('active');
+        });
+      </script>
+    </div>
+  </header>
+
+  <!-- HERO SECTION -->
+  <section class="hero-v2" id="hero" style="background:linear-gradient(135deg,#f3f9eb,#ffffff 50%,#f0f5ea);padding:3rem 1rem;position:relative;overflow:hidden">
+    <div style="max-width:1100px;margin:0 auto;display:flex;flex-direction:column;align-items:center;text-align:center;gap:1.5rem">
+      <div style="display:flex;gap:.5rem;flex-wrap:wrap;justify-content:center">
+        <span style="background:#e6f4d3;color:#3e5a1a;padding:.3rem .8rem;border-radius:20px;font-size:.75rem;font-weight:600">🚀 Presupuesto en 30 segundos</span>
+        <span style="background:#fff;border:1px solid #d4e8a8;color:#547c24;padding:.3rem .8rem;border-radius:20px;font-size:.75rem;font-weight:600">📋 Registro en 24h</span>
+      </div>
+      <div class="hero-content" style="max-width:750px">
+        <h1 style="font-size:2.5rem;font-weight:700;color:#20201f;line-height:1.15;margin:0 0 .25rem">Tu certificado energético<br><span style="color:#547c24">en 24 horas</span>, sin papeleo</h1>
+        <p style="font-size:1.1rem;color:#6b7762;max-width:600px;margin:.75rem auto;line-height:1.6">Presupuesto al instante por m². Sin formularios largos. Técnicos verificados en toda España.</p>
+      </div>
+      <a href="#presupuesto" class="btn-cta" style="display:inline-block;width:auto;padding:.85rem 2.5rem;background:linear-gradient(135deg,#547c24,#3e5a1a);color:white;border-radius:8px;font-size:1.1rem;font-weight:600;text-decoration:none;transition:all .3s;box-shadow:0 4px 14px rgba(84,124,36,.25)">Calcular presupuesto →</a>
+      <div style="display:flex;gap:2rem;justify-content:center;flex-wrap:wrap;font-size:.85rem;color:#8a9973;margin-top:.5rem">
+        <span>✅ Desde <strong style="color:#20201f">45€</strong></span>
+        <span>🔒 Pago seguro</span>
+        <span>📄 Registro autonómico incluido</span>
+      </div>
+      <!-- Trust badges -->
+      <div style="display:flex;gap:2rem;justify-content:center;flex-wrap:wrap;margin-top:1rem;padding:.75rem 1.5rem;background:rgba(255,255,255,.7);border-radius:12px;border:1px solid #e5e7eb">
+        <div style="text-align:center"><span style="display:block;font-size:1.1rem;font-weight:700;color:#20201f">156+</span><span style="font-size:.7rem;color:#9aab8a">certificados entregados</span></div>
+        <div style="text-align:center"><span style="display:block;font-size:1.1rem;font-weight:700;color:#20201f">4.8 ★</span><span style="font-size:.7rem;color:#9aab8a">valoración media</span></div>
+        <div style="text-align:center"><span style="display:block;font-size:1.1rem;font-weight:700;color:#20201f">15+</span><span style="font-size:.7rem;color:#9aab8a">técnicos verificados</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CÓMO FUNCIONA (PASOS) -->
+  <section style="padding:3rem 1rem" id="como-funciona">
+    <div style="max-width:1000px;margin:0 auto">
+      <h2 style="text-align:center;font-size:1.8rem;font-weight:600;color:#20201f;margin:0 0 .5rem">Cómo funciona</h2>
+      <p style="text-align:center;color:#6b7762;margin:0 0 2rem;font-size:.95rem">Tres pasos, sin complicaciones</p>
+      <div class="pasos-grid" style="display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem">
+        <div style="background:#fff;border:1px solid #e5e7eb;border-radius:12px;padding:1.5rem;text-align:center;transition:all .3s" onmouseover="this.style.borderColor='#547c24';this.style.boxShadow='0 4px 14px rgba(84,124,36,.1)'" onmouseout="this.style.borderColor='#e5e7eb';this.style.boxShadow='none'">
+          <div style="font-size:2rem;margin-bottom:.75rem">📏</div>
+          <h3 style="font-size:1.1rem;font-weight:600;color:#20201f;margin:0 0 .5rem">1. Presupuesto</h3>
+          <p style="font-size:.85rem;color:#6b7762;line-height:1.6">Indica los m² de tu inmueble y recibe el precio al instante. Sin registros ni compromiso.</p>
+        </div>
+        <div style="background:#fff;border:1px solid #e5e7eb;border-radius:12px;padding:1.5rem;text-align:center;transition:all .3s" onmouseover="this.style.borderColor='#547c24';this.style.boxShadow='0 4px 14px rgba(84,124,36,.1)'" onmouseout="this.style.borderColor='#e5e7eb';this.style.boxShadow='none'">
+          <div style="font-size:2rem;margin-bottom:.75rem">🔍</div>
+          <h3 style="font-size:1.1rem;font-weight:600;color:#20201f;margin:0 0 .5rem">2. Asignación</h3>
+          <p style="font-size:.85rem;color:#6b7762;line-height:1.6">Asignamos tu caso al técnico colegiado más cercano. Te contacta para coordinar la visita.</p>
+        </div>
+        <div style="background:#fff;border:1px solid #e5e7eb;border-radius:12px;padding:1.5rem;text-align:center;transition:all .3s" onmouseover="this.style.borderColor='#547c24';this.style.boxShadow='0 4px 14px rgba(84,124,36,.1)'" onmouseout="this.style.borderColor='#e5e7eb';this.style.boxShadow='none'">
+          <div style="font-size:2rem;margin-bottom:.75rem">📄</div>
+          <h3 style="font-size:1.1rem;font-weight:600;color:#20201f;margin:0 0 .5rem">3. Certificado</h3>
+          <p style="font-size:.85rem;color:#6b7762;line-height:1.6">Recibes tu CEE registrado en tu comunidad autónoma. Válido para venta o alquiler.</p>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- PASOS -->
-  <section id="como-funciona" style="scroll-margin-top:80px;padding:4rem 2rem;text-align:center">
-    <span style="display:inline-block;background:#e3f0d3;color:#3d5a1e;font-size:.78rem;font-weight:600;padding:.35rem .9rem;border-radius:20px;margin-bottom:.75rem">En 4 pasos</span>
-    <h2 style="font-size:2rem;font-weight:700;color:#1a1a1a;margin-bottom:3rem">Así de fácil es conseguir tu certificado</h2>
-    <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:1.25rem;max-width:1100px;margin:0 auto">
-      <div style="border-radius:12px;overflow:hidden;box-shadow:0 2px 8px rgba(0,0,0,.06)">
-        <img src="/img/pasos/paso01-calcula.jpg" alt="Calcula tu precio" style="width:100%;height:160px;object-fit:cover;display:block">
-        <div style="padding:1.25rem;background:#fff">
-          <h4 style="font-size:.95rem;font-weight:700;color:#1a1a1a;margin-bottom:.35rem">1. Calcula tu precio en 5 seg</h4>
-          <p style="font-size:.82rem;color:#6b7280;line-height:1.5">CP y m². Precio al instante. Sin registro.</p>
+  <!-- FORMULARIO DE PRESUPUESTO -->
+  <section id="presupuesto" style="background:linear-gradient(135deg,#f3f9eb,#fff);padding:3rem 1rem">
+    <div style="max-width:1100px;margin:0 auto">
+      <h2 style="text-align:center;font-size:1.8rem;font-weight:600;color:#20201f;margin:0 0 .5rem">Presupuesto al instante</h2>
+      <p style="text-align:center;color:#6b7762;margin:0 0 2rem;font-size:.95rem">Sin formularios largos. Solo lo esencial.</p>
+      <!-- Simplified entry: leads choose province and get instant quote -->
+      <div style="max-width:800px;margin:0 auto;background:white;border-radius:16px;box-shadow:0 4px 20px rgba(0,0,0,.06);padding:2rem;border:1px solid #e5e7eb">
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem;max-width:500px;margin:0 auto">
+          <div>
+            <label style="display:block;font-size:.82rem;font-weight:600;color:#20201f;margin-bottom:.4rem">Provincia</label>
+            <select id="lead-provincia" style="width:100%;padding:.7rem;border:1px solid #d4e8a8;border-radius:8px;font-family:Outfit,sans-serif;font-size:.9rem;background:white">
+              <option value="">Elige provincia</option>
+              <option value="madrid">Madrid</option>
+              <option value="barcelona">Barcelona</option>
+              <option value="valencia">Valencia</option>
+              <option value="sevilla">Sevilla</option>
+              <option value="asturias">Asturias</option>
+              <option value="malaga">Málaga</option>
+              <option value="alicante">Alicante</option>
+              <option value="otra">Otra provincia</option>
+            </select>
+          </div>
+          <div>
+            <label style="display:block;font-size:.82rem;font-weight:600;color:#20201f;margin-bottom:.4rem">Superficie (m²)</label>
+            <input type="number" id="lead-metros" placeholder="Ej: 90" min="20" max="10000" style="width:100%;padding:.7rem;border:1px solid #d4e8a8;border-radius:8px;font-family:Outfit,sans-serif;font-size:.9rem">
+          </div>
+        </div>
+        <div style="text-align:center;margin-top:1.5rem">
+          <div id="lead-precio" style="font-size:1.5rem;font-weight:700;color:#547c24;margin-bottom:.75rem;min-height:2rem">Desde <span id="precio-valor">45€</span></div>
+          <a href="/contacto.html" class="btn-cta" style="display:inline-block;width:auto;padding:.75rem 2rem;background:linear-gradient(135deg,#547c24,#3e5a1a);color:white;border-radius:8px;font-size:1rem;font-weight:600;text-decoration:none">Solicitar certificado →</a>
+          <p style="font-size:.78rem;color:#9aab8a;margin-top:.75rem">Sin compromiso. Te responderemos en menos de 24h.</p>
         </div>
       </div>
-      <div style="border-radius:12px;overflow:hidden;box-shadow:0 2px 8px rgba(0,0,0,.06)">
-        <img src="/img/pasos/paso02-contacto.jpg" alt="Te contactamos" style="width:100%;height:160px;object-fit:cover;display:block">
-        <div style="padding:1.25rem;background:#fff">
-          <h4 style="font-size:.95rem;font-weight:700;color:#1a1a1a;margin-bottom:.35rem">2. Un técnico de tu zona te llama</h4>
-          <p style="font-size:.82rem;color:#6b7280;line-height:1.5">Contacto en menos de 24h. Verificado y colegiado.</p>
-        </div>
-      </div>
-      <div style="border-radius:12px;overflow:hidden;box-shadow:0 2px 8px rgba(0,0,0,.06)">
-        <img src="/img/pasos/paso03-visita.jpg" alt="Visita técnica" style="width:100%;height:160px;object-fit:cover;display:block">
-        <div style="padding:1.25rem;background:#fff">
-          <h4 style="font-size:.95rem;font-weight:700;color:#1a1a1a;margin-bottom:.35rem">3. Visita y medición in situ</h4>
-          <p style="font-size:.82rem;color:#6b7280;line-height:1.5">Toma de datos, fotos y mediciones en tu inmueble.</p>
-        </div>
-      </div>
-      <div style="border-radius:12px;overflow:hidden;box-shadow:0 2px 8px rgba(0,0,0,.06)">
-        <img src="/img/pasos/paso04-certificado.jpg" alt="Certificado listo" style="width:100%;height:160px;object-fit:cover;display:block">
-        <div style="padding:1.25rem;background:#fff">
-          <h4 style="font-size:.95rem;font-weight:700;color:#1a1a1a;margin-bottom:.35rem">4. Recibe tu CEE por email</h4>
-          <p style="font-size:.82rem;color:#6b7280;line-height:1.5">Certificado registrado. Sin papeleo. En 48-72h.</p>
-        </div>
-      </div>
+      <script>
+        const precioBase = {madrid:45,barcelona:49,valencia:45,sevilla:45,asturias:49,malaga:49,alicante:45,otra:49};
+        const inputMetros = document.getElementById('lead-metros');
+        const selectProv = document.getElementById('lead-provincia');
+        const precioValor = document.getElementById('precio-valor');
+        function actualizarPrecio() {
+          const prov = selectProv.value;
+          const metros = parseInt(inputMetros.value) || 0;
+          if (!prov || metros < 20) { precioValor.textContent = '45€'; return; }
+          const base = precioBase[prov] || 49;
+          let total = metros <= 100 ? base : base + Math.ceil((metros - 100) / 50) * 5;
+          total = Math.min(total, 250);
+          precioValor.textContent = total + '€';
+        }
+        selectProv.addEventListener('change', actualizarPrecio);
+        inputMetros.addEventListener('input', actualizarPrecio);
+      </script>
     </div>
-    <style>
-      @media (max-width:768px){#como-funciona>div:first-of-type{grid-template-columns:1fr 1fr!important}#como-funciona img{height:120px!important}}
-      @media (max-width:480px){#como-funciona img{height:100px!important}}
-    </style>
   </section>
 
   <!-- PROVINCIAS -->
-  <section class="provincias-section-v2">
-    <h2>Selecciona tu provincia</h2>
-    <p class="section-sub">Técnicos disponibles en toda España</p>
-    <div style="text-align:center;margin-bottom:1.5rem">
-      <div class="buscador-wrapper" style="display:inline-block;position:relative">
-        <svg class="buscador-icono" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#888" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
-        <input type="text" id="buscador-provincia-inline" class="buscador-input" placeholder="Busca tu provincia..." autocomplete="off">
-        <div id="buscador-resultados-inline" class="buscador-resultados"></div>
+  <section id="provincias" style="padding:3rem 1rem">
+    <div style="max-width:1100px;margin:0 auto">
+      <h2 style="text-align:center;font-size:1.8rem;font-weight:600;color:#20201f;margin:0 0 .5rem">Certificado energético en tu provincia</h2>
+      <p style="text-align:center;color:#6b7762;margin:0 0 1.5rem;font-size:.95rem">Técnicos verificados en toda España</p>
+      <div class="provincias-grid-v2" style="display:grid;grid-template-columns:repeat(auto-fill,minmax(130px,1fr));gap:.6rem">
+        <a href="/precio-certificado-energetico-madrid/" style="display:block;padding:.55rem .8rem;background:#f8f9fa;border:1px solid #e5e7eb;border-radius:8px;color:#20201f;text-decoration:none;font-size:.82rem;font-weight:500;transition:all .2s" onmouseover="this.style.borderColor='#547c24';this.style.color='#547c24'" onmouseout="this.style.borderColor='#e5e7eb';this.style.color='#20201f'">Madrid</a>
+        <a href="/precio-certificado-energetico-barcelona/" style="display:block;padding:.55rem .8rem;background:#f8f9fa;border:1px solid #e5e7eb;border-radius:8px;color:#20201f;text-decoration:none;font-size:.82rem;font-weight:500;transition:all .2s" onmouseover="this.style.borderColor='#547c24';this.style.color='#547c24'" onmouseout="this.style.borderColor='#e5e7eb';this.style.color='#20201f'">Barcelona</a>
+        <a href="/precio-certificado-energetico-valencia/" style="display:block;padding:.55rem .8rem;background:#f8f9fa;border:1px solid #e5e7eb;border-radius:8px;color:#20201f;text-decoration:none;font-size:.82rem;font-weight:500;transition:all .2s" onmouseover="this.style.borderColor='#547c24';this.style.color='#547c24'" onmouseout="this.style.borderColor='#e5e7eb';this.style.color='#20201f'">Valencia</a>
+        <a href="/precio-certificado-energetico-sevilla/" style="display:block;padding:.55rem .8rem;background:#f8f9fa;border:1px solid #e5e7eb;border-radius:8px;color:#20201f;text-decoration:none;font-size:.82rem;font-weight:500;transition:all .2s" onmouseover="this.style.borderColor='#547c24';this.style.color='#547c24'" onmouseout="this.style.borderColor='#e5e7eb';this.style.color='#20201f'">Sevilla</a>
+        <a href="/precio-certificado-energetico-asturias/" style="display:block;padding:.55rem .8rem;background:#f8f9fa;border:1px solid #e5e7eb;border-radius:8px;color:#20201f;text-decoration:none;font-size:.82rem;font-weight:500;transition:all .2s" onmouseover="this.style.borderColor='#547c24';this.style.color='#547c24'" onmouseout="this.style.borderColor='#e5e7eb';this.style.color='#20201f'">Asturias</a>
+        <a href="/precio-certificado-energetico-malaga/" style="display:block;padding:.55rem .8rem;background:#f8f9fa;border:1px solid #e5e7eb;border-radius:8px;color:#20201f;text-decoration:none;font-size:.82rem;font-weight:500;transition:all .2s" onmouseover="this.style.borderColor='#547c24';this.style.color='#547c24'" onmouseout="this.style.borderColor='#e5e7eb';this.style.color='#20201f'">Málaga</a>
+        <a href="/precio-certificado-energetico-alicante/" style="display:block;padding:.55rem .8rem;background:#f8f9fa;border:1px solid #e5e7eb;border-radius:8px;color:#20201f;text-decoration:none;font-size:.82rem;font-weight:500;transition:all .2s" onmouseover="this.style.borderColor='#547c24';this.style.color='#547c24'" onmouseout="this.style.borderColor='#e5e7eb';this.style.color='#20201f'">Alicante</a>
+        <a href="/precio-certificado-energetico-bizkaia/" style="display:block;padding:.55rem .8rem;background:#f8f9fa;border:1px solid #e5e7eb;border-radius:8px;color:#20201f;text-decoration:none;font-size:.82rem;font-weight:500;transition:all .2s" onmouseover="this.style.borderColor='#547c24';this.style.color='#547c24'" onmouseout="this.style.borderColor='#e5e7eb';this.style.color='#20201f'">Bizkaia</a>
+        <a href="/precio-certificado-energetico-murcia/" style="display:block;padding:.55rem .8rem;background:#f8f9fa;border:1px solid #e5e7eb;border-radius:8px;color:#20201f;text-decoration:none;font-size:.82rem;font-weight:500;transition:all .2s" onmouseover="this.style.borderColor='#547c24';this.style.color='#547c24'" onmouseout="this.style.borderColor='#e5e7eb';this.style.color='#20201f'">Murcia</a>
+        <a href="/precio-certificado-energetico-zaragoza/" style="display:block;padding:.55rem .8rem;background:#f8f9fa;border:1px solid #e5e7eb;border-radius:8px;color:#20201f;text-decoration:none;font-size:.82rem;font-weight:500;transition:all .2s" onmouseover="this.style.borderColor='#547c24';this.style.color='#547c24'" onmouseout="this.style.borderColor='#e5e7eb';this.style.color='#20201f'">Zaragoza</a>
+        <a href="/precio-certificado-energetico-granada/" style="display:block;padding:.55rem .8rem;background:#f8f9fa;border:1px solid #e5e7eb;border-radius:8px;color:#20201f;text-decoration:none;font-size:.82rem;font-weight:500;transition:all .2s" onmouseover="this.style.borderColor='#547c24';this.style.color='#547c24'" onmouseout="this.style.borderColor='#e5e7eb';this.style.color='#20201f'">Granada</a>
+        <a href="/precio-certificado-energetico-tenerife/" style="display:block;padding:.55rem .8rem;background:#f8f9fa;border:1px solid #e5e7eb;border-radius:8px;color:#20201f;text-decoration:none;font-size:.82rem;font-weight:500;transition:all .2s" onmouseover="this.style.borderColor='#547c24';this.style.color='#547c24'" onmouseout="this.style.borderColor='#e5e7eb';this.style.color='#20201f'">Tenerife</a>
+        <a href="/precio-certificado-energetico-valladolid/" style="display:block;padding:.55rem .8rem;background:#f8f9fa;border:1px solid #e5e7eb;border-radius:8px;color:#20201f;text-decoration:none;font-size:.82rem;font-weight:500;transition:all .2s" onmouseover="this.style.borderColor='#547c24';this.style.color='#547c24'" onmouseout="this.style.borderColor='#e5e7eb';this.style.color='#20201f'">Valladolid</a>
+        <a href="/precio-certificado-energetico-las-palmas/" style="display:block;padding:.55rem .8rem;background:#f8f9fa;border:1px solid #e5e7eb;border-radius:8px;color:#20201f;text-decoration:none;font-size:.82rem;font-weight:500;transition:all .2s" onmouseover="this.style.borderColor='#547c24';this.style.color='#547c24'" onmouseout="this.style.borderColor='#e5e7eb';this.style.color='#20201f'">Las Palmas</a>
+        <a href="/precio-certificado-energetico-cordoba/" style="display:block;padding:.55rem .8rem;background:#f8f9fa;border:1px solid #e5e7eb;border-radius:8px;color:#20201f;text-decoration:none;font-size:.82rem;font-weight:500;transition:all .2s" onmouseover="this.style.borderColor='#547c24';this.style.color='#547c24'" onmouseout="this.style.borderColor='#e5e7eb';this.style.color='#20201f'">Córdoba</a>
+        <a href="/precio-certificado-energetico-gipuzkoa/" style="display:block;padding:.55rem .8rem;background:#f8f9fa;border:1px solid #e5e7eb;border-radius:8px;color:#20201f;text-decoration:none;font-size:.82rem;font-weight:500;transition:all .2s" onmouseover="this.style.borderColor='#547c24';this.style.color='#547c24'" onmouseout="this.style.borderColor='#e5e7eb';this.style.color='#20201f'">Gipuzkoa</a>
+        <a href="/provincias/" style="display:block;padding:.55rem .8rem;background:#547c24;color:white;border-radius:8px;text-decoration:none;font-size:.82rem;font-weight:500;text-align:center;transition:all .2s" onmouseover="this.style.background='#3e5a1a'" onmouseout="this.style.background='#547c24'">Ver todas →</a>
       </div>
-    </div>
-    <div class="provincias-grid-v2">
-      <a href="/certificado-energetico-madrid/" class="prov-link prov-link-destacada">Madrid</a>
-      <a href="/certificado-energetico-barcelona/" class="prov-link prov-link-destacada">Barcelona</a>
-      <a href="/certificado-energetico-valencia/" class="prov-link">Valencia</a>
-      <a href="/certificado-energetico-sevilla/" class="prov-link">Sevilla</a>
-      <a href="/certificado-energetico-alicante/" class="prov-link">Alicante</a>
-      <a href="/certificado-energetico-malaga/" class="prov-link">Málaga</a>
-      <a href="/certificado-energetico-murcia/" class="prov-link">Murcia</a>
-      <a href="/certificado-energetico-asturias/" class="prov-link">Asturias</a>
-      <a href="/certificado-energetico-gijon/" class="prov-link">Gijón</a>
-      <a href="/certificado-energetico-las-palmas/" class="prov-link">Las Palmas</a>
-      <a href="/certificado-energetico-tenerife/" class="prov-link">Tenerife</a>
-      <a href="/certificado-energetico-a-coruna/" class="prov-link">A Coruña</a>
-      <a href="/certificado-energetico-bizkaia/" class="prov-link">Bizkaia</a>
-      <a href="/certificado-energetico-cadiz/" class="prov-link">Cádiz</a>
-      <a href="/certificado-energetico-granada/" class="prov-link">Granada</a>
-      <a href="/certificado-energetico-cantabria/" class="prov-link">Cantabria</a>
-      <a href="/certificado-energetico-gipuzkoa/" class="prov-link">Gipuzkoa</a>
-      <a href="/certificado-energetico-leon/" class="prov-link">León</a>
-      <a href="/certificado-energetico-valladolid/" class="prov-link">Valladolid</a>
-      <a href="/certificado-energetico-salamanca/" class="prov-link">Salamanca</a>
-      <a href="/certificado-energetico-zaragoza/" class="prov-link">Zaragoza</a>
-      <a href="/certificado-energetico-baleares/" class="prov-link">Baleares</a>
-      <a href="/certificado-energetico-la-rioja/" class="prov-link">La Rioja</a>
-      <a href="/certificado-energetico-caceres/" class="prov-link">Cáceres</a>
-      <a href="/certificado-energetico-badajoz/" class="prov-link">Badajoz</a>
     </div>
   </section>
 
   <!-- VENTAJAS -->
-  <section class="ventajas-v2">
-    <div class="ventajas-grid-v2">
-      <div class="ventaja-v2">
-        <svg width="32" height="32" viewBox="0 0 24 24" fill="#547c24"><path d="M11.8 10.9c-2.27-.59-3-1.2-3-2.15 0-1.09 1.01-1.85 2.7-1.85 1.78 0 2.44.85 2.5 2.1h2.21c-.07-1.72-1.12-3.3-3.21-3.81V3h-3v2.16c-1.94.42-3.5 1.68-3.5 3.61 0 2.31 1.91 3.46 4.7 4.13 2.5.6 3 1.48 3 2.41 0 .69-.49 1.79-2.7 1.79-2.06 0-2.87-.92-2.98-2.1h-2.2c.12 2.19 1.76 3.42 3.68 3.83V21h3v-2.15c1.95-.37 3.5-1.5 3.5-3.55 0-2.84-2.43-3.81-4.7-4.4z"/></svg>
-        <div><h4>El mejor precio</h4><p>Desde 45 € para un piso estándar. Sin costes ocultos ni sorpresas.</p></div>
-      </div>
-      <div class="ventaja-v2">
-        <svg width="32" height="32" viewBox="0 0 24 24" fill="#547c24"><path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm-2 16l-4-4 1.41-1.41L10 14.17l6.59-6.59L18 9l-8 8z"/></svg>
-        <div><h4>Técnicos verificados</h4><p>Arquitectos, aparejadores e ingenieros colegiados. Verificamos sus credenciales.</p></div>
-      </div>
-      <div class="ventaja-v2">
-        <svg width="32" height="32" viewBox="0 0 24 24" fill="#547c24"><path d="M11.99 2C6.47 2 2 6.48 2 12s4.47 10 9.99 10C17.52 22 22 17.52 22 12S17.52 2 11.99 2zM12 20c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8zm.5-13H11v6l5.25 3.15.75-1.23-4.5-2.67z"/></svg>
-        <div><h4>En tiempo récord</h4><p>Presupuesto en 5 segundos, técnico en 24h, certificado registrado en 48-72h.</p></div>
-      </div>
-    </div>
-  </section>
-
-  <!-- FAQ -->
-  <section class="faq-v2" id="faq" style="scroll-margin-top:80px">
-    <h2>Resolvemos tus dudas</h2>
-    <details class="faq-item-v2">
-      <summary>¿Qué es el certificado energético (CEE)?</summary>
-      <div class="faq-body"><p>El Certificado de Eficiencia Energética (CEE) es un documento oficial que califica la eficiencia energética de un inmueble con una letra de la A (muy eficiente, menos de 44,6 kWh/m²/año) a la G (poco eficiente, más de 383 kWh/m²/año). Es obligatorio en toda la Unión Europea desde la Directiva 2010/31/UE, transpuesta en España mediante el Real Decreto 390/2021. Solo pueden emitirlo técnicos colegiados habilitados utilizando software oficial como CE3X, HULC o CYPETHERM. El certificado se registra en el organismo competente de cada comunidad autónoma y tiene una validez de 10 años.</p></div>
-    </details>
-    <details class="faq-item-v2">
-      <summary>¿Es obligatorio el certificado energético?</summary>
-      <div class="faq-body"><p>Sí. El CEE es obligatorio en España desde el 1 de junio de 2013 para vender o alquilar una vivienda, para obra nueva, y para edificios públicos de más de 250 m² que deben exhibir la etiqueta. Hay excepciones para edificios protegidos, lugares de culto y construcciones provisionales. No tenerlo puede acarrear sanciones de 300 a 6.000 €. Notarios y registradores pueden rechazar la operación sin el certificado.</p></div>
-    </details>
-    <details class="faq-item-v2">
-      <summary>¿Cuánto cuesta un certificado energético?</summary>
-      <div class="faq-body"><p>No existe tarifa oficial. Depende de metros cuadrados, ubicación y tipo de inmueble. En CertificadoYa: piso 60-80 m² en Madrid 60-96 €, en Asturias 40-65 €, en Barcelona 95-155 € (unifamiliar 120 m²). Las viviendas unifamiliares son más caras por la mayor superficie a medir. Usa nuestra calculadora gratuita para ver tu precio exacto en 5 segundos.</p></div>
-    </details>
-    <details class="faq-item-v2">
-      <summary>¿Quién puede emitir un certificado energético?</summary>
-      <div class="faq-body"><p>Solo técnicos habilitados y colegiados: arquitectos, arquitectos técnicos (aparejadores), ingenieros de edificación, ingenieros industriales e ingenieros técnicos. Deben usar software oficial reconocido por el Ministerio: CE3X (el más común, gratuito), HULC o CYPETHERAM. Desconfía de ofertas sin visita presencial: es ilegal. En CertificadoYa verificamos la colegiación de todos nuestros técnicos.</p></div>
-    </details>
-    <details class="faq-item-v2">
-      <summary>¿Cuánto tarda el proceso completo?</summary>
-      <div class="faq-body"><p>Con CertificadoYa, el proceso completo dura 48-72 horas: presupuesto instantáneo (5 segundos), contacto del técnico (1-24h), visita al inmueble (24-48h), emisión y registro del certificado (24-48h tras la visita). En casos urgentes podemos acelerar a 24-48h con recargo de urgencia. La competencia suele tardar 1-2 semanas.</p></div>
-    </details>
-    <details class="faq-item-v2">
-      <summary>¿Cómo puedo mejorar la letra de mi certificado?</summary>
-      <div class="faq-body"><p>Subir de letra puede aumentar el valor de tu vivienda hasta un 10% y ahorrarte cientos de euros al año. Las mejoras más efectivas: aislamiento térmico (reduce demanda 40-60%), cambio de ventanas a PVC con doble acristalamiento, aerotermia en lugar de caldera de gas, placas solares, e iluminación LED con electrodomésticos A+++. La combinación de aislamiento + aerotermia + placas solares puede llevar una vivienda de letra E a B o A.</p></div>
-    </details>
-  </section>
-
-  <!-- CTA -->
-  <section class="cta-v2" style="background:linear-gradient(135deg,rgba(84,124,36,.92),rgba(67,99,29,.95)),url('/img/hero-house.jpg') center/cover no-repeat">
-    <h2>¿Necesitas tu certificado energético?</h2>
-    <p>Presupuesto gratis en 5 segundos. Sin compromiso. Sin esperas.</p>
-    <a href="#presupuesto-card" class="btn-cta-large">Calcular presupuesto ahora</a>
-  </section>
-
-  <!-- Sección La Garantía de Marcos -->
-  <section class="garantia-marcos" style="background:#f8faf5;padding:4rem 1.5rem;text-align:center">
-    <div style="max-width:700px;margin:0 auto">
-      <div style="display:inline-flex;align-items:center;gap:1rem;margin-bottom:1.5rem">
-        <div style="width:60px;height:60px;border-radius:50%;background:#1a5c2e;display:flex;align-items:center;justify-content:center">
-          <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+  <section id="ventajas" style="background:linear-gradient(135deg,#f3f9eb,#fff);padding:3rem 1rem">
+    <div style="max-width:1000px;margin:0 auto">
+      <h2 style="text-align:center;font-size:1.8rem;font-weight:600;color:#20201f;margin:0 0 .5rem">¿Por qué CertificadoYa?</h2>
+      <p style="text-align:center;color:#6b7762;margin:0 0 2rem;font-size:.95rem">La forma más fácil de conseguir tu CEE</p>
+      <div class="ventajas-grid-v2" style="display:grid;grid-template-columns:repeat(3,1fr);gap:1.2rem">
+        <div style="background:white;border:1px solid #e5e7eb;border-radius:12px;padding:1.5rem;text-align:center;transition:all .3s" onmouseover="this.style.borderColor='#547c24';this.style.boxShadow='0 4px 14px rgba(84,124,36,.1)'" onmouseout="this.style.borderColor='#e5e7eb';this.style.boxShadow='none'">
+          <div style="font-size:1.75rem;margin-bottom:.5rem">⏱️</div>
+          <h3 style="font-size:1.05rem;font-weight:600;color:#20201f;margin:0 0 .35rem">Presupuesto en 30s</h3>
+          <p style="font-size:.82rem;color:#6b7762;line-height:1.5;margin:0">Sin formularios interminables. Introduce tus m² y obtén el precio al instante.</p>
         </div>
-        <div style="text-align:left">
-          <span style="display:block;font-size:1.1rem;font-weight:700;color:#1a5c2e">Marcos</span>
-          <span style="font-size:.85rem;color:#6b7c5e">Fundador de CertificadoYa</span>
+        <div style="background:white;border:1px solid #e5e7eb;border-radius:12px;padding:1.5rem;text-align:center;transition:all .3s" onmouseover="this.style.borderColor='#547c24';this.style.boxShadow='0 4px 14px rgba(84,124,36,.1)'" onmouseout="this.style.borderColor='#e5e7eb';this.style.boxShadow='none'">
+          <div style="font-size:1.75rem;margin-bottom:.5rem">🛡️</div>
+          <h3 style="font-size:1.05rem;font-weight:600;color:#20201f;margin:0 0 .35rem">Técnicos verificados</h3>
+          <p style="font-size:.82rem;color:#6b7762;line-height:1.5;margin:0">Todos colegiados y habilitados. Tu certificado tiene validez legal en toda España.</p>
         </div>
-      </div>
-      <h2 style="font-size:1.6rem;color:#1a5c2e;margin-bottom:1rem;font-weight:700">La Garantía de Marcos</h2>
-      <p style="font-size:1.05rem;line-height:1.7;color:#4a5568;margin-bottom:1.5rem">"Detrás de CertificadoYa no hay un call center, hay un <strong>equipo comprometido</strong>. Llevo años trabajando en el sector inmobiliario y la certificación energética. Creé esta plataforma porque estaba harto de ver cómo la gente pagaba de más por un trámite que debería ser sencillo."</p>
-      <p style="font-size:1.05rem;line-height:1.7;color:#4a5568;margin-bottom:2rem">"Reviso <strong>personalmente</strong> cada incidencia y me aseguro de que nuestros técnicos locales cumplan nuestro estándar de calidad. Si algo no sale como esperas, <strong>habla conmigo</strong>."</p>
-      <div style="display:inline-flex;gap:2rem;flex-wrap:wrap;justify-content:center">
-        <div style="display:flex;align-items:center;gap:.5rem">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#547c24" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
-          <span style="font-size:.9rem;color:#4a5568">Supervisión directa</span>
+        <div style="background:white;border:1px solid #e5e7eb;border-radius:12px;padding:1.5rem;text-align:center;transition:all .3s" onmouseover="this.style.borderColor='#547c24';this.style.boxShadow='0 4px 14px rgba(84,124,36,.1)'" onmouseout="this.style.borderColor='#e5e7eb';this.style.boxShadow='none'">
+          <div style="font-size:1.75rem;margin-bottom:.5rem">📋</div>
+          <h3 style="font-size:1.05rem;font-weight:600;color:#20201f;margin:0 0 .35rem">Registro incluido</h3>
+          <p style="font-size:.82rem;color:#6b7762;line-height:1.5;margin:0">Gestionamos el registro en tu comunidad autónoma. Tú solo espera, nosotros hacemos el resto.</p>
         </div>
-        <div style="display:flex;align-items:center;gap:.5rem">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#547c24" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
-          <span style="font-size:.9rem;color:#4a5568">Técnicos colegiados</span>
+        <div style="background:white;border:1px solid #e5e7eb;border-radius:12px;padding:1.5rem;text-align:center;transition:all .3s" onmouseover="this.style.borderColor='#547c24';this.style.boxShadow='0 4px 14px rgba(84,124,36,.1)'" onmouseout="this.style.borderColor='#e5e7eb';this.style.boxShadow='none'">
+          <div style="font-size:1.75rem;margin-bottom:.5rem">💬</div>
+          <h3 style="font-size:1.05rem;font-weight:600;color:#20201f;margin:0 0 .35rem">Sin compromiso</h3>
+          <p style="font-size:.82rem;color:#6b7762;line-height:1.5;margin:0">Pide presupuesto sin pagar nada. Solo cuando aceptes, se activa el servicio.</p>
         </div>
-        <div style="display:flex;align-items:center;gap:.5rem">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#547c24" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
-          <span style="font-size:.9rem;color:#4a5568">Si no sale bien, me encargo yo</span>
+        <div style="background:white;border:1px solid #e5e7eb;border-radius:12px;padding:1.5rem;text-align:center;transition:all .3s" onmouseover="this.style.borderColor='#547c24';this.style.boxShadow='0 4px 14px rgba(84,124,36,.1)'" onmouseout="this.style.borderColor='#e5e7eb';this.style.boxShadow='none'">
+          <div style="font-size:1.75rem;margin-bottom:.5rem">📱</div>
+          <h3 style="font-size:1.05rem;font-weight:600;color:#20201f;margin:0 0 .35rem">Atención personal</h3>
+          <p style="font-size:.82rem;color:#6b7762;line-height:1.5;margin:0">Te guiamos en todo el proceso. Resolvemos tus dudas antes, durante y después.</p>
+        </div>
+        <div style="background:white;border:1px solid #e5e7eb;border-radius:12px;padding:1.5rem;text-align:center;transition:all .3s" onmouseover="this.style.borderColor='#547c24';this.style.boxShadow='0 4px 14px rgba(84,124,36,.1)'" onmouseout="this.style.borderColor='#e5e7eb';this.style.boxShadow='none'">
+          <div style="font-size:1.75rem;margin-bottom:.5rem">🔒</div>
+          <h3 style="font-size:1.05rem;font-weight:600;color:#20201f;margin:0 0 .35rem">Pago seguro</h3>
+          <p style="font-size:.82rem;color:#6b7762;line-height:1.5;margin:0">Paga cuando veas el resultado. Transacciones protegidas con cifrado SSL.</p>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- TECNICOS -->
-  <section class="tecnicos-home" id="para-tecnicos" style="scroll-margin-top:80px;background:#f3f9eb;padding:4rem 2rem">
-    <div style="max-width:1000px;margin:0 auto;text-align:center">
-      <span style="display:inline-block;background:#e3f0d3;color:#3d5a1e;font-size:.82rem;font-weight:600;padding:.35rem .85rem;border-radius:20px;margin-bottom:1rem"><img src="/img/ico-tecnicos.svg" alt="Técnico" width="18" height="18" style="vertical-align:middle"> Técnicos</span>
-      <h2 style="font-size:1.8rem;font-weight:700;color:#2d3a1f;margin-bottom:.5rem">Consigue clientes sin hacer publicidad</h2>
-      <p style="font-size:1rem;color:#6b7b5e;max-width:600px;margin:0 auto 2rem">Si eres arquitecto, aparejador o ingeniero, te enviamos clientes que ya saben lo que cuesta y quieren que les contactes. <strong>Tú solo haces tu trabajo.</strong></p>
-
-      <!-- Cómo funciona -->
-      <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:1.25rem;margin-bottom:2.5rem;text-align:left" class="tecnicos-grid-3">
-        <div style="background:white;border-radius:12px;padding:1.5rem;border:1px solid #dce8d0">
-          <div style="width:40px;height:40px;background:#f3f9eb;border-radius:50%;display:flex;align-items:center;justify-content:center;margin-bottom:.75rem;font-weight:700;color:#547c24;font-size:1.1rem">1</div>
-          <h4 style="font-size:.95rem;color:#2d3a1f;margin-bottom:.35rem">Te registras gratis</h4>
-          <p style="font-size:.82rem;color:#6b7b5e;line-height:1.5">Crear cuenta son 2 minutos. Verificamos tu colegiación y en 24-48h ya estás activo. <strong>Sin cuota de alta.</strong></p>
+  <!-- PREGUNTAS FRECUENTES -->
+  <section id="faq" style="padding:3rem 1rem">
+    <div style="max-width:760px;margin:0 auto">
+      <h2 style="text-align:center;font-size:1.8rem;font-weight:600;color:#20201f;margin:0 0 .5rem">Preguntas frecuentes</h2>
+      <p style="text-align:center;color:#6b7762;margin:0 0 2rem;font-size:.95rem">Todo lo que necesitas saber sobre el CEE</p>
+      <div class="faq-list-v2">
+        <div class="faq-item-v2" style="border:1px solid #e5e7eb;border-radius:10px;margin-bottom:.6rem;overflow:hidden;transition:border-color .2s" onmouseover="this.style.borderColor='#d4e8a8'" onmouseout="this.style.borderColor='#e5e7eb'">
+          <button onclick="this.parentElement.classList.toggle('active');const p=this.nextElementSibling;if(p.style.display==='block'){p.style.display='none'}else{p.style.display='block'}" style="width:100%;padding:1rem 1.2rem;background:none;border:none;cursor:pointer;font-family:Outfit,sans-serif;font-size:.9rem;font-weight:600;color:#20201f;text-align:left;display:flex;justify-content:space-between;align-items:center">¿Qué es el certificado de eficiencia energética? <span style="transition:transform .2s;font-size:1.1rem;color:#547c24">▾</span></button>
+          <div style="display:none;padding:0 1.2rem 1rem;font-size:.85rem;color:#6b7762;line-height:1.7">Es un documento oficial que mide la eficiencia energética de una vivienda o local (de la A a la G). Es obligatorio para vender o alquilar cualquier inmueble desde 2013. El certificado debe ser emitido por un técnico competente y registrarse en la comunidad autónoma correspondiente.</div>
         </div>
-        <div style="background:white;border-radius:12px;padding:1.5rem;border:1px solid #dce8d0">
-          <div style="width:40px;height:40px;background:#f3f9eb;border-radius:50%;display:flex;align-items:center;justify-content:center;margin-bottom:.75rem;font-weight:700;color:#547c24;font-size:1.1rem">2</div>
-          <h4 style="font-size:.95rem;color:#2d3a1f;margin-bottom:.35rem">Recibes leads en tu zona</h4>
-          <p style="font-size:.82rem;color:#6b7b5e;line-height:1.5">Clientes que ya han calculado su presupuesto. Filtrados por CP y provincia. <strong>Solo trabajos cerca de ti.</strong></p>
+        <div class="faq-item-v2" style="border:1px solid #e5e7eb;border-radius:10px;margin-bottom:.6rem;overflow:hidden;transition:border-color .2s" onmouseover="this.style.borderColor='#d4e8a8'" onmouseout="this.style.borderColor='#e5e7eb'">
+          <button onclick="this.parentElement.classList.toggle('active');const p=this.nextElementSibling;if(p.style.display==='block'){p.style.display='none'}else{p.style.display='block'}" style="width:100%;padding:1rem 1.2rem;background:none;border:none;cursor:pointer;font-family:Outfit,sans-serif;font-size:.9rem;font-weight:600;color:#20201f;text-align:left;display:flex;justify-content:space-between;align-items:center">¿Es obligatorio tenerlo? <span style="transition:transform .2s;font-size:1.1rem;color:#547c24">▾</span></button>
+          <div style="display:none;padding:0 1.2rem 1rem;font-size:.85rem;color:#6b7762;line-height:1.7">Sí, desde el 1 de junio de 2013 es obligatorio para todas las viviendas y locales que se pongan en venta o alquiler. Las multas por no tenerlo pueden oscilar entre 300€ y 6.000€, dependiendo de la gravedad y la comunidad autónoma.</div>
         </div>
-        <div style="background:white;border-radius:12px;padding:1.5rem;border:1px solid #dce8d0">
-          <div style="width:40px;height:40px;background:#f3f9eb;border-radius:50%;display:flex;align-items:center;justify-content:center;margin-bottom:.75rem;font-weight:700;color:#547c24;font-size:1.1rem">3</div>
-          <h4 style="font-size:.95rem;color:#2d3a1f;margin-bottom:.35rem">Cobras tu tarifa completa</h4>
-          <p style="font-size:.82rem;color:#6b7b5e;line-height:1.5">Tú pones tus precios. El cliente te paga directamente. <strong>No te quitamos comisión</strong> de tu trabajo.</p>
+        <div class="faq-item-v2" style="border:1px solid #e5e7eb;border-radius:10px;margin-bottom:.6rem;overflow:hidden;transition:border-color .2s" onmouseover="this.style.borderColor='#d4e8a8'" onmouseout="this.style.borderColor='#e5e7eb'">
+          <button onclick="this.parentElement.classList.toggle('active');const p=this.nextElementSibling;if(p.style.display==='block'){p.style.display='none'}else{p.style.display='block'}" style="width:100%;padding:1rem 1.2rem;background:none;border:none;cursor:pointer;font-family:Outfit,sans-serif;font-size:.9rem;font-weight:600;color:#20201f;text-align:left;display:flex;justify-content:space-between;align-items:center">¿Cuánto cuesta el certificado energético? <span style="transition:transform .2s;font-size:1.1rem;color:#547c24">▾</span></button>
+          <div style="display:none;padding:0 1.2rem 1rem;font-size:.85rem;color:#6b7762;line-height:1.7">El precio varía según la superficie del inmueble y la provincia. En CertificadoYa los precios van desde <strong>45€</strong> para pisos pequeños. El presupuesto es instantáneo y sin compromiso. Incluye visita, certificación y registro autonómico.</div>
         </div>
-      </div>
-
-      <!-- Beneficios (sin precios visibles al público) -->
-      <div style="display:grid;grid-template-columns:1fr 1fr;gap:1.25rem;max-width:700px;margin:0 auto 2rem" class="tecnicos-grid-2">
-        <div style="background:white;border:1px solid #dce8d0;border-radius:12px;padding:1.5rem;text-align:center">
-          <div style="font-size:1.8rem;font-weight:800;color:#547c24;line-height:1.2;margin-bottom:.5rem">Sin cuota</div>
-          <p style="font-size:.82rem;color:#6b7b5e;line-height:1.6">Te registras gratis. No pagas nada hasta que recibas tu primer cliente.</p>
+        <div class="faq-item-v2" style="border:1px solid #e5e7eb;border-radius:10px;margin-bottom:.6rem;overflow:hidden;transition:border-color .2s" onmouseover="this.style.borderColor='#d4e8a8'" onmouseout="this.style.borderColor='#e5e7eb'">
+          <button onclick="this.parentElement.classList.toggle('active');const p=this.nextElementSibling;if(p.style.display==='block'){p.style.display='none'}else{p.style.display='block'}" style="width:100%;padding:1rem 1.2rem;background:none;border:none;cursor:pointer;font-family:Outfit,sans-serif;font-size:.9rem;font-weight:600;color:#20201f;text-align:left;display:flex;justify-content:space-between;align-items:center">¿Cuánto tarda el proceso? <span style="transition:transform .2s;font-size:1.1rem;color:#547c24">▾</span></button>
+          <div style="display:none;padding:0 1.2rem 1rem;font-size:.85rem;color:#6b7762;line-height:1.7">El técnico suele visitar el inmueble en <strong>24-48 horas</strong> desde la confirmación. El certificado se entrega en las siguientes 24-48h y nosotros gestionamos el registro autonómico. En total, el proceso completo suele estar listo en <strong>3-5 días hábiles</strong>.</div>
         </div>
-        <div style="background:white;border:1px solid #dce8d0;border-radius:12px;padding:1.5rem;text-align:center">
-          <div style="font-size:1.8rem;font-weight:800;color:#547c24;line-height:1.2;margin-bottom:.5rem">Solo leads</div>
-          <p style="font-size:.82rem;color:#6b7b5e;line-height:1.6">Pagas solo por los clientes que te enviamos. Sin mensualidades ni permanencia.</p>
+        <div class="faq-item-v2" style="border:1px solid #e5e7eb;border-radius:10px;margin-bottom:.6rem;overflow:hidden;transition:border-color .2s" onmouseover="this.style.borderColor='#d4e8a8'" onmouseout="this.style.borderColor='#e5e7eb'">
+          <button onclick="this.parentElement.classList.toggle('active');const p=this.nextElementSibling;if(p.style.display==='block'){p.style.display='none'}else{p.style.display='block'}" style="width:100%;padding:1rem 1.2rem;background:none;border:none;cursor:pointer;font-family:Outfit,sans-serif;font-size:.9rem;font-weight:600;color:#20201f;text-align:left;display:flex;justify-content:space-between;align-items:center">¿Qué incluye el servicio? <span style="transition:transform .2s;font-size:1.1rem;color:#547c24">▾</span></button>
+          <div style="display:none;padding:0 1.2rem 1rem;font-size:.85rem;color:#6b7762;line-height:1.7">Incluye: visita del técnico al inmueble, análisis de la envolvente térmica e instalaciones, emisión del certificado con la calificación energética, registro en el órgano autonómico correspondiente, y asesoramiento para mejorar la calificación si es necesario.</div>
         </div>
       </div>
+    </div>
+  </section>
 
-      <div style="display:flex;gap:1rem;justify-content:center;flex-wrap:wrap">
-        <a href="/panel-tecnicos.html" class="btn-cta" style="display:inline-block;text-decoration:none;width:auto;padding:.8rem 2rem;font-size:.95rem">Regístrate gratis →</a>
-        <a href="/blog/?cat=tecnicos" style="display:inline-block;padding:.7rem 1.5rem;border:2px solid #547c24;color:#547c24;border-radius:8px;text-decoration:none;font-weight:600;font-size:.9rem">Guías y recursos <img src="/img/ico-tecnicos.svg" alt="Técnico" width="18" height="18" style="vertical-align:middle"></a>
+  <!-- NEWSLETTER WIDGET SECTION -->
+  <section style="background: linear-gradient(135deg, #f3f9eb 0%, #ffffff 100%); border-top: 1px solid #d4e8a8; padding: 3rem 1rem;">
+    <div style="max-width: 900px; margin: 0 auto;">
+      <div class="newsletter-widget">
+        <div class="newsletter-container">
+          <div class="newsletter-header">
+            <h3>Mantente informado</h3>
+            <p>Recibe noticias y consejos directamente en tu email</p>
+          </div>
+          
+          <form id="newsletter-form" class="newsletter-form">
+            <!-- Email input -->
+            <div class="form-group">
+              <input type="email" id="newsletter-email" placeholder="Tu email" required aria-label="Correo electrónico">
+            </div>
+            
+            <!-- User type selector -->
+            <div class="form-group user-type-group">
+              <label class="radio-option">
+                <input type="radio" name="userType" value="technician" required aria-label="Soy técnico certificado">
+                <span class="radio-label">
+                  <strong>📋 Soy técnico</strong>
+                  <small>Noticias técnicas y encargos</small>
+                </span>
+              </label>
+              
+              <label class="radio-option">
+                <input type="radio" name="userType" value="owner" aria-label="Soy propietario o cliente">
+                <span class="radio-label">
+                  <strong>🏠 Soy propietario</strong>
+                  <small>Consejos para vender o alquilar</small>
+                </span>
+              </label>
+            </div>
+            
+            <!-- Privacy checkbox -->
+            <div class="form-group privacy-check">
+              <label class="checkbox-option">
+                <input type="checkbox" id="privacy-consent" required aria-label="Acepto recibir comunicaciones">
+                <span>Acepto recibir comunicaciones de CertificadoYa y tengo más de 18 años</span>
+              </label>
+            </div>
+            
+            <!-- Submit button -->
+            <button type="submit" class="btn-newsletter">
+              <span>Suscribirse gratis</span>
+              <span class="btn-arrow">→</span>
+            </button>
+            
+            <!-- Success/Error message -->
+            <div class="newsletter-message" id="newsletter-message" style="display: none;"></div>
+          </form>
+        </div>
       </div>
+    </div>
+  </section>
 
-      <div style="display:flex;gap:2rem;justify-content:center;margin-top:2.5rem;flex-wrap:wrap">
-        <div style="text-align:center"><span style="display:block;font-size:1.5rem;font-weight:700;color:#547c24">Red nacional</span><span style="font-size:.8rem;color:#9aab8a">técnicos colegiados verificados</span></div>
-        <div style="text-align:center"><span style="display:block;font-size:1.5rem;font-weight:700;color:#547c24">24-48h</span><span style="font-size:.8rem;color:#9aab8a">activación de cuenta</span></div>
-        <div style="text-align:center"><span style="display:block;font-size:1.5rem;font-weight:700;color:#547c24">0€</span><span style="font-size:.8rem;color:#9aab8a">cuota de alta</span></div>
+  <style>
+  .newsletter-widget {
+    background: linear-gradient(135deg, #f3f9eb 0%, #ffffff 100%);
+    border: 1px solid #d4e8a8;
+    border-radius: 12px;
+    padding: 2rem;
+    margin: 0;
+    box-shadow: 0 2px 12px rgba(84, 124, 36, 0.06);
+  }
+  .newsletter-container { max-width: 500px; margin: 0 auto; }
+  .newsletter-header { text-align: center; margin-bottom: 1.8rem; }
+  .newsletter-header h3 { font-size: 1.5rem; font-weight: 600; color: #20201f; margin: 0 0 0.5rem; }
+  .newsletter-header p { font-size: 0.95rem; color: #6b7762; margin: 0; }
+  .newsletter-form { display: flex; flex-direction: column; gap: 1.2rem; }
+  .form-group { display: flex; flex-direction: column; }
+  #newsletter-email {
+    padding: 0.75rem 1rem; border: 1px solid #d4e8a8; border-radius: 8px;
+    font-size: 1rem; font-family: Outfit, sans-serif; background: white;
+    transition: all 0.2s; color: #20201f; outline: none;
+  }
+  #newsletter-email:focus { border-color: #547c24; box-shadow: 0 0 0 3px rgba(84,124,36,0.08); }
+  #newsletter-email::placeholder { color: #a8b89d; }
+  .user-type-group { gap: 0.8rem; }
+  .radio-option {
+    display: flex; align-items: flex-start; gap: 0.8rem; cursor: pointer;
+    padding: 0.8rem; border: 1px solid transparent; border-radius: 8px; transition: all 0.2s;
+  }
+  .radio-option:hover { background: rgba(84,124,36,0.04); border-color: #d4e8a8; }
+  .radio-option input[type="radio"] {
+    width: 20px; height: 20px; min-width: 20px; margin-top: 0.2rem; cursor: pointer; accent-color: #547c24;
+  }
+  .radio-label { display: flex; flex-direction: column; gap: 0.2rem; flex: 1; }
+  .radio-label strong { font-size: 0.95rem; color: #20201f; }
+  .radio-label small { font-size: 0.8rem; color: #8a9973; }
+  .privacy-check { gap: 0.5rem; }
+  .checkbox-option {
+    display: flex; align-items: flex-start; gap: 0.6rem; cursor: pointer;
+    font-size: 0.8rem; color: #6b7762; line-height: 1.4;
+  }
+  .checkbox-option input[type="checkbox"] { width: 18px; height: 18px; min-width: 18px; margin-top: 0.15rem; cursor: pointer; accent-color: #547c24; }
+  .btn-newsletter {
+    padding: 0.85rem 1.5rem; background: linear-gradient(135deg, #547c24 0%, #3e5a1a 100%);
+    color: white; border: none; border-radius: 8px; font-size: 1rem; font-weight: 600;
+    cursor: pointer; transition: all 0.3s; display: flex; align-items: center;
+    justify-content: center; gap: 0.5rem; font-family: Outfit, sans-serif;
+  }
+  .btn-newsletter:hover { background: linear-gradient(135deg, #3e5a1a 0%, #2d4313 100%); transform: translateY(-2px); box-shadow: 0 4px 12px rgba(84,124,36,0.25); }
+  .btn-newsletter:active { transform: translateY(0); }
+  .btn-arrow { font-weight: 300; }
+  .newsletter-message { padding: 0.75rem 1rem; border-radius: 6px; font-size: 0.9rem; text-align: center; animation: slideDown 0.3s ease-out; }
+  .newsletter-message.success { background: #e6f4d3; color: #3e5a1a; border: 1px solid #c5e8a0; }
+  .newsletter-message.error { background: #fde8e8; color: #8b0a1a; border: 1px solid #f5c5c5; }
+  @keyframes slideDown { from { opacity: 0; transform: translateY(-10px); } to { opacity: 1; transform: translateY(0); } }
+  @media (max-width: 640px) {
+    .newsletter-widget { padding: 1.5rem 1rem; }
+    .newsletter-header h3 { font-size: 1.25rem; }
+    .newsletter-header p { font-size: 0.9rem; }
+    .radio-option { padding: 0.6rem; }
+    .radio-label strong { font-size: 0.9rem; }
+    .radio-label small { font-size: 0.75rem; }
+  }
+  </style>
+
+  <script>
+  document.addEventListener('DOMContentLoaded', function() {
+    const form = document.getElementById('newsletter-form');
+    const messageDiv = document.getElementById('newsletter-message');
+    if (!form) return;
+    form.addEventListener('submit', async function(e) {
+      e.preventDefault();
+      const email = document.getElementById('newsletter-email').value;
+      const userType = document.querySelector('input[name="userType"]:checked')?.value;
+      const privacyConsent = document.getElementById('privacy-consent').checked;
+      if (!email || !userType || !privacyConsent) {
+        showMessage('Por favor, completa todos los campos', 'error');
+        return;
+      }
+      const data = { email, userType, timestamp: new Date().toISOString(), source: 'website' };
+      try {
+        const response = await fetch('https://wypgqpgjlookbhuaiyxa.supabase.co/functions/v1/newsletter-subscribe', {
+          method: 'POST', headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(data)
+        });
+        if (response.ok) {
+          showMessage('✓ ¡Gracias! Revisa tu email para confirmar', 'success');
+          form.reset();
+        } else {
+          showMessage('Error al suscribirse. Intenta más tarde.', 'error');
+        }
+      } catch (error) {
+        console.error('Newsletter error:', error);
+        showMessage('Error de conexión. Intenta más tarde.', 'error');
+      }
+    });
+    function showMessage(text, type) {
+      messageDiv.textContent = text;
+      messageDiv.className = 'newsletter-message ' + type;
+      messageDiv.style.display = 'block';
+      if (type === 'success') setTimeout(() => { messageDiv.style.display = 'none'; }, 5000);
+    }
+  });
+  </script>
+
+  <!-- SECTION FOR TECHNICIANS -->
+  <section id="para-tecnicos" style="padding:3rem 1rem;background:linear-gradient(135deg,#f8faf5,#eef4e8)">
+    <div style="max-width:1100px;margin:0 auto;background:#fff;border:1px solid #d4e8a8;border-radius:16px;padding:2.5rem 2rem;box-shadow:0 4px 16px rgba(84,124,36,.06)">
+      <div class="tecnicos-home-inner" style="display:flex;align-items:center;gap:3rem">
+        <div style="flex:2">
+          <span style="display:inline-block;background:#e6f4d3;color:#3e5a1a;padding:.3rem .8rem;border-radius:20px;font-size:.72rem;font-weight:600;margin-bottom:.75rem">👷‍♂️ ¿Eres técnico certificador?</span>
+          <h2 style="font-size:1.8rem;font-weight:700;color:#20201f;margin:0 0 .75rem;line-height:1.2">Recibe clientes sin mover un dedo</h2>
+          <p style="font-size:.92rem;color:#6b7762;line-height:1.7;margin:0 0 1.2rem">Regístrate gratis, sin cuotas ni permanencia. Te enviamos clientes de tu zona. Tú solo certificas.</p>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:1.25rem;max-width:600px;margin-bottom:1.5rem" class="tecnicos-grid-2">
+            <div style="background:#f8faf5;border:1px solid #dce8d0;border-radius:12px;padding:1.25rem;text-align:center">
+              <div style="font-size:1.6rem;font-weight:800;color:#547c24;line-height:1.2;margin-bottom:.3rem">Sin cuota</div>
+              <p style="font-size:.8rem;color:#6b7b5e;line-height:1.5;margin:0">Te registras gratis. No pagas nada hasta que recibas tu primer cliente.</p>
+            </div>
+            <div style="background:#f8faf5;border:1px solid #dce8d0;border-radius:12px;padding:1.25rem;text-align:center">
+              <div style="font-size:1.6rem;font-weight:800;color:#547c24;line-height:1.2;margin-bottom:.3rem">Solo leads</div>
+              <p style="font-size:.8rem;color:#6b7b5e;line-height:1.5;margin:0">Pagas solo por los clientes que te enviamos. Sin mensualidades ni permanencia.</p>
+            </div>
+          </div>
+          <div style="display:flex;gap:1rem;flex-wrap:wrap">
+            <a href="/panel-tecnicos.html" class="btn-cta" style="display:inline-block;text-decoration:none;width:auto;padding:.8rem 2rem;font-size:.95rem;background:linear-gradient(135deg,#547c24,#3e5a1a);color:white;border-radius:8px;font-weight:600">Regístrate gratis →</a>
+            <a href="/blog/?cat=tecnicos" style="display:inline-block;padding:.7rem 1.5rem;border:2px solid #547c24;color:#547c24;border-radius:8px;text-decoration:none;font-weight:600;font-size:.9rem">Guías y recursos <img src="/img/ico-tecnicos.svg" alt="Técnico" width="18" height="18" style="vertical-align:middle"></a>
+          </div>
+        </div>
+      </div>
+      <div style="display:flex;gap:2rem;justify-content:center;flex-wrap:wrap;margin-top:2rem;padding-top:1.5rem;border-top:1px solid #eef4e8">
+        <div style="text-align:center"><span style="display:block;font-size:1.3rem;font-weight:700;color:#547c24">Red nacional</span><span style="font-size:.78rem;color:#9aab8a">técnicos colegiados verificados</span></div>
+        <div style="text-align:center"><span style="display:block;font-size:1.3rem;font-weight:700;color:#547c24">24-48h</span><span style="font-size:.78rem;color:#9aab8a">activación de cuenta</span></div>
+        <div style="text-align:center"><span style="display:block;font-size:1.3rem;font-weight:700;color:#547c24">0€</span><span style="font-size:.78rem;color:#9aab8a">cuota de alta</span></div>
       </div>
     </div>
   </section>
@@ -595,56 +662,137 @@ var provSlugs = {}; provincias.forEach(function(p){provSlugs[p.slug]=p.nombre;})
 document.addEventListener("DOMContentLoaded",function(){var e=document.getElementById("newsletter-form"),t=document.getElementById("newsletter-message");e&&e.addEventListener("submit",async function(n){n.preventDefault();var o=document.getElementById("newsletter-email").value,r=document.querySelector('input[name="userType"]:checked')?.value,a=document.getElementById("privacy-consent").checked;if(!o||!r||!a)return s("Por favor, completa todos los campos","error"),void 0;try{var c=await fetch("https://wypgqpgjlookbhuaiyxa.supabase.co/functions/v1/newsletter-subscribe",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({email:o,userType:r,timestamp:(new Date).toISOString(),source:"website"})});c.ok?(s("Todo correcto. Revisa tu email para confirmar.","success"),e.reset()):s("Error al suscribirse. Intenta más tarde.","error")}catch(c){s("Error de conexión. Intenta más tarde.","error")}});function s(e,n){t.textContent=e,t.className="newsletter-message "+n,t.style.display="block","success"===n&&setTimeout(function(){t.style.display="none"},5e3)}});
 </script>
 
+<!-- NEWSLETTER WIDGET SECTION -->
+<section style="background: linear-gradient(135deg, #f3f9eb 0%, #ffffff 100%); border-top: 1px solid #d4e8a8; padding: 3rem 1rem;">
+  <div style="max-width: 900px; margin: 0 auto;">
+    <div class="newsletter-widget">
+      <div class="newsletter-container">
+        <div class="newsletter-header">
+          <h3>Mantente informado</h3>
+          <p>Recibe noticias y consejos directamente en tu email</p>
+        </div>
+        <form id="newsletter-form" class="newsletter-form">
+          <div class="form-group">
+            <input type="email" id="newsletter-email" placeholder="Tu email" required aria-label="Correo electrónico">
+          </div>
+          <div class="form-group user-type-group">
+            <label class="radio-option">
+              <input type="radio" name="userType" value="technician" required aria-label="Soy técnico certificado">
+              <span class="radio-label"><strong>📋 Soy técnico</strong><small>Noticias técnicas y encargos</small></span>
+            </label>
+            <label class="radio-option">
+              <input type="radio" name="userType" value="owner" aria-label="Soy propietario o cliente">
+              <span class="radio-label"><strong>🏠 Soy propietario</strong><small>Consejos para vender o alquilar</small></span>
+            </label>
+          </div>
+          <div class="form-group privacy-check">
+            <label class="checkbox-option">
+              <input type="checkbox" id="privacy-consent" required aria-label="Acepto recibir comunicaciones">
+              <span>Acepto recibir comunicaciones de CertificadoYa y tengo más de 18 años</span>
+            </label>
+          </div>
+          <button type="submit" class="btn-newsletter">
+            <span>Suscribirse gratis</span>
+            <span class="btn-arrow">→</span>
+          </button>
+          <div class="newsletter-message" id="newsletter-message" style="display: none;"></div>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+.newsletter-widget{background:linear-gradient(135deg,#f3f9eb 0%,#ffffff 100%);border:1px solid #d4e8a8;border-radius:12px;padding:2rem;margin:0;box-shadow:0 2px 12px rgba(84,124,36,0.06)}
+.newsletter-container{max-width:500px;margin:0 auto}
+.newsletter-header{text-align:center;margin-bottom:1.8rem}
+.newsletter-header h3{font-size:1.5rem;font-weight:600;color:#20201f;margin:0 0 0.5rem}
+.newsletter-header p{font-size:0.95rem;color:#6b7762;margin:0}
+.newsletter-form{display:flex;flex-direction:column;gap:1.2rem}
+.form-group{display:flex;flex-direction:column}
+#newsletter-email{padding:0.75rem 1rem;border:1px solid #d4e8a8;border-radius:8px;font-size:1rem;font-family:Outfit,sans-serif;background:white;transition:all 0.2s;color:#20201f;outline:none}
+#newsletter-email:focus{border-color:#547c24;box-shadow:0 0 0 3px rgba(84,124,36,0.08)}
+#newsletter-email::placeholder{color:#a8b89d}
+.user-type-group{gap:0.8rem}
+.radio-option{display:flex;align-items:flex-start;gap:0.8rem;cursor:pointer;padding:0.8rem;border:1px solid transparent;border-radius:8px;transition:all 0.2s}
+.radio-option:hover{background:rgba(84,124,36,0.04);border-color:#d4e8a8}
+.radio-option input[type="radio"]{width:20px;height:20px;min-width:20px;margin-top:0.2rem;cursor:pointer;accent-color:#547c24}
+.radio-label{display:flex;flex-direction:column;gap:0.2rem;flex:1}
+.radio-label strong{font-size:0.95rem;color:#20201f}
+.radio-label small{font-size:0.8rem;color:#8a9973}
+.checkbox-option{display:flex;align-items:flex-start;gap:0.6rem;cursor:pointer;font-size:0.8rem;color:#6b7762;line-height:1.4}
+.checkbox-option input[type="checkbox"]{width:18px;height:18px;min-width:18px;margin-top:0.15rem;cursor:pointer;accent-color:#547c24}
+.btn-newsletter{padding:0.85rem 1.5rem;background:linear-gradient(135deg,#547c24 0%,#3e5a1a 100%);color:white;border:none;border-radius:8px;font-size:1rem;font-weight:600;cursor:pointer;transition:all 0.3s;display:flex;align-items:center;justify-content:center;gap:0.5rem;font-family:Outfit,sans-serif}
+.btn-newsletter:hover{background:linear-gradient(135deg,#3e5a1a 0%,#2d4313 100%);transform:translateY(-2px);box-shadow:0 4px 12px rgba(84,124,36,0.25)}
+.btn-newsletter:active{transform:translateY(0)}
+.newsletter-message{padding:0.75rem 1rem;border-radius:6px;font-size:0.9rem;text-align:center;animation:slideDown 0.3s ease-out}
+.newsletter-message.success{background:#e6f4d3;color:#3e5a1a;border:1px solid #c5e8a0}
+.newsletter-message.error{background:#fde8e8;color:#8b0a1a;border:1px solid #f5c5c5}
+@keyframes slideDown{from{opacity:0;transform:translateY(-10px)}to{opacity:1;transform:translateY(0)}}
+</style>
+
+<script>
+document.addEventListener("DOMContentLoaded",function(){var e=document.getElementById("newsletter-form"),t=document.getElementById("newsletter-message");e&&e.addEventListener("submit",async function(n){n.preventDefault();var o=document.getElementById("newsletter-email").value,r=document.querySelector('input[name="userType"]:checked')?.value,a=document.getElementById("privacy-consent").checked;if(!o||!r||!a)return s("Por favor, completa todos los campos","error"),void 0;try{var c=await fetch("https://wypgqpgjlookbhuaiyxa.supabase.co/functions/v1/newsletter-subscribe",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({email:o,userType:r,timestamp:(new Date).toISOString(),source:"website"})});c.ok?(s("✓ Gracias! Revisa tu email para confirmar","success"),e.reset()):s("Error al suscribirse. Intenta más tarde.","error")}catch(c){s("Error de conexión. Intenta más tarde.","error")}});function s(e,n){t.textContent=e,t.className="newsletter-message "+n,t.style.display="block","success"===n&&setTimeout(function(){t.style.display="none"},5e3)}});
+</script>
+
 <footer class="footer-v2">
   <div class="footer-grid">
     <div class="footer-brand">
-      <span class="footer-logo" style="display:flex;align-items:center;gap:.5rem">
-        <svg width="28" height="28" viewBox="0 0 32 32"><rect width="32" height="32" rx="6" fill="#547c24"/><text x="16" y="23" text-anchor="middle" fill="white" font-size="18" font-weight="700" font-family="Outfit,sans-serif">C</text></svg>
+      <span class="footer-logo" style="display:flex;align-items:center;gap:.5rem;font-size:1.1rem;font-weight:700;color:#20201f">
+        <svg width="24" height="24" viewBox="0 0 32 32"><rect width="32" height="32" rx="6" fill="#547c24"/><text x="16" y="23" text-anchor="middle" fill="white" font-size="18" font-weight="700" font-family="Outfit,sans-serif">C</text></svg>
         CertificadoYa
       </span>
-      <p>Certificados de eficiencia energética (CEE) en toda España. Técnicos colegiados verificados. Presupuesto instantáneo desde 45€.</p>
-      <p style="font-size:.78rem;margin-top:.5rem">📞 <a href="tel:+34641450068" style="color:#547c24;text-decoration:none">641 45 00 68</a> · 📧 <a href="mailto:info@certificadoya.es" style="color:#547c24;text-decoration:none">info@certificadoya.es</a></p>
+      <p style="font-size:.85rem;color:#6b7762;line-height:1.6">Certificados de eficiencia energética (CEE) en toda España. Técnicos colegiados verificados. Presupuesto instantáneo.</p>
+      <p style="font-size:.78rem;margin-top:.5rem">📧 <a href="mailto:info@certificadoya.es" style="color:#547c24;text-decoration:none">info@certificadoya.es</a> · 📞 <a href="tel:+34641450068" style="color:#547c24;text-decoration:none">641 45 00 68</a></p>
     </div>
     <div class="footer-links">
-      <strong>Servicios</strong>
-      <a href="/">Certificado energético</a>
-      <a href="/#presupuesto-card">Presupuesto instantáneo</a>
-      <a href="/organismos-contacto.html">Organismos oficiales</a>
-      <a href="/descargables/plantilla-informe-energetico.html">Plantilla descargable</a>
+      <strong style="display:block;font-size:.82rem;color:#20201f;margin-bottom:.75rem;text-transform:uppercase;letter-spacing:.5px">Servicios</strong>
+      <a href="/" style="display:block;font-size:.82rem;color:#6b7762;text-decoration:none;margin-bottom:.4rem;transition:color .15s" onmouseover="this.style.color='#547c24'" onmouseout="this.style.color='#6b7762'">Certificado energético</a>
+      <a href="/#presupuesto" style="display:block;font-size:.82rem;color:#6b7762;text-decoration:none;margin-bottom:.4rem;transition:color .15s" onmouseover="this.style.color='#547c24'" onmouseout="this.style.color='#6b7762'">Presupuesto instantáneo</a>
+      <a href="/organismos-contacto.html" style="display:block;font-size:.82rem;color:#6b7762;text-decoration:none;margin-bottom:.4rem;transition:color .15s" onmouseover="this.style.color='#547c24'" onmouseout="this.style.color='#6b7762'">Organismos oficiales</a>
+      <a href="/blog/" style="display:block;font-size:.82rem;color:#6b7762;text-decoration:none;margin-bottom:.4rem;transition:color .15s" onmouseover="this.style.color='#547c24'" onmouseout="this.style.color='#6b7762'">Blog</a>
     </div>
     <div class="footer-links">
-      <strong>Para técnicos</strong>
-      <a href="/panel-tecnicos.html">Registro de técnicos</a>
-      <a href="/blog/?cat=tecnicos">Blog técnico</a>
-      <a href="/tecnicos/">Directorio de técnicos</a>
-      <a href="/blog/guia-ce3x-tecnicos.html">Guía CE3X</a>
+      <strong style="display:block;font-size:.82rem;color:#20201f;margin-bottom:.75rem;text-transform:uppercase;letter-spacing:.5px">Para técnicos</strong>
+      <a href="/panel-tecnicos.html" style="display:block;font-size:.82rem;color:#6b7762;text-decoration:none;margin-bottom:.4rem;transition:color .15s" onmouseover="this.style.color='#547c24'" onmouseout="this.style.color='#6b7762'">Registro de técnicos</a>
+      <a href="/blog/?cat=tecnicos" style="display:block;font-size:.82rem;color:#6b7762;text-decoration:none;margin-bottom:.4rem;transition:color .15s" onmouseover="this.style.color='#547c24'" onmouseout="this.style.color='#6b7762'">Blog técnico</a>
+      <a href="/pool-encargos.html" style="display:block;font-size:.82rem;color:#6b7762;text-decoration:none;margin-bottom:.4rem;transition:color .15s" onmouseover="this.style.color='#547c24'" onmouseout="this.style.color='#6b7762'">Pool de encargos</a>
     </div>
     <div class="footer-links">
-      <strong>Legal</strong>
-      <a href="/legal/aviso-legal.html">Aviso legal</a>
-      <a href="/legal/privacidad.html">Privacidad</a>
-      <a href="/legal/cookies.html">Cookies</a>
-      <a href="/contacto.html">Contacto</a>
+      <strong style="display:block;font-size:.82rem;color:#20201f;margin-bottom:.75rem;text-transform:uppercase;letter-spacing:.5px">Legal</strong>
+      <a href="/legal/aviso-legal.html" style="display:block;font-size:.82rem;color:#6b7762;text-decoration:none;margin-bottom:.4rem;transition:color .15s" onmouseover="this.style.color='#547c24'" onmouseout="this.style.color='#6b7762'">Aviso legal</a>
+      <a href="/legal/privacidad.html" style="display:block;font-size:.82rem;color:#6b7762;text-decoration:none;margin-bottom:.4rem;transition:color .15s" onmouseover="this.style.color='#547c24'" onmouseout="this.style.color='#6b7762'">Privacidad</a>
+      <a href="/legal/cookies.html" style="display:block;font-size:.82rem;color:#6b7762;text-decoration:none;margin-bottom:.4rem;transition:color .15s" onmouseover="this.style.color='#547c24'" onmouseout="this.style.color='#6b7762'">Cookies</a>
+      <a href="/contacto.html" style="display:block;font-size:.82rem;color:#6b7762;text-decoration:none;margin-bottom:.4rem;transition:color .15s" onmouseover="this.style.color='#547c24'" onmouseout="this.style.color='#6b7762'">Contacto</a>
     </div>
   </div>
-  <p class="footer-bottom">© 2026 CertificadoYa — ArtStudio · Todas las provincias de España</p>
+  <p class="footer-bottom" style="text-align:center;font-size:.78rem;color:#9aab8a;padding-top:1.5rem;margin-top:1.5rem;border-top:1px solid #eef4e8">© 2026 CertificadoYa — ArtStudio · Todas las provincias de España</p>
 </footer>
 
-<!-- Modal lead -->
-<div class="modal-overlay" id="lead-modal">
-  <div class="modal-box">
-    <button class="modal-close" onclick="cerrarLeadModal()">✕</button>
-    <h3> Solicitar servicio</h3>
-    <p>Indica tus datos y buscaremos un técnico en tu zona. <strong>Sin pago hasta que un técnico acepte.</strong></p>
-    <div class="form-group"><label for="lead-nombre">Nombre *</label><input type="text" id="lead-nombre" placeholder="Tu nombre completo" required></div>
-    <div class="form-group"><label for="lead-telefono">Teléfono *</label><input type="tel" id="lead-telefono" placeholder="Ej: 612345678" required></div>
-    <div class="form-group"><label for="lead-email">Email (opcional)</label><input type="email" id="lead-email" placeholder="tu@email.com"></div>
-    <button class="btn-cta" id="lead-btn" onclick="confirmarLead()">Solicitar servicio →</button>
-  </div>
-</div>
+<script src="/js/main.js"></script>
+<script>
+(function(){
+  var btn = document.getElementById('hamburger');
+  var menu = document.getElementById('mobile-menu');
+  if (!btn || !menu) return;
+  btn.onclick = function(){
+    menu.classList.toggle('open');
+    btn.classList.toggle('active');
+  };
+  menu.querySelectorAll('a').forEach(function(a){
+    a.addEventListener('click', function(){
+      menu.classList.remove('open');
+      btn.classList.remove('active');
+    });
+  });
+})();
 
-<!-- Contenedor para mensaje de confirmación de solicitud -->
-<div id="resultado-solicitud"></div>
+// Cookie banner
+(function(){
+  var b = document.getElementById('cookies-banner');
+  if(b && !localStorage.getItem('cookie-consent')) setTimeout(function(){b.style.display='block'},800);
+})();
+</script>
 
 <!-- Cookie banner -->
 <div id="cookies-banner" style="position:fixed;bottom:24px;left:50%;transform:translateX(-50%);z-index:1000;background:white;border:1px solid #e5e7eb;border-radius:12px;padding:14px 20px;box-shadow:0 8px 30px rgba(0,0,0,0.12);max-width:460px;width:calc(100%-48px);display:none;font-family:Outfit,system-ui,sans-serif">
@@ -656,255 +804,6 @@ document.addEventListener("DOMContentLoaded",function(){var e=document.getElemen
     </div>
   </div>
 </div>
-<script>
-(function(){
-  var b=document.getElementById('cookies-banner');
-  if(b&&!localStorage.getItem('cookie-consent'))setTimeout(function(){b.style.display='block'},800);
-})();
-</script>
-
-<script src="/js/main.js"></script>
-<script src="/js/validador-cp.js"></script>
-<script>
-(function(){
-  var input = document.getElementById('buscador-provincia');
-  var resultados = document.getElementById('buscador-resultados');
-  if (!input || !resultados) return;
-  input.oninput = function() {
-    var q = this.value.toLowerCase().trim();
-    resultados.innerHTML = '';
-    if (!q) return;
-    var filtradas = provincias.filter(function(p){return p.nombre.toLowerCase().includes(q);});
-    filtradas.forEach(function(p){
-      var div = document.createElement('div');
-      div.className = 'buscador-item';
-      div.textContent = p.nombre;
-      div.onclick = function(){window.location.href='/certificado-energetico-'+p.slug+'/';};
-      resultados.appendChild(div);
-    });
-  };
-  document.addEventListener('click', function(e) {
-    if (!e.target.closest('.buscador-wrapper')) resultados.innerHTML = '';
-  });
-})();
-
-// Segundo buscador inline en sección provincias
-(function(){
-  var input = document.getElementById('buscador-provincia-inline');
-  var resultados = document.getElementById('buscador-resultados-inline');
-  if (!input || !resultados) return;
-  input.oninput = function() {
-    var q = this.value.toLowerCase().trim();
-    resultados.innerHTML = '';
-    if (!q) return;
-    var filtradas = provincias.filter(function(p){return p.nombre.toLowerCase().includes(q);});
-    filtradas.forEach(function(p){
-      var div = document.createElement('div');
-      div.className = 'buscador-item';
-      div.textContent = p.nombre;
-      div.onclick = function(){window.location.href='/certificado-energetico-'+p.slug+'/';};
-      resultados.appendChild(div);
-    });
-  };
-  document.addEventListener('click', function(e) {
-    if (!e.target.closest('.buscador-resultados-inline') && !e.target.closest('#buscador-provincia-inline')) resultados.innerHTML = '';
-  });
-})();
-
-// Scroll reveal animation
-var elems = document.querySelectorAll('.pasos-section,.ventajas-v2,.provincias-section-v2,.faq-v2,.cta-v2,.tecnicos-home');
-elems.forEach(function(el){el.style.opacity='0';el.style.transform='translateY(30px)';el.style.transition='opacity .8s ease,transform .8s ease'});
-var observer = new IntersectionObserver(function(entries){entries.forEach(function(e){if(e.isIntersecting){e.target.style.opacity='1';e.target.style.transform='translateY(0)';observer.unobserve(e.target)}})},{threshold:0.15});
-setTimeout(function(){elems.forEach(function(el){observer.observe(el)})},200)
-</script>
-
-<!-- WhatsApp floating button -->
-<div id="whatsapp-btn" onclick="window.open('https://wa.me/34641450068?text=' + encodeURIComponent('Hola, quiero un presupuesto de certificado energético'), '_blank')" title="Consultar por WhatsApp">
-  <svg viewBox="0 0 32 32" fill="white" width="24" height="24"><path d="M16 2C8.2 2 2 8.2 2 16c0 2.8.8 5.4 2.2 7.6L2 30l6.6-2.2C10.8 29.2 13.4 30 16 30c7.8 0 14-6.2 14-14S23.8 2 16 2zm7.2 20.2c-.4 1-1.4 1.8-2.4 2-1 .2-2 .2-3.2-.4-1-.4-2.2-1-3.4-2.2-1.2-1.2-2-2.4-2.4-3.6-.4-1.2-.2-2 .2-2.8.2-.4.4-.6.8-.8h.4c.2 0 .4 0 .6.4l.8 1.8c.2.4.2.6 0 .8-.2.2-.2.4-.4.6-.2.2-.4.4-.6.6-.2.2-.4.4-.2.6.8 1 1.6 1.8 2.6 2.4.2.2.4.2.6 0 .2-.2.4-.4.6-.6.2-.2.4-.4.6-.4.2 0 .4.2.6.4l1.2 1.2c.2.2.4.4.2.6-.2.4-.2.6-.4.6z"/></svg>
-</div>
-<style>
-#whatsapp-btn {
-  position: fixed; bottom: 24px; right: 24px; z-index: 999;
-  display: flex; align-items: center; justify-content: center;
-  background: #25D366; color: white; border: none; border-radius: 50%;
-  width: 48px; height: 48px; cursor: pointer; box-shadow: 0 2px 12px rgba(37,211,102,.35);
-  transition: transform .15s, box-shadow .15s;
-}
-#whatsapp-btn:hover { transform: scale(1.08); box-shadow: 0 4px 18px rgba(37,211,102,.45); }
-@media (max-width: 600px) {
-  #whatsapp-btn { width: 44px; height: 44px; bottom: 16px; right: 16px; }
-}
-</style>
-
-<!-- TECNICOS HOME CSS -->
-<style>
-.tecnicos-home {
-  background: #f3f9eb;
-  padding: 3rem 2rem;
-}
-.tecnicos-home-inner {
-  max-width: 1000px;
-  margin: 0 auto;
-  display: flex;
-  align-items: center;
-  gap: 3rem;
-}
-.tecnicos-home-text { flex: 1.5; }
-.tecnicos-home-badge {
-  display: inline-block;
-  background: #e3f0d3;
-  color: #3d5a1e;
-  font-size: .82rem;
-  font-weight: 600;
-  padding: .35rem .85rem;
-  border-radius: 20px;
-  margin-bottom: .75rem;
-}
-.tecnicos-home-text h2 {
-  font-size: 1.6rem;
-  font-weight: 700;
-  color: #2d3a1f;
-  margin-bottom: .6rem;
-  line-height: 1.3;
-}
-.tecnicos-home-text > p {
-  font-size: .95rem;
-  color: #6b7b5e;
-  margin-bottom: 1.25rem;
-  line-height: 1.6;
-}
-.tecnicos-home-plans {
-  display: flex;
-  gap: .75rem;
-  margin-bottom: 1.5rem;
-}
-.tecnicos-plan {
-  background: white;
-  border: 1px solid #dce8d0;
-  border-radius: 10px;
-  padding: .85rem 1.1rem;
-  flex: 1;
-}
-.tecnicos-plan strong {
-  display: block;
-  font-size: .85rem;
-  color: #2d3a1f;
-  margin-bottom: .15rem;
-}
-.tecnicos-plan span {
-  font-size: .78rem;
-  color: #9aab8a;
-}
-.tecnicos-home-btns {
-  display: flex;
-  gap: .85rem;
-  align-items: center;
-}
-.tecnicos-home-btns .btn-outline {
-  background: transparent;
-  border: 2px solid var(--primary);
-  color: var(--primary);
-  padding: .6rem 1.2rem;
-  border-radius: var(--radius-sm);
-  font-size: .85rem;
-  font-weight: 600;
-  text-decoration: none;
-  transition: background .15s, color .15s;
-}
-.tecnicos-home-btns .btn-outline:hover {
-  background: var(--primary);
-  color: white;
-}
-.tecnicos-home-stats {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  gap: .75rem;
-}
-.tecnicos-stat {
-  background: white;
-  border-radius: 12px;
-  padding: 1rem 1.25rem;
-  text-align: center;
-  border: 1px solid #dce8d0;
-}
-.tecnicos-stat-num {
-  display: block;
-  font-size: 1.3rem;
-  font-weight: 700;
-  color: var(--primary);
-}
-.tecnicos-stat-label {
-  display: block;
-  font-size: .78rem;
-  color: #9aab8a;
-  margin-top: .15rem;
-}
-@media (max-width: 700px) {
-  .tecnicos-home-inner { flex-direction: column; gap: 2rem; }
-  .tecnicos-home-plans { flex-direction: column; }
-  .tecnicos-home-btns { flex-direction: column; }
-  .tecnicos-home-btns .btn-outline { width: 100%; text-align: center; }
-  .tecnicos-home-stats { flex-direction: row; }
-}
-</style>
-
-<!-- Hamburger + menú móvil JS -->
-<script>
-(function(){
-  var btn = document.getElementById('hamburger-btn');
-  var menu = document.getElementById('mobile-menu');
-  if (!btn || !menu) return;
-  btn.onclick = function(e){
-    e.stopPropagation();
-    var open = menu.classList.toggle('open');
-    btn.classList.toggle('active');
-    btn.setAttribute('aria-expanded', open);
-    document.body.style.overflow = open ? 'hidden' : '';
-  };
-  document.addEventListener('click', function(e){
-    if (menu.classList.contains('open') && !menu.contains(e.target) && e.target !== btn && !btn.contains(e.target)) {
-      menu.classList.remove('open');
-      btn.classList.remove('active');
-      btn.setAttribute('aria-expanded', 'false');
-      document.body.style.overflow = '';
-    }
-  });
-  // Cerrar al hacer clic en un enlace
-  menu.querySelectorAll('a').forEach(function(a){
-    a.addEventListener('click', function(){
-      menu.classList.remove('open');
-      btn.classList.remove('active');
-      btn.setAttribute('aria-expanded', 'false');
-      document.body.style.overflow = '';
-    });
-  });
-})();
-
-// Buscador móvil
-(function(){
-  var input = document.getElementById('buscador-provincia-mobile');
-  var resultados = document.getElementById('buscador-resultados-mobile');
-  if (!input || !resultados) return;
-  input.oninput = function() {
-    var q = this.value.toLowerCase().trim();
-    resultados.innerHTML = '';
-    if (!q) return;
-    var filtradas = provincias.filter(function(p){return p.nombre.toLowerCase().includes(q);});
-    filtradas.forEach(function(p){
-      var div = document.createElement('div');
-      div.className = 'buscador-item';
-      div.textContent = p.nombre;
-      div.onclick = function(){window.location.href='/certificado-energetico-'+p.slug+'/';};
-      resultados.appendChild(div);
-    });
-  };
-  document.addEventListener('click', function(e) {
-    if (!e.target.closest('#buscador-resultados-mobile') && !e.target.closest('#buscador-provincia-mobile')) resultados.innerHTML = '';
-  });
-})();
-</script>
 
 </body>
 </html>
-<!-- redeploy Thu May 28 19:52:48 CEST 2026 -->
