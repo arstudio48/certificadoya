@@ -6,6 +6,7 @@ const corsHeaders = {
   'Access-Control-Allow-Headers': 'Content-Type'
 }
 
+const RESEND_API_KEY = Deno.env.get('RESEND_API_KEY') ?? ''
 const SUPABASE_URL = 'https://wypgqpgjlookbhuaiyxa.supabase.co'
 
 serve(async (req: Request) => {
@@ -88,6 +89,12 @@ serve(async (req: Request) => {
           source: source || 'website'
         })
       })
+
+      // Enviar confirmación de reactivación
+      if (RESEND_API_KEY) {
+        await enviarConfirmacion(emailClean, userType)
+      }
+
       return new Response(JSON.stringify({ success: true, message: 'Suscripción reactivada' }), {
         status: 200,
         headers: { ...corsHeaders, 'Content-Type': 'application/json' }
@@ -120,6 +127,11 @@ serve(async (req: Request) => {
       })
     }
 
+    // Enviar confirmación
+    if (RESEND_API_KEY) {
+      await enviarConfirmacion(emailClean, userType)
+    }
+
     return new Response(JSON.stringify({ success: true, message: 'Suscripción creada' }), {
       status: 201,
       headers: { ...corsHeaders, 'Content-Type': 'application/json' }
@@ -133,3 +145,44 @@ serve(async (req: Request) => {
     })
   }
 })
+
+async function enviarConfirmacion(email: string, userType: string) {
+  const tipoTexto = userType === 'technician' ? '👷 contenidos para técnicos' : '🏠 contenidos para propietarios'
+
+  await fetch("https://api.resend.com/emails", {
+    method: "POST",
+    headers: {
+      "Authorization": `Bearer ${RESEND_API_KEY}`,
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      from: "CertificadoYa <info@certificadoya.es>",
+      to: email,
+      subject: `📬 ¡Gracias por suscribirte a CertificadoYa!`,
+      html: `
+        <div style="font-family:Outfit,'Segoe UI',Arial,sans-serif;max-width:600px;margin:0 auto;background:#f5f7f2;padding:30px 15px">
+          <div style="background:#fff;border-radius:16px;overflow:hidden;box-shadow:0 2px 12px rgba(0,0,0,.06)">
+            <div style="background:linear-gradient(135deg,#547c24,#3d5e1a);padding:30px 40px;text-align:center">
+              <div style="font-size:28px;font-weight:700;color:#fff">CertificadoYa</div>
+              <div style="font-size:13px;color:#b8d4a0;margin-top:4px">Certificado de Eficiencia Energética</div>
+            </div>
+            <div style="padding:35px 40px 10px">
+              <div style="font-size:48px;text-align:center;margin-bottom:10px">📬</div>
+              <h1 style="font-size:22px;font-weight:700;color:#1a1a1a;margin:0 0 6px;text-align:center">¡Gracias por suscribirte!</h1>
+              <p style="font-size:15px;color:#6b7b5e;line-height:1.5;text-align:center">A partir de ahora recibirás cada semana <strong>${tipoTexto}</strong> directamente en tu bandeja de entrada.</p>
+            </div>
+            <div style="padding:10px 40px 25px;text-align:center">
+              <p style="font-size:14px;color:#6b7b5e;line-height:1.5">Mientras esperas al próximo envío, visita nuestro blog:</p>
+              <a href="https://www.certificadoya.es/blog/" style="display:inline-block;background:#fff;color:#547c24;text-decoration:none;padding:10px 24px;border-radius:8px;font-weight:600;font-size:14px;border:2px solid #547c24">Visitar blog →</a>
+            </div>
+            <div style="padding:20px 40px;text-align:center;font-size:12px;color:#9aab8a;border-top:1px solid #eef4e8">
+              <p style="margin:0 0 4px">CertificadoYa.es — Certificación energética en toda España</p>
+              <p style="margin:0"><a href="https://www.certificadoya.es/" style="color:#547c24">certificadoya.es</a> · <a href="mailto:info@certificadoya.es" style="color:#547c24">info@certificadoya.es</a></p>
+              <p style="margin-top:8px;font-size:11px;color:#b8c8a9">Si no te has suscrito tú, ignora este email.</p>
+            </div>
+          </div>
+        </div>
+      `,
+    }),
+  }).catch(e => console.error("Error enviando confirmación newsletter:", e));
+}
