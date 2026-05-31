@@ -946,6 +946,9 @@ setTimeout(function(){elems.forEach(function(el){observer.observe(el)})},200)
     </div>
 
     <form id="newsletter-form" class="newsletter-form">
+      <!-- Hidden radio inputs (checked by track clicks) -->
+      <input type="radio" name="userType" value="technician" id="nl-radio-tecnico" style="display:none">
+      <input type="radio" name="userType" value="owner" id="nl-radio-propietario" style="display:none">
       <div class="form-group">
         <input type="email" id="newsletter-email" placeholder="Tu email" required aria-label="Correo electrónico">
       </div>
@@ -977,8 +980,8 @@ function cerrarNewsletter() {
 function seleccionarTrack(tipo) {
   document.getElementById('track-tecnico').classList.toggle('selected', tipo === 'technician');
   document.getElementById('track-propietario').classList.toggle('selected', tipo === 'owner');
-  // Check the radio
-  var radio = document.querySelector('input[name="userType"][value="' + tipo + '"]');
+  // Check the hidden radio
+  var radio = document.getElementById(tipo === 'technician' ? 'nl-radio-tecnico' : 'nl-radio-propietario');
   if (radio) radio.checked = true;
 }
 // Close on overlay click
