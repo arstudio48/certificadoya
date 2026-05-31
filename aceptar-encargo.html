@@ -80,7 +80,7 @@
       <div style="margin-bottom: 1rem;">
         <input type="email" id="email-tecnico" value="${tecnicoEmail || ''}" placeholder="Tu email registrado" style="width:100%;padding:.75rem;border:2px solid #dce8d0;border-radius:8px;font-size:.9rem;text-align:center;font-family:inherit">
       </div>
-      <button class="btn" onclick="aceptarEncargo(${leadId})">✅ Aceptar encargo</button>
+      <button class="btn" onclick="aceptarEncargo('${leadId}')">✅ Aceptar encargo</button>
     `;
     document.getElementById('contenido').style.display = 'block';
   }
@@ -99,7 +99,7 @@
         <p><strong>Presupuesto:</strong> ${datos.presupuesto || '—'}€</p>
       </div>
       <p style="font-size:.82rem;color:#9aab8a">Al aceptar, se cobrará al cliente y recibirás sus datos de contacto completos.</p>
-      <button class="btn" onclick="aceptarEncargo(${leadId})">✅ Aceptar encargo y cobrar</button>
+      <button class="btn" onclick="aceptarEncargo('${leadId}')">✅ Aceptar encargo y cobrar</button>
     `;
     document.getElementById('contenido').style.display = 'block';
   }
@@ -121,7 +121,7 @@
       const res = await fetch(EDGE_FUNCTION_URL + '?action=aceptar', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ leadId: parseInt(leadId), tecnicoEmail })
+        body: JSON.stringify({ leadId: leadId, tecnicoEmail })
       });
 
       const data = await res.json();

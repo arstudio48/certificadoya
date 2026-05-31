@@ -7,9 +7,16 @@ import os
 import sys
 from datetime import datetime
 from supabase import create_client
+from dotenv import load_dotenv
 
-URL = "https://wypgqpgjlookbhuaiyxa.supabase.co"
-KEY = "sb_secret_7LGmViutdXYU16hwvAqlJg_hZjhfcLe"
+load_dotenv()
+
+URL = os.environ.get("SUPABASE_URL", "https://wypgqpgjlookbhuaiyxa.supabase.co")
+KEY = os.environ.get("SUPABASE_SERVICE_KEY")
+if not KEY:
+    print("ERROR: SUPABASE_SERVICE_KEY no está configurada. Define esta variable de entorno.")
+    print("  export SUPABASE_SERVICE_KEY='sb_secret_...'")
+    sys.exit(1)
 
 supabase = create_client(URL, KEY)
 
