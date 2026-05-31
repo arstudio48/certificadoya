@@ -1,2 +1,5 @@
 [functions.solicitar-servicio]
 verify_jwt = false
+
+[functions.newsletter-subscribe]
+verify_jwt = false
