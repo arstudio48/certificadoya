@@ -522,6 +522,78 @@ var provSlugs = {}; provincias.forEach(function(p){provSlugs[p.slug]=p.nombre;})
     </div>
   </section>
 </main>
+<!-- NEWSLETTER WIDGET SECTION -->
+<section style="background: linear-gradient(135deg, #f3f9eb 0%, #ffffff 100%); border-top: 1px solid #d4e8a8; padding: 3rem 1rem;">
+<div style="max-width: 900px; margin: 0 auto;">
+<div class="newsletter-widget">
+<div class="newsletter-container">
+<div class="newsletter-header">
+<h3>Mantente informado</h3>
+<p>Recibe noticias y consejos directamente en tu email</p>
+</div>
+<form id="newsletter-form" class="newsletter-form">
+<div class="form-group">
+<input type="email" id="newsletter-email" placeholder="Tu email" required aria-label="Correo electrónico">
+</div>
+<div class="form-group user-type-group">
+<label class="radio-option">
+<input type="radio" name="userType" value="technician" required aria-label="Soy técnico certificado">
+<span class="radio-label"><strong>📋 Soy técnico</strong><small>Noticias técnicas y encargos</small></span>
+</label>
+<label class="radio-option">
+<input type="radio" name="userType" value="owner" aria-label="Soy propietario o cliente">
+<span class="radio-label"><strong>🏠 Soy propietario</strong><small>Consejos para vender o alquilar</small></span>
+</label>
+</div>
+<div class="form-group privacy-check">
+<label class="checkbox-option">
+<input type="checkbox" id="privacy-consent" required aria-label="Acepto recibir comunicaciones">
+<span>Acepto recibir comunicaciones de CertificadoYa y tengo más de 18 años</span>
+</label>
+</div>
+<button type="submit" class="btn-newsletter">
+<span>Suscribirse gratis</span>
+<span class="btn-arrow">→</span>
+</button>
+<div class="newsletter-message" id="newsletter-message" style="display: none;"></div>
+</form>
+</div>
+</div>
+</div>
+</section>
+
+<style>
+.newsletter-widget{background:linear-gradient(135deg,#f3f9eb 0%,#ffffff 100%);border:1px solid #d4e8a8;border-radius:12px;padding:2rem;margin:0;box-shadow:0 2px 12px rgba(84,124,36,0.06)}
+.newsletter-container{max-width:500px;margin:0 auto}
+.newsletter-header{text-align:center;margin-bottom:1.8rem}
+.newsletter-header h3{font-size:1.5rem;font-weight:600;color:#20201f;margin:0 0 0.5rem}
+.newsletter-header p{font-size:0.95rem;color:#6b7762;margin:0}
+.newsletter-form{display:flex;flex-direction:column;gap:1.2rem}
+.form-group{display:flex;flex-direction:column}
+#newsletter-email{padding:0.75rem 1rem;border:1px solid #d4e8a8;border-radius:8px;font-size:1rem;font-family:Outfit,sans-serif;background:white;transition:all 0.2s;color:#20201f;outline:none}
+#newsletter-email:focus{border-color:#547c24;box-shadow:0 0 0 3px rgba(84,124,36,0.08)}
+#newsletter-email::placeholder{color:#a8b89d}
+.user-type-group{gap:0.8rem}
+.radio-option{display:flex;align-items:flex-start;gap:0.8rem;cursor:pointer;padding:0.8rem;border:1px solid transparent;border-radius:8px;transition:all 0.2s}
+.radio-option:hover{background:rgba(84,124,36,0.04);border-color:#d4e8a8}
+.radio-option input[type="radio"]{width:20px;height:20px;min-width:20px;margin-top:0.2rem;cursor:pointer;accent-color:#547c24}
+.radio-label{display:flex;flex-direction:column;gap:0.2rem;flex:1}
+.radio-label strong{font-size:0.95rem;color:#20201f}
+.radio-label small{font-size:0.8rem;color:#8a9973}
+.checkbox-option{display:flex;align-items:flex-start;gap:0.6rem;cursor:pointer;font-size:0.8rem;color:#6b7762;line-height:1.4}
+.checkbox-option input[type="checkbox"]{width:18px;height:18px;min-width:18px;margin-top:0.15rem;cursor:pointer;accent-color:#547c24}
+.btn-newsletter{padding:0.85rem 1.5rem;background:linear-gradient(135deg,#547c24 0%,#3e5a1a 100%);color:white;border:none;border-radius:8px;font-size:1rem;font-weight:600;cursor:pointer;transition:all 0.3s;display:flex;align-items:center;justify-content:center;gap:0.5rem;font-family:Outfit,sans-serif}
+.btn-newsletter:hover{background:linear-gradient(135deg,#3e5a1a 0%,#2d4313 100%);transform:translateY(-2px);box-shadow:0 4px 12px rgba(84,124,36,0.25)}
+.btn-newsletter:active{transform:translateY(0)}
+.newsletter-message{padding:0.75rem 1rem;border-radius:6px;font-size:0.9rem;text-align:center;animation:slideDown 0.3s ease-out}
+.newsletter-message.success{background:#e6f4d3;color:#3e5a1a;border:1px solid #c5e8a0}
+.newsletter-message.error{background:#fde8e8;color:#8b0a1a;border:1px solid #f5c5c5}
+@keyframes slideDown{from{opacity:0;transform:translateY(-10px)}to{opacity:1;transform:translateY(0)}}
+</style>
+
+<script>
+document.addEventListener("DOMContentLoaded",function(){var e=document.getElementById("newsletter-form"),t=document.getElementById("newsletter-message");e&&e.addEventListener("submit",async function(n){n.preventDefault();var o=document.getElementById("newsletter-email").value,r=document.querySelector('input[name="userType"]:checked')?.value,a=document.getElementById("privacy-consent").checked;if(!o||!r||!a)return s("Por favor, completa todos los campos","error"),void 0;try{var c=await fetch("https://wypgqpgjlookbhuaiyxa.supabase.co/functions/v1/newsletter-subscribe",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({email:o,userType:r,timestamp:(new Date).toISOString(),source:"website"})});c.ok?(s("Todo correcto. Revisa tu email para confirmar.","success"),e.reset()):s("Error al suscribirse. Intenta más tarde.","error")}catch(c){s("Error de conexión. Intenta más tarde.","error")}});function s(e,n){t.textContent=e,t.className="newsletter-message "+n,t.style.display="block","success"===n&&setTimeout(function(){t.style.display="none"},5e3)}});
+</script>
 
 <footer class="footer-v2">
   <div class="footer-grid">
