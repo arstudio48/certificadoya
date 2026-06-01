@@ -677,16 +677,22 @@ document.getElementById('form-registro-tecnico').addEventListener('submit', asyn
   btn.disabled = true;
   
   try {
-    const r = await fetch('https://hermes-worker.artbrice.workers.dev/api/registro-tecnico', {
+    const flatData = {
+      nombre: data.tecnico.nombre,
+      email: data.tecnico.email,
+      telefono: data.tecnico.telefono,
+      titulacion: data.tecnico.profesion
+    };
+    const r = await fetch('https://wypgqpgjlookbhuaiyxa.supabase.co/functions/v1/registro-tecnico', {
       method: 'POST',
       headers: {'Content-Type': 'application/json'},
-      body: JSON.stringify(data)
+      body: JSON.stringify(flatData)
     });
     const res = await r.json();
-    if(res.ok) {
+    if(res.success || res.id) {
       msg.style.display = 'block';
       msg.style.color = '#547c24';
-      msg.innerHTML = '✅ Solicitud enviada. Te confirmaremos por email en 24-48h.';
+      msg.innerHTML = '✅ Solicitud enviada. Te hemos enviado un email para completar el registro.';
       this.reset();
     } else {
       msg.style.display = 'block';
