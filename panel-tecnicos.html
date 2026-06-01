@@ -694,6 +694,11 @@ document.getElementById('form-registro-tecnico').addEventListener('submit', asyn
       msg.style.color = '#547c24';
       msg.innerHTML = '✅ Solicitud enviada. Te hemos enviado un email para completar el registro.';
       this.reset();
+    } else if (r.status === 409) {
+      msg.style.display = 'block';
+      msg.style.color = '#547c24';
+      msg.innerHTML = '📬 ' + (res.error || 'Ya estás registrado. Te hemos enviado un email con instrucciones.') + '<br><a href="/pool-encargos.html" style="color:#547c24;font-weight:600">Acceder a trabajos →</a>';
+      this.reset();
     } else {
       msg.style.display = 'block';
       msg.style.color = '#cc3333';
