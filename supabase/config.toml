@@ -24,3 +24,6 @@ verify_jwt = false
 
 [functions.nueva-era]
 verify_jwt = false
+
+[functions.registro-tecnico]
+verify_jwt = false
