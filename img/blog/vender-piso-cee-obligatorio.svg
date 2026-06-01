@@ -1,0 +1,41 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500" fill="none">
+  <rect width="800" height="500" fill="#1a5c2e"/>
+  <defs>
+    <linearGradient id="g2" x1="0" y1="0" x2="800" y2="500">
+      <stop offset="0%" stop-color="#25683b"/>
+      <stop offset="100%" stop-color="#0d3b1a"/>
+    </linearGradient>
+  </defs>
+  <rect width="800" height="500" fill="url(#g2)" opacity="0.4"/>
+  <!-- House icon -->
+  <g transform="translate(400,220)">
+    <!-- Roof -->
+    <polygon points="-120,-60 0,-130 120,-60" fill="#d4af37" stroke="#b8942f" stroke-width="2"/>
+    <polygon points="-110,-55 0,-118 110,-55" fill="#e8c94a"/>
+    <!-- Walls -->
+    <rect x="-90" y="-55" width="180" height="130" rx="3" fill="white" stroke="#ddd" stroke-width="1"/>
+    <!-- Door -->
+    <rect x="-18" y="10" width="36" height="65" rx="3" fill="#1a5c2e"/>
+    <circle cx="8" cy="45" r="3" fill="#d4af37"/>
+    <!-- Windows -->
+    <rect x="-70" y="-35" width="35" height="35" rx="2" fill="#87CEEB" stroke="#ccc" stroke-width="1"/>
+    <rect x="35" y="-35" width="35" height="35" rx="2" fill="#87CEEB" stroke="#ccc" stroke-width="1"/>
+    <rect x="-70" y="15" width="35" height="35" rx="2" fill="#87CEEB" stroke="#ccc" stroke-width="1"/>
+    <rect x="35" y="15" width="35" height="35" rx="2" fill="#87CEEB" stroke="#ccc" stroke-width="1"/>
+    <!-- Energy label -->
+    <rect x="85" y="-40" width="45" height="55" rx="2" fill="white" stroke="#ccc" stroke-width="1"/>
+    <rect x="88" y="-37" width="39" height="9" rx="1" fill="#008000"/>
+    <rect x="88" y="-27" width="39" height="9" rx="1" fill="#92D050"/>
+    <rect x="88" y="-17" width="39" height="9" rx="1" fill="#FFFF00"/>
+    <rect x="88" y="-7" width="39" height="9" rx="1" fill="#FFC000"/>
+    <rect x="88" y="3" width="39" height="9" rx="1" fill="#FF0000"/>
+    <text x="107" y="-30" text-anchor="middle" font-family="system-ui" font-size="6" fill="white" font-weight="bold">A</text>
+  </g>
+  <!-- Title -->
+  <text x="400" y="380" text-anchor="middle" font-family="system-ui" font-size="24" font-weight="bold" fill="white">Vender tu piso</text>
+  <text x="400" y="410" text-anchor="middle" font-family="system-ui" font-size="16" fill="#d4af37">sin certificado energético es ilegal</text>
+  <text x="400" y="445" text-anchor="middle" font-family="system-ui" font-size="14" fill="rgba(255,255,255,0.7)">Multas de hasta 6.000€ · Obligatorio desde 2013</text>
+  <!-- Checkmark -->
+  <circle cx="400" cy="475" r="8" fill="#d4af37"/>
+  <path d="M395,475 L399,479 L406,471" stroke="#1a5c2e" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>
