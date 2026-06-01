@@ -81,7 +81,7 @@ body {
 }
 .hero-new-grid {
   max-width: 1100px; margin:0 auto;
-  display:grid; grid-template-columns:1fr 400px; gap:3rem; align-items:center;
+  display:grid; grid-template-columns:400px 1fr; gap:3rem; align-items:center;
 }
 .hero-new a, .hero-new h1, .hero-new h2, .hero-new h3, .hero-new p, .hero-new span { color: inherit; }
 .hero-new-text h1 { color:#fff; font-size:2.2rem; font-weight:700; line-height:1.2; margin:0 0 .75rem; }
