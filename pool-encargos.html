@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Pool de encargos — CertificadoYa</title>
+  <title>Encargos disponibles — CertificadoYa</title>
   <meta name="robots" content="noindex, nofollow">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -124,7 +124,7 @@
   <div class="header-pool" id="header-pool" style="display:none">
     <a href="/" class="logo">
       <svg width="28" height="28" viewBox="0 0 32 32"><rect width="32" height="32" rx="6" fill="#547c24"/><text x="16" y="23" text-anchor="middle" fill="white" font-size="20" font-weight="700" font-family="Outfit,sans-serif">C</text></svg>
-      Pool de encargos
+      Encargos disponibles
     </a>
     <div class="user-info">
       <span id="user-nombre"></span>
@@ -165,7 +165,7 @@
   <!-- POOL (visible solo logueado) -->
   <div class="container" id="pool-section" style="display:none">
     <div class="pool-header">
-      <h1>📋 Pool de encargos disponibles</h1>
+      <h1>📋 Encargos disponibles</h1>
       <p>Clientes que han solicitado presupuesto en tus provincias. Acepta los que te interesen.</p>
     </div>
 
@@ -369,7 +369,7 @@
           if (filtroActual === 'pendiente') {
             lista.innerHTML = '<div class="empty-state"><div class="icon">📭</div><h3>No hay encargos disponibles</h3><p>Cuando lleguen nuevos clientes en tus provincias, aparecerán aquí.</p></div>';
           } else {
-            lista.innerHTML = '<div class="empty-state"><div class="icon">📋</div><h3>No hay leads en este estado</h3></div>';
+            lista.innerHTML = '<div class="empty-state"><div class="icon">📋</div><h3>No hay encargos en este estado</h3></div>';
           }
           actualizarStats([]);
           return;
