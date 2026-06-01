@@ -349,8 +349,47 @@ async function confirmarLead() {
     document.getElementById('resultado-solicitud').scrollIntoView({ behavior: 'smooth', block: 'center' });
 
   } catch (err) {
-    console.error('Error:', err);
-    alert('Error de conexión. Inténtalo de nuevo.');
+    console.error('Error en confirmarLead:', err);
+    // Reintentar una vez si es error de red
+    if (err instanceof TypeError && err.message.includes('fetch')) {
+      try {
+        const retryRes = await fetch(EDGE_FUNCTION_URL, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(leadData)
+        });
+        if (retryRes.ok) {
+          const savedLeads = await retryRes.json();
+          const savedLead = Array.isArray(savedLeads) ? savedLeads[0] : savedLeads;
+          const leadId = savedLead?.id;
+          if (leadId) {
+            fetch(EDGE_FUNCTION_URL + '?action=solicitar', {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify({ leadId, ...leadData })
+            }).catch(() => {});
+          }
+          document.getElementById('lead-modal').classList.remove('visible');
+          document.getElementById('resultado-solicitud').innerHTML = `
+            <div style="background:#edf4e5;border:2px solid #547c24;border-radius:12px;padding:2rem;text-align:center;margin-top:1rem">
+              <div style="font-size:2.5rem;margin-bottom:.5rem">✅</div>
+              <h3 style="color:#2d3a1f;font-size:1.2rem;margin-bottom:.5rem">Solicitud enviada</h3>
+              <p style="color:#6b7b5e;font-size:.9rem;line-height:1.5">
+                Hemos notificado a los técnicos de tu zona.<br>
+                <strong>Te contactarán pronto</strong> para concretar el servicio.<br><br>
+                Sin compromiso — solo pagas cuando un técnico acepte el encargo.
+              </p>
+              <button class="btn-cta" style="margin-top:1rem" onclick="this.parentElement.remove()">Entendido</button>
+            </div>
+          `;
+          document.getElementById('resultado-solicitud').scrollIntoView({ behavior: 'smooth', block: 'center' });
+          return;
+        }
+      } catch (retryErr) {
+        console.error('Error en reintento:', retryErr);
+      }
+    }
+    alert('Error de conexión. Inténtalo de nuevo. Si el problema persiste, escríbenos a info@certificadoya.es.');
     btn.textContent = 'Solicitar servicio →';
     btn.disabled = false;
   }
