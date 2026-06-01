@@ -242,26 +242,7 @@ var provSlugs = {}; provincias.forEach(function(p){provSlugs[p.slug]=p.nombre;})
   <!-- HERO -->
   <section class="hero-new" id="presupuesto-card" style="scroll-margin-top:80px">
     <div class="hero-new-grid">
-      <div class="hero-new-text">
-        <div class="hero-badge"><img src="/img/ico-rapido.svg" alt="Presupuesto rápido" loading="lazy" style="width:28px;height:28px;vertical-align:middle;margin-right:8px"> Presupuesto en 5 segundos</div>
-        <h1>Certificado energético <span>rápido y sin complicaciones</span></h1>
-        <p class="hero-lead">Consigue tu CEE en 24 horas con técnicos verificados en toda España. Presupuesto instantáneo, sin papeleo, desde <strong>45 €</strong>.</p>
-        <div class="hero-trust">
-          <div class="trust-item">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="#547c24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z"/></svg>
-            Técnicos colegiados verificados
-          </div>
-          <div class="trust-item">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="#547c24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z"/></svg>
-            Cobertura en toda España
-          </div>
-          <div class="trust-item">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="#547c24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z"/></svg>
-            4,9 ★ de valoración media
-          </div>
-        </div>
-      </div>
-      <div class="hero-new-card">
+    <div class="hero-new-card">
         <div class="presupuesto-card-v2">
           <div class="precio-destacado" style="text-align:center;margin-bottom:1rem;background:linear-gradient(135deg,#f3f9eb,#e8f0dc);padding:.75rem;border-radius:10px">
             <div style="font-size:.75rem;color:#6b7b5e;font-weight:500;text-transform:uppercase;letter-spacing:.05em">Precio desde</div>
@@ -294,6 +275,7 @@ var provSlugs = {}; provincias.forEach(function(p){provSlugs[p.slug]=p.nombre;})
             <span>Acepto la <a href="/legal/privacidad.html" target="_blank" style="color:#1a1a1a;text-decoration:underline">política de privacidad</a> y consiento el tratamiento de mis datos para recibir un presupuesto y ser contactado por un técnico certificador.</span>
           </label>
           <button class="btn-cta" onclick="calcularPresupuesto()">Calcular presupuesto</button>
+
           <div style="display:flex;gap:.75rem;justify-content:center;margin-top:.75rem;flex-wrap:wrap">
             <span style="display:inline-flex;align-items:center;gap:.3rem;font-size:.7rem;color:#9aab8a"><svg width="14" height="14" viewBox="0 0 24 24" fill="#547c24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z"/></svg> Pago seguro Stripe</span>
             <span style="display:inline-flex;align-items:center;gap:.3rem;font-size:.7rem;color:#9aab8a"><svg width="14" height="14" viewBox="0 0 24 24" fill="#547c24"><path d="M18 8h-1V6c0-2.76-2.24-5-5-5S7 3.24 7 6v2H6c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V10c0-1.1-.9-2-2-2zm-6 9c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2zm3.1-9H8.9V6c0-1.71 1.39-3.1 3.1-3.1 1.71 0 3.1 1.39 3.1 3.1v2z"/></svg> SSL encriptado</span>
@@ -306,10 +288,26 @@ var provSlugs = {}; provincias.forEach(function(p){provSlugs[p.slug]=p.nombre;})
           </div>
         </div>
       </div>
-    </div>
+      <div class="hero-new-text">
+        <div class="hero-badge"><img src="/img/ico-rapido.svg" alt="Presupuesto rápido" loading="lazy" style="width:28px;height:28px;vertical-align:middle;margin-right:8px"> Presupuesto en 5 segundos</div>
+        <h1>Certificado energético <span>rápido y sin complicaciones</span></h1>
+        <p class="hero-lead">Consigue tu CEE en 24 horas con técnicos verificados en toda España. Presupuesto instantáneo, sin papeleo, desde <strong>45 €</strong>.</p>
+        <div class="hero-trust">
+          <div class="trust-item">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="#547c24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z"/></svg>
+            Técnicos colegiados verificados
+          </div>
+          <div class="trust-item">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="#547c24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z"/></svg>
+            Cobertura en toda España
+          </div>
+          <div class="trust-item">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="#547c24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z"/></svg>
+            4,9 ★ de valoración media
+          </div>
+        </div>
+      </div>
   </section>
-
-  <!-- PASOS -->
   <section id="como-funciona" style="scroll-margin-top:80px;padding:4rem 2rem;text-align:center">
     <span style="display:inline-block;background:#e3f0d3;color:#3d5a1e;font-size:.78rem;font-weight:600;padding:.35rem .9rem;border-radius:20px;margin-bottom:.75rem">En 4 pasos</span>
     <h2 style="font-size:2rem;font-weight:700;color:#1a1a1a;margin-bottom:3rem">Así de fácil es conseguir tu certificado</h2>
