@@ -37,7 +37,44 @@ serve(async (req) => {
       .maybeSingle()
 
     if (existing) {
-      return new Response(JSON.stringify({ error: 'Este email ya está registrado' }), { status: 409, headers: { ...corsHeaders, 'Content-Type': 'application/json' } })
+      // Enviar email recordando que ya está registrado
+      if (RESEND_API_KEY) {
+        await fetch("https://api.resend.com/emails", {
+          method: "POST",
+          headers: {
+            "Authorization": `Bearer ${RESEND_API_KEY}`,
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            from: "CertificadoYa <info@certificadoya.es>",
+            to: email,
+            subject: `🔐 Ya estás registrado en CertificadoYa, ${nombre}`,
+            html: `
+              <div style="font-family:Outfit,'Segoe UI',Arial,sans-serif;max-width:600px;margin:0 auto;background:#f5f7f2;padding:30px 15px">
+                <div style="background:#fff;border-radius:16px;overflow:hidden;box-shadow:0 2px 12px rgba(0,0,0,.06)">
+                  <div style="background:linear-gradient(135deg,#547c24,#3d5e1a);padding:30px 40px;text-align:center">
+                    <div style="font-size:28px;font-weight:700;color:#fff">CertificadoYa</div>
+                    <div style="font-size:13px;color:#b8d4a0;margin-top:4px">Red de técnicos certificadores</div>
+                  </div>
+                  <div style="padding:35px 40px 10px 40px">
+                    <h1 style="font-size:22px;font-weight:700;color:#1a1a1a;margin:0 0 6px 0">Ya tienes cuenta en CertificadoYa</h1>
+                    <p style="font-size:15px;color:#6b7b5e;line-height:1.5;margin:0">Hemos recibido tu intento de registro, pero ya estás dado de alta en nuestra plataforma.</p>
+                  </div>
+                  <div style="padding:20px 40px 35px;text-align:center">
+                    <p style="font-size:14px;color:#6b7b5e;line-height:1.5">Para acceder a los trabajos disponibles, solo tienes que introducir tu email en la página de acceso y te enviaremos un código.</p>
+                    <a href="https://www.certificadoya.es/pool-encargos.html" style="display:inline-block;background:#547c24;color:#fff;text-decoration:none;padding:14px 32px;border-radius:8px;font-weight:600;font-size:15px">Acceder a trabajos →</a>
+                  </div>
+                  <div style="padding:20px 40px;text-align:center;font-size:12px;color:#9aab8a;border-top:1px solid #eef4e8">
+                    <p style="margin:0 0 4px">CertificadoYa.es — Trabajos para técnicos certificadores</p>
+                    <p style="margin:0"><a href="https://www.certificadoya.es/" style="color:#547c24">certificadoya.es</a> · <a href="mailto:info@certificadoya.es" style="color:#547c24">info@certificadoya.es</a></p>
+                  </div>
+                </div>
+              </div>
+            `,
+          }),
+        }).catch(e => console.error("Error enviando email de ya registrado:", e));
+      }
+      return new Response(JSON.stringify({ error: 'Este email ya está registrado. Te hemos enviado un email con instrucciones para acceder.' }), { status: 409, headers: { ...corsHeaders, 'Content-Type': 'application/json' } })
     }
 
     // Insert technician
