@@ -18,6 +18,7 @@ const supabaseServiceKey = Deno.env.get('SUPABASE_SERVICE_ROLE_KEY') || ''
 const supabase = createClient(supabaseUrl, supabaseServiceKey)
 
 const endpointSecret = Deno.env.get('STRIPE_WEBHOOK_SECRET') || ''
+const resendApiKey = Deno.env.get('RESEND_API_KEY') || ''
 
 interface Lead {
   nombre_cliente: string
@@ -33,6 +34,45 @@ interface Lead {
   fuente: string
   stripe_session_id: string
   stripe_payment_intent: string
+}
+
+// ── Email helpers ──
+async function sendEmail(to: string, subject: string, text: string) {
+  if (!resendApiKey) return
+  try {
+    await fetch('https://api.resend.com/emails', {
+      method: 'POST',
+      headers: {
+        'Authorization': `Bearer ${resendApiKey}`,
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        from: 'CertificadoYa <info@certificadoya.es>',
+        to,
+        subject,
+        html: `<div style="font-family: 'Montserrat', sans-serif; max-width: 560px; margin: 0 auto; padding: 20px;"><p style="color: #3d4f2e; line-height: 1.6;">${text.replace(/\n/g, '<br>')}</p></div>`
+      })
+    })
+  } catch (_) { /* email no crítico */ }
+}
+
+async function sendAdminEmail(subject: string, text: string) {
+  if (!resendApiKey) return
+  try {
+    await fetch('https://api.resend.com/emails', {
+      method: 'POST',
+      headers: {
+        'Authorization': `Bearer ${resendApiKey}`,
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        from: 'CertificadoYa <info@certificadoya.es>',
+        to: 'artbriher@gmail.com',
+        subject,
+        html: `<div style="font-family: sans-serif; max-width: 560px; margin: 0 auto; padding: 20px;"><p style="color: #333; line-height: 1.6;">${text.replace(/\n/g, '<br>')}</p></div>`
+      })
+    })
+  } catch (_) { /* email no crítico */ }
 }
 
 serve(async (req) => {
@@ -94,7 +134,6 @@ serve(async (req) => {
       }
 
       // ── Send confirmation email ──
-      const resendApiKey = Deno.env.get('RESEND_API_KEY')
       if (resendApiKey && meta.email) {
         try {
           await fetch('https://api.resend.com/emails', {
@@ -174,18 +213,142 @@ serve(async (req) => {
           })
         } catch (_) { /* email no crítico */ }
       }
+
+      // ── Handle credit purchase (técnico compra créditos) ──
+      if (meta.tipo === 'compra_creditos' && meta.tecnico_id) {
+        const cantidadCredits = parseInt(meta.cantidad_creditos || '0')
+        if (cantidadCredits > 0) {
+          // Update técnico saldo
+          const { data: currentTec } = await supabase
+            .from('tecnicos')
+            .select('saldo_creditos, nombre, email')
+            .eq('id', meta.tecnico_id)
+            .single()
+
+          if (currentTec) {
+            await supabase
+              .from('tecnicos')
+              .update({ saldo_creditos: (currentTec.saldo_creditos || 0) + cantidadCredits })
+              .eq('id', meta.tecnico_id)
+
+            // Insert transaction record
+            await supabase
+              .from('transacciones_tecnicos')
+              .insert({
+                tecnico_id: meta.tecnico_id,
+                tipo: 'compra_creditos',
+                cantidad: cantidadCredits,
+                importe_eur: parseFloat(meta.importe_total || '0'),
+                concepto: `Compra de ${cantidadCredits} créditos`,
+                stripe_payment_intent: typeof session.payment_intent === 'string' ? session.payment_intent : '',
+                stripe_session_id: session.id
+              })
+
+            // Send confirmation to técnico
+            if (currentTec.email) {
+              await sendEmail(currentTec.email,
+                `✅ ${cantidadCredits} créditos añadidos — CertificadoYa`,
+                `Se han añadido ${cantidadCredits} créditos a tu cuenta. Saldo actual: ${(currentTec.saldo_creditos || 0) + cantidadCredits} créditos.`)
+            }
+
+            // Notify admin
+            await sendAdminEmail(`💰 Compra de créditos — ${currentTec.nombre || 'Técnico'}`,
+              `Técnico compró ${cantidadCredits} créditos por ${meta.importe_total || '?'}€`)
+          }
+        }
+      }
+
+      // ── Handle premium subscription ──
+      if (meta.tipo === 'suscripcion_premium' && meta.tecnico_id) {
+        const subscriptionId = typeof session.subscription === 'string' ? session.subscription : ''
+        const customerId = typeof session.customer === 'string' ? session.customer : ''
+
+        await supabase
+          .from('tecnicos')
+          .update({
+            modelo_pago: 'premium',
+            stripe_customer_id: customerId,
+            stripe_subscription_id: subscriptionId,
+            premium_hasta: new Date(Date.now() + 30 * 24 * 60 * 60 * 1000).toISOString()
+          })
+          .eq('id', meta.tecnico_id)
+
+        // Insert transaction
+        await supabase
+          .from('transacciones_tecnicos')
+          .insert({
+            tecnico_id: meta.tecnico_id,
+            tipo: 'suscripcion_premium',
+            cantidad: 0,
+            importe_eur: parseFloat(meta.importe_premium || '49.99'),
+            concepto: 'Suscripción premium mensual',
+            stripe_session_id: session.id,
+            stripe_payment_intent: typeof session.payment_intent === 'string' ? session.payment_intent : ''
+          })
+
+        // Get técnico email
+        const { data: tec } = await supabase.from('tecnicos').select('nombre, email').eq('id', meta.tecnico_id).single()
+        if (tec?.email) {
+          await sendEmail(tec.email,
+            `🌟 Suscripción Premium activa — CertificadoYa`,
+            `¡Tu suscripción premium ya está activa! Disfruta de leads ilimitados sin coste adicional.`)
+        }
+      }
     }
 
     // ── Handle customer.subscription.updated ──
     if (event.type === 'customer.subscription.updated') {
       const subscription = event.data.object as Stripe.Subscription
+
+      // ── Update técnico premium status by subscription_id ──
+      const { data: tec } = await supabase
+        .from('tecnicos')
+        .select('id, nombre, email')
+        .eq('stripe_subscription_id', subscription.id)
+        .maybeSingle()
+
+      if (tec) {
+        if (subscription.status === 'active' || subscription.status === 'trialing') {
+          // Actualizar premium_hasta al final del período actual
+          await supabase
+            .from('tecnicos')
+            .update({
+              modelo_pago: 'premium',
+              premium_hasta: new Date((subscription.current_period_end || 0) * 1000).toISOString(),
+              updated_at: new Date().toISOString()
+            })
+            .eq('id', tec.id)
+
+          if (tec.email) {
+            await sendEmail(tec.email,
+              `🔄 Suscripción renovada — CertificadoYa`,
+              `Tu suscripción premium se ha renovado hasta el ${new Date((subscription.current_period_end || 0) * 1000).toLocaleDateString('es-ES')}.`)
+          }
+        } else if (subscription.status === 'past_due' || subscription.status === 'canceled' || subscription.status === 'unpaid' || subscription.status === 'incomplete_expired') {
+          await supabase
+            .from('tecnicos')
+            .update({
+              modelo_pago: 'lead',
+              premium_hasta: null,
+              updated_at: new Date().toISOString()
+            })
+            .eq('id', tec.id)
+
+          if (tec.email) {
+            await sendEmail(tec.email,
+              `⚠️ Suscripción premium finalizada — CertificadoYa`,
+              `Tu suscripción premium ha finalizado. A partir de ahora se te cobrará por lead. Recarga créditos para seguir aceptando encargos.`)
+          }
+        }
+      }
+
+      // ── Existing lead update logic ──
       const customerEmail = typeof subscription.customer === 'string'
         ? subscription.customer
         : (subscription.customer as Stripe.Customer | null)?.email || ''
 
       console.log(`Subscription updated: ${subscription.id}, status: ${subscription.status}`)
 
-      // Update lead if we have a matching subscription metadata
       const meta = subscription.metadata || {}
       if (meta.lead_id) {
         const { error: updateError } = await supabase
@@ -226,6 +389,43 @@ serve(async (req) => {
           } else {
             console.log(`Lead ${existingLeads[0].id} updated via email match to: ${subscription.status}`)
           }
+        }
+      }
+    }
+
+    // ── Handle invoice.payment_succeeded (renew premium) ──
+    if (event.type === 'invoice.payment_succeeded') {
+      const invoice = event.data.object as Stripe.Invoice
+      if (invoice.subscription) {
+        const subId = typeof invoice.subscription === 'string' ? invoice.subscription : ''
+        const { data: tec } = await supabase
+          .from('tecnicos')
+          .select('id')
+          .eq('stripe_subscription_id', subId)
+          .maybeSingle()
+
+        if (tec) {
+          // Extender premium_hasta 30 días más desde ahora
+          await supabase
+            .from('tecnicos')
+            .update({
+              premium_hasta: new Date(Date.now() + 30 * 24 * 60 * 60 * 1000).toISOString(),
+              modelo_pago: 'premium'
+            })
+            .eq('id', tec.id)
+
+          // Register renewal transaction
+          const amount = invoice.amount_paid ? invoice.amount_paid / 100 : 49.99
+          await supabase
+            .from('transacciones_tecnicos')
+            .insert({
+              tecnico_id: tec.id,
+              tipo: 'suscripcion_premium',
+              cantidad: 0,
+              importe_eur: amount,
+              concepto: 'Renovación suscripción premium',
+              stripe_payment_intent: typeof invoice.payment_intent === 'string' ? invoice.payment_intent : ''
+            })
         }
       }
     }

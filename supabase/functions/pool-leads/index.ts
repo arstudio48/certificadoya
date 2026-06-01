@@ -29,7 +29,7 @@ serve(async (req) => {
     // Verificar token de sesión y obtener datos del técnico
     const { data: tecnico, error: tokenError } = await supabase
       .from('tecnicos')
-      .select('id, nombre, email, provincia, verificado, activo')
+      .select('id, nombre, email, provincia, verificado, activo, modelo_pago, saldo_creditos, comision_por_lead, premium_hasta')
       .eq('token', sessionToken)
       .eq('activo', true)
       .maybeSingle()
@@ -114,21 +114,91 @@ serve(async (req) => {
           return new Response(JSON.stringify({ error: 'Este encargo ya no está disponible (otro técnico lo aceptó)' }), { status: 409, headers: { ...corsHeaders, 'Content-Type': 'application/json' } })
         }
 
-        // Actualizar lead
+        // ============================================================
+        // Verificar pago / suscripción antes de asignar
+        // ============================================================
+        let saldoRestante = tecnico.saldo_creditos ?? 0
+
+        if (tecnico.modelo_pago === 'premium') {
+          // Verificar suscripción premium activa
+          if (!tecnico.premium_hasta || new Date(tecnico.premium_hasta) <= new Date()) {
+            return new Response(JSON.stringify({
+              error: 'Tu suscripción premium ha expirado. Renueva para seguir aceptando encargos.'
+            }), { status: 402, headers: { ...corsHeaders, 'Content-Type': 'application/json' } })
+          }
+          // Premium: asignación gratuita, no descontar crédito
+        } else {
+          // Modelo por lead: descontar 1 crédito
+          if (saldoRestante < 1) {
+            return new Response(JSON.stringify({
+              error: 'Saldo insuficiente. Debes recargar créditos para aceptar encargos.'
+            }), { status: 402, headers: { ...corsHeaders, 'Content-Type': 'application/json' } })
+          }
+
+          // Débito atómico con condición saldo_creditos >= 1
+          const { error: debitError, count: affectedRows } = await supabase
+            .from('tecnicos')
+            .update({ saldo_creditos: saldoRestante - 1 })
+            .eq('id', tecnico.id)
+            .gte('saldo_creditos', 1)
+
+          if (debitError) {
+            return new Response(JSON.stringify({ error: 'Error al procesar el pago. Intenta de nuevo.' }), { status: 500, headers: { ...corsHeaders, 'Content-Type': 'application/json' } })
+          }
+
+          // Si affectedRows es 0, otro proceso agotó el saldo concurrentemente
+          if (affectedRows === 0) {
+            return new Response(JSON.stringify({
+              error: 'Saldo insuficiente. Debes recargar créditos para aceptar encargos.'
+            }), { status: 402, headers: { ...corsHeaders, 'Content-Type': 'application/json' } })
+          }
+
+          saldoRestante -= 1
+
+          // Registrar transacción
+          const leadIdShort = leadId.slice(0, 8)
+          const { error: txError } = await supabase
+            .from('transacciones_tecnicos')
+            .insert({
+              tecnico_id: tecnico.id,
+              tipo: 'gasto_lead',
+              cantidad: 1,
+              concepto: 'Lead asignado: ' + leadIdShort
+            })
+
+          if (txError) {
+            console.error('Error al registrar transacción:', txError.message)
+            // No bloquear la asignación por un error de registro
+          }
+        }
+
+        // ============================================================
+        // Asignar lead
+        // ============================================================
+        const now = new Date().toISOString()
         await supabase
           .from('leads')
           .update({
             estado: 'asignado',
             tecnico_asignado: tecnico.id,
-            updated_at: new Date().toISOString()
+            fecha_asignacion: now,
+            updated_at: now
           })
           .eq('id', leadId)
 
-        return new Response(JSON.stringify({
+        // Armar respuesta
+        const responseData: Record<string, unknown> = {
           success: true,
           message: 'Encargo aceptado. Recibirás los datos del cliente para contactarlo.',
-          leadId
-        }), {
+          leadId,
+          saldo_restante: saldoRestante
+        }
+
+        if (saldoRestante === 1) {
+          responseData.advertencia = 'Te queda 1 crédito. Recarga pronto para seguir aceptando encargos.'
+        }
+
+        return new Response(JSON.stringify(responseData), {
           headers: { ...corsHeaders, 'Content-Type': 'application/json' }
         })
       }
