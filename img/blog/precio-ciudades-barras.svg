@@ -1,0 +1,118 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 420" font-family="Outfit, sans-serif">
+  <defs>
+    <linearGradient id="gw" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#1a1a2e"/>
+      <stop offset="100%" stop-color="#16213e"/>
+    </linearGradient>
+    <linearGradient id="gb" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#4a7c1e"/>
+      <stop offset="100%" stop-color="#6ba32e"/>
+    </linearGradient>
+  </defs>
+  <rect width="800" height="420" fill="#f7f9f6" rx="12"/>
+  <text x="400" y="35" text-anchor="middle" font-size="16" font-weight="700" fill="#2d3a1f">Precio medio de vivienda usada por ciudad (€/m², 2024)</text>
+
+  <!-- Madrid 4200 -->
+  <rect x="50" y="62" width="168" height="18" fill="#3a6b14" rx="3"/>
+  <text x="48" y="76" text-anchor="end" font-size="12" fill="#2d3a1f" font-weight="600">Madrid</text>
+  <text x="222" y="76" text-anchor="start" font-size="11" fill="#4a7c1e">4.200 €/m²</text>
+
+  <!-- Barcelona 3700 -->
+  <rect x="50" y="90" width="148" height="18" fill="#4a7c1e" rx="3"/>
+  <text x="48" y="104" text-anchor="end" font-size="12" fill="#2d3a1f" font-weight="600">Barcelona</text>
+  <text x="202" y="104" text-anchor="start" font-size="11" fill="#4a7c1e">3.700 €/m²</text>
+
+  <!-- Palma 3500 -->
+  <rect x="50" y="118" width="140" height="18" fill="#5a8c24" rx="3"/>
+  <text x="48" y="132" text-anchor="end" font-size="12" fill="#2d3a1f" font-weight="600">Palma</text>
+  <text x="194" y="132" text-anchor="start" font-size="11" fill="#5a8c24">3.500 €/m²</text>
+
+  <!-- Málaga 3100 -->
+  <rect x="50" y="146" width="124" height="18" fill="#6ba32e" rx="3"/>
+  <text x="48" y="160" text-anchor="end" font-size="12" fill="#2d3a1f" font-weight="600">Málaga</text>
+  <text x="178" y="160" text-anchor="start" font-size="11" fill="#6ba32e">3.100 €/m²</text>
+
+  <!-- Bilbao 3000 -->
+  <rect x="50" y="174" width="120" height="18" fill="#7cb342" rx="3"/>
+  <text x="48" y="188" text-anchor="end" font-size="12" fill="#2d3a1f" font-weight="600">Bilbao</text>
+  <text x="174" y="188" text-anchor="start" font-size="11" fill="#7cb342">3.000 €/m²</text>
+
+  <!-- Valencia 2600 -->
+  <rect x="50" y="202" width="104" height="18" fill="#8bc34a" rx="3"/>
+  <text x="48" y="216" text-anchor="end" font-size="12" fill="#2d3a1f" font-weight="600">Valencia</text>
+  <text x="158" y="216" text-anchor="start" font-size="11" fill="#8bc34a">2.600 €/m²</text>
+
+  <!-- línea de precio medio nacional -->
+  <line x1="50" y1="230" x2="210" y2="230" stroke="#d4af37" stroke-width="1.5" stroke-dasharray="4,3"/>
+  <text x="210" y="244" font-size="10" fill="#d4af37">Media nacional: 2.250 €/m²</text>
+
+  <!-- Sevilla 2500 -->
+  <rect x="50" y="256" width="100" height="18" fill="#9ccc65" rx="3"/>
+  <text x="48" y="270" text-anchor="end" font-size="12" fill="#2d3a1f" font-weight="600">Sevilla</text>
+  <text x="154" y="270" text-anchor="start" font-size="11" fill="#9ccc65">2.500 €/m²</text>
+
+  <!-- Alicante 2300 -->
+  <rect x="50" y="284" width="92" height="18" fill="#aed581" rx="3"/>
+  <text x="48" y="298" text-anchor="end" font-size="12" fill="#2d3a1f" font-weight="600">Alicante</text>
+  <text x="146" y="298" text-anchor="start" font-size="11" fill="#aed581">2.300 €/m²</text>
+
+  <!-- Las Palmas 2300 -->
+  <rect x="50" y="312" width="92" height="18" fill="#aed581" rx="3"/>
+  <text x="48" y="326" text-anchor="end" font-size="12" fill="#2d3a1f" font-weight="600">Las Palmas</text>
+  <text x="146" y="326" text-anchor="start" font-size="11" fill="#aed581">2.300 €/m²</text>
+
+  <!-- A Coruña 2200 -->
+  <rect x="50" y="340" width="88" height="18" fill="#c5e1a5" rx="3"/>
+  <text x="48" y="354" text-anchor="end" font-size="12" fill="#2d3a1f" font-weight="600">A Coruña</text>
+  <text x="142" y="354" text-anchor="start" font-size="11" fill="#c5e1a5">2.200 €/m²</text>
+
+  <!-- Zaragoza 2100 -->
+  <rect x="50" y="368" width="84" height="18" fill="#e6ee9c" rx="3"/>
+  <text x="48" y="382" text-anchor="end" font-size="12" fill="#2d3a1f" font-weight="600">Zaragoza</text>
+  <text x="138" y="382" text-anchor="start" font-size="11" fill="#e6ee9c">2.100 €/m²</text>
+
+  <!-- Murcia 1700 -->
+  <rect x="50" y="396" width="68" height="18" fill="#fff9c4" rx="3"/>
+  <text x="48" y="410" text-anchor="end" font-size="12" fill="#2d3a1f" font-weight="600">Murcia</text>
+  <text x="122" y="410" text-anchor="start" font-size="11" fill="#fff9c4">1.700 €/m²</text>
+
+  <!-- derecha: mapa conceptual -->
+  <rect x="340" y="60" width="420" height="355" fill="none"/>
+  <text x="550" y="90" text-anchor="middle" font-size="14" font-weight="700" fill="#2d3a1f">Diferencia con la media nacional</text>
+
+  <!-- Círculo de Madrid arriba -->
+  <circle cx="550" cy="130" r="58" fill="none" stroke="#3a6b14" stroke-width="3"/>
+  <text x="550" y="126" text-anchor="middle" font-size="20" fill="#3a6b14" font-weight="700">+87%</text>
+  <text x="550" y="142" text-anchor="middle" font-size="10" fill="#3a6b14">Madrid</text>
+
+  <circle cx="440" cy="190" r="45" fill="none" stroke="#4a7c1e" stroke-width="2.5"/>
+  <text x="440" y="186" text-anchor="middle" font-size="16" fill="#4a7c1e" font-weight="700">+64%</text>
+  <text x="440" y="202" text-anchor="middle" font-size="10" fill="#4a7c1e">Barcelona</text>
+
+  <circle cx="650" cy="190" r="42" fill="none" stroke="#5a8c24" stroke-width="2.5"/>
+  <text x="650" y="186" text-anchor="middle" font-size="15" fill="#5a8c24" font-weight="700">+56%</text>
+  <text x="650" y="202" text-anchor="middle" font-size="10" fill="#5a8c24">Palma</text>
+
+  <circle cx="380" cy="270" r="28" fill="none" stroke="#6ba32e" stroke-width="2"/>
+  <text x="380" y="267" text-anchor="middle" font-size="11" fill="#6ba32e" font-weight="600">+38%</text>
+  <text x="380" y="280" text-anchor="middle" font-size="9" fill="#6ba32e">Málaga</text>
+
+  <circle cx="720" cy="260" r="25" fill="none" stroke="#7cb342" stroke-width="2"/>
+  <text x="720" y="257" text-anchor="middle" font-size="10" fill="#7cb342" font-weight="600">+33%</text>
+  <text x="720" y="270" text-anchor="middle" font-size="9" fill="#7cb342">Bilbao</text>
+
+  <!-- centro: referencia nacional -->
+  <circle cx="550" cy="290" r="20" fill="#d4af37" opacity="0.3"/>
+  <circle cx="550" cy="290" r="20" fill="none" stroke="#d4af37" stroke-width="2.5"/>
+  <text x="550" y="287" text-anchor="middle" font-size="10" fill="#8a7510" font-weight="600">0%</text>
+  <text x="550" y="300" text-anchor="middle" font-size="8" fill="#8a7510">Media</text>
+  <line x1="570" y1="290" x2="650" y2="260" stroke="#bbb" stroke-width="0.8" stroke-dasharray="3,2"/>
+  <line x1="555" y1="310" x2="720" y2="275" stroke="#bbb" stroke-width="0.8" stroke-dasharray="3,2"/>
+
+  <!-- abajo: Murcia -->
+  <circle cx="480" cy="350" r="24" fill="none" stroke="#d4c34a" stroke-width="2"/>
+  <text x="480" y="347" text-anchor="middle" font-size="10" fill="#8a7a10" font-weight="600">-24%</text>
+  <text x="480" y="360" text-anchor="middle" font-size="8" fill="#8a7a10">Murcia</text>
+
+  <text x="550" y="400" text-anchor="middle" font-size="11" fill="#9aab8a">Fuente: idealista (dic. 2024), Fotocasa, Tinsa</text>
+</svg>
