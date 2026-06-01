@@ -191,6 +191,14 @@ function validarM2() {
 // CALCULAR PRESUPUESTO (función llamada desde el botón)
 // ============================================================
 function calcularPresupuesto() {
+  // Verificar consentimiento
+  var consentCheck = document.getElementById('consent-datos');
+  if (consentCheck && !consentCheck.checked) {
+    alert('Debes aceptar la política de privacidad para calcular tu presupuesto.');
+    consentCheck.focus();
+    return;
+  }
+
   const cpInput = document.getElementById('cp');
   const m2Input = document.getElementById('m2');
   const tipoSelect = document.getElementById('tipo');
