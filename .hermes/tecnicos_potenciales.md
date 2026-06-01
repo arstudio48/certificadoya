@@ -2,7 +2,7 @@
 
 ## Contactos recopilados
 
-*Última actualización: 30/05/2026*
+*Última actualización: 01/06/2026*
 
 ### Colegios profesionales (contactados pendiente)
 
@@ -11,22 +11,33 @@
 | CSCAE (Arquitectos nacional) | cscae@cscae.com | cscae.com | ✅ 30/05 |
 | CGATE (Aparejadores nacional) | consejo@arquitectura-tecnica.com | arquitectura-tecnica.com | ✅ 30/05 |
 | CGCOII (Ingenieros Industriales) | consejo@ingenierosindustriales.es | ingenierosindustriales.es | ✅ 30/05 |
-|| COAM (Madrid) | dpd@coam.org | coam.org | ✅ 30/05 |
-|| COACV (C. Valenciana) | coacv@coacv.org | coacv.org | ✅ 30/05 |
-|| COACM (Castilla-La Mancha) | registro@coacm.es | coacm.org | ✅ 30/05 |
-|| COAA (Asturias) | coaa@coaa.es | coaa.es | ✅ 30/05 |
-|| COAMálaga | coamalaga@coamalaga.es | coamalaga.es | ✅ 30/05 |
-|| COAGranada | coagranada@coagranada.org | coagranada.org | ✅ 30/05 |
-|| COACórdoba | secretaria@coacordoba.net | coacordoba.org | ✅ 30/05 |
-|| COAMurcia | coamu@coamu.es | coamu.es | ✅ 30/05 |
-|| COACyLE (CyL Este) | coacyle@coacyle.com | coacyle.com | ✅ 30/05 |
-|| COALeón | coal@coal.es | coal.es | ✅ 30/05 |
-|| COAATIE (AT Madrid) | info@coaat.es | coaat.es | ❌ |
+| COAM (Madrid) | dpd@coam.org | coam.org | ✅ 30/05 |
+| COACV (C. Valenciana) | coacv@coacv.org | coacv.org | ✅ 30/05 |
+| COACM (Castilla-La Mancha) | registro@coacm.es | coacm.org | ✅ 30/05 |
+| COAA (Asturias) | coaa@coaa.es | coaa.es | ✅ 30/05 |
+| COAMálaga | coamalaga@coamalaga.es | coamalaga.es | ✅ 30/05 |
+| COAGranada | coagranada@coagranada.org | coagranada.org | ✅ 30/05 |
+| COACórdoba | secretaria@coacordoba.net | coacordoba.org | ✅ 30/05 |
+| COAMurcia | coamu@coamu.es | coamu.es | ✅ 30/05 |
+| COACyLE (CyL Este) | coacyle@coacyle.com | coacyle.com | ✅ 30/05 |
+| COALeón | coal@coal.es | coal.es | ✅ 30/05 |
+| COAATIE (AT Madrid) | info@coaat.es | coaat.es | ❌ |
 
-### Técnicos individuales (pendiente de búsqueda)
-- *(vacío — comenzar scraping desde Milanuncios/Habitissimo)*
+### Técnicos individuales encontrados online
 
-#### Wallapop — Técnicos encontrados (30/05)
+#### Cronoshare
+- **Estado:** No accesible (error técnico en la web, no muestra profesionales)
+
+#### Habitissimo
+- **Estado:** Búsqueda sin resultados para "certificado energético". Búsqueda de profesionales devuelve 404.
+
+#### Milanuncios
+- **Estado:** Bloqueado por seguridad (Cloudflare). URL: https://www.milanuncios.com/anuncios/certificado-energetico.htm
+
+#### LinkedIn
+- **Estado:** Requiere inicio de sesión para buscar técnicos. No accesible sin autenticación.
+
+#### Wallapop — Técnicos encontrados (scrape previo 30/05)
 | Anuncio | Precio | URL |
 |---------|--------|-----|
 | Certificados energéticos MADRID | 70€ | https://es.wallapop.com/item/certificados-energeticos-127337958 |
@@ -43,5 +54,9 @@
 | Certificado Energético desde 59 euros | 59€ | https://es.wallapop.com/item/certificado-energetico-desde-50-456573010 |
 | Certificado Energético Vivienda | 60€ | https://es.wallapop.com/item/certificado-energetico-vivienda-1266032560 |
 
-### Técnicos registrados en plataforma
-- (vacío — solo datos de relleno seed)
+## Estado de búsqueda 01/06/2026
+- Cronoshare: ❌ Error técnico
+- Habitissimo: ❌ Sin resultados/búsqueda 404
+- Milanuncios: ❌ Bloqueado (Cloudflare)
+- LinkedIn: ❌ Requiere login
+- Wallapop: ⚠️ Anunciantes individuales (13 encontrados en scrape previo)

@@ -1,48 +1,62 @@
-# Monitor CEE — 30/05/2026
+# Monitor CEE — 01/06/2026
 
 ## Noticias Últimas 24h
 
+### IMPACTO ALTO
+
+1. **Últimos días para pedir la ayuda de hasta 20.000 euros para reformar tu casa**
+   - Fuente: Vanitatis (hace ~7 días, detectado hoy)
+   - Plazo: 30 de junio de 2026
+   - La subvención puede cubrir hasta el 100% del coste de obras de rehabilitación energética. El plazo límite es el 30 de junio.
+   - Impacto: ALTO — Plazo próximo a vencer, relevante para usuarios del portal
+   - Sugerencia: ✅ Merece artículo urgente en el blog informando del plazo
+
 ### IMPACTO MEDIO
 
-1. **Madrid destinará 50 millones al Plan Rehabilita 2026 con nueva línea para mejora estética de edificios**
-   - Fuente: Construible (29 may 2026)
-   - https://www.construible.es/2026/05/29/madrid-destinara-50-millones-plan-rehabilita-2026-nueva-linea-mejora-estetica-edificios
-   - Impacto: MEDIO — Nuevas ayudas a la rehabilitación en Madrid, incluye mejora estética además de eficiencia
+2. **El Gobierno activa ayudas de hasta 21.400 euros para reformar viviendas**
+   - Fuente: El Periódico (1 jun 2026)
+   - Ayudas financiadas con fondos europeos para rehabilitación de viviendas. Cubren reformas integrales.
+   - Impacto: MEDIO — Nuevas ayudas confirmadas, amplía la información anterior
+   - Sugerencia: ✅ Merece artículo en el blog
 
-### IMPACTO BAJO
+3. **Ya ha entrado en vigor: reformar la vivienda será obligatorio en España desde 2026**
+   - Fuente: Crónica Global (12 may 2026, detectado hoy)
+   - El nuevo Código Técnico de la Edificación (CTE) obliga a rehabilitar inmuebles para frenar el consumo energético y las emisiones.
+   - Impacto: MEDIO — Confirmación de normativa ya en vigor
+   - Sugerencia: ✅ Merece artículo detallado
 
-2. **"Una casa normal gasta 4.000 euros al año solo en calefacción o aire; una pasiva, 400 en total": las ventajas de las casas pasivas**
-   - Fuente: La Vanguardia (29 may 2026)
-   - https://www.lavanguardia.com/magazine/casa/20260529/11550798/verano-dormimos-aire-acondicionado-encendido-toda-noche-ventajas-vivir-casa-pasiva-gvm.html
-   - Impacto: BAJO — Artículo divulgativo sobre casas pasivas, sin cambio normativo
+4. **Bruselas confirma que reformar la vivienda será obligatorio en España desde 2026**
+   - Fuente: Confidencial Digital (10 may 2026)
+   - La vivienda en España necesita aumentar oferta y reducir drásticamente su impacto ambiental. Doble presión normativa.
+   - Impacto: MEDIO — Contexto normativo relevante
+
+5. **La UE cambia las normas: obliga a España a renovar las viviendas con peor eficiencia energética**
+   - Fuente: El Español (31 may 2026, vía MSN)
+   - Directiva UE 2024/1275 ya en vigor. Obliga a renovar viviendas con peor calificación energética. Límite 2030.
+   - Impacto: MEDIO — Reiteración de directiva europea, pero con nuevo artículo
+   - Sugerencia: ✅ Contexto útil para blog
 
 ## Grupos Telegram
 
-Se han identificado los siguientes canales/grupos de Telegram relacionados:
+No se encontraron grupos nuevos de Telegram en esta sesión. Los buscadores (Google, DuckDuckGo, Bing) están bloqueando todas las búsquedas automatizadas. Los grupos previamente identificados siguen siendo:
 
-### GRUPOS ACTIVOS
-1. **@arquitectos** — Grupo (no oficial) de Arquitectos españoles. 103 miembros. Obligatorio ser colegiado en COA español.
-   - https://t.me/arquitectos
-
-### CANALES EXISTENTES (por confirmar actividad)
+1. **@arquitectos** — Grupo de Arquitectos españoles (~103 miembros)
 2. **@certificadoenergetico** — Canal sobre certificación energética
-   - https://t.me/certificadoenergetico
 3. **@aparejadores** — Canal sobre aparejadores
-   - https://t.me/aparejadores
 4. **@rehabilitacionenergetica** — Canal sobre rehabilitación energética
-   - https://t.me/rehabilitacionenergetica
 5. **@arquitectostech** — Canal sobre arquitectura técnica
-   - https://t.me/arquitectostech
-6. **@certificadoya** — Canal sobre certificación (relacionado con el proyecto)
-   - https://t.me/certificadoya
+6. **@certificadoya** — Canal del proyecto
 
 ## Evaluación
-- No se detectaron noticias de IMPACTO ALTO en las últimas 24h
-- Sin nuevos RD, BOE con normativa CEE, ni cambios regulatorios urgentes
-- Las ayudas de Madrid (50M€) son la noticia más relevante del período
-- Se han encontrado grupos de Telegram no reportados anteriormente
 
-## Entregado
-- ✅ Email enviado a aparejado@me.com vía himalaya
-- ✅ Grupos Telegram notificados (nuevos grupos encontrados)
-- ❌ Sin alertas de alto impacto
+- ✅ **1 noticia de IMPACTO ALTO**: Plazo de ayudas (30 junio) próximo a vencer
+- ✅ **5 noticias de IMPACTO MEDIO**: Ayudas rehabilitación, CTE obligatorio, Directiva UE
+- ⚠️ Buscadores bloqueando búsquedas automatizadas (Google, DuckDuckGo, Bing)
+- ❌ Sin nuevos Reales Decretos ni BOE con normativa CEE en los últimos 2 días
+
+## Acciones realizadas
+- ✅ Buscadas fuentes: BOE, MITECO, IDAE, Bing News, DuckDuckGo
+- ✅ Artículo El Español capturado completo (Directiva UE 2024/1275)
+- ✅ BOE 30/05 y 01/06 verificados: sin contenido relevante
+- ❌ Búsqueda de grupos Telegram bloqueada por todos los buscadores
+- ✅ Archivo actualizado en /home/arturo/certificadoya/.hermes/cee-news.md
