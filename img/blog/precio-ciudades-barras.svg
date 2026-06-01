@@ -1,118 +1,156 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 420" font-family="Outfit, sans-serif">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 700" font-family="Outfit, 'Segoe UI', sans-serif">
   <defs>
-    <linearGradient id="gw" x1="0" y1="0" x2="1" y2="1">
-      <stop offset="0%" stop-color="#1a1a2e"/>
-      <stop offset="100%" stop-color="#16213e"/>
-    </linearGradient>
-    <linearGradient id="gb" x1="0" y1="0" x2="0" y2="1">
-      <stop offset="0%" stop-color="#4a7c1e"/>
-      <stop offset="100%" stop-color="#6ba32e"/>
-    </linearGradient>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#1b1b1f"/><stop offset="100%" stop-color="#2a2a30"/></linearGradient>
+    <linearGradient id="gold" x1="0" y1="0" x2="1" y2="0"><stop offset="0%" stop-color="#d4af37"/><stop offset="100%" stop-color="#c9a032"/></linearGradient>
+    <filter id="glowGold"><feGaussianBlur stdDeviation="2" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+    <filter id="shadow"><feDropShadow dx="0" dy="2" stdDeviation="4" flood-color="#000" flood-opacity=".2"/></filter>
+    <pattern id="hatch" width="8" height="8" patternUnits="userSpaceOnUse"><line x1="0" y1="8" x2="8" y2="0" stroke="#ffffff" stroke-width=".5" opacity=".06"/></pattern>
   </defs>
-  <rect width="800" height="420" fill="#f7f9f6" rx="12"/>
-  <text x="400" y="35" text-anchor="middle" font-size="16" font-weight="700" fill="#2d3a1f">Precio medio de vivienda usada por ciudad (€/m², 2024)</text>
 
-  <!-- Madrid 4200 -->
-  <rect x="50" y="62" width="168" height="18" fill="#3a6b14" rx="3"/>
-  <text x="48" y="76" text-anchor="end" font-size="12" fill="#2d3a1f" font-weight="600">Madrid</text>
-  <text x="222" y="76" text-anchor="start" font-size="11" fill="#4a7c1e">4.200 €/m²</text>
+  <rect width="1200" height="700" fill="url(#bg)"/>
+  <rect width="1200" height="700" fill="url(#hatch)"/>
 
-  <!-- Barcelona 3700 -->
-  <rect x="50" y="90" width="148" height="18" fill="#4a7c1e" rx="3"/>
-  <text x="48" y="104" text-anchor="end" font-size="12" fill="#2d3a1f" font-weight="600">Barcelona</text>
-  <text x="202" y="104" text-anchor="start" font-size="11" fill="#4a7c1e">3.700 €/m²</text>
+  <text x="40" y="45" fill="#d4af37" font-size="16" font-weight="700" letter-spacing="2">03 · PRECIO DE LA VIVIENDA USADA POR CIUDAD</text>
+  <text x="40" y="75" fill="#e8e8e8" font-size="24" font-weight="600">¿Cuánto vale la vivienda tipo en cada ciudad?</text>
+  <text x="40" y="98" fill="#999" font-size="13">Precio medio de segunda mano para 97 m² · Fuentes: idealista · Tinsa · diciembre 2024</text>
+  <line x1="40" y1="108" x2="300" y2="108" stroke="#d4af37" stroke-width="2" opacity=".6"/>
 
-  <!-- Palma 3500 -->
-  <rect x="50" y="118" width="140" height="18" fill="#5a8c24" rx="3"/>
-  <text x="48" y="132" text-anchor="end" font-size="12" fill="#2d3a1f" font-weight="600">Palma</text>
-  <text x="194" y="132" text-anchor="start" font-size="11" fill="#5a8c24">3.500 €/m²</text>
+  <!-- Panel: Ranking de ciudades (columna izquierda) -->
+  <g filter="url(#shadow)">
+    <rect x="40" y="130" width="540" height="480" rx="12" fill="#1f1f25" stroke="#2d2d33" stroke-width="1" opacity=".95"/>
+  </g>
 
-  <!-- Málaga 3100 -->
-  <rect x="50" y="146" width="124" height="18" fill="#6ba32e" rx="3"/>
-  <text x="48" y="160" text-anchor="end" font-size="12" fill="#2d3a1f" font-weight="600">Málaga</text>
-  <text x="178" y="160" text-anchor="start" font-size="11" fill="#6ba32e">3.100 €/m²</text>
+  <text x="60" y="162" fill="#d4af37" font-size="13" font-weight="600" letter-spacing="1">RANKING DE PRECIOS (97 m², segunda mano)</text>
 
-  <!-- Bilbao 3000 -->
-  <rect x="50" y="174" width="120" height="18" fill="#7cb342" rx="3"/>
-  <text x="48" y="188" text-anchor="end" font-size="12" fill="#2d3a1f" font-weight="600">Bilbao</text>
-  <text x="174" y="188" text-anchor="start" font-size="11" fill="#7cb342">3.000 €/m²</text>
+  <!-- Encabezado tabla -->
+  <rect x="60" y="175" width="500" height="28" rx="4" fill="#25252b" stroke="#333" stroke-width="1"/>
+  <text x="75" y="194" fill="#999" font-size="10" font-weight="600">#</text>
+  <text x="100" y="194" fill="#999" font-size="10" font-weight="600">Ciudad</text>
+  <text x="380" y="194" fill="#999" font-size="10" font-weight="600">€/m²</text>
+  <text x="530" y="194" text-anchor="end" fill="#999" font-size="10" font-weight="600">Total (97 m²)</text>
 
-  <!-- Valencia 2600 -->
-  <rect x="50" y="202" width="104" height="18" fill="#8bc34a" rx="3"/>
-  <text x="48" y="216" text-anchor="end" font-size="12" fill="#2d3a1f" font-weight="600">Valencia</text>
-  <text x="158" y="216" text-anchor="start" font-size="11" fill="#8bc34a">2.600 €/m²</text>
+  <!-- Fila 1: Madrid -->
+  <rect x="60" y="208" width="500" height="34" rx="4" fill="#2a2a32" stroke="#d4af37" stroke-width="1"/>
+  <text x="78" y="231" fill="#d4af37" font-size="12" font-weight="700">1</text>
+  <text x="100" y="231" fill="#fff" font-size="12" font-weight="600">Madrid</text>
+  <text x="380" y="231" fill="#d4af37" font-size="12" font-weight="600">4.200</text>
+  <text x="540" y="231" text-anchor="end" fill="#d4af37" font-size="14" font-weight="700">407.400 €</text>
+  <line x1="60" y1="242" x2="560" y2="242" stroke="#333" stroke-width=".5"/>
 
-  <!-- línea de precio medio nacional -->
-  <line x1="50" y1="230" x2="210" y2="230" stroke="#d4af37" stroke-width="1.5" stroke-dasharray="4,3"/>
-  <text x="210" y="244" font-size="10" fill="#d4af37">Media nacional: 2.250 €/m²</text>
+  <!-- Fila 2: Barcelona -->
+  <rect x="60" y="244" width="500" height="34" rx="4" fill="#25252b"/>
+  <text x="78" y="267" fill="#aaa" font-size="12" font-weight="600">2</text>
+  <text x="100" y="267" fill="#e8e8e8" font-size="12">Barcelona</text>
+  <text x="380" y="267" fill="#e8e8e8" font-size="12">3.700</text>
+  <text x="540" y="267" text-anchor="end" fill="#e8e8e8" font-size="13" font-weight="600">358.900 €</text>
+  <line x1="60" y1="278" x2="560" y2="278" stroke="#333" stroke-width=".5"/>
 
-  <!-- Sevilla 2500 -->
-  <rect x="50" y="256" width="100" height="18" fill="#9ccc65" rx="3"/>
-  <text x="48" y="270" text-anchor="end" font-size="12" fill="#2d3a1f" font-weight="600">Sevilla</text>
-  <text x="154" y="270" text-anchor="start" font-size="11" fill="#9ccc65">2.500 €/m²</text>
+  <!-- Fila 3: Palma -->
+  <rect x="60" y="280" width="500" height="34" rx="4" fill="#25252b"/>
+  <text x="78" y="303" fill="#aaa" font-size="12" font-weight="600">3</text>
+  <text x="100" y="303" fill="#e8e8e8" font-size="12">Palma</text>
+  <text x="380" y="303" fill="#e8e8e8" font-size="12">3.500</text>
+  <text x="540" y="303" text-anchor="end" fill="#e8e8e8" font-size="13" font-weight="600">339.500 €</text>
+  <line x1="60" y1="314" x2="560" y2="314" stroke="#333" stroke-width=".5"/>
 
-  <!-- Alicante 2300 -->
-  <rect x="50" y="284" width="92" height="18" fill="#aed581" rx="3"/>
-  <text x="48" y="298" text-anchor="end" font-size="12" fill="#2d3a1f" font-weight="600">Alicante</text>
-  <text x="146" y="298" text-anchor="start" font-size="11" fill="#aed581">2.300 €/m²</text>
+  <!-- Fila 4: Málaga -->
+  <rect x="60" y="316" width="500" height="34" rx="4" fill="#25252b"/>
+  <text x="78" y="339" fill="#aaa" font-size="12" font-weight="600">4</text>
+  <text x="100" y="339" fill="#e8e8e8" font-size="12">Málaga</text>
+  <text x="380" y="339" fill="#e8e8e8" font-size="12">3.100</text>
+  <text x="540" y="339" text-anchor="end" fill="#e8e8e8" font-size="13" font-weight="600">300.700 €</text>
+  <line x1="60" y1="350" x2="560" y2="350" stroke="#333" stroke-width=".5"/>
 
-  <!-- Las Palmas 2300 -->
-  <rect x="50" y="312" width="92" height="18" fill="#aed581" rx="3"/>
-  <text x="48" y="326" text-anchor="end" font-size="12" fill="#2d3a1f" font-weight="600">Las Palmas</text>
-  <text x="146" y="326" text-anchor="start" font-size="11" fill="#aed581">2.300 €/m²</text>
+  <!-- Fila 5: Bilbao -->
+  <rect x="60" y="352" width="500" height="34" rx="4" fill="#25252b"/>
+  <text x="78" y="375" fill="#aaa" font-size="12" font-weight="600">5</text>
+  <text x="100" y="375" fill="#e8e8e8" font-size="12">Bilbao</text>
+  <text x="380" y="375" fill="#e8e8e8" font-size="12">3.000</text>
+  <text x="540" y="375" text-anchor="end" fill="#e8e8e8" font-size="13" font-weight="600">291.000 €</text>
+  <line x1="60" y1="386" x2="560" y2="386" stroke="#333" stroke-width=".5"/>
 
-  <!-- A Coruña 2200 -->
-  <rect x="50" y="340" width="88" height="18" fill="#c5e1a5" rx="3"/>
-  <text x="48" y="354" text-anchor="end" font-size="12" fill="#2d3a1f" font-weight="600">A Coruña</text>
-  <text x="142" y="354" text-anchor="start" font-size="11" fill="#c5e1a5">2.200 €/m²</text>
+  <!-- Fila 6: Valencia -->
+  <rect x="60" y="388" width="500" height="34" rx="4" fill="#25252b"/>
+  <text x="78" y="411" fill="#aaa" font-size="12" font-weight="600">6</text>
+  <text x="100" y="411" fill="#e8e8e8" font-size="12">Valencia</text>
+  <text x="380" y="411" fill="#e8e8e8" font-size="12">2.600</text>
+  <text x="540" y="411" text-anchor="end" fill="#e8e8e8" font-size="13" font-weight="600">252.200 €</text>
+  <line x1="60" y1="422" x2="560" y2="422" stroke="#333" stroke-width=".5"/>
 
-  <!-- Zaragoza 2100 -->
-  <rect x="50" y="368" width="84" height="18" fill="#e6ee9c" rx="3"/>
-  <text x="48" y="382" text-anchor="end" font-size="12" fill="#2d3a1f" font-weight="600">Zaragoza</text>
-  <text x="138" y="382" text-anchor="start" font-size="11" fill="#e6ee9c">2.100 €/m²</text>
+  <!-- Fila 7: Sevilla -->
+  <rect x="60" y="424" width="500" height="34" rx="4" fill="#25252b"/>
+  <text x="78" y="447" fill="#aaa" font-size="12" font-weight="600">7</text>
+  <text x="100" y="447" fill="#e8e8e8" font-size="12">Sevilla</text>
+  <text x="380" y="447" fill="#e8e8e8" font-size="12">2.500</text>
+  <text x="540" y="447" text-anchor="end" fill="#e8e8e8" font-size="13" font-weight="600">242.500 €</text>
+  <line x1="60" y1="458" x2="560" y2="458" stroke="#333" stroke-width=".5"/>
 
-  <!-- Murcia 1700 -->
-  <rect x="50" y="396" width="68" height="18" fill="#fff9c4" rx="3"/>
-  <text x="48" y="410" text-anchor="end" font-size="12" fill="#2d3a1f" font-weight="600">Murcia</text>
-  <text x="122" y="410" text-anchor="start" font-size="11" fill="#fff9c4">1.700 €/m²</text>
+  <!-- Fila 8: Alicante -->
+  <rect x="60" y="460" width="500" height="34" rx="4" fill="#25252b"/>
+  <text x="78" y="483" fill="#aaa" font-size="12" font-weight="600">8</text>
+  <text x="100" y="483" fill="#e8e8e8" font-size="12">Alicante</text>
+  <text x="380" y="483" fill="#e8e8e8" font-size="12">2.300</text>
+  <text x="540" y="483" text-anchor="end" fill="#e8e8e8" font-size="13" font-weight="600">223.100 €</text>
+  <line x1="60" y1="494" x2="560" y2="494" stroke="#333" stroke-width=".5"/>
 
-  <!-- derecha: mapa conceptual -->
-  <rect x="340" y="60" width="420" height="355" fill="none"/>
-  <text x="550" y="90" text-anchor="middle" font-size="14" font-weight="700" fill="#2d3a1f">Diferencia con la media nacional</text>
+  <!-- Fila 9: Las Palmas -->
+  <rect x="60" y="496" width="500" height="34" rx="4" fill="#25252b"/>
+  <text x="78" y="519" fill="#aaa" font-size="12" font-weight="600">9</text>
+  <text x="100" y="519" fill="#e8e8e8" font-size="12">Las Palmas</text>
+  <text x="380" y="519" fill="#e8e8e8" font-size="12">2.300</text>
+  <text x="540" y="519" text-anchor="end" fill="#e8e8e8" font-size="13" font-weight="600">223.100 €</text>
+  <line x1="60" y1="530" x2="560" y2="530" stroke="#333" stroke-width=".5"/>
 
-  <!-- Círculo de Madrid arriba -->
-  <circle cx="550" cy="130" r="58" fill="none" stroke="#3a6b14" stroke-width="3"/>
-  <text x="550" y="126" text-anchor="middle" font-size="20" fill="#3a6b14" font-weight="700">+87%</text>
-  <text x="550" y="142" text-anchor="middle" font-size="10" fill="#3a6b14">Madrid</text>
+  <!-- Fila 10: A Coruña -->
+  <rect x="60" y="532" width="500" height="34" rx="4" fill="#25252b"/>
+  <text x="78" y="555" fill="#aaa" font-size="12" font-weight="600">10</text>
+  <text x="100" y="555" fill="#e8e8e8" font-size="12">A Coruña</text>
+  <text x="380" y="555" fill="#e8e8e8" font-size="12">2.200</text>
+  <text x="540" y="555" text-anchor="end" fill="#e8e8e8" font-size="13" font-weight="600">213.400 €</text>
+  <line x1="60" y1="566" x2="560" y2="566" stroke="#333" stroke-width=".5"/>
 
-  <circle cx="440" cy="190" r="45" fill="none" stroke="#4a7c1e" stroke-width="2.5"/>
-  <text x="440" y="186" text-anchor="middle" font-size="16" fill="#4a7c1e" font-weight="700">+64%</text>
-  <text x="440" y="202" text-anchor="middle" font-size="10" fill="#4a7c1e">Barcelona</text>
+  <!-- Fila 11: Zaragoza -->
+  <rect x="60" y="568" width="500" height="34" rx="4" fill="#25252b"/>
+  <text x="78" y="591" fill="#aaa" font-size="12" font-weight="600">11</text>
+  <text x="100" y="591" fill="#e8e8e8" font-size="12">Zaragoza</text>
+  <text x="380" y="591" fill="#e8e8e8" font-size="12">2.100</text>
+  <text x="540" y="591" text-anchor="end" fill="#e8e8e8" font-size="13" font-weight="600">203.700 €</text>
 
-  <circle cx="650" cy="190" r="42" fill="none" stroke="#5a8c24" stroke-width="2.5"/>
-  <text x="650" y="186" text-anchor="middle" font-size="15" fill="#5a8c24" font-weight="700">+56%</text>
-  <text x="650" y="202" text-anchor="middle" font-size="10" fill="#5a8c24">Palma</text>
+  <!-- Panel derecho: comparativa visual + insights -->
+  <g filter="url(#shadow)">
+    <rect x="600" y="130" width="560" height="300" rx="12" fill="#1f1f25" stroke="#2d2d33" stroke-width="1" opacity=".95"/>
+  </g>
 
-  <circle cx="380" cy="270" r="28" fill="none" stroke="#6ba32e" stroke-width="2"/>
-  <text x="380" y="267" text-anchor="middle" font-size="11" fill="#6ba32e" font-weight="600">+38%</text>
-  <text x="380" y="280" text-anchor="middle" font-size="9" fill="#6ba32e">Málaga</text>
+  <text x="620" y="162" fill="#d4af37" font-size="13" font-weight="600" letter-spacing="1">DIFERENCIA ENTRE CIUDADES</text>
 
-  <circle cx="720" cy="260" r="25" fill="none" stroke="#7cb342" stroke-width="2"/>
-  <text x="720" y="257" text-anchor="middle" font-size="10" fill="#7cb342" font-weight="600">+33%</text>
-  <text x="720" y="270" text-anchor="middle" font-size="9" fill="#7cb342">Bilbao</text>
+  <!-- Barra de diferencial Madrid vs Murcia -->
+  <rect x="620" y="180" width="520" height="28" rx="6" fill="#d4af37" opacity=".15"/>
+  <rect x="620" y="180" width="520" height="28" rx="6" fill="#d4af37" opacity=".5"/>
+  <rect x="620" y="180" width="130" height="28" rx="6" fill="#d4af37" opacity=".8"/>
+  <text x="622" y="198" fill="#5a3e0a" font-size="11" font-weight="700">Murcia (164.900 €)</text>
+  <text x="620" y="222" fill="#d4af37" font-size="10">Diferencial Madrid vs Murcia:</text>
+  <text x="620" y="240" fill="#fff" font-size="16" font-weight="700">+242.500 € (147% más caro)</text>
 
-  <!-- centro: referencia nacional -->
-  <circle cx="550" cy="290" r="20" fill="#d4af37" opacity="0.3"/>
-  <circle cx="550" cy="290" r="20" fill="none" stroke="#d4af37" stroke-width="2.5"/>
-  <text x="550" y="287" text-anchor="middle" font-size="10" fill="#8a7510" font-weight="600">0%</text>
-  <text x="550" y="300" text-anchor="middle" font-size="8" fill="#8a7510">Media</text>
-  <line x1="570" y1="290" x2="650" y2="260" stroke="#bbb" stroke-width="0.8" stroke-dasharray="3,2"/>
-  <line x1="555" y1="310" x2="720" y2="275" stroke="#bbb" stroke-width="0.8" stroke-dasharray="3,2"/>
+  <rect x="620" y="260" width="520" height="1" fill="#333"/>
 
-  <!-- abajo: Murcia -->
-  <circle cx="480" cy="350" r="24" fill="none" stroke="#d4c34a" stroke-width="2"/>
-  <text x="480" y="347" text-anchor="middle" font-size="10" fill="#8a7a10" font-weight="600">-24%</text>
-  <text x="480" y="360" text-anchor="middle" font-size="8" fill="#8a7a10">Murcia</text>
+  <text x="620" y="285" fill="#ccc" font-size="11">La vivienda tipo en Madrid cuesta casi</text>
+  <text x="620" y="302" fill="#ccc" font-size="11">2,5 veces más que en Murcia.</text>
+  <text x="620" y="325" fill="#999" font-size="10">En las ciudades del sur y del interior (Murcia,</text>
+  <text x="620" y="340" fill="#999" font-size="10">Zaragoza) se puede comprar la misma vivienda</text>
+  <text x="620" y="355" fill="#999" font-size="10">por menos de la mitad que en Madrid.</text>
 
-  <text x="550" y="400" text-anchor="middle" font-size="11" fill="#9aab8a">Fuente: idealista (dic. 2024), Fotocasa, Tinsa</text>
+  <text x="620" y="420" fill="#666" font-size="9">Fuente: idealista · Índice de Precios diciembre 2024 · Tinsa IMIE 2024</text>
+
+  <!-- Panel inferior: Insight clave -->
+  <g filter="url(#shadow)">
+    <rect x="600" y="450" width="560" height="160" rx="12" fill="#1f1f25" stroke="#d4af37" stroke-width="1.5" opacity=".95"/>
+  </g>
+  <text x="620" y="482" fill="#d4af37" font-size="13" font-weight="600" letter-spacing="1">INSIGHT: PRECIO DEL CEE vs VALOR DE LA VIVIENDA</text>
+
+  <text x="620" y="510" fill="#ccc" font-size="12">El certificado energético de una vivienda tipo cuesta</text>
+  <text x="620" y="530" fill="#ccc" font-size="12">entre el <tspan fill="#d4af37" font-weight="700">0,016%</tspan> (Madrid) y el <tspan fill="#d4af37" font-weight="700">0,056%</tspan> (Murcia) del valor del inmueble.</text>
+  <text x="620" y="560" fill="#999" font-size="11">En Madrid: 100 € de CEE sobre 407.400 € = 0,025% del valor.</text>
+  <text x="620" y="580" fill="#999" font-size="11">En Murcia: 90 € de CEE sobre 164.900 € = 0,055% del valor.</text>
+
+  <text x="40" y="630" fill="#555" font-size="10">Fuentes: idealista · Índice de Precios Inmobiliarios diciembre 2024 · Tinsa IMIE Mercados Locales 2024 · Precios medios CEE CertificadoYa 2026</text>
 </svg>

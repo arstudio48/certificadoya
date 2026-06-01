@@ -1,38 +1,145 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 340" font-family="Outfit, sans-serif">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 640" font-family="Outfit, 'Segoe UI', sans-serif">
   <defs>
-    <linearGradient id="g1" x1="0" y1="0" x2="0" y2="1">
-      <stop offset="0%" stop-color="#4a7c1e"/>
-      <stop offset="100%" stop-color="#6ba32e"/>
-    </linearGradient>
-    <linearGradient id="g2" x1="0" y1="0" x2="0" y2="1">
-      <stop offset="0%" stop-color="#3a6b14"/>
-      <stop offset="100%" stop-color="#5a8c24"/>
-    </linearGradient>
-    <linearGradient id="g3" x1="0" y1="0" x2="0" y2="1">
-      <stop offset="0%" stop-color="#2d5a0e"/>
-      <stop offset="100%" stop-color="#4a7c1e"/>
-    </linearGradient>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#1b1b1f"/><stop offset="100%" stop-color="#2a2a30"/></linearGradient>
+    <linearGradient id="gold" x1="0" y1="0" x2="1" y2="0"><stop offset="0%" stop-color="#d4af37"/><stop offset="100%" stop-color="#c9a032"/></linearGradient>
+    <linearGradient id="gr1" x1="0" y1="1" x2="0" y2="0"><stop offset="0%" stop-color="#3d5a1e"/><stop offset="100%" stop-color="#547c24"/></linearGradient>
+    <linearGradient id="gr2" x1="0" y1="1" x2="0" y2="0"><stop offset="0%" stop-color="#2a6e3b"/><stop offset="100%" stop-color="#3a8f4f"/></linearGradient>
+    <linearGradient id="gr3" x1="0" y1="1" x2="0" y2="0"><stop offset="0%" stop-color="#1e5c80"/><stop offset="100%" stop-color="#2a7ab5"/></linearGradient>
+    <linearGradient id="gr4" x1="0" y1="1" x2="0" y2="0"><stop offset="0%" stop-color="#6b3fa0"/><stop offset="100%" stop-color="#8b5cf6"/></linearGradient>
+    <linearGradient id="gr5" x1="0" y1="1" x2="0" y2="0"><stop offset="0%" stop-color="#a04020"/><stop offset="100%" stop-color="#d45530"/></linearGradient>
+    <filter id="shadow"><feDropShadow dx="0" dy="2" stdDeviation="4" flood-color="#000" flood-opacity=".15"/></filter>
+    <filter id="glow"><feGaussianBlur stdDeviation="3" result="blur"/><feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+    <pattern id="hatch" width="8" height="8" patternUnits="userSpaceOnUse"><line x1="0" y1="8" x2="8" y2="0" stroke="#ffffff" stroke-width=".5" opacity=".08"/></pattern>
   </defs>
-  <rect width="800" height="340" fill="#f7f9f6" rx="12"/>
-  <text x="400" y="40" text-anchor="middle" font-size="18" font-weight="700" fill="#2d3a1f">Superficie de la vivienda tipo en España (m² construidos)</text>
-  <!-- Pisos -->
-  <rect x="60" y="85" width="120" height="200" fill="url(#g3)" rx="4" opacity="0.9"/>
-  <text x="120" y="270" text-anchor="middle" font-size="13" fill="#2d3a1f" font-weight="600">Piso 1 hab.</text>
-  <text x="120" y="286" text-anchor="middle" font-size="20" fill="#4a7c1e" font-weight="700">60 m²</text>
-  <!-- Piso 3 hab -->
-  <rect x="210" y="45" width="140" height="240" fill="url(#g1)" rx="4"/>
-  <text x="280" y="270" text-anchor="middle" font-size="13" fill="#2d3a1f" font-weight="600">Piso 3 hab.</text>
-  <text x="280" y="286" text-anchor="middle" font-size="20" fill="#fff" font-weight="700">97 m²</text>
-  <!-- estrella -->
-  <text x="280" y="30" text-anchor="middle" font-size="14" fill="#d4af37">★ TIPO</text>
-  <!-- Piso 4 hab -->
-  <rect x="380" y="105" width="140" height="180" fill="url(#g2)" rx="4" opacity="0.8"/>
-  <text x="450" y="270" text-anchor="middle" font-size="13" fill="#2d3a1f" font-weight="600">Piso 4 hab.</text>
-  <text x="450" y="286" text-anchor="middle" font-size="20" fill="#4a7c1e" font-weight="700">120 m²</text>
-  <!-- Unifamiliar -->
-  <rect x="550" y="10" width="160" height="275" fill="url(#g3)" rx="4" opacity="0.7"/>
-  <text x="630" y="270" text-anchor="middle" font-size="13" fill="#2d3a1f" font-weight="600">Unifamiliar</text>
-  <text x="630" y="286" text-anchor="middle" font-size="20" fill="#4a7c1e" font-weight="700">193 m²</text>
-  <!-- nota pie -->
-  <text x="400" y="320" text-anchor="middle" font-size="11" fill="#9aab8a">Fuente: INE, Censo de Viviendas 2021 · Catastro</text>
+
+  <!-- Fondo oscuro -->
+  <rect width="1200" height="640" fill="url(#bg)"/>
+  <rect width="1200" height="640" fill="url(#hatch)"/>
+
+  <!-- Título -->
+  <text x="40" y="45" fill="#d4af37" font-size="16" font-weight="700" letter-spacing="2">01 · VIVIENDA TIPO EN ESPAÑA</text>
+  <text x="40" y="75" fill="#e8e8e8" font-size="24" font-weight="600">¿Cuál es la vivienda más común?</text>
+  <text x="40" y="98" fill="#999" font-size="13">Superficie media, distribución y perfil del propietario según el INE</text>
+  <line x1="40" y1="108" x2="300" y2="108" stroke="#d4af37" stroke-width="2" opacity=".6"/>
+
+  <!-- COLUMNA IZQUIERDA: Datos principales -->
+  <g filter="url(#shadow)">
+    <rect x="40" y="130" width="540" height="240" rx="12" fill="#1f1f25" stroke="#2d2d33" stroke-width="1" opacity=".95"/>
+  </g>
+  <text x="60" y="162" fill="#d4af37" font-size="13" font-weight="600" letter-spacing="1">DATOS PRINCIPALES</text>
+
+  <!-- Ficha 1: Superficie -->
+  <rect x="60" y="178" width="155" height="80" rx="8" fill="#25252b" stroke="#333" stroke-width="1"/>
+  <text x="137" y="208" text-anchor="middle" fill="#d4af37" font-size="34" font-weight="700">97</text>
+  <text x="137" y="228" text-anchor="middle" fill="#aaa" font-size="11">m² construidos</text>
+  <text x="137" y="245" text-anchor="middle" fill="#777" font-size="9">Superficie media nacional</text>
+
+  <!-- Ficha 2: Dormitorios -->
+  <rect x="228" y="178" width="155" height="80" rx="8" fill="#25252b" stroke="#333" stroke-width="1"/>
+  <text x="305" y="208" text-anchor="middle" fill="#d4af37" font-size="34" font-weight="700">3</text>
+  <text x="305" y="228" text-anchor="middle" fill="#aaa" font-size="11">dormitorios</text>
+  <text x="305" y="245" text-anchor="middle" fill="#777" font-size="9">63% del parque</text>
+
+  <!-- Ficha 3: Baños -->
+  <rect x="396" y="178" width="155" height="80" rx="8" fill="#25252b" stroke="#333" stroke-width="1"/>
+  <text x="473" y="208" text-anchor="middle" fill="#d4af37" font-size="34" font-weight="700">1-2</text>
+  <text x="473" y="228" text-anchor="middle" fill="#aaa" font-size="11">baños</text>
+  <text x="473" y="245" text-anchor="middle" fill="#777" font-size="9">Generalmente 1 completo</text>
+
+  <!-- Línea separadora -->
+  <line x1="60" y1="270" x2="560" y2="270" stroke="#333" stroke-width="1"/>
+
+  <!-- Más datos -->
+  <text x="60" y="293" fill="#ccc" font-size="12" font-weight="600">Distribución típica:</text>
+  <text x="60" y="313" fill="#888" font-size="11">Salón-comedor ~25 m² · Cocina ~10 m² · Dorm. ppal ~14 m² · Dorm. sec. ~10 m² · Baño ~5 m²</text>
+
+  <text x="60" y="338" fill="#ccc" font-size="12" font-weight="600">Antigüedad media:</text>
+  <text x="60" y="358" fill="#888" font-size="11">1980 — El 42% del parque se construyó entre 1960 y 1980 (boom desarrollista)</text>
+
+  <!-- COLUMNA DERECHA: Gráfico de barras -->
+  <g filter="url(#shadow)">
+    <rect x="610" y="130" width="550" height="240" rx="12" fill="#1f1f25" stroke="#2d2d33" stroke-width="1" opacity=".95"/>
+  </g>
+  <text x="630" y="162" fill="#d4af37" font-size="13" font-weight="600" letter-spacing="1">SUPERFICIE MEDIA POR TIPO DE VIVIENDA (m² construidos)</text>
+
+  <!-- Barras horizontales -->
+  <!-- Leyenda -->
+  <rect x="630" y="178" width="10" height="10" rx="2" fill="url(#gr1)"/>
+  <text x="646" y="187" fill="#aaa" font-size="9">Vivienda tipo</text>
+  <rect x="720" y="178" width="10" height="10" rx="2" fill="url(#gr3)"/>
+  <text x="736" y="187" fill="#aaa" font-size="9">Unifamiliar</text>
+  <rect x="810" y="178" width="10" height="10" rx="2" fill="url(#gr5)"/>
+  <text x="826" y="187" fill="#aaa" font-size="9">Piso pequeño</text>
+
+  <!-- Barra 1: Vivienda tipo -->
+  <text x="630" y="218" fill="#999" font-size="10">Vivienda tipo (bloque)</text>
+  <rect x="630" y="224" width="460" height="20" rx="4" fill="url(#gr1)" opacity=".9"/>
+  <rect x="630" y="224" width="460" height="20" rx="4" fill="none" stroke="#d4af37" stroke-width="1.5"/>
+  <text x="1100" y="239" text-anchor="end" fill="#d4af37" font-size="12" font-weight="700">97 m²</text>
+
+  <!-- Barra 2: Unifamiliar -->
+  <text x="630" y="258" fill="#999" font-size="10">Vivienda unifamiliar adosada</text>
+  <rect x="630" y="264" width="560" height="20" rx="4" fill="url(#gr3)" opacity=".85"/>
+  <rect x="630" y="264" width="560" height="20" rx="4" fill="none" stroke="#2a7ab5" stroke-width="1"/>
+  <text x="1200" y="279" text-anchor="end" fill="#5ba3e0" font-size="12" font-weight="600">125 m²</text>
+
+  <!-- Barra 3: Piso pequeño -->
+  <text x="630" y="298" fill="#999" font-size="10">Piso pequeño / estudio</text>
+  <rect x="630" y="304" width="300" height="20" rx="4" fill="url(#gr5)" opacity=".85"/>
+  <rect x="630" y="304" width="300" height="20" rx="4" fill="none" stroke="#d45530" stroke-width="1"/>
+  <text x="940" y="319" text-anchor="end" fill="#d45530" font-size="12" font-weight="600">65 m²</text>
+
+  <!-- Barra 4: Media nacional -->
+  <text x="630" y="338" fill="#999" font-size="10">Media nacional (todas)</text>
+  <rect x="630" y="344" width="400" height="20" rx="4" fill="url(#gr2)" opacity=".85"/>
+  <rect x="630" y="344" width="400" height="20" rx="4" fill="none" stroke="#3a8f4f" stroke-width="1"/>
+  <text x="1040" y="359" text-anchor="end" fill="#3a8f4f" font-size="12" font-weight="600">85 m²</text>
+
+  <!-- PIE COLUMNA DERECHA -->
+  <text x="630" y="362" fill="#666" font-size="9">Fuente: INE, Censo de Viviendas 2021 · Catastro 2024</text>
+
+  <!-- SECCIÓN INFERIOR: Perfil propietario -->
+  <g filter="url(#shadow)">
+    <rect x="40" y="390" width="1120" height="230" rx="12" fill="#1f1f25" stroke="#2d2d33" stroke-width="1" opacity=".95"/>
+  </g>
+
+  <text x="60" y="422" fill="#d4af37" font-size="13" font-weight="600" letter-spacing="1">PERFIL DEL PROPIETARIO DE LA VIVIENDA TIPO</text>
+
+  <!-- Indicadores horizontales -->
+  <g>
+    <!-- 1 -->
+    <rect x="60" y="440" width="28" height="28" rx="6" fill="#25252b"/><text x="74" y="460" text-anchor="middle" fill="#d4af37" font-size="14" font-weight="700">1</text>
+    <text x="100" y="456" fill="#ccc" font-size="12" font-weight="600">Propietario particular</text>
+    <text x="100" y="472" fill="#777" font-size="10">El 76% de las viviendas principales están en régimen de propiedad</text>
+
+    <!-- 2 -->
+    <rect x="60" y="498" width="28" height="28" rx="6" fill="#25252b"/><text x="74" y="518" text-anchor="middle" fill="#d4af37" font-size="14" font-weight="700">2</text>
+    <text x="100" y="514" fill="#ccc" font-size="12" font-weight="600">Edificio en comunidad de vecinos</text>
+    <text x="100" y="530" fill="#777" font-size="10">El 68% de las viviendas están en edificios plurifamiliares con comunidad de propietarios</text>
+  </g>
+
+  <!-- Columna derecha perfil -->
+  <g>
+    <rect x="460" y="440" width="28" height="28" rx="6" fill="#25252b"/><text x="474" y="460" text-anchor="middle" fill="#d4af37" font-size="14" font-weight="700">3</text>
+    <text x="500" y="456" fill="#ccc" font-size="12" font-weight="600">Hogar de 3-4 personas</text>
+    <text x="500" y="472" fill="#777" font-size="10">El tamaño medio del hogar español es de 2,5 personas · familia tipo 3-4</text>
+
+    <rect x="460" y="498" width="28" height="28" rx="6" fill="#25252b"/><text x="474" y="518" text-anchor="middle" fill="#d4af37" font-size="14" font-weight="700">4</text>
+    <text x="500" y="514" fill="#ccc" font-size="12" font-weight="600">Calefacción individual</text>
+    <text x="500" y="530" fill="#777" font-size="10">Gas natural o eléctrica. Sin refrigeración en más del 40% de las viviendas</text>
+  </g>
+
+  <!-- Columna perfil 2 -->
+  <g>
+    <rect x="860" y="440" width="28" height="28" rx="6" fill="#25252b"/><text x="874" y="460" text-anchor="middle" fill="#d4af37" font-size="14" font-weight="700">5</text>
+    <text x="900" y="456" fill="#ccc" font-size="12" font-weight="600">Ventanas de aluminio + vidrio simple</text>
+    <text x="900" y="472" fill="#777" font-size="10">Sin rotura de puente térmico. Responsable del 25-30% de pérdidas energéticas</text>
+
+    <rect x="860" y="498" width="28" height="28" rx="6" fill="#25252b"/><text x="874" y="518" text-anchor="middle" fill="#d4af37" font-size="14" font-weight="700">6</text>
+    <text x="900" y="514" fill="#ccc" font-size="12" font-weight="600">Calificación energética E, F o G</text>
+    <text x="900" y="530" fill="#777" font-size="10">Por su antigüedad. Obligatorio obtener CEE para vender o alquilar</text>
+  </g>
+
+  <!-- Sello fuente inferior -->
+  <text x="40" y="630" fill="#555" font-size="10">Fuentes: INE · Censo de Viviendas 2021 · Catastro · IDAE · Ministerio de Transportes</text>
 </svg>

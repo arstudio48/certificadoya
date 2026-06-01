@@ -1,84 +1,181 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 380" font-family="Outfit, sans-serif">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 640" font-family="Outfit, 'Segoe UI', sans-serif">
   <defs>
-    <linearGradient id="ga" x1="0" y1="0" x2="1" y2="0">
-      <stop offset="0%" stop-color="#006837"/>
-      <stop offset="100%" stop-color="#2b8c3f"/>
-    </linearGradient>
-    <linearGradient id="gb" x1="0" y1="0" x2="1" y2="0">
-      <stop offset="0%" stop-color="#2b8c3f"/>
-      <stop offset="100%" stop-color="#66bd63"/>
-    </linearGradient>
-    <linearGradient id="gc" x1="0" y1="0" x2="1" y2="0">
-      <stop offset="0%" stop-color="#66bd63"/>
-      <stop offset="100%" stop-color="#a6d96a"/>
-    </linearGradient>
-    <linearGradient id="gd" x1="0" y1="0" x2="1" y2="0">
-      <stop offset="0%" stop-color="#a6d96a"/>
-      <stop offset="100%" stop-color="#d9ef8b"/>
-    </linearGradient>
-    <linearGradient id="ge" x1="0" y1="0" x2="1" y2="0">
-      <stop offset="0%" stop-color="#fee08b"/>
-      <stop offset="100%" stop-color="#fdae61"/>
-    </linearGradient>
-    <linearGradient id="gf" x1="0" y1="0" x2="1" y2="0">
-      <stop offset="0%" stop-color="#fdae61"/>
-      <stop offset="100%" stop-color="#f46d43"/>
-    </linearGradient>
-    <linearGradient id="gg" x1="0" y1="0" x2="1" y2="0">
-      <stop offset="0%" stop-color="#f46d43"/>
-      <stop offset="100%" stop-color="#a50026"/>
-    </linearGradient>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#1b1b1f"/><stop offset="100%" stop-color="#2a2a30"/></linearGradient>
+    <linearGradient id="gold" x1="0" y1="0" x2="1" y2="0"><stop offset="0%" stop-color="#d4af37"/><stop offset="100%" stop-color="#c9a032"/></linearGradient>
+    <filter id="shadow"><feDropShadow dx="0" dy="2" stdDeviation="4" flood-color="#000" flood-opacity=".2"/></filter>
+    <pattern id="hatch" width="8" height="8" patternUnits="userSpaceOnUse"><line x1="0" y1="8" x2="8" y2="0" stroke="#ffffff" stroke-width=".5" opacity=".06"/></pattern>
   </defs>
-  <rect width="800" height="380" fill="#f7f9f6" rx="12"/>
-  <text x="400" y="30" text-anchor="middle" font-size="16" font-weight="700" fill="#2d3a1f">Precio del certificado energético por tipo de vivienda</text>
 
-  <!-- Vivienda tipo destacada -->
-  <rect x="100" y="48" width="600" height="40" fill="#e8f5e9" rx="6"/>
-  <text x="400" y="68" text-anchor="middle" font-size="14" fill="#2d3a1f" font-weight="700">★ VIVIENDA TIPO: 97 m² · 3 dormitorios · bloque años 70</text>
-  <text x="400" y="83" text-anchor="middle" font-size="13" fill="#4a7c1e" font-weight="600">65 – 120 € según ciudad</text>
+  <rect width="1200" height="640" fill="url(#bg)"/>
+  <rect width="1200" height="640" fill="url(#hatch)"/>
 
-  <!-- Gráfico de barras horizontal por ciudad -->
-  <text x="100" y="115" font-size="13" fill="#2d3a1f" font-weight="600">Precio CEE por ciudad (vivienda tipo 97 m²)</text>
+  <text x="40" y="45" fill="#d4af37" font-size="16" font-weight="700" letter-spacing="2">04 · PRECIO DEL CERTIFICADO ENERGÉTICO POR CIUDAD</text>
+  <text x="40" y="75" fill="#e8e8e8" font-size="24" font-weight="600">¿Cuánto cuesta el CEE de una vivienda tipo en cada ciudad?</text>
+  <text x="40" y="98" fill="#999" font-size="13">Para vivienda de 97 m², 3 dormitorios, bloque años 70 · Precios con IVA y tasas incluidas</text>
+  <line x1="40" y1="108" x2="300" y2="108" stroke="#d4af37" stroke-width="2" opacity=".6"/>
 
-  <text x="80" y="140" text-anchor="end" font-size="11" fill="#555">Barcelona</text>
-  <rect x="85" y="130" width="115" height="14" fill="url(#gg)" rx="3"/>
-  <text x="204" y="141" font-size="10" fill="#a50026" font-weight="600">90-130 €</text>
+  <!-- Panel: Tabla de precios CEE -->
+  <g filter="url(#shadow)">
+    <rect x="40" y="130" width="720" height="490" rx="12" fill="#1f1f25" stroke="#2d2d33" stroke-width="1" opacity=".95"/>
+  </g>
 
-  <text x="80" y="162" text-anchor="end" font-size="11" fill="#555">Madrid</text>
-  <rect x="85" y="152" width="105" height="14" fill="url(#gf)" rx="3"/>
-  <text x="194" y="163" font-size="10" fill="#f46d43" font-weight="600">80-120 €</text>
+  <text x="60" y="162" fill="#d4af37" font-size="13" font-weight="600" letter-spacing="1">PRECIO DEL CEE POR CIUDAD (vivienda tipo 97 m²)</text>
 
-  <text x="80" y="184" text-anchor="end" font-size="11" fill="#555">Palma</text>
-  <rect x="85" y="174" width="105" height="14" fill="url(#gf)" rx="3"/>
-  <text x="194" y="185" font-size="10" fill="#f46d43" font-weight="600">90-110 €</text>
+  <!-- Encabezado -->
+  <rect x="60" y="175" width="680" height="32" rx="4" fill="#25252b" stroke="#333" stroke-width="1"/>
+  <text x="75" y="195" fill="#999" font-size="10" font-weight="600">Ciudad</text>
+  <text x="220" y="195" text-anchor="middle" fill="#999" font-size="10" font-weight="600">Precio mínimo</text>
+  <text x="340" y="195" text-anchor="middle" fill="#999" font-size="10" font-weight="600">Precio máximo</text>
+  <text x="470" y="195" text-anchor="middle" fill="#999" font-size="10" font-weight="600">Tasa registro</text>
+  <text x="600" y="195" text-anchor="middle" fill="#999" font-size="10" font-weight="600">Plazo medio</text>
 
-  <text x="80" y="206" text-anchor="end" font-size="11" fill="#555">Bilbao</text>
-  <rect x="85" y="196" width="95" height="14" fill="url(#ge)" rx="3"/>
-  <text x="184" y="207" font-size="10" fill="#fdae61" font-weight="600">80-110 €</text>
+  <!-- Madrid -->
+  <rect x="60" y="212" width="680" height="36" rx="4" fill="#2a2a32" stroke="#d4af37" stroke-width=".5"/>
+  <text x="75" y="236" fill="#fff" font-size="12" font-weight="600">Madrid</text>
+  <text x="220" y="236" text-anchor="middle" fill="#4abf6a" font-size="12" font-weight="600">85 €</text>
+  <text x="340" y="236" text-anchor="middle" fill="#e87a50" font-size="12">120 €</text>
+  <text x="470" y="236" text-anchor="middle" fill="#ccc" font-size="11">30-60 €</text>
+  <text x="600" y="236" text-anchor="middle" fill="#ccc" font-size="11">24-72 h</text>
 
-  <text x="80" y="228" text-anchor="end" font-size="11" fill="#555">Málaga</text>
-  <rect x="85" y="218" width="85" height="14" fill="url(#ed)" rx="3"/>
-  <text x="174" y="229" font-size="10" fill="#d9ef8b" font-weight="600">75-100 €</text>
+  <!-- Barcelona -->
+  <line x1="60" y1="248" x2="740" y2="248" stroke="#333" stroke-width=".5"/>
+  <rect x="60" y="250" width="680" height="36" rx="4" fill="#25252b"/>
+  <text x="75" y="274" fill="#e8e8e8" font-size="12">Barcelona</text>
+  <text x="220" y="274" text-anchor="middle" fill="#4abf6a" font-size="12" font-weight="600">90 €</text>
+  <text x="340" y="274" text-anchor="middle" fill="#e87a50" font-size="12">130 €</text>
+  <text x="470" y="274" text-anchor="middle" fill="#ccc" font-size="11">Incluida</text>
+  <text x="600" y="274" text-anchor="middle" fill="#ccc" font-size="11">48-72 h</text>
 
-  <text x="80" y="250" text-anchor="end" font-size="11" fill="#555">Valencia</text>
-  <rect x="85" y="240" width="80" height="14" fill="url(#dc)" rx="3"/>
-  <text x="169" y="251" font-size="10" fill="#66bd63" font-weight="600">70-95 €</text>
+  <!-- Valencia -->
+  <line x1="60" y1="286" x2="740" y2="286" stroke="#333" stroke-width=".5"/>
+  <rect x="60" y="288" width="680" height="36" rx="4" fill="#25252b"/>
+  <text x="75" y="312" fill="#e8e8e8" font-size="12">Valencia</text>
+  <text x="220" y="312" text-anchor="middle" fill="#4abf6a" font-size="12" font-weight="600">70 €</text>
+  <text x="340" y="312" text-anchor="middle" fill="#e87a50" font-size="12">100 €</text>
+  <text x="470" y="312" text-anchor="middle" fill="#ccc" font-size="11">15-25 €</text>
+  <text x="600" y="312" text-anchor="middle" fill="#ccc" font-size="11">24-48 h</text>
 
-  <text x="80" y="272" text-anchor="end" font-size="11" fill="#555">Sevilla</text>
-  <rect x="85" y="262" width="75" height="14" fill="url(#cb)" rx="3"/>
-  <text x="164" y="273" font-size="10" fill="#2b8c3f" font-weight="600">65-90 €</text>
+  <!-- Sevilla -->
+  <line x1="60" y1="324" x2="740" y2="324" stroke="#333" stroke-width=".5"/>
+  <rect x="60" y="326" width="680" height="36" rx="4" fill="#25252b"/>
+  <text x="75" y="350" fill="#e8e8e8" font-size="12">Sevilla</text>
+  <text x="220" y="350" text-anchor="middle" fill="#4abf6a" font-size="12" font-weight="600">65 €</text>
+  <text x="340" y="350" text-anchor="middle" fill="#e87a50" font-size="12">90 €</text>
+  <text x="470" y="350" text-anchor="middle" fill="#ccc" font-size="11">12-18 €</text>
+  <text x="600" y="350" text-anchor="middle" fill="#ccc" font-size="11">24-48 h</text>
 
-  <text x="80" y="294" text-anchor="end" font-size="11" fill="#555">Alicante</text>
-  <rect x="85" y="284" width="70" height="14" fill="url(#ba)" rx="3"/>
-  <text x="159" y="295" font-size="10" fill="#006837" font-weight="600">65-85 €</text>
+  <!-- Málaga -->
+  <line x1="60" y1="362" x2="740" y2="362" stroke="#333" stroke-width=".5"/>
+  <rect x="60" y="364" width="680" height="36" rx="4" fill="#25252b"/>
+  <text x="75" y="388" fill="#e8e8e8" font-size="12">Málaga</text>
+  <text x="220" y="388" text-anchor="middle" fill="#4abf6a" font-size="12" font-weight="600">70 €</text>
+  <text x="340" y="388" text-anchor="middle" fill="#e87a50" font-size="12">100 €</text>
+  <text x="470" y="388" text-anchor="middle" fill="#ccc" font-size="11">15-20 €</text>
+  <text x="600" y="388" text-anchor="middle" fill="#ccc" font-size="11">24-48 h</text>
 
-  <text x="80" y="316" text-anchor="end" font-size="11" fill="#555">Zaragoza</text>
-  <rect x="85" y="306" width="70" height="14" fill="url(#ba)" rx="3"/>
-  <text x="159" y="317" font-size="10" fill="#006837" font-weight="600">65-85 €</text>
+  <!-- Alicante -->
+  <line x1="60" y1="400" x2="740" y2="400" stroke="#333" stroke-width=".5"/>
+  <rect x="60" y="402" width="680" height="36" rx="4" fill="#25252b"/>
+  <text x="75" y="426" fill="#e8e8e8" font-size="12">Alicante</text>
+  <text x="220" y="426" text-anchor="middle" fill="#4abf6a" font-size="12" font-weight="600">65 €</text>
+  <text x="340" y="426" text-anchor="middle" fill="#e87a50" font-size="12">95 €</text>
+  <text x="470" y="426" text-anchor="middle" fill="#ccc" font-size="11">12-18 €</text>
+  <text x="600" y="426" text-anchor="middle" fill="#ccc" font-size="11">24-48 h</text>
 
-  <text x="80" y="338" text-anchor="end" font-size="11" fill="#555">Murcia</text>
-  <rect x="85" y="328" width="65" height="14" fill="url(#a)" rx="3"/>
-  <text x="154" y="339" font-size="10" fill="#006837" font-weight="600">60-80 €</text>
+  <!-- Bilbao -->
+  <line x1="60" y1="438" x2="740" y2="438" stroke="#333" stroke-width=".5"/>
+  <rect x="60" y="440" width="680" height="36" rx="4" fill="#25252b"/>
+  <text x="75" y="464" fill="#e8e8e8" font-size="12">Bilbao</text>
+  <text x="220" y="464" text-anchor="middle" fill="#4abf6a" font-size="12" font-weight="600">75 €</text>
+  <text x="340" y="464" text-anchor="middle" fill="#e87a50" font-size="12">110 €</text>
+  <text x="470" y="464" text-anchor="middle" fill="#ccc" font-size="11">18-25 €</text>
+  <text x="600" y="464" text-anchor="middle" fill="#ccc" font-size="11">48-72 h</text>
 
-  <text x="400" y="370" text-anchor="middle" font-size="10" fill="#9aab8a">Precios orientativos para vivienda tipo (97 m² construidos, 3 dormitorios, bloque 1960-1980)</text>
+  <!-- Zaragoza -->
+  <line x1="60" y1="476" x2="740" y2="476" stroke="#333" stroke-width=".5"/>
+  <rect x="60" y="478" width="680" height="36" rx="4" fill="#25252b"/>
+  <text x="75" y="502" fill="#e8e8e8" font-size="12">Zaragoza</text>
+  <text x="220" y="502" text-anchor="middle" fill="#4abf6a" font-size="12" font-weight="600">65 €</text>
+  <text x="340" y="502" text-anchor="middle" fill="#e87a50" font-size="12">90 €</text>
+  <text x="470" y="502" text-anchor="middle" fill="#ccc" font-size="11">10-15 €</text>
+  <text x="600" y="502" text-anchor="middle" fill="#ccc" font-size="11">24-48 h</text>
+
+  <!-- Murcia -->
+  <line x1="60" y1="514" x2="740" y2="514" stroke="#333" stroke-width=".5"/>
+  <rect x="60" y="516" width="680" height="36" rx="4" fill="#25252b"/>
+  <text x="75" y="540" fill="#e8e8e8" font-size="12">Murcia</text>
+  <text x="220" y="540" text-anchor="middle" fill="#4abf6a" font-size="12" font-weight="600">65 €</text>
+  <text x="340" y="540" text-anchor="middle" fill="#e87a50" font-size="12">90 €</text>
+  <text x="470" y="540" text-anchor="middle" fill="#ccc" font-size="11">10-15 €</text>
+  <text x="600" y="540" text-anchor="middle" fill="#ccc" font-size="11">24-48 h</text>
+
+  <!-- A Coruña -->
+  <line x1="60" y1="552" x2="740" y2="552" stroke="#333" stroke-width=".5"/>
+  <rect x="60" y="554" width="680" height="36" rx="4" fill="#25252b"/>
+  <text x="75" y="578" fill="#e8e8e8" font-size="12">A Coruña</text>
+  <text x="220" y="578" text-anchor="middle" fill="#4abf6a" font-size="12" font-weight="600">75 €</text>
+  <text x="340" y="578" text-anchor="middle" fill="#e87a50" font-size="12">105 €</text>
+  <text x="470" y="578" text-anchor="middle" fill="#ccc" font-size="11">15-20 €</text>
+  <text x="600" y="578" text-anchor="middle" fill="#ccc" font-size="11">24-48 h</text>
+
+  <!-- Las Palmas -->
+  <line x1="60" y1="590" x2="740" y2="590" stroke="#333" stroke-width=".5"/>
+  <rect x="60" y="592" width="680" height="36" rx="4" fill="#25252b"/>
+  <text x="75" y="616" fill="#e8e8e8" font-size="12">Las Palmas</text>
+  <text x="220" y="616" text-anchor="middle" fill="#4abf6a" font-size="12" font-weight="600">80 €</text>
+  <text x="340" y="616" text-anchor="middle" fill="#e87a50" font-size="12">115 €</text>
+  <text x="470" y="616" text-anchor="middle" fill="#ccc" font-size="11">25-35 €</text>
+  <text x="600" y="616" text-anchor="middle" fill="#ccc" font-size="11">48-72 h</text>
+
+  <!-- Panel derecho: desglose factores -->
+  <g filter="url(#shadow)">
+    <rect x="780" y="130" width="380" height="200" rx="12" fill="#1f1f25" stroke="#2d2d33" stroke-width="1" opacity=".95"/>
+  </g>
+
+  <text x="800" y="162" fill="#d4af37" font-size="13" font-weight="600" letter-spacing="1">FACTORES QUE INFLUYEN EN EL PRECIO</text>
+
+  <circle cx="810" cy="185" r="3" fill="#d4af37"/>
+  <text x="822" y="189" fill="#ccc" font-size="11">Superficie: más m² = más tiempo de trabajo</text>
+
+  <circle cx="810" cy="210" r="3" fill="#d4af37"/>
+  <text x="822" y="214" fill="#ccc" font-size="11">Antigüedad: edificios antiguos = más mediciones</text>
+
+  <circle cx="810" cy="235" r="3" fill="#d4af37"/>
+  <text x="822" y="239" fill="#ccc" font-size="11">Tasas autonómicas: varían 10-60 € según CCAA</text>
+
+  <circle cx="810" cy="260" r="3" fill="#d4af37"/>
+  <text x="822" y="264" fill="#ccc" font-size="11">Urgencia: recargo 10-15 € por servicio express</text>
+
+  <circle cx="810" cy="285" r="3" fill="#d4af37"/>
+  <text x="822" y="289" fill="#ccc" font-size="11">Desplazamiento: más lejos del técnico, más coste</text>
+
+  <circle cx="810" cy="310" r="3" fill="#d4af37"/>
+  <text x="822" y="314" fill="#ccc" font-size="11">Comunidad con zonas comunes (opcional)</text>
+
+  <text x="800" y="350" fill="#666" font-size="9">Fuente: CertificadoYa · precios medios junio 2026. IVA incluido.</text>
+
+  <!-- Panel inferior: dato destacado -->
+  <g filter="url(#shadow)">
+    <rect x="780" y="350" width="380" height="270" rx="12" fill="#1f1f25" stroke="#d4af37" stroke-width="1.5" opacity=".95"/>
+  </g>
+
+  <text x="800" y="382" fill="#d4af37" font-size="13" font-weight="600" letter-spacing="1">¿QUÉ INCLUYE EL PRECIO?</text>
+
+  <rect x="800" y="398" width="340" height="40" rx="6" fill="#25252b" stroke="#333" stroke-width="1"/>
+  <text x="815" y="414" fill="#4abf6a" font-size="12" font-weight="600">✓ Visita técnica al inmueble</text>
+  <text x="815" y="428" fill="#999" font-size="9">Medición de estancias, toma de datos, fotografías</text>
+
+  <rect x="800" y="446" width="340" height="40" rx="6" fill="#25252b" stroke="#333" stroke-width="1"/>
+  <text x="815" y="462" fill="#4abf6a" font-size="12" font-weight="600">✓ Cálculo con CE3X o HULC</text>
+  <text x="815" y="476" fill="#999" font-size="9">Modelado en software oficial del Ministerio</text>
+
+  <rect x="800" y="494" width="340" height="40" rx="6" fill="#25252b" stroke="#333" stroke-width="1"/>
+  <text x="815" y="510" fill="#4abf6a" font-size="12" font-weight="600">✓ Registro en la comunidad autónoma</text>
+  <text x="815" y="524" fill="#999" font-size="9">Incluye el abono de las tasas oficiales</text>
+
+  <rect x="800" y="542" width="340" height="40" rx="6" fill="#25252b" stroke="#333" stroke-width="1"/>
+  <text x="815" y="558" fill="#4abf6a" font-size="12" font-weight="600">✓ IVA y documentación</text>
+  <text x="815" y="572" fill="#999" font-size="9">Factura con desglose + certificado digital firmado</text>
+
+  <text x="40" y="640" fill="#555" font-size="10">Fuentes: CertificadoYa · precios medios junio 2026 · Datos de mercado basados en +500 CEE gestionados</text>
 </svg>
