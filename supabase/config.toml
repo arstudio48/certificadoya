@@ -21,3 +21,6 @@ verify_jwt = false
 
 [functions.stripe-webhook]
 verify_jwt = false
+
+[functions.nueva-era]
+verify_jwt = false
