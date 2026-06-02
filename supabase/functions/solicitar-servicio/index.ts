@@ -121,8 +121,7 @@ serve(async (req: Request) => {
             tecnico_id: tecnico.id,
             tipo: 'gasto_lead',
             cantidad: -1,
-            descripcion: `Gasto por aceptar lead #${leadIdVal}`,
-            referencia_id: leadIdVal
+            concepto: `Gasto por aceptar lead #${leadIdVal}`
           })
         })
       } else if (tecnico.modelo_pago === 'premium') {
@@ -154,7 +153,7 @@ serve(async (req: Request) => {
         },
         body: JSON.stringify({
           estado: 'asignado',
-          tecnico_asignado_id: tecnico.id,
+          tecnico_asignado: tecnico.id,
           fecha_asignacion: now
         })
       })
