@@ -59,8 +59,7 @@ serve(async (req) => {
           notas,
           estado,
           token_aceptacion,
-          created_at,
-          updated_at
+          fecha_creacion
         `)
         .eq('token_aceptacion', token)
         .maybeSingle()
@@ -278,8 +277,7 @@ serve(async (req) => {
         .from('presupuestos')
         .update({
           estado: 'pendiente_pago',
-          stripe_session_id: session.id,
-          updated_at: new Date().toISOString()
+          stripe_session_id: session.id
         })
         .eq('id', presupuesto.id)
 
