@@ -75,7 +75,7 @@ body {
 
 /* ====== HERO ====== */
 .hero-new {
-  background: linear-gradient(135deg, rgba(84,124,36,.50) 0%, rgba(60,95,25,.45) 100%), url('/img/hero-tecnicos.jpg') center/cover no-repeat;
+  background: linear-gradient(135deg, rgba(84,124,36,.50) 0%, rgba(60,95,25,.45) 100%), url('/img/hero-tecnicos.webp') center/cover no-repeat;
   color: #fff;
   padding: 3rem 2rem 4rem;
 }
@@ -84,6 +84,7 @@ body {
   display:grid; grid-template-columns:400px 1fr; gap:3rem; align-items:center;
 }
 .hero-new a, .hero-new h1, .hero-new h2, .hero-new h3, .hero-new p, .hero-new span { color: inherit; }
+.hero-new-text { min-height: 220px; }
 .hero-new-text h1 { color:#fff; font-size:2.2rem; font-weight:700; line-height:1.2; margin:0 0 .75rem; }
 .hero-new-text h1 span { color:#ffe0a0; }
 .hero-new .hero-lead { color:rgba(255,255,255,.92); font-size:1.05rem; line-height:1.6; }
@@ -94,7 +95,7 @@ body {
 .trust-item svg { fill:#fff; opacity:.9; }
 
 /* Card presupuesto */
-.hero-new-card { position:relative; }
+.hero-new-card { position:relative; min-height:400px; }
 .presupuesto-card-v2 {
   background:var(--white); border:1px solid var(--border); border-radius:var(--radius);
   padding:1.75rem; box-shadow:var(--shadow-md);
@@ -260,7 +261,11 @@ input.error { border-color:#ef4444 !important; background:#fef2f2; }
   .header-inner { padding:0 1rem; }
   .nav { display:none; }
   .hero-new { padding:2rem 1rem 3rem; }
+  .hero-new-text { min-height:200px; }
   .hero-new-text h1 { font-size:1.55rem; }
+  .hero-new-card { min-height:380px; }
+  .form-group input, .form-group select { height:42px; }
+  .btn-cta { height:46px; line-height:1; }
   .pasos-grid { grid-template-columns:1fr; }
   .provincias-grid-v2 { grid-template-columns:repeat(3, 1fr); }
   .prov-link { font-size:.75rem; padding:.35rem .45rem; }
