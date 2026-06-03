@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Desuscribirse — CertificadoYa</title>
+  <meta name="robots" content="noindex, nofollow">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: 'Outfit', 'Segoe UI', Arial, sans-serif;
+      background: #f5f7f2;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      padding: 20px;
+    }
+    .card {
+      background: #fff;
+      border-radius: 16px;
+      max-width: 490px;
+      width: 100%;
+      overflow: hidden;
+      box-shadow: 0 2px 20px rgba(0,0,0,.08);
+    }
+    .header {
+      background: linear-gradient(135deg, #547c24, #3d5e1a);
+      padding: 32px 32px 24px;
+      text-align: center;
+    }
+    .header .logo {
+      font-size: 26px;
+      font-weight: 700;
+      color: #fff;
+      letter-spacing: -0.5px;
+    }
+    .header .logo-sub {
+      font-size: 12px;
+      color: #b8d4a0;
+      margin-top: 2px;
+    }
+    .header h1 {
+      font-size: 19px;
+      font-weight: 600;
+      color: #fff;
+      margin-top: 12px;
+    }
+    .body {
+      padding: 28px 32px 16px;
+    }
+    .body p {
+      font-size: 14px;
+      color: #5a6b4a;
+      line-height: 1.6;
+      margin-bottom: 16px;
+    }
+    .email-badge {
+      background: #f0f5ea;
+      border: 1px solid #dce8d0;
+      border-radius: 8px;
+      padding: 10px 14px;
+      font-size: 14px;
+      font-weight: 600;
+      color: #3d5e1a;
+      text-align: center;
+      margin-bottom: 20px;
+      word-break: break-all;
+    }
+    .msg {
+      padding: 10px 14px;
+      border-radius: 8px;
+      font-size: 13px;
+      margin-bottom: 14px;
+      display: none;
+    }
+    .msg.error {
+      display: block;
+      background: #fef2f2;
+      color: #b91c1c;
+      border: 1px solid #fecaca;
+    }
+    .msg.success {
+      display: block;
+      background: #f0fdf4;
+      color: #166534;
+      border: 1px solid #bbf7d0;
+    }
+    .msg.info {
+      display: block;
+      background: #eff6ff;
+      color: #1e40af;
+      border: 1px solid #bfdbfe;
+    }
+    .radio-group {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      margin-bottom: 18px;
+    }
+    .radio-label {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 11px 14px;
+      border: 1.5px solid #e0e6d8;
+      border-radius: 10px;
+      cursor: pointer;
+      font-size: 14px;
+      color: #2d3a1f;
+      transition: all .15s;
+    }
+    .radio-label:hover {
+      border-color: #547c24;
+      background: #f9fbf5;
+    }
+    .radio-label input[type="radio"] {
+      width: 17px;
+      height: 17px;
+      accent-color: #547c24;
+      flex-shrink: 0;
+    }
+    .radio-label:has(input:checked) {
+      border-color: #547c24;
+      background: #f0f6e8;
+    }
+    .radio-label:has(input:checked) span {
+      font-weight: 600;
+      color: #3d5e1a;
+    }
+    .reason-box {
+      display: none;
+      margin: -10px 0 16px;
+    }
+    .reason-box.open {
+      display: block;
+    }
+    .reason-box textarea {
+      width: 100%;
+      padding: 10px 14px;
+      border: 1.5px solid #e0e6d8;
+      border-radius: 10px;
+      font-size: 13px;
+      font-family: 'Outfit', 'Segoe UI', Arial, sans-serif;
+      resize: vertical;
+      min-height: 60px;
+      color: #2d3a1f;
+      outline: none;
+      transition: border-color .2s;
+    }
+    .reason-box textarea:focus {
+      border-color: #547c24;
+      box-shadow: 0 0 0 3px rgba(84,124,36,.12);
+    }
+    .btn {
+      display: block;
+      width: 100%;
+      padding: 13px;
+      background: #547c24;
+      color: #fff;
+      border: none;
+      border-radius: 10px;
+      font-size: 15px;
+      font-weight: 600;
+      font-family: 'Outfit', 'Segoe UI', Arial, sans-serif;
+      cursor: pointer;
+      transition: background .15s;
+    }
+    .btn:hover { background: #3d5e1a; }
+    .btn:disabled {
+      background: #b8c8a9;
+      cursor: not-allowed;
+    }
+    .btn-outline {
+      background: #fff;
+      color: #547c24;
+      border: 2px solid #547c24;
+      padding: 11px;
+      font-size: 14px;
+    }
+    .btn-outline:hover {
+      background: #f0f6e8;
+    }
+    .footer {
+      padding: 20px 32px 28px;
+      text-align: center;
+      font-size: 12px;
+      color: #9aab8a;
+      border-top: 1px solid #eef4e8;
+    }
+    .footer a {
+      color: #547c24;
+      text-decoration: none;
+    }
+    .footer a:hover {
+      text-decoration: underline;
+    }
+    .hidden { display: none; }
+    .spinner {
+      display: inline-block;
+      width: 16px;
+      height: 16px;
+      border: 2px solid rgba(255,255,255,.3);
+      border-top-color: #fff;
+      border-radius: 50%;
+      animation: spin .6s linear infinite;
+      vertical-align: middle;
+      margin-right: 6px;
+    }
+    @keyframes spin { to { transform: rotate(360deg); } }
+    .success-icon {
+      font-size: 48px;
+      text-align: center;
+      margin-bottom: 8px;
+    }
+    .success-title {
+      font-size: 20px;
+      font-weight: 700;
+      color: #1a1a1a;
+      text-align: center;
+      margin-bottom: 8px;
+    }
+    .success-text {
+      text-align: center;
+      color: #5a6b4a;
+      font-size: 14px;
+      line-height: 1.6;
+    }
+    .success-actions {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      margin-top: 20px;
+    }
+  </style>
+</head>
+<body>
+<div class="card" id="app">
+  <div class="header">
+    <div class="logo">CertificadoYa</div>
+    <div class="logo-sub">Certificado de Eficiencia Energética</div>
+    <h1>Gestionar suscripción</h1>
+  </div>
+  <div class="body" id="body-content">
+    <!-- contenido dinámico generado por JS -->
+  </div>
+  <div class="footer">
+    <a href="https://www.certificadoya.es/">certificadoya.es</a> ·
+    <a href="mailto:info@certificadoya.es">info@certificadoya.es</a>
+  </div>
+</div>
+
+<script>
+const SUPABASE_FN = 'https://wypgqpgjlookbhuaiyxa.supabase.co/functions/v1/newsletter-unsubscribe';
+
+function getEmailFromURL() {
+  const params = new URLSearchParams(window.location.search);
+  return (params.get('email') || '').trim().toLowerCase();
+}
+
+function renderFormulario(email) {
+  const opciones = [
+    {value:'no_interesa',     label:'Ya no me interesa'},
+    {value:'demasiados',      label:'Recibo demasiados correos'},
+    {value:'no_solicitado',   label:'No solicité esta suscripción'},
+    {value:'contenido',       label:'El contenido no es relevante para mí'},
+    {value:'otro',            label:'Otro motivo'},
+  ];
+
+  const radios = opciones.map(o => `
+    <label class="radio-label">
+      <input type="radio" name="reason" value="${o.value}" required>
+      <span>${o.label}</span>
+    </label>
+  `).join('');
+
+  document.getElementById('body-content').innerHTML = `
+    <p><strong>¿Nos dejas?</strong> Lamentamos que te vayas. Cuéntanos el motivo para mejorar:</p>
+    <div class="email-badge">${email}</div>
+    <div class="msg" id="msg"></div>
+    <div class="radio-group" id="radio-group">
+      ${radios}
+    </div>
+    <div class="reason-box" id="reason-box">
+      <textarea id="reason-text" placeholder="Cuéntanos más (opcional)..." rows="3"></textarea>
+    </div>
+    <button class="btn" id="btn-submit" onclick="enviarBaja()">Darme de baja</button>
+  `;
+
+  // Mostrar textarea para "Otro motivo"
+  document.querySelectorAll('input[name="reason"]').forEach(r => {
+    r.addEventListener('change', () => {
+      document.getElementById('reason-box').classList.toggle('open', r.value === 'otro');
+    });
+  });
+}
+
+function renderSuccess() {
+  document.getElementById('body-content').innerHTML = `
+    <div class="success-icon">✅</div>
+    <div class="success-title">Todo listo</div>
+    <div class="success-text">
+      Te has dado de baja correctamente. Ya no recibirás más correos nuestros.
+    </div>
+    <div class="success-actions">
+      <a href="https://www.certificadoya.es/" class="btn">Volver a CertificadoYa</a>
+      <p style="text-align:center;font-size:13px;color:#9aab8a;margin-top:4px">
+        ¿Fue un error? <a href="https://www.certificadoya.es/" style="color:#547c24">Suscríbete de nuevo</a>
+      </p>
+    </div>
+  `;
+}
+
+function renderNoEmail() {
+  document.getElementById('body-content').innerHTML = `
+    <p><strong>¿Nos dejas?</strong> Introduce tu email para gestionar tu suscripción:</p>
+    <div class="msg" id="msg"></div>
+    <input type="email" id="manual-email" placeholder="tu@email.com"
+      style="width:100%;padding:12px 14px;border:1.5px solid #e0e6d8;border-radius:10px;font-size:14px;font-family:Outfit,sans-serif;margin-bottom:12px;outline:none"
+      onfocus="this.style.borderColor='#547c24'"
+      onblur="this.style.borderColor='#e0e6d8'">
+    <button class="btn" onclick="continuarConEmail()">Continuar</button>
+  `;
+}
+
+function renderLoading() {
+  document.getElementById('body-content').innerHTML = `
+    <div class="msg info" style="display:block;text-align:center">
+      <div class="spinner"></div> Procesando...
+    </div>
+  `;
+}
+
+function renderError(msg) {
+  const el = document.getElementById('msg');
+  if (el) {
+    el.textContent = msg;
+    el.className = 'msg error';
+  } else {
+    document.getElementById('body-content').innerHTML = `
+      <div class="msg error" style="display:block">${msg}</div>
+      <button class="btn btn-outline" onclick="location.reload()">Intentar de nuevo</button>
+    `;
+  }
+}
+
+async function enviarBaja() {
+  const email = getEmailFromURL();
+  const reason = document.querySelector('input[name="reason"]:checked');
+  if (!reason) {
+    renderError('Selecciona un motivo para continuar.');
+    return;
+  }
+
+  const btn = document.getElementById('btn-submit');
+  btn.disabled = true;
+  btn.innerHTML = '<span class="spinner"></span> Procesando...';
+
+  const data = {
+    email: email,
+    reason: reason.value,
+    reason_text: reason.value === 'otro' ? document.getElementById('reason-text').value.trim() : ''
+  };
+
+  try {
+    const resp = await fetch(SUPABASE_FN, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(data)
+    });
+    const result = await resp.json();
+    if (result.success) {
+      renderSuccess();
+    } else {
+      renderError(result.error || 'No se pudo procesar la baja');
+      btn.disabled = false;
+      btn.innerHTML = 'Darme de baja';
+    }
+  } catch (e) {
+    renderError('Error de conexión. Inténtalo de nuevo.');
+    btn.disabled = false;
+    btn.innerHTML = 'Darme de baja';
+  }
+}
+
+function continuarConEmail() {
+  const email = document.getElementById('manual-email').value.trim().toLowerCase();
+  if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+    renderError('Introduce un email válido.');
+    return;
+  }
+  // Recargar con email en URL
+  window.history.replaceState({}, '', '?email=' + encodeURIComponent(email));
+  renderFormulario(email);
+}
+
+// Inicializar
+const email = getEmailFromURL();
+if (email) {
+  renderFormulario(email);
+} else {
+  renderNoEmail();
+}
+</script>
+</body>
+</html>

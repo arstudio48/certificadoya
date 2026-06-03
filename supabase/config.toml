@@ -33,3 +33,9 @@ verify_jwt = false
 
 [functions.aceptar-presupuesto]
 verify_jwt = false
+
+[functions.notificar-lead]
+verify_jwt = false
+
+[functions.newsletter-unsubscribe]
+verify_jwt = false
