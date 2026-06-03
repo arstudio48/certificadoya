@@ -181,8 +181,7 @@ serve(async (req) => {
           .update({
             estado: 'asignado',
             tecnico_asignado: tecnico.id,
-            fecha_asignacion: now,
-            updated_at: now
+            fecha_asignacion: now
           })
           .eq('id', leadId)
 
