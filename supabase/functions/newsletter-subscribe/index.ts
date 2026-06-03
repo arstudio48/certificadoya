@@ -178,7 +178,8 @@ async function enviarConfirmacion(email: string, userType: string) {
             <div style="padding:20px 40px;text-align:center;font-size:12px;color:#9aab8a;border-top:1px solid #eef4e8">
               <p style="margin:0 0 4px">CertificadoYa.es — Certificación energética en toda España</p>
               <p style="margin:0"><a href="https://www.certificadoya.es/" style="color:#547c24">certificadoya.es</a> · <a href="mailto:info@certificadoya.es" style="color:#547c24">info@certificadoya.es</a></p>
-              <p style="margin-top:8px;font-size:11px;color:#b8c8a9">Si no te has suscrito tú, ignora este email.</p>
+              <p style="margin-top:10px;font-size:11px;color:#b8c8a9">Si no deseas recibir más correos, puedes <a href="https://www.certificadoya.es/desuscribirse.html?email=${email}" style="color:#547c24;text-decoration:underline">darte de baja aquí</a>.</p>
+              <p style="margin-top:4px;font-size:11px;color:#b8c8a9">Si no te has suscrito tú, ignora este email.</p>
             </div>
           </div>
         </div>
