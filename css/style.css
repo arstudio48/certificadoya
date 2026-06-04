@@ -174,11 +174,11 @@ input.error { border-color:#ef4444 !important; background:#fef2f2; }
   display:grid; grid-template-columns:repeat(auto-fill, minmax(130px, 1fr)); gap:.4rem;
 }
 .prov-link {
-  display:block; padding:.5rem .6rem; background:var(--white); border:1px solid var(--border);
-  border-radius:var(--radius-sm); text-decoration:none; color:var(--text); font-size:.85rem; font-weight:500;
+  display:block; padding:.5rem .6rem; background:var(--bg-green); border:1px solid var(--primary-lighter);
+  border-radius:var(--radius-sm); text-decoration:none; color:var(--primary); font-size:.85rem; font-weight:500;
   transition:all .15s;
 }
-.prov-link:hover { background:var(--bg-green); border-color:var(--primary); color:var(--primary); }
+.prov-link:hover { background:var(--primary); color:white !important; border-color:var(--primary); transform:translateY(-1px); }
 .prov-link-destacada { background:var(--bg-green); border-color:var(--primary-lighter); color:var(--primary); font-weight:600; }
 
 /* ====== VENTAJAS ====== */
