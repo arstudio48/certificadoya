@@ -1,0 +1,530 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Presupuesto - CertificadoYa</title>
+  <link rel="icon" type="image/png" href="/favicon.png">
+  <style>
+    :root {
+      --primary: #547c24;
+      --primary-dark: #3d5f1a;
+      --accent: #d4af37;
+      --bg: #f7f9f6;
+      --card: #ffffff;
+      --text: #2d3a1f;
+      --text-light: #6b7b5e;
+      --border: #e0e6da;
+      --radius: 16px;
+      --shadow: 0 2px 16px rgba(0,0,0,0.06);
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: 'Montserrat', -apple-system, BlinkMacSystemFont, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 24px 16px;
+    }
+    .container {
+      max-width: 520px;
+      width: 100%;
+    }
+    .header {
+      text-align: center;
+      margin-bottom: 28px;
+    }
+    .logo {
+      font-size: 1.6rem;
+      font-weight: 700;
+      color: var(--primary-dark);
+      letter-spacing: -0.5px;
+    }
+    .logo span { color: var(--accent); }
+    .logo small {
+      display: block;
+      font-size: .7rem;
+      font-weight: 400;
+      color: var(--text-light);
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      margin-top: 2px;
+    }
+    .card {
+      background: var(--card);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      padding: 28px 24px;
+      margin-bottom: 16px;
+    }
+    .card-title {
+      font-size: 1.1rem;
+      font-weight: 600;
+      margin-bottom: 16px;
+      color: var(--text);
+    }
+    .badge {
+      display: inline-block;
+      background: #edf4e5;
+      color: var(--primary);
+      font-size: .75rem;
+      font-weight: 600;
+      padding: 4px 12px;
+      border-radius: 20px;
+      margin-bottom: 16px;
+    }
+    .detail-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 10px 0;
+      border-bottom: 1px solid var(--border);
+    }
+    .detail-row:last-child { border-bottom: none; }
+    .detail-label {
+      color: var(--text-light);
+      font-size: .85rem;
+    }
+    .detail-value {
+      font-weight: 600;
+      font-size: .9rem;
+      text-align: right;
+    }
+    .price-large {
+      font-size: 1.8rem;
+      font-weight: 700;
+      color: var(--primary);
+      text-align: center;
+      padding: 20px 0;
+    }
+    .price-large small {
+      font-size: 1rem;
+      font-weight: 400;
+      color: var(--text-light);
+    }
+    .btn {
+      display: block;
+      width: 100%;
+      padding: 16px 24px;
+      border-radius: 12px;
+      font-size: 1rem;
+      font-weight: 600;
+      font-family: inherit;
+      border: none;
+      cursor: pointer;
+      transition: all .2s;
+      text-align: center;
+      text-decoration: none;
+    }
+    .btn-primary {
+      background: var(--primary);
+      color: white;
+    }
+    .btn-primary:hover {
+      background: var(--primary-dark);
+      transform: translateY(-1px);
+      box-shadow: 0 4px 14px rgba(84,124,36,0.3);
+    }
+    .btn-primary:disabled {
+      opacity: .6;
+      cursor: not-allowed;
+      transform: none;
+      box-shadow: none;
+    }
+    .btn-outline {
+      background: transparent;
+      color: var(--text);
+      border: 2px solid var(--border);
+      margin-top: 10px;
+    }
+    .btn-outline:hover {
+      border-color: var(--primary);
+      color: var(--primary);
+    }
+    .info-box {
+      background: #f0f4eb;
+      border-radius: 12px;
+      padding: 16px;
+      margin: 16px 0;
+      font-size: .85rem;
+      line-height: 1.6;
+      color: var(--text);
+    }
+    .info-box strong { color: var(--primary-dark); }
+    .info-box.icon {
+      display: flex;
+      gap: 12px;
+      align-items: flex-start;
+    }
+    .info-box .icon-emoji { font-size: 1.4rem; }
+    .success-box {
+      background: #e8f5e9;
+      border: 1px solid #a5d6a7;
+      border-radius: 12px;
+      padding: 24px;
+      text-align: center;
+      margin: 16px 0;
+    }
+    .success-box h2 { color: var(--primary-dark); margin-bottom: 12px; font-size: 1.2rem; }
+    .success-box p { color: #4a7c2e; font-size: .9rem; line-height: 1.6; margin-bottom: 8px; }
+    .contact-data {
+      background: white;
+      border: 2px solid var(--border);
+      border-radius: 12px;
+      padding: 20px;
+      margin: 16px 0;
+    }
+    .contact-data .contact-row {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 8px 0;
+      font-size: .95rem;
+    }
+    .contact-data .contact-row .label {
+      color: var(--text-light);
+      font-weight: 500;
+      min-width: 70px;
+    }
+    .contact-data .contact-row .value {
+      font-weight: 600;
+    }
+    .error-box {
+      background: #fef2f2;
+      border: 1px solid #fecaca;
+      border-radius: 12px;
+      padding: 24px;
+      text-align: center;
+      margin: 16px 0;
+    }
+    .error-box h2 { color: #b91c1c; font-size: 1.1rem; margin-bottom: 8px; }
+    .error-box p { color: #7f1d1d; font-size: .9rem; }
+    .footer {
+      text-align: center;
+      color: var(--text-light);
+      font-size: .75rem;
+      padding: 20px;
+    }
+    .loading {
+      text-align: center;
+      padding: 40px 0;
+    }
+    .spinner {
+      width: 36px;
+      height: 36px;
+      border: 3px solid var(--border);
+      border-top-color: var(--primary);
+      border-radius: 50%;
+      animation: spin .7s linear infinite;
+      margin: 0 auto 16px;
+    }
+    @keyframes spin { to { transform: rotate(360deg); } }
+    .loading p { color: var(--text-light); font-size: .9rem; }
+    .hidden { display: none !important; }
+    .mt-16 { margin-top: 16px; }
+    .mb-8 { margin-bottom: 8px; }
+  </style>
+</head>
+<body>
+<div class="container" id="app">
+  <!-- Header -->
+  <div class="header">
+    <div class="logo">Certificado<span>Ya</span><small>Presupuesto</small></div>
+  </div>
+
+  <!-- Loading state -->
+  <div id="loading-state" class="card loading">
+    <div class="spinner"></div>
+    <p>Cargando presupuesto…</p>
+  </div>
+
+  <!-- Error state -->
+  <div id="error-state" class="hidden">
+    <div class="card error-box">
+      <h2 id="error-title">⚠️ Enlace no válido</h2>
+      <p id="error-message">Este enlace no es válido o el presupuesto ya no está disponible.</p>
+    </div>
+    <a href="https://www.certificadoya.es" class="btn btn-outline">Ir a CertificadoYa</a>
+  </div>
+
+  <!-- Success state (after accepting) -->
+  <div id="success-state" class="hidden">
+    <div class="card success-box">
+      <div style="font-size:3rem;margin-bottom:12px;">🎉</div>
+      <h2>¡Presupuesto aceptado!</h2>
+      <p id="success-message">Has aceptado el presupuesto. Contacta al técnico para acordar el pago y la visita.</p>
+      <div id="contact-data" class="contact-data hidden">
+        <div class="contact-row"><span class="label">Técnico</span><span class="value" id="success-tecnico"></span></div>
+        <div class="contact-row"><span class="label">Teléfono</span><span class="value" id="success-telefono"></span></div>
+        <div class="contact-row"><span class="label">Email</span><span class="value" id="success-email"></span></div>
+      </div>
+      <p style="font-size:.8rem;color:#6b7b5e;margin-top:16px;">Gracias por confiar en CertificadoYa.</p>
+    </div>
+    <a href="https://www.certificadoya.es" class="btn btn-outline">Volver a CertificadoYa</a>
+  </div>
+
+  <!-- Budget detail -->
+  <div id="budget-state" class="hidden">
+    <div class="card">
+      <span class="badge" id="badge-inmueble">Vivienda</span>
+      <div class="price-large" id="budget-price">0 € <small>IVA incl.</small></div>
+      <div class="detail-row">
+        <span class="detail-label">Cliente</span>
+        <span class="detail-value" id="budget-cliente">—</span>
+      </div>
+      <div class="detail-row">
+        <span class="detail-label">Zona</span>
+        <span class="detail-value" id="budget-zona">—</span>
+      </div>
+      <div class="detail-row">
+        <span class="detail-label">Tipo inmueble</span>
+        <span class="detail-value" id="budget-tipo">—</span>
+      </div>
+      <div class="detail-row">
+        <span class="detail-label">Superficie</span>
+        <span class="detail-value" id="budget-m2">— m²</span>
+      </div>
+      <div class="detail-row" id="row-descripcion">
+        <span class="detail-label">Descripción</span>
+        <span class="detail-value" id="budget-descripcion" style="font-weight:400">—</span>
+      </div>
+      <div class="detail-row">
+        <span class="detail-label">Plazo estimado</span>
+        <span class="detail-value" id="budget-plazo">—</span>
+      </div>
+      <div id="budget-notas" class="hidden"></div>
+    </div>
+
+    <!-- Payment options -->
+    <div id="payment-section">
+      <!-- Direct payment (tipo_cobro = 'directo') -->
+      <div id="pay-direct" class="card hidden">
+        <div class="card-title" style="color:var(--primary)">💰 Paga al técnico directamente</div>
+        <div class="info-box icon">
+          <span class="icon-emoji">💡</span>
+          <div>
+            <strong>Cómo funciona:</strong><br>
+            Al aceptar este presupuesto, te daremos los datos de contacto del técnico para que os pongáis de acuerdo en el método de pago (efectivo, transferencia, bizum…).
+          </div>
+        </div>
+        <div class="info-box icon">
+          <span class="icon-emoji">✅</span>
+          <div>
+            <strong>Sin comisiones:</strong> pagas exactamente el presupuesto acordado con el técnico.
+          </div>
+        </div>
+        <button class="btn btn-primary mt-16" id="btn-aceptar-directo" onclick="aceptarPresupuesto()">
+          Aceptar presupuesto
+        </button>
+      </div>
+
+      <!-- Intermediated payment (tipo_cobro = 'intermediado') -->
+      <div id="pay-intermediado" class="card hidden">
+        <div class="card-title" style="color:var(--primary)">🔄 Pago con tarjeta</div>
+        <div class="info-box icon">
+          <span class="icon-emoji">🔒</span>
+          <div>
+            <strong>Pago seguro:</strong> pagas con tarjeta a través de Stripe y CertificadoYa transfiere al técnico.
+          </div>
+        </div>
+        <button class="btn btn-primary mt-16" id="btn-pagar" onclick="pagarPresupuesto()">
+          Pagar ahora con tarjeta
+        </button>
+      </div>
+    </div>
+
+    <!-- Reject -->
+    <button class="btn btn-outline" id="btn-rechazar" onclick="rechazarPresupuesto()">
+      No me interesa, rechazar presupuesto
+    </button>
+  </div>
+
+  <div class="footer">CertificadoYa © 2024 · certificadoya.es</div>
+</div>
+
+<script>
+const API_URL = 'https://wypgqpgjlookbhuaiyxa.supabase.co/functions/v1/aceptar-presupuesto'
+let presupuestoData = null
+
+// ── Cargar presupuesto al iniciar ──
+document.addEventListener('DOMContentLoaded', async () => {
+  const params = new URLSearchParams(window.location.search)
+  const token = params.get('token')
+
+  if (!token) {
+    mostrarError('Enlace incompleto', 'Falta el token de presupuesto. Revisa el enlace que te envió el técnico.')
+    return
+  }
+
+  try {
+    const res = await fetch(`${API_URL}?token=${encodeURIComponent(token)}`)
+    const data = await res.json()
+
+    if (!data.success) {
+      mostrarError('Presupuesto no disponible', data.error || 'Este enlace no es válido o el presupuesto ya no está disponible.')
+      return
+    }
+
+    presupuestoData = { ...data, token }
+    mostrarPresupuesto(data)
+  } catch (err) {
+    mostrarError('Error de conexión', 'No pudimos cargar el presupuesto. Comprueba tu conexión e inténtalo de nuevo.')
+  }
+})
+
+// ── Mostrar error ──
+function mostrarError(title, message) {
+  document.getElementById('loading-state').classList.add('hidden')
+  document.getElementById('budget-state').classList.add('hidden')
+  document.getElementById('success-state').classList.add('hidden')
+  document.getElementById('error-state').classList.remove('hidden')
+  document.getElementById('error-title').textContent = '⚠️ ' + title
+  document.getElementById('error-message').textContent = message
+}
+
+// ── Mostrar presupuesto ──
+function mostrarPresupuesto(data) {
+  document.getElementById('loading-state').classList.add('hidden')
+  document.getElementById('budget-state').classList.remove('hidden')
+
+  const p = data.presupuesto
+  const l = data.lead
+  const t = data.tecnico
+
+  // Badge según tipo de inmueble
+  const badge = document.getElementById('badge-inmueble')
+  const tipos = {
+    piso: '🏢 Piso',
+    casa: '🏠 Casa unifamiliar',
+    adosado: '🏘️ Adosado',
+    local: '🏪 Local comercial',
+    nave: '🏭 Nave industrial'
+  }
+  badge.textContent = tipos[l.tipo_inmueble] || '📋 ' + (l.tipo_inmueble || 'Inmueble')
+
+  document.getElementById('budget-price').innerHTML = Number(p.precio_total).toLocaleString('es-ES', { style: 'currency', currency: 'EUR', minimumFractionDigits: 2 }) + ' <small>IVA incl.</small>'
+  document.getElementById('budget-cliente').textContent = l.nombre_cliente || '—'
+  document.getElementById('budget-zona').textContent = l.zona || '—'
+  document.getElementById('budget-tipo').textContent = tipos[l.tipo_inmueble] || l.tipo_inmueble || '—'
+  document.getElementById('budget-m2').textContent = l.m2 ? l.m2 + ' m²' : '—'
+  document.getElementById('budget-descripcion').textContent = p.descripcion || '—'
+  document.getElementById('budget-plazo').textContent = p.plazo_estimado || '—'
+
+  if (p.notas) {
+    const notasEl = document.getElementById('budget-notas')
+    notasEl.classList.remove('hidden')
+    notasEl.innerHTML = '<div class="detail-row"><span class="detail-label">Notas</span><span class="detail-value" style="font-weight:400">' + p.notas + '</span></div>'
+  }
+
+  // Mostrar opción de pago según tipo_cobro del técnico
+  const tipoCobro = t ? t.tipo_cobro : 'directo'
+  if (tipoCobro === 'directo') {
+    document.getElementById('pay-direct').classList.remove('hidden')
+  } else {
+    document.getElementById('pay-intermediado').classList.remove('hidden')
+  }
+}
+
+// ── Aceptar presupuesto (pago directo) ──
+async function aceptarPresupuesto() {
+  const btn = document.getElementById('btn-aceptar-directo')
+  btn.disabled = true
+  btn.textContent = 'Aceptando…'
+
+  try {
+    const res = await fetch(API_URL, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        action: 'aceptar',
+        token: presupuestoData.token,
+        presupuesto_id: presupuestoData.presupuesto.id
+      })
+    })
+    const data = await res.json()
+
+    if (!data.success) {
+      btn.disabled = false
+      btn.textContent = 'Aceptar presupuesto'
+      alert('Error: ' + (data.error || 'No se pudo aceptar el presupuesto'))
+      return
+    }
+
+    // Mostrar pantalla de éxito
+    document.getElementById('budget-state').classList.add('hidden')
+    document.getElementById('success-state').classList.remove('hidden')
+
+    if (data.tecnico) {
+      document.getElementById('contact-data').classList.remove('hidden')
+      document.getElementById('success-tecnico').textContent = data.tecnico.nombre || '—'
+      document.getElementById('success-telefono').textContent = data.tecnico.telefono || '—'
+      document.getElementById('success-email').textContent = data.tecnico.email || '—'
+    }
+  } catch (err) {
+    btn.disabled = false
+    btn.textContent = 'Aceptar presupuesto'
+    alert('Error de conexión. Inténtalo de nuevo.')
+  }
+}
+
+// ── Pagar presupuesto (intermediado) ──
+async function pagarPresupuesto() {
+  const btn = document.getElementById('btn-pagar')
+  btn.disabled = true
+  btn.textContent = 'Redirigiendo a pago…'
+
+  try {
+    const res = await fetch(API_URL, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        action: 'pagar',
+        token: presupuestoData.token,
+        presupuesto_id: presupuestoData.presupuesto.id
+      })
+    })
+    const data = await res.json()
+
+    if (!data.success) {
+      btn.disabled = false
+      btn.textContent = 'Pagar ahora con tarjeta'
+      alert('Error: ' + (data.error || 'No se pudo iniciar el pago'))
+      return
+    }
+
+    // Redirigir a Stripe Checkout
+    if (data.url) {
+      window.location.href = data.url
+    }
+  } catch (err) {
+    btn.disabled = false
+    btn.textContent = 'Pagar ahora con tarjeta'
+    alert('Error de conexión. Inténtalo de nuevo.')
+  }
+}
+
+// ── Rechazar presupuesto ──
+async function rechazarPresupuesto() {
+  if (!confirm('¿Estás seguro de que quieres rechazar este presupuesto?')) return
+
+  try {
+    await fetch(API_URL, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        action: 'rechazar',
+        token: presupuestoData.token,
+        presupuesto_id: presupuestoData.presupuesto.id
+      })
+    })
+    mostrarError('Presupuesto rechazado', 'Has rechazado este presupuesto. Si cambias de opinión, contacta con el técnico.')
+  } catch (_) {
+    mostrarError('Presupuesto rechazado', 'Has rechazado este presupuesto.')
+  }
+}
+</script>
+</body>
+</html>

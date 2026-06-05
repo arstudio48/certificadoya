@@ -21,7 +21,7 @@ serve(async (req) => {
   }
 
   try {
-    const { token, email, titulacion, colegiado, colegio, provincias, iban, plan } = await req.json()
+    const { token, email, titulacion, colegiado, colegio, provincias, iban, plan, tipo_cobro } = await req.json()
 
     if (!token || !email || !titulacion || !colegiado || !colegio || !provincias) {
       return new Response(JSON.stringify({ error: 'Faltan campos obligatorios' }), { status: 400, headers: { ...corsHeaders, 'Content-Type': 'application/json' } })
@@ -52,6 +52,7 @@ serve(async (req) => {
         provincia: provinciaStr,
         iban: iban || null,
         plan: plan || 'por-lead',
+        tipo_cobro: tipo_cobro || 'directo',
         verificado: true
       })
       .eq('id', tecnico.id)
