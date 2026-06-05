@@ -8,7 +8,7 @@
 // ============================================================
 const SUPABASE_URL = 'https://wypgqpgjlookbhuaiyxa.supabase.co';
 const SUPABASE_ANON_KEY = 'sb_publishable_MsDx5jVGtDAzoB3l3-8DiQ_BxWpChA0';
-const STRIPE_PUBLISHABLE_KEY = 'pk_test_51TaRD7Rty9TkFoA3itHdQjA1A1TeYbK6b7XPIY8gbxAMOwUCjiEqjLhvkZb71IcsIge6b3b6cUUG319c7VWu0XdGl00jH3fl3dU';
+const STRIPE_PUBLISHABLE_KEY = 'pk_live_51TaRCrRuy9GodkzqIpJ9LpX8xZOWHOrTevsvilw1coWfx9J0Owb1vQrWoEL9ct0fFdMIKuHkA6w1pSlocOBV3dG400jBauSmmA';
 const EDGE_FUNCTION_URL = 'https://wypgqpgjlookbhuaiyxa.supabase.co/functions/v1/solicitar-servicio';
 //const SUPABASE_SERVICE_KEY = 'eliminado — se usa solo desde serverless functions';
 

@@ -9,6 +9,6 @@
 //
 // (= ^ ( . . )^) ✧  Aquí descansan los sueños de un Stripe directo al frontend.
 
-const STRIPE_PUBLISHABLE_KEY = 'pk_live_...'; // ← placeholder, no válida
+const STRIPE_PUBLISHABLE_KEY = 'pk_live_51TaRCrRuy9GodkzqIpJ9LpX8xZOWHOrTevsvilw1coWfx9J0Owb1vQrWoEL9ct0fFdMIKuHkA6w1pSlocOBV3dG400jBauSmmA';
 const SUPABASE_URL = 'https://wypgqpgjlookbhuaiyxa.supabase.co';
 const SUPABASE_KEY = 'sb_publishable_MsDx5jVGtDAzoB3l3-8DiQ_BxWpChA0';
