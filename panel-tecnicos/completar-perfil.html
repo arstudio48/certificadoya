@@ -295,6 +295,32 @@
         </div>
       </div>
 
+      <!-- TIPO DE COBRO: cómo cobra el técnico a sus clientes -->
+      <div class="form-group">
+        <label>¿Cómo cobras a los clientes?</label>
+        <div class="plan-selector" id="tipo-cobro-selector">
+          <label class="plan-option selected" id="cobro-directo">
+            <input type="radio" name="tipo_cobro" value="directo" checked>
+            <span class="plan-check"></span>
+            <div class="plan-info">
+              <strong>💰 Pago directo</strong>
+              <span class="plan-price" style="font-size:.82rem;font-weight:400;color:#2d3a1f">Recomendado</span>
+              <span class="plan-desc">El cliente te paga a ti directamente (efectivo, transferencia, bizum…). Nosotros solo te pasamos el cliente.</span>
+            </div>
+          </label>
+          <label class="plan-option" id="cobro-intermediado">
+            <input type="radio" name="tipo_cobro" value="intermediado">
+            <span class="plan-check"></span>
+            <div class="plan-info">
+              <strong>🔄 Pago intermediado</strong>
+              <span class="plan-price" style="font-size:.82rem;font-weight:400;color:#2d3a1f">Nosotros cobramos al cliente</span>
+              <span class="plan-desc">El cliente paga con tarjeta a través de CertificadoYa y nosotros te transferimos a ti (requiere IBAN).</span>
+            </div>
+          </label>
+        </div>
+        <span class="input-hint">Puedes cambiar esto más tarde desde tu panel de control</span>
+      </div>
+
       <button type="submit" class="btn-submit" id="btn-guardar">
         Guardar perfil y activar cuenta
       </button>
@@ -351,7 +377,8 @@ function guardarPerfil(e) {
     colegio: document.getElementById('colegio').value,
     provincias: provincias,
     iban: document.getElementById('iban').value,
-    plan: plan
+    plan: plan,
+    tipo_cobro: document.querySelector('input[name="tipo_cobro"]:checked')?.value || 'directo'
   };
 
   const btn = document.getElementById('btn-guardar');

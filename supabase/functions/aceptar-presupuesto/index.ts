@@ -1,5 +1,5 @@
 // Edge Function: aceptar-presupuesto
-// Cliente verifica y paga el presupuesto vía Stripe
+// Cliente verifica, acepta o paga el presupuesto
 // Deploy: supabase functions deploy aceptar-presupuesto --no-verify-jwt
 // Secrets needed: STRIPE_SECRET_KEY, SUPABASE_URL, SUPABASE_SERVICE_ROLE_KEY
 
@@ -46,7 +46,6 @@ serve(async (req) => {
         })
       }
 
-      // Buscar presupuesto por token_aceptacion
       const { data: presupuesto, error: presupuestoError } = await supabase
         .from('presupuestos')
         .select(`
@@ -101,7 +100,6 @@ serve(async (req) => {
         })
       }
 
-      // Obtener datos del lead asociado
       const { data: lead, error: leadError } = await supabase
         .from('leads')
         .select('id, nombre_cliente, zona, m2, tipo_inmueble, codigo_postal')
@@ -119,6 +117,16 @@ serve(async (req) => {
         })
       }
 
+      const { data: tecnico, error: tecnicoError } = await supabase
+        .from('tecnicos')
+        .select('nombre, tipo_cobro')
+        .eq('id', presupuesto.tecnico_id)
+        .maybeSingle()
+
+      if (tecnicoError || !tecnico) {
+        console.error('Error obteniendo técnico:', tecnicoError)
+      }
+
       return new Response(JSON.stringify({
         success: true,
         presupuesto: {
@@ -133,7 +141,11 @@ serve(async (req) => {
           zona: lead.zona,
           m2: lead.m2,
           tipo_inmueble: lead.tipo_inmueble
-        }
+        },
+        tecnico: tecnico ? {
+          nombre: tecnico.nombre,
+          tipo_cobro: tecnico.tipo_cobro || 'directo'
+        } : null
       }), {
         status: 200,
         headers: { ...corsHeaders, 'Content-Type': 'application/json' }
@@ -152,22 +164,12 @@ serve(async (req) => {
   }
 
   // ================================================================
-  // POST: Cliente acepta y paga el presupuesto
+  // POST: Cliente acepta, paga o rechaza el presupuesto
   // ================================================================
   if (req.method === 'POST') {
     try {
       const body = await req.json()
       const { action, token: bodyToken, leadId, presupuesto_id } = body
-
-      if (!action || action !== 'pagar') {
-        return new Response(JSON.stringify({
-          success: false,
-          error: 'Acción no válida. Use action="pagar"'
-        }), {
-          status: 400,
-          headers: { ...corsHeaders, 'Content-Type': 'application/json' }
-        })
-      }
 
       if (!bodyToken || !presupuesto_id) {
         return new Response(JSON.stringify({
@@ -179,7 +181,6 @@ serve(async (req) => {
         })
       }
 
-      // Verificar que el presupuesto existe y está en estado 'enviado'
       const { data: presupuesto, error: presupuestoError } = await supabase
         .from('presupuestos')
         .select('id, lead_id, tecnico_id, precio_total, descripcion, estado, token_aceptacion')
@@ -218,80 +219,157 @@ serve(async (req) => {
         })
       }
 
-      // Obtener datos del lead para el nombre del producto
-      const { data: lead, error: leadError } = await supabase
-        .from('leads')
-        .select('nombre_cliente')
-        .eq('id', presupuesto.lead_id)
-        .maybeSingle()
+      // ================================================================
+      // ACCIÓN: aceptar — Pago directo al técnico
+      // ================================================================
+      if (action === 'aceptar') {
+        const { data: tecnico, error: tecError } = await supabase
+          .from('tecnicos')
+          .select('nombre, telefono, email')
+          .eq('id', presupuesto.tecnico_id)
+          .maybeSingle()
 
-      if (leadError || !lead) {
-        console.error('Error obteniendo lead:', leadError)
+        const now = new Date().toISOString()
+        const { error: updateError } = await supabase
+          .from('presupuestos')
+          .update({
+            estado: 'aceptado',
+            fecha_respuesta: now,
+            aceptado_at: now
+          })
+          .eq('id', presupuesto.id)
+
+        if (updateError) {
+          console.error('Error actualizando presupuesto:', updateError)
+          return new Response(JSON.stringify({
+            success: false,
+            error: 'Error al aceptar el presupuesto'
+          }), {
+            status: 500,
+            headers: { ...corsHeaders, 'Content-Type': 'application/json' }
+          })
+        }
+
         return new Response(JSON.stringify({
-          success: false,
-          error: 'Error al obtener datos del cliente'
+          success: true,
+          mensaje: 'Presupuesto aceptado. Contacta al técnico para acordar el pago y la visita.',
+          tecnico: tecnico ? {
+            nombre: tecnico.nombre,
+            telefono: tecnico.telefono,
+            email: tecnico.email
+          } : null
         }), {
-          status: 500,
+          status: 200,
           headers: { ...corsHeaders, 'Content-Type': 'application/json' }
         })
       }
 
-      // Crear Stripe Checkout Session
-      const priceInCents = Math.round(Number(presupuesto.precio_total) * 100)
+      // ================================================================
+      // ACCIÓN: pagar — Stripe checkout (pago intermediado)
+      // ================================================================
+      if (action === 'pagar') {
+        const { data: lead, error: leadError } = await supabase
+          .from('leads')
+          .select('nombre_cliente')
+          .eq('id', presupuesto.lead_id)
+          .maybeSingle()
 
-      if (priceInCents <= 0) {
-        return new Response(JSON.stringify({
-          success: false,
-          error: 'El importe del presupuesto no es válido'
-        }), {
-          status: 400,
-          headers: { ...corsHeaders, 'Content-Type': 'application/json' }
-        })
-      }
+        if (leadError || !lead) {
+          console.error('Error obteniendo lead:', leadError)
+          return new Response(JSON.stringify({
+            success: false,
+            error: 'Error al obtener datos del cliente'
+          }), {
+            status: 500,
+            headers: { ...corsHeaders, 'Content-Type': 'application/json' }
+          })
+        }
 
-      const session = await stripe.checkout.sessions.create({
-        mode: 'payment',
-        line_items: [{
-          price_data: {
-            currency: 'eur',
-            product_data: {
-              name: `Certificado energético - ${lead.nombre_cliente}`,
-              description: presupuesto.descripcion || 'Certificado de Eficiencia Energética'
+        const priceInCents = Math.round(Number(presupuesto.precio_total) * 100)
+
+        if (priceInCents <= 0) {
+          return new Response(JSON.stringify({
+            success: false,
+            error: 'El importe del presupuesto no es válido'
+          }), {
+            status: 400,
+            headers: { ...corsHeaders, 'Content-Type': 'application/json' }
+          })
+        }
+
+        const session = await stripe.checkout.sessions.create({
+          mode: 'payment',
+          line_items: [{
+            price_data: {
+              currency: 'eur',
+              product_data: {
+                name: `Certificado energético - ${lead.nombre_cliente}`,
+                description: presupuesto.descripcion || 'Certificado de Eficiencia Energética'
+              },
+              unit_amount: priceInCents
             },
-            unit_amount: priceInCents
+            quantity: 1
+          }],
+          metadata: {
+            tipo: 'pago_presupuesto',
+            presupuesto_id: String(presupuesto.id),
+            lead_id: String(presupuesto.lead_id),
+            tecnico_id: String(presupuesto.tecnico_id)
           },
-          quantity: 1
-        }],
-        metadata: {
-          tipo: 'pago_presupuesto',
-          presupuesto_id: String(presupuesto.id),
-          lead_id: String(presupuesto.lead_id),
-          tecnico_id: String(presupuesto.tecnico_id)
-        },
-        success_url: `https://certificadoya.es/pago-exitoso.html?presupuesto_id=${presupuesto.id}`,
-        cancel_url: 'https://certificadoya.es/'
-      })
-
-      // Actualizar presupuesto a 'pendiente_pago' y guardar stripe_session_id
-      const { error: updateError } = await supabase
-        .from('presupuestos')
-        .update({
-          estado: 'pendiente_pago',
-          stripe_session_id: session.id
+          success_url: `https://certificadoya.es/pago-exitoso.html?presupuesto_id=${presupuesto.id}`,
+          cancel_url: 'https://certificadoya.es/'
         })
-        .eq('id', presupuesto.id)
 
-      if (updateError) {
-        console.error('Error actualizando presupuesto:', updateError)
-        // No retornamos error al cliente, la sesión ya se creó
+        const { error: updateError } = await supabase
+          .from('presupuestos')
+          .update({
+            estado: 'pendiente_pago',
+            stripe_session_id: session.id
+          })
+          .eq('id', presupuesto.id)
+
+        if (updateError) {
+          console.error('Error actualizando presupuesto:', updateError)
+        }
+
+        return new Response(JSON.stringify({
+          success: true,
+          url: session.url,
+          sessionId: session.id
+        }), {
+          status: 200,
+          headers: { ...corsHeaders, 'Content-Type': 'application/json' }
+        })
       }
 
+      // ================================================================
+      // ACCIÓN: rechazar
+      // ================================================================
+      if (action === 'rechazar') {
+        const { error: updateError } = await supabase
+          .from('presupuestos')
+          .update({ estado: 'rechazado', fecha_respuesta: new Date().toISOString() })
+          .eq('id', presupuesto.id)
+
+        if (updateError) {
+          console.error('Error al rechazar presupuesto:', updateError)
+        }
+
+        return new Response(JSON.stringify({
+          success: true,
+          mensaje: 'Presupuesto rechazado'
+        }), {
+          status: 200,
+          headers: { ...corsHeaders, 'Content-Type': 'application/json' }
+        })
+      }
+
+      // Acción desconocida
       return new Response(JSON.stringify({
-        success: true,
-        url: session.url,
-        sessionId: session.id
+        success: false,
+        error: 'Acción no válida. Use action="aceptar", "pagar" o "rechazar"'
       }), {
-        status: 200,
+        status: 400,
         headers: { ...corsHeaders, 'Content-Type': 'application/json' }
       })
     } catch (error) {
