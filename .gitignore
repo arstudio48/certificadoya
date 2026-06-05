@@ -17,6 +17,9 @@ __pycache__/
 *.pyc
 *.pyo
 
+# Media source files (raw copies, not served)
+media-cxs/
+
 # Vercel
 .vercel
 .github/
