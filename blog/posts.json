@@ -135,7 +135,16 @@
     "lectura": 8
   },
   {
-    "slug": "registro-centralizado-tecnicos-certificadores",
+      "slug": "guia-ce3x-avanzada",
+      "titulo": "Guía CE3X avanzada: casos prácticos, errores reales y cómo registrar el CEE en cada CCAA",
+      "fecha": "2026-06-03",
+      "autor": "Javier Martínez",
+      "descripcion": "Casos prácticos de CE3X para técnicos certificadores: cómo subir la letra sin gastar, aerotermia, cerramientos, registros autonómicos y checklist de 10 puntos. Incluye video y podcast con análisis completo.",
+      "categoria": "técnicos",
+      "lectura": 12
+  },
+  {
+      "slug": "registro-centralizado-tecnicos-certificadores",
     "titulo": "Registro centralizado de técnicos certificadores: ¿realidad o proyecto?",
     "fecha": "2026-05-31",
     "autor": "CertificadoYa",
