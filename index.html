@@ -3,13 +3,13 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>CertificadoYa — Certificado Energético en 24h | Presupuesto al Instante</title>
+  <title>🔴 Certificado energético urgente desde 45€ — CEE en 24h</title>
   <meta name="description" content="Consigue tu certificado de eficiencia energética (CEE) en 24 horas. Presupuesto instantáneo por m². Técnicos verificados en toda España. Desde 45€.">
   <meta name="keywords" content="certificado energético, certificado de eficiencia energética, CEE, precio certificado energético, presupuesto certificado energético, técnico certificador, Madrid, Barcelona, Valencia, Sevilla, Asturias">
   <meta name="robots" content="index, follow">
   <meta name="google-site-verification" content="jRJ8qVGRFBYAdjdpGyyJl0eTKhRGCzHc3HvnsO2iUZg">
   <link rel="canonical" href="https://www.certificadoya.es/">
-  <meta property="og:title" content="CertificadoYa — Certificado Energético en 24h | Presupuesto al Instante">
+  <meta property="og:title" content="🔴 Certificado energético urgente desde 45€ — CEE en 24h">
   <meta property="og:description" content="Presupuesto instantáneo por m². Sin formularios largos. Técnicos verificados en toda España. Desde 45€.">
   <meta property="og:url" content="https://www.certificadoya.es/">
   <meta property="og:type" content="website">
@@ -19,7 +19,7 @@
   <meta property="og:locale" content="es_ES">
   <meta property="og:site_name" content="CertificadoYa">
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="CertificadoYa — Certificado Energético en 24h | Presupuesto al Instante">
+  <meta name="twitter:title" content="🔴 Certificado energético urgente desde 45€ — CEE en 24h">
   <meta name="twitter:description" content="Presupuesto instantáneo por m². Sin formularios largos. Técnicos verificados en toda España. Desde 45€.">
   <meta name="twitter:image" content="https://www.certificadoya.es/img/og-image.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -56,6 +56,33 @@
 .mobile-menu a:hover{background:#f3f9eb;color:#547c24}
 .mobile-menu .btn-nav{margin:.5rem 1rem}
 @media(max-width:600px){.hamburger{display:flex}.nav>.nav-item,.nav>.buscador-wrapper,.nav>.btn-nav,.nav>.dropdown-pro{display:none}.header-inner{position:relative}}
+/* Mobile sticky bar + wizard pasos */
+.mobile-sticky{display:none;position:fixed;bottom:0;left:0;right:0;z-index:150;background:#fff;border-top:1px solid #e5e7eb;box-shadow:0 -4px 12px rgba(0,0,0,.08)}
+.mobile-sticky a{display:flex;align-items:center;justify-content:center;gap:.5rem;width:100%;padding:.8rem;background:#f24d2e;color:#fff;font-weight:700;font-size:.95rem;text-decoration:none;font-family:Outfit,sans-serif;transition:background .15s}
+.mobile-sticky a:hover{background:#d92e0d}
+.mobile-sticky a svg{width:20px;height:20px;flex-shrink:0}
+@media(min-width:601px){.mobile-sticky{display:none!important}}
+@media(max-width:600px){.mobile-sticky{display:flex}}
+.pasos-indicador{display:none;gap:.35rem;margin-bottom:.75rem;justify-content:center}
+.pasos-indicador .paso-dot{width:10px;height:10px;border-radius:50%;background:#ddd;transition:background .2s}
+.pasos-indicador .paso-dot.activo{background:#547c24}
+.paso-contenido{display:block}
+.paso-titulo{font-size:.85rem;font-weight:600;color:#20201f;margin-bottom:.6rem;display:none}
+.paso-nav{display:none;margin-top:.75rem}
+.paso-nav-inner{display:flex;gap:.5rem}
+.paso-nav-inner .btn-back{flex:1;padding:.6rem;border:1.5px solid #ddd;border-radius:6px;background:#fff;color:#20201f;font-family:Outfit,sans-serif;font-size:.85rem;font-weight:500;cursor:pointer;text-align:center;transition:all .15s}
+.paso-nav-inner .btn-back:hover{border-color:#bbb;background:#f9f9f9}
+.paso-nav-inner .btn-next{flex:2;padding:.6rem;border:none;border-radius:6px;background:#547c24;color:#fff;font-family:Outfit,sans-serif;font-size:.85rem;font-weight:600;cursor:pointer;text-align:center;transition:background .15s}
+.paso-nav-inner .btn-next:hover{background:#43631d}
+.paso-nav-inner .btn-next:disabled{opacity:.5;cursor:default}
+@media(max-width:600px){
+  .pasos-indicador{display:flex}
+  .paso-contenido:not(.paso-activo-mobile){display:none!important}
+  .paso-contenido.paso-activo-mobile{display:block}
+  .paso-titulo{display:block}
+  .paso-nav{display:block}
+  .presupuesto-card-v2{padding-bottom:5rem}
+}
 /* Dropdown Técnicos */
 .dropdown-pro{position:relative;display:inline-block}
 .dropdown-pro-btn{background:none;border:none;font-family:var(--font);font-size:.9rem;font-weight:500;color:var(--text);cursor:pointer;padding:0;transition:color .15s}
@@ -244,32 +271,58 @@ var provSlugs = {}; provincias.forEach(function(p){provSlugs[p.slug]=p.nombre;})
     <div class="hero-new-grid">
     <div class="hero-new-card">
         <div class="presupuesto-card-v2">
+          <!-- Indicador de progreso (solo móvil) -->
+          <div class="pasos-indicador" id="pasos-indicador">
+            <div class="paso-dot activo" data-paso="1"></div>
+            <div class="paso-dot" data-paso="2"></div>
+            <div class="paso-dot" data-paso="3"></div>
+          </div>
           <div class="precio-destacado" style="text-align:center;margin-bottom:1rem;background:linear-gradient(135deg,#f3f9eb,#e8f0dc);padding:.75rem;border-radius:10px">
             <div style="font-size:.75rem;color:#6b7b5e;font-weight:500;text-transform:uppercase;letter-spacing:.05em">Precio desde</div>
             <div style="font-size:2.4rem;font-weight:800;color:#547c24;line-height:1.1">45<span style="font-size:1.2rem;font-weight:500">€</span></div>
             <div style="font-size:.7rem;color:#9aab8a">para un piso estándar · sin sorpresas</div>
           </div>
-          <div class="form-group">
-            <label for="cp">Código postal</label>
-            <input type="text" id="cp" placeholder="Ej: 28001" maxlength="5" inputmode="numeric" pattern="[0-9]{5}" aria-required="true" aria-describedby="cp-error" oninput="validarCP()">
-            <span class="input-error" id="cp-error" role="alert"></span>
-          </div>
-          <div class="form-row">
+          <!-- Paso 1: CP (solo móvil; desktop se ve siempre) -->
+          <div class="paso-contenido paso-activo-mobile" data-paso="1" id="paso-cp-wrapper">
+            <div class="paso-titulo">📍 ¿Dónde está tu vivienda?</div>
             <div class="form-group">
-              <label for="m2">m²</label>
-              <input type="number" id="m2" placeholder="80" min="20" max="5000" aria-required="true" aria-describedby="m2-error" oninput="validarM2()">
-              <span class="input-error" id="m2-error" role="alert"></span>
+              <label for="cp">Código postal</label>
+              <input type="text" id="cp" placeholder="Ej: 28001" maxlength="5" inputmode="numeric" pattern="[0-9]{5}" aria-required="true" aria-describedby="cp-error" oninput="validarCP()">
+              <span class="input-error" id="cp-error" role="alert"></span>
             </div>
-            <div class="form-group">
-              <label for="tipo">Tipo</label>
-              <select id="tipo" onchange="calcularPresupuesto()">
-                <option value="piso">Piso</option>
-                <option value="unifamiliar">Unifamiliar</option>
-                <option value="adosado">Adosado</option>
-                <option value="local">Local</option>
-              </select>
+            <div class="paso-nav">
+              <div class="paso-nav-inner">
+                <button class="btn-next" id="paso-btn-1" onclick="irAlPaso(2)">Siguiente →</button>
+              </div>
             </div>
           </div>
+          <!-- Paso 2: m² + Tipo (solo móvil; desktop se ve siempre) -->
+          <div class="paso-contenido" data-paso="2" id="paso-medidas-wrapper">
+            <div class="paso-titulo">📐 ¿Cuántos metros tiene?</div>
+            <div class="form-row">
+              <div class="form-group">
+                <label for="m2">m²</label>
+                <input type="number" id="m2" placeholder="80" min="20" max="5000" aria-required="true" aria-describedby="m2-error" oninput="validarM2()">
+                <span class="input-error" id="m2-error" role="alert"></span>
+              </div>
+              <div class="form-group">
+                <label for="tipo">Tipo</label>
+                <select id="tipo" onchange="calcularPresupuesto()">
+                  <option value="piso">Piso</option>
+                  <option value="unifamiliar">Unifamiliar</option>
+                  <option value="adosado">Adosado</option>
+                  <option value="local">Local</option>
+                </select>
+              </div>
+            </div>
+            <div class="paso-nav">
+              <div class="paso-nav-inner">
+                <button class="btn-back" onclick="irAlPaso(1)">← Atrás</button>
+                <button class="btn-next" id="paso-btn-2" onclick="calcularPresupuesto()">Calcular →</button>
+              </div>
+            </div>
+          </div>
+          <!-- Consentimiento + botón calcular (siempre visible) -->
           <label style="display:flex;align-items:flex-start;gap:8px;margin:12px 0 4px;cursor:pointer;font-size:12px;color:#555;line-height:1.4">
             <input type="checkbox" id="consent-datos" style="margin-top:2px;width:14px;height:14px;accent-color:#111;cursor:pointer">
             <span>Acepto la <a href="/legal/privacidad.html" target="_blank" style="color:#1a1a1a;text-decoration:underline">política de privacidad</a> y consiento el tratamiento de mis datos para recibir un presupuesto y ser contactado por un técnico certificador.</span>
@@ -285,6 +338,16 @@ var provSlugs = {}; provincias.forEach(function(p){provSlugs[p.slug]=p.nombre;})
             <div class="resultado-precio" id="precio-rango">—</div>
             <div class="resultado-texto" id="precio-texto"></div>
             <button class="btn-cta btn-cta-outline" onclick="solicitarLead()">Solicitar servicio ahora →</button>
+          </div>
+          <!-- Paso 3: Confirmación (solo móvil, visible tras cálculo) -->
+          <div class="paso-contenido" data-paso="3" id="paso-confirmacion" style="display:none">
+            <div class="paso-nav">
+              <div class="paso-nav-inner">
+                <button class="btn-back" onclick="irAlPaso(2)">← Volver</button>
+                <button class="btn-next" onclick="solicitarLead()">Solicitar servicio →</button>
+              </div>
+            </div>
+            <p style="font-size:.72rem;color:#9aab8a;text-align:center;margin-top:.5rem">Técnico colegiado de tu zona · Pago seguro</p>
           </div>
         </div>
       </div>
@@ -1062,6 +1125,71 @@ document.addEventListener('keydown', function(e) {
   }
 })();
 </script>
+
+<script>
+// Mobile wizard — navegación entre pasos
+function irAlPaso(num) {
+  document.querySelectorAll('.paso-contenido').forEach(function(el){
+    el.classList.remove('paso-activo-mobile');
+  });
+  var paso = document.querySelector('.paso-contenido[data-paso="'+num+'"]');
+  if (paso) paso.classList.add('paso-activo-mobile');
+  document.querySelectorAll('.paso-dot').forEach(function(dot){
+    dot.classList.toggle('activo', parseInt(dot.dataset.paso) === num);
+  });
+  // Mostrar resultado si paso 3
+  if (num === 3) {
+    var resultado = document.getElementById('resultado');
+    if (resultado && resultado.classList.contains('visible')) {
+      resultado.style.display = 'block';
+    }
+  }
+  // Scroll suave al formulario en móvil
+  var card = document.querySelector('.presupuesto-card-v2');
+  if (card && window.innerWidth <= 600) {
+    card.scrollIntoView({behavior:'smooth', block:'start'});
+  }
+}
+// Envolver calcularPresupuesto para manejar pasos en móvil
+(function() {
+  var orig = window.calcularPresupuesto;
+  window.calcularPresupuesto = function() {
+    orig();
+    setTimeout(function() {
+      var r = document.getElementById('resultado');
+      if (r && r.classList.contains('visible') && window.innerWidth <= 600) {
+        irAlPaso(3);
+      }
+    }, 50);
+  };
+})();
+// Inicializar: paso 1 activo en móvil, desktop todo visible
+document.addEventListener('DOMContentLoaded', function(){
+  function ajustarPasos() {
+    var esMovil = window.innerWidth <= 600;
+    document.querySelectorAll('.paso-contenido').forEach(function(el){
+      if (!esMovil) {
+        el.classList.add('paso-activo-mobile');
+      } else {
+        var activo = document.querySelector('.paso-contenido.paso-activo-mobile');
+        if (!activo) {
+          document.querySelector('.paso-contenido[data-paso="1"]')?.classList.add('paso-activo-mobile');
+        }
+      }
+    });
+  }
+  ajustarPasos();
+  window.addEventListener('resize', ajustarPasos);
+});
+</script>
+
+<!-- Mobile sticky bar (solo visible en móvil) -->
+<div class="mobile-sticky" id="mobile-sticky">
+  <a href="#" onclick="event.preventDefault();document.getElementById('cp').focus();">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+    Calcular mi CEE gratis
+  </a>
+</div>
 
 </body>
 </html>
