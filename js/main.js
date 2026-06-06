@@ -247,7 +247,7 @@ function calcularPresupuesto() {
 function solicitarLead() {
   const presupuesto = window._presupuesto;
   if (!presupuesto) {
-    document.getElementById('presupuesto-card').scrollIntoView({ behavior: 'smooth' });
+    document.querySelector('.presupuesto-card-v2').scrollIntoView({ behavior: 'smooth' });
     return;
   }
   // Mostrar modal de contacto
