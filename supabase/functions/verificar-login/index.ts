@@ -44,6 +44,15 @@ serve(async (req) => {
       return new Response(JSON.stringify({ error: 'Código incorrecto' }), { status: 401, headers: { ...corsHeaders, 'Content-Type': 'application/json' } })
     }
 
+    // Comprobar que tiene provincias configuradas
+    const provincias = tecnico.provincia ? tecnico.provincia.split(',').map((p: string) => p.trim().toLowerCase()) : []
+    if (provincias.length === 0) {
+      return new Response(JSON.stringify({
+        error: 'Tu cuenta no tiene provincias de trabajo asignadas. Debes registrarte de nuevo y seleccionar al menos una provincia donde trabajes.',
+        necesitaRegistro: true
+      }), { status: 403, headers: { ...corsHeaders, 'Content-Type': 'application/json' } })
+    }
+
     // Generar token de sesión (válido 7 días)
     const sessionToken = crypto.randomUUID().replace(/-/g, '').slice(0, 32)
     const sessionExpira = new Date(Date.now() + 7 * 24 * 60 * 60 * 1000).toISOString()

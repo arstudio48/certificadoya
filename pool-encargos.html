@@ -147,6 +147,15 @@
       <a href="/panel-tecnicos.html" class="back-link">← ¿Aún no estás registrado?</a>
     </div>
 
+    <!-- PASO 1.5: Sin provincias -->
+    <div class="login-card" id="login-sin-provincias" style="display:none">
+      <h2>⚠️ Falta configurar tu zona</h2>
+      <p>Tu cuenta existe y el código es correcto, pero <strong>no tienes provincias de trabajo asignadas</strong>. Sin ellas no puedes ver los trabajos disponibles.</p>
+      <p style="color:#6b7b5e;font-size:.9rem;margin-bottom:1.5rem;line-height:1.5">Selecciona tu provincia o provincias para empezar a recibir encargos.</p>
+      <a href="/panel-tecnicos.html" class="btn" style="display:inline-block;text-decoration:none">Ir a registro →</a>
+      <a href="#" onclick="volverEmail()" class="back-link">← Usar otro email</a>
+    </div>
+
     <!-- PASO 2: Código -->
     <div class="login-card" id="login-codigo" style="display:none">
       <h2>✉️ Código enviado</h2>
@@ -268,6 +277,7 @@
 
     function volverEmail() {
       document.getElementById('login-codigo').style.display = 'none';
+      document.getElementById('login-sin-provincias').style.display = 'none';
       document.getElementById('login-email').style.display = 'block';
       document.getElementById('login-email-input').focus();
     }
@@ -294,6 +304,13 @@
         const data = await res.json();
 
         if (!res.ok) {
+          if (data.necesitaRegistro) {
+            document.getElementById('login-codigo').style.display = 'none';
+            document.getElementById('login-sin-provincias').style.display = 'block';
+            btn.disabled = false;
+            btn.textContent = 'Verificar código →';
+            return;
+          }
           mostrarError('codigo-error', data.error || 'Código incorrecto.');
           btn.disabled = false;
           btn.textContent = 'Verificar código →';
@@ -323,6 +340,7 @@
       document.getElementById('header-pool').style.display = 'none';
       document.getElementById('pool-section').style.display = 'none';
       document.getElementById('login-codigo').style.display = 'none';
+      document.getElementById('login-sin-provincias').style.display = 'none';
       document.getElementById('login-email').style.display = 'block';
       document.getElementById('login-section').style.display = 'block';
       document.getElementById('login-email-input').value = '';
