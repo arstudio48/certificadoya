@@ -40,6 +40,8 @@ INCLUDE_ROOT_PAGES = [
     ("organismos-contacto.html", "monthly", 0.6),
     ("directorio-tecnicos.html", "monthly", 0.6),
     ("404.html", "yearly", 0.3),
+    ("ver-presupuesto.html", "monthly", 0.7),
+    ("desuscribirse.html", "yearly", 0.3),
 ]
 
 def get_existing_dir_pages(base_dir, prefix):
@@ -94,8 +96,10 @@ def generate_sitemap():
     # Blog index
     urls.append((f"{SITE}/blog/", "weekly", 0.9))
     
-    # 3. Certificate pages (directories)
+    # 3. Certificate pages (directories) — both "certificado-energetico-*" and "cee-*"
     for page in get_existing_dir_pages(BASE_DIR, "certificado-energetico"):
+        urls.append((f"{SITE}/{page}/", "monthly", 0.7))
+    for page in get_existing_dir_pages(BASE_DIR, "cee-"):
         urls.append((f"{SITE}/{page}/", "monthly", 0.7))
     
     # 4. Other directory-based pages
