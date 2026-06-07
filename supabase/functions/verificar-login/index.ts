@@ -66,9 +66,6 @@ serve(async (req) => {
       })
       .eq('id', tecnico.id)
 
-    // Obtener provincias desde el perfil del técnico
-    const provincias = tecnico.provincia ? tecnico.provincia.split(',').map(p => p.trim().toLowerCase()) : []
-
     return new Response(JSON.stringify({
       success: true,
       sessionToken,
