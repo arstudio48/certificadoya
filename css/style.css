@@ -1,13 +1,14 @@
 /* ====== CERTIFICADOYA — Estilo Certicalia ====== */
 :root {
-  --primary: #547c24;
-  --primary-dark: #43631d;
-  --primary-light: #71a530;
-  --primary-lighter: #8cc842;
-  --accent: #f24d2e;
-  --accent-dark: #d92e0d;
+  --primary: #16a34a;
+  --primary-dark: #15803d;
+  --primary-light: #22c55e;
+  --primary-lighter: #86efac;
+  --accent: #f97316;
+  --accent-dark: #ea580c;
+  --accent-light: #fed7aa;
   --bg: #fafafa;
-  --bg-green: #f3f9eb;
+  --bg-green: #f0fdf4;
   --text: #20201f;
   --text-light: #6b7280;
   --text-lighter: #9ca3af;
@@ -65,17 +66,17 @@ body {
   border:2px solid var(--border-light);
   border-radius:var(--radius-sm);
   font-size:.85rem;
-  background:var(--white) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='%23547c24'%3E%3Cpath d='M7 10l5 5 5-5z'/%3E%3C/svg%3E") no-repeat right .5rem center;
+  background:var(--white) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='%2316a34a'%3E%3Cpath d='M7 10l5 5 5-5z'/%3E%3C/svg%3E") no-repeat right .5rem center;
   -webkit-appearance:none; -moz-appearance:none; appearance:none;
   cursor:pointer; transition:border-color .15s,box-shadow .15s;
   color:var(--text); font-weight:500;
 }
 .provincia-selector:hover { border-color:var(--primary); }
-.provincia-selector:focus { border-color:var(--primary); outline:none; box-shadow:0 0 0 3px rgba(84,124,36,.15); }
+.provincia-selector:focus { border-color:var(--primary); outline:none; box-shadow:0 0 0 3px rgba(22,163,74,.15); }
 
 /* ====== HERO ====== */
 .hero-new {
-  background: linear-gradient(135deg, rgba(84,124,36,.50) 0%, rgba(60,95,25,.45) 100%), url('/img/hero-tecnicos.webp') center/cover no-repeat;
+  background: linear-gradient(135deg, rgba(22,163,74,.65) 0%, rgba(21,128,61,.55) 100%), url('/img/hero-tecnicos.webp') center/cover no-repeat;
   color: #fff;
   padding: 3rem 2rem 4rem;
 }
@@ -109,7 +110,7 @@ body {
   width:100%; padding:.6rem .75rem; border:1px solid var(--border); border-radius:var(--radius-sm);
   font-family:var(--font); font-size:.9rem; color:var(--text); background:var(--white); transition:border-color .15s;
 }
-.form-group input:focus, .form-group select:focus { outline:none; border-color:var(--primary); box-shadow:0 0 0 3px rgba(84,124,36,.12); }
+.form-group input:focus, .form-group select:focus { outline:none; border-color:var(--primary); box-shadow:0 0 0 3px rgba(22,163,74,.12); }
 .form-row { display:grid; grid-template-columns:1fr 1fr; gap:.75rem; }
 .input-error { display:block; color:#ef4444; font-size:.72rem; margin-top:.2rem; min-height:1.1em; }
 input.error { border-color:#ef4444 !important; background:#fef2f2; }
@@ -352,11 +353,46 @@ input.error { border-color:#ef4444 !important; background:#fef2f2; }
 .cookies-inner p a{color:var(--primary);text-decoration:underline;font-weight:500}
 .cookies-buttons{display:flex;gap:.75rem;width:100%}
 .cookies-btn{padding:.6rem 1.25rem;border-radius:var(--radius-sm);font-family:var(--font);font-size:.85rem;font-weight:600;cursor:pointer;border:none;transition:all .2s;flex:1;text-align:center}
-.cookies-btn-accept{background:var(--primary);color:white;box-shadow:0 2px 6px rgba(84,124,36,.2)}
-.cookies-btn-accept:hover{background:var(--primary-dark);transform:translateY(-1px);box-shadow:0 4px 12px rgba(84,124,36,.3)}
+.cookies-btn-accept{background:var(--primary);color:white;box-shadow:0 2px 6px rgba(22,163,74,.2)}
+.cookies-btn-accept:hover{background:var(--primary-dark);transform:translateY(-1px);box-shadow:0 4px 12px rgba(22,163,74,.3)}
 .cookies-btn-essential{background:transparent;color:var(--text-light);border:1.5px solid var(--border)}
 .cookies-btn-essential:hover{border-color:var(--text-lighter);color:var(--text);background:var(--bg)}
 @media(max-width:480px){.cookies-banner{bottom:12px;padding:1rem 1.25rem;width:calc(100% - 24px)}.cookies-buttons{flex-direction:column;gap:.5rem}}
+
+/* ─── RESEÑAS ─── */
+.reviews-section { padding:4rem 2rem; background:var(--white); }
+.reviews-inner { max-width:960px; margin:0 auto; }
+.reviews-header { text-align:center; margin-bottom:2.5rem; }
+.reviews-stars { display:flex; justify-content:center; gap:4px; margin-bottom:.75rem; }
+.reviews-header h2 { font-size:1.8rem; font-weight:700; color:var(--text); margin:0 0 .35rem; }
+.reviews-sub { font-size:.95rem; color:var(--text-light); margin:0; }
+.reviews-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:1.25rem; }
+.review-card { background:var(--bg-green); border:1px solid var(--primary-lighter); border-radius:14px; padding:1.5rem; transition:all .2s; }
+.review-card:hover { box-shadow:var(--shadow-md); transform:translateY(-2px); }
+.review-card-header { display:flex; align-items:center; gap:.75rem; margin-bottom:.75rem; }
+.review-avatar { width:40px; height:40px; border-radius:50%; background:var(--accent-light); color:var(--accent-dark); display:flex; align-items:center; justify-content:center; font-weight:700; font-size:.9rem; flex-shrink:0; }
+.review-name { font-size:.85rem; font-weight:600; color:var(--text); }
+.review-date { font-size:.72rem; color:var(--text-lighter); }
+.review-card-stars { margin-left:auto; color:var(--accent); font-size:.8rem; letter-spacing:1px; }
+.review-text { font-size:.85rem; color:var(--text-light); line-height:1.6; margin:0; font-style:italic; }
+@media(max-width:768px){ .reviews-grid { grid-template-columns:1fr; } }
+
+/* ─── INMOBILIARIAS ─── */
+.inmobiliarias-section { padding:4rem 2rem; background:linear-gradient(135deg,#f0fdf4 0%,#fff7ed 100%); }
+.inmobiliarias-inner { max-width:1000px; margin:0 auto; display:grid; grid-template-columns:1fr 1fr; gap:3rem; align-items:center; }
+.inmobiliarias-badge { display:inline-block; background:var(--accent); color:white; font-size:.75rem; font-weight:600; padding:.3rem .8rem; border-radius:20px; margin-bottom:.75rem; text-transform:uppercase; letter-spacing:.04em; }
+.inmobiliarias-content h2 { font-size:2rem; font-weight:700; color:var(--text); margin:0 0 .75rem; }
+.inmobiliarias-desc { font-size:1rem; color:var(--text-light); line-height:1.6; margin:0 0 1.5rem; }
+.inmobiliarias-beneficios { list-style:none; padding:0; margin:0 0 2rem; display:flex; flex-direction:column; gap:.85rem; }
+.inmobiliarias-beneficios li { display:flex; align-items:center; gap:.6rem; font-size:.9rem; color:var(--text); font-weight:500; }
+.inmobiliarias-cta { display:inline-block; padding:.85rem 2rem; background:var(--accent); color:white; border-radius:10px; font-weight:600; font-size:.95rem; text-decoration:none; transition:all .2s; }
+.inmobiliarias-cta:hover { background:var(--accent-dark); transform:translateY(-1px); box-shadow:0 4px 12px rgba(249,115,22,.35); }
+.inmobiliarias-visual { display:flex; justify-content:center; }
+.inmobiliarias-card-stats { background:white; border-radius:16px; padding:2.5rem; box-shadow:var(--shadow-lg); display:flex; flex-direction:column; gap:2rem; min-width:240px; border:1px solid var(--border); }
+.inmobiliarias-stat { text-align:center; }
+.inmobiliarias-stat-number { display:block; font-size:2.2rem; font-weight:800; color:var(--primary); line-height:1.1; }
+.inmobiliarias-stat-label { font-size:.85rem; color:var(--text-light); }
+@media(max-width:768px){ .inmobiliarias-inner { grid-template-columns:1fr; gap:2rem; } .inmobiliarias-content h2 { font-size:1.6rem; } .inmobiliarias-card-stats { flex-direction:row; min-width:auto; padding:1.5rem; } }
 
 /* Etiqueta energética CEE - responsive */
 .etiqueta-cee-box { text-align:center; margin-bottom:1.5rem; background:#f8faf8; border:1px solid #e0e8e0; border-radius:12px; padding:1rem; }
