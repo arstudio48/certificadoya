@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Certificado energético para inmobiliarias — packs por volumen desde 35€</title>
+  <meta name="description" content="Gestiona los certificados energéticos de tu cartera de viviendas. Precios especiales para inmobiliarias, técnicos dedicados y panel de control online.">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://www.certificadoya.es/inmobiliarias.html">
+  <meta property="og:title" content="Certificado energético para inmobiliarias — packs desde 35€">
+  <meta property="og:description" content="Packs de certificados energéticos para agencias inmobiliarias. Precio por volumen, técnicos dedicados y panel de gestión online.">
+  <meta property="og:url" content="https://www.certificadoya.es/inmobiliarias.html">
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="es_ES">
+  <meta property="og:site_name" content="CertificadoYa">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/css/style.min.css">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='6' fill='%2316a34a'/><text x='16' y='23' text-anchor='middle' fill='white' font-size='18' font-family='sans-serif'>C</text></svg>">
+  <script data-goatcounter="https://certificadoya.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
+  <style>
+    .header-inner { max-width:1200px; margin:0 auto; display:flex; align-items:center; justify-content:space-between; padding:.8rem 2rem; }
+    .hero-inmo { background:linear-gradient(135deg,rgba(22,163,74,.92),rgba(21,128,61,.95)),url('/img/hero-house.webp') center/cover no-repeat; padding:5rem 2rem; text-align:center; color:white; }
+    .hero-inmo h1 { font-size:2.5rem; font-weight:700; margin:0 0 .75rem; line-height:1.2; }
+    .hero-inmo p { font-size:1.1rem; opacity:.9; max-width:600px; margin:0 auto 2rem; line-height:1.6; }
+    .hero-inmo .btn-cta-large { display:inline-block; padding:1rem 2.5rem; background:var(--accent); color:white; border-radius:10px; font-size:1.05rem; font-weight:600; text-decoration:none; transition:all .2s; }
+    .hero-inmo .btn-cta-large:hover { background:var(--accent-dark); transform:translateY(-2px); box-shadow:0 4px 16px rgba(249,115,22,.4); }
+    .inmo-section { padding:4rem 2rem; max-width:1000px; margin:0 auto; }
+    .inmo-section h2 { font-size:1.8rem; font-weight:700; color:var(--text); text-align:center; margin:0 0 .75rem; }
+    .inmo-section .section-sub { text-align:center; color:var(--text-light); font-size:.95rem; margin:0 0 3rem; }
+    .packs-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:1.5rem; }
+    .pack-card { background:white; border:1px solid var(--border); border-radius:16px; padding:2rem; text-align:center; transition:all .2s; position:relative; }
+    .pack-card:hover { box-shadow:var(--shadow-lg); transform:translateY(-3px); }
+    .pack-card.recomendado { border-color:var(--primary); border-width:2px; }
+    .pack-card.recomendado::before { content:'Recomendado'; position:absolute; top:-12px; left:50%; transform:translateX(-50%); background:var(--primary); color:white; font-size:.7rem; font-weight:700; padding:.25rem 1rem; border-radius:20px; text-transform:uppercase; letter-spacing:.04em; }
+    .pack-card h3 { font-size:1.2rem; font-weight:700; color:var(--text); margin:0 0 .35rem; }
+    .pack-card .pack-precio { font-size:2.8rem; font-weight:800; color:var(--primary); line-height:1.1; margin:.75rem 0; }
+    .pack-card .pack-precio span { font-size:1.1rem; font-weight:500; color:var(--text-light); }
+    .pack-card .pack-unit { font-size:.85rem; color:var(--text-lighter); margin-bottom:1.25rem; }
+    .pack-card ul { list-style:none; padding:0; margin:0 0 1.5rem; text-align:left; }
+    .pack-card ul li { display:flex; align-items:flex-start; gap:.5rem; font-size:.85rem; color:var(--text-light); padding:.4rem 0; }
+    .pack-card ul li::before { content:''; display:inline-block; width:16px; height:16px; min-width:16px; margin-top:2px; background:var(--primary); mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z'/%3E%3C/svg%3E") center/contain no-repeat; -webkit-mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z'/%3E%3C/svg%3E") center/contain no-repeat; }
+    .pack-cta { display:block; padding:.75rem; background:var(--bg-green); border:1.5px solid var(--primary); border-radius:8px; color:var(--primary); font-weight:600; font-size:.9rem; text-decoration:none; transition:all .2s; }
+    .pack-cta:hover { background:var(--primary); color:white; }
+    .pack-cta.solid { background:var(--primary); color:white; }
+    .pack-cta.solid:hover { background:var(--primary-dark); box-shadow:0 4px 12px rgba(22,163,74,.3); }
+    .como-funciona-inmo { background:var(--bg); }
+    .pasos-inmo { display:grid; grid-template-columns:repeat(4,1fr); gap:1.25rem; margin-top:2rem; }
+    .paso-inmo { text-align:center; padding:1.5rem; }
+    .paso-inmo .paso-num { width:48px; height:48px; background:var(--primary); color:white; border-radius:50%; display:flex; align-items:center; justify-content:center; font-weight:700; font-size:1.2rem; margin:0 auto .75rem; }
+    .paso-inmo h4 { font-size:.95rem; font-weight:600; color:var(--text); margin:0 0 .35rem; }
+    .paso-inmo p { font-size:.82rem; color:var(--text-light); line-height:1.5; margin:0; }
+    .beneficios-inmo-grid { display:grid; grid-template-columns:1fr 1fr; gap:1.5rem; }
+    .beneficio-inmo { background:var(--bg-green); border:1px solid var(--primary-lighter); border-radius:14px; padding:1.5rem; display:flex; gap:1rem; align-items:flex-start; }
+    .beneficio-inmo svg { width:28px; height:28px; min-width:28px; }
+    .beneficio-inmo h4 { font-size:.95rem; font-weight:600; color:var(--text); margin:0 0 .25rem; }
+    .beneficio-inmo p { font-size:.82rem; color:var(--text-light); line-height:1.5; margin:0; }
+    @media(max-width:768px){ .packs-grid { grid-template-columns:1fr; gap:1rem; } .pasos-inmo { grid-template-columns:1fr 1fr; } .beneficios-inmo-grid { grid-template-columns:1fr; } .hero-inmo h1 { font-size:1.8rem; } }
+    @media(max-width:480px){ .pasos-inmo { grid-template-columns:1fr; } }
+    .faq-inmo { max-width:700px; margin:0 auto; }
+    .faq-inmo details { margin-bottom:.75rem; border:1px solid var(--border); border-radius:12px; overflow:hidden; }
+    .faq-inmo summary { padding:1rem 1.25rem; cursor:pointer; font-weight:600; font-size:.9rem; color:var(--text); background:white; }
+    .faq-inmo summary:hover { background:var(--bg); }
+    .faq-inmo .faq-body { padding:0 1.25rem 1rem; font-size:.85rem; color:var(--text-light); line-height:1.6; }
+  </style>
+</head>
+<body>
+
+<header class="header">
+  <div class="header-inner">
+    <a href="/" class="logo">
+      <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <rect width="32" height="32" rx="6" fill="#16a34a"/>
+        <text x="16" y="23" text-anchor="middle" fill="white" font-size="20" font-weight="700" font-family="Outfit,sans-serif">C</text>
+      </svg>
+      <div class="logo-text-wrap">
+        <span class="logo-text">Certificado<span class="logo-highlight">Ya</span></span>
+        <span class="logo-sub">certificación energética de edificios existentes (CEE)</span>
+      </div>
+    </a>
+    <nav class="nav" style="gap:.6rem">
+      <a href="/">Inicio</a>
+      <a href="/#como-funciona">Cómo funciona</a>
+      <a href="/#faq">FAQ</a>
+      <a href="/blog/">Blog</a>
+      <a href="/#presupuesto-card" class="btn-nav">Presupuesto</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <!-- HERO -->
+  <section class="hero-inmo">
+    <h1>Certificados energéticos para <span style="color:var(--accent-light)">inmobiliarias</span></h1>
+    <p>Gestiona los CEE de tu cartera de viviendas sin complicaciones. Precios especiales por volumen, técnicos dedicados y un panel de control online para que hagas seguimiento de cada certificado.</p>
+    <a href="#contacto" class="btn-cta-large">Solicitar información</a>
+  </section>
+
+  <!-- PACKS -->
+  <section class="inmo-section" id="packs">
+    <h2>Elige tu pack</h2>
+    <p class="section-sub">Precios por volumen. Sin permanencia. Sin sorpresas.</p>
+    <div class="packs-grid">
+      <div class="pack-card">
+        <h3>Starter</h3>
+        <div class="pack-precio">45<span>€</span></div>
+        <div class="pack-unit">por certificado</div>
+        <ul>
+          <li>1-5 certificados al mes</li>
+          <li>Técnico asignado</li>
+          <li>Entrega en 72h</li>
+          <li>Seguimiento por email</li>
+          <li>Sin compromiso mensual</li>
+        </ul>
+        <a href="#contacto" class="pack-cta">Solicitar pack</a>
+      </div>
+      <div class="pack-card recomendado">
+        <h3>Profesional</h3>
+        <div class="pack-precio">39<span>€</span></div>
+        <div class="pack-unit">por certificado</div>
+        <ul>
+          <li>6-20 certificados al mes</li>
+          <li>Técnico dedicado prioritario</li>
+          <li>Entrega en 48h</li>
+          <li>Panel de control online</li>
+          <li>Informe energético incluido</li>
+          <li>Facturación mensual</li>
+        </ul>
+        <a href="#contacto" class="pack-cta solid">Elegir Profesional</a>
+      </div>
+      <div class="pack-card">
+        <h3>Enterprise</h3>
+        <div class="pack-precio">35<span>€</span></div>
+        <div class="pack-unit">por certificado</div>
+        <ul>
+          <li>+20 certificados al mes</li>
+          <li>Equipo técnico dedicado</li>
+          <li>Entrega en 24-48h</li>
+          <li>Panel de control + API</li>
+          <li>Informes energéticos + mejoras</li>
+          <li>Gestor de cuenta personal</li>
+          <li>Facturación personalizada</li>
+        </ul>
+        <a href="#contacto" class="pack-cta">Contactar</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- CÓMO FUNCIONA -->
+  <section class="inmo-section como-funciona-inmo" id="como-funciona">
+    <h2>¿Cómo funciona?</h2>
+    <p class="section-sub">En 4 pasos, sin complicaciones</p>
+    <div class="pasos-inmo">
+      <div class="paso-inmo">
+        <div class="paso-num">1</div>
+        <h4>Eliges tu pack</h4>
+        <p>Seleccionas el plan que mejor se adapte a tu volumen mensual de certificados.</p>
+      </div>
+      <div class="paso-inmo">
+        <div class="paso-num">2</div>
+        <h4>Subes tus inmuebles</h4>
+        <p>Nos envías las direcciones y datos básicos de las viviendas. O conectas tu CRM.</p>
+      </div>
+      <div class="paso-inmo">
+        <div class="paso-num">3</div>
+        <h4>Gestionamos las visitas</h4>
+        <p>Asignamos técnicos a cada inmueble. Coordinamos visitas con los propietarios o inquilinos.</p>
+      </div>
+      <div class="paso-inmo">
+        <div class="paso-num">4</div>
+        <h4>Recibes los certificados</h4>
+        <p>Cada CEE registrado lo tienes en tu panel. Descargas, reenvías o imprimes cuando quieras.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- BENEFICIOS -->
+  <section class="inmo-section">
+    <h2>¿Por qué elegir CertificadoYa?</h2>
+    <p class="section-sub">Lo que nos diferencia para agencias inmobiliarias</p>
+    <div class="beneficios-inmo-grid">
+      <div class="beneficio-inmo">
+        <svg viewBox="0 0 24 24" fill="#16a34a"><path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm-2 16l-4-4 1.41-1.41L10 14.17l6.59-6.59L18 9l-8 8z"/></svg>
+        <div>
+          <h4>Técnicos verificados</h4>
+          <p>Todos nuestros técnicos son arquitectos, aparejadores e ingenieros colegiados. Verificamos cada credencial.</p>
+        </div>
+      </div>
+      <div class="beneficio-inmo">
+        <svg viewBox="0 0 24 24" fill="#16a34a"><path d="M11.99 2C6.47 2 2 6.48 2 12s4.47 10 9.99 10C17.52 22 22 17.52 22 12S17.52 2 11.99 2zM12 20c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8zm.5-13H11v6l5.25 3.15.75-1.23-4.5-2.67z"/></svg>
+        <div>
+          <h4>Respuesta rápida</h4>
+          <p>Asignación de técnico en 24h, certificado registrado en 48-72h. Urgencias en 24h.</p>
+        </div>
+      </div>
+      <div class="beneficio-inmo">
+        <svg viewBox="0 0 24 24" fill="#16a34a"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zM9 17H7v-7h2v7zm4 0h-2V7h2v10zm4 0h-2v-4h2v4z"/></svg>
+        <div>
+          <h4>Panel de control</h4>
+          <p>Accede al estado de cada certificado en tiempo real. Descarga, reenvía y gestiona todo desde un solo lugar.</p>
+        </div>
+      </div>
+      <div class="beneficio-inmo">
+        <svg viewBox="0 0 24 24" fill="#16a34a"><path d="M11.8 10.9c-2.27-.59-3-1.2-3-2.15 0-1.09 1.01-1.85 2.7-1.85 1.78 0 2.44.85 2.5 2.1h2.21c-.07-1.72-1.12-3.3-3.21-3.81V3h-3v2.16c-1.94.42-3.5 1.68-3.5 3.61 0 2.31 1.91 3.46 4.7 4.13 2.5.6 3 1.48 3 2.41 0 .69-.49 1.79-2.7 1.79-2.06 0-2.87-.92-2.98-2.1h-2.2c.12 2.19 1.76 3.42 3.68 3.83V21h3v-2.15c1.95-.37 3.5-1.5 3.5-3.55 0-2.84-2.43-3.81-4.7-4.4z"/></svg>
+        <div>
+          <h4>Precio por volumen</h4>
+          <p>Desde 35€ por certificado en packs. Sin cuotas fijas. Pagas solo por los certificados que encargues.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACTO -->
+  <section class="inmo-section" id="contacto" style="background:var(--bg-green);border-radius:16px;margin:0 2rem 2rem">
+    <h2>Solicita información sin compromiso</h2>
+    <p class="section-sub" style="margin-bottom:2rem">Cuéntanos tu volumen mensual y te enviamos una propuesta personalizada en 24h.</p>
+    <form action="https://hook.eu2.make.com/ibv00gu95e2nqdx5bs79cxobm94pqdin" method="POST" id="inmo-form" style="max-width:500px;margin:0 auto">
+      <div class="form-group">
+        <label for="inmo-nombre">Nombre y apellidos</label>
+        <input type="text" id="inmo-nombre" name="nombre" placeholder="Ej: María García López" required>
+      </div>
+      <div class="form-group">
+        <label for="inmo-email">Email profesional</label>
+        <input type="email" id="inmo-email" name="email" placeholder="maria@inmobiliaria.es" required>
+      </div>
+      <div class="form-group">
+        <label for="inmo-telefono">Teléfono</label>
+        <input type="tel" id="inmo-telefono" name="telefono" placeholder="+34 600 00 00 00" required>
+      </div>
+      <div class="form-group">
+        <label for="inmo-agencia">Nombre de la agencia</label>
+        <input type="text" id="inmo-agencia" name="agencia" placeholder="Inmobiliaria XYZ">
+      </div>
+      <div class="form-group">
+        <label for="inmo-certificados">Certificados al mes (aprox.)</label>
+        <select id="inmo-certificados" name="certificados_mes">
+          <option value="1-5">1-5</option>
+          <option value="6-20" selected>6-20</option>
+          <option value="20-50">20-50</option>
+          <option value="50+">50+</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label for="inmo-mensaje">¿Algo más que debamos saber?</label>
+        <textarea id="inmo-mensaje" name="mensaje" rows="3" placeholder="Zonas donde operáis, tipo de inmuebles, urgencia..."></textarea>
+      </div>
+      <label style="display:flex;align-items:flex-start;gap:8px;margin:12px 0;cursor:pointer;font-size:12px;color:#555;line-height:1.4">
+        <input type="checkbox" name="consentimiento" required style="margin-top:2px;width:14px;height:14px;accent-color:#16a34a;cursor:pointer">
+        <span>Acepto la <a href="/legal/privacidad.html" target="_blank" style="color:#16a34a;text-decoration:underline">política de privacidad</a> y consiento el tratamiento de mis datos.</span>
+      </label>
+      <button type="submit" class="btn-cta" style="width:100%;background:var(--accent);box-shadow:0 4px 12px rgba(249,115,22,.25)">Enviar solicitud →</button>
+      <p style="font-size:.72rem;color:var(--text-lighter);text-align:center;margin-top:.75rem">Respondemos en menos de 24h laborables</p>
+    </form>
+  </section>
+
+  <!-- FAQ -->
+  <section class="inmo-section">
+    <h2>Preguntas frecuentes</h2>
+    <p class="section-sub" style="margin-bottom:2rem">Resolvemos tus dudas sobre el servicio para inmobiliarias</p>
+    <div class="faq-inmo">
+      <details>
+        <summary>¿Hay permanencia o compromiso mínimo?</summary>
+        <div class="faq-body"><p>No. Puedes contratar un pack mensual y cancelar cuando quieras. Sin penalización. El pack Starter ni siquiera tiene contrato mensual, pagas por certificado.</p></div>
+      </details>
+      <details>
+        <summary>¿Los técnicos están cualificados?</summary>
+        <div class="faq-body"><p>Sí, todos son arquitectos técnicos (aparejadores), arquitectos o ingenieros colegiados. Verificamos la colegiación de cada profesional antes de activarlo en nuestra red.</p></div>
+      </details>
+      <details>
+        <summary>¿Cuánto tarda cada certificado?</summary>
+        <div class="faq-body"><p>Normalmente 48-72h desde que nos das los datos del inmueble. En el pack Enterprise podemos acelerar a 24h para casos urgentes. El certificado se entrega registrado y listo para usar.</p></div>
+      </details>
+      <details>
+        <summary>¿Cómo coordináis las visitas con los propietarios?</summary>
+        <div class="faq-body"><p>Tú nos facilitas los datos de los inmuebles y el contacto de los propietarios/inquilinos. Nosotros coordinamos la visita directamente con ellos y te confirmamos la fecha. No tienes que hacer nada.</p></div>
+      </details>
+      <details>
+        <summary>¿Puedo probar con un certificado suelto?</summary>
+        <div class="faq-body"><p>Sí, puedes empezar con un solo certificado a precio estándar (desde 45€) y si te gusta el servicio, pasas a un pack. Sin compromiso.</p></div>
+      </details>
+    </div>
+  </section>
+</main>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="footer-inner">
+    <div class="footer-col">
+      <div class="footer-logo">
+        <svg width="32" height="32" viewBox="0 0 32 32"><rect width="32" height="32" rx="6" fill="#16a34a"/><text x="16" y="23" text-anchor="middle" fill="white" font-size="18" font-weight="700" font-family="Outfit,sans-serif">C</text></svg>
+        <span>CertificadoYa</span>
+      </div>
+      <p class="footer-desc">Conectamos propietarios con técnicos certificadores colegiados en toda España. Presupuesto instantáneo, sin papeleo.</p>
+      <p style="font-size:.78rem;margin-top:.5rem">📞 <a href="tel:+34641450068" style="color:#16a34a;text-decoration:none">641 45 00 68</a> · 📧 <a href="mailto:info@certificadoya.es" style="color:#16a34a;text-decoration:none">info@certificadoya.es</a></p>
+    </div>
+    <div class="footer-col">
+      <h4>Servicios</h4>
+      <a href="/">Certificado energético</a>
+      <a href="/inmobiliarias.html">Para inmobiliarias</a>
+      <a href="/panel-tecnicos.html">Para técnicos</a>
+      <a href="/pool-encargos.html">Pool de encargos</a>
+    </div>
+    <div class="footer-col">
+      <h4>Recursos</h4>
+      <a href="/blog/">Blog</a>
+      <a href="/#faq">Preguntas frecuentes</a>
+      <a href="/tecnicos/">Directorio de técnicos</a>
+    </div>
+    <div class="footer-col">
+      <h4>Legal</h4>
+      <a href="/legal/aviso-legal.html">Aviso Legal</a>
+      <a href="/legal/privacidad.html">Privacidad</a>
+      <a href="/legal/cookies.html">Cookies</a>
+      <a href="/legal/condiciones.html">Condiciones de uso</a>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>© 2024-2025 CertificadoYa. Todos los derechos reservados.</p>
+  </div>
+</footer>
+
+<script>
+document.getElementById('inmo-form').addEventListener('submit', function(e) {
+  e.preventDefault();
+  var btn = this.querySelector('button[type="submit"]');
+  btn.textContent = 'Enviando...';
+  btn.disabled = true;
+  var data = new FormData(this);
+  fetch(this.action, { method: 'POST', body: data, mode: 'no-cors' })
+    .then(function() {
+      btn.textContent = '✓ Solicitud enviada';
+      btn.style.background = '#16a34a';
+      document.getElementById('inmo-form').innerHTML = '<div style="text-align:center;padding:2rem;background:#f0fdf4;border-radius:12px"><svg width="48" height="48" viewBox="0 0 24 24" fill="#16a34a" style="margin-bottom:.75rem"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z"/></svg><h3 style="font-size:1.3rem;color:#20201f;margin:0 0 .5rem">¡Recibido!</h3><p style="color:#6b7280;font-size:.9rem">Te responderemos en menos de 24h laborables.</p></div>';
+    })
+    .catch(function() {
+      btn.textContent = 'Enviar solicitud →';
+      btn.disabled = false;
+      alert('Error al enviar. Inténtalo de nuevo o escríbenos a info@certificadoya.es');
+    });
+});
+</script>
+</body>
+</html>
