@@ -318,7 +318,7 @@ serve(async (req: Request) => {
         presupuesto_min: precioMinVal,
         presupuesto_max: precioMaxVal,
         fuente: 'web',
-        estado: 'nuevo'
+        estado: 'pendiente'
       })
     })
 

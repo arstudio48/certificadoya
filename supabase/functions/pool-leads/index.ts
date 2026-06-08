@@ -42,9 +42,9 @@ serve(async (req) => {
       return new Response(JSON.stringify({ error: 'Tu cuenta está pendiente de verificación. Te avisaremos cuando esté lista.' }), { status: 403, headers: { ...corsHeaders, 'Content-Type': 'application/json' } })
     }
 
-    // Obtener provincias del técnico
+    // Obtener provincias del técnico (capitalización original)
     const provincias = tecnico.provincia
-      ? tecnico.provincia.split(',').map(p => p.trim().toLowerCase())
+      ? tecnico.provincia.split(',').map(p => p.trim())
       : []
 
     // Acepta GET (listar) y POST (aceptar/rechazar)
@@ -57,12 +57,14 @@ serve(async (req) => {
 
       let query = supabase
         .from('leads')
-        .select('id, nombre_cliente, zona, codigo_postal, m2, tipo_inmueble, presupuesto_min, presupuesto_max, estado, created_at')
+        .select('id, nombre_cliente, provincia, codigo_postal, m2, tipo_inmueble, presupuesto_min, presupuesto_max, estado, created_at')
         .not('estado', 'eq', 'cancelado')
 
-      // Si el técnico tiene provincias asignadas, filtrar por zona
+      // Si el técnico tiene provincias asignadas, filtrar por provincia
       if (provincias.length > 0) {
-        query = query.in('zona', provincias)
+        // Usar OR con ilike para matching case-insensitive
+        const filtros = provincias.map(p => `provincia.ilike.%${p}%`).join(',')
+        query = query.or(filtros)
       }
 
       // Si es un estado específico
