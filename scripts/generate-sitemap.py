@@ -27,21 +27,13 @@ EXCLUDE_HTML = [
 INCLUDE_ROOT_PAGES = [
     ("index.html", "weekly", 1.0),
     ("contacto.html", "monthly", 0.6),
-    ("privacidad.html", "monthly", 0.6),
-    ("aviso-legal.html", "monthly", 0.6),
-    ("cookies.html", "monthly", 0.6),
     ("pool-encargos.html", "monthly", 0.6),
     ("panel-tecnicos.html", "monthly", 0.6),
     ("habla-con-nosotros.html", "monthly", 0.6),
-    ("aceptar-encargo.html", "monthly", 0.6),
-    ("pago-exitoso.html", "monthly", 0.6),
-    ("gracias.html", "monthly", 0.6),
-    ("success.html", "monthly", 0.6),
+    ("seguimiento.html", "monthly", 0.6),
     ("organismos-contacto.html", "monthly", 0.6),
     ("directorio-tecnicos.html", "monthly", 0.6),
-    ("404.html", "yearly", 0.3),
     ("ver-presupuesto.html", "monthly", 0.7),
-    ("desuscribirse.html", "yearly", 0.3),
 ]
 
 def get_existing_dir_pages(base_dir, prefix):
@@ -96,10 +88,8 @@ def generate_sitemap():
     # Blog index
     urls.append((f"{SITE}/blog/", "weekly", 0.9))
     
-    # 3. Certificate pages (directories) — both "certificado-energetico-*" and "cee-*"
+    # 3. Certificate pages (directories) — only real content pages (no redirects)
     for page in get_existing_dir_pages(BASE_DIR, "certificado-energetico"):
-        urls.append((f"{SITE}/{page}/", "monthly", 0.7))
-    for page in get_existing_dir_pages(BASE_DIR, "cee-"):
         urls.append((f"{SITE}/{page}/", "monthly", 0.7))
     
     # 4. Other directory-based pages
@@ -119,17 +109,7 @@ def generate_sitemap():
     for tech_page in get_technician_pages(os.path.join(BASE_DIR, "tecnicos")):
         urls.append((f"{SITE}/{tech_page}", "monthly", 0.5))
     
-    # 6. Legal pages (in legal/ directory)
-    legal_pages = [
-        "legal/", "legal/aviso-legal.html", "legal/cookies.html", "legal/privacidad.html",
-    ]
-    for page in legal_pages:
-        file_path = os.path.join(BASE_DIR, page)
-        if os.path.isdir(file_path):
-            if os.path.isfile(os.path.join(file_path, "index.html")):
-                urls.append((f"{SITE}/{page}", "yearly", 0.3))
-        elif os.path.isfile(file_path):
-            urls.append((f"{SITE}/{page}", "yearly", 0.3))
+    # 6. Omitimos páginas con noindex (privacidad, aviso-legal, cookies legales ya no están en el sitemap)
     
     # 7. Descargables
     for page in get_existing_dir_pages(os.path.join(BASE_DIR, "descargables"), "plantilla"):
