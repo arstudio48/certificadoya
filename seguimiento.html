@@ -1,0 +1,589 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex, nofollow">
+  <title>Seguimiento de Leads · CertificadoYa</title>
+  <script src="https://unpkg.com/@supabase/supabase-js@2"></script>
+  <style>
+    :root {
+      --bg: #f4f6f9;
+      --card: #ffffff;
+      --text: #1a1a2e;
+      --muted: #6b7280;
+      --green: #10b981;
+      --yellow: #f59e0b;
+      --red: #ef4444;
+      --blue: #3b82f6;
+      --purple: #8b5cf6;
+      --orange: #f97316;
+      --border: #e5e7eb;
+      --radius: 12px;
+    }
+    * { margin:0; padding:0; box-sizing:border-box; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      padding: 20px;
+    }
+    .header {
+      max-width: 1200px; margin: 0 auto 24px;
+      display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px;
+    }
+    .header h1 { font-size: 24px; display: flex; align-items: center; gap: 8px; }
+    .header h1 span { color: var(--blue); }
+    .header-actions { display: flex; gap: 8px; }
+    .badge { display: inline-flex; align-items: center; gap: 4px; padding: 4px 10px; border-radius: 20px; font-size: 12px; font-weight: 600; cursor: pointer; border: none; }
+    .badge-green { background: #d1fae5; color: #065f46; }
+    .badge-yellow { background: #fef3c7; color: #92400e; }
+    .badge-red { background: #fee2e2; color: #991b1b; }
+    .badge-blue { background: #dbeafe; color: #1e40af; }
+    .badge-purple { background: #ede9fe; color: #5b21b6; }
+    .badge-orange { background: #fed7aa; color: #9a3412; }
+    .badge-gray { background: #f3f4f6; color: #374151; }
+    .badge-lg { font-size: 14px; padding: 6px 14px; }
+
+    .stats-row {
+      max-width: 1200px; margin: 0 auto 24px;
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 12px;
+    }
+    .stat-card {
+      background: var(--card); border-radius: var(--radius); padding: 16px;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+    }
+    .stat-card .stat-number { font-size: 28px; font-weight: 700; }
+    .stat-card .stat-label { font-size: 13px; color: var(--muted); }
+    .stat-card .stat-sub { font-size: 12px; color: var(--muted); margin-top: 4px; }
+
+    .tabs {
+      max-width: 1200px; margin: 0 auto 16px;
+      display: flex; gap: 4px; background: var(--card); border-radius: var(--radius); padding: 4px;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+    }
+    .tab {
+      flex: 1; padding: 10px 16px; text-align: center; border-radius: 8px;
+      font-size: 14px; font-weight: 600; cursor: pointer; border: none; background: transparent; color: var(--muted); transition: all 0.2s;
+    }
+    .tab.active { background: var(--blue); color: white; }
+    .tab .count { font-size: 11px; opacity: 0.7; margin-left: 4px; }
+
+    .table-container {
+      max-width: 1200px; margin: 0 auto;
+      background: var(--card); border-radius: var(--radius); overflow: hidden;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+    }
+    table { width: 100%; border-collapse: collapse; font-size: 14px; }
+    thead { background: #f9fafb; }
+    th { text-align: left; padding: 12px 16px; font-weight: 600; color: var(--muted); font-size: 12px; text-transform: uppercase; letter-spacing: 0.5px; white-space: nowrap; }
+    td { padding: 12px 16px; border-top: 1px solid var(--border); vertical-align: middle; }
+    tr:hover { background: #f9fafb; }
+    .table-empty td { text-align: center; padding: 40px; color: var(--muted); }
+
+    .lead-name { font-weight: 600; }
+    .lead-meta { font-size: 12px; color: var(--muted); margin-top: 2px; }
+    .contact-info { font-size: 12px; color: var(--muted); }
+    .status-badge { display: inline-block; padding: 2px 8px; border-radius: 12px; font-size: 11px; font-weight: 600; }
+    .action-link { color: var(--blue); text-decoration: none; font-size: 12px; font-weight: 500; cursor: pointer; }
+    .action-link:hover { text-decoration: underline; }
+
+    .notes-input {
+      width: 100%; border: 1px solid var(--border); border-radius: 6px; padding: 6px 8px;
+      font-size: 12px; background: #fff; resize: vertical; min-height: 28px;
+    }
+
+    .modal-overlay { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.4); z-index: 1000; align-items: center; justify-content: center; }
+    .modal-overlay.show { display: flex; }
+    .modal { background: var(--card); border-radius: var(--radius); padding: 24px; max-width: 500px; width: 90%; max-height: 80vh; overflow-y: auto; }
+    .modal h2 { margin-bottom: 16px; font-size: 18px; }
+    .modal label { display: block; font-size: 13px; font-weight: 600; margin-top: 12px; margin-bottom: 4px; }
+    .modal input, .modal select, .modal textarea { width: 100%; padding: 8px 12px; border: 1px solid var(--border); border-radius: 8px; font-size: 14px; }
+    .modal textarea { min-height: 60px; resize: vertical; }
+    .modal-actions { display: flex; gap: 8px; margin-top: 16px; justify-content: flex-end; }
+    .btn { padding: 8px 16px; border-radius: 8px; border: none; font-weight: 600; font-size: 14px; cursor: pointer; }
+    .btn-primary { background: var(--blue); color: white; }
+    .btn-primary:hover { opacity: 0.9; }
+    .btn-secondary { background: #e5e7eb; color: var(--text); }
+    .btn-secondary:hover { opacity: 0.9; }
+    .btn-success { background: var(--green); color: white; }
+    .btn-success:hover { opacity: 0.9; }
+
+    .search-bar {
+      max-width: 1200px; margin: 0 auto 12px;
+      display: flex; gap: 8px;
+    }
+    .search-bar input {
+      flex: 1; padding: 10px 14px; border: 1px solid var(--border); border-radius: 8px;
+      font-size: 14px; background: var(--card);
+    }
+    .search-bar select {
+      padding: 10px 14px; border: 1px solid var(--border); border-radius: 8px;
+      font-size: 14px; background: var(--card);
+    }
+
+    .add-btn {
+      background: var(--green); color: white; border: none;
+      padding: 10px 16px; border-radius: 8px; font-weight: 600; font-size: 14px; cursor: pointer;
+      display: flex; align-items: center; gap: 6px;
+    }
+    .add-btn:hover { opacity: 0.9; }
+
+    @media (max-width: 768px) {
+      .stats-row { grid-template-columns: repeat(2, 1fr); }
+      th, td { padding: 8px 10px; font-size: 12px; }
+      .header h1 { font-size: 18px; }
+    }
+  </style>
+</head>
+<body>
+
+<div class="header">
+  <h1>📊 <span>Seguimiento</span> de Leads · CertificadoYa</h1>
+  <div class="header-actions">
+    <button class="add-btn" onclick="openAddModal()">➕ Nueva inmobiliaria</button>
+    <button class="btn btn-primary" onclick="location.reload()">🔄 Refrescar</button>
+  </div>
+</div>
+
+<div class="stats-row" id="statsRow">
+  <div class="stat-card"><div class="stat-number" id="statTecnicos">—</div><div class="stat-label">👷 Técnicos</div><div class="stat-sub" id="statTecnicosSub"></div></div>
+  <div class="stat-card"><div class="stat-number" id="statPropietarios">—</div><div class="stat-label">🏠 Propietarios</div><div class="stat-sub" id="statPropietariosSub"></div></div>
+  <div class="stat-card"><div class="stat-number" id="statInmobiliarias">—</div><div class="stat-label">🏢 Inmobiliarias</div><div class="stat-sub" id="statInmobiliariasSub"></div></div>
+  <div class="stat-card" style="border-left: 3px solid var(--green);"><div class="stat-number" id="statTotal">—</div><div class="stat-label">🎯 Total leads</div><div class="stat-sub" id="statPendientes">pendientes de acción</div></div>
+</div>
+
+<div class="search-bar">
+  <input type="text" id="searchInput" placeholder="🔍 Buscar por nombre, email, provincia..." oninput="filterTable()">
+  <select id="filterProvincia" onchange="filterTable()">
+    <option value="">Todas las provincias</option>
+  </select>
+  <select id="filterEstado" onchange="filterTable()">
+    <option value="">Todos los estados</option>
+    <option value="nuevo">🆕 Nuevo</option>
+    <option value="pendiente">⏳ Pendiente</option>
+    <option value="contactado">📞 Contactado</option>
+    <option value="interesado">👍 Interesado</option>
+    <option value="asignado">✅ Asignado</option>
+    <option value="cliente">⭐ Cliente</option>
+    <option value="rechazado">❌ Rechazado</option>
+    <option value="inactivo">💤 Inactivo</option>
+  </select>
+</div>
+
+<div class="tabs" id="tabsContainer">
+  <button class="tab active" data-tab="all" onclick="switchTab('all')">📋 Todos <span class="count" id="countAll">0</span></button>
+  <button class="tab" data-tab="tecnico" onclick="switchTab('tecnico')">👷 Técnicos <span class="count" id="countTecnico">0</span></button>
+  <button class="tab" data-tab="propietario" onclick="switchTab('propietario')">🏠 Propietarios <span class="count" id="countPropietario">0</span></button>
+  <button class="tab" data-tab="inmobiliaria" onclick="switchTab('inmobiliaria')">🏢 Inmobiliarias <span class="count" id="countInmobiliaria">0</span></button>
+</div>
+
+<div class="table-container">
+  <table>
+    <thead>
+      <tr>
+        <th style="width:30px">Tipo</th>
+        <th>Nombre / Empresa</th>
+        <th>Contacto</th>
+        <th>Provincia</th>
+        <th>Estado</th>
+        <th>Último contacto</th>
+        <th>Próximo paso</th>
+        <th style="width:120px">Notas rápidas</th>
+      </tr>
+    </thead>
+    <tbody id="tableBody">
+      <tr class="table-empty"><td colspan="8">Cargando datos...</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- Modal Añadir / Editar -->
+<div class="modal-overlay" id="modalOverlay">
+  <div class="modal">
+    <h2 id="modalTitle">➕ Nueva inmobiliaria</h2>
+    <form id="modalForm">
+      <input type="hidden" id="editId">
+      <input type="hidden" id="editType">
+
+      <label for="f_nombre">Nombre de la agencia *</label>
+      <input type="text" id="f_nombre" required>
+
+      <label for="f_contacto">Persona de contacto</label>
+      <input type="text" id="f_contacto">
+
+      <label for="f_email">Email</label>
+      <input type="email" id="f_email">
+
+      <label for="f_telefono">Teléfono</label>
+      <input type="text" id="f_telefono">
+
+      <label for="f_web">Web</label>
+      <input type="url" id="f_web" placeholder="https://...">
+
+      <label for="f_provincia">Provincia</label>
+      <input type="text" id="f_provincia" list="provinciasList">
+      <datalist id="provinciasList">
+        <option value="Madrid"><option value="Barcelona"><option value="Asturias"><option value="Zamora">
+        <option value="Valencia"><option value="Sevilla"><option value="Málaga"><option value="Bilbao">
+        <option value="Alicante"><option value="Murcia"><option value="Vizcaya"><option value="Gijón">
+      </datalist>
+
+      <label for="f_estado">Estado</label>
+      <select id="f_estado">
+        <option value="nuevo">🆕 Nuevo</option>
+        <option value="contactado">📞 Contactado</option>
+        <option value="interesado">👍 Interesado</option>
+        <option value="cliente">⭐ Cliente</option>
+        <option value="rechazado">❌ Rechazado</option>
+        <option value="inactivo">💤 Inactivo</option>
+      </select>
+
+      <label for="f_fuente">Fuente</label>
+      <select id="f_fuente">
+        <option value="foro">Foro</option>
+        <option value="web">Web</option>
+        <option value="scraping">Scraping</option>
+        <option value="recomendacion">Recomendación</option>
+        <option value="manual">Manual</option>
+        <option value="email">Email</option>
+      </select>
+
+      <label for="f_proximo_paso">Próximo paso</label>
+      <input type="text" id="f_proximo_paso" placeholder="Ej: Llamar, enviar email...">
+
+      <label for="f_notas">Notas</label>
+      <textarea id="f_notas" rows="3"></textarea>
+
+      <div class="modal-actions">
+        <button type="button" class="btn btn-secondary" onclick="closeModal()">Cancelar</button>
+        <button type="submit" class="btn btn-success" id="modalSubmit">Guardar</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<script>
+const SUPABASE_URL = 'https://jfejoxbcqhbvoevbgtbe.supabase.co';
+const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImpmZWpveGJjcWhidm9ldmJndGJlIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDYyMDM1NDAsImV4cCI6MjA2MTc3OTU0MH0.E_9R7Wq7Yak7I5JICBmeSO9-qFwVDuqQz5TgFrl_jo0';
+const supabase = supabaseCreateClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+
+let currentTab = 'all';
+let allData = { tecnicos: [], leads: [], inmobiliarias: [] };
+
+function supabaseCreateClient(url, key) {
+  return window.supabase.createClient(url, key);
+}
+
+function statusStyle(estado) {
+  const map = {
+    'nuevo': 'badge badge-blue', 'pendiente': 'badge badge-yellow',
+    'contactado': 'badge badge-orange', 'interesado': 'badge badge-purple',
+    'asignado': 'badge badge-green', 'cliente': 'badge badge-green',
+    'rechazado': 'badge badge-red', 'inactivo': 'badge badge-gray',
+    'activo': 'badge badge-green', 'verificado': 'badge badge-green',
+    'pendiente_pago': 'badge badge-yellow'
+  };
+  return map[estado] || 'badge badge-gray';
+}
+
+function statusLabel(estado) {
+  const map = {
+    'nuevo': '🆕 Nuevo', 'pendiente': '⏳ Pendiente',
+    'contactado': '📞 Contactado', 'interesado': '👍 Interesado',
+    'asignado': '✅ Asignado', 'cliente': '⭐ Cliente',
+    'rechazado': '❌ Rechazado', 'inactivo': '💤 Inactivo',
+    'activo': '✅ Activo', 'verificado': '✅ Verificado',
+    'pendiente_pago': '💳 Pendiente pago'
+  };
+  return map[estado] || estado;
+}
+
+function tipoIcon(tipo) {
+  const map = { 'tecnico': '👷', 'propietario': '🏠', 'inmobiliaria': '🏢', 'legacy': '📄' };
+  return map[tipo] || '📄';
+}
+
+function timeAgo(dateStr) {
+  if (!dateStr) return '—';
+  const d = new Date(dateStr);
+  const now = new Date();
+  const diff = Math.floor((now - d) / 1000);
+  if (diff < 60) return 'Ahora';
+  if (diff < 3600) return Math.floor(diff/60)+'m';
+  if (diff < 86400) return Math.floor(diff/3600)+'h';
+  if (diff < 86400*7) return Math.floor(diff/86400)+'d';
+  return d.toLocaleDateString('es');
+}
+
+function formatDate(dateStr) {
+  if (!dateStr) return '—';
+  return new Date(dateStr).toLocaleDateString('es', { day: 'numeric', month: 'short', year: 'numeric' });
+}
+
+async function loadData() {
+  try {
+    const [tecRes, leadsRes, inmRes] = await Promise.all([
+      supabase.from('tecnicos').select('id, nombre, apellidos, email, telefono, provincia, verificado, activo, created_at, ultimo_contacto, proximo_paso, seguimiento_notas').order('created_at', { ascending: false }),
+      supabase.from('leads').select('id, nombre_cliente, email_cliente, telefono_cliente, provincia, estado, tipo, created_at, ultimo_contacto, proximo_paso, seguimiento_notas').order('created_at', { ascending: false }),
+      supabase.from('inmobiliarias').select('id, nombre, email, telefono, web, provincia, contacto_nombre, estado, fuente, notas, created_at, ultimo_contacto, proximo_paso').order('created_at', { ascending: false })
+    ]);
+
+    if (tecRes.error && leadsRes.error && inmRes.error) {
+      document.getElementById('tableBody').innerHTML = '<tr class="table-empty"><td colspan="8">⚠️ Error al cargar datos: ' + (tecRes.error?.message || leadsRes.error?.message || inmRes.error?.message) + '</td></tr>';
+      return;
+    }
+
+    // Técnicos
+    allData.tecnicos = (tecRes.data || []).map(t => ({
+      _tipo: 'tecnico', _id: t.id,
+      _nombre: (t.nombre || '') + ' ' + (t.apellidos || ''),
+      _email: t.email, _telefono: t.telefono, _provincia: t.provincia || '—',
+      _estado: t.verificado ? 'verificado' : (t.activo ? 'activo' : 'inactivo'),
+      _created: t.created_at, _ultimo_contacto: t.ultimo_contacto,
+      _proximo_paso: t.proximo_paso, _notas: t.seguimiento_notas,
+      _fuente: 'registro'
+    }));
+
+    // Leads (propietarios)
+    allData.leads = (leadsRes.data || []).map(l => ({
+      _tipo: 'propietario', _id: l.id,
+      _nombre: l.nombre_cliente || '—',
+      _email: l.email_cliente, _telefono: l.telefono_cliente, _provincia: l.provincia || '—',
+      _estado: l.estado || 'nuevo',
+      _created: l.created_at, _ultimo_contacto: l.ultimo_contacto,
+      _proximo_paso: l.proximo_paso, _notas: l.seguimiento_notas,
+      _fuente: l.tipo || 'propietario'
+    }));
+
+    // Inmobiliarias
+    allData.inmobiliarias = (inmRes.data || []).map(i => ({
+      _tipo: 'inmobiliaria', _id: i.id,
+      _nombre: i.nombre,
+      _email: i.email, _telefono: i.telefono, _provincia: i.provincia || '—',
+      _estado: i.estado || 'nuevo',
+      _created: i.created_at, _ultimo_contacto: i.ultimo_contacto,
+      _proximo_paso: i.proximo_paso, _notas: i.notas,
+      _fuente: i.fuente || 'foro',
+      _web: i.web, _contacto: i.contacto_nombre
+    }));
+
+    renderAll();
+  } catch(e) {
+    document.getElementById('tableBody').innerHTML = '<tr class="table-empty"><td colspan="8">⚠️ Error: ' + e.message + '</td></tr>';
+  }
+}
+
+function getFilteredData() {
+  const all = [...allData.tecnicos, ...allData.leads, ...allData.inmobiliarias];
+  if (currentTab === 'all') return all;
+  return all.filter(d => d._tipo === currentTab);
+}
+
+function renderAll() {
+  updateStats();
+  updateTabs();
+  renderTable();
+  updateProvincias();
+}
+
+function updateStats() {
+  const tecnicos = allData.tecnicos.length;
+  const props = allData.leads.length;
+  const inms = allData.inmobiliarias.length;
+  const total = tecnicos + props + inms;
+
+  document.getElementById('statTecnicos').textContent = tecnicos;
+  document.getElementById('statTecnicosSub').textContent = allData.tecnicos.filter(t => t._estado === 'verificado').length + ' verificados';
+
+  document.getElementById('statPropietarios').textContent = props;
+  const propsPendientes = allData.leads.filter(l => l._estado === 'nuevo' || l._estado === 'pendiente').length;
+  document.getElementById('statPropietariosSub').textContent = propsPendientes + ' pendientes';
+
+  document.getElementById('statInmobiliarias').textContent = inms;
+  const inmsNuevas = allData.inmobiliarias.filter(i => i._estado === 'nuevo').length;
+  document.getElementById('statInmobiliariasSub').textContent = inmsNuevas + ' nuevas';
+
+  document.getElementById('statTotal').textContent = total;
+  document.getElementById('statPendientes').textContent = (propsPendientes + inmsNuevas) + ' pendientes de acción';
+}
+
+function updateTabs() {
+  document.getElementById('countAll').textContent = allData.tecnicos.length + allData.leads.length + allData.inmobiliarias.length;
+  document.getElementById('countTecnico').textContent = allData.tecnicos.length;
+  document.getElementById('countPropietario').textContent = allData.leads.length;
+  document.getElementById('countInmobiliaria').textContent = allData.inmobiliarias.length;
+}
+
+function updateProvincias() {
+  const provincias = new Set();
+  getFilteredData().forEach(d => {
+    if (d._provincia && d._provincia !== '—') {
+      d._provincia.split(',').forEach(p => provincias.add(p.trim()));
+    }
+  });
+  const select = document.getElementById('filterProvincia');
+  const currentVal = select.value;
+  select.innerHTML = '<option value="">Todas las provincias</option>';
+  [...provincias].sort().forEach(p => {
+    select.innerHTML += `<option value="${p}">${p}</option>`;
+  });
+  select.value = currentVal;
+}
+
+function renderTable() {
+  const search = document.getElementById('searchInput').value.toLowerCase();
+  const provincia = document.getElementById('filterProvincia').value;
+  const estado = document.getElementById('filterEstado').value;
+
+  let filtered = getFilteredData().filter(d => {
+    if (search && !d._nombre.toLowerCase().includes(search) && !(d._email || '').toLowerCase().includes(search) && !(d._telefono || '').toLowerCase().includes(search)) return false;
+    if (provincia && !(d._provincia || '').toLowerCase().includes(provincia.toLowerCase())) return false;
+    if (estado && d._estado !== estado) return false;
+    return true;
+  });
+
+  if (filtered.length === 0) {
+    document.getElementById('tableBody').innerHTML = '<tr class="table-empty"><td colspan="8">🔍 No hay resultados con esos filtros</td></tr>';
+    return;
+  }
+
+  let html = '';
+  filtered.forEach(d => {
+    const isInmobiliaria = d._tipo === 'inmobiliaria';
+    const isTecnico = d._tipo === 'tecnico';
+    const isLead = d._tipo === 'propietario';
+
+    html += `<tr>
+      <td style="font-size:18px;text-align:center">${tipoIcon(d._tipo)}</td>
+      <td>
+        <div class="lead-name">${d._nombre}</div>
+        <div class="lead-meta">${isInmobiliaria && d._contacto ? 'Contacto: ' + d._contacto : ''} ${isInmobiliaria && d._web ? `<a href="${d._web}" target="_blank" style="color:var(--blue)">🌐</a>` : ''}</div>
+      </td>
+      <td>
+        ${d._email ? `<div class="contact-info">📧 ${d._email}</div>` : ''}
+        ${d._telefono ? `<div class="contact-info">📞 ${d._telefono}</div>` : ''}
+      </td>
+      <td>${d._provincia}</td>
+      <td><span class="status-badge ${statusStyle(d._estado)}">${statusLabel(d._estado)}</span></td>
+      <td style="white-space:nowrap">
+        ${d._ultimo_contacto ? timeAgo(d._ultimo_contacto) : formatDate(d._created)}
+      </td>
+      <td style="max-width:150px;font-size:12px;color:var(--muted)">
+        ${d._proximo_paso || '—'}
+      </td>
+      <td>
+        <div style="display:flex;gap:4px;align-items:center;">
+          ${isInmobiliaria ? `<button class="action-link" onclick="openEditInmobiliaria('${d._id}')">✏️</button>` : ''}
+          ${isInmobiliaria ? `<button class="action-link" onclick="toggleEstadoInmobiliaria('${d._id}','${d._estado}')" title="Avanzar estado">⏩</button>` : ''}
+        </div>
+      </td>
+    </tr>`;
+  });
+
+  document.getElementById('tableBody').innerHTML = html;
+}
+
+function filterTable() { renderTable(); }
+
+function switchTab(tab) {
+  currentTab = tab;
+  document.querySelectorAll('.tab').forEach(t => t.classList.toggle('active', t.dataset.tab === tab));
+  updateProvincias();
+  renderTable();
+}
+
+// --- Modal functions ---
+function openAddModal() {
+  document.getElementById('modalTitle').textContent = '➕ Nueva inmobiliaria';
+  document.getElementById('modalSubmit').textContent = 'Guardar';
+  document.getElementById('editId').value = '';
+  document.getElementById('editType').value = 'inmobiliaria';
+  document.getElementById('modalForm').reset();
+  document.getElementById('f_estado').value = 'nuevo';
+  document.getElementById('f_fuente').value = 'foro';
+  // Show all fields
+  ['f_nombre','f_contacto','f_email','f_telefono','f_web','f_provincia','f_estado','f_fuente','f_proximo_paso','f_notas'].forEach(id => {
+    document.getElementById(id).closest('label') ? document.getElementById(id).closest('label').style.display = '' : '';
+    document.getElementById(id).style.display = '';
+  });
+  document.getElementById('modalOverlay').classList.add('show');
+}
+
+function openEditInmobiliaria(id) {
+  const item = allData.inmobiliarias.find(i => i._id === id);
+  if (!item) return;
+
+  document.getElementById('modalTitle').textContent = '✏️ Editar ' + item._nombre;
+  document.getElementById('modalSubmit').textContent = 'Actualizar';
+  document.getElementById('editId').value = id;
+  document.getElementById('editType').value = 'inmobiliaria';
+  document.getElementById('f_nombre').value = item._nombre || '';
+  document.getElementById('f_contacto').value = item._contacto || '';
+  document.getElementById('f_email').value = item._email || '';
+  document.getElementById('f_telefono').value = item._telefono || '';
+  document.getElementById('f_web').value = item._web || '';
+  document.getElementById('f_provincia').value = item._provincia || '';
+  document.getElementById('f_estado').value = item._estado || 'nuevo';
+  document.getElementById('f_fuente').value = item._fuente || 'foro';
+  document.getElementById('f_proximo_paso').value = item._proximo_paso || '';
+  document.getElementById('f_notas').value = item._notas || '';
+  document.getElementById('modalOverlay').classList.add('show');
+}
+
+function closeModal() { document.getElementById('modalOverlay').classList.remove('show'); }
+
+document.getElementById('modalForm').addEventListener('submit', async function(e) {
+  e.preventDefault();
+  const id = document.getElementById('editId').value;
+  const data = {
+    nombre: document.getElementById('f_nombre').value.trim(),
+    contacto_nombre: document.getElementById('f_contacto').value.trim(),
+    email: document.getElementById('f_email').value.trim(),
+    telefono: document.getElementById('f_telefono').value.trim(),
+    web: document.getElementById('f_web').value.trim(),
+    provincia: document.getElementById('f_provincia').value.trim(),
+    estado: document.getElementById('f_estado').value,
+    fuente: document.getElementById('f_fuente').value,
+    proximo_paso: document.getElementById('f_proximo_paso').value.trim(),
+    notas: document.getElementById('f_notas').value.trim()
+  };
+
+  try {
+    if (id) {
+      // Update
+      const { error } = await supabase.from('inmobiliarias').update(data).eq('id', id);
+      if (error) throw error;
+    } else {
+      // Insert
+      const { error } = await supabase.from('inmobiliarias').insert(data);
+      if (error) throw error;
+    }
+    closeModal();
+    await loadData();
+  } catch (e) {
+    alert('Error: ' + e.message);
+  }
+});
+
+// --- Quick actions ---
+async function toggleEstadoInmobiliaria(id, currentEstado) {
+  const nextEstado = { 'nuevo': 'contactado', 'contactado': 'interesado', 'interesado': 'cliente' }[currentEstado];
+  if (!nextEstado) return alert(`Estado actual: ${currentEstado}. Usa editar manualmente.`);
+  try {
+    const { error } = await supabase.from('inmobiliarias').update({
+      estado: nextEstado,
+      ultimo_contacto: new Date().toISOString()
+    }).eq('id', id);
+    if (error) throw error;
+    await loadData();
+  } catch (e) {
+    alert('Error: ' + e.message);
+  }
+}
+
+// --- Auto load ---
+loadData();
+</script>
+</body>
+</html>
