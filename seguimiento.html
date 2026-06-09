@@ -135,8 +135,62 @@
       .header h1 { font-size: 18px; }
     }
   </style>
+  <style>
+    /* Password gate */
+    #pw-overlay{position:fixed;inset:0;z-index:9999;background:rgba(0,0,0,.6);display:flex;align-items:center;justify-content:center;font-family:-apple-system,sans-serif}
+    #pw-overlay.hidden{display:none}
+    #pw-box{background:#fff;border-radius:16px;padding:2rem;max-width:360px;width:90%;text-align:center;box-shadow:0 20px 60px rgba(0,0,0,.3)}
+    #pw-box h2{margin:0 0 .3rem;font-size:1.2rem;color:#1a1a2e}
+    #pw-box p{margin:0 0 1.2rem;font-size:.85rem;color:#6b7280}
+    #pw-box input{width:100%;padding:.75rem 1rem;border:2px solid #e5e7eb;border-radius:10px;font-size:1rem;text-align:center;outline:none;box-sizing:border-box;font-family:inherit}
+    #pw-box input:focus{border-color:#10b981}
+    #pw-box .pw-error{color:#ef4444;font-size:.82rem;margin-top:.5rem;display:none}
+    #pw-box button{width:100%;margin-top:1rem;padding:.75rem;background:#10b981;color:#fff;border:none;border-radius:10px;font-size:1rem;font-weight:600;cursor:pointer}
+    #pw-box button:hover{background:#059669}
+    #pw-box .pw-hint{font-size:.75rem;color:#9ca3af;margin-top:1rem}
+  </style>
 </head>
 <body>
+<div id="pw-overlay">
+  <div id="pw-box">
+    <h2>🔒 Acceso restringido</h2>
+    <p>Introduce la contraseña para acceder al panel de seguimiento</p>
+    <input type="password" id="pw-input" placeholder="Contraseña" autofocus>
+    <div class="pw-error" id="pw-error">Contraseña incorrecta</div>
+    <button onclick="checkPassword()">Acceder</button>
+    <div class="pw-hint">Solo personal autorizado</div>
+  </div>
+</div>
+<script>
+// Password gate
+(function(){
+  const PW_HASH = 'ed279cf16129ccd40d58e387346539a29d9cc465284e5a030b5dcc7729f80fba';
+  function sha256(str) {
+    return crypto.subtle.digest('SHA-256', new TextEncoder().encode(str))
+      .then(buf => Array.from(new Uint8Array(buf)).map(b => b.toString(16).padStart(2,'0')).join(''));
+  }
+  const overlay = document.getElementById('pw-overlay');
+  const input = document.getElementById('pw-input');
+  const errorEl = document.getElementById('pw-error');
+  window.checkPassword = function(){
+    sha256(input.value).then(hash => {
+      if(hash === PW_HASH){
+        overlay.classList.add('hidden');
+        sessionStorage.setItem('pw_seguimiento','1');
+      } else {
+        errorEl.style.display = 'block';
+        input.value = '';
+        input.focus();
+      }
+    });
+  };
+  if(sessionStorage.getItem('pw_seguimiento') === '1'){
+    overlay.classList.add('hidden');
+  } else {
+    input.addEventListener('keydown', function(e){ if(e.key==='Enter') checkPassword(); });
+  }
+})();
+</script>
 
 <div class="header">
   <h1>📊 <span>Seguimiento</span> de Leads · CertificadoYa</h1>
