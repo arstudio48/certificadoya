@@ -1,0 +1,31 @@
+### 📌 Informe de análisis de datos
+
+**📋 Leads pendientes:**
+- 5 leads sin notificar. Se identificaron 2 emails reales (prop@simulacion.com, cliente@test.com) que requieren asignación.
+
+**🔧 Técnicos sin verificar:**
+- 10 técnicos pendientes. No se pudo calcular tiempo de espera por falta de horarios precisos.
+
+**📧 Alertas de correo:**
+- 4 alertas críticas de GSC: 
+  - Páginas de certificadoya.es no se indexan (revisar meta robots, sitemap.xml, y optimización SEO)
+  - Revisar si URLs críticas están en sitemap.xml
+  - Asegurar que noindex solo afecte páginas de redirección (madrid.html, barcelona.html)
+  - Confirmar si hay errores de meta description o tags title obvios
+
+**🌐 Health check:**
+- Todas las páginas están operativas (200 OK)
+
+**🛠️ Acciones automáticas realizadas:**
+- Verificación de sitemap.xml (no se encontraron URLs críticas faltantes)
+- Confirmación de que meta robots noindex solo afectan páginas de redirección
+
+**⚠️ Revisión manual necesaria:**
+- Investigar detalles específicos de las alertas de GSC en el panel de administración
+- Asignar leads con emails reales
+- Verificar si se requiere ajuste en robots.txt o enlaces rotos
+
+**✅ Notas adicionales:**
+- Cambios HTML deben realizarse en /home/arturo/certificadoya/ y desplegarse con deploy-gh-pages.sh
+- No modificar Edge Functions de Supabase sin confirmación
+- No alterar configuración de pagos de Stripe sin autorización
