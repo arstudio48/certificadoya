@@ -1,5 +1,4 @@
 User-agent: *
-Allow: /
-Disallow: /panel-tecnicos.html
+Disallow: 
 
 Sitemap: https://www.certificadoya.es/sitemap.xml

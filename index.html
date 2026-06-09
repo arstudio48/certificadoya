@@ -513,57 +513,8 @@ var provSlugs = {}; provincias.forEach(function(p){provSlugs[p.slug]=p.nombre;})
     <a href="#presupuesto-card" class="btn-cta-large">Calcular presupuesto ahora</a>
   </section>
 
-  <!-- RESEÑAS -->
-  <section class="reviews-section">
-    <div class="reviews-inner">
-      <div class="reviews-header">
-        <div class="reviews-stars">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="#f97316"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="#f97316"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="#f97316"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="#f97316"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="#f97316"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
-        </div>
-        <h2>Lo que dicen nuestros clientes</h2>
-        <p class="reviews-sub">4.9 ★ de valoración media · 156 reseñas verificadas</p>
-      </div>
-      <div class="reviews-grid">
-        <div class="review-card">
-          <div class="review-card-header">
-            <div class="review-avatar">MR</div>
-            <div>
-              <div class="review-name">María Rodríguez</div>
-              <div class="review-date">Hace 2 semanas</div>
-            </div>
-            <div class="review-card-stars">★★★★★</div>
-          </div>
-          <p class="review-text">&ldquo;Rápidos y profesionales. Me llamaron al día siguiente, el técnico vino puntual y en 48h tenía el certificado registrado. Muy recomendables.&rdquo;</p>
-        </div>
-        <div class="review-card">
-          <div class="review-card-header">
-            <div class="review-avatar">JG</div>
-            <div>
-              <div class="review-name">Javier García</div>
-              <div class="review-date">Hace 3 semanas</div>
-            </div>
-            <div class="review-card-stars">★★★★★</div>
-          </div>
-          <p class="review-text">&ldquo;Increíble lo fácil que fue. Calculé el precio en la web en segundos, pagué online y a los dos días tenía el certificado en mi email. Sin papeleo.&rdquo;</p>
-        </div>
-        <div class="review-card">
-          <div class="review-card-header">
-            <div class="review-avatar">AL</div>
-            <div>
-              <div class="review-name">Ana López</div>
-              <div class="review-date">Hace 1 mes</div>
-            </div>
-            <div class="review-card-stars">★★★★★</div>
-          </div>
-          <p class="review-text">&ldquo;Necesitaba el certificado urgente para vender mi piso y lo gestionaron en 24h. Precio justo, técnico amable y todo online. Sin duda volveré a contratarlos.&rdquo;</p>
-        </div>
-      </div>
-    </div>
-  </section>
+  <!-- TESTIMONIOS (oculto hasta tener reseñas reales verificadas) -->
+  <section class="reviews-section" id="testimonios" aria-hidden="true" style="display:none"></section>
 
   <!-- INMOBILIARIAS -->
   <section class="inmobiliarias-section">
@@ -581,16 +532,7 @@ var provSlugs = {}; provincias.forEach(function(p){provSlugs[p.slug]=p.nombre;})
         <a href="/inmobiliarias.html" class="inmobiliarias-cta">Ver planes para inmobiliarias →</a>
       </div>
       <div class="inmobiliarias-visual">
-        <div class="inmobiliarias-card-stats">
-          <div class="inmobiliarias-stat">
-            <span class="inmobiliarias-stat-number">+250</span>
-            <span class="inmobiliarias-stat-label">certificados gestionados</span>
-          </div>
-          <div class="inmobiliarias-stat">
-            <span class="inmobiliarias-stat-number">12</span>
-            <span class="inmobiliarias-stat-label">inmobiliarias colaboradoras</span>
-          </div>
-        </div>
+        <!-- Estadísticas eliminadas hasta tener datos verificables -->
       </div>
     </div>
   </section>
@@ -617,7 +559,7 @@ var provSlugs = {}; provincias.forEach(function(p){provSlugs[p.slug]=p.nombre;})
         <div style="background:white;border-radius:12px;padding:1.5rem;border:1px solid #bbf7d0">
           <div style="width:40px;height:40px;background:#f0fdf4;border-radius:50%;display:flex;align-items:center;justify-content:center;margin-bottom:.75rem;font-weight:700;color:#16a34a;font-size:1.1rem">3</div>
           <h4 style="font-size:.95rem;color:#2d3a1f;margin-bottom:.35rem">Cobras tu tarifa completa</h4>
-          <p style="font-size:.82rem;color:#6b7b5e;line-height:1.5">Tú pones tus precios. El cliente te paga directamente. <strong>No te quitamos comisión</strong> de tu trabajo.</p>
+          <p style="font-size:.82rem;color:#6b7b5e;line-height:1.5">Tú pones tus precios. El cliente te paga directamente. <strong>Solo cobramos un 18% de comisión</strong> —la más baja del mercado (competidores: ~30%).</p>
         </div>
       </div>
 
