@@ -1,0 +1,59 @@
+### Análisis de la Red Social CertificadoYa
+
+**1. Introducción**
+
+CertificadoYa es una plataforma en línea que permite a sus usuarios generar, compartir y validar certificados digitales en diversos contextos, como educación, certificaciones profesionales, y otros usos legales. Este informe analiza la seguridad de la plataforma, los riesgos potenciales que enfrenta y proporciona recomendaciones para mejorar su protección.
+
+**2. Evaluación de la Seguridad**
+
+**2.1. Protección de Datos**
+
+La plataforma utiliza encriptación SSL/TLS para proteger la comunicación entre el usuario y el servidor. Además, los datos sensibles, como contraseñas y información personal, están almacenados en servidores con seguridad reforzada. Sin embargo, no se menciona el uso de encriptación de datos en reposo, lo cual podría representar un riesgo si los servidores son comprometidos.
+
+**2.2. Autenticación y Autorización**
+
+CertificadoYa implementa un sistema de autenticación mediante correo electrónico y contraseña. Sin embargo, no se menciona la opción de autenticación multifactor (2FA), lo cual podría mejorar significativamente la seguridad de las cuentas. Adicionalmente, no se especifica cómo se manejan los permisos para acceder a ciertos recursos, lo que podría generar riesgos de acceso no autorizado.
+
+**2.3. Gestión de Certificados**
+
+La plataforma permite la generación de certificados digitales, lo cual es un proceso seguro si se implementan protocolos adecuados. Sin embargo, no se menciona el uso de firmas digitales para garantizar la autenticidad y la integridad de los certificados. Esto podría llevar a la posibilidad de certificados falsificados o alterados.
+
+**3. Riesgos Potenciales**
+
+**3.1. Vulnerabilidad a Ataques de Inyección de Código**
+
+Si la plataforma no implementa medidas adecuadas contra inyección SQL o XSS, podría ser vulnerable a ataques que comprometan la integridad de los datos y la seguridad de la aplicación.
+
+**3.2. Falta de Actualizaciones de Seguridad**
+
+No se menciona el plan de actualización de software y dependencias, lo cual podría dejar a la plataforma expuesta a vulnerabilidades conocidas que no se han sido corregidas.
+
+**3.3. Riesgo de Exposición de Datos**
+
+En caso de un ataque de tipo DDoS o compromiso de servidores, los datos sensibles podrían ser expuestos, especialmente si no se tiene encriptación de datos en reposo.
+
+**4. Recomendaciones**
+
+**4.1. Implementar Encriptación de Datos en Reposo**
+
+Se recomienda encriptar todos los datos almacenados en los servidores para protegerlos en caso de un compromiso. Esto incluye contraseñas, información personal y certificados digitales.
+
+**4.2. Añadir Autenticación Multifactor (2FA)**
+
+La implementación de 2FA será una medida importante para aumentar la seguridad de las cuentas de los usuarios. Esto impedirá el acceso no autorizado incluso si las contraseñas son comprometidas.
+
+**4.3. Realizar Auditorías de Seguridad Periódicas**
+
+Se sugiere realizar auditorías de seguridad regulares para identificar y corregir vulnerabilidades antes de que puedan ser explotadas por atacantes.
+
+**4.4. Actualizar Constantemente el Software y Dependencias**
+
+Es fundamental mantener actualizado el software de la plataforma y todas sus dependencias para garantizar que se resuelvan las vulnerabilidades conocidas y se mejore la seguridad continua.
+
+**5. Conclusión**
+
+CertificadoYa es una plataforma prometedora que ofrece servicios útiles en el ámbito de los certificados digitales. Sin embargo, para asegurar la confianza de sus usuarios y cumplir con estándares de seguridad, es esencial implementar las medidas propuestas en este informe. Al hacerlo, la plataforma podrá proteger mejor la información sensible y prevenir posibles ataques que podrían afectar a sus usuarios.
+
+---
+
+*Este análisis se realizó en el contexto de un examen de seguridad de red social, con las herramientas y métodos utilizados en la evaluación de plataformas web.*
