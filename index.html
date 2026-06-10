@@ -737,6 +737,7 @@ var provSlugs = {}; provincias.forEach(function(p){provSlugs[p.slug]=p.nombre;})
 .newsletter-trigger:hover { transform: scale(1.05); box-shadow: 0 6px 24px rgba(22,163,74,0.45); }
 .newsletter-trigger:active { transform: scale(.97); }
 @media (max-width: 640px) { .newsletter-trigger { bottom: 75px; right: 12px; padding: 10px 16px; font-size: .8rem; } }
+@media (min-width: 641px) { .newsletter-trigger { display: none !important; } }
 
 .newsletter-modal-overlay {
   position: fixed; inset: 0; z-index: 1200;
