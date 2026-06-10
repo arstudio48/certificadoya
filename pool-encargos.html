@@ -152,6 +152,98 @@
 </style>
 <script data-goatcounter="https://certificadoya.goatcounter.com/count"
         async src="//gc.zgo.at/count.js"></script>
+  <style>
+/* Menú overlay móvil */
+@media (max-width: 600px) {
+  .mobile-overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    z-index: 1000;
+  }
+  .mobile-overlay.open {
+    display: flex;
+  }
+  .mobile-overlay-bg {
+    position: absolute;
+    inset: 0;
+    background: rgba(0,0,0,0.5);
+    animation: mobileFadeIn 0.2s ease;
+  }
+  .mobile-overlay-panel {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    width: min(85vw, 320px);
+    background: #fff;
+    overflow-y: auto;
+    animation: mobileSlideIn 0.25s ease;
+    padding: 1.2rem 0;
+  }
+  .mobile-overlay-close {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    width: 36px;
+    height: 36px;
+    border: none;
+    background: #f5f5f5;
+    border-radius: 50%;
+    font-size: 1.1rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 2;
+  }
+  .mobile-overlay-nav {
+    margin-top: 3rem;
+    display: flex;
+    flex-direction: column;
+  }
+  .mobile-overlay-nav a {
+    display: block;
+    padding: 0.8rem 1.2rem;
+    color: #333;
+    text-decoration: none;
+    font-size: 0.95rem;
+    border-bottom: 1px solid #f0f0f0;
+  }
+  .mobile-overlay-nav a:hover {
+    background: #f5f9f0;
+  }
+  .mobile-overlay-nav strong {
+    display: block;
+    padding: 0.6rem 1.2rem;
+    font-size: 0.82rem;
+    color: #9aab8a;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    border-bottom: 1px solid #f0f0f0;
+  }
+  .mobile-overlay-nav .buscador-wrapper {
+    padding: 0.8rem 1.2rem;
+    border-bottom: 1px solid #f0f0f0;
+  }
+  .mobile-overlay-nav .buscador-wrapper input {
+    width: 100%;
+    padding: 0.6rem 0.8rem;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    font-size: 0.9rem;
+    font-family: inherit;
+  }
+  @keyframes mobileFadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+  @keyframes mobileSlideIn {
+    from { transform: translateX(100%); }
+    to { transform: translateX(0); }
+  }
+}
+  </style>
 </head>
 <body>
 
@@ -168,8 +260,13 @@
       <span></span><span></span><span></span>
     </button>
   
-    <div class="mobile-menu" id="mobile-menu">
-      <strong style="display:block;padding:.6rem 1.2rem;font-size:.82rem;color:#9aab8a;text-transform:uppercase;letter-spacing:.05em;border-bottom:1px solid #f0f0f0">🔑 Propietarios</strong>
+        <!-- Overlay menú móvil -->
+    <div class="mobile-overlay" id="mobile-overlay">
+      <div class="mobile-overlay-bg" id="mobile-overlay-bg"></div>
+      <div class="mobile-overlay-panel" id="mobile-overlay-panel">
+        <button class="mobile-overlay-close" id="mobile-overlay-close" aria-label="Cerrar menú">✕</button>
+        <nav class="mobile-overlay-nav">
+<strong style="display:block;padding:.6rem 1.2rem;font-size:.82rem;color:#9aab8a;text-transform:uppercase;letter-spacing:.05em;border-bottom:1px solid #f0f0f0">🔑 Propietarios</strong>
       <a href="/#presupuesto-card" style="font-weight:600;color:#16a34a">💰 Presupuesto instantáneo</a>
       <a href="/#como-funciona">📋 Cómo funciona</a>
       <a href="/#faq">❓ Preguntas frecuentes</a>
@@ -181,6 +278,8 @@
       <a href="/tecnicos/">👥 Directorio de técnicos</a>
       <strong style="display:block;padding:.6rem 1.2rem;font-size:.82rem;color:#9aab8a;text-transform:uppercase;letter-spacing:.05em;border-bottom:1px solid #f0f0f0">🏢 Inmobiliarias</strong>
       <a href="/inmobiliarias.html">🏠 Inmobiliarias</a>
+        </nav>
+      </div>
     </div>
 </div>
 
@@ -581,5 +680,41 @@
       setTimeout(() => toast.classList.remove('show'), 3000);
     }
   </script>
+
+<!-- Menú overlay JS -->
+<script>
+(function(){
+  var btn = document.getElementById('hamburger-btn');
+  var overlay = document.getElementById('mobile-overlay');
+  var panel = document.getElementById('mobile-overlay-panel');
+  var bg = document.getElementById('mobile-overlay-bg');
+  var closeBtn = document.getElementById('mobile-overlay-close');
+  if (!btn || !overlay) return;
+  function openM(){
+    overlay.classList.add('open');
+    btn.classList.add('active');
+    btn.setAttribute('aria-expanded', 'true');
+    document.body.style.overflow = 'hidden';
+  }
+  function closeM(){
+    overlay.classList.remove('open');
+    btn.classList.remove('active');
+    btn.setAttribute('aria-expanded', 'false');
+    document.body.style.overflow = '';
+  }
+  btn.onclick = function(e){
+    e.stopPropagation();
+    overlay.classList.contains('open') ? closeM() : openM();
+  };
+  if (bg) bg.onclick = closeM;
+  if (closeBtn) closeBtn.onclick = closeM;
+  overlay.querySelectorAll('a').forEach(function(a){
+    a.addEventListener('click', closeM);
+  });
+  document.addEventListener('keydown', function(e){
+    if (e.key === 'Escape' && overlay.classList.contains('open')) closeM();
+  });
+})();
+</script>
 </body>
 </html>

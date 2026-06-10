@@ -88,6 +88,98 @@
   </script>
 <script data-goatcounter="https://certificadoya.goatcounter.com/count"
         async src="//gc.zgo.at/count.js"></script>
+  <style>
+/* Menú overlay móvil */
+@media (max-width: 600px) {
+  .mobile-overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    z-index: 1000;
+  }
+  .mobile-overlay.open {
+    display: flex;
+  }
+  .mobile-overlay-bg {
+    position: absolute;
+    inset: 0;
+    background: rgba(0,0,0,0.5);
+    animation: mobileFadeIn 0.2s ease;
+  }
+  .mobile-overlay-panel {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    width: min(85vw, 320px);
+    background: #fff;
+    overflow-y: auto;
+    animation: mobileSlideIn 0.25s ease;
+    padding: 1.2rem 0;
+  }
+  .mobile-overlay-close {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    width: 36px;
+    height: 36px;
+    border: none;
+    background: #f5f5f5;
+    border-radius: 50%;
+    font-size: 1.1rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 2;
+  }
+  .mobile-overlay-nav {
+    margin-top: 3rem;
+    display: flex;
+    flex-direction: column;
+  }
+  .mobile-overlay-nav a {
+    display: block;
+    padding: 0.8rem 1.2rem;
+    color: #333;
+    text-decoration: none;
+    font-size: 0.95rem;
+    border-bottom: 1px solid #f0f0f0;
+  }
+  .mobile-overlay-nav a:hover {
+    background: #f5f9f0;
+  }
+  .mobile-overlay-nav strong {
+    display: block;
+    padding: 0.6rem 1.2rem;
+    font-size: 0.82rem;
+    color: #9aab8a;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    border-bottom: 1px solid #f0f0f0;
+  }
+  .mobile-overlay-nav .buscador-wrapper {
+    padding: 0.8rem 1.2rem;
+    border-bottom: 1px solid #f0f0f0;
+  }
+  .mobile-overlay-nav .buscador-wrapper input {
+    width: 100%;
+    padding: 0.6rem 0.8rem;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    font-size: 0.9rem;
+    font-family: inherit;
+  }
+  @keyframes mobileFadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+  @keyframes mobileSlideIn {
+    from { transform: translateX(100%); }
+    to { transform: translateX(0); }
+  }
+}
+  </style>
 </head>
   <script type="application/ld+json">
   {
@@ -152,12 +244,19 @@
     <button class="hamburger" id="hamburger-btn" aria-label="Menú" aria-expanded="false">
         <span></span><span></span><span></span>
       </button>
-    <div class="mobile-menu" id="mobile-menu">
-      <a href="/#como-funciona">Cómo funciona</a>
+        <!-- Overlay menú móvil -->
+    <div class="mobile-overlay" id="mobile-overlay">
+      <div class="mobile-overlay-bg" id="mobile-overlay-bg"></div>
+      <div class="mobile-overlay-panel" id="mobile-overlay-panel">
+        <button class="mobile-overlay-close" id="mobile-overlay-close" aria-label="Cerrar menú">✕</button>
+        <nav class="mobile-overlay-nav">
+<a href="/#como-funciona">Cómo funciona</a>
       <a href="/#faq">FAQ</a>
       <a href="/blog/">Blog</a>
       <a href="/panel-tecnicos.html">¿Eres técnico?</a>
       <a href="#presupuesto" class="btn-nav" style="margin:0 1rem 1rem;text-align:center">Presupuesto</a>
+        </nav>
+      </div>
     </div>
 
   </div>
@@ -312,34 +411,38 @@
   <p class="footer-bottom">© 2026 CertificadoYa — ArtStudio</p>
 </footer>
 
-<!-- Hamburger + menú móvil JS -->
+<!-- Menú overlay JS -->
 <script>
 (function(){
   var btn = document.getElementById('hamburger-btn');
-  var menu = document.getElementById('mobile-menu');
-  if (!btn || !menu) return;
+  var overlay = document.getElementById('mobile-overlay');
+  var panel = document.getElementById('mobile-overlay-panel');
+  var bg = document.getElementById('mobile-overlay-bg');
+  var closeBtn = document.getElementById('mobile-overlay-close');
+  if (!btn || !overlay) return;
+  function openM(){
+    overlay.classList.add('open');
+    btn.classList.add('active');
+    btn.setAttribute('aria-expanded', 'true');
+    document.body.style.overflow = 'hidden';
+  }
+  function closeM(){
+    overlay.classList.remove('open');
+    btn.classList.remove('active');
+    btn.setAttribute('aria-expanded', 'false');
+    document.body.style.overflow = '';
+  }
   btn.onclick = function(e){
     e.stopPropagation();
-    var open = menu.classList.toggle('open');
-    btn.classList.toggle('active');
-    btn.setAttribute('aria-expanded', open);
-    document.body.style.overflow = open ? 'hidden' : '';
+    overlay.classList.contains('open') ? closeM() : openM();
   };
-  document.addEventListener('click', function(e){
-    if (menu.classList.contains('open') && !menu.contains(e.target) && e.target !== btn && !btn.contains(e.target)) {
-      menu.classList.remove('open');
-      btn.classList.remove('active');
-      btn.setAttribute('aria-expanded', 'false');
-      document.body.style.overflow = '';
-    }
+  if (bg) bg.onclick = closeM;
+  if (closeBtn) closeBtn.onclick = closeM;
+  overlay.querySelectorAll('a').forEach(function(a){
+    a.addEventListener('click', closeM);
   });
-  menu.querySelectorAll('a').forEach(function(a){
-    a.addEventListener('click', function(){
-      menu.classList.remove('open');
-      btn.classList.remove('active');
-      btn.setAttribute('aria-expanded', 'false');
-      document.body.style.overflow = '';
-    });
+  document.addEventListener('keydown', function(e){
+    if (e.key === 'Escape' && overlay.classList.contains('open')) closeM();
   });
 })();
 </script>
