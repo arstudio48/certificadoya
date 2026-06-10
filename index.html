@@ -24,7 +24,7 @@
   <meta name="twitter:image" content="https://www.certificadoya.es/img/og-image.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600;9..40,700;9..40,800&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
   <link rel="preload" href="/css/style.min.css?v=a020e0be" as="style">
   <link rel="stylesheet" href="/css/style.min.css?v=a020e0be">
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='6' fill='%2316a34a'/><text x='16' y='23' text-anchor='middle' fill='white' font-size='18' font-family='sans-serif'>C</text></svg>">
@@ -65,26 +65,7 @@
 .mobile-sticky a svg{width:20px;height:20px;flex-shrink:0;stroke:#16a34a}
 @media(min-width:601px){.mobile-sticky{display:none!important}}
 @media(max-width:600px){.mobile-sticky{display:flex}}
-.pasos-indicador{display:none;gap:.35rem;margin-bottom:.75rem;justify-content:center}
-.pasos-indicador .paso-dot{width:10px;height:10px;border-radius:50%;background:#ddd;transition:background .2s}
-.pasos-indicador .paso-dot.activo{background:#16a34a}
-.paso-contenido{display:block}
-.paso-titulo{font-size:.85rem;font-weight:600;color:#20201f;margin-bottom:.6rem;display:none}
-.paso-nav{display:none;margin-top:.75rem}
-.paso-nav-inner{display:flex;gap:.5rem}
-.paso-nav-inner .btn-back{flex:1;padding:.6rem;border:1.5px solid #ddd;border-radius:6px;background:#fff;color:#20201f;font-family:Outfit,sans-serif;font-size:.85rem;font-weight:500;cursor:pointer;text-align:center;transition:all .15s}
-.paso-nav-inner .btn-back:hover{border-color:#bbb;background:#f9f9f9}
-.paso-nav-inner .btn-next{flex:2;padding:.6rem;border:none;border-radius:6px;background:#16a34a;color:#fff;font-family:Outfit,sans-serif;font-size:.85rem;font-weight:600;cursor:pointer;text-align:center;transition:background .15s}
-.paso-nav-inner .btn-next:hover{background:#15803d}
-.paso-nav-inner .btn-next:disabled{opacity:.5;cursor:default}
-@media(max-width:600px){
-  .pasos-indicador{display:flex}
-  .paso-contenido:not(.paso-activo-mobile){display:none!important}
-  .paso-contenido.paso-activo-mobile{display:block}
-  .paso-titulo{display:block}
-  .paso-nav{display:block}
-  .presupuesto-card-v2{padding-bottom:5rem}
-}
+
 /* Dropdown Técnicos */
 .dropdown-pro{position:relative;display:inline-block}
 .dropdown-pro-btn{background:none;border:none;font-family:var(--font);font-size:.9rem;font-weight:500;color:var(--text);cursor:pointer;padding:0;transition:color .15s}
@@ -106,6 +87,152 @@
 }
 .prov-link-disabled small {
     font-size:.65rem;color:#bbb;font-weight:400
+}
+/* ========== F1: Hero oscuro con calculadora ========== */
+:root {
+  --f1-bg: #0A0A0B;
+  --f1-accent: #00ffbb;
+  --f1-pink: #ff0055;
+  --f1-gold: #C9903A;
+  --f1-card: #141416;
+  --f1-border: #2a2a2e;
+  --f1-text: #e8e8ea;
+  --f1-muted: #88889a;
+  --font-sans: 'DM Sans', sans-serif;
+  --font-mono: 'DM Mono', monospace;
+}
+.hero-f1 {
+  background: var(--f1-bg);
+  padding: 3rem 2rem 4rem;
+  font-family: var(--font-sans);
+  min-height: 85vh;
+  display: flex;
+  align-items: center;
+}
+.hero-f1-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 3rem;
+  align-items: center;
+  width: 100%;
+}
+/* Texto */
+.hero-f1-text { display: flex; flex-direction: column; gap: 1rem; }
+.hero-f1-badge {
+  display: inline-flex; align-items: center; gap: .5rem;
+  background: rgba(0,255,187,0.08); color: var(--f1-accent);
+  font-size: .8rem; font-weight: 500; padding: .4rem 1rem;
+  border-radius: 50px; width: fit-content;
+  border: 1px solid rgba(0,255,187,0.15);
+  font-family: var(--font-mono);
+}
+.hero-f1-h1 {
+  font-size: 2.8rem; font-weight: 700; color: #fff;
+  line-height: 1.2; margin: 0;
+}
+.hero-f1-precio { color: var(--f1-accent); white-space: nowrap; }
+.hero-f1-sub {
+  font-size: 1.05rem; color: var(--f1-muted);
+  line-height: 1.5; margin: 0; max-width: 480px;
+}
+.hero-f1-features {
+  display: flex; flex-wrap: wrap; gap: 1rem; margin-top: .5rem;
+}
+.hero-f1-features span {
+  display: inline-flex; align-items: center; gap: .4rem;
+  font-size: .85rem; color: var(--f1-text); font-weight: 400;
+}
+/* Calculadora */
+.hero-f1-card {
+  background: var(--f1-card);
+  border: 1px solid var(--f1-border);
+  border-radius: 20px;
+  padding: 1.5rem;
+  box-shadow: 0 20px 60px rgba(0,0,0,0.5);
+}
+.calc-header {
+  text-align: center; margin-bottom: 1.25rem;
+  padding-bottom: 1rem; border-bottom: 1px solid var(--f1-border);
+}
+.calc-header-precio { font-size: 1.8rem; font-weight: 800; color: #fff; }
+.calc-header-precio strong { color: var(--f1-accent); }
+.calc-header-label { display: block; font-size: .85rem; color: var(--f1-muted); margin-top: .2rem; }
+.calc-body { display: flex; flex-direction: column; gap: .85rem; }
+.calc-field { display: flex; flex-direction: column; gap: .35rem; }
+.calc-field label { font-size: .8rem; color: var(--f1-muted); font-weight: 500; }
+.calc-select {
+  width: 100%;
+  padding: .7rem .85rem;
+  background: #1e1e22;
+  border: 1px solid var(--f1-border);
+  border-radius: 10px;
+  color: #fff;
+  font-family: var(--font-sans);
+  font-size: .9rem;
+  outline: none;
+  transition: border-color .2s;
+  cursor: pointer;
+  -webkit-appearance: none; appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%2388889a' stroke-width='1.5' fill='none'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 12px center;
+}
+.calc-select:focus { border-color: var(--f1-accent); }
+.calc-select option { background: #141416; color: #fff; }
+.calc-row { display: grid; grid-template-columns: 1fr 1fr; gap: .75rem; }
+.calc-consent { margin: .25rem 0; }
+.calc-checkbox {
+  display: flex; align-items: flex-start; gap: 8px;
+  cursor: pointer; font-size: .75rem; color: var(--f1-muted); line-height: 1.4;
+}
+.calc-checkbox input[type="checkbox"] {
+  margin-top: 2px; width: 14px; height: 14px;
+  accent-color: var(--f1-accent); cursor: pointer;
+}
+.calc-btn {
+  width: 100%; padding: .9rem 1.5rem;
+  background: var(--f1-accent); color: #0A0A0B;
+  border: none; border-radius: 10px;
+  font-family: var(--font-sans); font-size: 1rem; font-weight: 700;
+  cursor: pointer; transition: opacity .2s, transform .1s;
+}
+.calc-btn:hover { opacity: .9; }
+.calc-btn:active { transform: scale(.98); }
+.calc-btn-sec { background: transparent; border: 1.5px solid var(--f1-accent); color: var(--f1-accent); margin-top: .5rem; }
+.calc-seguros {
+  display: flex; gap: .75rem; justify-content: center;
+  flex-wrap: wrap; font-size: .7rem; color: var(--f1-muted);
+}
+.calc-seguros span { display: inline-flex; align-items: center; gap: .25rem; }
+/* Resultado */
+.calc-resultado {
+  text-align: center; margin-top: .5rem;
+  padding-top: 1rem; border-top: 1px solid var(--f1-border);
+}
+.calc-resultado-linea { font-size: .75rem; color: var(--f1-muted); text-transform: uppercase; letter-spacing: .05em; font-family: var(--font-mono); }
+.calc-resultado-precio { font-size: 2.2rem; font-weight: 800; color: var(--f1-accent); margin: .25rem 0; }
+.calc-resultado-detalle { font-size: .8rem; color: var(--f1-muted); margin-bottom: .5rem; }
+.calc-resultado-aviso { font-size: .68rem; color: var(--f1-muted); margin: .5rem 0 0; line-height: 1.4; }
+/* Mobile F1 */
+@media (max-width: 768px) {
+  .hero-f1 { padding: 2rem 1rem 3rem; min-height: auto; }
+  .hero-f1-inner { grid-template-columns: 1fr; gap: 2rem; }
+  .hero-f1-text { text-align: center; align-items: center; }
+  .hero-f1-h1 { font-size: 1.8rem; }
+  .hero-f1-sub { max-width: 100%; font-size: .9rem; }
+  .hero-f1-features { justify-content: center; }
+}
+@media (max-width: 480px) {
+  .hero-f1 { padding: 1.5rem .85rem 2.5rem; }
+  .hero-f1-h1 { font-size: 1.45rem; }
+  .hero-f1-sub { font-size: .82rem; }
+  .hero-f1-card { padding: 1rem; }
+  .calc-header-precio { font-size: 1.4rem; }
+  .calc-row { grid-template-columns: 1fr; gap: .6rem; }
+  .calc-btn { padding: .8rem 1rem; font-size: .9rem; }
+  .calc-resultado-precio { font-size: 1.6rem; }
 }</style>
   <script type="application/ld+json">
   {
@@ -276,9 +403,6 @@
   .header-inner{padding:0 .75rem !important;min-height:56px}
   .mobile-overlay-panel{width:100vw !important;max-width:320px}
   .mobile-overlay-nav a{padding:.75rem 1rem !important;font-size:1rem !important;min-height:44px;display:flex;align-items:center}
-  .presupuesto-card-v2{padding:1rem 1rem 5rem !important}
-  .precio-destacado{margin-bottom:.6rem !important}
-  .resultado-box{padding:.75rem !important}
   footer{padding:1.5rem 1rem !important}
   .footer-grid{grid-template-columns:1fr !important;gap:1rem}
 }
@@ -413,103 +537,127 @@ var provSlugs = {}; provincias.forEach(function(p){provSlugs[p.slug]=p.nombre;})
 </header>
 
 <main>
-  <!-- HERO -->
-  <section class="hero-new" id="presupuesto-card" style="scroll-margin-top:80px">
-    <div class="hero-new-grid">
-    <div class="hero-new-card">
-        <div class="presupuesto-card-v2">
-          <!-- Indicador de progreso (solo móvil) -->
-          <div class="pasos-indicador" id="pasos-indicador">
-            <div class="paso-dot activo" data-paso="1"></div>
-            <div class="paso-dot" data-paso="2"></div>
-            <div class="paso-dot" data-paso="3"></div>
-          </div>
-          <div class="precio-destacado" style="text-align:center;margin-bottom:1rem;background:linear-gradient(135deg,#f0fdf4,#e8f0dc);padding:.75rem;border-radius:10px">
-            <div style="font-size:.75rem;color:#6b7b5e;font-weight:500;text-transform:uppercase;letter-spacing:.05em">Precio desde</div>
-            <div style="font-size:2.4rem;font-weight:800;color:#16a34a;line-height:1.1">45<span style="font-size:1.2rem;font-weight:500">€</span></div>
-            <div style="font-size:.7rem;color:#9aab8a">para un piso estándar · sin sorpresas</div>
-          </div>
-          <!-- Paso 1: CP (solo móvil; desktop se ve siempre) -->
-          <div class="paso-contenido paso-activo-mobile" data-paso="1" id="paso-cp-wrapper">
-            <div class="paso-titulo">📍 ¿Dónde está tu vivienda?</div>
-            <div class="form-group">
-              <label for="cp">Código postal</label>
-              <input type="text" id="cp" placeholder="Ej: 28001" maxlength="5" inputmode="numeric" pattern="[0-9]{5}" aria-required="true" aria-describedby="cp-error" oninput="validarCP()">
-              <span class="input-error" id="cp-error" role="alert"></span>
-            </div>
-            <div class="paso-nav">
-              <div class="paso-nav-inner">
-                <button class="btn-next" id="paso-btn-1" onclick="irAlPaso(2)">Siguiente →</button>
-              </div>
-            </div>
-          </div>
-          <!-- Paso 2: m² + Tipo (solo móvil; desktop se ve siempre) -->
-          <div class="paso-contenido" data-paso="2" id="paso-medidas-wrapper">
-            <div class="paso-titulo">📐 ¿Cuántos metros tiene?</div>
-            <div class="form-row">
-              <div class="form-group">
-                <label for="m2">m²</label>
-                <input type="number" id="m2" placeholder="80" min="20" max="5000" aria-required="true" aria-describedby="m2-error" oninput="validarM2()">
-                <span class="input-error" id="m2-error" role="alert"></span>
-              </div>
-              <div class="form-group">
-                <label for="tipo">Tipo</label>
-                <select id="tipo" onchange="calcularPresupuesto()">
-                  <option value="piso">Piso</option>
-                  <option value="unifamiliar">Unifamiliar</option>
-                  <option value="adosado">Adosado</option>
-                  <option value="local">Local</option>
-                </select>
-              </div>
-            </div>
-            <div class="paso-nav">
-              <div class="paso-nav-inner">
-                <button class="btn-back" onclick="irAlPaso(1)">← Atrás</button>
-                <button class="btn-next" id="paso-btn-2" onclick="calcularPresupuesto()">Calcular →</button>
-              </div>
-            </div>
-          </div>
-          <!-- Consentimiento + botón calcular (siempre visible) -->
-          <label style="display:flex;align-items:flex-start;gap:8px;margin:12px 0 4px;cursor:pointer;font-size:12px;color:#555;line-height:1.4">
-            <input type="checkbox" id="consent-datos" style="margin-top:2px;width:14px;height:14px;accent-color:#111;cursor:pointer">
-            <span>Acepto la <a href="/legal/privacidad.html" target="_blank" style="color:#1a1a1a;text-decoration:underline">política de privacidad</a> y consiento el tratamiento de mis datos para recibir un presupuesto y ser contactado por un técnico certificador.</span>
-          </label>
-          <button class="btn-cta" onclick="calcularPresupuesto()">Calcular presupuesto</button>
-
-          <div style="display:flex;gap:.75rem;justify-content:center;margin-top:.75rem;flex-wrap:wrap">
-            <span style="display:inline-flex;align-items:center;gap:.3rem;font-size:.7rem;color:#9aab8a"><svg width="14" height="14" viewBox="0 0 24 24" fill="#16a34a"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z"/></svg> Pago seguro Stripe</span>
-            <span style="display:inline-flex;align-items:center;gap:.3rem;font-size:.7rem;color:#9aab8a"><svg width="14" height="14" viewBox="0 0 24 24" fill="#16a34a"><path d="M18 8h-1V6c0-2.76-2.24-5-5-5S7 3.24 7 6v2H6c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V10c0-1.1-.9-2-2-2zm-6 9c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2zm3.1-9H8.9V6c0-1.71 1.39-3.1 3.1-3.1 1.71 0 3.1 1.39 3.1 3.1v2z"/></svg> SSL encriptado</span>
-            <span style="display:inline-flex;align-items:center;gap:.3rem;font-size:.7rem;color:#9aab8a"><svg width="14" height="14" viewBox="0 0 24 24" fill="#16a34a"><path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm-2 16l-4-4 1.41-1.41L10 14.17l6.59-6.59L18 9l-8 8z"/></svg> Técnicos verificados</span>
-          </div>
-          <div class="resultado-box" id="resultado">
-            <div class="resultado-precio" id="precio-rango">—</div>
-            <div class="resultado-texto" id="precio-texto"></div>
-            <button class="btn-cta btn-cta-outline" onclick="solicitarLead()">Solicitar servicio ahora →</button>
-          </div>
-          <!-- Paso 3: Confirmación (solo móvil, visible tras cálculo) -->
-          <div class="paso-contenido" data-paso="3" id="paso-confirmacion" style="display:none">
-            <div class="paso-nav">
-              <div class="paso-nav-inner">
-                <button class="btn-back" onclick="irAlPaso(2)">← Volver</button>
-                <button class="btn-next" onclick="solicitarLead()">Solicitar servicio →</button>
-              </div>
-            </div>
-            <p style="font-size:.72rem;color:#9aab8a;text-align:center;margin-top:.5rem">Técnico colegiado de tu zona · Pago seguro</p>
-          </div>
+  <!-- HERO F1: precio ancla + calculadora provincia/tipo/superficie -->
+  <section class="hero-f1" id="presupuesto-card" style="scroll-margin-top:0">
+    <div class="hero-f1-inner">
+      <!-- Lado izquierdo: texto -->
+      <div class="hero-f1-text">
+        <div class="hero-f1-badge">Presupuesto en 5 segundos</div>
+        <h1 class="hero-f1-h1">Tu certificado energético desde <span class="hero-f1-precio">45 €</span> <br>— todo incluido</h1>
+        <p class="hero-f1-sub">IVA, visita del técnico, registro oficial en tu comunidad y etiqueta energética. Sin sorpresas.</p>
+        <div class="hero-f1-features">
+          <span><svg width="16" height="16" viewBox="0 0 24 24" fill="#00ffbb"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z"/></svg> Técnico asignado en 24h</span>
+          <span><svg width="16" height="16" viewBox="0 0 24 24" fill="#00ffbb"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z"/></svg> Pago seguro retenido</span>
+          <span><svg width="16" height="16" viewBox="0 0 24 24" fill="#00ffbb"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z"/></svg> Certificado en 48-72h</span>
         </div>
       </div>
-      <div class="hero-new-text">
-        <div class="hero-badge"><img src="/img/ico-rapido.svg" alt="Presupuesto rápido" style="width:28px;height:28px;vertical-align:middle;margin-right:8px"> Presupuesto en 5 segundos</div>
-        <h1>Certificado energético <span>rápido y sin complicaciones</span></h1>
-        <p class="hero-lead">Consigue tu CEE en 48-72horas con técnicos verificados en toda España. Presupuesto instantáneo, sin papeleo, desde <strong>45 €</strong>.</p>
-        <div class="hero-trust">
-          <div class="trust-item">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="#16a34a"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z"/></svg>
-            Técnicos colegiados verificados
+      <!-- Lado derecho: calculadora -->
+      <div class="hero-f1-card" id="calc-card">
+        <div class="calc-header">
+          <span class="calc-header-precio">Desde <strong>45 €</strong></span>
+          <span class="calc-header-label">— calcula tu precio exacto</span>
+        </div>
+        <div class="calc-body" id="calc-body">
+          <div class="calc-field">
+            <label for="calc-provincia">📍 Provincia</label>
+            <select id="calc-provincia" class="calc-select">
+              <option value="">Selecciona provincia…</option>
+              <option value="alava">Álava</option>
+              <option value="albacete">Albacete</option>
+              <option value="alicante">Alicante</option>
+              <option value="almeria">Almería</option>
+              <option value="asturias">Asturias</option>
+              <option value="avila">Ávila</option>
+              <option value="badajoz">Badajoz</option>
+              <option value="baleares">Baleares</option>
+              <option value="barcelona">Barcelona</option>
+              <option value="burgos">Burgos</option>
+              <option value="caceres">Cáceres</option>
+              <option value="cadiz">Cádiz</option>
+              <option value="cantabria">Cantabria</option>
+              <option value="castellon">Castellón</option>
+              <option value="ceuta">Ceuta</option>
+              <option value="ciudad-real">Ciudad Real</option>
+              <option value="cordoba">Córdoba</option>
+              <option value="a-coruna">A Coruña</option>
+              <option value="cuenca">Cuenca</option>
+              <option value="gipuzkoa">Gipuzkoa</option>
+              <option value="girona">Girona</option>
+              <option value="granada">Granada</option>
+              <option value="guadalajara">Guadalajara</option>
+              <option value="huelva">Huelva</option>
+              <option value="huesca">Huesca</option>
+              <option value="jaen">Jaén</option>
+              <option value="leon">León</option>
+              <option value="lleida">Lleida</option>
+              <option value="lugo">Lugo</option>
+              <option value="madrid">Madrid</option>
+              <option value="malaga">Málaga</option>
+              <option value="melilla">Melilla</option>
+              <option value="murcia">Murcia</option>
+              <option value="navarra">Navarra</option>
+              <option value="ourense">Ourense</option>
+              <option value="palencia">Palencia</option>
+              <option value="las-palmas">Las Palmas</option>
+              <option value="pontevedra">Pontevedra</option>
+              <option value="la-rioja">La Rioja</option>
+              <option value="salamanca">Salamanca</option>
+              <option value="segovia">Segovia</option>
+              <option value="sevilla">Sevilla</option>
+              <option value="soria">Soria</option>
+              <option value="tarragona">Tarragona</option>
+              <option value="teruel">Teruel</option>
+              <option value="toledo">Toledo</option>
+              <option value="valencia">Valencia</option>
+              <option value="valladolid">Valladolid</option>
+              <option value="bizkaia">Bizkaia</option>
+              <option value="zamora">Zamora</option>
+              <option value="zaragoza">Zaragoza</option>
+            </select>
           </div>
-          <div class="trust-item">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="#16a34a"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z"/></svg>
-            Cobertura en toda España
+          <div class="calc-row">
+            <div class="calc-field calc-field-half">
+              <label for="calc-tipo">🏠 Tipo de inmueble</label>
+              <select id="calc-tipo" class="calc-select">
+                <option value="piso">Piso</option>
+                <option value="unifamiliar">Unifamiliar</option>
+                <option value="local">Local</option>
+                <option value="oficina">Oficina</option>
+                <option value="nave">Nave</option>
+              </select>
+            </div>
+            <div class="calc-field calc-field-half">
+              <label for="calc-superficie">📐 Superficie</label>
+              <select id="calc-superficie" class="calc-select">
+                <option value="-50">Menos de 50 m²</option>
+                <option value="50-80" selected>50 — 80 m²</option>
+                <option value="81-120">81 — 120 m²</option>
+                <option value="121-180">121 — 180 m²</option>
+                <option value="181-250">181 — 250 m²</option>
+                <option value="250+">Más de 250 m²</option>
+              </select>
+            </div>
+          </div>
+          <div class="calc-consent">
+            <label class="calc-checkbox">
+              <input type="checkbox" id="calc-consent">
+              <span>Acepto la <a href="/legal/privacidad.html" target="_blank" style="color:#00ffbb;text-decoration:underline">política de privacidad</a> y consiento el tratamiento de mis datos para recibir un presupuesto.</span>
+            </label>
+          </div>
+          <button class="calc-btn" id="calc-btn" onclick="calcularPrecioF1()">Calcular mi precio</button>
+          <div class="calc-seguros">
+            <span><svg width="12" height="12" viewBox="0 0 24 24" fill="#4ade80"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z"/></svg> Pago seguro Stripe</span>
+            <span><svg width="12" height="12" viewBox="0 0 24 24" fill="#4ade80"><path d="M18 8h-1V6c0-2.76-2.24-5-5-5S7 3.24 7 6v2H6c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V10c0-1.1-.9-2-2-2zm-6 9c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2zm3.1-9H8.9V6c0-1.71 1.39-3.1 3.1-3.1 1.71 0 3.1 1.39 3.1 3.1v2z"/></svg> SSL encriptado</span>
+            <span><svg width="12" height="12" viewBox="0 0 24 24" fill="#4ade80"><path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm-2 16l-4-4 1.41-1.41L10 14.17l6.59-6.59L18 9l-8 8z"/></svg> Técnicos verificados</span>
+          </div>
+          <!-- Resultado -->
+          <div class="calc-resultado" id="calc-resultado" style="display:none">
+            <div class="calc-resultado-linea">Precio estimado</div>
+            <div class="calc-resultado-precio" id="calc-resultado-precio">—</div>
+            <div class="calc-resultado-detalle" id="calc-resultado-detalle"></div>
+            <!-- [PENDIENTE-ARTURO: tabla de precios reales por tramo provincia/tipo/superficie] -->
+            <button class="calc-btn calc-btn-sec" id="calc-btn-reservar" onclick="irAReserva()">Reservar ahora →</button>
+            <p class="calc-resultado-aviso">Pago retenido de forma segura: solo se cobra cuando un técnico acepta tu encargo.</p>
           </div>
         </div>
       </div>
@@ -1280,78 +1428,85 @@ document.addEventListener('keydown', function(e) {
 </script>
 
 <script>
-// Mobile wizard — navegación entre pasos
-function irAlPaso(num) {
-  document.querySelectorAll('.paso-contenido').forEach(function(el){
-    el.classList.remove('paso-activo-mobile');
-  });
-  var paso = document.querySelector('.paso-contenido[data-paso="'+num+'"]');
-  if (paso) paso.classList.add('paso-activo-mobile');
-  document.querySelectorAll('.paso-dot').forEach(function(dot){
-    dot.classList.toggle('activo', parseInt(dot.dataset.paso) === num);
-  });
-  // Ocultar sticky bar al interactuar con el formulario
-  var sticky = document.getElementById('mobile-sticky');
-  if (sticky && num >= 1) sticky.classList.add('hidden');
-  // Mostrar resultado si paso 3
-  if (num === 3) {
-    var resultado = document.getElementById('resultado');
-    if (resultado && resultado.classList.contains('visible')) {
-      resultado.style.display = 'block';
-    }
-  }
-  // Scroll suave al formulario en móvil
-  var card = document.querySelector('.presupuesto-card-v2');
-  if (card && window.innerWidth <= 600) {
-    card.scrollIntoView({behavior:'smooth', block:'start'});
-  }
-}
-// Envolver calcularPresupuesto para manejar pasos en móvil
-(function() {
-  var orig = window.calcularPresupuesto;
-  window.calcularPresupuesto = function() {
-    orig();
-    setTimeout(function() {
-      var r = document.getElementById('resultado');
-      if (r && r.classList.contains('visible') && window.innerWidth <= 600) {
-        irAlPaso(3);
-      }
-    }, 50);
+// ========== F1: Calculadora de precios ==========
+// [PENDIENTE-ARTURO: tabla de precios reales por tramo provincia/tipo/superficie]
+// Por ahora usa precios estimados basados en el mínimo 45€.
+function calcularPrecioF1() {
+  var provincia = document.getElementById('calc-provincia').value;
+  var tipo = document.getElementById('calc-tipo').value;
+  var superficie = document.getElementById('calc-superficie').value;
+  var consent = document.getElementById('calc-consent').checked;
+  var btn = document.getElementById('calc-btn');
+  var resultado = document.getElementById('calc-resultado');
+  var precioEl = document.getElementById('calc-resultado-precio');
+  var detalleEl = document.getElementById('calc-resultado-detalle');
+  var reservarBtn = document.getElementById('calc-btn-reservar');
+
+  if (!provincia) { mostrarErrorF1('Selecciona una provincia'); return; }
+  if (!consent) { mostrarErrorF1('Acepta la política de privacidad'); return; }
+
+  // Precios estimados (placeholder hasta tabla real)
+  var preciosBase = {
+    piso: { '-50': 45, '50-80': 45, '81-120': 55, '121-180': 75, '181-250': 95, '250+': 130 },
+    unifamiliar: { '-50': 65, '50-80': 75, '81-120': 90, '121-180': 120, '181-250': 150, '250+': 200 },
+    local: { '-50': 55, '50-80': 65, '81-120': 80, '121-180': 100, '181-250': 125, '250+': 165 },
+    oficina: { '-50': 50, '50-80': 60, '81-120': 75, '121-180': 95, '181-250': 120, '250+': 160 },
+    nave: { '-50': 80, '50-80': 95, '81-120': 120, '121-180': 155, '181-250': 195, '250+': 250 }
   };
-})();
-// Inicializar: paso 1 activo en móvil, desktop todo visible
-document.addEventListener('DOMContentLoaded', function(){
-  // Ocultar sticky bar al tocar cualquier campo del formulario
-  var card = document.querySelector('.presupuesto-card-v2');
-  if (card) {
-    card.addEventListener('focusin', function(){
-      var sticky = document.getElementById('mobile-sticky');
-      if (sticky) sticky.classList.add('hidden');
-    });
-  }
-  function ajustarPasos() {
-    var esMovil = window.innerWidth <= 600;
-    document.querySelectorAll('.paso-contenido').forEach(function(el){
-      if (!esMovil) {
-        el.classList.add('paso-activo-mobile');
-      } else {
-        var activo = document.querySelector('.paso-contenido.paso-activo-mobile');
-        if (!activo) {
-          document.querySelector('.paso-contenido[data-paso="1"]')?.classList.add('paso-activo-mobile');
-        }
-      }
-    });
-  }
-  ajustarPasos();
-  window.addEventListener('resize', ajustarPasos);
-});
+
+  var precio = preciosBase[tipo] && preciosBase[tipo][superficie];
+  if (!precio) { precio = 45; }
+
+  var superficieTexto = {
+    '-50': '< 50 m²', '50-80': '50-80 m²', '81-120': '81-120 m²',
+    '121-180': '121-180 m²', '181-250': '181-250 m²', '250+': '> 250 m²'
+  };
+  var tipoTexto = {
+    piso: 'Piso', unifamiliar: 'Unifamiliar',
+    local: 'Local', oficina: 'Oficina', nave: 'Nave'
+  };
+  var provNombre = document.getElementById('calc-provincia').options[document.getElementById('calc-provincia').selectedIndex].text;
+
+  precioEl.textContent = precio + ' €';
+  detalleEl.innerHTML = tipoTexto[tipo] + ' · ' + superficieTexto[superficie] + ' · ' + provNombre +
+    '<br><span style="font-size:.7rem;color:#66667a">IVA incluido · Todo incluido · Sin sorpresas</span>';
+
+  resultado.style.display = 'block';
+  resultado.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+
+  // Guardar datos para F2/F3
+  window._ultimoPresupuesto = { provincia, tipo, superficie, precio, provNombre };
+}
+
+function mostrarErrorF1(msg) {
+  var btn = document.getElementById('calc-btn');
+  var original = btn.textContent;
+  btn.textContent = '⚠ ' + msg;
+  btn.style.background = '#ff0055';
+  btn.style.color = '#fff';
+  setTimeout(function() {
+    btn.textContent = original;
+    btn.style.background = '';
+    btn.style.color = '';
+  }, 2000);
+}
+
+function irAReserva() {
+  // F2/F3: llevar a página de pago con datos
+  var data = window._ultimoPresupuesto;
+  if (!data || !data.precio) { calcularPrecioF1(); return; }
+  window.location.href = '/reserva/?provincia=' + encodeURIComponent(data.provincia) +
+    '&tipo=' + encodeURIComponent(data.tipo) +
+    '&superficie=' + encodeURIComponent(data.superficie) +
+    '&precio=' + encodeURIComponent(data.precio);
+}
 </script>
 
 <!-- Mobile sticky bar (solo visible en móvil) -->
 <div class="mobile-sticky" id="mobile-sticky">
-  <a href="#" onclick="event.preventDefault();document.getElementById('cp').focus();">
+  <a href="#" onclick="event.preventDefault();document.getElementById('calc-provincia').focus();">
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
-    Calcular mi CEE gratis
+    Calcular mi CEE ahora
   </a>
 </div>
 
