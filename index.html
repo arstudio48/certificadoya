@@ -181,6 +181,14 @@
 }
 .calc-select:focus { border-color: var(--f1-accent); }
 .calc-select option { background: #141416; color: #fff; }
+.calc-input {
+  width: 100%; padding: .7rem .85rem; border-radius: 8px;
+  border: 1px solid var(--f1-border); background: var(--f1-card);
+  color: var(--f1-text); font-size: .85rem; font-family: inherit;
+  outline: none; box-sizing: border-box; transition: border .2s;
+}
+.calc-input::placeholder { color: #55556a; }
+.calc-input:focus { border-color: var(--f1-accent); }
 .calc-row { display: grid; grid-template-columns: 1fr 1fr; gap: .75rem; }
 .calc-consent { margin: .25rem 0; }
 .calc-checkbox {
@@ -637,6 +645,11 @@ var provSlugs = {}; provincias.forEach(function(p){provSlugs[p.slug]=p.nombre;})
                 <option value="250+">Más de 250 m²</option>
               </select>
             </div>
+          </div>
+          <!-- F2: Email antes del precio -->
+          <div class="calc-field" style="margin-top:.5rem">
+            <label for="calc-email">✉️ Tu email</label>
+            <input type="email" id="calc-email" class="calc-input" placeholder="tu@email.com" autocomplete="email" required>
           </div>
           <div class="calc-consent">
             <label class="calc-checkbox">
@@ -1435,6 +1448,7 @@ function calcularPrecioF1() {
   var provincia = document.getElementById('calc-provincia').value;
   var tipo = document.getElementById('calc-tipo').value;
   var superficie = document.getElementById('calc-superficie').value;
+  var email = document.getElementById('calc-email').value.trim();
   var consent = document.getElementById('calc-consent').checked;
   var btn = document.getElementById('calc-btn');
   var resultado = document.getElementById('calc-resultado');
@@ -1443,6 +1457,7 @@ function calcularPrecioF1() {
   var reservarBtn = document.getElementById('calc-btn-reservar');
 
   if (!provincia) { mostrarErrorF1('Selecciona una provincia'); return; }
+  if (!email || !email.includes('@')) { mostrarErrorF1('Introduce tu email'); return; }
   if (!consent) { mostrarErrorF1('Acepta la política de privacidad'); return; }
 
   // Precios estimados (placeholder hasta tabla real)
@@ -1475,7 +1490,33 @@ function calcularPrecioF1() {
   resultado.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
 
   // Guardar datos para F2/F3
-  window._ultimoPresupuesto = { provincia, tipo, superficie, precio, provNombre };
+  window._ultimoPresupuesto = { provincia, tipo, superficie, precio, provNombre, email };
+
+  // F2: Guardar lead en Supabase en segundo plano
+  guardarLeadF2({ provincia, tipo, superficie, precio, provNombre, email });
+}
+
+// F2: Guardar lead en Supabase sin bloquear la UX
+function guardarLeadF2(datos) {
+  var m2Texto = { '-50': 0, '50-80': 65, '81-120': 100, '121-180': 150, '181-250': 215, '250+': 300 };
+  var m2 = m2Texto[datos.superficie] || 80;
+  var tipoMap = { piso: 'piso', unifamiliar: 'unifamiliar', local: 'local', oficina: 'oficina', nave: 'nave' };
+  fetch('https://wypgqpgjlookbhuaiyxa.supabase.co/functions/v1/solicitar-servicio?action=solicitar', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json', 'apikey': 'sb_publishable_MsDx5jVGtDAzoB3l3-8DiQ_BxWpChA0' },
+    body: JSON.stringify({
+      email_cliente: datos.email,
+      nombre_cliente: '',
+      telefono_cliente: '',
+      zona: datos.provincia,
+      m2: m2,
+      tipo_inmueble: tipoMap[datos.tipo] || datos.tipo,
+      presupuesto_min: datos.precio,
+      presupuesto_max: datos.precio,
+      fuente: 'web-f1-calculadora',
+      estado: 'pendiente'
+    })
+  }).catch(function(e) { console.log('Lead save (non-blocking):', e); });
 }
 
 function mostrarErrorF1(msg) {
@@ -1492,13 +1533,14 @@ function mostrarErrorF1(msg) {
 }
 
 function irAReserva() {
-  // F2/F3: llevar a página de pago con datos
+  // F3: llevar a página de pago con datos
   var data = window._ultimoPresupuesto;
   if (!data || !data.precio) { calcularPrecioF1(); return; }
   window.location.href = '/reserva/?provincia=' + encodeURIComponent(data.provincia) +
     '&tipo=' + encodeURIComponent(data.tipo) +
     '&superficie=' + encodeURIComponent(data.superficie) +
-    '&precio=' + encodeURIComponent(data.precio);
+    '&precio=' + encodeURIComponent(data.precio) +
+    '&email=' + encodeURIComponent(data.email || '');
 }
 </script>
 
