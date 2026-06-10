@@ -1,4 +1,4 @@
 User-agent: *
 Disallow: 
 
-Sitemap: https://www.certificadoya.es/sitemap.xml
+Sitemap: https://certificadoya.es/sitemap.xml
