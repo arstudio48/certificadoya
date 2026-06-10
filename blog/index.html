@@ -62,17 +62,17 @@
 }
   </script>
   <style>
-.mobile-overlay{display:none!important}
+.mobile-overlay{display:none}
 /* Menú overlay móvil */
 @media (max-width: 600px) {
   .mobile-overlay {
-    display: none;
+    display: none !important;
     position: fixed;
     inset: 0;
     z-index: 1000;
   }
   .mobile-overlay.open {
-    display: flex;
+    display: flex !important;
   }
   .mobile-overlay-bg {
     position: absolute;
