@@ -142,7 +142,14 @@
     to { transform: translateX(0); }
   }
 }
-  </style>
+  
+  /* Acordeon overlay movil */
+  .accordion-toggle{display:flex;align-items:center;justify-content:space-between;width:100%;padding:.8rem 1.2rem;font-size:.82rem;color:#9aab8a;text-transform:uppercase;letter-spacing:.05em;border:none;border-bottom:1px solid #f0f0f0;background:none;cursor:pointer;text-align:left;font-family:inherit}
+  .accordion-toggle:hover{background:#f5f9f0}
+  .accordion-toggle strong{margin:0;padding:0;border:none;display:inline;font-size:inherit;color:inherit;text-transform:inherit;letter-spacing:inherit}
+  .accordion-arrow{font-size:.7rem;color:#9aab8a}
+  .accordion-content{overflow:hidden}
+</style>
 </head>
 <body>
 
@@ -170,19 +177,28 @@
       <div class="mobile-overlay-panel" id="mobile-overlay-panel">
         <button class="mobile-overlay-close" id="mobile-overlay-close" aria-label="Cerrar menú">✕</button>
         <nav class="mobile-overlay-nav">
-<strong style="display:block;padding:.6rem 1.2rem;font-size:.82rem;color:#9aab8a;text-transform:uppercase;letter-spacing:.05em;border-bottom:1px solid #f0f0f0">🔑 Propietarios</strong>
-      <a href="/#presupuesto-card" style="font-weight:600;color:#16a34a">💰 Presupuesto instantáneo</a>
-      <a href="/#como-funciona">📋 Cómo funciona</a>
-      <a href="/#faq">❓ Preguntas frecuentes</a>
-      <a href="/blog/">📝 Blog</a>
-      <strong style="display:block;padding:.6rem 1.2rem;font-size:.82rem;color:#9aab8a;text-transform:uppercase;letter-spacing:.05em;border-bottom:1px solid #f0f0f0">🔧 Técnicos</strong>
-      <a href="/panel-tecnicos.html">📋 Registro de técnicos</a>
-      <a href="/pool-encargos.html">🔎 Trabajos disponibles</a>
-      <a href="/blog/?cat=tecnicos">📖 Blog técnico</a>
-      <a href="/tecnicos/">👥 Directorio de técnicos</a>
-      <strong style="display:block;padding:.6rem 1.2rem;font-size:.82rem;color:#9aab8a;text-transform:uppercase;letter-spacing:.05em;border-bottom:1px solid #f0f0f0">🏢 Inmobiliarias</strong>
-      <a href="/inmobiliarias.html">🏠 Inmobiliarias</a>
-        </nav>
+
+<button class="accordion-toggle" onclick="toggleSection('propietarios')" aria-expanded="true" aria-controls="accordion-propietarios">🔑 Propietarios<span class="accordion-arrow">▾</span></button>
+<div class="accordion-content" id="accordion-propietarios" style="display:block">
+        <a href="/#presupuesto-card" style="font-weight:600;color:#16a34a">💰 Presupuesto instantáneo</a>
+        <a href="/#como-funciona">📋 Cómo funciona</a>
+        <a href="/#faq">❓ Preguntas frecuentes</a>
+        <a href="/blog/">📝 Blog</a>
+</div>
+
+<button class="accordion-toggle" onclick="toggleSection('tecnicos')" aria-expanded="false" aria-controls="accordion-tecnicos">🔧 Técnicos<span class="accordion-arrow">▸</span></button>
+<div class="accordion-content" id="accordion-tecnicos" style="display:none">
+        <a href="/panel-tecnicos.html">📋 Registro de técnicos</a>
+        <a href="/pool-encargos.html">🔎 Trabajos disponibles</a>
+        <a href="/blog/?cat=tecnicos">📖 Blog técnico</a>
+        <a href="/tecnicos/">👥 Directorio de técnicos</a>
+</div>
+
+<button class="accordion-toggle" onclick="toggleSection('inmobiliarias')" aria-expanded="false" aria-controls="accordion-inmobiliarias">🏢 Inmobiliarias<span class="accordion-arrow">▸</span></button>
+<div class="accordion-content" id="accordion-inmobiliarias" style="display:none">
+        <a href="/inmobiliarias.html">🏠 Inmobiliarias</a>
+</div>
+      </nav>
       </div>
     </div>
   </div>
@@ -293,6 +309,8 @@
     if (e.key === 'Escape' && overlay.classList.contains('open')) closeM();
   });
 })();
-</script>
+
+
+function toggleSection(id){var c=document.getElementById('accordion-'+id);var b=document.querySelector('[onclick*="'+id+'"]');if(!c||!b)return;var o=c.style.display!=='none';c.style.display=o?'none':'block';b.setAttribute('aria-expanded',!o);var a=b.querySelector('.accordion-arrow');if(a)a.textContent=o?'▸':'▾'}</script>
 </body>
 </html>
