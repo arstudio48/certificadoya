@@ -100,6 +100,15 @@
     .input-error { display:block; color:#ef4444; font-size:.78rem; margin-top:.25rem; min-height:1.2em; }
     input:invalid:not(:placeholder-shown), input.error { border-color:#ef4444!important; background:#fef2f2; }
     input:valid:not(:placeholder-shown) { border-color:#547c24!important; background:#f0fdf4; }
+  /* Acordeón de contenido */
+  .accordion-section { margin-bottom:.75rem; border:1px solid var(--gray-200); border-radius:var(--radius); overflow:hidden; background:var(--white); }
+  .accordion-section summary { display:flex; align-items:center; gap:.5rem; padding:1rem 1.25rem; font-weight:600; font-size:1rem; cursor:pointer; color:var(--gray-800); background:var(--gray-50); user-select:none; list-style:none; transition:background .15s; }
+  .accordion-section summary::-webkit-details-marker { display:none; }
+  .accordion-section summary::after { content:'▾'; margin-left:auto; font-size:.85rem; color:var(--green); transition:transform .2s; }
+  .accordion-section[open] summary { background:var(--green-light); }
+  .accordion-section[open] summary::after { transform:rotate(180deg); }
+  .accordion-section summary:hover { background:var(--green-light); }
+  .accordion-body { padding:1.25rem; color:var(--gray-600); font-size:.95rem; line-height:1.7; }
     @media (max-width:600px) { .hero-local h1 { font-size:1.5rem; } .form-row { grid-template-columns:1fr; } .tabla-precios { font-size:.85rem; } .tabla-precios th, .tabla-precios td { padding:.5rem .65rem; } }
   /* Hamburguesa y menú móvil */
 .hamburger{display:none;flex-direction:column;justify-content:center;align-items:center;width:36px;height:36px;background:none;border:none;cursor:pointer;gap:5px;padding:4px;z-index:200;position:relative}
@@ -189,9 +198,7 @@
     <p class="lead">Presupuesto al instante para tu certificado de eficiencia energética (CEE) en Madrid capital y comunidad. Técnicos colegiados verificados. Registro oficial ante la Comunidad de Madrid incluido. Resultado en 48h.</p>
   </section>
 
-  <div class="info-box" style="max-width:800px;margin:0 auto 1.5rem">
-    <p><strong>👷 Marcos, Fundador:</strong> "En Madrid trabajo con una red de 14 técnicos locales colegiados. Cuando pides cita, no te mando a un comercial — te mando a un profesional que conoce tu barrio y los trámites de la Comunidad de Madrid."</p>
-  </div>
+
 
   <div class="presupuesto-card" id="presupuesto-card">
     <h3><img src="/img/ico-presupuesto.svg" alt="Calcular" width="18" height="18" style="vertical-align:middle"> Calcula tu presupuesto en Madrid</h3>
@@ -230,7 +237,9 @@
     <h2>Certificado energético en Madrid: precios, plazos y organismos oficiales</h2>
     <p>Si necesitas el <strong>certificado de eficiencia energética (CEE)</strong> para vender o alquilar tu vivienda en la <strong>Comunidad de Madrid</strong>, estás en el sitio correcto. En CertificadoYa te ofrecemos un servicio completo con técnicos colegiados, presupuestos transparentes y registro oficial incluido.</p>
 
-    <h3>📊 Precios del certificado energético en Madrid por superficie</h3>
+    <details class="accordion-section" open>
+    <summary>📊 Precios del certificado energético en Madrid por superficie</summary>
+    <div class="accordion-body">
     <p>Los precios varían según los metros cuadrados, el tipo de inmueble y su ubicación dentro de la Comunidad de Madrid. Todos nuestros precios incluyen visita, emisión y registro oficial.</p>
 
     <table class="tabla-precios">
@@ -249,8 +258,12 @@
       </tbody>
     </table>
     <p style="font-size:.82rem;color:var(--gray-600)">* Precios orientativos a junio de 2026. El presupuesto final depende de la ubicación exacta y las características del inmueble. Calcula tu precio exacto con nuestra herramienta gratuita.</p>
+  </div>
+</details>
 
-    <h3>🏛️ Organismo competente en la Comunidad de Madrid</h3>
+    <details class="accordion-section">
+    <summary>🏛️ Organismo competente en la Comunidad de Madrid</summary>
+    <div class="accordion-body">
     <p>El registro de los certificados de eficiencia energética en la Comunidad de Madrid se realiza a través de la <strong>Dirección General de Industria, Energía y Minas</strong>, adscrita a la Consejería de Medio Ambiente, Agricultura e Interior.</p>
     <ul>
       <li><strong>Organismo:</strong> Dirección General de Industria, Energía y Minas</li>
@@ -259,16 +272,24 @@
       <li><strong>Enlace oficial:</strong> <a href="https://www.comunidad.madrid/servicios/energia/" target="_blank" rel="noopener">Portal de Energía — Comunidad de Madrid</a></li>
       <li><strong>Tasas de registro:</strong> La Comunidad de Madrid <strong>no cobra tasa</strong> por el registro telemático del certificado de eficiencia energética</li>
     </ul>
+  </div>
+</details>
 
-    <h3>⏱️ Plazos del proceso en Madrid</h3>
+    <details class="accordion-section">
+    <summary>⏱️ Plazos del proceso en Madrid</summary>
+    <div class="accordion-body">
     <ol>
       <li><strong>Visita técnica:</strong> 24 — 48h desde la confirmación del presupuesto (el técnico acuerda contigo la cita)</li>
       <li><strong>Cálculo y emisión:</strong> 24 — 48h tras la visita (software oficial CE3X / CYPETHERM / HULC)</li>
       <li><strong>Registro oficial:</strong> 7 — 15 días hábiles desde la presentación telemática en la Dirección General de Industria, Energía y Minas</li>
       <li><strong>Certificado total:</strong> proceso completo en aproximadamente <strong>2 — 3 semanas</strong>, aunque la documentación necesaria para vender o alquilar la tienes en <strong>48 — 72h</strong></li>
     </ol>
+  </div>
+</details>
 
-    <h3>✅ ¿Por qué elegir CertificadoYa en Madrid?</h3>
+    <details class="accordion-section">
+    <summary>✅ ¿Por qué elegir CertificadoYa en Madrid?</summary>
+    <div class="accordion-body">
     <ul>
       <li><strong>Técnicos colegiados en Madrid</strong>: arquitectos, aparejadores e ingenieros verificados por el Colegio Profesional correspondiente</li>
       <li><strong>Presupuesto al instante</strong>: sabes el precio antes de comprometerte, sin letra pequeña</li>
@@ -277,15 +298,23 @@
       <li><strong>Certificado registrado oficialmente</strong>: ante la Dirección General de Industria, Energía y Minas</li>
       <li><strong>Sin sorpresas</strong>: precio cerrado desde el principio, sin costes ocultos</li>
     </ul>
+  </div>
+</details>
 
-    <h3>🔗 Información útil sobre certificados energéticos</h3>
+    <details class="accordion-section">
+    <summary>🔗 Información útil sobre certificados energéticos</summary>
+    <div class="accordion-body">
     <div class="enlaces-internos">
       <a href="/precio-certificado-energetico-2026/">📄 Precios del CEE en 2026</a>
       <a href="/blog/certificado-energetico-venta.html">🏠 CEE para vender tu piso</a>
       <a href="/blog/certificado-energetico-obligatorio-2026.html">📋 ¿Es obligatorio el CEE?</a>
     </div>
+  </div>
+</details>
 
-    <h3>❓ Preguntas frecuentes sobre el CEE en Madrid</h3>
+    <details class="accordion-section">
+    <summary>❓ Preguntas frecuentes sobre el CEE en Madrid</summary>
+    <div class="accordion-body">
 
     <details class="faq-item">
       <summary class="faq-question">¿Cuánto cuesta un certificado energético en Madrid?</summary>
@@ -316,8 +345,12 @@
       <summary class="faq-question">¿Cubre el servicio todas las zonas de Madrid?</summary>
       <div class="faq-answer"><p>Sí, trabajamos en toda la Comunidad de Madrid: <strong>Madrid capital</strong> (todos los distritos: Centro, Chamberí, Salamanca, Retiro, Chamartín, Tetuán, Fuencarral, Moncloa, Latina, Carabanchel, Usera, Villaverde, San Blas, Barajas, etc.) y <strong>municipios</strong> como Pozuelo, Alcobendas, Móstoles, Getafe, Leganés, Alcalá de Henares, Alcorcón, Fuenlabrada, Las Rozas, Majadahonda, Boadilla, Collado Villalba, etc.</p></div>
     </details>
+  </div>
+</details>
 
-    <h3>📖 ¿Qué incluye exactamente el servicio?</h3>
+    <details class="accordion-section">
+    <summary>📖 ¿Qué incluye exactamente el servicio?</summary>
+    <div class="accordion-body">
     <ol>
       <li><strong>Visita técnica</strong> a tu inmueble para tomar datos, mediciones y fotografías</li>
       <li><strong>Cálculo con software oficial</strong> (CE3X, HULC o CYPETHERM), homologado por el Ministerio</li>
@@ -325,6 +358,8 @@
       <li><strong>Registro telemático</strong> en la Dirección General de Industria, Energía y Minas de la Comunidad de Madrid</li>
       <li><strong>Recomendaciones de mejora</strong> personalizadas para subir la letra y ahorrar en tus facturas de luz y gas</li>
     </ol>
+  </div>
+</details>
 
   </section>
 
