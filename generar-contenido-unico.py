@@ -109,7 +109,7 @@ PLACES_KEY = {
 def gen_title(d, p):
     name_lower = p["name"].lower()
     if p["fee"]:
-        suffix = "precios y tasas"
+        suffix = "precios actualizados"
     else:
         suffix = "precios actualizados"
     return f"🏠 Certificado Energético {p['name']} desde 45€ — CEE oficial {suffix}"
@@ -132,11 +132,7 @@ def gen_content_section(d, p):
     p2 = ", ".join(places[:2])
     p3 = ", ".join(places[:3])
     
-    fee_text = ""
-    if fee:
-        fee_text = f"Ten en cuenta que {region} cobra una tasa autonómica por el registro del certificado, así que el precio final puede incluir este suplemento. En CertificadoYa te informamos del coste exacto antes de confirmar."
-    else:
-        fee_text = f"{region} no cobra tasa autonómica por el registro del certificado energético, por lo que el precio que ves es el precio final, sin sorpresas."
+    fee_text = "El coste del registro puede variar según la normativa vigente de cada comunidad autónoma. En CertificadoYa te informamos del importe exacto antes de confirmar el servicio."
     
     h2s = [
         f"Certificado energético en {name}: todo lo que necesitas saber",
@@ -166,7 +162,7 @@ def gen_content_section(d, p):
     conf = confianza[hash(d + "conf") % len(confianza)]
     
     faq_precio_q = f"¿Cuánto cuesta el certificado energético en {name}?"
-    faq_precio_a = f"El precio en {name} oscila entre <strong>45€ y 85€</strong> para un piso de 50-70 m², y entre <strong>85€ y 130€</strong> para uno de 70-100 m². Las viviendas unifamiliares y locales tienen tarifas distintas. Usa nuestra calculadora gratuita para el precio exacto según tu código postal. {'' if not fee else f'En {region} se aplica una tasa autonómica de registro que puede añadir entre 15-30€ al coste final.'}"
+    faq_precio_a = f"El precio en {name} oscila entre <strong>45€ y 85€</strong> para un piso de 50-70 m², y entre <strong>85€ y 130€</strong> para uno de 70-100 m². Las viviendas unifamiliares y locales tienen tarifas distintas. Usa nuestra calculadora gratuita para el precio exacto según tu código postal."
     
     faq_organismo_q = f"¿Quién regula el CEE en {name}?"
     faq_organismo_a = f"El organismo competente en {region} es {org}. El registro se realiza de forma telemática a través de su sede electrónica. {fee_text}"
