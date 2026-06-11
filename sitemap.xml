@@ -195,11 +195,7 @@
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
-  <url>
-    <loc>https://www.certificadoya.es/certicalia-preview.html</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
+
   <url>
     <loc>https://www.certificadoya.es/certificado-energetico-a-coruna/index.html</loc>
     <changefreq>monthly</changefreq>
@@ -640,21 +636,13 @@
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
-  <url>
-    <loc>https://www.certificadoya.es/dibujos-preview.html</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
+
   <url>
     <loc>https://www.certificadoya.es/directorio-tecnicos.html</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
-  <url>
-    <loc>https://www.certificadoya.es/estilos-preview.html</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
+
   <url>
     <loc>https://www.certificadoya.es/googleeaa10702b70e0553.html</loc>
     <changefreq>monthly</changefreq>
@@ -670,11 +658,7 @@
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
-  <url>
-    <loc>https://www.certificadoya.es/iconos-final.html</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
+
   <url>
     <loc>https://www.certificadoya.es/</loc>
     <changefreq>daily</changefreq>
@@ -685,11 +669,7 @@
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
-  <url>
-    <loc>https://www.certificadoya.es/lapiz-preview.html</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
+
   <url>
     <loc>https://www.certificadoya.es/legal/aviso-legal.html</loc>
     <changefreq>monthly</changefreq>
@@ -715,11 +695,7 @@
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
-  <url>
-    <loc>https://www.certificadoya.es/newsletter-widget.html</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
+
   <url>
     <loc>https://www.certificadoya.es/organismos-contacto.html</loc>
     <changefreq>monthly</changefreq>
@@ -735,11 +711,7 @@
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
-  <url>
-    <loc>https://www.certificadoya.es/panorama-artstudio.html</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
+
   <url>
     <loc>https://www.certificadoya.es/pool-encargos.html</loc>
     <changefreq>monthly</changefreq>
@@ -750,11 +722,7 @@
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
-  <url>
-    <loc>https://www.certificadoya.es/preview-movil.html</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
+
   <url>
     <loc>https://www.certificadoya.es/privacidad.html</loc>
     <changefreq>monthly</changefreq>
