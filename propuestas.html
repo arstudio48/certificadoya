@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Propuestas Web — CertificadoYa</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Montserrat:wght@600;700;800&display=swap');
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: 'Inter', sans-serif;
+    background: #1b1b1f;
+    color: #f5f5f5;
+    line-height: 1.6;
+  }
+  .container {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 20px;
+  }
+  header {
+    text-align: center;
+    padding: 40px 0 20px;
+    border-bottom: 1px solid #d4af3733;
+    margin-bottom: 30px;
+  }
+  h1 {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 2em;
+    color: #d4af37;
+    margin-bottom: 5px;
+  }
+  h2 {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 1.4em;
+    color: #d4af37;
+    margin: 30px 0 15px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid #333;
+  }
+  h3 {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 1.1em;
+    color: #fff;
+    margin: 20px 0 10px;
+  }
+  .card-list {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+  }
+  .card {
+    background: #252529;
+    border-radius: 12px;
+    padding: 20px;
+    border-left: 3px solid #d4af37;
+    transition: transform 0.2s;
+  }
+  .card:hover { transform: translateX(5px); }
+  .card .num {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 800;
+    font-size: 1.8em;
+    color: #d4af37;
+    opacity: 0.5;
+    float: right;
+  }
+  .card .name {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 700;
+    font-size: 1.15em;
+    color: #d4af37;
+    margin-bottom: 6px;
+  }
+  .card .tag {
+    display: inline-block;
+    background: #d4af3722;
+    color: #d4af37;
+    font-size: 0.75em;
+    padding: 2px 10px;
+    border-radius: 20px;
+    margin-bottom: 8px;
+    font-weight: 600;
+  }
+  .card p { font-size: 0.9em; color: #bbb; margin: 3px 0; }
+  .card .highlight { color: #fff; font-weight: 600; }
+
+  .detail-card {
+    background: #252529;
+    border-radius: 12px;
+    padding: 25px;
+    margin-bottom: 20px;
+  }
+  .detail-card h3 { color: #d4af37; margin-bottom: 12px; font-size: 1.2em; }
+  .detail-card ul { list-style: none; padding: 0; }
+  .detail-card li {
+    padding: 8px 0;
+    border-bottom: 1px solid #333;
+    font-size: 0.9em;
+    color: #ccc;
+  }
+  .detail-card li:last-child { border: none; }
+  .detail-card li strong { color: #fff; }
+  .detail-card .feature { color: #00c6ff; font-weight: 600; }
+
+  .section-tabs {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 25px;
+    flex-wrap: wrap;
+  }
+  .section-tabs a {
+    padding: 8px 20px;
+    background: #252529;
+    border-radius: 8px;
+    text-decoration: none;
+    color: #bbb;
+    font-size: 0.9em;
+    font-weight: 600;
+    transition: 0.2s;
+  }
+  .section-tabs a:hover, .section-tabs a.active {
+    background: #d4af37;
+    color: #1b1b1f;
+  }
+  .badge {
+    display: inline-block;
+    background: #d4af37;
+    color: #1b1b1f;
+    padding: 2px 12px;
+    border-radius: 20px;
+    font-size: 0.75em;
+    font-weight: 700;
+    margin-right: 5px;
+  }
+  .color-swatch {
+    display: inline-block;
+    width: 18px;
+    height: 18px;
+    border-radius: 4px;
+    vertical-align: middle;
+    margin-right: 4px;
+    border: 1px solid #444;
+  }
+  .footer-note {
+    text-align: center;
+    padding: 30px;
+    color: #666;
+    font-size: 0.85em;
+  }
+  @media (max-width: 600px) {
+    .container { padding: 15px; }
+    h1 { font-size: 1.5em; }
+    .card { padding: 15px; }
+  }
+</style>
+</head>
+<body>
+<div class="container">
+
+<header>
+  <h1>✨ Propuestas Web CertificadoYa</h1>
+  <p style="color:#888;font-size:0.9em">10 propuestas estéticas + 2 diseños completos con datos reales</p>
+</header>
+
+<div class="section-tabs">
+  <a href="#esteticas" class="active">🎨 Estéticas (1-5)</a>
+  <a href="#funcionales">⚙️ Funcionales (6-10)</a>
+  <a href="#completas">📐 Propuestas Completas</a>
+</div>
+
+<!-- ==================== ESTÉTICAS ==================== -->
+<h2 id="esteticas">🎨 Propuestas Estéticas</h2>
+<div class="card-list">
+
+  <div class="card">
+    <span class="num">01</span>
+    <div class="name">Minimalista Profesional</div>
+    <span class="tag">Paleta: #1b1b1f · #d4af37 · blanco</span>
+    <p>CTA grande "Obtener Certificado" en hero + cards de beneficios. Estructura vertical, secciones claras.</p>
+    <p><span class="highlight">→</span> Contraste limpio, ideal para profesionales del sector</p>
+  </div>
+
+  <div class="card">
+    <span class="num">02</span>
+    <div class="name">Vibrante y Energético</div>
+    <span class="tag">Paleta: #1b1b1f · #d4af37 · #ffcc00</span>
+    <p>Sliders horizontales + animación "Comparar Certificados". Cards de servicios con iconos. Formulario central.</p>
+    <p><span class="highlight">→</span> Colores llamativos, mucho movimiento visual</p>
+  </div>
+
+  <div class="card">
+    <span class="num">03</span>
+    <div class="name">Premium y Confiable</div>
+    <span class="tag">Paleta: #1b1b1f · #d4af37 · #f5f5f5</span>
+    <p>Grid con secciones destacadas. CTA "Descargar Gratis" + sidebar con formulario. Testimonios en cards.</p>
+    <p><span class="highlight">→</span> Estructura clara, máxima credibilidad</p>
+  </div>
+
+  <div class="card">
+    <span class="num">04</span>
+    <div class="name">Usuario-Céntrico</div>
+    <span class="tag">Paleta: #1b1b1f · #d4af37 · blanco</span>
+    <p>Quiz interactivo "¿Qué certificado necesitas?" + sección de pasos. Testimonios en carousel. Formulario al final.</p>
+    <p><span class="highlight">→</span> Guía al usuario paso a paso, reduce la fricción</p>
+  </div>
+
+  <div class="card">
+    <span class="num">05</span>
+    <div class="name">Dinámico y Moderno</div>
+    <span class="tag">Paleta: #1b1b1f · #d4af37 · #000000</span>
+    <p>Layout asimétrico con elementos flotantes. Video del proceso + timeline de testimonios. FAQ + formulario integrados.</p>
+    <p><span class="highlight">→</span> Diseño innovador, impacta visualmente</p>
+  </div>
+
+</div>
+
+<!-- ==================== FUNCIONALES ==================== -->
+<h2 id="funcionales">⚙️ Propuestas Funcionales</h2>
+<div class="card-list">
+
+  <div class="card">
+    <span class="num">06</span>
+    <div class="name">Simplificado</div>
+    <span class="tag">Enfoque UX</span>
+    <p>Menú superior (Inicio, Servicios, Testimonios, Contacto). CTA "Solicita Presupuesto" + formulario 3 pasos. Chatbot en tiempo real. FAQ en footer.</p>
+    <p><span class="highlight">→</span> Sencillez ante todo</p>
+  </div>
+
+  <div class="card">
+    <span class="num">07</span>
+    <div class="name">Móvil</div>
+    <span class="tag">Mobile-First</span>
+    <p>Menú inferior con iconos. CTA destacado + formulario 1 paso. Badges de confianza. Dark mode. Imágenes responsivas.</p>
+    <p><span class="highlight">→</span> Optimizado para el 70% de tráfico móvil</p>
+  </div>
+
+  <div class="card">
+    <span class="num">08</span>
+    <div class="name">Velocidad</div>
+    <span class="tag">Rendimiento</span>
+    <p>Menú lateral ocultable. CTA en hero + formulario lateral sin scroll. Lazy loading, WebP, CDN. Indicador de carga.</p>
+    <p><span class="highlight">→</span> Lighthouse 95+, cero fricción</p>
+  </div>
+
+  <div class="card">
+    <span class="num">09</span>
+    <div class="name">Convertido</div>
+    <span class="tag">Conversión</span>
+    <p>Pop-up smart + formulario 2 pasos. Timer de urgencia. A/B testing de CTAs. Chat en vivo. Notificación de envío.</p>
+    <p><span class="highlight">→</span> Máxima tasa de conversión de leads</p>
+  </div>
+
+  <div class="card">
+    <span class="num">10</span>
+    <div class="name">Pro</div>
+    <span class="tag">Holístico</span>
+    <p>Sidebar desktop / menú inferior móvil. Panel de seguimiento para clientes. Experiencia unificada web+móvil.</p>
+    <p><span class="highlight">→</span> Solución completa para gestión integral</p>
+  </div>
+
+</div>
+
+<!-- ==================== COMPLETAS ==================== -->
+<h2 id="completas">📐 Propuestas Completas (basadas en datos reales)</h2>
+
+<div class="detail-card">
+  <h3>🎨 Propuesta Estética — basada en certificadoya.es real</h3>
+  <p style="color:#888;margin-bottom:12px;font-size:0.9em">Pensada para la web actual: hero con formulario, 4 pasos, FAQ, colores #1b1b1f · #d4af37</p>
+  <ul>
+    <li><strong>Hero:</strong> Formulario más visible, CTA "Obtén tu presupuesto ahora" en botón dorado grande</li>
+    <li><strong>Precios:</strong> Tarjeta destacada "Desde 45€" con selector provincia + tipo de inmueble</li>
+    <li><strong>4 Pasos:</strong> Progress bar visual con iconos y contador "X técnicos disponibles ahora"</li>
+    <li><strong>Confianza:</strong> Badges "Técnico Verificado", "Colegiado", testimoniales con foto real</li>
+    <li><strong>FAQ:</strong> Filtro por temas (precios, plazos, legal) — no solo acordeón</li>
+    <li><strong>Mobile:</strong> Formulario vertical, secciones colapsables, botones 48px</li>
+    <li><span class="feature">Tipografía:</span> Montserrat (headings) + Inter (body)</li>
+    <li><span class="feature">Color extra:</span> Teal #00c6ff para trust signals sin romper paleta</li>
+    <li><span class="feature">Mapa:</span> España con provincias activas coloreadas</li>
+  </ul>
+</div>
+
+<div class="detail-card">
+  <h3>⚙️ Propuesta Funcional — sistema completo</h3>
+  <p style="color:#888;margin-bottom:12px;font-size:0.9em">Incluye panel admin, dashboard técnicos, sistema de reseñas</p>
+  <ul>
+    <li><strong>Navegación:</strong> Home, Marketplace, Cómo Funciona, Blog, Login/Registro</li>
+    <li><span class="feature">Formulario 2 pasos:</span> 1º provincia+inmueble, 2º email — reduce abandono un 30%</li>
+    <li><span class="feature">Panel admin Supabase:</span> Filtros por estado, provincia, scoring de leads, automatización</li>
+    <li><span class="feature">Dashboard técnicos:</span> Login 2FA, calendario, notificaciones push, Google Calendar</li>
+    <li><span class="feature">Chatbot 24/7:</span> Soporte automático en página de formulario</li>
+    <li><span class="feature">Mapa interactivo:</span> Técnicos disponibles por provincia</li>
+    <li><span class="feature">Reseñas post-servicio:</span> 5 estrellas + texto, badge "Técnico TOP"</li>
+    <li><strong>Schema markup:</strong> LocalBusiness, Review, FAQ → mejor SEO</li>
+    <li><strong>Blog:</strong> Artículos SEO para tráfico orgánico</li>
+    <li><strong>Velocidad:</strong> WebP, lazy loading, CDN, target Lighthouse > 90</li>
+    <li><strong>Accesibilidad:</strong> WAVE + ARIA labels</li>
+  </ul>
+</div>
+
+<div class="footer-note">
+  CertificadoYa &mdash; Generado por sub-agentes locales &mdash; <span style="color:#d4af37">#1b1b1f + #d4af37</span>
+</div>
+
+</div>
+</body>
+</html>
