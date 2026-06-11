@@ -251,6 +251,11 @@
   .mobile-overlay-panel{width:100vw !important;max-width:320px}
   .mobile-overlay-nav a{padding:.75rem 1rem !important;font-size:1rem !important;min-height:44px;display:flex;align-items:center}
   .presupuesto-card-v2{padding:1rem 1rem 5rem !important}
+  .hero-split { display:flex; gap:2rem; align-items:center; max-width:900px; margin:0 auto 3rem; }
+  .hero-split .hero-img { flex:0 0 280px; border-radius:var(--radius); overflow:hidden; box-shadow:var(--shadow); }
+  .hero-split .hero-img img { width:100%; height:auto; display:block; }
+  .hero-split .presupuesto-card { flex:1; max-width:100%; margin:0; }
+  @media (max-width:700px) { .hero-split { flex-direction:column; } .hero-split .hero-img { flex:0 0 auto; max-width:200px; } }
   .precio-destacado{margin-bottom:.6rem !important}
   .resultado-box{padding:.75rem !important}
   footer{padding:1.5rem 1rem !important}
@@ -309,11 +314,13 @@
     <a href="/">Inicio</a> › Certificado energético en Segovia
   </div>
 
-  <section class="hero-local">
+  <div class="hero-local">
     <h1>Certificado energético <span>en Segovia</span></h1>
     <p class="lead">Presupuesto al instante para tu certificado de eficiencia energética (CEE) en Segovia capital y comunidad. Técnicos colegiados verificados. Resultado en 48-72 horas.</p>
-  </section>
-
+    <div class="hero-split">
+      <div class="hero-img">
+        <img src="/images/ciudades/segovia.jpg" alt="Ilustración Segovia" width="800" height="1134" loading="lazy">
+      </div>
   <div class="presupuesto-card" id="presupuesto-card">
     <h3><img src="/img/ico-presupuesto.svg" alt="Calcular" width="18" height="18" style="vertical-align:middle"> Calcula tu presupuesto en Segovia</h3>
     <p class="subtitle">Introduce tu código postal y los metros cuadrados</p>
@@ -344,6 +351,10 @@
       <div class="resultado-texto" id="precio-texto"></div>
       <button class="btn btn-green btn-full" style="margin-top:1rem" onclick="solicitarLead()">Quiero que me contacte un técnico →</button>
     </div>
+  </div>
+    </div>
+  </div>
+
   <div id="resultado-solicitud"></div>
 
     <section class="content-section">
