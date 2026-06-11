@@ -54,6 +54,11 @@
     .hero-local h1 { font-size:2rem; margin-bottom:1rem; color:var(--gray-900); }
     .hero-local h1 span { color:var(--green); }
     .hero-local .lead { font-size:1.1rem; color:var(--gray-600); margin-bottom:1.5rem; }
+    .hero-split { display:flex; gap:2rem; align-items:center; max-width:900px; margin:0 auto 3rem; }
+    .hero-split .hero-img { flex:0 0 280px; border-radius:var(--radius); overflow:hidden; box-shadow:var(--shadow); }
+    .hero-split .hero-img img { width:100%; height:auto; display:block; }
+    .hero-split .presupuesto-card { flex:1; max-width:100%; margin:0; }
+    @media (max-width:700px) { .hero-split { flex-direction:column; } .hero-split .hero-img { flex:0 0 auto; max-width:200px; } }
     .presupuesto-card { max-width:500px; margin:0 auto 3rem; padding:2rem; background:var(--white); border:1px solid var(--gray-200); border-radius:var(--radius); box-shadow:var(--shadow-lg); }
     .presupuesto-card h3 { text-align:center; margin-bottom:.5rem; }
     .presupuesto-card .subtitle { text-align:center; color:var(--gray-600); font-size:.9rem; margin-bottom:1.5rem; }
@@ -309,13 +314,14 @@
     <a href="/">Inicio</a> › Certificado energético en Sevilla
   </div>
 
-  <section class="hero-local">
-    <h1>Certificado energético <span>en Sevilla</span></h1>
-    <p class="lead">Presupuesto al instante para tu certificado de eficiencia energética (CEE) en Sevilla capital y provincia. Técnicos colegiados verificados. Resultado en 48-72 horas.</p>
-  </section>
-
-  <div class="presupuesto-card" id="presupuesto-card">
-    <h3><img src="/img/ico-presupuesto.svg" alt="Calcular" width="18" height="18" style="vertical-align:middle"> Calcula tu presupuesto en Sevilla</h3>
+    <div class="hero-local">
+    <h1>🏠 Certificado Energético <span>en Sevilla</span></h1>
+    <p class="lead">Presupuesto online gratuito. Técnicos colegiados en Sevilla capital y provincia. Resultado oficial en 48h.</p>
+    <div class="hero-split">
+      <div class="hero-img">
+        <img src="/images/ciudades/sevilla.jpg" alt="Ilustración Sevilla" width="800" height="1134" loading="lazy">
+      </div>
+<h3><img src="/img/ico-presupuesto.svg" alt="Calcular" width="18" height="18" style="vertical-align:middle"> Calcula tu presupuesto en Sevilla</h3>
     <p class="subtitle">Introduce tu código postal y los metros cuadrados</p>
     <div class="form-group">
       <label for="cp">Código postal</label>
@@ -346,7 +352,13 @@
     </div>
   </div>
 
-  <div id="resultado-solicitud"></div>
+  <div id="resultado-solicitud">
+      </div>
+    </div>
+  </div>
+
+
+  
 
     <section class="content-section">
 
