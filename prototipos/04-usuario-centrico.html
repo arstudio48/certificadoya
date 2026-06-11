@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>CertificadoYa — ¿Qué certificado necesitas?</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;background:#1b1b1f;color:#f5f5f5;line-height:1.6}
+.container{max-width:1100px;margin:0 auto;padding:0 20px}
+
+/* HEADER */
+header{background:#1b1b1f;border-bottom:1px solid #333;padding:15px 0;position:sticky;top:0;z-index:100}
+header .container{display:flex;justify-content:space-between;align-items:center}
+.logo{font-size:1.3em;font-weight:800;color:#d4af37;letter-spacing:-0.5px}
+.logo span{color:#fff}
+nav a{color:#999;text-decoration:none;margin-left:25px;font-size:0.85em;font-weight:600}
+nav a:hover{color:#d4af37}
+
+/* HERO */
+.hero{text-align:center;padding:60px 20px 50px}
+.hero h1{font-size:2.2em;font-weight:800;margin-bottom:10px;letter-spacing:-1px}
+.hero h1 span{color:#d4af37}
+.hero p{color:#999;font-size:1em;max-width:600px;margin:0 auto 30px}
+
+/* QUIZ */
+.quiz-section{max-width:600px;margin:0 auto;padding:0 20px 50px}
+.quiz-step{display:none}
+.quiz-step.active{display:block}
+.quiz-step h2{font-size:1.3em;margin-bottom:20px;color:#fff}
+.quiz-options{display:flex;flex-direction:column;gap:12px}
+.quiz-opt{background:#252529;border:2px solid #333;border-radius:12px;padding:16px 20px;cursor:pointer;font-size:1em;color:#fff;text-align:left;transition:0.2s;font-weight:600}
+.quiz-opt:hover{border-color:#d4af37;background:#2a2a2e}
+.quiz-opt.selected{border-color:#d4af37;background:#d4af3715}
+.quiz-progress{display:flex;justify-content:center;gap:8px;margin-bottom:30px}
+.quiz-dot{width:10px;height:10px;border-radius:50%;background:#333;transition:0.3s}
+.quiz-dot.active{background:#d4af37;width:30px;border-radius:5px}
+.quiz-dot.done{background:#d4af3780}
+.quiz-counter{text-align:center;color:#666;font-size:0.85em;margin-bottom:10px}
+
+/* PASOS */
+.steps{padding:60px 0;background:#1a1a1e}
+.steps h2{text-align:center;font-size:1.8em;margin-bottom:40px}
+.steps h2 span{color:#d4af37}
+.steps-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:20px}
+.step-card{background:#252529;border-radius:12px;padding:25px;text-align:center;border:1px solid #333}
+.step-num{font-size:2em;font-weight:800;color:#d4af37;opacity:0.3;margin-bottom:5px}
+.step-card h3{font-size:1em;margin-bottom:8px;color:#fff}
+.step-card p{font-size:0.85em;color:#999}
+
+/* PRECIOS */
+.pricing{padding:60px 0;text-align:center}
+.pricing h2{font-size:1.5em;margin-bottom:30px}
+.pricing h2 span{color:#d4af37}
+.price-card{background:linear-gradient(135deg,#252529,#2a2a2e);border-radius:16px;padding:35px;max-width:400px;margin:0 auto;border:1px solid #d4af3733}
+.price-from{font-size:0.9em;color:#999;margin-bottom:5px}
+.price-amount{font-size:3em;font-weight:800;color:#d4af37}
+.price-amount sup{font-size:0.4em;vertical-align:super}
+.price-unit{color:#999;font-size:0.9em;margin-bottom:20px}
+.price-features{list-style:none;margin:20px 0;text-align:left}
+.price-features li{padding:8px 0;color:#bbb;font-size:0.9em;border-bottom:1px solid #333}
+.price-features li:before{content:"✓ ";color:#d4af37;font-weight:700}
+
+/* TRUST */
+.trust{text-align:center;padding:40px 0}
+.trust h2{font-size:1.3em;margin-bottom:25px}
+.trust-badges{display:flex;justify-content:center;gap:30px;flex-wrap:wrap}
+.badge-item{text-align:center}
+.badge-icon{font-size:2em;margin-bottom:5px}
+.badge-item p{font-size:0.8em;color:#999}
+
+/* TESTIMONIALS */
+.testimonials{padding:50px 0;background:#1a1a1e}
+.testimonials h2{text-align:center;font-size:1.5em;margin-bottom:30px}
+.testimonials h2 span{color:#d4af37}
+.testimonial-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:20px}
+.testimonial{background:#252529;border-radius:12px;padding:20px;border:1px solid #333}
+.testimonial-stars{color:#d4af37;font-size:1em;margin-bottom:8px}
+.testimonial p{font-size:0.9em;color:#bbb;margin-bottom:12px;font-style:italic}
+.testimonial-author{font-size:0.85em;font-weight:600;color:#fff}
+.testimonial-location{font-size:0.75em;color:#666}
+
+/* FAQ */
+.faq{padding:50px 0;max-width:700px;margin:0 auto}
+.faq h2{text-align:center;font-size:1.5em;margin-bottom:30px}
+.faq h2 span{color:#d4af37}
+.faq-item{border-bottom:1px solid #333;padding:15px 0}
+.faq-q{display:flex;justify-content:space-between;align-items:center;cursor:pointer;font-weight:600;color:#fff;font-size:0.95em}
+.faq-q:after{content:"+";color:#d4af37;font-size:1.2em}
+.faq-item.open .faq-q:after{content:"−"}
+.faq-a{display:none;padding-top:10px;color:#999;font-size:0.9em;line-height:1.5}
+.faq-item.open .faq-a{display:block}
+
+/* CTA FINAL */
+.cta-final{text-align:center;padding:60px 20px;background:linear-gradient(180deg,#1b1b1f,#252529)}
+.cta-final h2{font-size:1.8em;margin-bottom:10px}
+.cta-final p{color:#999;margin-bottom:25px}
+.btn-gold{display:inline-block;background:#d4af37;color:#1b1b1f;padding:16px 40px;border-radius:10px;text-decoration:none;font-weight:700;font-size:1.1em;transition:0.2s}
+.btn-gold:hover{transform:translateY(-2px);box-shadow:0 8px 25px #d4af3740}
+.btn-outline{display:inline-block;border:2px solid #d4af37;color:#d4af37;padding:14px 35px;border-radius:10px;text-decoration:none;font-weight:600;font-size:1em;margin-left:10px;transition:0.2s}
+.btn-outline:hover{background:#d4af3715}
+
+/* FOOTER */
+footer{text-align:center;padding:30px;color:#555;font-size:0.8em;border-top:1px solid #222}
+footer a{color:#666;text-decoration:none;margin:0 10px}
+
+@media(max-width:600px){
+  .hero h1{font-size:1.6em}
+  nav a{margin-left:12px;font-size:0.8em}
+  .steps-grid{grid-template-columns:1fr}
+  .btn-outline{margin-left:0;margin-top:10px}
+}
+</style>
+</head>
+<body>
+
+<header>
+<div class="container">
+<div class="logo">Certificado<span>Ya</span></div>
+<nav>
+<a href="#">Inicio</a>
+<a href="#">Precios</a>
+<a href="#">Técnicos</a>
+<a href="#">Contacto</a>
+</nav>
+</div>
+</header>
+
+<section class="hero">
+<div class="container">
+<h1>¿Qué certificado <span>necesitas</span>?</h1>
+<p>Responde 2 preguntas y te decimos el precio exacto. Sin registro, sin compromiso.</p>
+</div>
+</section>
+
+<section class="quiz-section">
+<div class="quiz-counter" id="quizCounter">Paso 1 de 3</div>
+<div class="quiz-progress">
+<div class="quiz-dot active" id="dot1"></div>
+<div class="quiz-dot" id="dot2"></div>
+<div class="quiz-dot" id="dot3"></div>
+</div>
+
+<div class="quiz-step active" id="step1">
+<h2>¿Dónde está tu inmueble?</h2>
+<div class="quiz-options">
+<button class="quiz-opt" onclick="selectOpt(this,1)">📍 Madrid</button>
+<button class="quiz-opt" onclick="selectOpt(this,1)">📍 Barcelona</button>
+<button class="quiz-opt" onclick="selectOpt(this,1)">📍 Valencia</button>
+<button class="quiz-opt" onclick="selectOpt(this,1)">📍 Sevilla</button>
+<button class="quiz-opt" onclick="selectOpt(this,1)">📍 Otra provincia</button>
+</div>
+</div>
+
+<div class="quiz-step" id="step2">
+<h2>¿Qué tipo de inmueble es?</h2>
+<div class="quiz-options">
+<button class="quiz-opt" onclick="selectOpt(this,2)">🏠 Piso / Apartamento</button>
+<button class="quiz-opt" onclick="selectOpt(this,2)">🏡 Casa / Chalet</button>
+<button class="quiz-opt" onclick="selectOpt(this,2)">🏗️ Local comercial</button>
+<button class="quiz-opt" onclick="selectOpt(this,2)">🏢 Oficina</button>
+</div>
+</div>
+
+<div class="quiz-step" id="step3">
+<h2>¿Cuántos m² aproximadamente?</h2>
+<div class="quiz-options">
+<button class="quiz-opt" onclick="selectOpt(this,3)">Menos de 60 m²</button>
+<button class="quiz-opt" onclick="selectOpt(this,3)">60 - 90 m²</button>
+<button class="quiz-opt" onclick="selectOpt(this,3)">90 - 120 m²</button>
+<button class="quiz-opt" onclick="selectOpt(this,3)">Más de 120 m²</button>
+</div>
+</div>
+</section>
+
+<section class="steps">
+<div class="container">
+<h2>Así de fácil es conseguir tu <span>CEE</span></h2>
+<div class="steps-grid">
+<div class="step-card"><div class="step-num">01</div><h3>Calcula y reserva</h3><p>Elige provincia, tipo y superficie. Precio al instante. Sin registro.</p></div>
+<div class="step-card"><div class="step-num">02</div><h3>Pago 100% seguro</h3><p>Pagas con Stripe. Solo cobramos cuando un técnico acepta tu encargo.</p></div>
+<div class="step-card"><div class="step-num">03</div><h3>Visita y medición</h3><p>Técnico certificador en tu zona visita el inmueble. Toma datos y medidas.</p></div>
+<div class="step-card"><div class="step-num">04</div><h3>Recibe tu CEE</h3><p>Certificado registrado y enviado a tu email. En 48-72h.</p></div>
+</div>
+</div>
+</section>
+
+<section class="pricing">
+<div class="container">
+<h2>Desde <span>45€</span> todo incluido</h2>
+<div class="price-card">
+<div class="price-from">Desde</div>
+<div class="price-amount">45<sup>€</sup></div>
+<div class="price-unit">IVA incluido · Piso estándar</div>
+<ul class="price-features">
+<li>Visita del técnico certificador</li>
+<li>Medición y toma de datos in situ</li>
+<li>Certificado registrado oficialmente</li>
+<li>Etiqueta energética incluida</li>
+<li>Pago seguro con Stripe</li>
+</ul>
+<a href="#" class="btn-gold">Calcular mi precio ahora</a>
+</div>
+</div>
+</section>
+
+<section class="testimonials">
+<div class="container">
+<h2>Lo que dicen nuestros <span>clientes</span></h2>
+<div class="testimonial-grid">
+<div class="testimonial">
+<div class="testimonial-stars">★★★★★</div>
+<p>"Rápidos y profesionales. Tuve el certificado en menos de 48h. Muy recomendables."</p>
+<div class="testimonial-author">María G.</div>
+<div class="testimonial-location">Madrid · Piso 75m²</div>
+</div>
+<div class="testimonial">
+<div class="testimonial-stars">★★★★★</div>
+<p>"Mejor precio que en otras webs. El técnico vino puntual y fue muy profesional."</p>
+<div class="testimonial-author">Carlos R.</div>
+<div class="testimonial-location">Barcelona · Casa 120m²</div>
+</div>
+<div class="testimonial">
+<div class="testimonial-stars">★★★★★</div>
+<p>"Proceso sencillo. Lo recomiendo. Presupuesto en 5 segundos y certificado en 3 días."</p>
+<div class="testimonial-author">Ana L.</div>
+<div class="testimonial-location">Valencia · Piso 60m²</div>
+</div>
+</div>
+</div>
+</section>
+
+<section class="trust">
+<div class="container">
+<h2>Por qué confiar en CertificadoYa</h2>
+<div class="trust-badges">
+<div class="badge-item"><div class="badge-icon">🛡️</div><p>Técnicos verificados</p></div>
+<div class="badge-item"><div class="badge-icon">🔒</div><p>Pago Stripe seguro</p></div>
+<div class="badge-item"><div class="badge-icon">⚡</div><p>Certificado en 48-72h</p></div>
+<div class="badge-item"><div class="badge-icon">📋</div><p>Registro oficial</p></div>
+</div>
+</div>
+</section>
+
+<section class="cta-final">
+<div class="container">
+<h2>¿Listo para tu certificado?</h2>
+<p>Presupuesto gratis en 5 segundos. Sin compromiso.</p>
+<a href="#" class="btn-gold">Obtén tu presupuesto ahora</a>
+</div>
+</section>
+
+<footer>
+<div class="container">
+<p>CertificadoYa © 2026 · <a href="#">Privacidad</a> · <a href="#">Términos</a> · <a href="#">Contacto</a></p>
+<p style="margin-top:5px">Hecho en España · Técnicos colegiados en toda España</p>
+</div>
+</footer>
+
+<script>
+function selectOpt(btn, step) {
+  document.querySelectorAll('#step'+step+' .quiz-opt').forEach(b=>b.classList.remove('selected'));
+  btn.classList.add('selected');
+  if(step<3){
+    document.getElementById('step'+step).classList.remove('active');
+    document.getElementById('step'+(step+1)).classList.add('active');
+    document.getElementById('dot'+step).classList.remove('active');
+    document.getElementById('dot'+step).classList.add('done');
+    document.getElementById('dot'+(step+1)).classList.add('active');
+    document.getElementById('quizCounter').textContent = 'Paso '+(step+1)+' de 3';
+  } else {
+    document.getElementById('quizCounter').textContent = '✅ ¡Completa! Pon tu email abajo';
+  }
+}
+</script>
+</body>
+</html>
