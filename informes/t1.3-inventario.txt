@@ -1,0 +1,46 @@
+================================================================================
+INVENTARIO T1.3 — Enlaces actuales a provinciales en blog
+Fecha: 2026-06-11
+Total posts: 36
+--------------------------------------------------------------------------------
+RUTA | TÍTULO | ENLACES ACTUALES | PROVINCIAS
+--------------------------------------------------------------------------------
+blog/aerotermia-certificado-energetico.html | Aerotermia y certificado energético: cómo mejorar tu letra | enlaces: 0 | ninguna
+blog/caducidad-certificado-energetico.html | Caducidad del certificado energético: ¿cuándo caduca y cómo renovarlo? | enlaces: 0 | ninguna
+blog/cee-hipoteca-banco.html | Certificado energético para hipoteca: por qué lo exigen los bancos y cómo obtenerlo | enlaces: 0 | ninguna
+blog/certificado-energetico-alquiler.html | Certificado energético para alquilar: guía completa para caseros | enlaces: 0 | ninguna
+blog/certificado-energetico-locales-comerciales.html | Certificado energético para locales comerciales y oficinas: guía completa | enlaces: 0 | ninguna
+blog/certificado-energetico-obligatorio-2026-v2.html | ¿Es obligatorio el certificado energético en garajes, locales y edificios? 2026 | enlaces: 0 | ninguna
+blog/certificado-energetico-obligatorio-2026.html | ¿CEE Obligatorio en 2026? Multas hasta 6.000€ y Plazos | enlaces: 0 | ninguna
+blog/certificado-energetico-online.html | Cómo obtener el certificado energético online: guía paso a paso 2026 | enlaces: 0 | ninguna
+blog/certificado-energetico-vender-piso.html | Certificado energético para vender un piso: guía paso a paso 2026 | enlaces: 0 | ninguna
+blog/certificado-energetico-venta.html | Certificado energético para vender tu vivienda: obligaciones y plazos | enlaces: 0 | ninguna
+blog/como-darse-de-alta-tecnico-certificador.html | Cómo darse de alta como técnico certificador en cada comunidad autónoma | enlaces: 0 | ninguna
+blog/errores-comunes-cee.html | Errores comunes al rellenar el CEE (y cómo evitarlos) | enlaces: 0 | ninguna
+blog/etiqueta-energetica-edificios.html | La etiqueta energética de edificios: entiende la escala A-G | enlaces: 0 | ninguna
+blog/garaje-trasero-necesita-certificado-energetico.html | ¿Necesita un garaje o trastero certificado energético? Exenciones por tipo de inmueble | enlaces: 0 | ninguna
+blog/guia-ce3x-avanzada.html | CE3X avanzada: casos prácticos, errores y registro CCAA | enlaces: 0 | ninguna
+blog/guia-ce3x-tecnicos.html | Guía CE3X para técnicos certificadores — Software oficial CEE | enlaces: 0 | ninguna
+blog/guia-subvenciones-rehabilitacion-energetica-2026.html | Guía completa de subvenciones para rehabilitación energética 2026 | enlaces: 0 | ninguna
+blog/hulc-cype-vs-ce3x.html | HULC vs CYPETHERM vs CE3X: ¿qué software elegir para certificar? | enlaces: 0 | ninguna
+blog/mejorar-eficiencia-energetica-vivienda.html | 7 formas de mejorar la eficiencia energética de tu vivienda (y ahorrar en facturas) | enlaces: 0 | ninguna
+blog/normativa-cee-2026.html | Normativa CEE 2026: todo lo que los técnicos deben saber | enlaces: 0 | ninguna
+blog/normativa-certificacion-energetica-espana.html | Normativa de certificación energética en España: historia y actualidad | enlaces: 0 | ninguna
+blog/obligacion-reformar-viviendas-guia-2026-2030.html | Obligación de reformar viviendas 2026: guía completa hasta 2030 | enlaces: 0 | ninguna
+blog/placas-solares-certificado-energetico.html | Placas solares y certificado energético: guía de instalación y ahorro | enlaces: 0 | ninguna
+blog/plan-social-clima-9099-millones-ayudas.html | Plan Social del Clima: 9.099 millones en ayudas para hogares vulnerables | enlaces: 0 | ninguna
+blog/plantilla-informe-energetico.html | Plantilla de informe energético para técnicos (descargable) | enlaces: 0 | ninguna
+blog/precio-certificado-energetico-2026.html | ¿Cuánto cuesta un certificado energético? Tarifas 2026 para pisos, casas y locales | enlaces: 0 | ninguna
+blog/precios-certificado-energetico-provincias-2026.html | Precios del certificado energético por provincia 2026 | Comparativa actualizada desde 45€ | enlaces: 0 | ninguna
+blog/que-es-certificado-energetico.html | ¿Qué es el certificado energético? Guía completa 2026: obligatoriedad, precios y cómo se calcula | enlaces: 0 | ninguna
+blog/rd-659-2025-fp-superior-certificado-energetico.html | RD 659/2025: La FP Superior se abre paso en la certificación energética | enlaces: 0 | ninguna
+blog/reforma-certificado-energetico-2026-cambios.html | Reforma del certificado energético 2026: cambios, plazos y cómo te afecta | enlaces: 0 | ninguna
+blog/registro-cee-comunidades-autonomas.html | Registro CEE por CCAA 2026: Guía paso a paso y tasas | enlaces: 0 | ninguna
+blog/registro-centralizado-tecnicos-certificadores.html | Registro centralizado de técnicos certificadores: ¿realidad o proyecto? | enlaces: 0 | ninguna
+blog/rehabilitacion-energetica-edificios.html | Rehabilitación energética de edificios: ayudas Next Generation y cómo financiarla | enlaces: 0 | ninguna
+blog/sanciones-certificado-energetico-2026.html | Sanciones por no tener el certificado energético: multas 2026 | enlaces: 0 | ninguna
+blog/se-acaba-dinero-europeo-guia-comunidades-vecinos.html | Se acaba el dinero europeo: guía para comunidades de vecinos | ayudas rehabilitación 2026 | enlaces: 0 | ninguna
+blog/vivienda-estandar-espana-medidas-precio-cee.html | Vivienda Estándar España 2026: 97m², Precios y Coste del CEE | enlaces: 0 | ninguna
+--------------------------------------------------------------------------------
+Resumen: 0/36 posts ya tienen enlaces. Total enlaces a provinciales: 0.
+================================================================================

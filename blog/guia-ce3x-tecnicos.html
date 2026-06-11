@@ -1,28 +1,29 @@
 <!DOCTYPE html>
+
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Guía CE3X para técnicos certificadores — Software oficial CEE</title>
-  <meta name="description" content="Guía completa del software CE3X para técnicos certificadores. Cómo usarlo, trucos, errores comunes, zonas climáticas y registro del CEE.">
-  <meta name="robots" content="index, follow">
-  <link rel="canonical" href="https://www.certificadoya.es/blog/guia-ce3x-tecnicos.html">
-  <meta property="og:title" content="Guía CE3X para técnicos certificadores — Software oficial CEE">
-  <meta property="og:description" content="Guía completa del software CE3X para emitir certificados de eficiencia energética. Trucos, zonas climáticas, errores frecuentes y registro.">
-  <meta property="og:url" content="https://www.certificadoya.es/blog/guia-ce3x-tecnicos.html">
-  <meta property="og:type" content="article">
-  <meta property="og:image" content="https://www.certificadoya.es/img/blog/ce3x-guia.jpg">
-  <meta property="og:image:width" content="1200">
-  <meta property="og:image:height" content="630">
-  <meta property="og:locale" content="es_ES">
-  <meta name="twitter:card" content="summary_large_image">
-  <meta property="article:published_time" content="2026-05-26T10:00:00+02:00">
-  <meta property="article:modified_time" content="2026-05-26T10:00:00+02:00">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="/css/style.min.css">
-  <style>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Guía CE3X para técnicos certificadores — Software oficial CEE</title>
+<meta content="Guía completa del software CE3X para técnicos certificadores. Cómo usarlo, trucos, errores comunes, zonas climáticas y registro del CEE." name="description"/>
+<meta content="index, follow" name="robots"/>
+<link href="https://www.certificadoya.es/blog/guia-ce3x-tecnicos.html" rel="canonical"/>
+<meta content="Guía CE3X para técnicos certificadores — Software oficial CEE" property="og:title"/>
+<meta content="Guía completa del software CE3X para emitir certificados de eficiencia energética. Trucos, zonas climáticas, errores frecuentes y registro." property="og:description"/>
+<meta content="https://www.certificadoya.es/blog/guia-ce3x-tecnicos.html" property="og:url"/>
+<meta content="article" property="og:type"/>
+<meta content="https://www.certificadoya.es/img/blog/ce3x-guia.jpg" property="og:image"/>
+<meta content="1200" property="og:image:width"/>
+<meta content="630" property="og:image:height"/>
+<meta content="es_ES" property="og:locale"/>
+<meta content="summary_large_image" name="twitter:card"/>
+<meta content="2026-05-26T10:00:00+02:00" property="article:published_time"/>
+<meta content="2026-05-26T10:00:00+02:00" property="article:modified_time"/>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="/css/style.min.css" rel="stylesheet"/>
+<style>
     .blog-post { max-width: 780px; margin: 2rem auto; padding: 0 1.5rem; }
     .blog-post h1 { font-size: 1.8rem; margin-bottom: .5rem; color: #2d3a1f; }
     .blog-post .meta { color: #9aab8a; font-size: .85rem; margin-bottom: 1.5rem; display: flex; gap: 1rem; align-items: center; }
@@ -50,9 +51,8 @@
 .mobile-menu .btn-nav{margin:.5rem 1rem}
 @media(max-width:600px){.hamburger{display:flex}.nav>a,.nav>.buscador-wrapper,.nav>.btn-nav{display:none}.header-inner{position:relative}}
   </style>
-<script data-goatcounter="https://certificadoya.goatcounter.com/count"
-        async src="//gc.zgo.at/count.js"></script>
-  <script type="application/ld+json">
+<script async="" data-goatcounter="https://certificadoya.goatcounter.com/count" src="//gc.zgo.at/count.js"></script>
+<script type="application/ld+json">
 {
     "@context": "https://schema.org",
     "@type": "Article",
@@ -68,7 +68,7 @@
     }
 }
   </script>
-  <style>
+<style>
 .mobile-overlay{display:none}
 /* Menú overlay móvil */
 @media (max-width: 600px) {
@@ -184,250 +184,205 @@
 </style>
 </head>
 <body>
-
 <header class="header">
-  <div class="header-inner">
-    <a href="/" class="logo">
-      <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <rect width="32" height="32" rx="6" fill="#547c24"/>
-        <text x="16" y="23" text-anchor="middle" fill="white" font-size="20" font-weight="700" font-family="Outfit,sans-serif">C</text>
-      </svg>
-      <div class="logo-text-wrap">
-        <span class="logo-text">Certificado<span class="logo-highlight">Ya</span></span>
-        <span class="logo-sub">certificación energética de edificios existentes (CEE)</span>
-      </div>
-    </a>
-    <nav class="nav">
-      <a href="/#como-funciona">Cómo funciona</a>
-      <a href="/#faq">FAQ</a>
-      <a href="/blog/" class="active">Blog</a>
-      <a href="/panel-tecnicos.html">¿Eres técnico?</a>
-      <a href="/#presupuesto" class="btn-nav">Presupuesto</a></nav>
-    <button class="hamburger" id="hamburger-btn" aria-label="Menú" aria-expanded="false">
-        <span></span><span></span><span></span>
-      </button>
-        <!-- Overlay menú móvil -->
-    <div class="mobile-overlay" id="mobile-overlay">
-      <div class="mobile-overlay-bg" id="mobile-overlay-bg"></div>
-      <div class="mobile-overlay-panel" id="mobile-overlay-panel">
-        <button class="mobile-overlay-close" id="mobile-overlay-close" aria-label="Cerrar menú">✕</button>
-        <nav class="mobile-overlay-nav">
-<a href="/#como-funciona">Cómo funciona</a>
-      <a href="/#faq">FAQ</a>
-      <a href="/blog/">Blog</a>
-      <a href="/panel-tecnicos.html">¿Eres técnico?</a>
-      <a href="/#presupuesto" class="btn-nav" style="margin:0 1rem 1rem;text-align:center">Presupuesto</a>
-        </nav>
-      </div>
-    </div>
-
-  </div>
-</header>
-
-<main class="blog-post">
-  <div class="meta">
-    <span><img src="/img/ico-rapido.svg" alt="Fecha" width="16" height="16" style="vertical-align:middle"> 2026-05-25</span>
-    <span><img src="/img/ico-rapido.svg" alt="Tiempo" width="16" height="16" style="vertical-align:middle"> 8 min</span>
-    <span class="cat-badge"><img src="/img/ico-tecnicos.svg" alt="Técnicos" width="18" height="18" style="vertical-align:middle"> Técnicos</span>
-  </div>
-
-  <h1>Guía CE3X para técnicos certificadores: cómo usarlo paso a paso</h1>
-
-<a href="/blog/guia-ce3x-tecnicos.html"><img src="/img/blog/ce3x-guia.jpg" alt="Guía CE3X para técnicos certificadores" loading="lazy" style="width:100%;display:block;border-radius:12px"></a>
-
-<p>Si eres arquitecto técnico, aparejador o ingeniero y te dedicas a la certificación energética, el <strong>CE3X</strong> es tu herramienta del día a día. Es el software del Ministerio para edificios existentes y el que más se usa en España. Pero ojo: usarlo bien marca la diferencia entre un certificado que se registra sin problemas y uno que te devuelven.</p>
-
-<p>Esta guía no es el manual oficial —es lo que aprendes después de 500 certificados: trucos, atajos, errores que te ahorrarán horas y cómo evitar que el registro autonómico te lo rechace.</p>
-
-<div class="tip-box">
-  <strong><img src="/img/ico-confianza.svg" alt="Consejo" width="16" height="16" style="vertical-align:middle"> La clave:</strong> CE3X es un software de cálculo simplificado. No necesitas ser ingeniero de caminos para usarlo, pero sí necesitas conocer bien la construcción del edificio. Un dato mal puesto puede cambiarte la letra de la B a la E.
+<div class="header-inner">
+<a class="logo" href="/">
+<svg fill="none" height="32" viewbox="0 0 32 32" width="32" xmlns="http://www.w3.org/2000/svg">
+<rect fill="#547c24" height="32" rx="6" width="32"></rect>
+<text fill="white" font-family="Outfit,sans-serif" font-size="20" font-weight="700" text-anchor="middle" x="16" y="23">C</text>
+</svg>
+<div class="logo-text-wrap">
+<span class="logo-text">Certificado<span class="logo-highlight">Ya</span></span>
+<span class="logo-sub">certificación energética de edificios existentes (CEE)</span>
 </div>
-
+</a>
+<nav class="nav">
+<a href="/#como-funciona">Cómo funciona</a>
+<a href="/#faq">FAQ</a>
+<a class="active" href="/blog/">Blog</a>
+<a href="/panel-tecnicos.html">¿Eres técnico?</a>
+<a class="btn-nav" href="/#presupuesto">Presupuesto</a></nav>
+<button aria-expanded="false" aria-label="Menú" class="hamburger" id="hamburger-btn">
+<span></span><span></span><span></span>
+</button>
+<!-- Overlay menú móvil -->
+<div class="mobile-overlay" id="mobile-overlay">
+<div class="mobile-overlay-bg" id="mobile-overlay-bg"></div>
+<div class="mobile-overlay-panel" id="mobile-overlay-panel">
+<button aria-label="Cerrar menú" class="mobile-overlay-close" id="mobile-overlay-close">✕</button>
+<nav class="mobile-overlay-nav">
+<a href="/#como-funciona">Cómo funciona</a>
+<a href="/#faq">FAQ</a>
+<a href="/blog/">Blog</a>
+<a href="/panel-tecnicos.html">¿Eres técnico?</a>
+<a class="btn-nav" href="/#presupuesto" style="margin:0 1rem 1rem;text-align:center">Presupuesto</a>
+</nav>
+</div>
+</div>
+</div>
+</header>
+<main class="blog-post">
+<div class="meta">
+<span><img alt="Fecha" height="16" src="/img/ico-rapido.svg" style="vertical-align:middle" width="16"/> 2026-05-25</span>
+<span><img alt="Tiempo" height="16" src="/img/ico-rapido.svg" style="vertical-align:middle" width="16"/> 8 min</span>
+<span class="cat-badge"><img alt="Técnicos" height="18" src="/img/ico-tecnicos.svg" style="vertical-align:middle" width="18"/> Técnicos</span>
+</div>
+<h1>Guía CE3X para técnicos certificadores: cómo usarlo paso a paso</h1>
+<a href="/blog/guia-ce3x-tecnicos.html"><img alt="Guía CE3X para técnicos certificadores" loading="lazy" src="/img/blog/ce3x-guia.jpg" style="width:100%;display:block;border-radius:12px"/></a>
+<p>Si eres arquitecto técnico, aparejador o ingeniero y te dedicas a la certificación energética, el <strong>CE3X</strong> es tu herramienta del día a día. Es el software del Ministerio para edificios existentes y el que más se usa en España. Pero ojo: usarlo bien marca la diferencia entre un certificado que se registra sin problemas y uno que te devuelven.</p>
+<p>Esta guía no es el manual oficial —es lo que aprendes después de 500 certificados: trucos, atajos, errores que te ahorrarán horas y cómo evitar que el registro autonómico te lo rechace.</p>
+<div class="tip-box">
+<strong><img alt="Consejo" height="16" src="/img/ico-confianza.svg" style="vertical-align:middle" width="16"/> La clave:</strong> CE3X es un software de cálculo simplificado. No necesitas ser ingeniero de caminos para usarlo, pero sí necesitas conocer bien la construcción del edificio. Un dato mal puesto puede cambiarte la letra de la B a la E.
+</div>
 <h2>¿Qué es CE3X exactamente?</h2>
 <p>CE3X (Certificación Energética de Edificios Existentes) es un programa gratuito del Ministerio que sigue un <strong>método simplificado</strong> —no simula el comportamiento real del edificio como HULC, sino que aplica coeficientes y tablas predefinidas. Por eso es más rápido y requiere menos datos de entrada.</p>
 <ul>
-  <li><strong>Ventaja:</strong> Rápido, gratuito, aceptado en TODAS las comunidades autónomas.</li>
-  <li><strong>Limitación:</strong> No permite modelar geometrías complejas ni sistemas innovadores. Para eso necesitas HULC o CYPETHERM.</li>
-  <li><strong>Cuándo usarlo:</strong> Siempre en existentes salvo que el cliente pida un estudio detallado o sea un edificio singular.</li>
+<li><strong>Ventaja:</strong> Rápido, gratuito, aceptado en TODAS las comunidades autónomas.</li>
+<li><strong>Limitación:</strong> No permite modelar geometrías complejas ni sistemas innovadores. Para eso necesitas HULC o CYPETHERM.</li>
+<li><strong>Cuándo usarlo:</strong> Siempre en existentes salvo que el cliente pida un estudio detallado o sea un edificio singular.</li>
 </ul>
-
 <h2>Qué necesitas antes de abrir CE3X</h2>
 <p>No empieces a teclear sin esto. El 90% de las devoluciones en el registro son por datos incorrectos del inmueble.</p>
-
 <h3>Del inmueble (imprescindible):</h3>
 <ul>
-  <li><strong>Referencia catastral</strong> — la necesitas para el registro autonómico. Consíguela en la sede catastral con la dirección.</li>
-  <li><strong>Año de construcción exacto</strong> — si no lo sabes, búscalo en el catastro. Una diferencia de 5 años puede cambiar la zona climática.</li>
-  <li><strong>Superficie útil por planta</strong> — no la construida. El CE3X pide superficie útil.</li>
-  <li><strong>Cerramientos:</strong> tipo de muro, espesor, si tiene cámara de aire, si está aislado. Pregunta al propietario o mira en la documentación del edificio.</li>
-  <li><strong>Huecos:</strong> cuenta todas las ventanas. Si son muchas iguales, agrupa por tipo.</li>
-  <li><strong>Sistemas:</strong> caldera (marca, modelo, año), aire acondicionado, ACS (termo, caldera, aerotermia). Si no hay, se asume "sin instalación".</li>
+<li><strong>Referencia catastral</strong> — la necesitas para el registro autonómico. Consíguela en la sede catastral con la dirección.</li>
+<li><strong>Año de construcción exacto</strong> — si no lo sabes, búscalo en el catastro. Una diferencia de 5 años puede cambiar la zona climática.</li>
+<li><strong>Superficie útil por planta</strong> — no la construida. El CE3X pide superficie útil.</li>
+<li><strong>Cerramientos:</strong> tipo de muro, espesor, si tiene cámara de aire, si está aislado. Pregunta al propietario o mira en la documentación del edificio.</li>
+<li><strong>Huecos:</strong> cuenta todas las ventanas. Si son muchas iguales, agrupa por tipo.</li>
+<li><strong>Sistemas:</strong> caldera (marca, modelo, año), aire acondicionado, ACS (termo, caldera, aerotermia). Si no hay, se asume "sin instalación".</li>
 </ul>
-
 <div class="warning-box">
-  <strong><img src="/img/ico-confianza.svg" alt="Aviso" width="16" height="16" style="vertical-align:middle"> Error de novato:</strong> Poner "sin aislamiento" en todos los cerramientos porque no tienes los datos. Si el edificio es posterior a 1979 (NBE-CT-79), ya tiene algún tipo de aislamiento. Usa los valores por defecto del CTE para el año de construcción. Es mejor aproximar con criterio que poner cero aislamiento —te cargas la calificación.
+<strong><img alt="Aviso" height="16" src="/img/ico-confianza.svg" style="vertical-align:middle" width="16"/> Error de novato:</strong> Poner "sin aislamiento" en todos los cerramientos porque no tienes los datos. Si el edificio es posterior a 1979 (NBE-CT-79), ya tiene algún tipo de aislamiento. Usa los valores por defecto del CTE para el año de construcción. Es mejor aproximar con criterio que poner cero aislamiento —te cargas la calificación.
 </div>
-
 <h2>Descarga e instalación</h2>
 <ol>
-  <li>Descárgalo de la web oficial del <a href="https://energia.gob.es/desarrollo/EficienciaEnergetica/CertificacionEnergetica/ProgramaCE3X/Paginas/programa-ce3x.aspx" target="_blank" rel="noopener">Ministerio</a> (versión 2.3+)</li>
-  <li>Instalador clásico de Windows. Sin complicaciones.</li>
-  <li>Si usas Mac, con Wine o máquina virtual funciona.</li>
-  <li>Importante: <strong>después de instalar, ejecuta el actualizador</strong> desde el menú de CE3X. La versión de instalación suele estar desactualizada.</li>
+<li>Descárgalo de la web oficial del <a href="https://energia.gob.es/desarrollo/EficienciaEnergetica/CertificacionEnergetica/ProgramaCE3X/Paginas/programa-ce3x.aspx" rel="noopener" target="_blank">Ministerio</a> (versión 2.3+)</li>
+<li>Instalador clásico de Windows. Sin complicaciones.</li>
+<li>Si usas Mac, con Wine o máquina virtual funciona.</li>
+<li>Importante: <strong>después de instalar, ejecuta el actualizador</strong> desde el menú de CE3X. La versión de instalación suele estar desactualizada.</li>
 </ol>
-
 <div class="tip-box">
-  <strong><img src="/img/confianza.svg" alt="Consejo" width="16" height="16" style="vertical-align:middle"> Tip:</strong> Cada vez que el Ministerio actualiza los factores de paso (emisiones de CO₂ por kWh), CE3X se actualiza. Si notas que las calificaciones te salen raras, comprueba la versión. Pasa cada 1-2 años.
+<strong><img alt="Consejo" height="16" src="/img/confianza.svg" style="vertical-align:middle" width="16"/> Tip:</strong> Cada vez que el Ministerio actualiza los factores de paso (emisiones de CO₂ por kWh), CE3X se actualiza. Si notas que las calificaciones te salen raras, comprueba la versión. Pasa cada 1-2 años.
 </div>
-
 <h2>Zonas climáticas: el error más común</h2>
 <p>CE3X asigna la zona climática según el código postal. Pero no siempre acierta. <strong>La zona climática es CRÍTICA</strong>: una zona mal asignada puede variar la calificación hasta 2 letras.</p>
-
 <p>Las zonas en España (según CTE DB-HE):</p>
 <ul>
-  <li><strong>Zona α (alfa):</strong> Canarias — clima suave todo el año</li>
-  <li><strong>Zona A:</strong> Costa mediterránea sur (Almería, Murcia, Alicante), Baleares</li>
-  <li><strong>Zona B:</strong> Costa mediterránea norte (Valencia, Barcelona, Girona), sur peninsular (Sevilla, Cádiz)</li>
-  <li><strong>Zona C:</strong> Meseta sur (Madrid, Toledo, Ciudad Real), valle del Ebro</li>
-  <li><strong>Zona D:</strong> Meseta norte (Valladolid, Burgos, León), interior de Cataluña</li>
-  <li><strong>Zona E:</strong> Alta montaña (Pirineos, Sistema Central, Sierra Nevada)</li>
+<li><strong>Zona α (alfa):</strong> Canarias — clima suave todo el año</li>
+<li><strong>Zona A:</strong> Costa mediterránea sur (Almería, Murcia, <a href="https://www.certificadoya.es/certificado-energetico-alicante/">Alicante</a>), Baleares</li>
+<li><strong>Zona B:</strong> Costa mediterránea norte (<a href="https://www.certificadoya.es/certificado-energetico-valencia/">Valencia</a>, Barcelona, Girona), sur peninsular (Sevilla, Cádiz)</li>
+<li><strong>Zona C:</strong> Meseta sur (<a href="https://www.certificadoya.es/precio-certificado-energetico-madrid/">Madrid</a>, Toledo, Ciudad Real), valle del Ebro</li>
+<li><strong>Zona D:</strong> Meseta norte (Valladolid, Burgos, León), interior de Cataluña</li>
+<li><strong>Zona E:</strong> Alta montaña (Pirineos, Sistema Central, Sierra Nevada)</li>
 </ul>
-
 <div class="warning-box">
-  <strong><img src="/img/ico-confianza.svg" alt="Aviso" width="16" height="16" style="vertical-align:middle"> Caso real:</strong> Un piso en la Sierra de Madrid (Cercedilla, 28470) tiene zona E, pero el catastro pone "Madrid" y CE3X asigna zona D. Hay que corregirlo manualmente. Siempre verifica la zona antes de calcular.
+<strong><img alt="Aviso" height="16" src="/img/ico-confianza.svg" style="vertical-align:middle" width="16"/> Caso real:</strong> Un piso en la Sierra de Madrid (Cercedilla, 28470) tiene zona E, pero el catastro pone "Madrid" y CE3X asigna zona D. Hay que corregirlo manualmente. Siempre verifica la zona antes de calcular.
 </div>
-
 <h2>Paso a paso: cómo hacer un certificado en CE3X</h2>
-
 <h3>1. Datos generales</h3>
 <p>Rellena: dirección exacta (como aparecerá en el registro), referencia catastral, año construcción, año de la última rehabilitación (si la hay), superficie útil total, número de plantas sobre rasante y bajo rasante.</p>
 <p><strong>Importante:</strong> el tipo de edificio (unifamiliar, piso en bloque, etc.) afecta a la demanda de referencia. No marques "bloque" si es un chalet.</p>
-
 <h3>2. Envolvente térmica</h3>
 <p>Aquí se decide el 60% de la calificación. Tómate tu tiempo:</p>
 <ul>
-  <li><strong>Muros de fachada:</strong> si el edificio tiene cámara de aire (posteriores a 1979 aproximadamente), indícalo. La cámara de aire mejora mucho la transmitancia aunque no tenga aislamiento añadido.</li>
-  <li><strong>Cubierta:</strong> plana o inclinada. Si es plana transitable o no. Si tiene aislamiento o cámara.</li>
-  <li><strong>Suelo:</strong> contacto con terreno o con cámara sanitaria. Si es vivienda en bloque, la planta baja da al terreno y las superiores a viviendas (esa partición no cuenta como cerramiento).</li>
-  <li><strong>Puentes térmicos:</strong> no te olvides. CE3X los calcula automáticamente según el tipo de fachada. Si pones "fachada sin puente térmico" en un edificio real, estás maquillando la calificación.</li>
+<li><strong>Muros de fachada:</strong> si el edificio tiene cámara de aire (posteriores a 1979 aproximadamente), indícalo. La cámara de aire mejora mucho la transmitancia aunque no tenga aislamiento añadido.</li>
+<li><strong>Cubierta:</strong> plana o inclinada. Si es plana transitable o no. Si tiene aislamiento o cámara.</li>
+<li><strong>Suelo:</strong> contacto con terreno o con cámara sanitaria. Si es vivienda en bloque, la planta baja da al terreno y las superiores a viviendas (esa partición no cuenta como cerramiento).</li>
+<li><strong>Puentes térmicos:</strong> no te olvides. CE3X los calcula automáticamente según el tipo de fachada. Si pones "fachada sin puente térmico" en un edificio real, estás maquillando la calificación.</li>
 </ul>
-
 <div class="tip-box">
-  <strong><img src="/img/ico-confianza.svg" alt="Consejo" width="16" height="16" style="vertical-align:middle"> Atajo:</strong> Si el edificio tiene <strong>fachada ventilada</strong> o <strong>SATE</strong> (aislamiento exterior), puedes reflejarlo como "fachada con aislamiento exterior" en los materiales. Esto mejora bastante la calificación frente a aislamiento interior.
+<strong><img alt="Consejo" height="16" src="/img/ico-confianza.svg" style="vertical-align:middle" width="16"/> Atajo:</strong> Si el edificio tiene <strong>fachada ventilada</strong> o <strong>SATE</strong> (aislamiento exterior), puedes reflejarlo como "fachada con aislamiento exterior" en los materiales. Esto mejora bastante la calificación frente a aislamiento interior.
 </div>
-
 <h3>3. Huecos y ventanas</h3>
 <p>Agrupa por tipo de ventana. No pongas una a una si hay 50 iguales. <strong>El factor más importante aquí es el tipo de vidrio</strong>:</p>
 <ul>
-  <li>Vidrio sencillo (U ≈ 5.7 W/m²K) — típico de edificios anteriores a 1990</li>
-  <li>Vidrio doble (U ≈ 2.8-3.3 W/m²K) — a partir de los 90</li>
-  <li>Vidrio bajo emisivo (U ≈ 1.8-2.2 W/m²K) — edificios modernos o rehabilitaciones recientes</li>
+<li>Vidrio sencillo (U ≈ 5.7 W/m²K) — típico de edificios anteriores a 1990</li>
+<li>Vidrio doble (U ≈ 2.8-3.3 W/m²K) — a partir de los 90</li>
+<li>Vidrio bajo emisivo (U ≈ 1.8-2.2 W/m²K) — edificios modernos o rehabilitaciones recientes</li>
 </ul>
 <p>El marco también importa: aluminio sin rotura de puente térmico es lo peor; PVC y madera son mejores; aluminio con RPT es aceptable.</p>
-
 <h3>4. Instalaciones</h3>
 <p>Calefacción, ACS y refrigeración. Si no hay refrigeración (muchas viviendas en el norte no tienen), marca "sin instalación" (no "equipo inexistente" que es otra cosa).</p>
-
 <p>Para <strong>calderas</strong>: si no sabes el rendimiento exacto, CE3X tiene valores por defecto según año de instalación. Son conservadores pero aceptables:</p>
 <ul>
-  <li>Caldera anterior a 2000: rendimiento ≈ 70-80%</li>
-  <li>Caldera 2000-2010: ≈ 80-85%</li>
-  <li>Caldera posterior a 2010 (condensación): ≈ 90-98%</li>
-  <li>Bomba de calor aerotermia: rendimiento ≈ 250-400% (según modelo y temperatura exterior)</li>
+<li>Caldera anterior a 2000: rendimiento ≈ 70-80%</li>
+<li>Caldera 2000-2010: ≈ 80-85%</li>
+<li>Caldera posterior a 2010 (condensación): ≈ 90-98%</li>
+<li>Bomba de calor aerotermia: rendimiento ≈ 250-400% (según modelo y temperatura exterior)</li>
 </ul>
-
 <div class="warning-box">
-  <strong><img src="/img/ico-confianza.svg" alt="Aviso" width="16" height="16" style="vertical-align:middle"> Error frecuente:</strong> Poner bomba de calor aerotermia con rendimiento del 100% porque no sabes qué significa el COP. Una bomba de calor con COP=4 tiene un rendimiento del 400%. Si pones 100% estás infravalorando la instalación y la calificación será peor de lo que corresponde.
+<strong><img alt="Aviso" height="16" src="/img/ico-confianza.svg" style="vertical-align:middle" width="16"/> Error frecuente:</strong> Poner bomba de calor aerotermia con rendimiento del 100% porque no sabes qué significa el COP. Una bomba de calor con COP=4 tiene un rendimiento del 400%. Si pones 100% estás infravalorando la instalación y la calificación será peor de lo que corresponde.
 </div>
-
 <h3>5. Cálculo</h3>
 <p>Pulsa "Calcular". CE3X te da dos calificaciones: <strong>Consumo de energía primaria</strong> (kWh/m² año) y <strong>Emisiones de CO₂</strong> (kg CO₂/m² año). La normativa exige que ambas estén dentro de los límites; la peor de las dos es la que cuenta para la letra final.</p>
-
 <p><strong>Interpretación rápida:</strong></p>
 <ul>
-  <li>A y B: edificios muy eficientes (normal en obra nueva o rehabilitaciones integrales)</li>
-  <li>C: eficiencia media-alta (edificio bien conservado con mejoras)</li>
-  <li>D y E: lo más habitual en edificios existentes sin rehabilitar</li>
-  <li>F y G: edificios antiguos sin aislamiento o con sistemas ineficientes</li>
+<li>A y B: edificios muy eficientes (normal en obra nueva o rehabilitaciones integrales)</li>
+<li>C: eficiencia media-alta (edificio bien conservado con mejoras)</li>
+<li>D y E: lo más habitual en edificios existentes sin rehabilitar</li>
+<li>F y G: edificios antiguos sin aislamiento o con sistemas ineficientes</li>
 </ul>
-
 <div class="tip-box">
-  <strong><img src="/img/ico-confianza.svg" alt="Consejo" width="16" height="16" style="vertical-align:middle"> Truco:</strong> Si la calificación te sale muy baja (F o G) y sabes que el edificio no está tan mal, revisa: 1) zona climática, 2) que los cerramientos no estén con espesor 0, 3) que los huecos estén contabilizados correctamente. Muchas veces el error está ahí.
+<strong><img alt="Consejo" height="16" src="/img/ico-confianza.svg" style="vertical-align:middle" width="16"/> Truco:</strong> Si la calificación te sale muy baja (F o G) y sabes que el edificio no está tan mal, revisa: 1) zona climática, 2) que los cerramientos no estén con espesor 0, 3) que los huecos estén contabilizados correctamente. Muchas veces el error está ahí.
 </div>
-
 <h3>6. Medidas de mejora</h3>
 <p>CE3X genera automáticamente propuestas de mejora. <strong>No las copies sin criterio.</strong> El programa sugiere mejoras genéricas que a veces no son viables (como poner aislamiento exterior en un edificio protegido). Selecciona las que realmente sean aplicables y presupuestables.</p>
 <p>Un buen conjunto de medidas de mejora suele incluir: 1) mejora de fachada (SATE o aislamiento interior), 2) sustitución de ventanas, 3) mejora de caldera a condensación o aerotermia. Con estas tres sueles pasar de una E a una C.</p>
-
 <h3>7. Generar PDF y registrar</h3>
 <p>CE3X genera un PDF con todo el informe técnico. Ese PDF lo presentas en el registro autonómico correspondiente. <strong>Cada comunidad tiene su propio procedimiento</strong> — algunas tienen plataforma online, otras piden el PDF firmado electrónicamente, otras requieren presentación presencial.</p>
-
 <div class="tip-box">
-  <strong><img src="/img/ico-visita.svg" alt="Nota" width="18" height="18" style="vertical-align:middle"> Recuerda:</strong> Antes de registrar, consulta el organismo de tu comunidad. Algunas cobran tasa (desde 0€ hasta 40€ aprox). En <a href="/organismos-contacto.html">nuestra página de organismos oficiales</a> tienes los enlaces directos.
+<strong><img alt="Nota" height="18" src="/img/ico-visita.svg" style="vertical-align:middle" width="18"/> Recuerda:</strong> Antes de registrar, consulta el organismo de tu comunidad. Algunas cobran tasa (desde 0€ hasta 40€ aprox). En <a href="/organismos-contacto.html">nuestra página de organismos oficiales</a> tienes los enlaces directos.
 </div>
-
 <h2>Errores frecuentes que te harán perder tiempo</h2>
 <ul>
-  <li><strong>"El edificio no cumple los requisitos mínimos"</strong> — te falta llenar alguna pestaña. Revisa que cada sección tenga todos los campos obligatorios. Especialmente la de iluminación (si marcaste terciario) y la de instalaciones.</li>
-  <li><strong>Calificación demasiado baja para lo que esperabas</strong> — casi siempre es la envolvente. Revisa espesores de cerramientos y tipo de vidrio. Un muro de ladrillo macizo de 30cm sin aislar tiene una transmitancia muy alta.</li>
-  <li><strong>CE3X se cuelga o da error al calcular</strong> — normalmente es la versión. Actualiza el programa. Si sigue fallando, reinstala.</li>
-  <li><strong>Diferencia grande entre letra de consumo y emisiones</strong> — típico de viviendas con calefacción eléctrica. El consumo primario es alto (la electricidad tiene factor de paso alto) pero las emisiones pueden ser bajas si la electricidad es renovable. Es normal.</li>
-  <li><strong>El registro autonómico rechaza el PDF</strong> — suele ser por: referencia catastral incorrecta, dirección que no coincide con el catastro, falta de firma del técnico, o que el PDF esté bloqueado para editar. Asegúrate de que el PDF sea el original de CE3X sin modificaciones posteriores.</li>
+<li><strong>"El edificio no cumple los requisitos mínimos"</strong> — te falta llenar alguna pestaña. Revisa que cada sección tenga todos los campos obligatorios. Especialmente la de iluminación (si marcaste terciario) y la de instalaciones.</li>
+<li><strong>Calificación demasiado baja para lo que esperabas</strong> — casi siempre es la envolvente. Revisa espesores de cerramientos y tipo de vidrio. Un muro de ladrillo macizo de 30cm sin aislar tiene una transmitancia muy alta.</li>
+<li><strong>CE3X se cuelga o da error al calcular</strong> — normalmente es la versión. Actualiza el programa. Si sigue fallando, reinstala.</li>
+<li><strong>Diferencia grande entre letra de consumo y emisiones</strong> — típico de viviendas con calefacción eléctrica. El consumo primario es alto (la electricidad tiene factor de paso alto) pero las emisiones pueden ser bajas si la electricidad es renovable. Es normal.</li>
+<li><strong>El registro autonómico rechaza el PDF</strong> — suele ser por: referencia catastral incorrecta, dirección que no coincide con el catastro, falta de firma del técnico, o que el PDF esté bloqueado para editar. Asegúrate de que el PDF sea el original de CE3X sin modificaciones posteriores.</li>
 </ul>
-
 <div class="tip-box">
-  <strong>📘 Lectura complementaria:</strong> Si ya dominas lo básico y quieres profundizar, hemos publicado la <a href="/blog/guia-ce3x-avanzada.html" style="color:#547c24;text-decoration:underline">Guía CE3X avanzada con casos prácticos, errores reales y registro en cada CCAA</a>. Casos reales de unifamiliares, pisos y locales, cómo configurar aerotermia correctamente, y los trucos que aprendes después de 500 certificados.
+<strong>📘 Lectura complementaria:</strong> Si ya dominas lo básico y quieres profundizar, hemos publicado la <a href="/blog/guia-ce3x-avanzada.html" style="color:#547c24;text-decoration:underline">Guía CE3X avanzada con casos prácticos, errores reales y registro en cada CCAA</a>. Casos reales de unifamiliares, pisos y locales, cómo configurar aerotermia correctamente, y los trucos que aprendes después de 500 certificados.
 </div>
-
 <h2>CE3X vs HULC vs CYPETHERM: cuándo usar cada uno</h2>
 <p>Cada herramienta tiene su momento:</p>
 <ul>
-  <li><strong>CE3X:</strong> para el 90% de los CEE de edificios existentes. Rápido, fiable, aceptado en todos los registros.</li>
-  <li><strong>HULC (LIDER-CALENER):</strong> cuando el edificio tiene geometría compleja (varias orientaciones, formas irregulares) o necesitas un cálculo más preciso. Obligatorio para obra nueva.</li>
-  <li><strong>CYPETHERM:</strong> si trabajas con Cype habitualmente, es muy completo. Bueno para obra nueva y rehabilitaciones con modelado BIM.</li>
+<li><strong>CE3X:</strong> para el 90% de los CEE de edificios existentes. Rápido, fiable, aceptado en todos los registros.</li>
+<li><strong>HULC (LIDER-CALENER):</strong> cuando el edificio tiene geometría compleja (varias orientaciones, formas irregulares) o necesitas un cálculo más preciso. Obligatorio para obra nueva.</li>
+<li><strong>CYPETHERM:</strong> si trabajas con Cype habitualmente, es muy completo. Bueno para obra nueva y rehabilitaciones con modelado BIM.</li>
 </ul>
-
 <div class="tip-box">
-  <strong><img src="/img/ico-confianza.svg" alt="Consejo" width="16" height="16" style="vertical-align:middle"> Mi recomendación:</strong> Ten los tres instalados. Usa CE3X para el día a día, HULC para casos especiales y CYPETHERM si el proyecto viene de Cype. Pero si solo vas a usar uno, que sea CE3X.
+<strong><img alt="Consejo" height="16" src="/img/ico-confianza.svg" style="vertical-align:middle" width="16"/> Mi recomendación:</strong> Ten los tres instalados. Usa CE3X para el día a día, HULC para casos especiales y CYPETHERM si el proyecto viene de Cype. Pero si solo vas a usar uno, que sea CE3X.
 </div>
-
 <h2>Preguntas frecuentes de técnicos</h2>
-
 <h3>¿Puedo hacer el certificado sin visitar el inmueble?</h3>
 <p>Legalmente, el técnico debe visitar el inmueble para levantar los datos de cerramientos, huecos e instalaciones. Hacerlo sin visita es una irresponsabilidad profesional y puedes tener problemas si te reclaman.</p>
-
 <h3>¿CE3X funciona en Mac?</h3>
 <p>Oficialmente no. Con Wine o una máquina virtual (Parallels, VirtualBox) funciona sin problemas. No recomiendo versiones online no oficiales — no sabes qué hacen con los datos del certificado.</p>
-
 <h3>¿Qué hago si el registro autonómico no acepta el PDF?</h3>
 <p>Primero verifica que el PDF no esté dañado. Luego comprueba que los datos del inmueble en el PDF coinciden con los del catastro (referencia, dirección). Si todo está bien, contacta con el soporte del registro autonómico — a veces es un error del sistema.</p>
-
 <h3>¿CE3X calcula correctamente con aerotermia?</h3>
 <p>CE3X v2.3+ ya tiene perfiles para bomba de calor y aerotermia. El rendimiento lo puedes ajustar según el COP declarado por el fabricante. Si introduces un COP de 4.5, el rendimiento estacional será aproximadamente del 350-400%.</p>
-
 <h3>¿Puedo presentar el mismo certificado en varias comunidades?</h3>
 <p>No. El certificado se registra en la comunidad donde está ubicado el inmueble. Si el edificio está en Madrid, se registra en Madrid. No puedes registrar el mismo certificado en dos comunidades.</p>
-
-  
-
-    <div class="cta-tecnicos" style="text-align:center">
-    <h3>📋 Certificado energético en tu provincia</h3>
-    <p style="margin:.5rem 0;font-size:.9rem">Presupuesto instantáneo. Técnicos verificados. Desde 60€ en 48-72h.</p>
-    <div class="provincias-grid-v2" style="display:flex;flex-wrap:wrap;gap:.4rem;justify-content:center;margin:.75rem 0">
-      <a href="/certificado-energetico-madrid/" class="prov-link">Madrid</a>
-      <a href="/certificado-energetico-barcelona/" class="prov-link">Barcelona</a>
-      <a href="/certificado-energetico-valencia/" class="prov-link">Valencia</a>
-    </div>
-    <a href="/#presupuesto-card" class="btn-cta" style="display:inline-block;text-decoration:none;margin-top:.5rem">Calcular mi presupuesto →</a>
-  </div>
-
+<div class="cta-tecnicos" style="text-align:center">
+<h3>📋 Certificado energético en tu provincia</h3>
+<p style="margin:.5rem 0;font-size:.9rem">Presupuesto instantáneo. Técnicos verificados. Desde 60€ en 48-72h.</p>
+<div class="provincias-grid-v2" style="display:flex;flex-wrap:wrap;gap:.4rem;justify-content:center;margin:.75rem 0">
+<a class="prov-link" href="/certificado-energetico-madrid/">Madrid</a>
+<a class="prov-link" href="/certificado-energetico-barcelona/">Barcelona</a>
+<a class="prov-link" href="/certificado-energetico-valencia/">Valencia</a>
+</div>
+<a class="btn-cta" href="/#presupuesto-card" style="display:inline-block;text-decoration:none;margin-top:.5rem">Calcular mi presupuesto →</a>
+</div>
 <div class="autor-box">
-  <img src="/img/autor-javier.jpg" alt="Javier Martínez" class="autor-img" loading="lazy">
-  <div class="autor-info">
-    <strong class="autor-nombre">Javier Martínez</strong>
-    <span class="autor-titulo">Arquitecto Técnico y redactor especializado en certificación energética</span>
-    <p class="autor-bio">Arquitecto técnico por la Universidad Politécnica de Madrid. Máster en Eficiencia Energética. Más de 8 años elaborando CEEs y colaborando con despachos de toda España.</p>
-  </div>
+<img alt="Javier Martínez" class="autor-img" loading="lazy" src="/img/autor-javier.jpg"/>
+<div class="autor-info">
+<strong class="autor-nombre">Javier Martínez</strong>
+<span class="autor-titulo">Arquitecto Técnico y redactor especializado en certificación energética</span>
+<p class="autor-bio">Arquitecto técnico por la Universidad Politécnica de Madrid. Máster en Eficiencia Energética. Más de 8 años elaborando CEEs y colaborando con despachos de toda España.</p>
+</div>
 </div>
 <style>
 .autor-box { display: flex; align-items: flex-start; gap: 1rem; margin: 2rem 0 1rem; padding: 1.25rem; background: #f7f9f6; border-radius: 12px; border: 1px solid #e8ece6; }
@@ -437,31 +392,28 @@
 .autor-bio { font-size: .82rem; color: #6b7b5e; line-height: 1.5; margin: 0; }
 @media (max-width: 500px) { .autor-box { flex-direction: column; align-items: center; text-align: center; } }
 </style>
-
 </main>
-
 <footer class="footer-v2">
-  <div class="footer-grid">
-    <div class="footer-brand">
-      <span class="footer-logo">CertificadoYa</span>
-      <p>Certificados de eficiencia energética (CEE) en toda España. Técnicos colegiados verificados. Presupuesto instantáneo.</p>
-    </div>
-    <div class="footer-links">
-      <strong>Enlaces</strong>
-      <a href="/blog/">Blog</a>
-      <a href="/organismos-contacto.html">Organismos oficiales</a>
-      <a href="/panel-tecnicos.html">¿Eres técnico?</a>
-    </div>
-    <div class="footer-links">
-      <strong>Legal</strong>
-      <a href="/legal/aviso-legal.html">Aviso legal</a>
-      <a href="/legal/privacidad.html">Privacidad</a>
-      <a href="/legal/cookies.html">Cookies</a>
-    </div>
-  </div>
-  <p class="footer-bottom">© 2026 CertificadoYa — ArtStudio</p>
+<div class="footer-grid">
+<div class="footer-brand">
+<span class="footer-logo">CertificadoYa</span>
+<p>Certificados de eficiencia energética (CEE) en toda España. Técnicos colegiados verificados. Presupuesto instantáneo.</p>
+</div>
+<div class="footer-links">
+<strong>Enlaces</strong>
+<a href="/blog/">Blog</a>
+<a href="/organismos-contacto.html">Organismos oficiales</a>
+<a href="/panel-tecnicos.html">¿Eres técnico?</a>
+</div>
+<div class="footer-links">
+<strong>Legal</strong>
+<a href="/legal/aviso-legal.html">Aviso legal</a>
+<a href="/legal/privacidad.html">Privacidad</a>
+<a href="/legal/cookies.html">Cookies</a>
+</div>
+</div>
+<p class="footer-bottom">© 2026 CertificadoYa — ArtStudio</p>
 </footer>
-
 <!-- Menú overlay JS -->
 <script>
 (function(){
@@ -497,6 +449,6 @@
   });
 })();
 </script>
-<script src="/js/blog-preguntas.js" defer></script>
+<script defer="" src="/js/blog-preguntas.js"></script>
 </body>
 </html>
