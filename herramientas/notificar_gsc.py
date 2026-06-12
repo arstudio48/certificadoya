@@ -1,9 +1,9 @@
 # -*- coding: utf-8 -*-
-"""Envía el sitemap a Google Search Console usando ADC (artbriher@gmail.com)."""
+"""Envía el sitemap a Google Search Console usando OAuth desde ~/.credenciales/gsc-oauth.json."""
 import sys
 import os
 import requests
-from google.auth import default
+from google.oauth2.credentials import Credentials
 from google.auth.transport.requests import Request
 
 URL_SITEMAP = "https://www.certificadoya.es/sitemap.xml"
@@ -14,8 +14,8 @@ QUOTA_PROJECT = "certificadoya-seo"
 
 
 def obtener_token():
-    os.environ["GOOGLE_CLOUD_QUOTA_PROJECT"] = QUOTA_PROJECT
-    credenciales, _ = default(scopes=AMBITO)
+    ruta = os.path.expanduser("~/.credenciales/gsc-oauth.json")
+    credenciales = Credentials.from_authorized_user_file(ruta, scopes=AMBITO)
     if not credenciales.valid:
         credenciales.refresh(Request())
     return credenciales.token
