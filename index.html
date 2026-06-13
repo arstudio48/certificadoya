@@ -106,14 +106,14 @@
 }
 /* ========== F1: Hero oscuro con calculadora ========== */
 :root {
-  --f1-bg: #0A0A0B;
-  --f1-accent: #00ffbb;
-  --f1-pink: #ff0055;
-  --f1-gold: #C9903A;
-  --f1-card: #141416;
-  --f1-border: #2a2a2e;
-  --f1-text: #e8e8ea;
-  --f1-muted: #88889a;
+  --f1-bg: #EAF5EF;
+  --f1-accent: #137E47;
+  --f1-pink: #E2231A;
+  --f1-gold: #A6781F;
+  --f1-card: #FFFFFF;
+  --f1-border: #E3ECE6;
+  --f1-text: #14241C;
+  --f1-muted: #44524B;
   --font-sans: 'DM Sans', sans-serif;
   --font-mono: 'DM Mono', monospace;
 }
@@ -138,14 +138,14 @@
 .hero-f1-text { display: flex; flex-direction: column; gap: 1rem; }
 .hero-f1-badge {
   display: inline-flex; align-items: center; gap: .5rem;
-  background: rgba(0,255,187,0.08); color: var(--f1-accent);
+  background: rgba(19,126,71,0.08); color: var(--f1-accent);
   font-size: .8rem; font-weight: 500; padding: .4rem 1rem;
   border-radius: 50px; width: fit-content;
-  border: 1px solid rgba(0,255,187,0.15);
+  border: 1px solid rgba(19,126,71,0.15);
   font-family: var(--font-mono);
 }
 .hero-f1-h1 {
-  font-size: 2.8rem; font-weight: 700; color: #fff;
+  font-size: 2.8rem; font-weight: 700; color: var(--f1-text);
   line-height: 1.2; margin: 0;
 }
 .hero-f1-precio { color: var(--f1-accent); white-space: nowrap; }
@@ -166,13 +166,13 @@
   border: 1px solid var(--f1-border);
   border-radius: 20px;
   padding: 1.5rem;
-  box-shadow: 0 20px 60px rgba(0,0,0,0.5);
+  box-shadow: 0 20px 60px rgba(20,36,28,.12);
 }
 .calc-header {
   text-align: center; margin-bottom: 1.25rem;
   padding-bottom: 1rem; border-bottom: 1px solid var(--f1-border);
 }
-.calc-header-precio { font-size: 1.8rem; font-weight: 800; color: #fff; }
+.calc-header-precio { font-size: 1.8rem; font-weight: 800; color: var(--f1-text); }
 .calc-header-precio strong { color: var(--f1-accent); }
 .calc-header-label { display: block; font-size: .85rem; color: var(--f1-muted); margin-top: .2rem; }
 .calc-body { display: flex; flex-direction: column; gap: .85rem; }
@@ -181,10 +181,10 @@
 .calc-select {
   width: 100%;
   padding: .7rem .85rem;
-  background: #1e1e22;
+  background: #fff;
   border: 1px solid var(--f1-border);
   border-radius: 10px;
-  color: #fff;
+  color: var(--f1-text);
   font-family: var(--font-sans);
   font-size: .9rem;
   outline: none;
@@ -196,14 +196,14 @@
   background-position: right 12px center;
 }
 .calc-select:focus { border-color: var(--f1-accent); }
-.calc-select option { background: #141416; color: #fff; }
+.calc-select option { background: #fff; color: var(--f1-text); }
 .calc-input {
   width: 100%; padding: .7rem .85rem; border-radius: 8px;
   border: 1px solid var(--f1-border); background: var(--f1-card);
   color: var(--f1-text); font-size: .85rem; font-family: inherit;
   outline: none; box-sizing: border-box; transition: border .2s;
 }
-.calc-input::placeholder { color: #55556a; }
+.calc-input::placeholder { color: #9CA3AF; }
 .calc-input:focus { border-color: var(--f1-accent); }
 .calc-row { display: grid; grid-template-columns: 1fr 1fr; gap: .75rem; }
 .calc-consent { margin: .25rem 0; }
@@ -217,7 +217,7 @@
 }
 .calc-btn {
   width: 100%; padding: .9rem 1.5rem;
-  background: var(--f1-accent); color: #0A0A0B;
+  background: var(--f1-accent); color: #fff;
   border: none; border-radius: 10px;
   font-family: var(--font-sans); font-size: 1rem; font-weight: 700;
   cursor: pointer; transition: opacity .2s, transform .1s;
@@ -570,9 +570,9 @@ var provSlugs = {}; provincias.forEach(function(p){provSlugs[p.slug]=p.nombre;})
         <h1 class="hero-f1-h1">Tu certificado energético desde <span class="hero-f1-precio">45 €</span> <br>— todo incluido</h1>
         <p class="hero-f1-sub">IVA, visita del técnico, registro oficial en tu comunidad y etiqueta energética. Sin sorpresas.</p>
         <div class="hero-f1-features">
-          <span><svg width="16" height="16" viewBox="0 0 24 24" fill="#00ffbb"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z"/></svg> Técnico asignado en 24h</span>
-          <span><svg width="16" height="16" viewBox="0 0 24 24" fill="#00ffbb"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z"/></svg> Pago seguro retenido</span>
-          <span><svg width="16" height="16" viewBox="0 0 24 24" fill="#00ffbb"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z"/></svg> Certificado en 48-96h</span>
+          <span><svg width="16" height="16" viewBox="0 0 24 24" fill="#137E47"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z"/></svg> Técnico asignado en 24h</span>
+          <span><svg width="16" height="16" viewBox="0 0 24 24" fill="#137E47"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z"/></svg> Pago seguro retenido</span>
+          <span><svg width="16" height="16" viewBox="0 0 24 24" fill="#137E47"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z"/></svg> Certificado en 48-96h</span>
         </div>
       </div>
       <!-- Lado derecho: calculadora -->
@@ -670,7 +670,7 @@ var provSlugs = {}; provincias.forEach(function(p){provSlugs[p.slug]=p.nombre;})
           <div class="calc-consent">
             <label class="calc-checkbox">
               <input type="checkbox" id="calc-consent">
-              <span>Acepto la <a href="/legal/privacidad.html" target="_blank" style="color:#00ffbb;text-decoration:underline">política de privacidad</a> y consiento el tratamiento de mis datos para recibir un presupuesto.</span>
+              <span>Acepto la <a href="/legal/privacidad.html" target="_blank" style="color:#137E47;text-decoration:underline">política de privacidad</a> y consiento el tratamiento de mis datos para recibir un presupuesto.</span>
             </label>
           </div>
           <button class="calc-btn" id="calc-btn" onclick="calcularPrecioF1()">Calcular mi precio</button>
@@ -1528,7 +1528,7 @@ function mostrarErrorF1(msg) {
   var btn = document.getElementById('calc-btn');
   var original = btn.textContent;
   btn.textContent = '⚠ ' + msg;
-  btn.style.background = '#ff0055';
+  btn.style.background = '#E2231A';
   btn.style.color = '#fff';
   setTimeout(function() {
     btn.textContent = original;
