@@ -31,7 +31,6 @@
 <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
 <link as="style" href="/css/style.min.css" rel="preload"/>
 <link href="/css/style.min.css" rel="stylesheet"/>
-<link href="data:image/svg+xml,&lt;svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'&gt;&lt;rect width='32' height='32' rx='6' fill='%23547c24'/&gt;&lt;text x='16' y='23' text-anchor='middle' fill='white' font-size='18' font-family='sans-serif'&gt;C&lt;/text&gt;&lt;/svg&gt;" rel="icon"/>
 <style>
   .hamburger{display:none;flex-direction:column;justify-content:center;align-items:center;width:36px;height:36px;background:none;border:none;cursor:pointer;gap:5px;padding:4px;z-index:200;position:relative}
   .hamburger span{display:block;width:22px;height:2.5px;background:#333;border-radius:2px;transition:transform .25s ease,opacity .25s ease}
@@ -229,11 +228,17 @@
   .mobile-overlay-panel{padding-bottom:env(safe-area-inset-bottom,1rem)}
 }
 </style>
+  <link rel="stylesheet" href="/css/tema-claro-certificadoya.css">
+  <link rel="icon" type="image/png" sizes="32x32" href="/img/favicon-32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/img/favicon-16.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/img/apple-touch-icon-180.png">
 </head>
 <body>
 <header class="site-header">
 <div class="header-content">
-<a class="logo" href="/"><span class="logo-c">C</span>ertificadoYa</a>
+<a class="logo" href="/">
+<img src="/img/logo-certificadoya-lockup.svg" alt="CertificadoYa" style="height:34px;width:auto">
+</a>
 <nav aria-label="Navegación principal" class="main-nav">
 <a href="/#presupuesto">Presupuesto</a>
 <a href="/blog/">Blog</a>
