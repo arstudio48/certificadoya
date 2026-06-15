@@ -298,6 +298,10 @@ serve(async (req: Request) => {
     const precioMinVal = precioMin != null ? Math.round(Number(precioMin)) : null
     const precioMaxVal = precioMax != null ? Math.round(Number(precioMax)) : null
 
+    // Generar token de verificación si tiene email
+    const tokenVerificacion = emailVal ? crypto.randomUUID() : null
+    const estadoLead = emailVal ? 'pendiente_verificacion' : 'pendiente'
+
     // INSERT directo en la tabla leads
     const res = await fetch(`${SUPABASE_URL}/rest/v1/leads`, {
       method: 'POST',
@@ -318,7 +322,9 @@ serve(async (req: Request) => {
         presupuesto_min: precioMinVal,
         presupuesto_max: precioMaxVal,
         fuente: 'web',
-        estado: 'pendiente'
+        estado: estadoLead,
+        email_verificado: false,
+        token_verificacion: tokenVerificacion
       })
     })
 
@@ -333,11 +339,9 @@ serve(async (req: Request) => {
       })
     }
 
-    // --- Enviar confirmación al cliente (si tiene email) ---
-    if (emailVal && RESEND_API_KEY) {
-      const presupuestoTexto = precioMinVal && precioMaxVal
-        ? `${precioMinVal}€ – ${precioMaxVal}€`
-        : 'a consultar'
+    // --- Enviar email de verificación (si tiene email) ---
+    if (emailVal && tokenVerificacion && RESEND_API_KEY) {
+      const linkVerificacion = `https://www.certificadoya.es/verificar-email.html?token=${encodeURIComponent(tokenVerificacion)}&email=${encodeURIComponent(emailVal)}`
 
       await fetch("https://api.resend.com/emails", {
         method: "POST",
@@ -348,18 +352,22 @@ serve(async (req: Request) => {
         body: JSON.stringify({
           from: "CertificadoYa <info@certificadoya.es>",
           to: emailVal,
-          subject: `✅ Solicitud recibida - CertificadoYa`,
+          subject: `🔐 Confirma tu email - CertificadoYa`,
           html: `
             <div style="font-family:Outfit,'Segoe UI',Arial,sans-serif;max-width:600px;margin:0 auto;background:#f5f7f2;padding:30px 15px">
               <div style="background:#fff;border-radius:16px;overflow:hidden;box-shadow:0 2px 12px rgba(0,0,0,.06)">
                 <div style="background:linear-gradient(135deg,#547c24,#3d5e1a);padding:30px 40px;text-align:center">
                   <div style="font-size:28px;font-weight:700;color:#fff">CertificadoYa</div>
-                  <div style="font-size:13px;color:#b8d4a0;margin-top:4px">Certificado de Eficiencia Energética</div>
+                  <div style="font-size:13px;color:#b8d4a0;margin-top:4px">Confirma tu dirección de email</div>
                 </div>
                 <div style="padding:35px 40px 10px">
-                  <div style="font-size:48px;text-align:center;margin-bottom:10px">✅</div>
-                  <h1 style="font-size:22px;font-weight:700;color:#1a1a1a;margin:0 0 6px;text-align:center">¡Solicitud recibida!</h1>
-                  <p style="font-size:15px;color:#6b7b5e;line-height:1.5;text-align:center">Hemos recibido tu solicitud de certificado energético. <strong>Un técnico de tu zona te llamará pronto.</strong></p>
+                  <div style="font-size:48px;text-align:center;margin-bottom:10px">🔐</div>
+                  <h1 style="font-size:22px;font-weight:700;color:#1a1a1a;margin:0 0 6px;text-align:center">Casi listo, ${nombre}!</h1>
+                  <p style="font-size:15px;color:#6b7b5e;line-height:1.5;text-align:center">Gracias por solicitar tu certificado energético. Para confirmar tu solicitud, haz clic en el botón de abajo.</p>
+                </div>
+                <div style="padding:10px 40px 20px;text-align:center">
+                  <a href="${linkVerificacion}" style="display:inline-block;background:#547c24;color:#fff;text-decoration:none;padding:14px 32px;border-radius:10px;font-weight:700;font-size:16px">✅ Verificar mi email</a>
+                  <p style="font-size:13px;color:#9aab8a;margin-top:12px">O copia este enlace en tu navegador:<br><span style="color:#6b7b5e;font-size:12px;word-break:break-all">${linkVerificacion}</span></p>
                 </div>
                 <div style="padding:10px 40px 20px">
                   <div style="background:#f3f9eb;border-radius:8px;padding:16px 20px">
@@ -369,13 +377,12 @@ serve(async (req: Request) => {
                       <tr><td style="padding:4px 0;color:#6b7b5e">Teléfono</td><td style="padding:4px 0;color:#1a1a1a">${telefono}</td></tr>
                       <tr><td style="padding:4px 0;color:#6b7b5e">Zona</td><td style="padding:4px 0;color:#1a1a1a">${zonaVal || '—'} (CP: ${cpVal})</td></tr>
                       <tr><td style="padding:4px 0;color:#6b7b5e">Inmueble</td><td style="padding:4px 0;color:#1a1a1a">${m2Val || '—'} m² · ${tipo || 'Piso'}</td></tr>
-                      <tr><td style="padding:4px 0;color:#6b7b5e">Presupuesto</td><td style="padding:4px 0;color:#1a1a1a;font-weight:600">${presupuestoTexto}</td></tr>
                     </table>
                   </div>
                 </div>
                 <div style="padding:0 40px 25px;text-align:center">
-                  <p style="font-size:14px;color:#6b7b5e;line-height:1.5">Mientras tanto, puedes consultar guías útiles en nuestro blog:</p>
-                  <a href="https://www.certificadoya.es/blog/" style="display:inline-block;background:#fff;color:#547c24;text-decoration:none;padding:10px 24px;border-radius:8px;font-weight:600;font-size:14px;border:2px solid #547c24">Visitar blog →</a>
+                  <p style="font-size:13px;color:#9aab8a;line-height:1.5">¿No has solicitado este servicio? Ignora este email.<br>Si tienes dudas, contáctanos en <a href="mailto:info@certificadoya.es" style="color:#547c24">info@certificadoya.es</a></p>
+                  <p style="font-size:12px;color:#b8c4a8">Revisa también tu carpeta de spam si no ves este email.</p>
                 </div>
                 <div style="padding:20px 40px;text-align:center;font-size:12px;color:#9aab8a;border-top:1px solid #eef4e8">
                   <p style="margin:0 0 4px">CertificadoYa.es — Certificación energética en toda España</p>
@@ -385,13 +392,16 @@ serve(async (req: Request) => {
             </div>
           `,
         }),
-      }).catch(e => console.error("Error enviando confirmación al cliente:", e));
+      }).catch(e => console.error("Error enviando email de verificación:", e));
     }
 
     return new Response(JSON.stringify({
       success: true,
       leadId: data.id || data[0]?.id,
-      mensaje: 'Solicitud recibida. Te contactaremos pronto.'
+      necesitaVerificacion: !!emailVal,
+      mensaje: emailVal
+        ? 'Te hemos enviado un email de verificación. Revisa tu bandeja de entrada.'
+        : 'Solicitud recibida. Te contactaremos pronto.'
     }), {
       headers: { ...corsHeaders, 'Content-Type': 'application/json' }
     })

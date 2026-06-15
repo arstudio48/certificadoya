@@ -46,6 +46,8 @@ body {
   display: flex; align-items: center; justify-content: space-between; height: 64px;
 }
 .logo { display:flex; align-items:center; gap:.75rem; text-decoration:none; }
+.logo img { height:68px !important; width:auto; }
+@media(max-width:768px){ .logo img { height:48px !important; } }
 .logo svg { flex-shrink:0; width:36px; height:36px; }
 .logo-text-wrap { display:flex; flex-direction:column; line-height:1.2; }
 .logo-text { font-size:1.5rem; font-weight:700; color:var(--text); letter-spacing:-.02em; }

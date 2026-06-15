@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Verificando email - CertificadoYa</title>
+  <meta name="robots" content="noindex">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: Outfit, 'Segoe UI', Arial, sans-serif;
+      background: #f5f7f2;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+    .card {
+      background: #fff;
+      border-radius: 20px;
+      padding: 40px;
+      max-width: 480px;
+      width: 100%;
+      text-align: center;
+      box-shadow: 0 4px 24px rgba(0,0,0,.08);
+    }
+    .icon { font-size: 64px; margin-bottom: 16px; }
+    h1 { font-size: 24px; color: #1a1a1a; margin-bottom: 8px; }
+    p { font-size: 15px; color: #6b7b5e; line-height: 1.6; margin-bottom: 16px; }
+    .success { color: #2d6e2d; }
+    .error { color: #b33; }
+    .spinner {
+      display: inline-block;
+      width: 40px; height: 40px;
+      border: 4px solid #eef4e8;
+      border-top-color: #547c24;
+      border-radius: 50%;
+      animation: spin .8s linear infinite;
+      margin-bottom: 16px;
+    }
+    @keyframes spin { to { transform: rotate(360deg); } }
+    .btn {
+      display: inline-block;
+      padding: 12px 28px;
+      background: #547c24;
+      color: #fff;
+      text-decoration: none;
+      border-radius: 10px;
+      font-weight: 600;
+      font-size: 15px;
+      border: none;
+      cursor: pointer;
+      margin-top: 8px;
+    }
+    .btn:hover { background: #436A1E; }
+    .hidden { display: none; }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <div id="loading">
+      <div class="spinner"></div>
+      <h1>Verificando tu email...</h1>
+      <p>Por favor, espera un momento mientras confirmamos tu dirección de correo electrónico.</p>
+    </div>
+    <div id="done" class="hidden">
+      <div class="icon" id="resultIcon">✅</div>
+      <h1 id="resultTitle">¡Email verificado!</h1>
+      <p id="resultMessage">Tu solicitud está siendo procesada. En breve recibirás noticias.</p>
+      <a href="https://www.certificadoya.es/" class="btn">Volver a CertificadoYa</a>
+    </div>
+  </div>
+
+  <script>
+    (function() {
+      const params = new URLSearchParams(window.location.search);
+      const token = params.get('token');
+      const email = params.get('email');
+
+      if (!token || !email) {
+        showError('Faltan parámetros de verificación. Asegúrate de usar el enlace completo del email.');
+        return;
+      }
+
+      fetch('https://wypgqpgjlookbhuaiyxa.supabase.co/functions/v1/verificar-email', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ token, email })
+      })
+      .then(r => r.json())
+      .then(data => {
+        if (data.success) {
+          showSuccess(data.message || 'Email verificado correctamente.');
+        } else {
+          showError(data.message || 'Error al verificar el email.');
+        }
+      })
+      .catch(err => {
+        showError('Error de conexión. Inténtalo de nuevo más tarde.');
+      });
+
+      function showSuccess(msg) {
+        document.getElementById('loading').classList.add('hidden');
+        document.getElementById('done').classList.remove('hidden');
+        document.getElementById('resultIcon').textContent = '✅';
+        document.getElementById('resultTitle').textContent = '¡Email verificado!';
+        document.getElementById('resultTitle').className = 'success';
+        document.getElementById('resultMessage').textContent = msg;
+      }
+
+      function showError(msg) {
+        document.getElementById('loading').classList.add('hidden');
+        document.getElementById('done').classList.remove('hidden');
+        document.getElementById('resultIcon').textContent = '❌';
+        document.getElementById('resultTitle').textContent = 'Error de verificación';
+        document.getElementById('resultTitle').className = 'error';
+        document.getElementById('resultMessage').textContent = msg;
+      }
+    })();
+  </script>
+</body>
+</html>
