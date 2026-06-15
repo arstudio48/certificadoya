@@ -445,16 +445,20 @@
   display: flex;
   align-items: center;
 }
-.hero-f1-bg {
-  position: absolute; top: 0; right: 0; bottom: 0; width: 50%; z-index: 1;
+/* Imagen de fondo a ancho completo */
+.hero-f1::before {
+  content: '';
+  position: absolute; inset: 0; z-index: 1;
   background: url('/img/webp-couple-hero.webp') no-repeat center center / cover;
 }
-.hero-f1-bg::after {
-  content: ''; position: absolute; inset: 0;
-  background: linear-gradient(270deg, transparent 40%, #EAF5EF 75%);
+/* Overlay: verde sólido a la izq → transparente a la der */
+.hero-f1::after {
+  content: '';
+  position: absolute; inset: 0; z-index: 2;
+  background: linear-gradient(90deg, rgba(234,245,239,0.92) 0%, rgba(234,245,239,0.4) 40%, rgba(234,245,239,0.08) 65%, transparent 100%);
 }
 .hero-f1-inner {
-  position: relative; z-index: 2;
+  position: relative; z-index: 3;
   max-width: 1200px; margin: 0 auto; width: 100%;
   display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; align-items: center;
 }
@@ -526,8 +530,10 @@
 
 /* ── Responsive ── */
 @media (max-width: 768px) {
-  .hero-f1-bg { display: none; }
-  .hero-f1-inner { grid-template-columns: 1fr; gap: 2rem; }
+  .hero-f1::before { display: none; }
+  .hero-f1::after { display: none; }
+  .hero-f1 { background: linear-gradient(135deg, #EAF5EF 0%, #D4EDDA 100%); }
+  .hero-f1-inner { grid-template-columns: 1fr; gap: 2rem; z-index: 1; }
   .hero-f1-text { text-align: center; align-items: center; padding: 1rem 0; }
   .hero-f1-h1 { font-size: 1.8rem; }
   .hero-f1-sub { max-width: 100%; font-size: .9rem; }
@@ -668,7 +674,6 @@ var provSlugs = {}; provincias.forEach(function(p){provSlugs[p.slug]=p.nombre;})
 <main>
   <!-- HERO F1: precio ancla + calculadora provincia/tipo/superficie -->
   <section class="hero-f1" id="presupuesto-card" style="scroll-margin-top:0">
-    <div class="hero-f1-bg"></div>
     <div class="hero-f1-inner">
       <!-- Lado izquierdo: texto -->
       <div class="hero-f1-text">
