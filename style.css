@@ -65,6 +65,7 @@
 .buscador-resultados{position:absolute;top:100%;left:0;right:0;background:#fff;border:1px solid #e0e0e0;border-radius:8px;box-shadow:0 4px 16px rgba(0,0,0,.1);max-height:280px;overflow-y:auto;z-index:9999;margin-top:4px;display:block}
 .buscador-item{padding:8px 14px;cursor:pointer;font-size:.85rem;font-family:Outfit,sans-serif;color:#333;transition:background .15s}
 .buscador-item:hover{background:#f0fdf4;color:#16a34a}
+.buscador-item.resaltado{background:#dcfce7;color:#15803d}
 .buscador-item:not(:last-child){border-bottom:1px solid #f0f0f0}
 @media(max-width:768px){
   .buscador-input{width:140px;font-size:.75rem;padding:5px 8px 5px 28px}
@@ -552,6 +553,8 @@
 .form-group{display:flex;flex-direction:column}
 #newsletter-email{padding:.75rem 1rem;border:1px solid #86efac;border-radius:8px;font-size:1rem;font-family:Outfit,sans-serif;background:white;transition:border-color .2s,box-shadow .2s;color:#20201f;outline:none}
 #newsletter-email:focus{border-color:#16a34a;box-shadow:0 0 0 3px rgba(22,163,74,0.08)}
+#newsletter-email.email-invalido{border-color:#dc2626;box-shadow:0 0 0 3px rgba(220,38,38,0.08)}
+#newsletter-email.email-valido{border-color:#16a34a;box-shadow:0 0 0 3px rgba(22,163,74,0.08)}
 #newsletter-email::placeholder{color:#a8b89d}
 .user-type-group{gap:.8rem}
 .radio-option{display:flex;align-items:flex-start;gap:.8rem;cursor:pointer;padding:.8rem;border:1px solid transparent;border-radius:8px;transition:background .2s,border-color .2s}
@@ -568,6 +571,7 @@
 .newsletter-message{padding:.75rem 1rem;border-radius:6px;font-size:.9rem;text-align:center;animation:slideDown .3s ease-out}
 .newsletter-message.success{background:#f0fdf4;color:#15803d;border:1px solid #86efac}
 .newsletter-message.error{background:#fde8e8;color:#8b0a1a;border:1px solid #f5c5c5}
+.newsletter-email-feedback{margin-top:.5rem}
 @keyframes slideDown{from{opacity:0;transform:translateY(-10px)}to{opacity:1;transform:translateY(0)}}
 
 /* ── WHATSAPP BUTTON ── */
