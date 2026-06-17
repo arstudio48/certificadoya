@@ -714,6 +714,43 @@
 }
 /* === WEB-FIX-HOME-002 :: fin === */
 </style>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "LocalBusiness",
+      "@id": "https://www.certificadoya.es/#localbusiness",
+      "name": "CertificadoYa",
+      "url": "https://www.certificadoya.es/",
+      "telephone": "+34641450068",
+      "address": {
+        "@type": "PostalAddress",
+        "addressLocality": "Madrid",
+        "addressRegion": "Comunidad de Madrid",
+        "addressCountry": "ES"
+      },
+      "areaServed": { "@type": "Country", "name": "España" }
+    },
+    {
+      "@type": "Service",
+      "@id": "https://www.certificadoya.es/#servicio-certificado-energetico",
+      "name": "Certificado energético",
+      "serviceType": "Certificado de eficiencia energética",
+      "description": "Servicio de emisión y registro de certificado energético para viviendas y locales.",
+      "provider": { "@id": "https://www.certificadoya.es/#localbusiness" },
+      "areaServed": { "@type": "Country", "name": "España" }
+    },
+    {
+      "@type": "Review",
+      "itemReviewed": { "@id": "https://www.certificadoya.es/#servicio-certificado-energetico" },
+      "author": { "@type": "Person", "name": "María García" },
+      "reviewBody": "Necesitaba el certificado para vender mi piso en Gijón. En 3 días lo tenía registrado y el técnico fue muy profesional. Repetiría sin dudar.",
+      "reviewRating": { "@type": "Rating", "ratingValue": "5", "bestRating": "5" }
+    }
+  ]
+}
+</script>
 </head>
 <body>
 <script>
