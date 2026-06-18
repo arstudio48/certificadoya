@@ -57,6 +57,14 @@ serve(async (req) => {
       })
     }
 
+    // Llamar a stripe-payout para procesar el pago al técnico
+    const payoutUrl = `${supabaseUrl}/functions/v1/stripe-payout`
+    fetch(payoutUrl, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${supabaseServiceKey}` },
+      body: JSON.stringify({ lead_id, tecnico_id })
+    }).catch(e => console.error('Error calling stripe-payout:', e))
+
     // Enviar email de reseña al cliente
     const emailCliente = lead.email_cliente || ''
     const nombreCliente = lead.nombre_cliente || ''

@@ -1,3 +1,6 @@
+[functions.stripe-payout]
+verify_jwt = false
+
 [functions.completar-servicio]
 verify_jwt = false
 
