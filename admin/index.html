@@ -1,0 +1,922 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin — CertificadoYa</title>
+  <meta name="robots" content="noindex, nofollow">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600;9..40,700;9..40,800&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --color-fondo: #f5f7f5;
+      --color-fondo-alt: #EFF4F1;
+      --color-tarjeta: #FFFFFF;
+      --color-linea: #E3ECE6;
+      --color-tinta: #14241C;
+      --color-tinta-suave: #44524B;
+      --color-tinta-tenue: #7C8A83;
+      --verde-principal: #16a34a;
+      --verde-vivo: #1FA85F;
+      --verde-claro: #EAF5EF;
+      --color-exito: #1FA85F;
+      --color-aviso: #F7A600;
+      --color-error: #E2231A;
+      --fuente-base: 'DM Sans', system-ui, -apple-system, sans-serif;
+      --fuente-dato: 'DM Mono', ui-monospace, monospace;
+      --radio-s: 11px;
+      --radio-m: 16px;
+      --sombra-suave: 0 1px 2px rgba(20,36,28,.04), 0 12px 32px rgba(20,36,28,.07);
+      --header-h: 72px;
+    }
+    html { scroll-behavior: smooth; }
+    body {
+      background: var(--color-fondo);
+      color: var(--color-tinta);
+      font-family: var(--fuente-base);
+      -webkit-font-smoothing: antialiased;
+      line-height: 1.55;
+      min-height: 100vh;
+    }
+    a { color: var(--verde-principal); text-decoration: none; }
+    a:hover { color: var(--verde-vivo); }
+    img { max-width: 100%; height: auto; }
+
+    /* ─── HEADER igual que el sitio ─── */
+    .header {
+      position: sticky; top: 0; z-index: 100;
+      background: #fff;
+      border-bottom: 1px solid var(--color-linea);
+      box-shadow: var(--sombra-suave);
+      height: var(--header-h);
+    }
+    .header-inner {
+      max-width: 1280px; margin: 0 auto;
+      display: flex; align-items: center;
+      justify-content: space-between;
+      height: 100%; padding: 0 1.5rem;
+    }
+    .logo { display: flex; align-items: center; }
+    .logo img { height: 40px; width: auto; }
+    .header-right {
+      display: flex; align-items: center; gap: 1rem;
+    }
+    .admin-badge {
+      background: var(--verde-claro);
+      color: var(--verde-principal);
+      font-weight: 600; font-size: .8rem;
+      padding: .3rem .7rem;
+      border-radius: 999px;
+    }
+    .btn-logout {
+      background: none; border: 1px solid var(--color-linea);
+      color: var(--color-tinta-suave);
+      font-family: var(--fuente-base);
+      font-size: .85rem; font-weight: 500;
+      padding: .4rem 1rem;
+      border-radius: var(--radio-s);
+      cursor: pointer;
+      transition: all .15s;
+    }
+    .btn-logout:hover {
+      background: var(--color-error);
+      color: #fff;
+      border-color: var(--color-error);
+    }
+
+    /* ─── LOGIN SCREEN ─── */
+    #login-screen {
+      display: flex;
+      align-items: center; justify-content: center;
+      min-height: 100vh;
+      background: var(--color-fondo);
+      padding: 1rem;
+    }
+    #login-screen.hidden { display: none; }
+    .login-card {
+      background: var(--color-tarjeta);
+      border-radius: var(--radio-m);
+      box-shadow: var(--sombra-suave);
+      padding: 2.5rem 2rem;
+      width: 100%; max-width: 400px;
+    }
+    .login-card h1 {
+      font-size: 1.5rem;
+      font-weight: 700;
+      text-align: center;
+      margin-bottom: .25rem;
+    }
+    .login-card p {
+      text-align: center;
+      color: var(--color-tinta-suave);
+      font-size: .9rem;
+      margin-bottom: 1.5rem;
+    }
+    .login-card .logo-login {
+      display: flex; justify-content: center; margin-bottom: 1rem;
+    }
+    .login-card .logo-login img { height: 48px; }
+    .form-group {
+      margin-bottom: 1rem;
+    }
+    .form-group label {
+      display: block;
+      font-size: .85rem;
+      font-weight: 500;
+      color: var(--color-tinta-suave);
+      margin-bottom: .35rem;
+    }
+    .form-group input {
+      width: 100%;
+      padding: .7rem .85rem;
+      font-family: var(--fuente-base);
+      font-size: .95rem;
+      background: var(--color-fondo);
+      color: var(--color-tinta);
+      border: 1px solid var(--color-linea);
+      border-radius: var(--radio-s);
+      transition: border-color .2s, box-shadow .2s;
+    }
+    .form-group input:focus {
+      outline: none;
+      border-color: var(--verde-principal);
+      box-shadow: 0 0 0 3px rgba(22,163,74,.15);
+    }
+    .btn-primary {
+      width: 100%;
+      padding: .75rem;
+      background: var(--verde-principal);
+      color: #fff;
+      border: none;
+      border-radius: var(--radio-s);
+      font-family: var(--fuente-base);
+      font-size: .95rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background .15s;
+    }
+    .btn-primary:hover { background: #15803d; }
+    .btn-primary:disabled {
+      opacity: .6; cursor: not-allowed;
+    }
+    .login-error {
+      color: var(--color-error);
+      font-size: .85rem;
+      margin-top: .5rem;
+      text-align: center;
+      display: none;
+    }
+    .login-error.show { display: block; }
+
+    /* ─── ADMIN APP ─── */
+    #admin-app { display: none; }
+    #admin-app.show { display: block; }
+
+    .admin-main {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 1.5rem;
+    }
+
+    /* Dashboard stats */
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 1rem;
+      margin-bottom: 2rem;
+    }
+    .stat-card {
+      background: var(--color-tarjeta);
+      border-radius: var(--radio-s);
+      padding: 1.25rem;
+      box-shadow: var(--sombra-suave);
+    }
+    .stat-card .stat-label {
+      font-size: .78rem;
+      font-weight: 500;
+      color: var(--color-tinta-tenue);
+      text-transform: uppercase;
+      letter-spacing: .04em;
+      margin-bottom: .35rem;
+    }
+    .stat-card .stat-value {
+      font-size: 1.6rem;
+      font-weight: 700;
+      color: var(--color-tinta);
+      font-family: var(--fuente-dato);
+    }
+    .stat-card .stat-value.green { color: var(--verde-principal); }
+    .stat-card .stat-value.orange { color: var(--color-aviso); }
+    .stat-card .stat-value.red { color: var(--color-error); }
+
+    /* Section headers */
+    .section-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: .75rem;
+      margin-bottom: 1rem;
+      margin-top: 2rem;
+    }
+    .section-header:first-child { margin-top: 0; }
+    .section-header h2 {
+      font-size: 1.2rem;
+      font-weight: 700;
+      color: var(--color-tinta);
+    }
+    .section-header .count-badge {
+      background: var(--verde-claro);
+      color: var(--verde-principal);
+      font-size: .78rem;
+      font-weight: 600;
+      padding: .15rem .55rem;
+      border-radius: 999px;
+      margin-left: .4rem;
+    }
+
+    /* Filters */
+    .filter-bar {
+      display: flex;
+      gap: .5rem;
+      flex-wrap: wrap;
+      margin-bottom: 1rem;
+    }
+    .filter-btn {
+      background: var(--color-tarjeta);
+      border: 1px solid var(--color-linea);
+      color: var(--color-tinta-suave);
+      font-family: var(--fuente-base);
+      font-size: .8rem;
+      font-weight: 500;
+      padding: .35rem .85rem;
+      border-radius: 999px;
+      cursor: pointer;
+      transition: all .15s;
+    }
+    .filter-btn:hover {
+      border-color: var(--verde-principal);
+      color: var(--verde-principal);
+    }
+    .filter-btn.active {
+      background: var(--verde-principal);
+      color: #fff;
+      border-color: var(--verde-principal);
+    }
+
+    /* Tables */
+    .table-wrapper {
+      background: var(--color-tarjeta);
+      border-radius: var(--radio-s);
+      box-shadow: var(--sombra-suave);
+      overflow-x: auto;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: .85rem;
+    }
+    thead {
+      background: var(--color-fondo-alt);
+    }
+    th {
+      text-align: left;
+      padding: .75rem .85rem;
+      font-weight: 600;
+      font-size: .78rem;
+      color: var(--color-tinta-suave);
+      text-transform: uppercase;
+      letter-spacing: .03em;
+      white-space: nowrap;
+      border-bottom: 1px solid var(--color-linea);
+    }
+    td {
+      padding: .7rem .85rem;
+      border-bottom: 1px solid var(--color-linea);
+      color: var(--color-tinta);
+      vertical-align: middle;
+    }
+    tr:last-child td { border-bottom: none; }
+    tr:hover td { background: #f9fbf9; }
+
+    /* Status badges */
+    .status-badge {
+      display: inline-block;
+      font-size: .75rem;
+      font-weight: 600;
+      padding: .2rem .6rem;
+      border-radius: 999px;
+      white-space: nowrap;
+    }
+    .status-badge.nuevo { background: #DBEAFE; color: #1E40AF; }
+    .status-badge.asignado { background: #FEF3C7; color: #92400E; }
+    .status-badge.completado { background: #D1FAE5; color: #065F46; }
+    .status-badge.cancelado { background: #FEE2E2; color: #991B1B; }
+    .status-badge.pendiente { background: #FEF3C7; color: #92400E; }
+    .status-badge.pagado { background: #D1FAE5; color: #065F46; }
+
+    .btn-sm {
+      font-family: var(--fuente-base);
+      font-size: .78rem;
+      font-weight: 500;
+      padding: .3rem .7rem;
+      border-radius: var(--radio-s);
+      border: none;
+      cursor: pointer;
+      transition: all .15s;
+    }
+    .btn-sm.green {
+      background: var(--verde-claro);
+      color: var(--verde-principal);
+    }
+    .btn-sm.green:hover {
+      background: var(--verde-principal);
+      color: #fff;
+    }
+    .btn-sm:disabled {
+      opacity: .5;
+      cursor: not-allowed;
+    }
+
+    .empty-state {
+      text-align: center;
+      padding: 2rem 1rem;
+      color: var(--color-tinta-tenue);
+      font-size: .9rem;
+    }
+
+    /* Toast */
+    .toast {
+      position: fixed;
+      bottom: 1.5rem;
+      right: 1.5rem;
+      background: var(--color-tinta);
+      color: #fff;
+      font-family: var(--fuente-base);
+      font-size: .85rem;
+      padding: .75rem 1.25rem;
+      border-radius: var(--radio-s);
+      box-shadow: 0 4px 16px rgba(0,0,0,.25);
+      z-index: 999;
+      opacity: 0;
+      transform: translateY(10px);
+      transition: opacity .25s, transform .25s;
+      pointer-events: none;
+    }
+    .toast.show {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    .toast.success { border-left: 4px solid var(--color-exito); }
+    .toast.error { border-left: 4px solid var(--color-error); }
+
+    /* Loading shimmer */
+    .loading {
+      text-align: center;
+      padding: 2rem;
+      color: var(--color-tinta-tenue);
+    }
+    .loading::after {
+      content: '';
+      display: inline-block;
+      width: 1rem; height: 1rem;
+      border: 2px solid var(--color-linea);
+      border-top-color: var(--verde-principal);
+      border-radius: 50%;
+      animation: spin .6s linear infinite;
+      margin-left: .5rem;
+      vertical-align: middle;
+    }
+    @keyframes spin { to { transform: rotate(360deg); } }
+
+    /* ─── RESPONSIVE ─── */
+    @media (max-width: 768px) {
+      .header-inner { padding: 0 1rem; }
+      .logo img { height: 34px; }
+      .admin-main { padding: 1rem; }
+      .stats-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: .75rem;
+      }
+      .stat-card { padding: 1rem; }
+      .stat-card .stat-value { font-size: 1.25rem; }
+      .login-card { padding: 1.75rem 1.25rem; }
+      th, td { padding: .5rem .6rem; font-size: .78rem; }
+      .filter-bar { gap: .35rem; }
+      .filter-btn { font-size: .75rem; padding: .3rem .65rem; }
+      .section-header h2 { font-size: 1rem; }
+    }
+    @media (max-width: 480px) {
+      .stats-grid { grid-template-columns: 1fr 1fr; gap: .5rem; }
+      .stat-card { padding: .75rem; }
+      .stat-card .stat-value { font-size: 1.1rem; }
+      .stat-card .stat-label { font-size: .7rem; }
+      .toast { left: 1rem; right: 1rem; bottom: 1rem; text-align: center; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ═══════════════ TOAST ═══════════════ -->
+<div id="toast" class="toast"></div>
+
+<!-- ═══════════════ LOGIN SCREEN ═══════════════ -->
+<div id="login-screen">
+  <div class="login-card">
+    <div class="logo-login">
+      <img src="../img/logo-certificadoya-lockup.svg" alt="CertificadoYa">
+    </div>
+    <h1>Panel de Administración</h1>
+    <p>Accede para gestionar leads, pagos y técnicos</p>
+    <form id="login-form" autocomplete="off">
+      <div class="form-group">
+        <label for="login-email">Correo electrónico</label>
+        <input type="email" id="login-email" placeholder="admin@certificadoya.es" required>
+      </div>
+      <div class="form-group">
+        <label for="login-password">Contraseña</label>
+        <input type="password" id="login-password" placeholder="••••••••" required>
+      </div>
+      <div class="login-error" id="login-error">Credenciales incorrectas</div>
+      <button type="submit" class="btn-primary" id="login-btn">Entrar</button>
+    </form>
+  </div>
+</div>
+
+<!-- ═══════════════ ADMIN APP ═══════════════ -->
+<div id="admin-app">
+  <!-- HEADER -->
+  <header class="header">
+    <div class="header-inner">
+      <a href="../index.html" class="logo">
+        <img src="../img/logo-certificadoya-lockup.svg" alt="CertificadoYa">
+      </a>
+      <div class="header-right">
+        <span class="admin-badge">Admin</span>
+        <button class="btn-logout" id="logout-btn">Cerrar sesión</button>
+      </div>
+    </div>
+  </header>
+
+  <main class="admin-main">
+    <!-- Dashboard Stats -->
+    <div class="stats-grid" id="stats-grid">
+      <div class="stat-card">
+        <div class="stat-label">Leads Hoy</div>
+        <div class="stat-value" id="stat-leads-hoy">—</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-label">Leads Totales</div>
+        <div class="stat-value" id="stat-leads-totales">—</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-label">Ingresos Hoy</div>
+        <div class="stat-value green" id="stat-ingresos-hoy">—</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-label">Ingresos Totales</div>
+        <div class="stat-value green" id="stat-ingresos-totales">—</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-label">Pagos Pendientes</div>
+        <div class="stat-value orange" id="stat-pagos-pendientes">—</div>
+      </div>
+    </div>
+
+    <!-- LEADS TABLE -->
+    <div class="section-header">
+      <h2>Leads <span class="count-badge" id="leads-count">0</span></h2>
+    </div>
+    <div class="filter-bar" id="leads-filters">
+      <button class="filter-btn active" data-filter="todas">Todas</button>
+      <button class="filter-btn" data-filter="nuevo">Nuevo</button>
+      <button class="filter-btn" data-filter="asignado">Asignado</button>
+      <button class="filter-btn" data-filter="completado">Completado</button>
+      <button class="filter-btn" data-filter="cancelado">Cancelado</button>
+    </div>
+    <div class="table-wrapper">
+      <table>
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Nombre</th>
+            <th>Email</th>
+            <th>Teléfono</th>
+            <th>Provincia</th>
+            <th>Metros²</th>
+            <th>Precio</th>
+            <th>Estado</th>
+            <th>Fecha</th>
+          </tr>
+        </thead>
+        <tbody id="leads-tbody">
+          <tr><td colspan="9" class="loading">Cargando leads...</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- PAGOS TÉCNICOS -->
+    <div class="section-header">
+      <h2>Pagos a Técnicos <span class="count-badge" id="pagos-count">0</span></h2>
+    </div>
+    <div class="filter-bar" id="pagos-filters">
+      <button class="filter-btn active" data-filter="todos">Todos</button>
+      <button class="filter-btn" data-filter="pendiente">Pendientes</button>
+      <button class="filter-btn" data-filter="pagado">Completados</button>
+    </div>
+    <div class="table-wrapper">
+      <table>
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Lead ID</th>
+            <th>Técnico</th>
+            <th>Importe</th>
+            <th>Estado</th>
+            <th>Acción</th>
+          </tr>
+        </thead>
+        <tbody id="pagos-tbody">
+          <tr><td colspan="6" class="loading">Cargando pagos...</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- TÉCNICOS -->
+    <div class="section-header">
+      <h2>Técnicos Registrados <span class="count-badge" id="tecnicos-count">0</span></h2>
+    </div>
+    <div class="table-wrapper">
+      <table>
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Nombre</th>
+            <th>Email</th>
+            <th>Teléfono</th>
+            <th>Provincia</th>
+            <th>Registro</th>
+          </tr>
+        </thead>
+        <tbody id="tecnicos-tbody">
+          <tr><td colspan="6" class="loading">Cargando técnicos...</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </main>
+</div>
+
+<script>
+(function() {
+  'use strict';
+
+  // ─── Config ───
+  const SUPABASE_URL = 'https://wypgqpgjlookbhuaiyxa.supabase.co';
+  const SUPABASE_KEY = 'sb_publishable_MsDx5jVGtDAzoB3l3-8DiQ_BxWpChA0';
+  const API_HEADERS = {
+    'apikey': SUPABASE_KEY,
+    'Authorization': 'Bearer ' + SUPABASE_KEY,
+    'Content-Type': 'application/json',
+    'Accept': 'application/json'
+  };
+
+  const ADMIN_EMAIL = 'admin@certificadoya.es';
+  const ADMIN_PASS  = 'admin123';
+
+  // ─── State ───
+  let leadsData = [];
+  let pagosData = [];
+  let tecnicosData = [];
+  let leadsFilter = 'todas';
+  let pagosFilter = 'todos';
+  let isLoggedIn = false;
+
+  // ─── DOM refs ───
+  const loginScreen   = document.getElementById('login-screen');
+  const adminApp      = document.getElementById('admin-app');
+  const loginForm     = document.getElementById('login-form');
+  const loginEmail    = document.getElementById('login-email');
+  const loginPass     = document.getElementById('login-password');
+  const loginError    = document.getElementById('login-error');
+  const loginBtn      = document.getElementById('login-btn');
+  const logoutBtn     = document.getElementById('logout-btn');
+  const toastEl       = document.getElementById('toast');
+
+  // ─── Toast ───
+  let toastTimeout;
+  function showToast(msg, type) {
+    type = type || 'success';
+    clearTimeout(toastTimeout);
+    toastEl.textContent = msg;
+    toastEl.className = 'toast ' + type + ' show';
+    toastTimeout = setTimeout(function() {
+      toastEl.classList.remove('show');
+    }, 3000);
+  }
+
+  // ─── Login ───
+  function handleLogin(email, pass) {
+    if (email === ADMIN_EMAIL && pass === ADMIN_PASS) {
+      isLoggedIn = true;
+      loginScreen.classList.add('hidden');
+      adminApp.classList.add('show');
+      loginError.classList.remove('show');
+      loadAllData();
+    } else {
+      loginError.classList.add('show');
+    }
+  }
+
+  loginForm.addEventListener('submit', function(e) {
+    e.preventDefault();
+    handleLogin(loginEmail.value.trim(), loginPass.value);
+  });
+
+  logoutBtn.addEventListener('click', function() {
+    isLoggedIn = false;
+    adminApp.classList.remove('show');
+    loginScreen.classList.remove('hidden');
+    loginPass.value = '';
+    loginEmail.value = '';
+    loginError.classList.remove('show');
+  });
+
+  // ─── API helpers ───
+  async function apiGet(table) {
+    const url = SUPABASE_URL + '/rest/v1/' + table + '?select=*';
+    const res = await fetch(url, { headers: API_HEADERS });
+    if (!res.ok) throw new Error('Error ' + res.status + ' al obtener ' + table);
+    return await res.json();
+  }
+
+  async function apiPatch(table, id, data) {
+    const url = SUPABASE_URL + '/rest/v1/' + table + '?id=eq.' + id;
+    const res = await fetch(url, {
+      method: 'PATCH',
+      headers: API_HEADERS,
+      body: JSON.stringify(data)
+    });
+    if (!res.ok) throw new Error('Error ' + res.status + ' al actualizar ' + table);
+    return res;
+  }
+
+  // ─── Data loading ───
+  async function loadAllData() {
+    try {
+      const [leadsResult, pagosResult, tecnicosResult] = await Promise.all([
+        apiGet('leads').catch(function(e) {
+          console.warn('Error leads:', e);
+          return [];
+        }),
+        apiGet('pagos_tecnicos').catch(function(e) {
+          console.warn('Error pagos:', e);
+          return [];
+        }),
+        apiGet('tecnicos').catch(function(e) {
+          console.warn('Error técnicos:', e);
+          return [];
+        })
+      ]);
+
+      leadsData = Array.isArray(leadsResult) ? leadsResult : [];
+      pagosData = Array.isArray(pagosResult) ? pagosResult : [];
+      tecnicosData = Array.isArray(tecnicosResult) ? tecnicosResult : [];
+
+      renderDashboard();
+      renderLeads();
+      renderPagos();
+      renderTecnicos();
+    } catch (err) {
+      showToast('Error al cargar datos: ' + err.message, 'error');
+    }
+  }
+
+  // ─── Dashboard ───
+  function renderDashboard() {
+    var today = new Date();
+    var todayStr = today.toISOString().slice(0, 10);
+
+    var leadsHoy = leadsData.filter(function(l) {
+      var d = l.created_at || l.fecha || '';
+      return d.slice(0, 10) === todayStr;
+    });
+
+    var leadsTotales = leadsData.length;
+
+    var ingresosHoy = 0;
+    var ingresosTotales = 0;
+    leadsData.forEach(function(l) {
+      var precio = parseFloat(l.precio) || 0;
+      ingresosTotales += precio;
+      var d = l.created_at || l.fecha || '';
+      if (d.slice(0, 10) === todayStr) {
+        ingresosHoy += precio;
+      }
+    });
+
+    var pagosPendientes = pagosData.filter(function(p) {
+      return (p.estado || '').toLowerCase() === 'pendiente';
+    }).length;
+
+    document.getElementById('stat-leads-hoy').textContent = leadsHoy.length;
+    document.getElementById('stat-leads-totales').textContent = leadsTotales;
+    document.getElementById('stat-ingresos-hoy').textContent = ingresosHoy.toFixed(2) + ' €';
+    document.getElementById('stat-ingresos-totales').textContent = ingresosTotales.toFixed(2) + ' €';
+    document.getElementById('stat-pagos-pendientes').textContent = pagosPendientes;
+  }
+
+  // ─── Leads ───
+  function renderLeads() {
+    var tbody = document.getElementById('leads-tbody');
+    var countEl = document.getElementById('leads-count');
+
+    var filtered = leadsData;
+    if (leadsFilter !== 'todas') {
+      filtered = leadsData.filter(function(l) {
+        return (l.estado || '').toLowerCase() === leadsFilter;
+      });
+    }
+
+    countEl.textContent = filtered.length;
+
+    if (filtered.length === 0) {
+      tbody.innerHTML = '<tr><td colspan="9" class="empty-state">No hay leads' +
+        (leadsFilter !== 'todas' ? ' con estado "' + leadsFilter + '"' : '') + '</td></tr>';
+      return;
+    }
+
+    tbody.innerHTML = filtered.map(function(l) {
+      var estado = (l.estado || 'nuevo').toLowerCase();
+      var fecha = l.created_at || l.fecha || '';
+      var fDisplay = fecha ? fecha.slice(0, 10) + ' ' + fecha.slice(11, 16) : '—';
+      var precio = parseFloat(l.precio) || 0;
+      return '<tr>' +
+        '<td>' + (l.id || '—') + '</td>' +
+        '<td>' + escHtml(l.nombre || l.name || '—') + '</td>' +
+        '<td>' + escHtml(l.email || '—') + '</td>' +
+        '<td>' + escHtml(l.telefono || l.phone || '—') + '</td>' +
+        '<td>' + escHtml(l.provincia || l.province || '—') + '</td>' +
+        '<td>' + (l.metros_cuadrados || l.area || '—') + '</td>' +
+        '<td>' + precio.toFixed(2) + ' €</td>' +
+        '<td><span class="status-badge ' + estado + '">' + estado.charAt(0).toUpperCase() + estado.slice(1) + '</span></td>' +
+        '<td>' + fDisplay + '</td>' +
+        '</tr>';
+    }).join('');
+  }
+
+  // ─── Pagos ───
+  function renderPagos() {
+    var tbody = document.getElementById('pagos-tbody');
+    var countEl = document.getElementById('pagos-count');
+
+    var filtered = pagosData;
+    if (pagosFilter !== 'todos') {
+      filtered = pagosData.filter(function(p) {
+        return (p.estado || '').toLowerCase() === pagosFilter;
+      });
+    }
+
+    countEl.textContent = filtered.length;
+
+    if (filtered.length === 0) {
+      tbody.innerHTML = '<tr><td colspan="6" class="empty-state">No hay pagos' +
+        (pagosFilter !== 'todos' ? ' con estado "' + pagosFilter + '"' : '') + '</td></tr>';
+      return;
+    }
+
+    tbody.innerHTML = filtered.map(function(p) {
+      var estado = (p.estado || 'pendiente').toLowerCase();
+      var esPendiente = estado === 'pendiente';
+      var importe = parseFloat(p.importe || p.monto || 0);
+      var tecnicoNombre = p.tecnico_nombre || p.tecnico || p.técnico || '—';
+      return '<tr>' +
+        '<td>' + (p.id || '—') + '</td>' +
+        '<td>' + (p.lead_id || '—') + '</td>' +
+        '<td>' + escHtml(tecnicoNombre) + '</td>' +
+        '<td>' + importe.toFixed(2) + ' €</td>' +
+        '<td><span class="status-badge ' + estado + '">' + estado.charAt(0).toUpperCase() + estado.slice(1) + '</span></td>' +
+        '<td>' +
+          (esPendiente
+            ? '<button class="btn-sm green" data-pago-id="' + (p.id || '') + '" onclick="window.__marcarPagado(event)">Marcar como pagado</button>'
+            : '<span style="color:var(--color-tinta-tenue);font-size:.78rem;">—</span>') +
+        '</td>' +
+        '</tr>';
+    }).join('');
+  }
+
+  // Marcar como pagado (global para onclick)
+  window.__marcarPagado = function(e) {
+    var btn = e.currentTarget;
+    var pagoId = btn.getAttribute('data-pago-id');
+    if (!pagoId) return;
+    btn.disabled = true;
+    btn.textContent = 'Actualizando...';
+
+    apiPatch('pagos_tecnicos', pagoId, { estado: 'pagado' })
+      .then(function() {
+        showToast('Pago #' + pagoId + ' marcado como pagado ✅');
+        // Refresh pagos
+        return apiGet('pagos_tecnicos');
+      })
+      .then(function(result) {
+        pagosData = Array.isArray(result) ? result : [];
+        renderPagos();
+        renderDashboard();
+      })
+      .catch(function(err) {
+        showToast('Error: ' + err.message, 'error');
+        btn.disabled = false;
+        btn.textContent = 'Marcar como pagado';
+      });
+  };
+
+  // ─── Técnicos ───
+  function renderTecnicos() {
+    var tbody = document.getElementById('tecnicos-tbody');
+    var countEl = document.getElementById('tecnicos-count');
+
+    countEl.textContent = tecnicosData.length;
+
+    if (tecnicosData.length === 0) {
+      tbody.innerHTML = '<tr><td colspan="6" class="empty-state">No hay técnicos registrados</td></tr>';
+      return;
+    }
+
+    tbody.innerHTML = tecnicosData.map(function(t) {
+      var fecha = t.created_at || t.fecha || t.registro || '';
+      var fDisplay = fecha ? fecha.slice(0, 10) : '—';
+      return '<tr>' +
+        '<td>' + (t.id || '—') + '</td>' +
+        '<td>' + escHtml(t.nombre || t.name || '—') + '</td>' +
+        '<td>' + escHtml(t.email || '—') + '</td>' +
+        '<td>' + escHtml(t.telefono || t.phone || '—') + '</td>' +
+        '<td>' + escHtml(t.provincia || t.province || '—') + '</td>' +
+        '<td>' + fDisplay + '</td>' +
+        '</tr>';
+    }).join('');
+  }
+
+  // ─── Filters ───
+  document.getElementById('leads-filters').addEventListener('click', function(e) {
+    var btn = e.target.closest('.filter-btn');
+    if (!btn) return;
+    // Remove active from all siblings
+    btn.parentElement.querySelectorAll('.filter-btn').forEach(function(b) { b.classList.remove('active'); });
+    btn.classList.add('active');
+    leadsFilter = btn.getAttribute('data-filter');
+    renderLeads();
+  });
+
+  document.getElementById('pagos-filters').addEventListener('click', function(e) {
+    var btn = e.target.closest('.filter-btn');
+    if (!btn) return;
+    btn.parentElement.querySelectorAll('.filter-btn').forEach(function(b) { b.classList.remove('active'); });
+    btn.classList.add('active');
+    pagosFilter = btn.getAttribute('data-filter');
+    renderPagos();
+  });
+
+  // ─── Helpers ───
+  function escHtml(str) {
+    if (!str) return '—';
+    var d = document.createElement('div');
+    d.textContent = String(str);
+    return d.innerHTML;
+  }
+
+  // ─── Check localStorage for session persistence ───
+  try {
+    if (localStorage.getItem('certificadoya_admin_logged') === 'true') {
+      // Auto-login
+      isLoggedIn = true;
+      loginScreen.classList.add('hidden');
+      adminApp.classList.add('show');
+      loadAllData();
+    }
+  } catch(e) {}
+
+  // Persist login state on successful login
+  var origLogin = handleLogin;
+  handleLogin = function(email, pass) {
+    if (email === ADMIN_EMAIL && pass === ADMIN_PASS) {
+      try { localStorage.setItem('certificadoya_admin_logged', 'true'); } catch(e) {}
+    }
+    origLogin(email, pass);
+  };
+
+  logoutBtn.addEventListener('click', function() {
+    try { localStorage.removeItem('certificadoya_admin_logged'); } catch(e) {}
+    isLoggedIn = false;
+    adminApp.classList.remove('show');
+    loginScreen.classList.remove('hidden');
+    loginPass.value = '';
+    loginEmail.value = '';
+    loginError.classList.remove('show');
+  });
+
+})();
+</script>
+</body>
+</html>
