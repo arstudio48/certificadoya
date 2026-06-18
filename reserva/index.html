@@ -160,16 +160,16 @@ a{color:inherit;text-decoration:none}
     tarragona:'Tarragona',teruel:'Teruel',toledo:'Toledo',valencia:'Valencia',valladolid:'Valladolid',
     bizkaia:'Bizkaia',zamora:'Zamora',zaragoza:'Zaragoza'
   };
-
+  var provNombre = provNombres[provincia] || provincia || '—';
   var supTexto = m2 ? m2 + ' m²' : '—';
 
-  document.getElementById('r-provincia').textContent = provNombres[provincia] || provincia || '—';
+  document.getElementById('r-provincia').textContent = provNombre;
   document.getElementById('r-tipo').textContent = tipoTexto[tipo] || tipo || '—';
   document.getElementById('r-superficie').textContent = supTexto;
   document.getElementById('r-precio').textContent = precio ? precio + ' €' : '—';
   document.getElementById('btn-precio').textContent = precio ? precio + ' €' : '—';
 
-  window._reservaData = { provincia:provincia, tipo, m2:parseInt(m2)||0, precio:parseFloat(precio)||0, email };
+  window._reservaData = { provincia:provincia, provinciaNombre:provNombre, tipo, m2:parseInt(m2)||0, precio:parseFloat(precio)||0, email };
 })();
 
 async function iniciarPago() {
@@ -191,36 +191,41 @@ async function iniciarPago() {
   btn.disabled = true;
 
   try {
-    var body = {
-      nombre_cliente: nombre,
-      telefono_cliente: telefono,
-      email_cliente: data.email,
-      zona: data.provincia,
-      m2: data.m2,
-      tipo_inmueble: data.tipo,
-      presupuesto: data.precio,
-      fuente: 'web-reserva',
-      estado: 'pendiente'
-    };
-
-    var res = await fetch('https://wypgqpgjlookbhuaiyxa.supabase.co/functions/v1/solicitar-servicio?action=solicitar', {
+    // Crear sesión de pago Stripe via Edge Function
+    var res = await fetch('https://wypgqpgjlookbhuaiyxa.supabase.co/functions/v1/stripe-checkout?action=create', {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json', 'apikey': 'sb_publishable_MsDx5jVGtDAzoB3l3-8DiQ_BxWpChA0' },
-      body: JSON.stringify(body)
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        price: data.precio,
+        service: 'Certificado energético (CEE)',
+        city: data.provinciaNombre || data.provincia,
+        name: nombre,
+        email: data.email,
+        phone: telefono,
+        description: 'Certificado de eficiencia energética - Todo incluido',
+        m2: data.m2,
+        tipo: data.tipo
+      })
     });
 
     if (!res.ok) {
       var errText = await res.text();
-      console.error('Error guardando solicitud:', errText);
-      mostrarErrorReserva('Error al procesar tu solicitud. Inténtalo de nuevo.');
+      console.error('Error creando sesión Stripe:', errText);
+      mostrarErrorReserva('Error al procesar el pago. Inténtalo de nuevo.');
       btn.classList.remove('cargando');
       btn.disabled = false;
       return;
     }
 
-    document.getElementById('reserva-form').style.display = 'none';
-    document.getElementById('reserva-success').style.display = 'block';
-
+    var result = await res.json();
+    if (result.url) {
+      // Redirigir a Stripe Checkout
+      window.location.href = result.url;
+    } else {
+      mostrarErrorReserva('Error al conectar con Stripe. Inténtalo de nuevo.');
+      btn.classList.remove('cargando');
+      btn.disabled = false;
+    }
   } catch (e) {
     console.error('Error en pago:', e);
     mostrarErrorReserva('Error de conexión. Inténtalo de nuevo.');

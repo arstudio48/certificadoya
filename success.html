@@ -5,27 +5,29 @@
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Pago confirmado | CertificadoYa</title>
 <meta name="robots" content="noindex,nofollow">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-body{font-family:'DM Sans',sans-serif;background:#0A0A0B;color:#e8e8ea;display:flex;align-items:center;justify-content:center;min-height:100vh;padding:1rem}
-.success-card{background:#141416;border:1px solid #2a2a2e;border-radius:16px;padding:2.5rem;max-width:480px;width:100%;text-align:center}
+body{font-family:'DM Sans',sans-serif;background:#f5f7f5;color:#1a2e1e;display:flex;align-items:center;justify-content:center;min-height:100vh;padding:1rem}
+.card{background:#fff;border:1px solid #e5e7eb;border-radius:16px;padding:2.5rem;max-width:480px;width:100%;text-align:center;box-shadow:0 4px 16px rgba(0,0,0,.04)}
 .icon{font-size:3.5rem;margin-bottom:1rem}
-h1{font-size:1.4rem;font-weight:700;color:#00ffbb;margin-bottom:.75rem}
-p{font-size:.88rem;color:#8a8a9a;line-height:1.6;margin-bottom:1.5rem}
-.btn{display:inline-block;background:#00ffbb;color:#0A0A0B;font-weight:600;padding:.6rem 1.5rem;border-radius:8px;font-size:.85rem;text-decoration:none}
-.btn:hover{opacity:.9}
-.loading{font-size:.85rem;color:#55556a;margin:1rem 0}
-.spinner{width:20px;height:20px;border:2px solid #2a2a2e;border-top-color:#00ffbb;border-radius:50%;animation:spin .6s linear infinite;margin:1rem auto}
-@keyframes spin{to{transform:rotate(360deg)}
-.success-card small{display:block;margin-top:1rem;font-size:.72rem;color:#55556a}
+h1{font-size:1.4rem;font-weight:700;color:#16a34a;margin-bottom:.75rem}
+p{font-size:.88rem;color:#6b7b5e;line-height:1.6;margin-bottom:1.5rem}
+.btn{display:inline-block;background:#16a34a;color:#fff;font-weight:600;padding:.6rem 1.5rem;border-radius:8px;font-size:.85rem;text-decoration:none}
+.btn:hover{background:#15803d}
+.loading{font-size:.85rem;color:#8a9a8a;margin:1rem 0}
+.spinner{width:20px;height:20px;border:2px solid #dce8d0;border-top-color:#16a34a;border-radius:50%;animation:spin .6s linear infinite;margin:1rem auto}
+@keyframes spin{to{transform:rotate(360deg)}}
+.card small{display:block;margin-top:1rem;font-size:.72rem;color:#b0c0a8}
 </style>
-  <link rel="stylesheet" href="/css/tema-claro-certificadoya.css">
-  <link rel="icon" type="image/png" sizes="32x32" href="/img/favicon-32.png">
-  <link rel="icon" type="image/png" sizes="16x16" href="/img/favicon-16.png">
-  <link rel="apple-touch-icon" sizes="180x180" href="/img/apple-touch-icon-180.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/img/favicon-32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/img/favicon-16.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/img/apple-touch-icon-180.png">
 </head>
 <body>
-<div class="success-card" id="success-card">
+<div class="card" id="card">
   <div class="loading" id="loading-state">
     <div class="spinner"></div>
     <p>Verificando tu pago...</p>
@@ -39,7 +41,6 @@ p{font-size:.88rem;color:#8a8a9a;line-height:1.6;margin-bottom:1.5rem}
   </div>
 </div>
 <script>
-// Verificar pago con la Edge Function
 (function(){
   var params = new URLSearchParams(window.location.search);
   var sessionId = params.get('session_id');
@@ -52,9 +53,8 @@ p{font-size:.88rem;color:#8a8a9a;line-height:1.6;margin-bottom:1.5rem}
     return;
   }
 
-  // Reintentar hasta 5 veces (Stripe puede tardar en confirmar)
-  async function verificarPago(intento) {
-    for (var i = 1; i <= intento; i++) {
+  async function verificarPago(intentos) {
+    for (var i = 1; i <= intentos; i++) {
       try {
         var res = await fetch('https://wypgqpgjlookbhuaiyxa.supabase.co/functions/v1/stripe-checkout?action=confirm', {
           method: 'POST',
@@ -68,9 +68,8 @@ p{font-size:.88rem;color:#8a8a9a;line-height:1.6;margin-bottom:1.5rem}
           return;
         }
       } catch(e) {}
-      if (i < intento) await new Promise(function(r){setTimeout(r, i * 2000)});
+      if (i < intentos) await new Promise(function(r){setTimeout(r, i * 2000)});
     }
-    // Mostrar éxito aunque fallen todas las verificaciones (el pago ya se hizo en Stripe)
     loadingEl.style.display = 'none';
     successEl.style.display = 'block';
   }
