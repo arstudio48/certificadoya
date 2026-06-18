@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 460 120" width="460" height="120" role="img" aria-label="CertificadoYa">
+  <defs><linearGradient id="tile" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#23B26C"/><stop offset="1" stop-color="#108A4D"/></linearGradient></defs>
+  <rect x="8" y="8" width="104" height="104" rx="27" fill="url(#tile)"/>
+  <rect x="8" y="8" width="104" height="50" rx="27" fill="#ffffff" opacity="0.08"/>
+  <circle cx="58" cy="60" r="27" fill="none" stroke="#ffffff" stroke-width="11" stroke-linecap="round" stroke-dasharray="122 48" transform="rotate(50 58 60)"/>
+  <g transform="rotate(-28 57 60)">
+    <path d="M57 46 C48 53, 48 67, 57 74 C66 67, 66 53, 57 46 Z" fill="#ffffff"/>
+    <path d="M57 48 C54 55, 54 65, 57 72" fill="none" stroke="#108A4D" stroke-width="2.6" stroke-linecap="round"/>
+  </g>
+  <text x="130" y="74" font-family="DM Sans, system-ui, sans-serif" font-size="40" font-weight="900" letter-spacing="-1.2" fill="#14241C">CertificadoYa</text>
+</svg>

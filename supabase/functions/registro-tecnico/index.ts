@@ -21,9 +21,9 @@ serve(async (req) => {
   }
 
   try {
-    const { nombre, email, telefono, titulacion } = await req.json()
+    const { nombre, email, telefono, titulacion, provincias } = await req.json()
 
-    if (!nombre || !email || !telefono || !titulacion) {
+    if (!nombre || !email || !telefono) {
       return new Response(JSON.stringify({ error: 'Faltan campos obligatorios' }), { status: 400, headers: { ...corsHeaders, 'Content-Type': 'application/json' } })
     }
 
@@ -84,7 +84,8 @@ serve(async (req) => {
         email,
         nombre,
         telefono,
-        titulacion,
+        titulacion: titulacion || null,
+        provincia: provincias || null,
         verificado: false,
         activo: true
       })
