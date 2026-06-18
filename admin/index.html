@@ -504,6 +504,7 @@
             <th>Nombre</th>
             <th>Email</th>
             <th>Teléfono</th>
+            <th>Dirección</th>
             <th>Provincia</th>
             <th>Metros²</th>
             <th>Precio</th>
@@ -512,7 +513,7 @@
           </tr>
         </thead>
         <tbody id="leads-tbody">
-          <tr><td colspan="9" class="loading">Cargando leads...</td></tr>
+          <tr><td colspan="10" class="loading">Cargando leads...</td></tr>
         </tbody>
       </table>
     </div>
@@ -742,7 +743,7 @@
     countEl.textContent = filtered.length;
 
     if (filtered.length === 0) {
-      tbody.innerHTML = '<tr><td colspan="9" class="empty-state">No hay leads' +
+      tbody.innerHTML = '<tr><td colspan="10" class="empty-state">No hay leads' +
         (leadsFilter !== 'todas' ? ' con estado "' + leadsFilter + '"' : '') + '</td></tr>';
       return;
     }
@@ -752,11 +753,15 @@
       var fecha = l.created_at || l.fecha || '';
       var fDisplay = fecha ? fecha.slice(0, 10) + ' ' + fecha.slice(11, 16) : '—';
       var precio = parseFloat(l.precio) || 0;
+      var direccionStr = [l.direccion, l.numero].filter(Boolean).join(' ');
+      var ciudadCp = [l.codigo_postal, l.ciudad].filter(Boolean).join(' ');
+      var addrDisplay = [direccionStr, ciudadCp].filter(Boolean).join(', ') || '—';
       return '<tr>' +
         '<td>' + (l.id || '—') + '</td>' +
         '<td>' + escHtml(l.nombre || l.name || '—') + '</td>' +
         '<td>' + escHtml(l.email || '—') + '</td>' +
         '<td>' + escHtml(l.telefono || l.phone || '—') + '</td>' +
+        '<td>' + escHtml(addrDisplay) + '</td>' +
         '<td>' + escHtml(l.provincia || l.province || '—') + '</td>' +
         '<td>' + (l.metros_cuadrados || l.area || '—') + '</td>' +
         '<td>' + precio.toFixed(2) + ' €</td>' +

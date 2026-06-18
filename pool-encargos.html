@@ -1204,6 +1204,7 @@
           <div class="lead-meta">
             <span>📍 ${lead.zona || '—'}</span>
             <span>📐 ${lead.m2 || '?'} m² · ${lead.tipo_inmueble || '—'}</span>
+            ${lead.direccion || lead.ciudad || lead.codigo_postal ? `<span>🏠 ${(lead.direccion || '')}${lead.numero ? ' ' + lead.numero : ''}, ${lead.codigo_postal || ''} ${lead.ciudad || ''}</span>` : ''}
             <span>📅 ${fecha}</span>
             <span class="lead-status ${statusClass}">${estadoLabel}</span>
           </div>

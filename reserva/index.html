@@ -107,6 +107,26 @@ a{color:inherit;text-decoration:none}
         <input type="tel" id="reserva-telefono" class="form-input" placeholder="612 345 678" autocomplete="tel" required pattern="[0-9]{9}">
       </div>
 
+      <!-- Dirección del inmueble -->
+      <div class="form-group">
+        <label for="reserva-direccion">Dirección del inmueble</label>
+        <input type="text" id="reserva-direccion" class="form-input" placeholder="Calle Mayor">
+      </div>
+      <div style="display:flex;gap:.75rem">
+        <div class="form-group" style="flex:1">
+          <label for="reserva-numero">Número</label>
+          <input type="text" id="reserva-numero" class="form-input" placeholder="23">
+        </div>
+        <div class="form-group" style="flex:2">
+          <label for="reserva-ciudad">Ciudad</label>
+          <input type="text" id="reserva-ciudad" class="form-input" placeholder="Gijón">
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="reserva-cp">Código postal *</label>
+        <input type="text" id="reserva-cp" class="form-input" placeholder="33201" pattern="[0-9]{5}" required maxlength="5">
+      </div>
+
       <div class="reserva-privacy">
         <label>
           <input type="checkbox" id="reserva-consent" required>
@@ -175,6 +195,10 @@ a{color:inherit;text-decoration:none}
 async function iniciarPago() {
   var nombre = document.getElementById('reserva-nombre').value.trim();
   var telefono = document.getElementById('reserva-telefono').value.trim();
+  var direccion = document.getElementById('reserva-direccion').value.trim();
+  var numero = document.getElementById('reserva-numero').value.trim();
+  var ciudad = document.getElementById('reserva-ciudad').value.trim();
+  var cp = document.getElementById('reserva-cp').value.trim();
   var consent = document.getElementById('reserva-consent').checked;
   var errorEl = document.getElementById('reserva-error');
   var btn = document.getElementById('btn-pagar');
@@ -184,6 +208,7 @@ async function iniciarPago() {
 
   if (!nombre || nombre.length < 3) { mostrarErrorReserva('Introduce tu nombre completo'); return; }
   if (!telefono || !/^[0-9]{9}$/.test(telefono)) { mostrarErrorReserva('Introduce un teléfono válido (9 dígitos)'); return; }
+  if (!cp || !/^[0-9]{5}$/.test(cp)) { mostrarErrorReserva('Introduce un código postal válido (5 dígitos)'); return; }
   if (!consent) { mostrarErrorReserva('Acepta la política de privacidad'); return; }
   if (!data || !data.precio) { mostrarErrorReserva('Error: datos de presupuesto no válidos. Vuelve a calcular.'); return; }
 
@@ -204,7 +229,11 @@ async function iniciarPago() {
         phone: telefono,
         description: 'Certificado de eficiencia energética - Todo incluido',
         m2: data.m2,
-        tipo: data.tipo
+        tipo: data.tipo,
+        cp: cp,
+        direccion: direccion,
+        numero: numero,
+        ciudad: ciudad
       })
     });
 
