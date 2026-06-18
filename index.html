@@ -484,9 +484,9 @@
 }
 .hero-f1-features span svg { width: 16px; height: 16px; flex-shrink: 0; }
 .hero-f1-card {
-  background: #FFFFFF; border-radius: 20px; padding: 1.5rem;
+  background: #FFFFFF; border-radius: var(--radio-card); padding: 1.5rem;
   box-shadow: 0 20px 60px rgba(22,163,74,0.08);
-  border: 1px solid #E3ECE6;
+  border: 1px solid var(--hero-border, #E3ECE6);
 }
 
 /* ── ESTADISTICAS / CONFIAR — TEMA CLARO ── */
@@ -1250,20 +1250,20 @@ var provSlugs = {}; provincias.forEach(function(p){provSlugs[p.slug]=p.nombre;})
       </div>
 
       <!-- Beneficios (sin precios visibles al público) -->
-      <div style="display:grid;grid-template-columns:1fr 1fr;gap:1.25rem;max-width:700px;margin:0 auto 2rem" class="tecnicos-grid-2">
-        <div class="fix-beneficio-card" style="background:white;border:1px solid #bbf7d0;border-radius:12px;padding:1.25rem" data-fix="WEB-FIX-HOME-001">
+      <div class="tecnicos-grid-2">
+        <div class="fix-beneficio-card" data-fix="WEB-FIX-HOME-001">
           <div class="fix-beneficio-title">Sin cuotas</div>
-          <p class="fix-beneficio-desc" style="margin:0">Registro gratuito. Sin mensualidades ni permanencia. Pagas solo por los trabajos que recibes.</p>
+          <p class="fix-beneficio-desc">Registro gratuito. Sin mensualidades ni permanencia. Pagas solo por los trabajos que recibes.</p>
         </div>
-        <div class="fix-beneficio-card" style="background:white;border:1px solid #bbf7d0;border-radius:12px;padding:1.25rem" data-fix="WEB-FIX-HOME-001">
+        <div class="fix-beneficio-card" data-fix="WEB-FIX-HOME-001">
           <div class="fix-beneficio-title">Clientes cerca</div>
-          <p class="fix-beneficio-desc" style="margin:0">Trabajos filtrados por tu código postal y provincia. Sin desplazamientos largos.</p>
+          <p class="fix-beneficio-desc">Trabajos filtrados por tu código postal y provincia. Sin desplazamientos largos.</p>
         </div>
       </div>
 
       <div style="display:flex;gap:1rem;justify-content:center;flex-wrap:wrap">
-        <a href="/panel-tecnicos.html" class="btn-cta" style="display:inline-block;text-decoration:none;width:auto;padding:.8rem 2rem;font-size:.95rem">Regístrate gratis →</a>
-        <a href="/blog/?cat=tecnicos" style="display:inline-block;padding:.7rem 1.5rem;border:2px solid #16a34a;color:#16a34a;border-radius:8px;text-decoration:none;font-weight:600;font-size:.9rem">Guías y recursos <img src="/img/ico-tecnicos.svg" alt="Técnico" width="18" height="18" style="vertical-align:middle"></a>
+        <a href="/panel-tecnicos.html" class="btn-cta btn-cta-inline">Regístrate gratis →</a>
+        <a href="/blog/?cat=tecnicos" class="btn-outline-link">Guías y recursos <img src="/img/ico-tecnicos.svg" alt="Técnico" width="18" height="18" style="vertical-align:middle"></a>
       </div>
 
       <div style="display:flex;gap:2rem;justify-content:center;margin-top:2.5rem;flex-wrap:wrap">
