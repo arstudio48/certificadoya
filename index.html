@@ -274,6 +274,33 @@
   .property-card { padding: .5rem .2rem; font-size: .7rem; }
   .property-card svg { width: 18px; height: 18px; }
 }
+/* Trust section — foto oficina + estadísticas */
+.trust-section { padding: 5rem 2rem; background: #FFFFFF; }
+.trust-inner { max-width: 1100px; margin: 0 auto; }
+.trust-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; align-items: center; }
+.trust-image { border-radius: 16px; overflow: hidden; position: relative; box-shadow: 0 8px 30px rgba(0,0,0,0.06); }
+.trust-image img { width: 100%; height: 450px; object-fit: cover; display: block; }
+.trust-image::after { content: ''; position: absolute; inset: 0; background: linear-gradient(135deg, rgba(22,163,74,0.04), transparent 50%); pointer-events: none; }
+.trust-content { display: flex; flex-direction: column; gap: 1rem; }
+.trust-badge { display: inline-flex; align-items: center; gap: .5rem; background: rgba(22,163,74,0.1); color: #16a34a; font-size: .8rem; font-weight: 600; padding: .4rem 1rem; border-radius: 50px; width: fit-content; }
+.trust-content h2 { font-size: 1.8rem; font-weight: 700; color: #1a2e1e; line-height: 1.2; margin: 0; }
+.trust-content h2 span { color: #16a34a; }
+.trust-content p { font-size: .95rem; color: #4a6a52; line-height: 1.6; margin: 0; max-width: 460px; }
+.trust-stats { display: grid; grid-template-columns: repeat(3,1fr); gap: 1rem; margin-top: .5rem; }
+.stat-item { text-align: center; padding: 1rem; background: #f0faf2; border-radius: 12px; }
+.stat-num { font-size: 1.6rem; font-weight: 800; color: #16a34a; }
+.stat-label { font-size: .75rem; color: #4a6a52; margin-top: .2rem; }
+.trust-testimonial { margin-top: .5rem; padding: 1.25rem; background: #f0faf2; border-radius: 12px; border-left: 3px solid #16a34a; }
+.trust-testimonial p { font-size: .88rem; color: #4a6a52; font-style: italic; margin: 0 0 .5rem; line-height: 1.5; }
+.trust-testimonial cite { font-size: .78rem; color: #16a34a; font-style: normal; font-weight: 600; }
+@media (max-width: 768px) {
+  .trust-grid { grid-template-columns: 1fr; }
+  .trust-image { order: -1; }
+  .trust-image img { height: 250px; }
+  .trust-stats { grid-template-columns: repeat(3,1fr); gap: .5rem; }
+  .stat-num { font-size: 1.3rem; }
+  .trust-content h2 { font-size: 1.4rem; }
+}
 /* Resultado */
 .calc-resultado {
   text-align: center; margin-top: .5rem;
@@ -754,6 +781,41 @@ var provSlugs = {}; provincias.forEach(function(p){provSlugs[p.slug]=p.nombre;})
       </div>
     </div>
   </section>
+
+  <!-- CONFIAR + ESTADISTICAS -->
+  <section class="trust-section">
+    <div class="trust-inner">
+      <div class="trust-grid">
+        <div class="trust-image">
+          <img src="/img/webp-madrid-skyscrapers.webp" alt="Madrid — Cuatro Torres, sede de nuestra oficina" width="700" height="450" loading="lazy">
+        </div>
+        <div class="trust-content">
+          <div class="trust-badge">✓ Confianza verificada</div>
+          <h2>Más de <span>1.200</span> certificados gestionados con <span>éxito</span></h2>
+          <p>Conectamos a propietarios con técnicos certificadores colegiados en toda España. Sin intermediarios, sin sorpresas.</p>
+          <div class="trust-stats">
+            <div class="stat-item">
+              <div class="stat-num">1.200+</div>
+              <div class="stat-label">CEE emitidos</div>
+            </div>
+            <div class="stat-item">
+              <div class="stat-num">50+</div>
+              <div class="stat-label">Técnicos verificados</div>
+            </div>
+            <div class="stat-item">
+              <div class="stat-num">48-96h</div>
+              <div class="stat-label">Entrega media</div>
+            </div>
+          </div>
+          <div class="trust-testimonial">
+            <p>"Necesitaba el certificado para vender mi piso en Gijón. En 3 días lo tenía registrado y el técnico fue muy profesional. Repetiría sin dudar."</p>
+            <cite>— María García, Gijón</cite>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <section id="como-funciona" class="pasos-section" style="scroll-margin-top:80px">
     <span style="display:inline-block;background:#dcfce7;color:#3d5a1e;font-size:.78rem;font-weight:600;padding:.35rem .9rem;border-radius:20px;margin-bottom:.75rem">En 4 pasos</span>
     <h2>Así de fácil es conseguir tu certificado</h2>
