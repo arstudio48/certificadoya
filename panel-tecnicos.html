@@ -10,7 +10,7 @@
   <meta name="google-site-verification" content="jRJ8qVGRFBYAdjdpGyyJl0eTKhRGCzHc3HvnsO2iUZg">
   <link rel="canonical" href="https://www.certificadoya.es/panel-tecnicos.html">
   <meta property="og:title" content="CertificadoYa — Únete como técnico certificador">
-  <meta property="og:description" content="Recibe trabajos en tu zona. Sin cuotas de alta. Comisión del 18%, la más baja del mercado. Solo para técnicos colegiados.">
+  <meta property="og:description" content="Recibe trabajos en tu zona. Sin cuotas de alta. Comisión del 18%, la más baja del mercado.">
   <meta property="og:url" content="https://www.certificadoya.es/panel-tecnicos.html/">
   <meta property="og:type" content="website">
   <meta property="og:image" content="https://www.certificadoya.es/img/og-image.png">
@@ -35,7 +35,7 @@
   </script>
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="CertificadoYa — Únete como técnico certificador">
-  <meta name="twitter:description" content="Recibe trabajos en tu zona. Sin cuotas de alta. Comisión del 18%, la más baja del mercado. Solo para técnicos colegiados.">
+  <meta name="twitter:description" content="Recibe trabajos en tu zona. Sin cuotas de alta. Comisión del 18%, la más baja del mercado.">
   <meta name="twitter:image" content="https://www.certificadoya.es/img/og-image.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -568,7 +568,7 @@
           <div class="benefit-icon"><img src="/img/ico-tecnicos.svg" width="40" height="40" alt="Verificado"></div>
           <div class="benefit-text">
             <h4>Perfil profesional verificado</h4>
-            <p>Verificamos tu colegiación. Los clientes confían porque saben que eres un profesional habilitado.</p>
+            <p>Validamos tu titulación. Los clientes confían porque saben que eres un profesional habilitado.</p>
           </div>
         </div>
       </div>
@@ -579,8 +579,8 @@
       <div class="registro-card" id="reg-form">
         <div class="registro-card-header">
           <div class="icon-circle"><img src="/img/ico-tecnicos.svg" width="56" height="56" alt="Técnico"></div>
-          <h2>Crea tu cuenta gratis</h2>
-          <p>Regístrate, crea tu perfil profesional y empieza a recibir solicitudes de trabajo en tu zona.</p>
+          <h2>Únete a la red</h2>
+          <p>Rellena nombre, email y teléfono. Listo. Después completas tu perfil a tu ritmo.</p>
         </div>
 
         <div class="form-grid">
@@ -597,8 +597,13 @@
             <input type="tel" id="reg-telefono" placeholder="612 345 678" required>
           </div>
           <div class="form-group form-full">
-            <label for="reg-titulacion">Titulación *</label>
-            <select id="reg-titulacion" required>
+            <label for="reg-provincias">Provincia(s) donde trabajas *</label>
+            <input type="text" id="reg-provincias" placeholder="Ej: Gipuzkoa, Madrid, Asturias" required>
+            <span style="font-size:.78rem;color:#9aab8a">Puedes escribir varias separadas por coma</span>
+          </div>
+          <div class="form-group form-full">
+            <label for="reg-titulacion">Titulación <span style="font-weight:400;color:#9aab8a">(opcional)</span></label>
+            <select id="reg-titulacion">
               <option value="">Selecciona...</option>
               <option value="arquitecto">Arquitecto</option>
               <option value="aparejador">Aparejador / Arquitecto técnico</option>
@@ -612,13 +617,13 @@
         </div>
 
         <p style="font-size:.78rem;color:#9aab8a;margin-top:.75rem;line-height:1.5">
-          <img src="/img/ico-confianza.svg" width="14" height="14" alt="" style="vertical-align:middle;margin-right:3px"> Tus datos se guardan de forma segura. Después del registro podrás completar tu perfil profesional (colegiación, provincias y datos de cobro).
+          <img src="/img/ico-confianza.svg" width="14" height="14" alt="" style="vertical-align:middle;margin-right:3px"> Registro en 30 segundos. Después completas provincias, colegiación y datos de cobro.
         </p>
 
         
 
         <button class="btn-submit" id="reg-btn" onclick="registrarTecnico()">
-          Regístrate gratis →
+          Quiero recibir trabajos →
         </button>
 
         <div class="trust-bar">
@@ -663,7 +668,7 @@
       <h3 style="color:#2d3a1f;margin-bottom:1rem">📋 Requisitos</h3>
       <ul style="list-style:none;padding:0;color:#4a5a3a;line-height:2">
         <li>✓ Ser arquitecto, aparejador, ingeniero de edificación, ingeniero industrial o técnico</li>
-        <li>✓ Estar colegiado o habilitado legalmente</li>
+        <li>✓ Titulación técnica habilitante (arquitecto, aparejador, ingeniero...)</li>
         <li>✓ Disponibilidad para realizar visitas presenciales</li>
         <li>✓ Conocimiento de software CE3X, HULC o CYPETHERM</li>
       </ul>
@@ -690,7 +695,7 @@
           <input type="text" name="nombre" placeholder="Nombre completo" required style="padding:.7rem;border:1px solid #dce8d0;border-radius:8px;font-family:Outfit,sans-serif;font-size:.88rem">
           <input type="email" name="email" placeholder="Email profesional" required style="padding:.7rem;border:1px solid #dce8d0;border-radius:8px;font-family:Outfit,sans-serif;font-size:.88rem">
           <input type="tel" name="telefono" placeholder="Teléfono" required style="padding:.7rem;border:1px solid #dce8d0;border-radius:8px;font-family:Outfit,sans-serif;font-size:.88rem">
-          <select name="profesion" required style="padding:.7rem;border:1px solid #dce8d0;border-radius:8px;font-family:Outfit,sans-serif;font-size:.88rem;background:white;color:#333">
+          <select name="profesion" style="padding:.7rem;border:1px solid #dce8d0;border-radius:8px;font-family:Outfit,sans-serif;font-size:.88rem;background:white;color:#333">
             <option value="">Selecciona tu profesión</option>
             <option>Arquitecto</option>
             <option>Arquitecto Técnico / Aparejador</option>
@@ -698,8 +703,8 @@
             <option>Ingeniero Industrial</option>
             <option>Ingeniero Técnico Industrial</option>
           </select>
-          <input type="text" name="colegiado" placeholder="Nº de colegiado" required style="padding:.7rem;border:1px solid #dce8d0;border-radius:8px;font-family:Outfit,sans-serif;font-size:.88rem">
-          <input type="text" name="provincias" placeholder="Provincias donde trabajas (ej: Madrid, Toledo)" required style="padding:.7rem;border:1px solid #dce8d0;border-radius:8px;font-family:Outfit,sans-serif;font-size:.88rem">
+          <input type="text" name="colegiado" placeholder="Nº de colegiado (opcional)" style="padding:.7rem;border:1px solid #dce8d0;border-radius:8px;font-family:Outfit,sans-serif;font-size:.88rem">
+          <input type="text" name="provincias" placeholder="Provincias donde trabajas (ej: Madrid, Toledo)" style="padding:.7rem;border:1px solid #dce8d0;border-radius:8px;font-family:Outfit,sans-serif;font-size:.88rem">
           <input type="url" name="web" placeholder="Tu web (opcional)" style="padding:.7rem;border:1px solid #dce8d0;border-radius:8px;font-family:Outfit,sans-serif;font-size:.88rem">
           <button type="submit" style="padding:.8rem;background:#16a34a;color:white;border:none;border-radius:8px;font-weight:600;font-size:.9rem;cursor:pointer;font-family:Outfit,sans-serif">Enviar solicitud →</button>
         </div>
@@ -709,30 +714,69 @@
   </div>
 
 <script>
+const EDGE_URL = 'https://wypgqpgjlookbhuaiyxa.supabase.co/functions/v1/registro-tecnico';
+
+async function registrarTecnico() {
+  const btn = document.getElementById('reg-btn');
+  const nombre = document.getElementById('reg-nombre').value.trim();
+  const email = document.getElementById('reg-email').value.trim();
+  const telefono = document.getElementById('reg-telefono').value.trim();
+  const titulacion = document.getElementById('reg-titulacion').value;
+  const provincias = document.getElementById('reg-provincias').value.trim();
+
+  if (!nombre || !email || !telefono || !provincias) {
+    alert('Por favor rellena nombre, email, teléfono y provincia(s).');
+    return;
+  }
+
+  btn.disabled = true;
+  btn.textContent = 'Enviando...';
+
+  try {
+    const r = await fetch(EDGE_URL, {
+      method: 'POST',
+      headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify({ nombre, email, telefono, provincias, titulacion: titulacion || undefined })
+    });
+    const res = await r.json();
+    if (res.success || res.id || r.status === 409) {
+      document.getElementById('reg-email-conf').textContent = email;
+      document.getElementById('reg-form').classList.add('hidden');
+      document.getElementById('reg-exito').classList.remove('hidden');
+    } else {
+      alert(res.error || 'Error al enviar. Intenta de nuevo.');
+    }
+  } catch(err) {
+    alert('Error de conexión. Intenta de nuevo.');
+  }
+  btn.disabled = false;
+  btn.textContent = 'Quiero recibir trabajos →';
+}
+
 document.getElementById('form-registro-tecnico').addEventListener('submit', async function(e) {
   e.preventDefault();
   const btn = this.querySelector('button[type=submit]');
   const msg = document.getElementById('msg-registro');
-  const data = {tecnico: {}};
-  Array.from(this.elements).forEach(el => { if(el.name) data.tecnico[el.name] = el.value; });
-  
+  const fd = {};
+  Array.from(this.elements).forEach(el => { if(el.name) fd[el.name] = el.value; });
+
   btn.textContent = 'Enviando...';
   btn.disabled = true;
-  
+
   try {
-    const flatData = {
-      nombre: data.tecnico.nombre,
-      email: data.tecnico.email,
-      telefono: data.tecnico.telefono,
-      titulacion: data.tecnico.profesion
-    };
-    const r = await fetch('https://wypgqpgjlookbhuaiyxa.supabase.co/functions/v1/registro-tecnico', {
+    const r = await fetch(EDGE_URL, {
       method: 'POST',
       headers: {'Content-Type': 'application/json'},
-      body: JSON.stringify(flatData)
+      body: JSON.stringify({
+        nombre: fd.nombre,
+        email: fd.email,
+        telefono: fd.telefono,
+        titulacion: fd.profesion || undefined,
+        provincias: fd.provincias || undefined
+      })
     });
     const res = await r.json();
-    if(res.success || res.id) {
+    if (res.success || res.id) {
       msg.style.display = 'block';
       msg.style.color = '#16a34a';
       msg.innerHTML = '✅ Solicitud enviada. Te hemos enviado un email para completar el registro.';
@@ -791,7 +835,7 @@ document.getElementById('form-registro-tecnico').addEventListener('submit', asyn
     </details>
     <details style="border:1px solid #e8ece6;border-radius:10px;padding:1rem;margin-bottom:.75rem">
       <summary style="font-weight:600;cursor:pointer;color:#2d3a1f">¿Cómo se verifican mis credenciales?</summary>
-      <p style="margin-top:.75rem;color:#6b7b5e;line-height:1.6">Al registrarte, te pediremos tu número de colegiado. Lo verificamos con el colegio profesional correspondiente. Este proceso suele tardar 48-96 horas.</p>
+      <p style="margin-top:.75rem;color:#6b7b5e;line-height:1.6">Tras el registro completarás tu perfil con titulación y, si aplica, número de colegiado. Lo validamos manualmente. Este proceso suele tardar 48-96 horas.</p>
     </details>
     <details style="border:1px solid #e8ece6;border-radius:10px;padding:1rem;margin-bottom:.75rem">
       <summary style="font-weight:600;cursor:pointer;color:#2d3a1f">¿En qué provincias hay más demanda?</summary>
