@@ -242,10 +242,13 @@
   box-shadow: 0 2px 6px rgba(0,0,0,.15); cursor: pointer;
 }
 .calc-slider-values {
+  display: flex; align-items: center; gap: .35rem;
   font-size: .9rem; font-weight: 700; color: var(--f1-text);
-  min-width: 60px; text-align: center; white-space: nowrap;
+  min-width: 110px; text-align: center; white-space: nowrap;
 }
 .calc-slider-values span:last-child { font-weight: 400; color: var(--f1-muted); font-size: .72rem; }
+.calc-slider-sep { color: var(--f1-border); font-weight: 300; }
+.calc-inline-price { color: var(--f1-accent); font-weight: 800; font-size: .95rem; min-width: 45px; }
 @media (max-width: 600px) {
   .calc-slider-group { flex-direction: column; gap: .3rem; }
   .calc-slider { width: 100%; }
@@ -787,6 +790,8 @@ var provSlugs = {}; provincias.forEach(function(p){provSlugs[p.slug]=p.nombre;})
                 <input type="range" id="calc-superficie" class="calc-slider" min="30" max="500" step="5" value="80" oninput="calcularPrecioF1()">
                 <div class="calc-slider-values">
                   <span id="calc-m2-value">80</span> <span>m²</span>
+                  <span class="calc-slider-sep">·</span>
+                  <span id="calc-inline-price" class="calc-inline-price">—</span>
                 </div>
               </div>
             </div>
@@ -1684,6 +1689,7 @@ function calcularPrecioF1() {
 
   if (provincia) {
     precioEl.textContent = total + ' €';
+    document.getElementById('calc-inline-price').textContent = total + ' €';
     detalleEl.innerHTML = cfg.label + ' · ' + m2 + ' m²' + (provNombre ? ' · ' + provNombre : '') +
       '<br><span style="font-size:.7rem;color:#66667a">Todo incluido · Sin sorpresas</span>';
     var tasaDisplay = tasa > 0 ? '<div class="desglose-linea"><span>Tasa registro autonómico</span><span>' + tasa.toFixed(2) + ' €</span></div>' : '';
