@@ -124,7 +124,36 @@
 
 </head>
 <body>
-<div id="header-inyectado"></div>
+<header class="header">
+<div class="header-inner">
+<a class="logo" href="/">
+<img src="/img/logo-certificadoya-lockup.svg" alt="CertificadoYa" style="height:44px;width:auto">
+</a>
+<nav class="nav">
+<a href="/#como-funciona">Cómo funciona</a>
+<a href="/#faq">FAQ</a>
+<a href="/blog/">Blog</a>
+<a href="/panel-tecnicos.html">¿Eres técnico?</a>
+<a class="btn-nav" href="#presupuesto">Presupuesto</a>
+</nav>
+<button aria-expanded="false" aria-label="Menú" class="hamburger" id="hamburger-btn">
+<span></span><span></span><span></span>
+</button>
+<div class="mobile-overlay" id="mobile-overlay">
+<div class="mobile-overlay-bg" id="mobile-overlay-bg"></div>
+<div class="mobile-overlay-panel" id="mobile-overlay-panel">
+<button aria-label="Cerrar menú" class="mobile-overlay-close" id="mobile-overlay-close">✕</button>
+<nav class="mobile-overlay-nav">
+<a href="/#como-funciona">Cómo funciona</a>
+<a href="/#faq">FAQ</a>
+<a href="/blog/">Blog</a>
+<a href="/panel-tecnicos.html">¿Eres técnico?</a>
+<a class="btn-nav" href="#presupuesto" style="margin:0 1rem 1rem;text-align:center">Presupuesto</a>
+</nav>
+</div>
+</div>
+</div>
+</header>
 
 <main class="blog-post">
   <div class="container blog-container">
@@ -271,7 +300,27 @@
   </div>
 </main>
 
-<div id="footer-inyectado"></div>
+<footer class="footer-v2">
+<div class="footer-grid">
+<div class="footer-brand">
+<span class="footer-logo">CertificadoYa</span>
+<p>Certificados de eficiencia energética (CEE) en toda España. Técnicos colegiados verificados. Presupuesto instantáneo.</p>
+</div>
+<div class="footer-links">
+<strong>Enlaces</strong>
+<a href="/blog/">Blog</a>
+<a href="/organismos-contacto.html">Organismos oficiales</a>
+<a href="/panel-tecnicos.html">¿Eres técnico?</a>
+</div>
+<div class="footer-links">
+<strong>Legal</strong>
+<a href="/legal/aviso-legal.html">Aviso legal</a>
+<a href="/legal/privacidad.html">Privacidad</a>
+<a href="/legal/cookies.html">Cookies</a>
+</div>
+</div>
+<p class="footer-bottom">© 2026 CertificadoYa — ArtStudio</p>
+</footer>
 <script src="/js/blog-preguntas.js" defer></script>
 
 </body>
