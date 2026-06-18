@@ -597,6 +597,11 @@
             <input type="tel" id="reg-telefono" placeholder="612 345 678" required>
           </div>
           <div class="form-group form-full">
+            <label for="reg-provincias">Provincia(s) donde trabajas *</label>
+            <input type="text" id="reg-provincias" placeholder="Ej: Gipuzkoa, Madrid, Asturias" required>
+            <span style="font-size:.78rem;color:#9aab8a">Puedes escribir varias separadas por coma</span>
+          </div>
+          <div class="form-group form-full">
             <label for="reg-titulacion">Titulación <span style="font-weight:400;color:#9aab8a">(opcional)</span></label>
             <select id="reg-titulacion">
               <option value="">Selecciona...</option>
@@ -618,7 +623,7 @@
         
 
         <button class="btn-submit" id="reg-btn" onclick="registrarTecnico()">
-          Regístrate gratis →
+          Quiero recibir trabajos →
         </button>
 
         <div class="trust-bar">
@@ -717,9 +722,10 @@ async function registrarTecnico() {
   const email = document.getElementById('reg-email').value.trim();
   const telefono = document.getElementById('reg-telefono').value.trim();
   const titulacion = document.getElementById('reg-titulacion').value;
+  const provincias = document.getElementById('reg-provincias').value.trim();
 
-  if (!nombre || !email || !telefono) {
-    alert('Por favor rellena nombre, email y teléfono.');
+  if (!nombre || !email || !telefono || !provincias) {
+    alert('Por favor rellena nombre, email, teléfono y provincia(s).');
     return;
   }
 
@@ -730,7 +736,7 @@ async function registrarTecnico() {
     const r = await fetch(EDGE_URL, {
       method: 'POST',
       headers: {'Content-Type': 'application/json'},
-      body: JSON.stringify({ nombre, email, telefono, titulacion: titulacion || undefined })
+      body: JSON.stringify({ nombre, email, telefono, provincias, titulacion: titulacion || undefined })
     });
     const res = await r.json();
     if (res.success || res.id || r.status === 409) {
@@ -744,7 +750,7 @@ async function registrarTecnico() {
     alert('Error de conexión. Intenta de nuevo.');
   }
   btn.disabled = false;
-  btn.textContent = 'Regístrate gratis →';
+  btn.textContent = 'Quiero recibir trabajos →';
 }
 
 document.getElementById('form-registro-tecnico').addEventListener('submit', async function(e) {

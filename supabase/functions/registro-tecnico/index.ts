@@ -85,7 +85,7 @@ serve(async (req) => {
         nombre,
         telefono,
         titulacion: titulacion || null,
-        provincias: provincias || null,
+        provincia: provincias || null,
         verificado: false,
         activo: true
       })
