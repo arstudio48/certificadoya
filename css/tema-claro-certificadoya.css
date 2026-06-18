@@ -1,0 +1,26 @@
+/* CertificadoYa — Tema claro (rebrand A). Cargar DESPUÉS de style(.min).css */
+:root{
+  --color-fondo:#F7FAF8; --color-fondo-alt:#EFF4F1; --color-tarjeta:#FFFFFF; --color-linea:#E3ECE6;
+  --color-tinta:#14241C; --color-tinta-suave:#44524B; --color-tinta-tenue:#7C8A83;
+  --verde-principal:#137E47; --verde-vivo:#1FA85F; --verde-claro:#EAF5EF;
+  --acento-propietarios:var(--verde-principal); --acento-tecnicos:#0E6B7A; --acento-inmobiliarias:#A6781F;
+  --cee-a:#009E5C; --cee-b:#5FB14E; --cee-c:#C3D200; --cee-d:#FFD500; --cee-e:#F7A600; --cee-f:#F06E1E; --cee-g:#E2231A;
+  --color-exito:#1FA85F; --color-aviso:#F7A600; --color-error:#E2231A;
+  --fuente-base:'DM Sans',system-ui,-apple-system,sans-serif;
+  --fuente-dato:'DM Mono',ui-monospace,monospace;
+  --radio-s:11px; --radio-m:16px; --radio-l:22px;
+  --sombra-suave:0 1px 2px rgba(20,36,28,.04), 0 12px 32px rgba(20,36,28,.07);
+}
+html{scroll-behavior:smooth}
+body{background:var(--color-fondo)!important;color:var(--color-tinta)!important;font-family:var(--fuente-base);-webkit-font-smoothing:antialiased;line-height:1.55}
+h1,h2,h3,h4{color:var(--color-tinta);letter-spacing:-.02em;line-height:1.1}
+a{color:var(--verde-principal);text-decoration:none}
+a:hover{color:var(--verde-vivo)}
+.dato,.precio,.cifra{font-family:var(--fuente-dato)}
+input,select,textarea{font-family:var(--fuente-base);background:var(--color-fondo);color:var(--color-tinta);border:1px solid var(--color-linea);border-radius:var(--radio-s)}
+input:focus,select:focus,textarea:focus{outline:none;border-color:var(--verde-vivo);box-shadow:0 0 0 3px var(--verde-claro)}
+.escala-cee{max-width:560px;margin:0 auto;display:flex;flex-direction:column;gap:8px}
+.escala-cee .barra{height:38px;border-radius:6px;display:flex;align-items:center;color:#fff;font-weight:900;padding-left:16px;clip-path:polygon(0 0,calc(100% - 19px) 0,100% 50%,calc(100% - 19px) 100%,0 100%)}
+.escala-cee .b-a{background:var(--cee-a);width:46%} .escala-cee .b-b{background:var(--cee-b);width:54%}
+.escala-cee .b-c{background:var(--cee-c);width:62%;color:#3a4400} .escala-cee .b-d{background:var(--cee-d);width:70%;color:#5a4d00}
+.escala-cee .b-e{background:var(--cee-e);width:78%} .escala-cee .b-f{background:var(--cee-f);width:86%} .escala-cee .b-g{background:var(--cee-g);width:94%}
