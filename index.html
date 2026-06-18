@@ -697,8 +697,9 @@ var provSlugs = {}; provincias.forEach(function(p){provSlugs[p.slug]=p.nombre;})
         <div class="calc-body" id="calc-body">
           <div class="calc-field">
             <label for="calc-provincia">Provincia</label>
-            <select id="calc-provincia" class="calc-select">
+            <select id="calc-provincia" class="calc-select" onchange="calcularPrecioF1()">
               <option value="">Selecciona provincia…</option>
+              <option value="madrid" selected>Madrid</option>
               <option value="alava">Álava</option>
               <option value="albacete">Albacete</option>
               <option value="alicante">Alicante</option>
@@ -782,7 +783,7 @@ var provSlugs = {}; provincias.forEach(function(p){provSlugs[p.slug]=p.nombre;})
             <div class="calc-field calc-field-half">
               <label for="calc-superficie">Superficie</label>
               <div class="calc-slider-group">
-                <input type="range" id="calc-superficie" class="calc-slider" min="30" max="500" step="5" value="80">
+                <input type="range" id="calc-superficie" class="calc-slider" min="30" max="500" step="5" value="80" oninput="calcularPrecioF1()">
                 <div class="calc-slider-values">
                   <span id="calc-m2-value">80</span> <span>m²</span>
                 </div>
@@ -1654,7 +1655,6 @@ function actualizarSlider() {
   var display = document.getElementById('calc-m2-value');
   if (slider && display) {
     display.textContent = slider.value;
-    // Actualizar fondo del slider
     var pct = ((slider.value - slider.min) / (slider.max - slider.min)) * 100;
     slider.style.background = 'linear-gradient(to right, var(--f1-accent) 0%, var(--f1-accent) ' + pct + '%, var(--f1-border) ' + pct + '%, var(--f1-border) 100%)';
   }
@@ -1671,43 +1671,34 @@ function calcularPrecioF1() {
   var detalleEl = document.getElementById('calc-resultado-detalle');
   var desgloseEl = document.getElementById('calc-resultado-desglose');
 
-  // Actualizar display del slider
   actualizarSlider();
 
-  // Siempre calcular aunque falte email/consent
   var cfg = CONFIG_TIPO[tipo] || CONFIG_TIPO.piso;
   var subtotal = cfg.base + m2 * cfg.factor;
   var tasa = TASA_REGISTRO[provincia] || 0;
   var iva = Math.round(subtotal * 0.21);
   var total = Math.round(subtotal + tasa + iva);
   if (total < 35) total = 35;
-
   var baseSinIVA = subtotal;
   var provNombre = provincia ? document.getElementById('calc-provincia').options[document.getElementById('calc-provincia').selectedIndex].text : '';
 
-  // Mostrar resultado si hay provincia seleccionada
   if (provincia) {
     precioEl.textContent = total + ' €';
     detalleEl.innerHTML = cfg.label + ' · ' + m2 + ' m²' + (provNombre ? ' · ' + provNombre : '') +
       '<br><span style="font-size:.7rem;color:#66667a">Todo incluido · Sin sorpresas</span>';
-
-    // Desglose transparente
     var tasaDisplay = tasa > 0 ? '<div class="desglose-linea"><span>Tasa registro autonómico</span><span>' + tasa.toFixed(2) + ' €</span></div>' : '';
     desgloseEl.innerHTML =
       '<div class="desglose-linea"><span>Precio servicio</span><span>' + subtotal.toFixed(2) + ' €</span></div>' +
       tasaDisplay +
       '<div class="desglose-linea"><span>IVA 21%</span><span>' + iva + ' €</span></div>' +
       '<div class="desglose-linea-total"><span>Total</span><span>' + total + ' €</span></div>';
-
     resultado.style.display = 'block';
   } else {
     resultado.style.display = 'none';
   }
 
-  // Solo guardar en Supabase si tiene email + consent
   if (provincia && email && email.includes('@') && consent) {
     window._ultimoPresupuesto = { provincia, tipo, m2, precio: total, provNombre, email, baseSinIVA, iva };
-
     if (debounceTimer) clearTimeout(debounceTimer);
     debounceTimer = setTimeout(function() {
       guardarLeadF2({ provincia, tipo, m2, precio: total, provNombre, email });
@@ -1715,26 +1706,32 @@ function calcularPrecioF1() {
   }
 }
 
-// Reactividad: calcular al cambiar cualquier campo
-document.addEventListener('DOMContentLoaded', function() {
-  var campos = ['calc-provincia', 'calc-email', 'calc-consent'];
-  campos.forEach(function(id) {
-    var el = document.getElementById(id);
-    if (el) {
-      el.addEventListener('change', function() { calcularPrecioF1(); });
-      if (el.tagName === 'INPUT' && el.type !== 'checkbox') {
-        el.addEventListener('input', function() { calcularPrecioF1(); });
-      }
-    }
-  });
-  // Slider: input continuo
+// === Event wiring: run immediately (script at bottom of body, DOM already parsed) ===
+(function() {
+  // Province select
+  var provEl = document.getElementById('calc-provincia');
+  if (provEl) {
+    provEl.addEventListener('change', calcularPrecioF1);
+  }
+  // Email input
+  var emailEl = document.getElementById('calc-email');
+  if (emailEl) {
+    emailEl.addEventListener('input', calcularPrecioF1);
+  }
+  // Consent checkbox
+  var consentEl = document.getElementById('calc-consent');
+  if (consentEl) {
+    consentEl.addEventListener('change', calcularPrecioF1);
+  }
+  // Slider: both input (live) and change (fallback for accessibility)
   var slider = document.getElementById('calc-superficie');
   if (slider) {
-    slider.addEventListener('input', function() { calcularPrecioF1(); });
+    slider.addEventListener('input', calcularPrecioF1);
+    slider.addEventListener('change', calcularPrecioF1);
   }
-  // Calcular al cargar
+  // Initial calculation
   calcularPrecioF1();
-});
+})();
 
 // F2: Guardar lead en Supabase sin bloquear la UX
 function guardarLeadF2(datos) {
