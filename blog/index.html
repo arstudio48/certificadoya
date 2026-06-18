@@ -152,8 +152,60 @@
     <button class="filter-btn" data-cat="precios" onclick="filtrarCategoria('precios', this)">Precios</button>
     <button class="filter-btn" data-cat="tecnologia" onclick="filtrarCategoria('tecnologia', this)">Tecnologia</button>
     <button class="filter-btn" data-cat="tecnicos" onclick="filtrarCategoria('tecnicos', this)"><img src="/img/ico-tecnicos.svg" alt="Técnicos" width="18" height="18" style="vertical-align:middle"> Técnicos</button>
+    <button class="filter-btn" data-cat="subvenciones" onclick="filtrarCategoria('subvenciones', this)">Subvenciones</button>
   </div>
     <div class="posts-grid">
+    <article class="blog-card featured">
+      <a href="/blog/ultimos-dias-ayudas-20000-euros-rehabilitacion-2026.html" class="blog-card-img-link">
+      <div class="blog-card-img">
+        <img src="/img/blog/subvenciones-pareja-hero.jpg" alt="Últimos días para pedir la ayuda de 20.000€" loading="lazy" style="width:100%;height:180px;object-fit:cover;border-radius:8px">
+        <span class="blog-card-cat">subvenciones</span>
+      </div>
+      </a>
+      <div class="blog-card-body">
+        <h2><a href="/blog/ultimos-dias-ayudas-20000-euros-rehabilitacion-2026.html">Últimos días para pedir la ayuda de 20.000€ para reformar tu casa</a></h2>
+        <div class="blog-card-meta">
+          <span><img src="/img/ico-rapido.svg" alt="Fecha" width="16" height="16" style="vertical-align:middle"> 2026-06-17</span>
+          <span><img src="/img/ico-rapido.svg" alt="Tiempo" width="16" height="16" style="vertical-align:middle"> 8 min</span>
+        </div>
+        <p class="blog-card-desc">El plazo para solicitar la ayuda de hasta 20.000€ para rehabilitación energética acaba el 30 de junio de 2026. Requisitos, cobertura del 100% y cómo pedirla paso a paso.</p>
+        <a href="/blog/ultimos-dias-ayudas-20000-euros-rehabilitacion-2026.html" class="blog-card-link">Leer más <span class="arrow"><img src="/img/ico-rapido.svg" alt="→" style="width:12px;height:12px;vertical-align:middle;margin-left:3px"></span></a>
+      </div>
+    </article>
+    <article class="blog-card">
+      <a href="/blog/certificado-energetico-garajes-locales.html" class="blog-card-img-link">
+      <div class="blog-card-img">
+        <img src="/img/blog/energias-alternativas-hero.jpg" alt="CEE obligatorio garajes locales edificios 2026" loading="lazy" style="width:100%;height:180px;object-fit:cover;border-radius:8px">
+        <span class="blog-card-cat">normativa</span>
+      </div>
+      </a>
+      <div class="blog-card-body">
+        <h2><a href="/blog/certificado-energetico-garajes-locales.html">¿Es obligatorio el certificado energético en garajes, locales y edificios? 2026</a></h2>
+        <div class="blog-card-meta">
+          <span><img src="/img/ico-rapido.svg" alt="Fecha" width="16" height="16" style="vertical-align:middle"> 2026-06-04</span>
+          <span><img src="/img/ico-rapido.svg" alt="Tiempo" width="16" height="16" style="vertical-align:middle"> 9 min</span>
+        </div>
+        <p class="blog-card-desc">Guía completa 2026: ¿el CEE es obligatorio en garajes, locales comerciales, naves industriales y edificios completos? Plazos, sanciones y cómo obtenerlo según el tipo de inmueble.</p>
+        <a href="/blog/certificado-energetico-garajes-locales.html" class="blog-card-link">Leer más <span class="arrow"><img src="/img/ico-rapido.svg" alt="→" style="width:12px;height:12px;vertical-align:middle;margin-left:3px"></span></a>
+      </div>
+    </article>
+    <article class="blog-card">
+      <a href="/blog/ayudas-21400-euros-rehabilitacion-2026.html" class="blog-card-img-link">
+      <div class="blog-card-img">
+        <img src="/img/blog/reforma-obligatoria-hero.jpg" alt="Ayudas de 21.400€ para rehabilitación de viviendas en 2026" loading="lazy" style="width:100%;height:180px;object-fit:cover;border-radius:8px">
+        <span class="blog-card-cat">subvenciones</span>
+      </div>
+      </a>
+      <div class="blog-card-body">
+        <h2><a href="/blog/ayudas-21400-euros-rehabilitacion-2026.html">Ayudas de 21.400€ para rehabilitación de viviendas en 2026: requisitos y plazos</a></h2>
+        <div class="blog-card-meta">
+          <span><img src="/img/ico-rapido.svg" alt="Fecha" width="16" height="16" style="vertical-align:middle"> 2026-06-17</span>
+          <span><img src="/img/ico-rapido.svg" alt="Tiempo" width="16" height="16" style="vertical-align:middle"> 8 min</span>
+        </div>
+        <p class="blog-card-desc">El Gobierno activa ayudas de hasta 21.400€ con fondos europeos para rehabilitación de viviendas. Requisitos, plazos y cómo solicitar las subvenciones en 2026.</p>
+        <a href="/blog/ayudas-21400-euros-rehabilitacion-2026.html" class="blog-card-link">Leer más <span class="arrow"><img src="/img/ico-rapido.svg" alt="→" style="width:12px;height:12px;vertical-align:middle;margin-left:3px"></span></a>
+      </div>
+    </article>
     <article class="blog-card">
       <a href="/blog/reforma-certificado-energetico-2026-cambios.html" class="blog-card-img-link">
 <div class="blog-card-img">
@@ -853,7 +905,15 @@ function actualizarLikes() {
     }
   });
 }
-document.addEventListener('DOMContentLoaded', actualizarLikes);
+document.addEventListener('DOMContentLoaded', function() {
+  actualizarLikes();
+  var params = new URLSearchParams(window.location.search);
+  var cat = params.get('cat');
+  if (cat) {
+    var btn = document.querySelector('.filter-btn[data-cat="' + cat + '"]');
+    if (btn) filtrarCategoria(cat, btn);
+  }
+});
 </script>
 <style>
 .blog-card-img-link { display: block; text-decoration: none; }
