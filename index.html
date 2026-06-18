@@ -249,6 +249,10 @@
 .calc-slider-values span:last-child { font-weight: 400; color: var(--f1-muted); font-size: .72rem; }
 .calc-slider-sep { color: var(--f1-border); font-weight: 300; }
 .calc-inline-price { color: var(--f1-accent); font-weight: 800; font-size: .95rem; min-width: 45px; }
+.calc-inline-detail { font-weight: 400; font-size: .72rem; color: var(--f1-muted); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 180px; }
+@media (max-width: 600px) {
+  .calc-inline-detail { display: none; }
+}
 @media (max-width: 600px) {
   .calc-slider-group { flex-direction: column; gap: .3rem; }
   .calc-slider { width: 100%; }
@@ -792,6 +796,7 @@ var provSlugs = {}; provincias.forEach(function(p){provSlugs[p.slug]=p.nombre;})
                   <span id="calc-m2-value">80</span> <span>m²</span>
                   <span class="calc-slider-sep">·</span>
                   <span id="calc-inline-price" class="calc-inline-price">—</span>
+                  <span id="calc-inline-detail" class="calc-inline-detail"></span>
                 </div>
               </div>
             </div>
@@ -814,14 +819,11 @@ var provSlugs = {}; provincias.forEach(function(p){provSlugs[p.slug]=p.nombre;})
           </div>
           <!-- Resultado -->
           <div class="calc-resultado" id="calc-resultado" style="display:none">
-            <div class="calc-resultado-linea">Precio estimado</div>
-            <div class="calc-resultado-precio" id="calc-resultado-precio">—</div>
-            <div class="calc-resultado-detalle" id="calc-resultado-detalle"></div>
             <div class="calc-resultado-desglose" id="calc-resultado-desglose"></div>
             <!-- [PENDIENTE-ARTURO: tabla de precios reales por tramo provincia/tipo/superficie] -->
             <button class="calc-btn calc-btn-sec" id="calc-btn-reservar" onclick="irAReserva()">Reservar ahora →</button>
             <p class="calc-resultado-aviso">Pago retenido de forma segura: solo se cobra cuando un técnico acepta tu encargo.</p>
-            <p class="calc-resultado-contacto">📞 <a href="tel:+34641450068">641 45 00 68</a> · <a href="https://wa.me/34641450068?text=Hola%2C%20quiero%20un%20presupuesto" target="_blank">WhatsApp</a> · <a href="mailto:info@certificadoya.es">info@certificadoya.es</a></p>
+            <p class="calc-resultado-contacto">📞 <a href="tel:+346****0068">641 45 00 68</a> · <a href="https://wa.me/34641450068?text=Hola%2C%20quiero%20un%20presupuesto" target="_blank">WhatsApp</a> · <a href="mailto:info@certificadoya.es">info@certificadoya.es</a></p>
           </div>
         </div>
       </div>
@@ -1672,8 +1674,6 @@ function calcularPrecioF1() {
   var email = document.getElementById('calc-email').value.trim();
   var consent = document.getElementById('calc-consent').checked;
   var resultado = document.getElementById('calc-resultado');
-  var precioEl = document.getElementById('calc-resultado-precio');
-  var detalleEl = document.getElementById('calc-resultado-detalle');
   var desgloseEl = document.getElementById('calc-resultado-desglose');
 
   actualizarSlider();
@@ -1688,10 +1688,8 @@ function calcularPrecioF1() {
   var provNombre = provincia ? document.getElementById('calc-provincia').options[document.getElementById('calc-provincia').selectedIndex].text : '';
 
   if (provincia) {
-    precioEl.textContent = total + ' €';
     document.getElementById('calc-inline-price').textContent = total + ' €';
-    detalleEl.innerHTML = cfg.label + ' · ' + m2 + ' m²' + (provNombre ? ' · ' + provNombre : '') +
-      '<br><span style="font-size:.7rem;color:#66667a">Todo incluido · Sin sorpresas</span>';
+    document.getElementById('calc-inline-detail').textContent = cfg.label + ' · ' + provNombre + ' · Todo incluido';
     var tasaDisplay = tasa > 0 ? '<div class="desglose-linea"><span>Tasa registro autonómico</span><span>' + tasa.toFixed(2) + ' €</span></div>' : '';
     desgloseEl.innerHTML =
       '<div class="desglose-linea"><span>Precio servicio</span><span>' + subtotal.toFixed(2) + ' €</span></div>' +
