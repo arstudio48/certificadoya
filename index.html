@@ -220,6 +220,37 @@
   margin-top: 2px; width: 14px; height: 14px;
   accent-color: var(--f1-accent); cursor: pointer;
 }
+/* Slider de superficie */
+.calc-slider-group { display: flex; align-items: center; gap: .75rem; }
+.calc-slider {
+  flex: 1; -webkit-appearance: none; appearance: none;
+  height: 6px; border-radius: 3px;
+  background: linear-gradient(to right, var(--f1-accent) 0%, var(--f1-accent) 11%, var(--f1-border) 11%, var(--f1-border) 100%);
+  outline: none; cursor: pointer;
+}
+.calc-slider::-webkit-slider-thumb {
+  -webkit-appearance: none; appearance: none;
+  width: 20px; height: 20px; border-radius: 50%;
+  background: var(--f1-accent); border: 3px solid #fff;
+  box-shadow: 0 2px 6px rgba(0,0,0,.15); cursor: pointer;
+  transition: transform .1s;
+}
+.calc-slider::-webkit-slider-thumb:hover { transform: scale(1.15); }
+.calc-slider::-moz-range-thumb {
+  width: 20px; height: 20px; border-radius: 50%;
+  background: var(--f1-accent); border: 3px solid #fff;
+  box-shadow: 0 2px 6px rgba(0,0,0,.15); cursor: pointer;
+}
+.calc-slider-values {
+  font-size: 1rem; font-weight: 700; color: var(--f1-text);
+  min-width: 70px; text-align: center; white-space: nowrap;
+}
+.calc-slider-values span:last-child { font-weight: 400; color: var(--f1-muted); font-size: .8rem; }
+@media (max-width: 600px) {
+  .calc-slider-group { flex-direction: column; gap: .4rem; }
+  .calc-slider { width: 100%; }
+  .calc-slider-values { min-width: auto; }
+}
 .calc-btn {
   width: 100%; padding: .9rem 1.5rem;
   background: var(--f1-accent); color: #fff;
@@ -665,7 +696,7 @@ var provSlugs = {}; provincias.forEach(function(p){provSlugs[p.slug]=p.nombre;})
         </div>
         <div class="calc-body" id="calc-body">
           <div class="calc-field">
-            <label for="calc-provincia">📍 Provincia</label>
+            <label for="calc-provincia">Provincia</label>
             <select id="calc-provincia" class="calc-select">
               <option value="">Selecciona provincia…</option>
               <option value="alava">Álava</option>
@@ -723,7 +754,7 @@ var provSlugs = {}; provincias.forEach(function(p){provSlugs[p.slug]=p.nombre;})
           </div>
           <div class="calc-row">
             <div class="calc-field" style="grid-column:1/-1">
-                <label>🏠 Tipo de inmueble</label>
+                <label>Tipo de inmueble</label>
                 <div class="property-selector" id="propertySelector">
                   <div class="property-card selected" data-tipo="piso" onclick="seleccionarTipo(this)">
                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="10" width="16" height="11" rx="1"/><path d="M8 21V14h8v7"/><path d="M2 11l10-8 10 8"/></svg>
@@ -749,20 +780,18 @@ var provSlugs = {}; provincias.forEach(function(p){provSlugs[p.slug]=p.nombre;})
                 <input type="hidden" id="calc-tipo" value="piso">
               </div>
             <div class="calc-field calc-field-half">
-              <label for="calc-superficie">📐 Superficie</label>
-              <select id="calc-superficie" class="calc-select">
-                <option value="-50">Menos de 50 m²</option>
-                <option value="50-80" selected>50 — 80 m²</option>
-                <option value="81-120">81 — 120 m²</option>
-                <option value="121-180">121 — 180 m²</option>
-                <option value="181-250">181 — 250 m²</option>
-                <option value="250+">Más de 250 m²</option>
-              </select>
+              <label for="calc-superficie">Superficie</label>
+              <div class="calc-slider-group">
+                <input type="range" id="calc-superficie" class="calc-slider" min="30" max="500" value="80">
+                <div class="calc-slider-values">
+                  <span id="calc-m2-value">80</span> <span>m²</span>
+                </div>
+              </div>
             </div>
           </div>
           <!-- F2: Email antes del precio -->
           <div class="calc-field" style="margin-top:.5rem">
-            <label for="calc-email">✉️ Tu email</label>
+            <label for="calc-email">Tu email</label>
             <input type="email" id="calc-email" class="calc-input" placeholder="tu@email.com" autocomplete="email" required>
           </div>
           <div class="calc-consent">
@@ -1580,8 +1609,38 @@ document.addEventListener('keydown', function(e) {
 </script>
 
 <script>
-// ========== F1: Calculadora de precios reactiva con desglose ==========
+// ========== F1: Calculadora de precios reactiva con slider y desglose ==========
 var debounceTimer = null;
+
+// Configuración de precios por tipo: base + factor por m²
+var CONFIG_TIPO = {
+  piso:        { base: 20, factor: 0.31, label: 'Piso' },
+  unifamiliar: { base: 35, factor: 0.43, label: 'Unifamiliar' },
+  local:       { base: 28, factor: 0.38, label: 'Local' },
+  oficina:     { base: 25, factor: 0.35, label: 'Oficina' },
+  nave:        { base: 40, factor: 0.52, label: 'Nave' }
+};
+
+// Ajuste por provincia (multiplicador sobre el precio base)
+var AJUSTE_PROVINCIA = {
+  madrid: 1.15, barcelona: 1.18, baleares: 1.12,
+  malaga: 1.05, sevilla: 1.03, valencia: 1.08,
+  alicante: 1.06, gipuzkoa: 1.10, bizkaia: 1.10,
+  navarra: 1.08, zaragoza: 1.02, asturias: 1.0,
+  cantabria: 1.02, pontevedra: 1.0, a-coruna: 1.0,
+  lugo: 0.98, ourense: 0.97, granada: 0.98,
+  cadiz: 0.97, cordoba: 0.95, jaen: 0.93,
+  almeria: 0.95, huelva: 0.95, badajoz: 0.92,
+  caceres: 0.92, toledo: 0.95, ciudad-real: 0.93,
+  albacete: 0.93, cuenca: 0.90, guadalajara: 0.92,
+  teruel: 0.88, huesca: 0.90, lleida: 0.92,
+  girona: 1.02, tarragona: 1.0, castellon: 0.98,
+  leon: 0.93, palencia: 0.90, valladolid: 0.95,
+  zamora: 0.88, salamanca: 0.92, segovia: 0.90,
+  avila: 0.88, soria: 0.85, rioja: 0.95,
+  murcia: 1.0, ceuta: 1.05, melilla: 1.05,
+  alava: 1.05, las-palmas: 1.02, tenerife: 1.02
+};
 
 function seleccionarTipo(el) {
   document.querySelectorAll('.property-card').forEach(function(c) { c.classList.remove('selected'); });
@@ -1590,51 +1649,49 @@ function seleccionarTipo(el) {
   calcularPrecioF1();
 }
 
+function actualizarSlider() {
+  var slider = document.getElementById('calc-superficie');
+  var display = document.getElementById('calc-m2-value');
+  if (slider && display) {
+    display.textContent = slider.value;
+    // Actualizar fondo del slider
+    var pct = ((slider.value - slider.min) / (slider.max - slider.min)) * 100;
+    slider.style.background = 'linear-gradient(to right, var(--f1-accent) 0%, var(--f1-accent) ' + pct + '%, var(--f1-border) ' + pct + '%, var(--f1-border) 100%)';
+  }
+}
+
 function calcularPrecioF1() {
   var provincia = document.getElementById('calc-provincia').value;
   var tipo = document.getElementById('calc-tipo').value;
-  var superficie = document.getElementById('calc-superficie').value;
+  var m2 = parseInt(document.getElementById('calc-superficie').value) || 80;
   var email = document.getElementById('calc-email').value.trim();
   var consent = document.getElementById('calc-consent').checked;
   var resultado = document.getElementById('calc-resultado');
   var precioEl = document.getElementById('calc-resultado-precio');
   var detalleEl = document.getElementById('calc-resultado-detalle');
   var desgloseEl = document.getElementById('calc-resultado-desglose');
-  var reservarBtn = document.getElementById('calc-btn-reservar');
 
-  // Si falta provincia o email, ocultar resultado pero no mostrar error
+  // Actualizar display del slider
+  actualizarSlider();
+
   if (!provincia || !email || !email.includes('@') || !consent) {
     resultado.style.display = 'none';
     return;
   }
 
-  // Precios estimados (placeholder hasta tabla real)
-  var preciosBase = {
-    piso: { '-50': 45, '50-80': 45, '81-120': 55, '121-180': 75, '181-250': 95, '250+': 130 },
-    unifamiliar: { '-50': 65, '50-80': 75, '81-120': 90, '121-180': 120, '181-250': 150, '250+': 200 },
-    local: { '-50': 55, '50-80': 65, '81-120': 80, '121-180': 100, '181-250': 125, '250+': 165 },
-    oficina: { '-50': 50, '50-80': 60, '81-120': 75, '121-180': 95, '181-250': 120, '250+': 160 },
-    nave: { '-50': 80, '50-80': 95, '81-120': 120, '121-180': 155, '181-250': 195, '250+': 250 }
-  };
-
-  var total = preciosBase[tipo] && preciosBase[tipo][superficie];
-  if (!total) { total = 45; }
+  // Cálculo real: (base + m² * factor) * ajusteProvincia
+  var cfg = CONFIG_TIPO[tipo] || CONFIG_TIPO.piso;
+  var ajuste = AJUSTE_PROVINCIA[provincia] || 1.0;
+  var total = Math.round((cfg.base + m2 * cfg.factor) * ajuste);
+  if (total < 35) total = 35; // precio mínimo
 
   var baseSinIVA = Math.round(total / 1.21);
   var iva = total - baseSinIVA;
 
-  var superficieTexto = {
-    '-50': '< 50 m²', '50-80': '50-80 m²', '81-120': '81-120 m²',
-    '121-180': '121-180 m²', '181-250': '181-250 m²', '250+': '> 250 m²'
-  };
-  var tipoTexto = {
-    piso: 'Piso', unifamiliar: 'Unifamiliar',
-    local: 'Local', oficina: 'Oficina', nave: 'Nave'
-  };
   var provNombre = document.getElementById('calc-provincia').options[document.getElementById('calc-provincia').selectedIndex].text;
 
   precioEl.textContent = total + ' €';
-  detalleEl.innerHTML = tipoTexto[tipo] + ' · ' + superficieTexto[superficie] + ' · ' + provNombre +
+  detalleEl.innerHTML = cfg.label + ' · ' + m2 + ' m² · ' + provNombre +
     '<br><span style="font-size:.7rem;color:#66667a">Todo incluido · Sin sorpresas</span>';
 
   // Desglose transparente
@@ -1647,18 +1704,18 @@ function calcularPrecioF1() {
   resultado.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
 
   // Guardar datos para F2/F3
-  window._ultimoPresupuesto = { provincia, tipo, superficie, precio: total, provNombre, email, baseSinIVA, iva };
+  window._ultimoPresupuesto = { provincia, tipo, m2, precio: total, provNombre, email, baseSinIVA, iva };
 
   // Guardar lead en Supabase en segundo plano (debounced)
   if (debounceTimer) clearTimeout(debounceTimer);
   debounceTimer = setTimeout(function() {
-    guardarLeadF2({ provincia, tipo, superficie, precio: total, provNombre, email });
+    guardarLeadF2({ provincia, tipo, m2, precio: total, provNombre, email });
   }, 1500);
 }
 
 // Reactividad: calcular al cambiar cualquier campo
 document.addEventListener('DOMContentLoaded', function() {
-  var campos = ['calc-provincia', 'calc-superficie', 'calc-email', 'calc-consent'];
+  var campos = ['calc-provincia', 'calc-email', 'calc-consent'];
   campos.forEach(function(id) {
     var el = document.getElementById(id);
     if (el) {
@@ -1668,14 +1725,18 @@ document.addEventListener('DOMContentLoaded', function() {
       }
     }
   });
-  // Calcular al cargar si ya hay datos
+  // Slider: input continuo
+  var slider = document.getElementById('calc-superficie');
+  if (slider) {
+    slider.addEventListener('input', function() { calcularPrecioF1(); });
+  }
+  // Calcular al cargar
   calcularPrecioF1();
 });
 
 // F2: Guardar lead en Supabase sin bloquear la UX
 function guardarLeadF2(datos) {
-  var m2Texto = { '-50': 0, '50-80': 65, '81-120': 100, '121-180': 150, '181-250': 215, '250+': 300 };
-  var m2 = m2Texto[datos.superficie] || 80;
+  var m2 = datos.m2 || 80;
   var tipoMap = { piso: 'piso', unifamiliar: 'unifamiliar', local: 'local', oficina: 'oficina', nave: 'nave' };
   fetch('https://wypgqpgjlookbhuaiyxa.supabase.co/functions/v1/solicitar-servicio?action=solicitar', {
     method: 'POST',
@@ -1695,25 +1756,12 @@ function guardarLeadF2(datos) {
   }).catch(function(e) { console.log('Lead save (non-blocking):', e); });
 }
 
-function mostrarErrorF1(msg) {
-  var btn = document.getElementById('calc-btn');
-  var original = btn.textContent;
-  btn.textContent = '⚠ ' + msg;
-  btn.style.background = '#E2231A';
-  btn.style.color = '#fff';
-  setTimeout(function() {
-    btn.textContent = original;
-    btn.style.background = '';
-    btn.style.color = '';
-  }, 2000);
-}
-
 function irAReserva() {
   var data = window._ultimoPresupuesto;
   if (!data || !data.precio) { calcularPrecioF1(); return; }
   window.location.href = '/reserva/?provincia=' + encodeURIComponent(data.provincia) +
     '&tipo=' + encodeURIComponent(data.tipo) +
-    '&superficie=' + encodeURIComponent(data.superficie) +
+    '&m2=' + encodeURIComponent(data.m2) +
     '&precio=' + encodeURIComponent(data.precio) +
     '&email=' + encodeURIComponent(data.email || '');
 }
