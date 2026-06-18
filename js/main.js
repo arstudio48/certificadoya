@@ -191,20 +191,26 @@ function validarM2() {
 // CALCULAR PRESUPUESTO (función llamada desde el botón)
 // ============================================================
 function calcularPresupuesto() {
-  // Verificar consentimiento
-  var consentCheck = document.getElementById('consent-datos');
-  if (consentCheck && !consentCheck.checked) {
-    alert('Debes aceptar la política de privacidad para calcular tu presupuesto.');
-    consentCheck.focus();
-    return;
-  }
-
+  // Guard clause: solo ejecutar si los elementos necesarios existen en la página
   const cpInput = document.getElementById('cp');
   const m2Input = document.getElementById('m2');
   const tipoSelect = document.getElementById('tipo');
   const resultadoBox = document.getElementById('resultado');
   const precioRango = document.getElementById('precio-rango');
   const precioTexto = document.getElementById('precio-texto');
+
+  // Si no hay formulario de CP (página sin calculadora), salir
+  if (!cpInput || !m2Input || !resultadoBox || !precioRango || !precioTexto) {
+    return;
+  }
+
+  // Verificar consentimiento (soporta ambos IDs)
+  var consentCheck = document.getElementById('consent-datos') || document.getElementById('calc-consent');
+  if (consentCheck && !consentCheck.checked) {
+    alert('Debes aceptar la política de privacidad para calcular tu presupuesto.');
+    consentCheck.focus();
+    return;
+  }
 
   // Validar código postal
   const cp = cpInput.value.trim();
@@ -266,6 +272,7 @@ async function confirmarLead() {
   const presupuesto = window._presupuesto;
   const nombre = document.getElementById('lead-nombre').value.trim();
   const email = document.getElementById('lead-email').value.trim();
+  const telefono = document.getElementById('lead-telefono')?.value?.trim() || '';
 
   if (!nombre || !telefono || !email) {
     alert('Por favor, completa nombre, teléfono y email.');
@@ -276,19 +283,20 @@ async function confirmarLead() {
   btn.textContent = '⏳ Enviando solicitud...';
   btn.disabled = true;
 
+  const leadData = {
+    name: nombre,
+    email: email,
+    phone: telefono,
+    cp: presupuesto.cp,
+    zona: presupuesto.zona,
+    m2: parseInt(presupuesto.m2) || 0,
+    tipo: presupuesto.tipo,
+    precioMin: presupuesto.precioMin,
+    precioMax: presupuesto.precioMax
+  };
+
   try {
     // 1. Guardar lead via Edge Function (con service key, evita RLS)
-    const leadData = {
-      name: nombre,
-      email: email,
-      phone: telefono,
-      cp: presupuesto.cp,
-      zona: presupuesto.zona,
-      m2: parseInt(presupuesto.m2) || 0,
-      tipo: presupuesto.tipo,
-      precioMin: presupuesto.precioMin,
-      precioMax: presupuesto.precioMax
-    };
 
     const insertRes = await fetch(EDGE_FUNCTION_URL, {
       method: 'POST',
