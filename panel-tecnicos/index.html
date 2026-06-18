@@ -44,7 +44,7 @@
   <link rel="stylesheet" href="/css/style.min.css">
   
   <style>
-    /* ====== TECNICOS REGISTRO PAGE ====== */
+/* ====== TECNICOS REGISTRO PAGE ====== */
     .registro-page { background: #f7f9f6; min-height: calc(100vh - 64px); }
     
     .registro-hero {
@@ -55,58 +55,50 @@
       padding: 2rem;
       gap: 3rem;
       align-items: center;
-    }
-    
+
     /* LEFT COLUMN */
     .registro-left {
       flex: 1;
       display: flex;
       flex-direction: column;
       gap: 2rem;
-    }
-    
+
     .registro-img-wrapper {
       position: relative;
       border-radius: 16px;
       overflow: hidden;
       box-shadow: 0 8px 40px rgba(0,0,0,.08);
-    }
-    
+
     .registro-img-wrapper img {
       display: block;
       width: 100%;
       height: auto;
       object-fit: cover;
       max-height: 420px;
-    }
-    
+
     .registro-img-overlay {
       position: absolute;
       bottom: 0; left: 0; right: 0;
       background: linear-gradient(transparent, rgba(84,124,36,.85));
       padding: 2rem 1.5rem 1.5rem;
       color: white;
-    }
-    
+
     .registro-img-overlay h2 {
       font-size: 1.5rem;
       font-weight: 700;
       margin-bottom: .4rem;
       color: white;
-    }
-    
+
     .registro-img-overlay p {
       font-size: .95rem;
       opacity: .92;
       line-height: 1.5;
-    }
-    
+
     .registro-benefits {
       display: flex;
       flex-direction: column;
       gap: 1rem;
-    }
-    
+
     .benefit-item {
       display: flex;
       align-items: flex-start;
@@ -116,8 +108,7 @@
       border-radius: 12px;
       border: 1px solid #e8ece6;
       transition: box-shadow .2s;
-    }
-    
+
     .benefit-item:hover { box-shadow: 0 2px 12px rgba(84,124,36,.1); }
     
     .benefit-icon {
@@ -128,7 +119,7 @@
       align-items: center;
       justify-content: center;
       flex-shrink: 0;
-    }
+
     .benefit-icon img { width:40px; height:40px; display:block; }
     
     .benefit-text h4 {
@@ -136,34 +127,29 @@
       font-weight: 600;
       color: #2d3a1f;
       margin-bottom: .15rem;
-    }
-    
+
     .benefit-text p {
       font-size: .82rem;
       color: #6b7b5e;
       line-height: 1.4;
-    }
-    
+
     /* RIGHT COLUMN — FLOATING CARD */
     .registro-right {
       flex: 0 0 460px;
       position: sticky;
       top: 84px;
-    }
-    
+
     .registro-card {
       background: white;
       border-radius: 16px;
       padding: 2.25rem;
       box-shadow: 0 4px 30px rgba(0,0,0,.08), 0 1px 3px rgba(0,0,0,.04);
       border: 1px solid #e8ece6;
-    }
-    
+
     .registro-card-header {
       text-align: center;
       margin-bottom: 1.75rem;
-    }
-    
+
     .registro-card-header .icon-circle {
       width: 56px; height: 56px;
       background: #edf4e5;
@@ -173,43 +159,36 @@
       justify-content: center;
       font-size: 1.6rem;
       margin-bottom: .75rem;
-    }
-    
+
     .registro-card-header h2 {
       font-size: 1.35rem;
       font-weight: 700;
       color: #2d3a1f;
       margin-bottom: .35rem;
-    }
-    
+
     .registro-card-header p {
       font-size: .88rem;
       color: #6b7b5e;
       line-height: 1.5;
-    }
-    
+
     .registro-card .form-grid {
       display: grid;
       grid-template-columns: 1fr 1fr;
       gap: 1rem;
-    }
-    
+
     .registro-card .form-full {
       grid-column: 1 / -1;
-    }
-    
+
     .registro-card .form-group {
       margin-bottom: 0;
-    }
-    
+
     .registro-card label {
       display: block;
       font-size: .82rem;
       font-weight: 600;
       color: #3d4f2e;
       margin-bottom: .35rem;
-    }
-    
+
     .registro-card input,
     .registro-card select,
     .registro-card textarea {
@@ -222,8 +201,7 @@
       color: #2d3a1f;
       background: #fafcfa;
       transition: border-color .2s, box-shadow .2s;
-    }
-    
+
     .registro-card input:focus,
     .registro-card select:focus,
     .registro-card textarea:focus {
@@ -231,25 +209,21 @@
       border-color: #16a34a;
       box-shadow: 0 0 0 3px rgba(84,124,36,.12);
       background: white;
-    }
-    
+
     .registro-card input.error {
       border-color: #e74c3c;
       background: #fff5f5;
-    }
-    
+
     .registro-card .input-hint {
       display: block;
       font-size: .72rem;
       color: #9aab8a;
       margin-top: .25rem;
-    }
-    
+
     .registro-card textarea {
       resize: vertical;
       min-height: 60px;
-    }
-    
+
     .registro-card .btn-submit {
       width: 100%;
       padding: .85rem;
@@ -263,36 +237,30 @@
       cursor: pointer;
       transition: background .2s, transform .1s;
       margin-top: .5rem;
-    }
-    
+
     .registro-card .btn-submit:hover {
       background: #45691d;
       transform: translateY(-1px);
-    }
-    
+
     .registro-card .btn-submit:active {
       transform: translateY(0);
-    }
-    
+
     .registro-card .btn-submit:disabled {
       background: #a0b88a;
       cursor: not-allowed;
       transform: none;
-    }
-    
+
     .registro-card .form-footer {
       text-align: center;
       font-size: .78rem;
       color: #9aab8a;
       margin-top: 1.25rem;
       line-height: 1.5;
-    }
-    
+
     .registro-card .form-footer a {
       color: #16a34a;
       font-weight: 500;
-    }
-    
+
     /* Success state */
     .registro-card.exito-state { text-align: center; padding: 3rem 2rem; }
     .registro-card.exito-state .exito-icon { font-size: 3.5rem; margin-bottom: 1rem; }
@@ -301,9 +269,7 @@
     .registro-card.exito-state p { color: #6b7b5e; font-size: .9rem; line-height: 1.6; }
     
     .hidden { display: none !important; }
-    
-     }
-    
+
     /* Trust bar */
     .trust-bar {
       display: flex;
@@ -314,33 +280,28 @@
       border-top: 1px solid #e8ece6;
       font-size: .78rem;
       color: #9aab8a;
-    }
-    
+
     .trust-bar span {
       display: flex;
       align-items: center;
       gap: .35rem;
-    }
-    
+
     /* ====== RESPONSIVE ====== */
     @media (max-width: 1024px) {
       .registro-hero {
         flex-direction: column;
         gap: 2rem;
         padding: 1rem;
-      }
-      
+
       .registro-right {
         flex: 1;
         width: 100%;
         max-width: 500px;
         margin: 0 auto;
         position: static;
-      }
-      
+
       .registro-img-wrapper img { max-height: 300px; }
-    }
-    
+
     @media (max-width: 500px) {
       .registro-hero { padding: .5rem; }
       .registro-card { padding: 1.5rem; border-radius: 12px; }
@@ -348,8 +309,7 @@
       .registro-img-overlay h2 { font-size: 1.2rem; }
       .registro-img-overlay p { font-size: .85rem; }
       .benefit-item { padding: .85rem 1rem; }
-    }
-  </style>
+</style>
 <script data-goatcounter="https://certificadoya.goatcounter.com/count"
         async src="//gc.zgo.at/count.js"></script>
   <style>
@@ -359,19 +319,12 @@
   .hero-content p{font-size:.85rem !important;line-height:1.4}
   .btn-cta{padding:.7rem 1rem !important;font-size:.85rem !important;min-height:44px}
   .header-inner{padding:0 .75rem !important;min-height:56px}
-  .mobile-overlay-panel{width:100vw !important;max-width:320px}
-  .mobile-overlay-nav a{padding:.75rem 1rem !important;font-size:1rem !important;min-height:44px;display:flex;align-items:center}
+
   .presupuesto-card-v2{padding:1rem 1rem 5rem !important}
   
   .resultado-box{padding:.75rem !important}
   footer{padding:1.5rem 1rem !important}
   .footer-grid{grid-template-columns:1fr !important;gap:1rem}
-}
-@media (max-width:600px){
-  .mobile-overlay-close{width:40px;height:40px;font-size:1.2rem}
-  .mobile-overlay-nav{margin-top:3.5rem}
-  .mobile-overlay-panel{padding-bottom:env(safe-area-inset-bottom,1rem)}
-}
 </style>
   <link rel="stylesheet" href="/css/tema-claro-certificadoya.css">
   <link rel="icon" type="image/png" sizes="32x32" href="/img/favicon-32.png">
@@ -662,23 +615,10 @@ document.getElementById('form-registro-tecnico').addEventListener('submit', asyn
   #planes h3{font-size:1.1rem!important}
   .registro-hero{flex-direction:column!important;padding:1rem!important}
   .registro-right{width:100%!important;position:static!important}
-}
+
 @media (max-width:480px){
   #planes{padding:1.5rem!important}
   #planes h3{font-size:1rem!important}
-}
-
-    .hamburger{display:none;flex-direction:column;justify-content:center;align-items:center;width:36px;height:36px;background:none;border:none;cursor:pointer;gap:5px;padding:4px;z-index:200;position:relative}
-    .hamburger span{display:block;width:22px;height:2.5px;background:#333;border-radius:2px;transition:transform .25s ease,opacity .25s ease}
-    .hamburger.active span:nth-child(1){transform:translateY(7.5px) rotate(45deg)}
-    .hamburger.active span:nth-child(2){opacity:0}
-    .hamburger.active span:nth-child(3){transform:translateY(-7.5px) rotate(-45deg)}
-    .mobile-menu{display:none;position:absolute;top:64px;left:0;right:0;background:#fff;border-bottom:1px solid #e5e7eb;box-shadow:0 4px 12px rgba(0,0,0,.08);z-index:99;flex-direction:column}
-    .mobile-menu.open{display:flex}
-    .mobile-menu a{padding:.8rem 1.2rem;font-size:.95rem;font-weight:500;color:#20201f;text-decoration:none;border-bottom:1px solid #f0f0f0;transition:background .15s}
-    .mobile-menu a:hover{background:#f3f9eb;color:#16a34a}
-    .mobile-menu .btn-nav{margin:.5rem 1rem}
-    @media(max-width:600px){.hamburger{display:flex}.nav>a,.nav>.buscador-wrapper,.nav>.btn-nav{display:none}.header-inner{position:relative}}
 </style>
   <div style="max-width:700px;margin:0 auto">
     <details style="border:1px solid #e8ece6;border-radius:10px;padding:1rem;margin-bottom:.75rem">

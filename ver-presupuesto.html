@@ -6,7 +6,7 @@
   <meta name="robots" content="noindex, nofollow">
   <title>Presupuesto - CertificadoYa</title>
   <style>
-    :root {
+:root {
       --primary: #16a34a;
       --primary-dark: #3d5f1a;
       --accent: #d4af37;
@@ -17,7 +17,7 @@
       --border: #e0e6da;
       --radius: 16px;
       --shadow: 0 2px 16px rgba(0,0,0,0.06);
-    }
+
     * { margin: 0; padding: 0; box-sizing: border-box; }
     body {
       font-family: 'Montserrat', -apple-system, BlinkMacSystemFont, sans-serif;
@@ -28,21 +28,21 @@
       flex-direction: column;
       align-items: center;
       padding: 24px 16px;
-    }
+
     .container {
       max-width: 520px;
       width: 100%;
-    }
+
     .header {
       text-align: center;
       margin-bottom: 28px;
-    }
+
     .logo {
       font-size: 1.6rem;
       font-weight: 700;
       color: var(--primary-dark);
       letter-spacing: -0.5px;
-    }
+
     .logo span { color: var(--accent); }
     .logo small {
       display: block;
@@ -52,20 +52,20 @@
       letter-spacing: 1px;
       text-transform: uppercase;
       margin-top: 2px;
-    }
+
     .card {
       background: var(--card);
       border-radius: var(--radius);
       box-shadow: var(--shadow);
       padding: 28px 24px;
       margin-bottom: 16px;
-    }
+
     .card-title {
       font-size: 1.1rem;
       font-weight: 600;
       margin-bottom: 16px;
       color: var(--text);
-    }
+
     .badge {
       display: inline-block;
       background: #edf4e5;
@@ -75,36 +75,36 @@
       padding: 4px 12px;
       border-radius: 20px;
       margin-bottom: 16px;
-    }
+
     .detail-row {
       display: flex;
       justify-content: space-between;
       align-items: center;
       padding: 10px 0;
       border-bottom: 1px solid var(--border);
-    }
+
     .detail-row:last-child { border-bottom: none; }
     .detail-label {
       color: var(--text-light);
       font-size: .85rem;
-    }
+
     .detail-value {
       font-weight: 600;
       font-size: .9rem;
       text-align: right;
-    }
+
     .price-large {
       font-size: 1.8rem;
       font-weight: 700;
       color: var(--primary);
       text-align: center;
       padding: 20px 0;
-    }
+
     .price-large small {
       font-size: 1rem;
       font-weight: 400;
       color: var(--text-light);
-    }
+
     .btn {
       display: block;
       width: 100%;
@@ -118,32 +118,32 @@
       transition: all .2s;
       text-align: center;
       text-decoration: none;
-    }
+
     .btn-primary {
       background: var(--primary);
       color: white;
-    }
+
     .btn-primary:hover {
       background: var(--primary-dark);
       transform: translateY(-1px);
       box-shadow: 0 4px 14px rgba(84,124,36,0.3);
-    }
+
     .btn-primary:disabled {
       opacity: .6;
       cursor: not-allowed;
       transform: none;
       box-shadow: none;
-    }
+
     .btn-outline {
       background: transparent;
       color: var(--text);
       border: 2px solid var(--border);
       margin-top: 10px;
-    }
+
     .btn-outline:hover {
       border-color: var(--primary);
       color: var(--primary);
-    }
+
     .info-box {
       background: #f0f4eb;
       border-radius: 12px;
@@ -152,13 +152,13 @@
       font-size: .85rem;
       line-height: 1.6;
       color: var(--text);
-    }
+
     .info-box strong { color: var(--primary-dark); }
     .info-box.icon {
       display: flex;
       gap: 12px;
       align-items: flex-start;
-    }
+
     .info-box .icon-emoji { font-size: 1.4rem; }
     .success-box {
       background: #e8f5e9;
@@ -167,7 +167,7 @@
       padding: 24px;
       text-align: center;
       margin: 16px 0;
-    }
+
     .success-box h2 { color: var(--primary-dark); margin-bottom: 12px; font-size: 1.2rem; }
     .success-box p { color: #4a7c2e; font-size: .9rem; line-height: 1.6; margin-bottom: 8px; }
     .contact-data {
@@ -176,22 +176,22 @@
       border-radius: 12px;
       padding: 20px;
       margin: 16px 0;
-    }
+
     .contact-data .contact-row {
       display: flex;
       align-items: center;
       gap: 10px;
       padding: 8px 0;
       font-size: .95rem;
-    }
+
     .contact-data .contact-row .label {
       color: var(--text-light);
       font-weight: 500;
       min-width: 70px;
-    }
+
     .contact-data .contact-row .value {
       font-weight: 600;
-    }
+
     .error-box {
       background: #fef2f2;
       border: 1px solid #fecaca;
@@ -199,7 +199,7 @@
       padding: 24px;
       text-align: center;
       margin: 16px 0;
-    }
+
     .error-box h2 { color: #b91c1c; font-size: 1.1rem; margin-bottom: 8px; }
     .error-box p { color: #7f1d1d; font-size: .9rem; }
     .footer {
@@ -207,11 +207,11 @@
       color: var(--text-light);
       font-size: .75rem;
       padding: 20px;
-    }
+
     .loading {
       text-align: center;
       padding: 40px 0;
-    }
+
     .spinner {
       width: 36px;
       height: 36px;
@@ -220,13 +220,12 @@
       border-radius: 50%;
       animation: spin .7s linear infinite;
       margin: 0 auto 16px;
-    }
+
     @keyframes spin { to { transform: rotate(360deg); } }
     .loading p { color: var(--text-light); font-size: .9rem; }
     .hidden { display: none !important; }
     .mt-16 { margin-top: 16px; }
     .mb-8 { margin-bottom: 8px; }
-  
 
 /* B4: UX móvil mejorada — hero, CTA, header */
 @media (max-width:480px){
@@ -234,19 +233,12 @@
   .hero-content p{font-size:.85rem !important;line-height:1.4}
   .btn-cta{padding:.7rem 1rem !important;font-size:.85rem !important;min-height:44px}
   .header-inner{padding:0 .75rem !important;min-height:56px}
-  .mobile-overlay-panel{width:100vw !important;max-width:320px}
-  .mobile-overlay-nav a{padding:.75rem 1rem !important;font-size:1rem !important;min-height:44px;display:flex;align-items:center}
+
   .presupuesto-card-v2{padding:1rem 1rem 5rem !important}
   .precio-destacado{margin-bottom:.6rem !important}
   .resultado-box{padding:.75rem !important}
   footer{padding:1.5rem 1rem !important}
   .footer-grid{grid-template-columns:1fr !important;gap:1rem}
-}
-@media (max-width:600px){
-  .mobile-overlay-close{width:40px;height:40px;font-size:1.2rem}
-  .mobile-overlay-nav{margin-top:3.5rem}
-  .mobile-overlay-panel{padding-bottom:env(safe-area-inset-bottom,1rem)}
-}
 </style>
   <link rel="stylesheet" href="/css/tema-claro-certificadoya.css">
   <link rel="icon" type="image/png" sizes="32x32" href="/img/favicon-32.png">
