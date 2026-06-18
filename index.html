@@ -769,7 +769,7 @@ var provSlugs = {}; provincias.forEach(function(p){provSlugs[p.slug]=p.nombre;})
     <a href="/" class="logo">
       <img src="/img/logo-certificadoya-lockup.svg" alt="CertificadoYa" style="height:44px;width:auto">
     </a>
-    <nav class="nav">
+    <nav class="nav" aria-label="Navegación principal">
       <a href="#como-funciona">Cómo funciona</a>
       <a href="#faq">Preguntas frecuentes</a>
       <a href="/blog/">Blog</a>
@@ -788,7 +788,7 @@ var provSlugs = {}; provincias.forEach(function(p){provSlugs[p.slug]=p.nombre;})
         <input type="text" id="buscador-provincia" class="buscador-input" placeholder="Busca tu provincia..." autocomplete="off">
         <div id="buscador-resultados" class="buscador-resultados"></div>
       </div>
-      <a href="https://wa.me/34641450068?text=Hola%2C%20quiero%20un%20presupuesto%20de%20certificado%20energ%C3%A9tico" target="_blank" class="nav-whatsapp" title="WhatsApp"><svg width="18" height="18" viewBox="0 0 24 24" fill="#25D366" style="vertical-align:middle"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg></a>
+      <a href="https://wa.me/34641450068?text=Hola%2C%20quiero%20un%20presupuesto%20de%20certificado%20energ%C3%A9tico" target="_blank" rel="noopener noreferrer" class="nav-whatsapp" title="WhatsApp"><svg width="18" height="18" viewBox="0 0 24 24" fill="#25D366" style="vertical-align:middle"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg></a>
       <a href="#presupuesto-card" class="btn-nav">Presupuesto</a>
     </nav>
     <button class="hamburger" id="hamburger-btn" aria-label="Menú" aria-expanded="false">
@@ -827,14 +827,14 @@ var provSlugs = {}; provincias.forEach(function(p){provSlugs[p.slug]=p.nombre;})
         </div>
 </div>
 
-<a href="https://wa.me/34641450068?text=Hola%2C%20quiero%20un%20presupuesto%20de%20certificado%20energ%C3%A9tico" target="_blank" style="display:flex;gap:.5rem;padding:.8rem 1.2rem;font-size:.95rem;font-weight:600;color:#25D366;text-decoration:none;border-bottom:1px solid #f0f0f0;align-items:center"><svg width="18" height="18" viewBox="0 0 24 24" fill="#25D366" style="vertical-align:middle"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg> WhatsApp</a>
+<a href="https://wa.me/34641450068?text=Hola%2C%20quiero%20un%20presupuesto%20de%20certificado%20energ%C3%A9tico" target="_blank" rel="noopener noreferrer" style="display:flex;gap:.5rem;padding:.8rem 1.2rem;font-size:.95rem;font-weight:600;color:#25D366;text-decoration:none;border-bottom:1px solid #f0f0f0;align-items:center"><svg width="18" height="18" viewBox="0 0 24 24" fill="#25D366" style="vertical-align:middle"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg> WhatsApp</a>
 </nav>
       </div>
     </div>
   </div>
 </header>
 
-<main>
+<main role="main">
   <!-- HERO F1: precio ancla + calculadora provincia/tipo/superficie -->
   <section class="hero-f1" id="presupuesto-card" style="scroll-margin-top:0">
     <div class="hero-f1-inner">
@@ -1154,13 +1154,13 @@ var provSlugs = {}; provincias.forEach(function(p){provSlugs[p.slug]=p.nombre;})
 
   <!-- CTA -->
   <section class="cta-v2" style="background:linear-gradient(135deg,rgba(22,163,74,.92),rgba(21,128,61,.95)),url('/img/hero-house.webp') center/cover no-repeat">
-    <h2>¿Necesitas tu certificado energético?</h2>
-    <p>Presupuesto gratis en 5 segundos. Sin compromiso. Sin esperas.</p>
+    <h2 style="color:#fff">¿Necesitas tu certificado energético?</h2>
+    <p style="color:#fff">Presupuesto gratis en 5 segundos. Sin compromiso. Sin esperas.</p>
     <a href="#presupuesto-card" class="btn-cta-large">Calcular presupuesto ahora</a>
   </section>
 
   <!-- TESTIMONIOS (oculto hasta tener reseñas reales verificadas) -->
-  <section class="reviews-section" id="testimonios" aria-hidden="true" style="display:none"></section>
+  <!-- Sección eliminada porque está vacía y oculta -->
 
   <!-- INMOBILIARIAS -->
   <section class="inmobiliarias-section">
@@ -1520,9 +1520,9 @@ setTimeout(function(){elems.forEach(function(el){observer.observe(el)})},200)
 </script>
 
 <!-- WhatsApp floating button -->
-<div id="whatsapp-btn" onclick="window.open('https://wa.me/34641450068?text=' + encodeURIComponent('Hola, quiero un presupuesto de certificado energético'), '_blank')" title="Consultar por WhatsApp">
+<button id="whatsapp-btn" onclick="window.open('https://wa.me/34641450068?text=' + encodeURIComponent('Hola, quiero un presupuesto de certificado energético'), '_blank')" title="Consultar por WhatsApp" aria-label="Consultar por WhatsApp">
   <svg viewBox="0 0 32 32" fill="white" width="24" height="24"><path d="M16 2C8.2 2 2 8.2 2 16c0 2.8.8 5.4 2.2 7.6L2 30l6.6-2.2C10.8 29.2 13.4 30 16 30c7.8 0 14-6.2 14-14S23.8 2 16 2zm7.2 20.2c-.4 1-1.4 1.8-2.4 2-1 .2-2 .2-3.2-.4-1-.4-2.2-1-3.4-2.2-1.2-1.2-2-2.4-2.4-3.6-.4-1.2-.2-2 .2-2.8.2-.4.4-.6.8-.8h.4c.2 0 .4 0 .6.4l.8 1.8c.2.4.2.6 0 .8-.2.2-.2.4-.4.6-.2.2-.4.4-.6.6-.2.2-.4.4-.2.6.8 1 1.6 1.8 2.6 2.4.2.2.4.2.6 0 .2-.2.4-.4.6-.6.2-.2.4-.4.6-.4.2 0 .4.2.6.4l1.2 1.2c.2.2.4.4.2.6-.2.4-.2.6-.4.6z"/></svg>
-</div>
+</button>
 <style>
 #whatsapp-btn {
   position: fixed; bottom: 24px; right: 24px; z-index: 999;
