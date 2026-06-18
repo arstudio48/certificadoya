@@ -65,17 +65,35 @@
 </head>
 <body>
 
-<header class="site-header">
-  <nav class="nav-container" aria-label="Navegación principal">
-    <a href="/" class="logo">
-      <img src="/img/logo-certificadoya-lockup.svg" alt="CertificadoYa" width="180" height="40">
-    </a>
-    <ul class="nav-links">
-      <li><a href="/#presupuesto">Presupuesto</a></li>
-      <li><a href="/blog/">Blog</a></li>
-      <li><a href="/sobre-nosotros.html">Sobre nosotros</a></li>
-    </ul>
-  </nav>
+<header class="header">
+<div class="header-inner">
+<a class="logo" href="/">
+<img src="/img/logo-certificadoya-lockup.svg" alt="CertificadoYa" style="height:44px;width:auto">
+</a>
+<nav class="nav">
+<a href="/#como-funciona">Cómo funciona</a>
+<a href="/#faq">FAQ</a>
+<a href="/blog/">Blog</a>
+<a href="/panel-tecnicos.html">¿Eres técnico?</a>
+<a class="btn-nav" href="#presupuesto">Presupuesto</a>
+</nav>
+<button aria-expanded="false" aria-label="Menú" class="hamburger" id="hamburger-btn">
+<span></span><span></span><span></span>
+</button>
+<div class="mobile-overlay" id="mobile-overlay">
+<div class="mobile-overlay-bg" id="mobile-overlay-bg"></div>
+<div class="mobile-overlay-panel" id="mobile-overlay-panel">
+<button aria-label="Cerrar menú" class="mobile-overlay-close" id="mobile-overlay-close">✕</button>
+<nav class="mobile-overlay-nav">
+<a href="/#como-funciona">Cómo funciona</a>
+<a href="/#faq">FAQ</a>
+<a href="/blog/">Blog</a>
+<a href="/panel-tecnicos.html">¿Eres técnico?</a>
+<a class="btn-nav" href="#presupuesto" style="margin:0 1rem 1rem;text-align:center">Presupuesto</a>
+</nav>
+</div>
+</div>
+</div>
 </header>
 
 <main>
@@ -295,27 +313,43 @@
   </article>
 </main>
 
-<footer class="site-footer">
-  <div class="footer-container">
-    <div class="footer-section">
-      <h4>CertificadoYa</h4>
-      <p>Tu certificado energético rápido y fiable.</p>
-    </div>
-    <div class="footer-section">
-      <h4>Enlaces</h4>
-      <ul>
-        <li><a href="/blog/">Blog</a></li>
-        <li><a href="/sobre-nosotros.html">Sobre nosotros</a></li>
-        <li><a href="/aviso-legal.html">Aviso legal</a></li>
-        <li><a href="/politica-privacidad.html">Política de privacidad</a></li>
-        <li><a href="/politica-cookies.html">Política de cookies</a></li>
-      </ul>
-    </div>
-  </div>
-  <div class="footer-bottom">
-    <p>© 2026 CertificadoYa. Todos los derechos reservados.</p>
-  </div>
+<footer class="footer-v2">
+<div class="footer-grid">
+<div class="footer-brand">
+<span class="footer-logo">CertificadoYa</span>
+<p>Certificados de eficiencia energética (CEE) en toda España. Técnicos colegiados verificados. Presupuesto instantáneo.</p>
+</div>
+<div class="footer-links">
+<strong>Enlaces</strong>
+<a href="/blog/">Blog</a>
+<a href="/organismos-contacto.html">Organismos oficiales</a>
+<a href="/panel-tecnicos.html">¿Eres técnico?</a>
+</div>
+<div class="footer-links">
+<strong>Legal</strong>
+<a href="/legal/aviso-legal.html">Aviso legal</a>
+<a href="/legal/privacidad.html">Privacidad</a>
+<a href="/legal/cookies.html">Cookies</a>
+</div>
+</div>
+<p class="footer-bottom">© 2026 CertificadoYa — ArtStudio</p>
 </footer>
+<script>
+(function(){
+  var btn = document.getElementById('hamburger-btn');
+  var overlay = document.getElementById('mobile-overlay');
+  var bg = document.getElementById('mobile-overlay-bg');
+  var closeBtn = document.getElementById('mobile-overlay-close');
+  if (!btn || !overlay) return;
+  function openM(){ overlay.classList.add('open'); btn.classList.add('active'); btn.setAttribute('aria-expanded', 'true'); document.body.style.overflow = 'hidden'; }
+  function closeM(){ overlay.classList.remove('open'); btn.classList.remove('active'); btn.setAttribute('aria-expanded', 'false'); document.body.style.overflow = ''; }
+  btn.onclick = function(e){ e.stopPropagation(); overlay.classList.contains('open') ? closeM() : openM(); };
+  if (bg) bg.onclick = closeM;
+  if (closeBtn) closeBtn.onclick = closeM;
+  overlay.querySelectorAll('a').forEach(function(a){ a.addEventListener('click', closeM); });
+  document.addEventListener('keydown', function(e){ if (e.key === 'Escape' && overlay.classList.contains('open')) closeM(); });
+})();
+</script>
 
 <script src="/js/blog-preguntas.js" defer></script>
 </body>
