@@ -398,5 +398,20 @@ input.error { border-color:#ef4444 !important; background:#fef2f2; }
 
 /* Etiqueta energética CEE - responsive */
 .etiqueta-cee-box { text-align:center; margin-bottom:1.5rem; background:#f8faf8; border:1px solid #e0e8e0; border-radius:12px; padding:1rem; }
+
+/* ─── BLOG: Featured card ─── */
+.blog-card.featured { grid-column: span 2; display:grid; grid-template-columns:1fr 1fr; gap:0; }
+.blog-card.featured .blog-card-img { height:100%; }
+.blog-card.featured .blog-card-img img { height:100% !important; }
+.blog-card.featured .blog-card-body { padding:1.5rem; display:flex; flex-direction:column; justify-content:center; }
+@media(max-width:768px) { .blog-card.featured { grid-column:span 1; display:block; } .blog-card.featured .blog-card-img img { height:180px !important; } }
+
+/* ─── BLOG: Table of Contents ─── */
+.toc-box { border-left:4px solid #547c24; background:#f3f9eb; padding:1rem 1.5rem; border-radius:0 8px 8px 0; margin-bottom:2rem; }
+.toc-box h4 { font-size:.9rem; font-weight:700; color:#2d3a1f; margin:0 0 .5rem; text-transform:uppercase; letter-spacing:.04em; }
+.toc-box ol { margin:0; padding-left:1.25rem; }
+.toc-box li { font-size:.85rem; margin-bottom:.35rem; line-height:1.4; }
+.toc-box a { color:#547c24; text-decoration:none; }
+.toc-box a:hover { text-decoration:underline; }
 .etiqueta-cee-box img { width:100%; max-width:400px; height:auto; display:inline-block; }
 @media (max-width:480px) { .etiqueta-cee-box { padding:0.5rem; } .etiqueta-cee-box img { max-width:280px; } }

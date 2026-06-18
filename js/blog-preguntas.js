@@ -1,3 +1,36 @@
+/* TOC — Tabla de contenidos automática para artículos con 3+ H2 */
+(function() {
+  'use strict';
+  function initTOC() {
+    var body = document.querySelector('.article-body');
+    if (!body) return;
+    var headings = body.querySelectorAll('h2');
+    if (headings.length < 3) return;
+    var ol = document.createElement('ol');
+    headings.forEach(function(h, i) {
+      if (!h.id) h.id = 'toc-' + i;
+      var li = document.createElement('li');
+      var a = document.createElement('a');
+      a.href = '#' + h.id;
+      a.textContent = h.textContent;
+      li.appendChild(a);
+      ol.appendChild(li);
+    });
+    var box = document.createElement('div');
+    box.className = 'toc-box';
+    var title = document.createElement('h4');
+    title.textContent = 'En este artículo';
+    box.appendChild(title);
+    box.appendChild(ol);
+    body.insertBefore(box, body.firstChild);
+  }
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initTOC);
+  } else {
+    initTOC();
+  }
+})();
+
 /* Blog Preguntas Widget — Sección de preguntas en artículos del blog solo para usuarios registrados */
 (function() {
   'use strict';

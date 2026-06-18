@@ -245,9 +245,10 @@
     <button class="filter-btn" data-cat="precios" onclick="filtrarCategoria('precios', this)">Precios</button>
     <button class="filter-btn" data-cat="tecnologia" onclick="filtrarCategoria('tecnologia', this)">Tecnologia</button>
     <button class="filter-btn" data-cat="tecnicos" onclick="filtrarCategoria('tecnicos', this)"><img src="/img/ico-tecnicos.svg" alt="Técnicos" width="18" height="18" style="vertical-align:middle"> Técnicos</button>
+    <button class="filter-btn" data-cat="subvenciones" onclick="filtrarCategoria('subvenciones', this)">Subvenciones</button>
   </div>
     <div class="posts-grid">
-    <article class="blog-card">
+    <article class="blog-card featured">
       <a href="/blog/ultimos-dias-ayudas-20000-euros-rehabilitacion-2026.html" class="blog-card-img-link">
       <div class="blog-card-img">
         <img src="/img/blog/subvenciones-pareja-hero.jpg" alt="Últimos días para pedir la ayuda de 20.000€" loading="lazy" style="width:100%;height:180px;object-fit:cover;border-radius:8px">
@@ -997,7 +998,15 @@ function actualizarLikes() {
     }
   });
 }
-document.addEventListener('DOMContentLoaded', actualizarLikes);
+document.addEventListener('DOMContentLoaded', function() {
+  actualizarLikes();
+  var params = new URLSearchParams(window.location.search);
+  var cat = params.get('cat');
+  if (cat) {
+    var btn = document.querySelector('.filter-btn[data-cat="' + cat + '"]');
+    if (btn) filtrarCategoria(cat, btn);
+  }
+});
 </script>
 <style>
 .blog-card-img-link { display: block; text-decoration: none; }
