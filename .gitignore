@@ -27,3 +27,4 @@ media-cxs/
 # Local Netlify folder
 .netlify
 .aider*
+.env.supabase
