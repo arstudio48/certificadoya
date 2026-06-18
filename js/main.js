@@ -191,20 +191,26 @@ function validarM2() {
 // CALCULAR PRESUPUESTO (función llamada desde el botón)
 // ============================================================
 function calcularPresupuesto() {
-  // Verificar consentimiento
-  var consentCheck = document.getElementById('consent-datos');
-  if (consentCheck && !consentCheck.checked) {
-    alert('Debes aceptar la política de privacidad para calcular tu presupuesto.');
-    consentCheck.focus();
-    return;
-  }
-
+  // Guard clause: solo ejecutar si los elementos necesarios existen en la página
   const cpInput = document.getElementById('cp');
   const m2Input = document.getElementById('m2');
   const tipoSelect = document.getElementById('tipo');
   const resultadoBox = document.getElementById('resultado');
   const precioRango = document.getElementById('precio-rango');
   const precioTexto = document.getElementById('precio-texto');
+
+  // Si no hay formulario de CP (página sin calculadora), salir
+  if (!cpInput || !m2Input || !resultadoBox || !precioRango || !precioTexto) {
+    return;
+  }
+
+  // Verificar consentimiento (soporta ambos IDs)
+  var consentCheck = document.getElementById('consent-datos') || document.getElementById('calc-consent');
+  if (consentCheck && !consentCheck.checked) {
+    alert('Debes aceptar la política de privacidad para calcular tu presupuesto.');
+    consentCheck.focus();
+    return;
+  }
 
   // Validar código postal
   const cp = cpInput.value.trim();
@@ -265,31 +271,32 @@ function cerrarLeadModal() {
 async function confirmarLead() {
   const presupuesto = window._presupuesto;
   const nombre = document.getElementById('lead-nombre').value.trim();
-  const telefono = document.getElementById('lead-telefono').value.trim();
+  const email = document.getElementById('lead-email').value.trim();
+  const telefono = document.getElementById('lead-telefono')?.value?.trim() || '';
 
-  if (!nombre || !telefono) {
-    alert('Por favor, indica tu nombre y teléfono.');
+  if (!nombre || !telefono || !email) {
+    alert('Por favor, completa nombre, teléfono y email.');
     return;
   }
 
-  const email = document.getElementById('lead-email').value.trim() || '';
   const btn = document.getElementById('lead-btn');
   btn.textContent = '⏳ Enviando solicitud...';
   btn.disabled = true;
 
+  const leadData = {
+    name: nombre,
+    email: email,
+    phone: telefono,
+    cp: presupuesto.cp,
+    zona: presupuesto.zona,
+    m2: parseInt(presupuesto.m2) || 0,
+    tipo: presupuesto.tipo,
+    precioMin: presupuesto.precioMin,
+    precioMax: presupuesto.precioMax
+  };
+
   try {
     // 1. Guardar lead via Edge Function (con service key, evita RLS)
-    const leadData = {
-      name: nombre,
-      email: email,
-      phone: telefono,
-      cp: presupuesto.cp,
-      zona: presupuesto.zona,
-      m2: parseInt(presupuesto.m2) || 0,
-      tipo: presupuesto.tipo,
-      precioMin: presupuesto.precioMin,
-      precioMax: presupuesto.precioMax
-    };
 
     const insertRes = await fetch(EDGE_FUNCTION_URL, {
       method: 'POST',
@@ -309,11 +316,11 @@ async function confirmarLead() {
     }
 
     const savedLeads = await insertRes.json();
-    const savedLead = Array.isArray(savedLeads) ? savedLeads[0] : savedLeads;
-    const leadId = savedLead?.id;
+    const data = savedLeads;
+    const leadId = data?.leadId || data?.id;
 
-    // 2. Llamar a Edge Function para notificar técnicos (no crítico si falla)
-    if (leadId) {
+    // 2. Llamar a Edge Function para notificar técnicos solo si NO necesita verificación
+    if (leadId && !data.necesitaVerificacion) {
       fetch(EDGE_FUNCTION_URL + '?action=solicitar', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -334,7 +341,19 @@ async function confirmarLead() {
 
     // Mostrar éxito
     document.getElementById('lead-modal').classList.remove('visible');
-    document.getElementById('resultado-solicitud').innerHTML = `
+    document.getElementById('resultado-solicitud').innerHTML = data.necesitaVerificacion ? `
+      <div style="background:#edf4e5;border:2px solid #547c24;border-radius:12px;padding:2rem;text-align:center;margin-top:1rem">
+        <div style="font-size:2.5rem;margin-bottom:.5rem">📧</div>
+        <h3 style="color:#2d3a1f;font-size:1.2rem;margin-bottom:.5rem">Verifica tu email</h3>
+        <p style="color:#6b7b5e;font-size:.9rem;line-height:1.5">
+          Te hemos enviado un <strong>email de confirmación</strong> a<br>
+          <strong style="color:#3d5e1a">${email}</strong>.<br><br>
+          Haz clic en el enlace que contiene para activar tu solicitud.<br>
+          Revisa también tu carpeta de <strong>spam</strong>.
+        </p>
+        <button class="btn-cta" style="margin-top:1rem" onclick="this.parentElement.remove()">Entendido</button>
+      </div>
+    ` : `
       <div style="background:#edf4e5;border:2px solid #547c24;border-radius:12px;padding:2rem;text-align:center;margin-top:1rem">
         <div style="font-size:2.5rem;margin-bottom:.5rem">✅</div>
         <h3 style="color:#2d3a1f;font-size:1.2rem;margin-bottom:.5rem">Solicitud enviada</h3>
