@@ -108,7 +108,7 @@ serve(async (req) => {
         tipo_inmueble: meta.tipo || '',
         presupuesto_min: meta.price ? parseInt(meta.price) : null,
         presupuesto_max: meta.price ? parseInt(meta.price) : null,
-        estado: 'pagado',
+        estado: 'nuevo',
         fuente: 'stripe'
       }
 
