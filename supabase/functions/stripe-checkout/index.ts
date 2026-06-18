@@ -32,7 +32,7 @@ serve(async (req) => {
   // ============================================================
   if (action === 'create' || !action) {
     try {
-      const { price, service, city, name, email, phone, description, m2, tipo, cp } = await req.json()
+      const { price, service, city, name, email, phone, description, m2, tipo, cp, direccion, numero, ciudad } = await req.json()
 
       const session = await stripe.checkout.sessions.create({
         payment_method_types: ['card'],
@@ -55,6 +55,9 @@ serve(async (req) => {
           m2: String(m2 || ''),
           tipo: tipo || '',
           cp: cp || '',
+          direccion: direccion || '',
+          numero: numero || '',
+          ciudad: ciudad || '',
           price: String(price)
         }
       })
@@ -109,7 +112,10 @@ serve(async (req) => {
         presupuesto_min: meta.price ? parseInt(meta.price) : null,
         presupuesto_max: meta.price ? parseInt(meta.price) : null,
         estado: 'nuevo',
-        fuente: 'stripe'
+        fuente: 'stripe',
+        direccion: meta.direccion || '',
+        numero: meta.numero || '',
+        ciudad: meta.ciudad || ''
       }
 
       const { error } = await supabase.from('leads').insert([lead])

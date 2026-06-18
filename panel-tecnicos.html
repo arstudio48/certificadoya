@@ -457,6 +457,11 @@
             <span style="font-size:.78rem;color:#9aab8a">Puedes escribir varias separadas por coma</span>
           </div>
           <div class="form-group form-full">
+            <label for="reg-cp-cobertura">Códigos postales donde trabajas</label>
+            <input type="text" id="reg-cp-cobertura" placeholder="Ej: 33200-33299, 33000-33099">
+            <span style="font-size:.78rem;color:#9aab8a">Rangos de CP separados por coma. Déjalo vacío si trabajas en toda la provincia.</span>
+          </div>
+          <div class="form-group form-full">
             <label for="reg-titulacion">Titulación <span style="font-weight:400;color:#9aab8a">(opcional)</span></label>
             <select id="reg-titulacion">
               <option value="">Selecciona...</option>
@@ -560,6 +565,7 @@
           </select>
           <input type="text" name="colegiado" placeholder="Nº de colegiado (opcional)" style="padding:.7rem;border:1px solid #dce8d0;border-radius:8px;font-family:Outfit,sans-serif;font-size:.88rem">
           <input type="text" name="provincias" placeholder="Provincias donde trabajas (ej: Madrid, Toledo)" style="padding:.7rem;border:1px solid #dce8d0;border-radius:8px;font-family:Outfit,sans-serif;font-size:.88rem">
+          <input type="text" name="cp_cobertura" placeholder="CPs donde trabajas (ej: 33200-33299, 33000-33099)" style="padding:.7rem;border:1px solid #dce8d0;border-radius:8px;font-family:Outfit,sans-serif;font-size:.88rem">
           <input type="url" name="web" placeholder="Tu web (opcional)" style="padding:.7rem;border:1px solid #dce8d0;border-radius:8px;font-family:Outfit,sans-serif;font-size:.88rem">
           <button type="submit" style="padding:.8rem;background:#16a34a;color:white;border:none;border-radius:8px;font-weight:600;font-size:.9rem;cursor:pointer;font-family:Outfit,sans-serif">Enviar solicitud →</button>
         </div>
@@ -578,6 +584,7 @@ async function registrarTecnico() {
   const telefono = document.getElementById('reg-telefono').value.trim();
   const titulacion = document.getElementById('reg-titulacion').value;
   const provincias = document.getElementById('reg-provincias').value.trim();
+  const cpCobertura = document.getElementById('reg-cp-cobertura').value.trim();
 
   if (!nombre || !email || !telefono || !provincias) {
     alert('Por favor rellena nombre, email, teléfono y provincia(s).');
@@ -591,7 +598,7 @@ async function registrarTecnico() {
     const r = await fetch(EDGE_URL, {
       method: 'POST',
       headers: {'Content-Type': 'application/json'},
-      body: JSON.stringify({ nombre, email, telefono, provincias, titulacion: titulacion || undefined })
+      body: JSON.stringify({ nombre, email, telefono, provincias, titulacion: titulacion || undefined, cp_cobertura: cpCobertura || undefined })
     });
     const res = await r.json();
     if (res.success || res.id || r.status === 409) {
@@ -627,7 +634,8 @@ document.getElementById('form-registro-tecnico').addEventListener('submit', asyn
         email: fd.email,
         telefono: fd.telefono,
         titulacion: fd.profesion || undefined,
-        provincias: fd.provincias || undefined
+        provincias: fd.provincias || undefined,
+        cp_cobertura: fd.cp_cobertura || undefined
       })
     });
     const res = await r.json();

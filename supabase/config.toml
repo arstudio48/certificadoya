@@ -46,5 +46,8 @@ verify_jwt = false
 [functions.newsletter-unsubscribe]
 verify_jwt = false
 
+[functions.stripe-checkout]
+verify_jwt = false
+
 [functions.verificar-email]
 verify_jwt = false
