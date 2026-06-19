@@ -1,0 +1,1267 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Panel inmobiliarias — CertificadoYa</title>
+  <meta name="robots" content="noindex, nofollow">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600;9..40,700;9..40,800&display=swap" rel="stylesheet">
+  <script data-goatcounter="https://certificadoya.goatcounter.com/count"
+          async src="//gc.zgo.at/count.js"></script>
+  <link rel="icon" type="image/png" sizes="32x32" href="/img/favicon-32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/img/favicon-16.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/img/apple-touch-icon-180.png">
+  <style>
+    /* ====== RESET & BASE ====== */
+    *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+    :root {
+      --primary: #16a34a;
+      --primary-dark: #15803d;
+      --primary-light: #22c55e;
+      --accent: #f97316;
+      --accent-dark: #ea580c;
+      --bg: #f5f7f5;
+      --bg-card: #ffffff;
+      --text: #20201f;
+      --text-light: #6b7280;
+      --text-lighter: #9ca3af;
+      --border: #e5e7eb;
+      --border-light: #f0f0f0;
+      --radius: 12px;
+      --radius-sm: 8px;
+      --font: 'DM Sans', -apple-system, sans-serif;
+      --shadow: 0 1px 3px rgba(0,0,0,.06);
+      --shadow-md: 0 4px 16px rgba(0,0,0,.08);
+      --shadow-lg: 0 10px 30px rgba(0,0,0,.1);
+    }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: var(--font);
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      min-height: 100vh;
+    }
+    a { color: var(--primary); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+
+    /* ====== SPINNER ====== */
+    @keyframes spin { to { transform: rotate(360deg); } }
+    @keyframes fadeIn { from { opacity:0; transform:translateY(8px); } to { opacity:1; transform:translateY(0); } }
+    @keyframes slideUp { from { opacity:0; transform:translateY(16px); } to { opacity:1; transform:translateY(0); } }
+    .spinner {
+      width: 24px; height: 24px;
+      border: 3px solid #dce8d0;
+      border-top-color: var(--primary);
+      border-radius: 50%;
+      animation: spin .6s linear infinite;
+      margin: 0 auto 1rem;
+    }
+
+    /* ====== HEADER ====== */
+    .header {
+      position: sticky; top:0; z-index:100;
+      background: #fff;
+      border-bottom: 1px solid var(--border-light);
+      box-shadow: 0 1px 4px rgba(0,0,0,.03);
+    }
+    .header-inner {
+      max-width: 1200px; margin:0 auto; padding: 0 2rem;
+      display: flex; align-items: center; justify-content: space-between; height: 64px;
+    }
+    .logo { display:flex; align-items:center; gap:.75rem; text-decoration:none; }
+    .logo img { height:44px !important; width:auto; }
+    @media(max-width:768px){ .logo img { height:38px !important; } }
+    .nav { display:flex; align-items:center; gap:1.5rem; }
+    .nav a { text-decoration:none; color:var(--text); font-size:.9rem; font-weight:500; transition:color .15s; }
+    .nav a:hover { color:var(--primary); text-decoration:none; }
+    .nav a.active { color:var(--primary); font-weight:600; }
+    .btn-nav {
+      background:var(--accent); color:white !important; padding:.55rem 1.2rem; border-radius:6px;
+      font-weight:600; font-size:.85rem; transition:background .15s;
+    }
+    .btn-nav:hover { background:var(--accent-dark); color:white !important; text-decoration:none; }
+
+    /* Hamburguesa */
+    .hamburger{display:none;flex-direction:column;justify-content:center;align-items:center;width:36px;height:36px;background:none;border:none;cursor:pointer;gap:5px;padding:4px;z-index:200;position:relative}
+    .hamburger span{display:block;width:24px;height:3px;background:#20201f;border-radius:3px;transition:transform .25s ease,opacity .25s ease}
+    .hamburger.active span:nth-child(1){transform:translateY(7.5px) rotate(45deg)}
+    .hamburger.active span:nth-child(2){opacity:0}
+    .hamburger.active span:nth-child(3){transform:translateY(-7.5px) rotate(-45deg)}
+    @media(max-width:600px){
+      .hamburger{display:flex}
+      .nav{display:none}
+    }
+
+    /* Mobile overlay */
+    .mobile-overlay{display:none}
+    @media (max-width: 600px) {
+      .mobile-overlay {
+        display: none !important;
+        position: fixed;
+        inset: 0;
+        z-index: 1000;
+      }
+      .mobile-overlay.open {
+        display: flex !important;
+      }
+      .mobile-overlay-bg {
+        position: absolute;
+        inset: 0;
+        background: rgba(0,0,0,0.5);
+        animation: mobileFadeIn 0.2s ease;
+      }
+      .mobile-overlay-panel {
+        position: absolute;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        width: min(85vw, 320px);
+        background: #fff;
+        overflow-y: auto;
+        animation: mobileSlideIn 0.25s ease;
+        padding: 1.2rem 0;
+      }
+      .mobile-overlay-close {
+        position: absolute;
+        top: 1rem;
+        right: 1rem;
+        width: 36px; height: 36px;
+        border: none; background: #f5f5f5; border-radius: 50%;
+        font-size: 1.1rem; cursor: pointer;
+        display: flex; align-items: center; justify-content: center;
+        z-index: 2;
+      }
+      .mobile-overlay-nav { margin-top: 3rem; display: flex; flex-direction: column; }
+      .mobile-overlay-nav a {
+        display:block; padding:.8rem 1.2rem; color:#333;
+        text-decoration:none; font-size:.95rem; border-bottom:1px solid #f0f0f0;
+      }
+      .mobile-overlay-nav a:hover { background:#f5f9f0; text-decoration:none; }
+      .accordion-toggle {
+        display:flex; align-items:center; gap:.5rem; width:100%;
+        padding:.8rem 1.2rem; background:none; border:none;
+        border-bottom:1px solid #f0f0f0; font-size:.9rem;
+        cursor:pointer; text-align:left; color:#333; font-weight:500;
+      }
+      .accordion-toggle:hover { background:#f9f9f9; }
+      .accordion-content { overflow:hidden; }
+      .accordion-arrow { margin-left:auto; font-size:.7rem; color:#999; transition:transform .2s; }
+      @keyframes mobileFadeIn { from { opacity:0; } to { opacity:1; } }
+      @keyframes mobileSlideIn { from { transform:translateX(100%); } to { transform:translateX(0); } }
+    }
+    @media (min-width: 601px) {
+      .mobile-overlay { display: none !important; }
+    }
+
+    /* ====== LOGIN ====== */
+    .login-section {
+      display: flex; align-items: center; justify-content: center;
+      min-height: calc(100vh - 64px); padding: 2rem 1rem;
+    }
+    .login-card {
+      max-width: 420px; width: 100%;
+      background: var(--bg-card);
+      border-radius: 16px;
+      padding: 2.5rem;
+      text-align: center;
+      box-shadow: 0 4px 24px rgba(0,0,0,.06);
+      border: 1px solid var(--border);
+      animation: slideUp .4s ease;
+    }
+    .login-card h2 {
+      font-size: 1.3rem;
+      margin-bottom: .35rem;
+      font-weight: 700;
+    }
+    .login-card .login-sub {
+      color: var(--text-light);
+      font-size: .9rem;
+      margin-bottom: 1.5rem;
+      line-height: 1.5;
+    }
+    .login-card input[type="email"],
+    .login-card input[type="text"],
+    .login-card input[type="tel"] {
+      width: 100%;
+      padding: .8rem 1rem;
+      border: 2px solid var(--border);
+      border-radius: var(--radius-sm);
+      font-size: .95rem;
+      font-family: var(--font);
+      margin-bottom: 1rem;
+      text-align: center;
+      transition: border-color .2s, box-shadow .2s;
+      outline: none;
+    }
+    .login-card input:focus {
+      border-color: var(--primary);
+      box-shadow: 0 0 0 3px rgba(22,163,74,.12);
+    }
+    .login-card .login-error {
+      color: #dc2626;
+      font-size: .85rem;
+      margin-bottom: .75rem;
+      display: none;
+      background: #fef2f2;
+      padding: .5rem .75rem;
+      border-radius: 6px;
+    }
+    .btn {
+      display: inline-block; width: 100%;
+      padding: .8rem 1.5rem;
+      border: none; border-radius: var(--radius-sm);
+      font-family: var(--font); font-weight: 600; font-size: .95rem;
+      cursor: pointer; text-align: center;
+      transition: background .15s, transform .1s;
+    }
+    .btn-primary {
+      background: var(--primary); color: white;
+    }
+    .btn-primary:hover {
+      background: var(--primary-dark); transform: translateY(-1px);
+    }
+    .btn-primary:disabled {
+      background: #a0b88a; cursor: not-allowed; transform: none;
+    }
+    .btn-secondary {
+      background: var(--bg-card); color: var(--text);
+      border: 1.5px solid var(--border);
+    }
+    .btn-secondary:hover {
+      border-color: var(--primary); color: var(--primary);
+    }
+    .login-card .back-link {
+      display: block; margin-top: 1.25rem;
+      color: var(--text-lighter); font-size: .82rem;
+    }
+    .login-card .back-link:hover { color: var(--primary); text-decoration: none; }
+    .login-card .legal-note {
+      font-size:.78rem; color:var(--text-lighter);
+      margin-top: -.25rem; margin-bottom: 1rem; text-align:center;
+    }
+
+    /* OTP input — single field with autocomplete='one-time-code' */
+    .otp-field-wrap { margin-bottom: 1rem; position: relative; }
+    .otp-field-wrap input {
+      font-size: 2rem !important;
+      font-weight: 700;
+      letter-spacing: .5rem;
+      padding: .75rem .5rem !important;
+      text-align: center;
+      font-family: 'DM Mono', 'DM Sans', monospace !important;
+    }
+    .otp-separate { display: none; gap: .5rem; justify-content: center; margin-bottom: 1rem; }
+    .otp-separate.show { display: flex; }
+    .otp-separate input {
+      width: 48px; height: 52px;
+      text-align: center; font-size: 1.4rem; font-weight: 700;
+      border: 2px solid var(--border); border-radius: var(--radius-sm);
+      font-family: var(--font);
+      outline: none; transition: border-color .2s;
+    }
+    .otp-separate input:focus { border-color: var(--primary); box-shadow: 0 0 0 3px rgba(22,163,74,.12); }
+    .otp-separate input.filled { border-color: var(--primary); background: #f0fdf4; }
+
+    /* ====== PANEL ====== */
+    .panel-section { display: none; }
+    .panel-section.active { display: block; }
+    .panel-container {
+      max-width: 1100px; margin: 0 auto;
+      padding: 1.5rem 2rem 3rem;
+    }
+    @media(max-width:768px){ .panel-container { padding: 1rem; } }
+
+    .panel-header {
+      display: flex; align-items: center; justify-content: space-between;
+      margin-bottom: 1.5rem; flex-wrap: wrap; gap: .75rem;
+    }
+    .panel-header h1 { font-size: 1.4rem; font-weight: 700; }
+    .panel-header p { color: var(--text-light); font-size: .9rem; margin-top: .15rem; }
+    .panel-user-badge {
+      display: inline-flex; align-items: center; gap: .5rem;
+      background: #f0fdf4; color: var(--primary-dark);
+      padding: .4rem 1rem; border-radius: 20px;
+      font-size: .82rem; font-weight: 500;
+    }
+    .btn-logout {
+      background: none; border: 1.5px solid var(--border);
+      color: var(--text-light); padding: .4rem .85rem;
+      border-radius: 8px; cursor: pointer;
+      font-size: .8rem; font-family: var(--font);
+      transition: all .15s;
+    }
+    .btn-logout:hover { border-color: #dc2626; color: #dc2626; }
+
+    /* ====== STATS ====== */
+    .stats-row {
+      display: flex; gap: .75rem; margin-bottom: 1.5rem;
+      flex-wrap: wrap;
+    }
+    .stat-pill {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: .75rem 1.25rem;
+      flex: 1; min-width: 120px;
+      text-align: center;
+    }
+    .stat-pill .num {
+      font-size: 1.5rem; font-weight: 700;
+      color: var(--primary);
+      line-height: 1.2;
+    }
+    .stat-pill .label {
+      font-size: .78rem;
+      color: var(--text-lighter);
+    }
+
+    /* ====== BUTTONS ====== */
+    .btn-success {
+      display: inline-flex; align-items: center; gap: .35rem;
+      background: var(--primary); color: white; padding: .6rem 1.2rem;
+      border: none; border-radius: var(--radius-sm);
+      font-family: var(--font); font-weight: 600; font-size: .85rem;
+      cursor: pointer; transition: background .15s, transform .1s;
+    }
+    .btn-success:hover { background: var(--primary-dark); transform: translateY(-1px); }
+    .btn-success:disabled { background: #a0b88a; cursor: not-allowed; transform: none; }
+    .btn-outline-sm {
+      background: transparent; color: var(--text-light);
+      border: 1.5px solid var(--border);
+      padding: .6rem 1rem;
+      border-radius: var(--radius-sm);
+      cursor: pointer; font-size: .82rem; font-family: var(--font);
+      transition: all .15s;
+    }
+    .btn-outline-sm:hover { border-color: var(--primary); color: var(--primary); }
+    .btn-refresh {
+      display: inline-flex; align-items: center; gap: .35rem;
+      padding: .4rem .85rem;
+      border: 1.5px solid var(--border); border-radius: var(--radius-sm);
+      background: #fff; color: var(--text-light);
+      font-size: .82rem; cursor: pointer; font-family: var(--font);
+      transition: all .15s;
+    }
+    .btn-refresh:hover { border-color: var(--primary); color: var(--primary); }
+    .btn-danger-sm {
+      background: transparent; color: #dc2626;
+      border: 1.5px solid #fecaca;
+      padding: .4rem .75rem;
+      border-radius: var(--radius-sm);
+      cursor: pointer; font-size: .78rem; font-family: var(--font);
+      transition: all .15s;
+    }
+    .btn-danger-sm:hover { background: #fef2f2; border-color: #dc2626; }
+
+    /* ====== PROPERTY TABLE ====== */
+    .table-wrap { overflow-x: auto; }
+    .prop-table {
+      width: 100%; border-collapse: collapse;
+      background: var(--bg-card);
+      border-radius: var(--radius);
+      overflow: hidden;
+      border: 1px solid var(--border);
+      font-size: .88rem;
+    }
+    .prop-table th {
+      background: #f0f2ef;
+      text-align: left;
+      padding: .7rem .85rem;
+      font-size: .75rem;
+      font-weight: 600;
+      color: var(--text-light);
+      text-transform: uppercase;
+      letter-spacing: .03em;
+      white-space: nowrap;
+    }
+    .prop-table td {
+      padding: .7rem .85rem;
+      border-top: 1px solid var(--border-light);
+      vertical-align: middle;
+    }
+    .prop-table tr:hover td { background: #fafcfa; }
+    .prop-table .prop-actions {
+      display: flex; gap: .35rem; flex-wrap: wrap;
+    }
+
+    .lead-status {
+      font-size: .75rem; font-weight: 600;
+      padding: .2rem .6rem; border-radius: 20px;
+      white-space: nowrap;
+      display: inline-block;
+    }
+    .lead-status-nuevo,
+    .lead-status-pendiente { background: #fef3c7; color: #92400e; }
+    .lead-status-asignado { background: #dcfce7; color: #166534; }
+    .lead-status-completado { background: #dbeafe; color: #1e3a5f; }
+    .lead-status-pagado { background: #e0e7ff; color: #3730a3; }
+
+    /* ====== FORM MODAL ====== */
+    .modal-overlay {
+      display: none;
+      position: fixed; inset: 0; z-index: 500;
+      background: rgba(0,0,0,0.4);
+      align-items: center; justify-content: center;
+      padding: 1rem;
+    }
+    .modal-overlay.open { display: flex; }
+    .modal-card {
+      background: #fff;
+      border-radius: 16px;
+      max-width: 560px; width: 100%;
+      max-height: 90vh; overflow-y: auto;
+      padding: 2rem;
+      box-shadow: 0 10px 40px rgba(0,0,0,.15);
+      animation: slideUp .3s ease;
+    }
+    .modal-card h2 {
+      font-size: 1.2rem;
+      font-weight: 700;
+      margin-bottom: .25rem;
+    }
+    .modal-card .modal-sub {
+      color: var(--text-light);
+      font-size: .85rem;
+      margin-bottom: 1.5rem;
+    }
+    .modal-close {
+      float: right; background: none; border: none;
+      font-size: 1.4rem; cursor: pointer; color: var(--text-light);
+      padding: 0 .25rem; line-height: 1;
+    }
+    .modal-close:hover { color: var(--text); }
+
+    .form-group {
+      margin-bottom: 1rem;
+    }
+    .form-group label {
+      display: block;
+      font-size: .82rem;
+      font-weight: 600;
+      color: var(--text);
+      margin-bottom: .35rem;
+    }
+    .form-group .required::after {
+      content: ' *';
+      color: #dc2626;
+    }
+    .form-row {
+      display: grid; grid-template-columns: 1fr 1fr; gap: .75rem;
+    }
+    @media(max-width:480px){ .form-row { grid-template-columns: 1fr; } }
+    .form-group input,
+    .form-group select,
+    .form-group textarea {
+      width: 100%;
+      padding: .7rem .85rem;
+      border: 2px solid var(--border);
+      border-radius: var(--radius-sm);
+      font-size: .9rem;
+      font-family: var(--font);
+      transition: border-color .2s, box-shadow .2s;
+      outline: none;
+      background: #fff;
+    }
+    .form-group input:focus,
+    .form-group select:focus,
+    .form-group textarea:focus {
+      border-color: var(--primary);
+      box-shadow: 0 0 0 3px rgba(22,163,74,.12);
+    }
+    .form-group textarea {
+      resize: vertical;
+      min-height: 70px;
+    }
+    .form-actions {
+      display: flex; gap: .75rem; margin-top: 1.5rem;
+    }
+    .form-actions .btn { flex: 1; }
+
+    /* ====== EMPTY STATE ====== */
+    .empty-state {
+      text-align: center; padding: 3rem 1rem;
+      color: var(--text-lighter);
+    }
+    .empty-state .icon { font-size: 3rem; margin-bottom: .75rem; }
+    .empty-state h3 { color: var(--text-light); font-weight: 600; margin-bottom: .5rem; font-size: 1.1rem; }
+    .empty-state p { font-size: .9rem; }
+
+    /* ====== TOAST ====== */
+    .toast {
+      position: fixed; bottom: 2rem; right: 2rem;
+      padding: .85rem 1.5rem;
+      border-radius: var(--radius);
+      font-size: .9rem; font-weight: 500;
+      color: white;
+      opacity: 0; transform: translateY(10px);
+      transition: all .3s ease;
+      z-index: 999;
+      max-width: 400px;
+    }
+    .toast.show { opacity: 1; transform: translateY(0); }
+    .toast-success { background: var(--primary); }
+    .toast-error { background: #dc2626; }
+
+    /* ====== RESPONSIVE ====== */
+    @media (max-width: 768px) {
+      .panel-header { flex-direction: column; align-items: flex-start; }
+      .login-card { padding: 1.75rem; }
+      .prop-table th, .prop-table td { padding: .5rem .6rem; font-size: .8rem; }
+      .header-inner { padding: 0 1rem; }
+      .stats-row { gap: .5rem; }
+      .stat-pill { padding: .6rem .75rem; min-width: 80px; }
+      .stat-pill .num { font-size: 1.2rem; }
+    }
+    @media (max-width: 480px) {
+      .header-inner { padding: 0 .75rem !important; min-height: 56px; }
+      .login-card { padding: 1.5rem; }
+      .otp-separate input { width: 42px; height: 46px; font-size: 1.2rem; }
+      .toast { left: 1rem; right: 1rem; bottom: 1rem; }
+      .modal-card { padding: 1.25rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ====== HEADER ====== -->
+  <header class="header">
+    <div class="header-inner">
+      <a href="/" class="logo">
+        <img src="/img/logo-certificadoya-lockup.svg" alt="CertificadoYa">
+      </a>
+      <nav class="nav" id="main-nav">
+        <a href="/">Inicio</a>
+        <a href="/#como-funciona">Cómo funciona</a>
+        <a href="/inmobiliarias.html" class="active">Inmobiliarias</a>
+        <a href="/#presupuesto-card" class="btn-nav">Presupuesto</a>
+      </nav>
+      <button class="hamburger" id="hamburger-btn" aria-label="Menú" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+
+      <!-- Overlay menú móvil -->
+      <div class="mobile-overlay" id="mobile-overlay">
+        <div class="mobile-overlay-bg" id="mobile-overlay-bg"></div>
+        <div class="mobile-overlay-panel" id="mobile-overlay-panel">
+          <button class="mobile-overlay-close" id="mobile-overlay-close" aria-label="Cerrar menú">✕</button>
+          <nav class="mobile-overlay-nav">
+            <button class="accordion-toggle" onclick="toggleSection('propietarios')" aria-expanded="true" aria-controls="accordion-propietarios">🔑 Propietarios<span class="accordion-arrow">▾</span></button>
+            <div class="accordion-content" id="accordion-propietarios" style="display:block">
+              <a href="/#presupuesto-card" style="font-weight:600;color:#16a34a">💰 Presupuesto instantáneo</a>
+              <a href="/#como-funciona">📋 Cómo funciona</a>
+              <a href="/#faq">❓ Preguntas frecuentes</a>
+              <a href="/blog/">📝 Blog</a>
+            </div>
+            <button class="accordion-toggle" onclick="toggleSection('tecnicos')" aria-expanded="false" aria-controls="accordion-tecnicos">🔧 Técnicos<span class="accordion-arrow">▸</span></button>
+            <div class="accordion-content" id="accordion-tecnicos" style="display:none">
+              <a href="/panel-tecnicos.html">📋 Registro de técnicos</a>
+              <a href="/pool-encargos.html">🔎 Trabajos disponibles</a>
+              <a href="/blog/?cat=tecnicos">📖 Blog técnico</a>
+              <a href="/tecnicos/">👥 Directorio de técnicos</a>
+            </div>
+            <button class="accordion-toggle" onclick="toggleSection('inmobiliarias')" aria-expanded="true" aria-controls="accordion-inmobiliarias">🏢 Inmobiliarias<span class="accordion-arrow">▾</span></button>
+            <div class="accordion-content" id="accordion-inmobiliarias" style="display:block">
+              <a href="/inmobiliarias.html">🏢 Inmobiliarias</a>
+              <a href="/inmobiliarias/panel.html" style="font-weight:600;color:#16a34a">📊 Panel de control</a>
+            </div>
+          </nav>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- ====== LOGIN SECTION ====== -->
+  <div class="login-section" id="login-section">
+    <!-- PASO 1: Email -->
+    <div class="login-card" id="login-email">
+      <h2>🏢 Acceso inmobiliarias</h2>
+      <p class="login-sub">Introduce tu email registrado y te enviaremos un código de acceso al panel.</p>
+      <div class="login-error" id="login-error"></div>
+      <input type="email" id="login-email-input" placeholder="t u@inmobiliaria.es" autocomplete="email" inputmode="email" autofocus>
+      <p class="legal-note">
+        Al continuar aceptas nuestra
+        <a href="/legal/privacidad.html" style="color:#16a34a;text-decoration:underline">política de privacidad</a>.
+      </p>
+      <button class="btn btn-primary" id="login-btn" onclick="enviarCodigo()">Enviar código →</button>
+      <a href="/inmobiliarias.html" class="back-link">← Información sobre el servicio</a>
+    </div>
+
+    <!-- PASO 2: Código OTP -->
+    <div class="login-card" id="login-codigo" style="display:none">
+      <h2>✉️ Código enviado</h2>
+      <p class="login-sub">Revisa tu bandeja de entrada. Introduce el código de 6 dígitos.</p>
+      <div class="login-error" id="codigo-error"></div>
+
+      <!-- Campo único con autocomplete='one-time-code' (iOS/macOS auto-suggest) -->
+      <div class="otp-field-wrap" id="otp-single-wrap">
+        <input type="text" id="otp-single-input"
+               inputmode="numeric" pattern="[0-9]*"
+               maxlength="6" autocomplete="one-time-code"
+               placeholder="000000"
+               oninput="handleOtpSingle(this)">
+      </div>
+
+      <!-- Fallback: 6 inputs individuales -->
+      <div class="otp-separate" id="otp-separate">
+        <input type="text" maxlength="1" class="codigo-digit" data-index="0" inputmode="numeric" pattern="[0-9]*" autocomplete="off" oninput="handleCodigoInput(this, 0)">
+        <input type="text" maxlength="1" class="codigo-digit" data-index="1" inputmode="numeric" pattern="[0-9]*" autocomplete="off" oninput="handleCodigoInput(this, 1)">
+        <input type="text" maxlength="1" class="codigo-digit" data-index="2" inputmode="numeric" pattern="[0-9]*" autocomplete="off" oninput="handleCodigoInput(this, 2)">
+        <input type="text" maxlength="1" class="codigo-digit" data-index="3" inputmode="numeric" pattern="[0-9]*" autocomplete="off" oninput="handleCodigoInput(this, 3)">
+        <input type="text" maxlength="1" class="codigo-digit" data-index="4" inputmode="numeric" pattern="[0-9]*" autocomplete="off" oninput="handleCodigoInput(this, 4)">
+        <input type="text" maxlength="1" class="codigo-digit" data-index="5" inputmode="numeric" pattern="[0-9]*" autocomplete="off" oninput="handleCodigoInput(this, 5)">
+      </div>
+
+      <button class="btn btn-primary" id="verificar-btn" onclick="verificarCodigo()" disabled>Verificar código →</button>
+      <p style="font-size:.78rem;color:var(--text-lighter);margin-top:.75rem">
+        ¿No recibes el email? <a href="#" onclick="enviarCodigo(event)" style="color:#16a34a">Reenviar código</a>
+      </p>
+      <a href="#" onclick="volverEmail(event)" class="back-link">← Usar otro email</a>
+    </div>
+  </div>
+
+  <!-- ====== PANEL (logueado) ====== -->
+  <div class="panel-section active" id="panel-section" style="display:none">
+    <div class="panel-container">
+      <!-- Cabecera del panel -->
+      <div class="panel-header">
+        <div>
+          <h1>🏢 Panel de control</h1>
+          <p id="panel-subtitle">Gestiona tus propiedades y certificados</p>
+        </div>
+        <div style="display:flex;align-items:center;gap:.75rem;flex-wrap:wrap">
+          <span class="panel-user-badge" id="panel-user-name">🏢 Inmobiliaria</span>
+          <button class="btn-logout" onclick="cerrarSesion()">Cerrar sesión</button>
+        </div>
+      </div>
+
+      <!-- Stats -->
+      <div class="stats-row" id="stats-row">
+        <div class="stat-pill">
+          <div class="num" id="stat-total">0</div>
+          <div class="label">Total propiedades</div>
+        </div>
+        <div class="stat-pill">
+          <div class="num" id="stat-pendientes">0</div>
+          <div class="label">Pendientes</div>
+        </div>
+        <div class="stat-pill">
+          <div class="num" id="stat-asignadas">0</div>
+          <div class="label">Asignadas</div>
+        </div>
+        <div class="stat-pill">
+          <div class="num" id="stat-completadas">0</div>
+          <div class="label">Completadas</div>
+        </div>
+      </div>
+
+      <!-- Actions bar -->
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:1rem;flex-wrap:wrap;gap:.5rem">
+        <button class="btn-success" onclick="abrirModalNueva()">➕ Nueva propiedad</button>
+        <button class="btn-refresh" onclick="cargarPropiedades()">🔄 Actualizar</button>
+      </div>
+
+      <!-- Tabla de propiedades -->
+      <div id="propiedades-container">
+        <div style="text-align:center;padding:3rem"><div class="spinner"></div><p style="color:var(--text-lighter)">Cargando propiedades...</p></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ====== MODAL: Nueva / Editar propiedad ====== -->
+  <div class="modal-overlay" id="modal-propiedad">
+    <div class="modal-card">
+      <button class="modal-close" onclick="cerrarModal()">✕</button>
+      <h2 id="modal-title">➕ Nueva propiedad</h2>
+      <p class="modal-sub" id="modal-sub">Añade un inmueble para solicitar su certificado energético.</p>
+
+      <form id="form-propiedad" onsubmit="guardarPropiedad(event)">
+        <input type="hidden" id="prop-id" value="">
+
+        <div class="form-row">
+          <div class="form-group">
+            <label class="required">Dirección</label>
+            <input type="text" id="prop-direccion" placeholder="Calle Mayor" required>
+          </div>
+          <div class="form-group">
+            <label class="required">Número</label>
+            <input type="text" id="prop-numero" placeholder="12" required>
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label class="required">Ciudad</label>
+            <input type="text" id="prop-ciudad" placeholder="Madrid" required>
+          </div>
+          <div class="form-group">
+            <label class="required">Código Postal</label>
+            <input type="text" id="prop-cp" placeholder="28001" required>
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label class="required">Tipo de inmueble</label>
+            <select id="prop-tipo" required>
+              <option value="">Selecciona...</option>
+              <option value="piso">Piso</option>
+              <option value="casa">Casa / Chalet</option>
+              <option value="local">Local comercial</option>
+              <option value="oficina">Oficina</option>
+              <option value="nave">Nave industrial</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Superficie (m²)</label>
+            <input type="number" id="prop-m2" placeholder="90" min="1">
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label class="required">Nombre contacto propietario</label>
+            <input type="text" id="prop-nombre-contacto" placeholder="Nombre del propietario" required>
+          </div>
+          <div class="form-group">
+            <label class="required">Teléfono propietario</label>
+            <input type="tel" id="prop-telefono" placeholder="+34 600 00 00 00" required>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label>Observaciones</label>
+          <textarea id="prop-observaciones" placeholder="Indica cualquier detalle relevante para la visita..."></textarea>
+        </div>
+
+        <div class="form-actions">
+          <button type="button" class="btn btn-secondary" onclick="cerrarModal()">Cancelar</button>
+          <button type="submit" class="btn btn-primary" id="btn-guardar-prop">Guardar propiedad →</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <div class="toast" id="toast"></div>
+
+  <script>
+    const EDGE_FUNCTION_URL = 'https://wypgqpgjlookbhuaiyxa.supabase.co/functions/v1';
+    const SUPABASE_URL = 'https://wypgqpgjlookbhuaiyxa.supabase.co';
+    const APIKEY = 'sb_publishable_MsDx5jVGtDAzoB3l3-8DiQ_BxWpChA0';
+
+    let emailInmo = '';
+    let inmoData = null;
+
+    // ==============================================================
+    // LOGIN
+    // ==============================================================
+
+    document.addEventListener('DOMContentLoaded', function() {
+      const savedSession = localStorage.getItem('inmo_session');
+      if (savedSession) {
+        try {
+          const session = JSON.parse(savedSession);
+          if (session.token && session.email) {
+            emailInmo = session.email;
+            inmoData = session;
+            mostrarPanel();
+            return;
+          }
+        } catch(e) {}
+      }
+      document.getElementById('login-email-input').focus();
+
+      document.getElementById('login-email-input').addEventListener('keydown', function(e) {
+        if (e.key === 'Enter') enviarCodigo(e);
+      });
+
+      const singleInput = document.getElementById('otp-single-input');
+      if (singleInput) {
+        singleInput.addEventListener('keydown', function(e) {
+          if (e.key === 'Enter' && this.value.length === 6) {
+            verificarCodigo();
+          }
+        });
+      }
+    });
+
+    async function enviarCodigo(e) {
+      if (e) e.preventDefault();
+      const email = document.getElementById('login-email-input').value.trim();
+      if (!email || !email.includes('@')) {
+        mostrarError('login-error', 'Introduce un email válido.');
+        return;
+      }
+
+      const btn = document.getElementById('login-btn');
+      btn.disabled = true;
+      btn.textContent = '⏳ Enviando...';
+
+      try {
+        const res = await fetch(EDGE_FUNCTION_URL + '/login-inmobiliaria', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ email })
+        });
+        const data = await res.json();
+
+        if (!res.ok) {
+          mostrarError('login-error', data.error || 'Error al enviar código.');
+          btn.disabled = false;
+          btn.textContent = 'Enviar código →';
+          return;
+        }
+
+        emailInmo = email;
+        document.getElementById('login-email').style.display = 'none';
+        document.getElementById('login-codigo').style.display = 'block';
+
+        const singleInput = document.getElementById('otp-single-input');
+        const separateDiv = document.getElementById('otp-separate');
+
+        if ('OTPCredential' in window) {
+          separateDiv.classList.remove('show');
+          singleInput.focus();
+          recibirOtpAutomatically();
+        } else {
+          separateDiv.classList.add('show');
+          document.querySelector('.codigo-digit').focus();
+        }
+      } catch (err) {
+        mostrarError('login-error', 'Error de conexión. Inténtalo de nuevo.');
+        btn.disabled = false;
+        btn.textContent = 'Enviar código →';
+      }
+    }
+
+    async function recibirOtpAutomatically() {
+      try {
+        if (!('OTPCredential' in window)) return;
+        const cred = await navigator.credentials.get({
+          otp: { transport: ['sms'] }
+        });
+        if (cred && cred.code) {
+          const input = document.getElementById('otp-single-input');
+          input.value = cred.code;
+          handleOtpSingle(input);
+        }
+      } catch (err) {}
+    }
+
+    function handleOtpSingle(input) {
+      input.value = input.value.replace(/[^0-9]/g, '').slice(0, 6);
+      const completo = input.value.length === 6;
+      document.getElementById('verificar-btn').disabled = !completo;
+      if (completo) {
+        setTimeout(verificarCodigo, 200);
+      }
+    }
+
+    function handleCodigoInput(input, index) {
+      input.value = input.value.replace(/[^0-9]/g, '');
+      if (input.value) input.classList.add('filled');
+      else input.classList.remove('filled');
+
+      if (input.value && index < 5) {
+        document.querySelector(`.codigo-digit[data-index="${index + 1}"]`).focus();
+      }
+
+      const inputs = document.querySelectorAll('.codigo-digit');
+      const completo = Array.from(inputs).every(inp => inp.value.length === 1);
+      document.getElementById('verificar-btn').disabled = !completo;
+
+      if (completo) {
+        setTimeout(verificarCodigo, 200);
+      }
+    }
+
+    function volverEmail(e) {
+      if (e) e.preventDefault();
+      document.getElementById('login-codigo').style.display = 'none';
+      document.getElementById('login-email').style.display = 'block';
+      document.getElementById('login-email-input').focus();
+    }
+
+    async function verificarCodigo() {
+      const singleInput = document.getElementById('otp-single-input');
+      let codigo;
+      if (singleInput.value) {
+        codigo = singleInput.value;
+      } else {
+        const inputs = document.querySelectorAll('.codigo-digit');
+        codigo = Array.from(inputs).map(inp => inp.value).join('');
+      }
+
+      if (codigo.length !== 6) {
+        mostrarError('codigo-error', 'Introduce el código completo de 6 dígitos.');
+        return;
+      }
+
+      const btn = document.getElementById('verificar-btn');
+      btn.disabled = true;
+      btn.textContent = '⏳ Verificando...';
+
+      try {
+        const res = await fetch(EDGE_FUNCTION_URL + '/verificar-login-inmobiliaria', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ email: emailInmo, codigo })
+        });
+        const data = await res.json();
+
+        if (!res.ok) {
+          mostrarError('codigo-error', data.error || 'Código incorrecto.');
+          btn.disabled = false;
+          btn.textContent = 'Verificar código →';
+          return;
+        }
+
+        inmoData = data;
+        localStorage.setItem('inmo_session', JSON.stringify({
+          token: data.sessionToken,
+          email: data.inmobiliaria.email,
+          nombre: data.inmobiliaria.nombre,
+          id: data.inmobiliaria.id
+        }));
+
+        mostrarPanel();
+      } catch (err) {
+        mostrarError('codigo-error', 'Error de conexión.');
+        btn.disabled = false;
+        btn.textContent = 'Verificar código →';
+      }
+    }
+
+    function cerrarSesion() {
+      localStorage.removeItem('inmo_session');
+      emailInmo = '';
+      inmoData = null;
+      document.getElementById('panel-section').style.display = 'none';
+      document.getElementById('login-codigo').style.display = 'none';
+      document.getElementById('login-email').style.display = 'block';
+      document.getElementById('login-section').style.display = 'flex';
+      document.getElementById('login-email-input').value = '';
+      document.getElementById('login-error').style.display = 'none';
+      document.getElementById('otp-single-input').value = '';
+      document.querySelectorAll('.codigo-digit').forEach(inp => { inp.value = ''; inp.classList.remove('filled'); });
+      document.getElementById('verificar-btn').disabled = true;
+      document.getElementById('login-btn').disabled = false;
+      document.getElementById('login-btn').textContent = 'Enviar código →';
+    }
+
+    // ==============================================================
+    // PANEL
+    // ==============================================================
+
+    let propiedades = [];
+
+    function mostrarPanel() {
+      document.getElementById('login-section').style.display = 'none';
+      document.getElementById('panel-section').style.display = 'block';
+
+      const nombre = inmoData?.inmobiliaria?.nombre || inmoData?.nombre || emailInmo;
+      document.getElementById('panel-user-name').textContent = '🏢 ' + nombre;
+
+      cargarPropiedades();
+    }
+
+    async function cargarPropiedades() {
+      const container = document.getElementById('propiedades-container');
+      container.innerHTML = '<div style="text-align:center;padding:3rem"><div class="spinner"></div><p style="color:var(--text-lighter)">Cargando propiedades...</p></div>';
+
+      try {
+        // Cargar leads desde Supabase Rest API
+        const res = await fetch(SUPABASE_URL + '/rest/v1/leads?select=*&order=created_at.desc', {
+          headers: {
+            'apikey': APIKEY,
+            'Authorization': 'Bearer ' + APIKEY
+          }
+        });
+
+        if (!res.ok) {
+          container.innerHTML = `<div class="empty-state">
+            <div class="icon">⚠️</div>
+            <h3>Error al cargar</h3>
+            <p>No se pudieron cargar las propiedades. Verifica tu conexión.</p>
+            <button class="btn-refresh" onclick="cargarPropiedades()" style="margin-top:1rem">🔄 Reintentar</button>
+          </div>`;
+          return;
+        }
+
+        const data = await res.json();
+
+        // Filtrar leads de tipo 'inmobiliaria' que coincidan con el email de la inmobiliaria
+        // O simplemente mostrar todos (según el negocio puede variar)
+        // Por ahora, filtramos por email_cliente si coincide con el email de la inmobiliaria
+        const emailCliente = emailInmo;
+        propiedades = Array.isArray(data) ? data.filter(function(p) {
+          // Si la propiedad tiene email_cliente, filtrar por ese email
+          if (p.email_cliente) return p.email_cliente.toLowerCase() === emailCliente.toLowerCase();
+          // Si no tiene email_cliente, mostramos todas (para demo)
+          return true;
+        }) : [];
+
+        actualizarEstadisticas();
+        renderPropiedades();
+      } catch (err) {
+        container.innerHTML = `<div class="empty-state">
+          <div class="icon">⚠️</div>
+          <h3>Error de conexión</h3>
+          <p>No se pudo conectar con el servidor.</p>
+          <button class="btn-refresh" onclick="cargarPropiedades()" style="margin-top:1rem">🔄 Reintentar</button>
+        </div>`;
+      }
+    }
+
+    function actualizarEstadisticas() {
+      const total = propiedades.length;
+      const pendientes = propiedades.filter(function(p) { return p.estado === 'nuevo' || p.estado === 'pendiente'; }).length;
+      const asignadas = propiedades.filter(function(p) { return p.estado === 'asignado'; }).length;
+      const completadas = propiedades.filter(function(p) { return p.estado === 'completado' || p.estado === 'pagado'; }).length;
+
+      document.getElementById('stat-total').textContent = total;
+      document.getElementById('stat-pendientes').textContent = pendientes;
+      document.getElementById('stat-asignadas').textContent = asignadas;
+      document.getElementById('stat-completadas').textContent = completadas;
+    }
+
+    function renderPropiedades() {
+      const container = document.getElementById('propiedades-container');
+
+      if (propiedades.length === 0) {
+        container.innerHTML = `
+          <div class="empty-state">
+            <div class="icon">🏠</div>
+            <h3>No hay propiedades todavía</h3>
+            <p>Añade tu primera propiedad para solicitar su certificado energético.</p>
+            <button class="btn-success" onclick="abrirModalNueva()" style="margin-top:1rem">➕ Añadir propiedad</button>
+          </div>`;
+        return;
+      }
+
+      container.innerHTML = `
+        <div class="table-wrap">
+          <table class="prop-table">
+            <thead>
+              <tr>
+                <th>Dirección</th>
+                <th>Ciudad</th>
+                <th>CP</th>
+                <th>Tipo</th>
+                <th>Estado</th>
+                <th>Técnico</th>
+                <th>Fecha</th>
+              </tr>
+            </thead>
+            <tbody>
+              ${propiedades.map(function(p) {
+                return renderFila(p);
+              }).join('')}
+            </tbody>
+          </table>
+        </div>`;
+    }
+
+    function renderFila(p) {
+      const estadoClass = 'lead-status-' + (p.estado || 'nuevo');
+      const estadoLabel = p.estado === 'nuevo' ? 'Nuevo' :
+                          p.estado === 'pendiente' ? 'Pendiente' :
+                          p.estado === 'asignado' ? 'Asignado' :
+                          p.estado === 'completado' ? 'Completado' :
+                          p.estado === 'pagado' ? 'Pagado' :
+                          p.estado || 'Nuevo';
+
+      const fecha = p.created_at ? new Date(p.created_at).toLocaleDateString('es-ES', {
+        day: '2-digit', month: 'short', year: 'numeric'
+      }) : '—';
+
+      const direccion = (p.direccion || '') + (p.numero ? ' ' + p.numero : '');
+
+      return `<tr>
+        <td><strong>${direccion || '—'}</strong></td>
+        <td>${p.ciudad || '—'}</td>
+        <td>${p.codigo_postal || '—'}</td>
+        <td>${p.tipo_inmueble || '—'}</td>
+        <td><span class="lead-status ${estadoClass}">${estadoLabel}</span></td>
+        <td>${p.tecnico_asignado || p.tecnico_nombre || '—'}</td>
+        <td>${fecha}</td>
+      </tr>`;
+    }
+
+    // ==============================================================
+    // MODAL: NUEVA / EDITAR PROPIEDAD
+    // ==============================================================
+
+    function abrirModalNueva() {
+      document.getElementById('modal-title').textContent = '➕ Nueva propiedad';
+      document.getElementById('modal-sub').textContent = 'Añade un inmueble para solicitar su certificado energético.';
+      document.getElementById('prop-id').value = '';
+      document.getElementById('form-propiedad').reset();
+      document.getElementById('btn-guardar-prop').textContent = 'Guardar propiedad →';
+      document.getElementById('modal-propiedad').classList.add('open');
+    }
+
+    function cerrarModal() {
+      document.getElementById('modal-propiedad').classList.remove('open');
+    }
+
+    // Cerrar modal al hacer clic fuera
+    document.getElementById('modal-propiedad').addEventListener('click', function(e) {
+      if (e.target === this) cerrarModal();
+    });
+
+    async function guardarPropiedad(e) {
+      e.preventDefault();
+
+      const direccion = document.getElementById('prop-direccion').value.trim();
+      const numero = document.getElementById('prop-numero').value.trim();
+      const ciudad = document.getElementById('prop-ciudad').value.trim();
+      const cp = document.getElementById('prop-cp').value.trim();
+      const tipo = document.getElementById('prop-tipo').value;
+      const m2 = document.getElementById('prop-m2').value.trim();
+      const nombreContacto = document.getElementById('prop-nombre-contacto').value.trim();
+      const telefono = document.getElementById('prop-telefono').value.trim();
+      const observaciones = document.getElementById('prop-observaciones').value.trim();
+
+      if (!direccion || !numero || !ciudad || !cp || !tipo || !nombreContacto || !telefono) {
+        mostrarToast('Completa todos los campos obligatorios.', 'error');
+        return;
+      }
+
+      const btn = document.getElementById('btn-guardar-prop');
+      btn.disabled = true;
+      btn.textContent = '⏳ Guardando...';
+
+      try {
+        const body = {
+          email_cliente: emailInmo,
+          direccion: direccion,
+          numero: numero,
+          ciudad: ciudad,
+          codigo_postal: cp,
+          m2: m2 ? parseFloat(m2) : null,
+          tipo_inmueble: tipo,
+          fuente: 'inmobiliaria',
+          estado: 'nuevo',
+          nombre_cliente: nombreContacto,
+          telefono_cliente: telefono,
+          observaciones: observaciones || null
+        };
+
+        const res = await fetch(EDGE_FUNCTION_URL + '/solicitar-servicio?action=solicitar', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'apikey': APIKEY
+          },
+          body: JSON.stringify(body)
+        });
+
+        const data = await res.json();
+
+        if (!res.ok) {
+          mostrarToast(data.error || 'Error al guardar la propiedad.', 'error');
+          btn.disabled = false;
+          btn.textContent = 'Guardar propiedad →';
+          return;
+        }
+
+        mostrarToast('✅ Propiedad añadida correctamente.', 'success');
+        cerrarModal();
+        cargarPropiedades();
+      } catch (err) {
+        mostrarToast('Error de conexión. Inténtalo de nuevo.', 'error');
+        btn.disabled = false;
+        btn.textContent = 'Guardar propiedad →';
+      }
+    }
+
+    // ==============================================================
+    // UTILS
+    // ==============================================================
+
+    function mostrarError(id, msg) {
+      const el = document.getElementById(id);
+      el.textContent = msg;
+      el.style.display = 'block';
+    }
+
+    function mostrarToast(msg, tipo) {
+      const toast = document.getElementById('toast');
+      toast.textContent = msg;
+      toast.className = 'toast toast-' + tipo + ' show';
+      setTimeout(function() { toast.classList.remove('show'); }, 3000);
+    }
+  </script>
+
+  <!-- Menú overlay + acordeón JS -->
+  <script>
+  (function(){
+    var btn = document.getElementById('hamburger-btn');
+    var overlay = document.getElementById('mobile-overlay');
+    var panel = document.getElementById('mobile-overlay-panel');
+    var bg = document.getElementById('mobile-overlay-bg');
+    var closeBtn = document.getElementById('mobile-overlay-close');
+    if (!btn || !overlay) return;
+    function openM(){
+      overlay.classList.add('open');
+      btn.classList.add('active');
+      btn.setAttribute('aria-expanded', 'true');
+      document.body.style.overflow = 'hidden';
+    }
+    function closeM(){
+      overlay.classList.remove('open');
+      btn.classList.remove('active');
+      btn.setAttribute('aria-expanded', 'false');
+      document.body.style.overflow = '';
+    }
+    btn.onclick = function(e){
+      e.stopPropagation();
+      overlay.classList.contains('open') ? closeM() : openM();
+    };
+    if (bg) bg.onclick = closeM;
+    if (closeBtn) closeBtn.onclick = closeM;
+    overlay.querySelectorAll('a').forEach(function(a){
+      a.addEventListener('click', closeM);
+    });
+    document.addEventListener('keydown', function(e){
+      if (e.key === 'Escape' && overlay.classList.contains('open')) closeM();
+    });
+  })();
+
+  function toggleSection(id){
+    var c=document.getElementById('accordion-'+id);
+    var b=document.querySelector('[onclick*="'+id+'"]');
+    if(!c||!b)return;
+    var o=c.style.display!=='none';
+    if(o){
+      c.style.height=c.scrollHeight+'px';
+      requestAnimationFrame(function(){
+        c.style.height='0';
+        c.style.opacity='0';
+      });
+      setTimeout(function(){c.style.display='none';c.style.height='';c.style.opacity='';},220);
+      b.setAttribute('aria-expanded','false');
+      var a=b.querySelector('.accordion-arrow');
+      if(a)a.textContent='\u25B8';
+    }else{
+      c.style.display='block';
+      c.style.height='0';
+      c.style.opacity='0';
+      requestAnimationFrame(function(){
+        c.style.height=c.scrollHeight+'px';
+        c.style.opacity='1';
+      });
+      setTimeout(function(){c.style.height='';c.style.opacity='';},220);
+      b.setAttribute('aria-expanded','true');
+      var a=b.querySelector('.accordion-arrow');
+      if(a)a.textContent='\u25BE';
+    }
+  }
+  </script>
+</body>
+</html>
