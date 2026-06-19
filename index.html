@@ -1685,7 +1685,12 @@ function calcularPrecioF1() {
   var cfg = CONFIG_TIPO[tipo] || CONFIG_TIPO.piso;
   var subtotal = cfg.base + m2 * cfg.factor;
   var tasa = TASA_REGISTRO[provincia] || 0;
-  var iva = Math.round(subtotal * 0.21);
+  // IVA 21% (peninsular), IGIC 7% (Canarias), IPSI 4% (Ceuta/Melilla)
+  var esCanarias = provincia === 'las-palmas' || provincia === 'tenerife' || provincia === 'santa-cruz-de-tenerife';
+  var esCeutaMelilla = provincia === 'ceuta' || provincia === 'melilla';
+  var tipoImpuesto = esCanarias ? 'IGIC' : (esCeutaMelilla ? 'IPSI' : 'IVA');
+  var porcImpuesto = esCanarias ? 0.07 : (esCeutaMelilla ? 0.04 : 0.21);
+  var iva = Math.round(subtotal * porcImpuesto);
   var total = Math.round(subtotal + tasa + iva);
   if (total < 35) total = 35;
   var baseSinIVA = subtotal;
@@ -1698,7 +1703,7 @@ function calcularPrecioF1() {
     desgloseEl.innerHTML =
       '<div class="desglose-linea"><span>Precio servicio</span><span>' + subtotal.toFixed(2) + ' €</span></div>' +
       tasaDisplay +
-      '<div class="desglose-linea"><span>IVA 21%</span><span>' + iva + ' €</span></div>' +
+      '<div class="desglose-linea"><span>' + tipoImpuesto + ' ' + Math.round(porcImpuesto * 100) + '%</span><span>' + iva + ' €</span></div>' +
       '<div class="desglose-linea-total"><span>Total</span><span>' + total + ' €</span></div>';
     resultado.style.display = 'block';
   } else {

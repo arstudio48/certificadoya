@@ -11,8 +11,14 @@ const corsHeaders = {
   'Access-Control-Allow-Headers': 'authorization, x-client-info, apikey, content-type',
 }
 
-// IVA estándar
-const IVA_PCT = 21
+// IVA/IGIC/IPSI según zona
+function getImpuesto(zona: string): { nombre: string; pct: number } {
+  const canarias = ['las-palmas', 'tenerife', 'santa-cruz-de-tenerife'];
+  const ceutaMelilla = ['ceuta', 'melilla'];
+  if (canarias.includes(zona)) return { nombre: 'IGIC', pct: 7 };
+  if (ceutaMelilla.includes(zona)) return { nombre: 'IPSI', pct: 4 };
+  return { nombre: 'IVA', pct: 21 };
+}
 
 serve(async (req) => {
   // Handle CORS preflight
@@ -103,7 +109,9 @@ serve(async (req) => {
       }
 
       const base = parseFloat(base_imponible) || 0
-      const iva = Math.round((base * IVA_PCT) / 100 * 100) / 100
+      const zona = reqBody.zona || ''
+      const impuesto = getImpuesto(zona)
+      const iva = Math.round((base * impuesto.pct) / 100 * 100) / 100
       const total = base + iva
 
       // Generar número de factura
@@ -261,6 +269,8 @@ serve(async (req) => {
 })
 
 function generarFacturaHTML(factura: any): string {
+  const zona = String(factura.zona || '')
+  const impuestoFactura = getImpuesto(zona)
   const fecha = factura.created_at
     ? new Date(factura.created_at).toLocaleDateString('es-ES', {
         day: 'numeric', month: 'long', year: 'numeric'
@@ -454,7 +464,7 @@ function generarFacturaHTML(factura: any): string {
         <td style="text-align:right">${Number(factura.base_imponible).toFixed(2)} €</td>
       </tr>
       <tr>
-        <td>IVA 21%</td>
+        <td>${impuestoFactura.nombre} ${impuestoFactura.pct}%</td>
         <td style="text-align:right">${Number(factura.iva).toFixed(2)} €</td>
       </tr>
       <tr class="total-row">
