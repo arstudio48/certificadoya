@@ -351,6 +351,56 @@
 .calc-resultado-precio { font-size: 1.6rem; font-weight: 800; color: var(--f1-accent); margin: .15rem 0; }
 .calc-resultado-detalle { font-size: .72rem; color: var(--f1-muted); margin-bottom: .3rem; }
 .calc-resultado-aviso { font-size: .62rem; color: var(--f1-muted); margin: .3rem 0 0; line-height: 1.4; }
+
+/* ===== MICROINTERACCIONES ===== */
+.property-card {
+  transition: all .25s cubic-bezier(.4,0,.2,1);
+}
+.property-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 4px 16px rgba(22,163,74,.15);
+}
+.property-card.selected {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 20px rgba(22,163,74,.25);
+}
+#calc-resultado {
+  animation: fadeSlideIn .35s ease-out;
+}
+@keyframes fadeSlideIn {
+  from { opacity: 0; transform: translateY(8px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+.calc-btn {
+  transition: all .2s cubic-bezier(.4,0,.2,1);
+}
+.calc-btn:hover {
+  transform: scale(1.02);
+  box-shadow: 0 4px 14px rgba(22,163,74,.3);
+}
+.calc-btn:active {
+  transform: scale(.98);
+}
+.calc-slider::-webkit-slider-thumb {
+  transition: box-shadow .2s, transform .15s;
+}
+.calc-slider::-webkit-slider-thumb:hover {
+  box-shadow: 0 0 0 6px rgba(22,163,74,.15);
+}
+.ventaja-v2 {
+  transition: all .25s ease;
+}
+.ventaja-v2:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 24px rgba(0,0,0,.06);
+}
+.stat-item {
+  transition: transform .2s ease;
+}
+.stat-item:hover {
+  transform: scale(1.04);
+}
+
 /* Mobile F1 */
 @media (max-width: 768px) {
   .hero-f1::before { display: none; }
@@ -888,46 +938,6 @@ var provSlugs = {}; provincias.forEach(function(p){provSlugs[p.slug]=p.nombre;})
         <h4>Recibe tu CEE por email</h4>
         <p>Certificado registrado en el organismo competente y enviado a tu email. En 48-96h.</p>
       </div>
-    </div>
-  </section>
-
-  <!-- PROVINCIAS -->
-  <section class="provincias-section-v2">
-    <h2>Selecciona tu provincia</h2>
-    <p class="section-sub">Técnicos disponibles en toda España</p>
-    <div style="text-align:center;margin-bottom:1.5rem">
-      <div class="buscador-wrapper" style="display:inline-block;position:relative">
-        <svg class="buscador-icono" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#888" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg>
-        <input type="text" id="buscador-provincia-inline" class="buscador-input" placeholder="Busca tu provincia..." autocomplete="off">
-        <div id="buscador-resultados-inline" class="buscador-resultados"></div>
-      </div>
-    </div>
-    <div class="provincias-grid-v2">
-      <a href="/certificado-energetico-madrid/" class="prov-link prov-link-destacada">Madrid</a>
-      <a href="/certificado-energetico-barcelona/" class="prov-link">Barcelona</a>
-      <a href="/certificado-energetico-valencia/" class="prov-link">Valencia</a>
-      <a href="/certificado-energetico-sevilla/" class="prov-link">Sevilla</a>
-      <a href="/certificado-energetico-alicante/" class="prov-link">Alicante</a>
-      <a href="/certificado-energetico-malaga/" class="prov-link">Málaga</a>
-      <a href="/certificado-energetico-murcia/" class="prov-link">Murcia</a>
-      <a href="/certificado-energetico-asturias/" class="prov-link">Asturias</a>
-      <a href="/certificado-energetico-gijon/" class="prov-link">Gijón</a>
-      <a href="/certificado-energetico-las-palmas/" class="prov-link">Las Palmas</a>
-      <a href="/certificado-energetico-tenerife/" class="prov-link">Tenerife</a>
-      <a href="/certificado-energetico-a-coruna/" class="prov-link">A Coruña</a>
-      <a href="/certificado-energetico-bizkaia/" class="prov-link">Bizkaia</a>
-      <a href="/certificado-energetico-cadiz/" class="prov-link">Cádiz</a>
-      <a href="/certificado-energetico-granada/" class="prov-link">Granada</a>
-      <a href="/certificado-energetico-cantabria/" class="prov-link">Cantabria</a>
-      <a href="/certificado-energetico-gipuzkoa/" class="prov-link">Gipuzkoa</a>
-      <a href="/certificado-energetico-leon/" class="prov-link">León</a>
-      <a href="/certificado-energetico-valladolid/" class="prov-link">Valladolid</a>
-      <a href="/certificado-energetico-salamanca/" class="prov-link">Salamanca</a>
-      <a href="/certificado-energetico-zaragoza/" class="prov-link">Zaragoza</a>
-      <a href="/certificado-energetico-baleares/" class="prov-link">Baleares</a>
-      <a href="/certificado-energetico-la-rioja/" class="prov-link">La Rioja</a>
-      <a href="/certificado-energetico-caceres/" class="prov-link">Cáceres</a>
-      <a href="/certificado-energetico-badajoz/" class="prov-link">Badajoz</a>
     </div>
   </section>
 
