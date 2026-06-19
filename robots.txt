@@ -2,3 +2,14 @@ User-agent: *
 Disallow: 
 
 Sitemap: https://www.certificadoya.es/sitemap.xml
+# GEO-001: Crawlers de IA
+User-agent: GPTBot
+Allow: /
+User-agent: ChatGPT-User
+Allow: /
+User-agent: PerplexityBot
+Allow: /
+User-agent: ClaudeBot
+Allow: /
+User-agent: Google-Extended
+Allow: /
