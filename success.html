@@ -17,9 +17,11 @@ h1{font-size:1.4rem;font-weight:700;color:#16a34a;margin-bottom:.75rem}
 p{font-size:.88rem;color:#6b7b5e;line-height:1.6;margin-bottom:1.5rem}
 .btn{display:inline-block;background:#16a34a;color:#fff;font-weight:600;padding:.6rem 1.5rem;border-radius:8px;font-size:.85rem;text-decoration:none}
 .btn:hover{background:#15803d}
-.loading{font-size:.85rem;color:#8a9a8a;margin:1rem 0}
+.btn2{display:inline-block;background:#fff;color:#16a34a;font-weight:600;padding:.6rem 1.5rem;border-radius:8px;font-size:.85rem;text-decoration:none;border:1.5px solid #16a34a;margin-top:.5rem}
+.btn2:hover{background:#f5f7f5}
 .spinner{width:20px;height:20px;border:2px solid #dce8d0;border-top-color:#16a34a;border-radius:50%;animation:spin .6s linear infinite;margin:1rem auto}
 @keyframes spin{to{transform:rotate(360deg)}}
+.loading{font-size:.85rem;color:#8a9a8a;margin:1rem 0}
 .card small{display:block;margin-top:1rem;font-size:.72rem;color:#b0c0a8}
 </style>
 <link rel="icon" type="image/png" sizes="32x32" href="/img/favicon-32.png">
@@ -28,7 +30,7 @@ p{font-size:.88rem;color:#6b7b5e;line-height:1.6;margin-bottom:1.5rem}
 </head>
 <body>
 <div class="card" id="card">
-  <div class="loading" id="loading-state">
+  <div id="loading-state">
     <div class="spinner"></div>
     <p>Verificando tu pago...</p>
   </div>
@@ -36,45 +38,33 @@ p{font-size:.88rem;color:#6b7b5e;line-height:1.6;margin-bottom:1.5rem}
     <div class="icon">✅</div>
     <h1>¡Pago confirmado!</h1>
     <p>Tu reserva está en proceso. En las próximas 24h un técnico certificador aceptará tu encargo.<br><br>Te enviaremos un email con los siguientes pasos.</p>
-    <a href="/" class="btn">Volver al inicio</a>
-    <small>Si tienes cualquier duda, responde al email de confirmación que has recibido.</small>
+    <a href="/mi-reserva.html" class="btn2">📋 Ver estado de mi reserva</a>
+    <a href="/" class="btn" style="margin-top:.5rem">Volver al inicio</a>
+  </div>
+  <div id="error-content" style="display:none">
+    <div class="icon">❌</div>
+    <h1 style="color:#ef4444">Error en el pago</h1>
+    <p id="error-msg">No pudimos confirmar tu pago. Contacta con nosotros.</p>
+    <a href="mailto:info@certificadoya.es" class="btn">Contactar</a>
   </div>
 </div>
 <script>
-(function(){
-  var params = new URLSearchParams(window.location.search);
-  var sessionId = params.get('session_id');
-  var loadingEl = document.getElementById('loading-state');
-  var successEl = document.getElementById('success-content');
+var params = new URLSearchParams(window.location.search);
+var sessionId = params.get('session_id');
+var msg = document.getElementById('status-msg');
 
-  if (!sessionId) {
-    loadingEl.style.display = 'none';
-    successEl.style.display = 'block';
-    return;
-  }
-
-  async function verificarPago(intentos) {
-    for (var i = 1; i <= intentos; i++) {
-      try {
-        var res = await fetch('https://wypgqpgjlookbhuaiyxa.supabase.co/functions/v1/stripe-checkout?action=confirm', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ session_id: sessionId })
-        });
-        var data = await res.json();
-        if (data.success) {
-          loadingEl.style.display = 'none';
-          successEl.style.display = 'block';
-          return;
-        }
-      } catch(e) {}
-      if (i < intentos) await new Promise(function(r){setTimeout(r, i * 2000)});
-    }
-    loadingEl.style.display = 'none';
-    successEl.style.display = 'block';
-  }
-  verificarPago(5);
-})();
+if (sessionId) {
+  var sp = document.getElementById('loading-state');
+  var sc = document.getElementById('success-content');
+  sp.style.display = 'none';
+  sc.style.display = 'block';
+} else {
+  document.getElementById('loading-state').innerHTML = '<p style="color:#8a9a8a">Buscando información de tu reserva...</p>';
+  setTimeout(function(){
+    document.getElementById('loading-state').style.display = 'none';
+    document.getElementById('success-content').style.display = 'block';
+  }, 1500);
+}
 </script>
 </body>
 </html>

@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Mi reserva | CertificadoYa</title>
+<meta name="robots" content="noindex,nofollow">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600;9..40,700&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'DM Sans',sans-serif;background:#f5f7f5;color:#1a2e1e;min-height:100vh;display:flex;flex-direction:column;align-items:center;padding:2rem 1rem}
+.container{max-width:540px;width:100%}
+.logo{text-align:center;margin-bottom:2rem}
+.logo img{height:40px;width:auto}
+.card{background:#fff;border:1px solid #e5e7eb;border-radius:16px;padding:2rem;box-shadow:0 4px 16px rgba(0,0,0,.04);margin-bottom:1.5rem}
+h1{font-size:1.3rem;font-weight:700;margin-bottom:.25rem}
+.sub{font-size:.85rem;color:#6b7b5e;margin-bottom:1.5rem}
+label{display:block;font-size:.78rem;font-weight:600;color:#4a5a4a;margin-bottom:.35rem;text-transform:uppercase;letter-spacing:.04em}
+input{width:100%;padding:.7rem .85rem;border:1px solid #dce8d0;border-radius:10px;font-family:'DM Sans',sans-serif;font-size:.88rem;color:#1a2e1e;background:#f5f7f5;outline:none;transition:border .2s}
+input:focus{border-color:#16a34a;box-shadow:0 0 0 3px rgba(22,163,74,.1)}
+.btn{display:block;width:100%;padding:.75rem;background:#16a34a;color:#fff;border:none;border-radius:10px;font-weight:600;font-size:.9rem;cursor:pointer;transition:all .2s;margin-top:.75rem}
+.btn:hover{background:#15803d;box-shadow:0 4px 12px rgba(22,163,74,.25)}
+.btn:disabled{opacity:.6;cursor:default}
+.hidden{display:none!important}
+.step{display:flex;align-items:center;gap:.75rem;padding:.75rem 0;border-bottom:1px solid #f0f0f0}
+.step:last-child{border-bottom:none}
+.step-icon{width:32px;height:32px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:.85rem;font-weight:700;flex-shrink:0}
+.step.done .step-icon{background:#16a34a;color:#fff}
+.step.active .step-icon{background:#fbbf24;color:#fff;animation:pulse 2s infinite}
+.step.pending .step-icon{background:#e5e7eb;color:#9ca3af}
+.step-info{flex:1}
+.step-info h4{font-size:.88rem;font-weight:600;margin-bottom:.15rem}
+.step-info p{font-size:.78rem;color:#6b7b5e}
+.step-status{font-size:.72rem;font-weight:600;padding:.2rem .6rem;border-radius:20px}
+.step.done .step-status{background:#f0fdf4;color:#16a34a}
+.step.active .step-status{background:#fffbeb;color:#d97706}
+.step.pending .step-status{background:#f3f4f6;color:#9ca3af}
+@keyframes pulse{0%,100%{box-shadow:0 0 0 0 rgba(251,191,36,.4)}50%{box-shadow:0 0 0 8px rgba(251,191,36,0)}}
+.info-grid{display:grid;grid-template-columns:1fr 1fr;gap:.75rem}
+.info-item{}
+.info-item label{font-size:.7rem;color:#8a9a8a;margin-bottom:.15rem}
+.info-item p{font-size:.85rem;font-weight:600;color:#1a2e1e}
+.error-msg{text-align:center;padding:2rem;color:#ef4444}
+.error-msg p{font-size:.88rem;margin-top:.5rem}
+.loading{text-align:center;padding:3rem;color:#8a9a8a;font-size:.9rem}
+.loading span{animation:dots 1.5s infinite}
+@keyframes dots{0%,20%{opacity:0}50%{opacity:1}80%,100%{opacity:0}}
+footer{text-align:center;padding:1rem;font-size:.75rem;color:#9aa89a}
+footer a{color:#16a34a;text-decoration:none}
+@media(max-width:480px){.card{padding:1.25rem}.info-grid{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<div class="container">
+  <div class="logo"><a href="/"><img src="/img/logo-certificadoya-lockup.svg" alt="CertificadoYa"></a></div>
+
+  <!-- Step 1: Buscar reserva -->
+  <div class="card" id="step-buscar">
+    <h1>🔍 Mi reserva</h1>
+    <p class="sub">Introduce tu email para ver el estado de tu certificado.</p>
+    <label for="buscar-email">Tu email</label>
+    <input type="email" id="buscar-email" placeholder="tu@email.com" required>
+    <button class="btn" id="buscar-btn" onclick="buscarReserva()">Ver mi reserva →</button>
+    <p id="buscar-error" class="error-msg hidden">❌ No encontramos ninguna reserva con ese email.</p>
+  </div>
+
+  <!-- Step 2: Estado reserva -->
+  <div class="card hidden" id="step-reserva">
+    <h1>📋 Estado de tu certificado</h1>
+    <p class="sub" id="reserva-cliente"></p>
+
+    <div class="info-grid" style="margin-bottom:1.5rem">
+      <div class="info-item"><label>Dirección</label><p id="r-direccion">—</p></div>
+      <div class="info-item"><label>Provincia</label><p id="r-provincia">—</p></div>
+      <div class="info-item"><label>Tipo</label><p id="r-tipo">—</p></div>
+      <div class="info-item"><label>Superficie</label><p id="r-m2">—</p></div>
+    </div>
+
+    <div style="background:#f9faf9;border-radius:12px;padding:1rem;margin-bottom:1.5rem">
+      <div class="step done" id="step-pago">
+        <div class="step-icon">✓</div>
+        <div class="step-info"><h4>Pago confirmado</h4><p>Hemos recibido tu pago correctamente</p></div>
+        <span class="step-status">Completado</span>
+      </div>
+      <div class="step pending" id="step-asignado">
+        <div class="step-icon">2</div>
+        <div class="step-info"><h4>Asignación de técnico</h4><p>Buscamos un técnico en tu zona</p></div>
+        <span class="step-status" id="status-asignado">Pendiente</span>
+      </div>
+      <div class="step pending" id="step-visita">
+        <div class="step-icon">3</div>
+        <div class="step-info"><h4>Visita al inmueble</h4><p>El técnico realizará la visita</p></div>
+        <span class="step-status" id="status-visita">Pendiente</span>
+      </div>
+      <div class="step pending" id="step-cee">
+        <div class="step-icon">4</div>
+        <div class="step-info"><h4>Certificado emitido</h4><p>Recibirás el CEE por email</p></div>
+        <span class="step-status" id="status-cee">Pendiente</span>
+      </div>
+    </div>
+
+    <p style="font-size:.78rem;color:#8a9a8a;text-align:center">¿Tienes dudas? <a href="mailto:info@certificadoya.es" style="color:#16a34a">info@certificadoya.es</a></p>
+  </div>
+</div>
+<footer>© 2026 CertificadoYa — <a href="/">Volver al inicio</a></footer>
+
+<script>
+const SUPABASE_URL = 'https://wypgqpgjlookbhuaiyxa.supabase.co'
+const SUPABASE_KEY = 'sb_publishable_MsDx5jVGtDAzoB3l3-8DiQ_BxWpChA0'
+
+async function buscarReserva() {
+  var email = document.getElementById('buscar-email').value.trim()
+  if (!email || !email.includes('@')) return
+
+  document.getElementById('buscar-btn').disabled = true
+  document.getElementById('buscar-btn').textContent = 'Buscando...'
+  document.getElementById('buscar-error').classList.add('hidden')
+
+  try {
+    var resp = await fetch(SUPABASE_URL + '/rest/v1/leads?select=*&email_cliente=eq.' + encodeURIComponent(email) + '&order=created_at.desc&limit=1', {
+      headers: { 'apikey': SUPABASE_KEY, 'Authorization': 'Bearer ' + SUPABASE_KEY }
+    })
+    var leads = await resp.json()
+
+    if (!leads || leads.length === 0 || leads.error) {
+      document.getElementById('buscar-error').classList.remove('hidden')
+      document.getElementById('buscar-btn').disabled = false
+      document.getElementById('buscar-btn').textContent = 'Ver mi reserva →'
+      return
+    }
+
+    var lead = leads[0]
+    mostrarReserva(lead)
+  } catch(e) {
+    document.getElementById('buscar-error').classList.remove('hidden')
+    document.getElementById('buscar-btn').disabled = false
+    document.getElementById('buscar-btn').textContent = 'Ver mi reserva →'
+  }
+}
+
+function mostrarReserva(lead) {
+  document.getElementById('step-buscar').classList.add('hidden')
+  document.getElementById('step-reserva').classList.remove('hidden')
+  document.getElementById('reserva-cliente').textContent = '👋 ' + (lead.nombre_cliente || lead.email_cliente || 'Cliente')
+
+  document.getElementById('r-direccion').textContent = [lead.direccion, lead.numero, lead.ciudad].filter(Boolean).join(', ') || lead.codigo_postal || '—'
+  document.getElementById('r-provincia').textContent = lead.provincia || '—'
+  document.getElementById('r-tipo').textContent = lead.tipo_inmueble || '—'
+  document.getElementById('r-m2').textContent = lead.m2 ? lead.m2 + ' m²' : '—'
+
+  var estado = (lead.estado || 'nuevo').toLowerCase()
+  var pasos = { 0:'done', 1:'pending', 2:'pending', 3:'pending' }
+
+  if (estado === 'completado') { pasos[1]='done'; pasos[2]='done'; pasos[3]='done' }
+  else if (estado === 'asignado' || estado === 'pagado') { pasos[1]='done'; pasos[2]='active' }
+  else if (estado === 'nuevo' || estado === 'pendiente') { pasos[1]='active' }
+
+  document.getElementById('step-pago').className = 'step done'
+  document.getElementById('step-asignado').className = 'step ' + pasos[1]
+  document.getElementById('step-visita').className = 'step ' + pasos[2]
+  document.getElementById('step-cee').className = 'step ' + pasos[3]
+
+  var labels = { done:'✅ Completado', active:'🔄 En proceso', pending:'⏳ Pendiente' }
+  document.getElementById('status-asignado').textContent = labels[pasos[1]]
+  document.getElementById('status-visita').textContent = labels[pasos[2]]
+  document.getElementById('status-cee').textContent = labels[pasos[3]]
+}
+</script>
+</body>
+</html>
