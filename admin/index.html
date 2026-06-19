@@ -566,6 +566,37 @@
         </tbody>
       </table>
     </div>
+
+    <!-- FACTURAS -->
+    <div class="section-header" id="facturas-header" style="display:none">
+      <h2>Facturas <span class="count-badge" id="facturas-count">0</span></h2>
+      <div style="display:flex;gap:.5rem;flex-wrap:wrap">
+        <button class="filter-btn active" data-factura-filter="todas" onclick="cambiarFiltroFactura('todas')">Todas</button>
+        <button class="filter-btn" data-factura-filter="cliente" onclick="cambiarFiltroFactura('cliente')">Clientes</button>
+        <button class="filter-btn" data-factura-filter="tecnico" onclick="cambiarFiltroFactura('tecnico')">Técnicos</button>
+        <button class="filter-btn" data-factura-filter="agencia" onclick="cambiarFiltroFactura('agencia')">Agencias</button>
+      </div>
+    </div>
+    <div class="table-wrapper" id="facturas-wrapper" style="display:none">
+      <table>
+        <thead>
+          <tr>
+            <th>Nº Factura</th>
+            <th>Cliente</th>
+            <th>Concepto</th>
+            <th>Base</th>
+            <th>IVA</th>
+            <th>Total</th>
+            <th>Tipo</th>
+            <th>Fecha</th>
+            <th>Acción</th>
+          </tr>
+        </thead>
+        <tbody id="facturas-tbody">
+          <tr><td colspan="9" class="loading">Cargando facturas...</td></tr>
+        </tbody>
+      </table>
+    </div>
   </main>
 </div>
 
@@ -574,6 +605,7 @@
   'use strict';
 
   // ─── Config ───
+  const EDGE_FUNCTION_URL = 'https://wypgqpgjlookbhuaiyxa.supabase.co/functions/v1';
   const SUPABASE_URL = 'https://wypgqpgjlookbhuaiyxa.supabase.co';
   const SUPABASE_KEY = 'sb_publishable_MsDx5jVGtDAzoB3l3-8DiQ_BxWpChA0';
   const API_HEADERS = {
@@ -590,8 +622,10 @@
   let leadsData = [];
   let pagosData = [];
   let tecnicosData = [];
+  let facturasData = [];
   let leadsFilter = 'todas';
   let pagosFilter = 'todos';
+  let facturasFilter = 'todas';
   let isLoggedIn = false;
 
   // ─── DOM refs ───
@@ -666,7 +700,7 @@
   // ─── Data loading ───
   async function loadAllData() {
     try {
-      const [leadsResult, pagosResult, tecnicosResult] = await Promise.all([
+      const [leadsResult, pagosResult, tecnicosResult, facturasResult] = await Promise.all([
         apiGet('leads').catch(function(e) {
           console.warn('Error leads:', e);
           return [];
@@ -678,17 +712,23 @@
         apiGet('tecnicos').catch(function(e) {
           console.warn('Error técnicos:', e);
           return [];
+        }),
+        apiGet('facturas').catch(function(e) {
+          console.warn('Error facturas:', e);
+          return [];
         })
       ]);
 
       leadsData = Array.isArray(leadsResult) ? leadsResult : [];
       pagosData = Array.isArray(pagosResult) ? pagosResult : [];
       tecnicosData = Array.isArray(tecnicosResult) ? tecnicosResult : [];
+      facturasData = Array.isArray(facturasResult) ? facturasResult : [];
 
       renderDashboard();
       renderLeads();
       renderPagos();
       renderTecnicos();
+      renderFacturas();
     } catch (err) {
       showToast('Error al cargar datos: ' + err.message, 'error');
     }
@@ -862,6 +902,68 @@
         '</tr>';
     }).join('');
   }
+
+  // ─── Facturas ───
+  function renderFacturas() {
+    var tbody = document.getElementById('facturas-tbody');
+    var countEl = document.getElementById('facturas-count');
+    var header = document.getElementById('facturas-header');
+    var wrapper = document.getElementById('facturas-wrapper');
+
+    facturasFilter = window._facturasFilter || 'todas';
+
+    var filtered = facturasData;
+    if (facturasFilter !== 'todas') {
+      filtered = facturasData.filter(function(f) {
+        return (f.tipo || '').toLowerCase() === facturasFilter;
+      });
+    }
+
+    if (filtered.length > 0) {
+      header.style.display = '';
+      wrapper.style.display = '';
+    } else {
+      header.style.display = 'none';
+      wrapper.style.display = 'none';
+    }
+
+    countEl.textContent = filtered.length;
+
+    if (filtered.length === 0) {
+      tbody.innerHTML = '<tr><td colspan="9" class="empty-state">' +
+        (facturasData.length === 0 ? 'No hay facturas' : 'No hay facturas de este tipo') +
+        '</td></tr>';
+      return;
+    }
+
+    tbody.innerHTML = filtered.map(function(f) {
+      var fecha = f.created_at ? f.created_at.slice(0, 10) : '—';
+      var tipoLabel = f.tipo === 'cliente' ? 'Cliente' : f.tipo === 'tecnico' ? 'Técnico' : 'Agencia';
+      return '<tr>' +
+        '<td><strong>' + escHtml(f.num_factura || '—') + '</strong></td>' +
+        '<td>' + escHtml(f.cliente_nombre || '—') + '</td>' +
+        '<td>' + escHtml(f.concepto || '—') + '</td>' +
+        '<td>' + (parseFloat(f.base_imponible) || 0).toFixed(2) + ' €</td>' +
+        '<td>' + (parseFloat(f.iva) || 0).toFixed(2) + ' €</td>' +
+        '<td><strong>' + (parseFloat(f.total) || 0).toFixed(2) + ' €</strong></td>' +
+        '<td><span class="status-badge ' + f.tipo + '">' + tipoLabel + '</span></td>' +
+        '<td>' + fecha + '</td>' +
+        '<td><button class="btn-sm green" onclick="window.open(\'' + EDGE_FUNCTION_URL + '/gestion-facturas?action=pdf&id=' + f.id + '\', \'_blank\')">📄 Ver PDF</button></td>' +
+        '</tr>';
+    }).join('');
+  }
+
+  // Factura filter (global for onclick)
+  window.cambiarFiltroFactura = function(tipo) {
+    window._facturasFilter = tipo;
+    document.querySelectorAll('[data-factura-filter]').forEach(function(b) {
+      b.classList.remove('active');
+      if (b.getAttribute('data-factura-filter') === tipo) {
+        b.classList.add('active');
+      }
+    });
+    renderFacturas();
+  };
 
   // ─── Filters ───
   document.getElementById('leads-filters').addEventListener('click', function(e) {

@@ -635,6 +635,8 @@
         </div>
         <div style="display:flex;align-items:center;gap:.75rem;flex-wrap:wrap">
           <span class="panel-user-badge" id="panel-user-name">🏢 Inmobiliaria</span>
+          <span class="panel-user-badge" id="panel-creditos" style="background:#eefbf0;color:var(--primary-dark)">💳 <span id="saldo-creditos">0</span> créditos</span>
+          <button class="btn-success" onclick="abrirModalCompra()" style="font-size:.8rem;padding:.4rem .9rem">💳 Comprar créditos</button>
           <button class="btn-logout" onclick="cerrarSesion()">Cerrar sesión</button>
         </div>
       </div>
@@ -746,6 +748,50 @@
     </div>
   </div>
 
+  <!-- ====== MODAL: Comprar créditos ====== -->
+  <div class="modal-overlay" id="modal-compra">
+    <div class="modal-card" style="max-width:480px">
+      <button class="modal-close" onclick="cerrarModalCompra()">✕</button>
+      <h2>💳 Comprar créditos</h2>
+      <p class="modal-sub">Cada crédito permite añadir una propiedad al sistema. Compra en packs y ahorra.</p>
+
+      <div style="display:grid;gap:.75rem;margin-bottom:1.5rem">
+        <div class="plan-card" data-cantidad="5" onclick="seleccionarPlan(this)" style="cursor:pointer;border:2px solid var(--border);border-radius:var(--radius);padding:1rem;display:flex;justify-content:space-between;align-items:center;transition:border-color .2s,background .2s">
+          <div>
+            <strong>5 créditos</strong>
+            <p style="font-size:.82rem;color:var(--text-light);margin-top:.15rem">45 €/crédito</p>
+          </div>
+          <div style="text-align:right">
+            <span style="font-size:1.3rem;font-weight:700;color:var(--primary)">225 €</span>
+          </div>
+        </div>
+        <div class="plan-card" data-cantidad="10" onclick="seleccionarPlan(this)" style="cursor:pointer;border:2px solid var(--border);border-radius:var(--radius);padding:1rem;display:flex;justify-content:space-between;align-items:center;transition:border-color .2s,background .2s">
+          <div>
+            <strong>10 créditos</strong>
+            <p style="font-size:.82rem;color:var(--text-light);margin-top:.15rem">39 €/crédito <span style="display:inline-block;background:#fef3c7;color:#92400e;font-size:.7rem;padding:.1rem .4rem;border-radius:4px;margin-left:.4rem">Ahorra 60€</span></p>
+          </div>
+          <div style="text-align:right">
+            <span style="font-size:1.3rem;font-weight:700;color:var(--primary)">390 €</span>
+          </div>
+        </div>
+        <div class="plan-card" data-cantidad="20" onclick="seleccionarPlan(this)" style="cursor:pointer;border:2px solid var(--border);border-radius:var(--radius);padding:1rem;display:flex;justify-content:space-between;align-items:center;transition:border-color .2s,background .2s">
+          <div>
+            <strong>20 créditos</strong>
+            <p style="font-size:.82rem;color:var(--text-light);margin-top:.15rem">35 €/crédito <span style="display:inline-block;background:#fef3c7;color:#92400e;font-size:.7rem;padding:.1rem .4rem;border-radius:4px;margin-left:.4rem">Ahorra 200€</span></p>
+          </div>
+          <div style="text-align:right">
+            <span style="font-size:1.3rem;font-weight:700;color:var(--primary)">700 €</span>
+          </div>
+        </div>
+      </div>
+
+      <div id="compra-error" style="color:#dc2626;font-size:.85rem;margin-bottom:.75rem;display:none;background:#fef2f2;padding:.5rem .75rem;border-radius:6px"></div>
+
+      <button class="btn btn-primary" id="btn-comprar" onclick="comprarCreditos()" disabled>Selecciona un plan →</button>
+      <button class="btn btn-secondary" onclick="cerrarModalCompra()" style="margin-top:.5rem">Cancelar</button>
+    </div>
+  </div>
+
   <div class="toast" id="toast"></div>
 
   <script>
@@ -761,6 +807,17 @@
     // ==============================================================
 
     document.addEventListener('DOMContentLoaded', function() {
+      // Check for creditos_ok success param
+      if (window.location.search.includes('creditos_ok=1')) {
+        setTimeout(function() {
+          mostrarToast('✅ ¡Créditos añadidos correctamente!', 'success');
+          // Limpiar URL
+          if (window.history && window.history.replaceState) {
+            window.history.replaceState({}, document.title, window.location.pathname);
+          }
+        }, 500);
+      }
+
       const savedSession = localStorage.getItem('inmo_session');
       if (savedSession) {
         try {
@@ -966,6 +1023,7 @@
       const nombre = inmoData?.inmobiliaria?.nombre || inmoData?.nombre || emailInmo;
       document.getElementById('panel-user-name').textContent = '🏢 ' + nombre;
 
+      cargarSaldoCreditos();
       cargarPropiedades();
     }
 
@@ -1179,6 +1237,167 @@
         btn.textContent = 'Guardar propiedad →';
       }
     }
+
+    // ==============================================================
+    // CRÉDITOS: Sistema de créditos prepago
+    // ==============================================================
+
+    let planSeleccionado = null;
+
+    function abrirModalCompra() {
+      planSeleccionado = null;
+      document.getElementById('compra-error').style.display = 'none';
+      document.getElementById('btn-comprar').disabled = true;
+      document.getElementById('btn-comprar').textContent = 'Selecciona un plan →';
+      document.getElementById('btn-comprar').removeAttribute('data-cantidad');
+      // Reset selected plan visuals
+      document.querySelectorAll('.plan-card').forEach(function(el) {
+        el.style.borderColor = 'var(--border)';
+        el.style.background = '';
+      });
+      document.getElementById('modal-compra').classList.add('open');
+    }
+
+    function cerrarModalCompra() {
+      document.getElementById('modal-compra').classList.remove('open');
+    }
+
+    // Cerrar modal al hacer clic fuera
+    document.getElementById('modal-compra').addEventListener('click', function(e) {
+      if (e.target === this) cerrarModalCompra();
+    });
+
+    function seleccionarPlan(el) {
+      document.querySelectorAll('.plan-card').forEach(function(card) {
+        card.style.borderColor = 'var(--border)';
+        card.style.background = '';
+      });
+      el.style.borderColor = 'var(--primary)';
+      el.style.background = '#f0fdf4';
+      planSeleccionado = parseInt(el.getAttribute('data-cantidad'));
+      const btn = document.getElementById('btn-comprar');
+      btn.disabled = false;
+      btn.textContent = '💳 Pagar ' + (planSeleccionado === 5 ? '225' : planSeleccionado === 10 ? '390' : '700') + ' €';
+      btn.setAttribute('data-cantidad', String(planSeleccionado));
+      document.getElementById('compra-error').style.display = 'none';
+    }
+
+    async function comprarCreditos() {
+      const cantidad = parseInt(document.getElementById('btn-comprar').getAttribute('data-cantidad'));
+      if (!cantidad) return;
+
+      const btn = document.getElementById('btn-comprar');
+      btn.disabled = true;
+      btn.textContent = '⏳ Redirigiendo a Stripe...';
+
+      try {
+        const session = JSON.parse(localStorage.getItem('inmo_session'));
+        const res = await fetch(EDGE_FUNCTION_URL + '/gestion-saldo-inmobiliaria', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': 'Bearer ' + session.token
+          },
+          body: JSON.stringify({ action: 'comprar', cantidad })
+        });
+
+        const data = await res.json();
+
+        if (!res.ok) {
+          document.getElementById('compra-error').textContent = data.error || 'Error al procesar compra';
+          document.getElementById('compra-error').style.display = 'block';
+          btn.disabled = false;
+          btn.textContent = 'Ir a pagar →';
+          return;
+        }
+
+        // Redirigir a Stripe Checkout
+        window.location.href = data.url;
+      } catch (err) {
+        document.getElementById('compra-error').textContent = 'Error de conexión. Inténtalo de nuevo.';
+        document.getElementById('compra-error').style.display = 'block';
+        btn.disabled = false;
+        btn.textContent = 'Ir a pagar →';
+      }
+    }
+
+    async function cargarSaldoCreditos() {
+      try {
+        const session = JSON.parse(localStorage.getItem('inmo_session'));
+        if (!session || !session.token) return;
+
+        const res = await fetch(EDGE_FUNCTION_URL + '/gestion-saldo-inmobiliaria', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': 'Bearer ' + session.token
+          },
+          body: JSON.stringify({ action: 'saldo' })
+        });
+
+        const data = await res.json();
+        if (data.success) {
+          document.getElementById('saldo-creditos').textContent = data.saldo_creditos || 0;
+        }
+      } catch (err) {
+        // Silently fail
+      }
+    }
+
+    // Override guardarPropiedad to check credits first
+    const guardarPropiedadOriginal = guardarPropiedad;
+    guardarPropiedad = async function(e) {
+      e.preventDefault();
+
+      const session = JSON.parse(localStorage.getItem('inmo_session'));
+      if (!session || !session.token) {
+        mostrarToast('Sesión no encontrada. Inicia sesión de nuevo.', 'error');
+        return;
+      }
+
+      // Verificar créditos disponibles
+      try {
+        const saldoRes = await fetch(EDGE_FUNCTION_URL + '/gestion-saldo-inmobiliaria', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': 'Bearer ' + session.token
+          },
+          body: JSON.stringify({ action: 'saldo' })
+        });
+        const saldoData = await saldoRes.json();
+
+        if (!saldoData.success || !saldoData.saldo_creditos || saldoData.saldo_creditos < 1) {
+          mostrarToast('❌ Sin créditos disponibles. Compra más créditos para añadir propiedades.', 'error');
+          abrirModalCompra();
+          return;
+        }
+
+        // Usar crédito primero
+        const usarRes = await fetch(EDGE_FUNCTION_URL + '/gestion-saldo-inmobiliaria', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': 'Bearer ' + session.token
+          },
+          body: JSON.stringify({ action: 'usar' })
+        });
+        const usarData = await usarRes.json();
+
+        if (!usarData.success) {
+          mostrarToast(usarData.error || 'Error al usar crédito', 'error');
+          return;
+        }
+
+        // Actualizar saldo visual
+        document.getElementById('saldo-creditos').textContent = usarData.saldo_creditos;
+
+        // Ahora llamar a la función original para guardar la propiedad
+        await guardarPropiedadOriginal(e);
+      } catch (err) {
+        mostrarToast('Error de conexión. Inténtalo de nuevo.', 'error');
+      }
+    };
 
     // ==============================================================
     // UTILS

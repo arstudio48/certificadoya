@@ -1143,6 +1143,7 @@
                 <th>Fecha</th>
                 <th>Importe</th>
                 <th>Estado</th>
+                <th>Factura</th>
               </tr>
             </thead>
             <tbody>
@@ -1159,6 +1160,7 @@
                     <td>${d}</td>
                     <td class="earning-amount">${importe}</td>
                     <td><span class="earning-status ${estadoClass}">${estadoLabel}</span></td>
+                    <td><button class="btn-outline-sm" onclick="solicitarFactura('${lead.id}')" style="font-size:.75rem;padding:.35rem .6rem">📄 Factura</button></td>
                   </tr>`;
               }).join('')}
             </tbody>
@@ -1320,6 +1322,72 @@
       toast.textContent = msg;
       toast.className = 'toast toast-' + tipo + ' show';
       setTimeout(() => toast.classList.remove('show'), 3000);
+    }
+
+    // ==============================================================
+    // FACTURA: Solicitar factura para un lead
+    // ==============================================================
+    async function solicitarFactura(leadId) {
+      const session = JSON.parse(localStorage.getItem('tec_session'));
+      if (!session || !session.token) {
+        mostrarToast('Inicia sesión para solicitar una factura.', 'error');
+        return;
+      }
+
+      try {
+        // Obtener datos del lead para preparar la factura
+        const res = await fetch(EDGE_FUNCTION_URL + '/pool-leads?estado=completado,pagado&leadId=' + leadId, {
+          headers: { 'Authorization': 'Bearer ' + session.token }
+        });
+        const data = await res.json();
+
+        if (!res.ok) {
+          mostrarToast('Error al obtener datos del lead.', 'error');
+          return;
+        }
+
+        const lead = Array.isArray(data.leads) ? data.leads.find(l => String(l.id) === String(leadId)) : null;
+        if (!lead) {
+          mostrarToast('Lead no encontrado.', 'error');
+          return;
+        }
+
+        const nombreCliente = lead.nombre_cliente || 'Cliente';
+        const direccion = [lead.direccion, lead.numero, lead.ciudad].filter(Boolean).join(', ');
+        const importe = parseFloat(lead.precio_tecnico) || 0;
+
+        // Crear factura
+        const facturaRes = await fetch(EDGE_FUNCTION_URL + '/gestion-facturas?action=crear', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': 'Bearer ' + session.token
+          },
+          body: JSON.stringify({
+            tipo: 'tecnico',
+            cliente_nombre: nombreCliente,
+            cliente_email: lead.email_cliente || lead.email || '',
+            concepto: 'Certificado energético - ' + (direccion || lead.zona || ''),
+            direccion: direccion,
+            base_imponible: Math.round(importe / 1.21 * 100) / 100,
+            lead_id: parseInt(leadId),
+            tecnico_id: lead.tecnico_asignado_id || null,
+          })
+        });
+
+        const facturaData = await facturaRes.json();
+
+        if (!facturaData.success) {
+          mostrarToast(facturaData.error || 'Error al crear factura', 'error');
+          return;
+        }
+
+        // Abrir factura en nueva ventana
+        window.open(EDGE_FUNCTION_URL + '/gestion-facturas?action=pdf&id=' + facturaData.factura.id, '_blank');
+        mostrarToast('✅ Factura ' + facturaData.factura.num_factura + ' creada', 'success');
+      } catch (err) {
+        mostrarToast('Error de conexión', 'error');
+      }
     }
   </script>
 

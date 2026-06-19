@@ -57,3 +57,9 @@ verify_jwt = false
 
 [functions.verificar-email]
 verify_jwt = false
+
+[functions.gestion-saldo-inmobiliaria]
+verify_jwt = false
+
+[functions.gestion-facturas]
+verify_jwt = false
