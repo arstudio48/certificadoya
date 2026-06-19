@@ -1,0 +1,65 @@
+#!/usr/bin/env python3
+"""Inject JSON-LD Service schema into provincial pages of certificadoya.es"""
+
+import os
+import re
+import sys
+
+REPO = r'C:\Users\artur\certificadoya'
+
+# Province name map: slug -> display name
+PROVINCE_NAMES = {
+    'a-coruna': 'A Coruña',
+    'alava': 'Álava',
+    'albacete': 'Albacete',
+    'alicante': 'Alicante',
+    'almeria': 'Almería',
+    'asturias': 'Asturias',
+    'avila': 'Ávila',
+    'badajoz': 'Badajoz',
+    'baleares': 'Baleares',
+    'barcelona': 'Barcelona',
+    'bilbao': 'Bilbao',
+    'bizkaia': 'Bizkaia',
+    'burgos': 'Burgos',
+    'caceres': 'Cáceres',
+    'cadiz': 'Cádiz',
+    'cantabria': 'Cantabria',
+    'castellon': 'Castellón',
+    'ceuta': 'Ceuta',
+    'ciudad-real': 'Ciudad Real',
+    'cordoba': 'Córdoba',
+    'cuenca': 'Cuenca',
+    'gipuzkoa': 'Gipuzkoa',
+    'girona': 'Girona',
+    'granada': 'Granada',
+    'guadalajara': 'Guadalajara',
+    'huelva': 'Huelva',
+    'huesca': 'Huesca',
+    'jaen': 'Jaén',
+    'la-rioja': 'La Rioja',
+    'las-palmas': 'Las Palmas',
+    'leon': 'León',
+    'lleida': 'Lleida',
+    'lugo': 'Lugo',
+    'madrid': 'Madrid',
+    'malaga': 'Málaga',
+    'melilla': 'Melilla',
+    'murcia': 'Murcia',
+    'navarra': 'Navarra',
+    'ourense': 'Ourense',
+    'palencia': 'Palencia',
+    'pontevedra': 'Pontevedra',
+    'salamanca': 'Salamanca',
+    'segovia': 'Segovia',
+    'sevilla': 'Sevilla',
+    'soria': 'Soria',
+    'tarragona': 'Tarragona',
+    'tenerife': 'Tenerife',
+    'teruel': 'Teruel',
+    'toledo': 'Toledo',
+    'valencia': 'Valencia',
+    'valladolid': 'Valladolid',
+    'zamora': 'Zamora',
+    'zaragoza': 'Zaragoza',
+}
