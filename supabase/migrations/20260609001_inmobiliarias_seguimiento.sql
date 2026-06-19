@@ -60,18 +60,21 @@ CREATE INDEX IF NOT EXISTS idx_tecnicos_seguimiento_verificado ON tecnicos(verif
 ALTER TABLE inmobiliarias ENABLE ROW LEVEL SECURITY;
 
 -- Anon: solo lectura
+DROP POLICY IF EXISTS "anon_select_inmobiliarias" ON inmobiliarias;
 CREATE POLICY "anon_select_inmobiliarias"
   ON inmobiliarias FOR SELECT
   TO anon
   USING (true);
 
--- Anon: puede insertar (desde formulario web o agente)
+-- Anon: insert leads
+DROP POLICY IF EXISTS "anon_insert_inmobiliarias" ON inmobiliarias;
 CREATE POLICY "anon_insert_inmobiliarias"
   ON inmobiliarias FOR INSERT
   TO anon
   WITH CHECK (true);
 
 -- Servicerole: todo
+DROP POLICY IF EXISTS "service_all_inmobiliarias" ON inmobiliarias;
 CREATE POLICY "service_all_inmobiliarias"
   ON inmobiliarias FOR ALL
   TO service_role
@@ -81,7 +84,6 @@ CREATE POLICY "service_all_inmobiliarias"
 -- Grants
 GRANT SELECT, INSERT ON inmobiliarias TO anon;
 GRANT ALL ON inmobiliarias TO service_role;
-GRANT USAGE ON SEQUENCE inmobiliarias_id_seq TO anon, service_role;
 
 -- ============================================================
 -- 6. FUNCIÓN: Estadísticas consolidadas de todos los leads

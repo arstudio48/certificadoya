@@ -12,7 +12,7 @@ ALTER TABLE inmobiliarias
 -- ============================================================
 CREATE TABLE IF NOT EXISTS transacciones_inmobiliarias (
   id SERIAL PRIMARY KEY,
-  inmobiliaria_id INTEGER NOT NULL REFERENCES inmobiliarias(id),
+  inmobiliaria_id UUID NOT NULL REFERENCES inmobiliarias(id),
   tipo TEXT NOT NULL CHECK (tipo IN ('compra', 'gasto', 'ajuste')),
   cantidad INTEGER NOT NULL,
   concepto TEXT DEFAULT '',
@@ -39,9 +39,9 @@ CREATE TABLE IF NOT EXISTS facturas (
   base_imponible DECIMAL(10,2) NOT NULL,
   iva DECIMAL(10,2) NOT NULL DEFAULT 0,
   total DECIMAL(10,2) NOT NULL,
-  lead_id INTEGER REFERENCES leads(id),
-  tecnico_id INTEGER REFERENCES tecnicos(id),
-  inmobiliaria_id INTEGER REFERENCES inmobiliarias(id),
+  lead_id UUID REFERENCES leads(id),
+  tecnico_id UUID REFERENCES tecnicos(id),
+  inmobiliaria_id UUID REFERENCES inmobiliarias(id),
   pdf_url TEXT,
   created_at TIMESTAMPTZ DEFAULT NOW()
 );
