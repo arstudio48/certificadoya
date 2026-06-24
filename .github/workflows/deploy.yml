@@ -1,0 +1,27 @@
+name: Deploy a GitHub Pages
+
+on:
+  push:
+    branches:
+      - main
+
+permissions:
+  contents: write
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Desplegar en gh-pages
+        run: |
+          git fetch origin gh-pages 2>/dev/null || true
+          git checkout gh-pages 2>/dev/null || git checkout --orphan gh-pages
+          git checkout main -- .
+          git config user.name "CertificadoYa Bot"
+          git config user.email "bot@certificadoya.es"
+          git add -A
+          git diff --cached --quiet || git commit -m "deploy: $(date +'%Y-%m-%d %H:%M')"
+          git push origin gh-pages
