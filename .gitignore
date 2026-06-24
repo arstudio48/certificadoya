@@ -22,7 +22,6 @@ media-cxs/
 
 # Vercel
 .vercel
-.github/
 
 # Local Netlify folder
 .netlify
