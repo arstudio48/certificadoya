@@ -84,9 +84,27 @@
 
 /* Dropdown Técnicos */
 .dropdown-pro{position:relative;display:inline-block}
-.dropdown-pro-btn{background:none;border:none;font-family:var(--font);font-size:.9rem;font-weight:500;color:var(--text);cursor:pointer;padding:0;transition:color .15s}
-.dropdown-pro-btn:hover{color:var(--primary)}
-.dropdown-pro-menu{display:none;position:absolute;top:100%;left:50%;transform:translateX(-50%);background:#fff;border:1px solid #e5e7eb;border-radius:10px;box-shadow:0 4px 16px rgba(0,0,0,.1);min-width:210px;z-index:999;padding:.65rem 0 0;margin-top:0}.dropdown-pro-menu-inner{padding:.35rem 0}
+.dropdown-pro-btn{
+  background:#f0fdf4;border:1.5px solid #16a34a;font-family:var(--font);font-size:.82rem;
+  font-weight:700;color:#15803d;cursor:pointer;padding:.3rem .75rem .3rem .55rem;
+  border-radius:20px;transition:all .2s;display:inline-flex;align-items:center;gap:.4rem;
+  letter-spacing:.01em;white-space:nowrap
+}
+.dropdown-pro-btn:hover{background:#16a34a;color:#fff;border-color:#16a34a}
+.dropdown-pro-btn .tecnico-dot{
+  width:7px;height:7px;background:#16a34a;border-radius:50%;flex-shrink:0;
+  animation:pulso 1.8s ease-in-out infinite
+}
+.dropdown-pro-btn:hover .tecnico-dot{background:#fff}
+@keyframes pulso{0%,100%{transform:scale(1);opacity:1}50%{transform:scale(1.5);opacity:.6}}
+.dropdown-pro-menu{display:none;position:absolute;top:calc(100% + 8px);left:50%;transform:translateX(-50%);background:#fff;border:1px solid #bbf7d0;border-radius:14px;box-shadow:0 8px 28px rgba(22,163,74,.15);min-width:260px;z-index:999;padding:0;margin-top:0;overflow:hidden}
+.dropdown-pro-menu-inner{padding:.4rem 0}
+.dropdown-tecnico-hook{background:linear-gradient(135deg,#f0fdf4,#dcfce7);padding:1rem 1.1rem .85rem;border-bottom:1px solid #bbf7d0}
+.dropdown-tecnico-hook .hook-title{font-size:.92rem;font-weight:700;color:#14532d;margin:0 0 .2rem;display:flex;align-items:center;gap:.4rem}
+.dropdown-tecnico-hook .hook-sub{font-size:.78rem;color:#4b7a3a;margin:0 0 .7rem;line-height:1.4}
+.dropdown-tecnico-hook .hook-stat{font-size:.74rem;color:#16a34a;font-weight:600;margin:0 0 .65rem;display:flex;align-items:center;gap:.3rem}
+.dropdown-tecnico-cta{display:block;width:100%;text-align:center;background:#16a34a;color:#fff!important;font-weight:700;font-size:.84rem;padding:.55rem .8rem;border-radius:8px;text-decoration:none;transition:background .15s;box-sizing:border-box}
+.dropdown-tecnico-cta:hover{background:#15803d!important;color:#fff!important}
 .dropdown-pro-menu::before{content:'';position:absolute;top:-6px;left:50%;transform:translateX(-50%);width:0;height:0;border-left:6px solid transparent;border-right:6px solid transparent;border-bottom:6px solid #fff;filter:drop-shadow(0 -1px 1px rgba(0,0,0,.05))}
 .dropdown-pro:hover .dropdown-pro-menu,.dropdown-pro-menu:hover{display:block}
 .dropdown-pro-menu a{display:block;padding:.6rem 1rem;font-size:.85rem;color:#20201f;text-decoration:none;white-space:nowrap;transition:background .15s}
@@ -704,13 +722,23 @@ var provSlugs = {}; provincias.forEach(function(p){provSlugs[p.slug]=p.nombre;})
       <a href="/blog/">Blog</a>
       <a href="/inmobiliarias.html">Inmobiliarias</a>
       <div class="dropdown-pro">
-        <button class="dropdown-pro-btn">Técnicos ▾</button>
-        <div class="dropdown-pro-menu"><div class="dropdown-pro-menu-inner">
-          <a href="/panel-tecnicos.html">Registro de técnicos</a>
-          <a href="/pool-encargos.html">Trabajos</a>
-          <a href="/blog/?cat=tecnicos">Blog técnico</a>
-          <a href="/tecnicos/">Directorio de técnicos</a>
-        </div></div>
+        <button class="dropdown-pro-btn">
+          <span class="tecnico-dot"></span>¿Eres técnico? ▾
+        </button>
+        <div class="dropdown-pro-menu">
+          <!-- Hook para técnicos -->
+          <div class="dropdown-tecnico-hook">
+            <p class="hook-title">🏗️ Consigue encargos en tu zona</p>
+            <p class="hook-sub">Recibe clientes que ya tienen precio y quieren que les contactes. Tú solo certifica.</p>
+            <p class="hook-stat">✓ Comisión del 18% · la más baja del sector</p>
+            <a href="/panel-tecnicos.html" class="dropdown-tecnico-cta">Registrarme gratis →</a>
+          </div>
+          <div class="dropdown-pro-menu-inner">
+            <a href="/pool-encargos.html">Ver encargos disponibles</a>
+            <a href="/blog/?cat=tecnicos">Blog técnico</a>
+            <a href="/tecnicos/">Directorio de técnicos</a>
+          </div>
+        </div>
       </div>
       <div class="buscador-wrapper">
         <svg class="buscador-icono" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#888" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg>
