@@ -502,3 +502,15 @@ input.error { border-color:#ef4444 !important; background:#fef2f2; }
 .btn-outline-link:hover { background:var(--bg-green); }
 .btn-cta-inline { display:inline-block; width:auto; padding:.8rem 2rem; font-size:.95rem; text-decoration:none; }
 @media (max-width:480px) { .etiqueta-cee-box { padding:0.5rem; } .etiqueta-cee-box img { max-width:280px; } }
+
+/* ── OVERRIDE dark sections ── */
+.inmobiliarias-section {
+  background: linear-gradient(135deg, #0c1a2e 0%, #1e3a5f 50%, #1a3a6b 100%) !important;
+  padding: 5rem 2rem !important;
+}
+.inmobiliarias-content h2  { color: #fff !important; }
+.inmobiliarias-desc        { color: rgba(255,255,255,.75) !important; }
+.inmobiliarias-beneficios li { color: rgba(255,255,255,.9) !important; }
+.inmobiliarias-cta { background: #2563eb !important; }
+.inmobiliarias-cta:hover { background: #1d4ed8 !important; box-shadow: 0 4px 12px rgba(37,99,235,.4) !important; }
+.tecnicos-home { background: linear-gradient(135deg, #0f2d1a 0%, #14532d 50%, #166534 100%) !important; padding: 5rem 2rem !important; }
