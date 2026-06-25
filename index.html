@@ -1060,21 +1060,231 @@ var provSlugs = {}; provincias.forEach(function(p){provSlugs[p.slug]=p.nombre;})
 
   <!-- INMOBILIARIAS -->
   <section class="inmobiliarias-section">
-    <div class="inmobiliarias-inner">
-      <div class="inmobiliarias-content">
-        <span class="inmobiliarias-badge">Para profesionales</span>
-        <h2>¿Eres inmobiliaria?</h2>
-        <p class="inmobiliarias-desc">Gestiona los certificados energéticos de tus carteras de alquiler y venta de forma masiva. Precios especiales por volumen, técnicos dedicados y gestión centralizada.</p>
-        <ul class="inmobiliarias-beneficios">
-          <li><svg width="20" height="20" viewBox="0 0 24 24" fill="#16a34a"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z"/></svg> Precios desde 45 € por certificado en packs</li>
-          <li><svg width="20" height="20" viewBox="0 0 24 24" fill="#16a34a"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z"/></svg> Técnicos dedicados para tu zona</li>
-          <li><svg width="20" height="20" viewBox="0 0 24 24" fill="#16a34a"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z"/></svg> Gestión online desde tu panel privado</li>
-          <li><svg width="20" height="20" viewBox="0 0 24 24" fill="#16a34a"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z"/></svg> Certificado registrado en 48h con seguimiento</li>
-        </ul>
-        <a href="/inmobiliarias.html" class="inmobiliarias-cta">Ver planes para inmobiliarias →</a>
+  <style>
+  .inmobiliarias-section {
+    background: linear-gradient(135deg, #0c1a2e 0%, #1e3a5f 50%, #1a3a6b 100%);
+    padding: 5rem 2rem;
+    position: relative;
+    overflow: hidden;
+  }
+  .inmobiliarias-section::before {
+    content: "";
+    position: absolute;
+    top: -80px; right: -80px;
+    width: 400px; height: 400px;
+    background: radial-gradient(circle, rgba(59,130,246,.15) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .inmobiliarias-section::after {
+    content: "";
+    position: absolute;
+    bottom: -60px; left: -60px;
+    width: 300px; height: 300px;
+    background: radial-gradient(circle, rgba(147,197,253,.1) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .inmo-inner {
+    max-width: 1060px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 3.5rem;
+    align-items: center;
+    position: relative;
+    z-index: 1;
+  }
+  .inmo-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: .4rem;
+    background: rgba(147,197,253,.2);
+    border: 1px solid rgba(147,197,253,.4);
+    color: #93c5fd;
+    font-size: .75rem;
+    font-weight: 700;
+    padding: .3rem .85rem;
+    border-radius: 20px;
+    margin-bottom: 1.25rem;
+    text-transform: uppercase;
+    letter-spacing: .06em;
+  }
+  .inmo-headline {
+    font-size: 2.2rem;
+    font-weight: 800;
+    color: #fff;
+    line-height: 1.2;
+    margin: 0 0 1rem;
+  }
+  .inmo-headline em { font-style: normal; color: #60a5fa; }
+  .inmo-sub {
+    font-size: 1rem;
+    color: rgba(255,255,255,.75);
+    line-height: 1.7;
+    margin: 0 0 2rem;
+  }
+  .inmo-perks { display: flex; flex-direction: column; gap: .75rem; margin-bottom: 2.25rem; }
+  .inmo-perk { display: flex; align-items: flex-start; gap: .75rem; color: rgba(255,255,255,.9); font-size: .92rem; line-height: 1.5; }
+  .inmo-perk-icon {
+    width: 22px; height: 22px;
+    background: #2563eb;
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0; margin-top: 1px;
+  }
+  .inmo-perk-icon svg { width: 13px; height: 13px; }
+  .inmo-perk strong { color: #93c5fd; }
+  .inmo-ctas { display: flex; gap: .85rem; flex-wrap: wrap; align-items: center; }
+  .inmo-cta-main {
+    display: inline-flex; align-items: center; gap: .5rem;
+    background: #2563eb; color: #fff; font-weight: 700; font-size: .95rem;
+    padding: .85rem 2rem; border-radius: 10px; text-decoration: none;
+    transition: all .2s; box-shadow: 0 4px 20px rgba(37,99,235,.5);
+  }
+  .inmo-cta-main:hover { background: #1d4ed8; transform: translateY(-2px); box-shadow: 0 6px 28px rgba(37,99,235,.6); }
+  .inmo-cta-sec {
+    display: inline-flex; align-items: center; gap: .4rem;
+    color: rgba(255,255,255,.8); font-size: .88rem; font-weight: 600;
+    text-decoration: none; border-bottom: 1px solid rgba(255,255,255,.3);
+    padding-bottom: 1px; transition: color .15s, border-color .15s;
+  }
+  .inmo-cta-sec:hover { color: #fff; border-color: rgba(255,255,255,.7); }
+  .inmo-right { display: flex; flex-direction: column; gap: 1rem; }
+  .inmo-card {
+    background: rgba(255,255,255,.07);
+    border: 1px solid rgba(255,255,255,.12);
+    border-radius: 14px; padding: 1.25rem 1.4rem;
+    display: flex; gap: 1.1rem; align-items: flex-start;
+    transition: background .2s, border-color .2s;
+  }
+  .inmo-card:hover { background: rgba(255,255,255,.12); border-color: rgba(96,165,250,.35); }
+  .inmo-card-icon {
+    width: 42px; height: 42px;
+    background: linear-gradient(135deg, #2563eb, #60a5fa);
+    border-radius: 10px; display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0; box-shadow: 0 4px 12px rgba(37,99,235,.4);
+  }
+  .inmo-card-icon svg { width: 20px; height: 20px; }
+  .inmo-card-title { font-size: .97rem; font-weight: 700; color: #fff; margin: 0 0 .3rem; }
+  .inmo-card-desc { font-size: .82rem; color: rgba(255,255,255,.65); line-height: 1.55; margin: 0; }
+  .inmo-card-desc strong { color: #93c5fd; font-weight: 600; }
+  .inmo-stats {
+    grid-column: 1 / -1;
+    display: flex; gap: 0;
+    background: rgba(255,255,255,.06);
+    border: 1px solid rgba(255,255,255,.1);
+    border-radius: 14px; overflow: hidden; margin-top: 1rem;
+  }
+  .inmo-stat { flex: 1; padding: 1.2rem 1rem; text-align: center; border-right: 1px solid rgba(255,255,255,.08); }
+  .inmo-stat:last-child { border-right: none; }
+  .inmo-stat-val { display: block; font-size: 1.6rem; font-weight: 800; color: #60a5fa; line-height: 1.1; margin-bottom: .25rem; }
+  .inmo-stat-label { font-size: .75rem; color: rgba(255,255,255,.5); line-height: 1.3; }
+  @media (max-width: 768px) {
+    .inmo-inner { grid-template-columns: 1fr; gap: 2.5rem; }
+    .inmo-headline { font-size: 1.7rem; }
+    .inmo-stats { flex-wrap: wrap; }
+    .inmo-stat { min-width: 50%; border-bottom: 1px solid rgba(255,255,255,.08); }
+  }
+  @media (max-width: 480px) { .inmo-headline { font-size: 1.45rem; } }
+  </style>
+
+    <div class="inmo-inner">
+      <!-- LEFT -->
+      <div>
+        <span class="inmo-badge">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#93c5fd" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+          Para inmobiliarias y agencias
+        </span>
+        <h2 class="inmo-headline">
+          Gestiona todos tus CEE<br><em>desde un solo panel</em>
+        </h2>
+        <p class="inmo-sub">
+          Centraliza los certificados energeticos de toda tu cartera. Precios especiales por volumen, tecnicos dedicados a tu zona y seguimiento en tiempo real. Sin llamadas, sin papeleo.
+        </p>
+        <div class="inmo-perks">
+          <div class="inmo-perk">
+            <span class="inmo-perk-icon"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></span>
+            <span>Precios especiales por volumen. <strong>Desde 45&euro; por certificado en packs.</strong></span>
+          </div>
+          <div class="inmo-perk">
+            <span class="inmo-perk-icon"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></span>
+            <span><strong>Tecnicos dedicados</strong> para tu zona &mdash; siempre el mismo equipo.</span>
+          </div>
+          <div class="inmo-perk">
+            <span class="inmo-perk-icon"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></span>
+            <span>Panel privado con <strong>estado en tiempo real</strong> de cada encargo.</span>
+          </div>
+          <div class="inmo-perk">
+            <span class="inmo-perk-icon"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></span>
+            <span>Certificado registrado y entregado en <strong>48h con seguimiento.</strong></span>
+          </div>
+        </div>
+        <div class="inmo-ctas">
+          <a href="/inmobiliarias.html" class="inmo-cta-main">
+            Ver planes para inmobiliarias
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          </a>
+          <a href="/inmobiliarias.html#contacto" class="inmo-cta-sec">Hablar con un asesor &rarr;</a>
+        </div>
       </div>
-      <div class="inmobiliarias-visual">
-        <!-- Estadísticas eliminadas hasta tener datos verificables -->
+
+      <!-- RIGHT: feature cards -->
+      <div class="inmo-right">
+        <div class="inmo-card">
+          <div class="inmo-card-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg>
+          </div>
+          <div>
+            <p class="inmo-card-title">Panel centralizado</p>
+            <p class="inmo-card-desc">Todos tus encargos en un solo lugar. <strong>Estado, documentos y facturas</strong> accesibles en cualquier momento.</p>
+          </div>
+        </div>
+        <div class="inmo-card">
+          <div class="inmo-card-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+          </div>
+          <div>
+            <p class="inmo-card-title">Tecnicos dedicados</p>
+            <p class="inmo-card-desc">Asignamos un equipo fijo a tu zona. <strong>Siempre los mismos, siempre disponibles.</strong></p>
+          </div>
+        </div>
+        <div class="inmo-card">
+          <div class="inmo-card-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+          </div>
+          <div>
+            <p class="inmo-card-title">Seguimiento en tiempo real</p>
+            <p class="inmo-card-desc">Notificaciones en cada paso: visita, CEE emitido, registro. <strong>Sin tener que preguntar.</strong></p>
+          </div>
+        </div>
+        <div class="inmo-card">
+          <div class="inmo-card-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+          </div>
+          <div>
+            <p class="inmo-card-title">Facturacion consolidada</p>
+            <p class="inmo-card-desc">Una sola factura mensual con todos los encargos. <strong>Facil de gestionar y contabilizar.</strong></p>
+          </div>
+        </div>
+      </div>
+
+      <!-- STATS BAR -->
+      <div class="inmo-stats">
+        <div class="inmo-stat">
+          <span class="inmo-stat-val">45&euro;</span>
+          <span class="inmo-stat-label">Desde por certificado<br>en pack</span>
+        </div>
+        <div class="inmo-stat">
+          <span class="inmo-stat-val">48h</span>
+          <span class="inmo-stat-label">Entrega media</span>
+        </div>
+        <div class="inmo-stat">
+          <span class="inmo-stat-val">50+</span>
+          <span class="inmo-stat-label">Tecnicos en toda Espana</span>
+        </div>
+        <div class="inmo-stat">
+          <span class="inmo-stat-val">1.200+</span>
+          <span class="inmo-stat-label">CEE gestionados</span>
+        </div>
       </div>
     </div>
   </section>
