@@ -678,3 +678,32 @@
   transition: transform .28s cubic-bezier(.4,0,.2,1), opacity .2s ease, background .2s !important;
 }
 .hamburger:hover span { background: #137E47; }
+
+/* ── OVERRIDE: secciones oscuras inmobiliarias + técnicos ── */
+/* Anular interferencias de reglas con !important en secciones dark */
+
+/* Padding correcto en ambas secciones oscuras */
+.inmobiliarias-section { padding: 5rem 2rem !important; }
+.tecnicos-home         { padding: 5rem 2rem !important; }
+
+/* Anular colores de texto dark que se aplican dentro de .tecnicos-home */
+.tecnicos-home .fix-beneficio-card .fix-beneficio-title { color: #fff !important; }
+.tecnicos-home .fix-beneficio-card .fix-beneficio-desc  { color: rgba(255,255,255,.7) !important; }
+.tecnicos-home [class*="tecnicos-grid"] > div           { color: #fff !important; background: rgba(255,255,255,.07) !important; border-color: rgba(255,255,255,.14) !important; }
+.tecnicos-home h2 { color: #fff !important; }
+.tecnicos-home h4 { color: #fff !important; }
+.tecnicos-home p  { color: rgba(255,255,255,.75) !important; }
+
+/* Anular box-shadow blanco/claro en cards dentro de secciones dark */
+.tecnicos-home [class*="tecnicos-grid"] > div { box-shadow: none !important; }
+
+/* tec-step y tec-stat: nunca transform interferente */
+.tec-step, .tec-stat, .inmo-card, .inmo-stat { transform: none; transition: background .2s, border-color .2s !important; }
+.tec-step:hover  { transform: none !important; }
+.inmo-card:hover { transform: none !important; }
+
+/* Anular section{padding} genérico para estas dos */
+@media (max-width:480px) {
+  .inmobiliarias-section { padding: 3rem 1rem !important; }
+  .tecnicos-home         { padding: 3rem 1rem !important; }
+}
