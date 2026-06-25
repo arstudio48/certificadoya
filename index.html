@@ -1345,10 +1345,46 @@ function toggleSection(id){
 })();
 
 // Scroll reveal animation
-var elems = document.querySelectorAll('.pasos-section,.ventajas-v2,.provincias-section-v2,.faq-v2,.cta-v2,.tecnicos-home');
-elems.forEach(function(el){el.style.opacity='0';el.style.transform='translateY(30px)';el.style.transition='opacity .8s ease,transform .8s ease'});
-var observer = new IntersectionObserver(function(entries){entries.forEach(function(e){if(e.isIntersecting){e.target.style.opacity='1';e.target.style.transform='translateY(0)';observer.unobserve(e.target)}})},{threshold:0.15});
-setTimeout(function(){elems.forEach(function(el){observer.observe(el)})},200)
+(function() {
+  var selectors = '.pasos-section,.ventajas-v2,.provincias-section-v2,.faq-v2,.cta-v2,.tecnicos-home';
+  var elems = document.querySelectorAll(selectors);
+  if (!elems.length) return;
+  elems.forEach(function(el) {
+    el.style.opacity = '0';
+    el.style.transform = 'translateY(28px)';
+    el.style.transition = 'opacity .7s ease, transform .7s ease';
+  });
+  function revealAll() {
+    elems.forEach(function(el) {
+      el.style.opacity = '1';
+      el.style.transform = 'translateY(0)';
+    });
+  }
+  if (!window.IntersectionObserver) { revealAll(); return; }
+  var observer = new IntersectionObserver(function(entries) {
+    entries.forEach(function(e) {
+      if (e.isIntersecting) {
+        e.target.style.opacity = '1';
+        e.target.style.transform = 'translateY(0)';
+        observer.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.05, rootMargin: '0px 0px -40px 0px' });
+  // Fallback: reveal everything after 3s in case observer never fires
+  var fallback = setTimeout(revealAll, 3000);
+  setTimeout(function() {
+    elems.forEach(function(el) { observer.observe(el); });
+    // Also check immediately visible ones
+    elems.forEach(function(el) {
+      var rect = el.getBoundingClientRect();
+      if (rect.top < window.innerHeight) {
+        el.style.opacity = '1';
+        el.style.transform = 'translateY(0)';
+        clearTimeout(fallback);
+      }
+    });
+  }, 100);
+})()
 </script>
 
 <!-- WhatsApp floating button -->
