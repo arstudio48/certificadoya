@@ -78,7 +78,8 @@
     "autor": "CertificadoYa",
     "descripcion": "Recorrido por la normativa española de certificación energética: del RD 235/2013 al RD 390/2021. Directivas europeas, CTE y obligaciones actuales.",
     "categoria": "normativa",
-    "lectura": 8
+    "lectura": 8,
+    "image": "/img/blog/normativa-certificacion-energetica-espana.jpg"
   },
   {
     "slug": "aerotermia-certificado-energetico",
@@ -105,7 +106,8 @@
     "autor": "CertificadoYa",
     "descripcion": "Todo lo que necesitas saber si vas a vender tu casa: obligación legal del CEE, plazos, cómo afecta al precio de venta y qué pasa si no lo tienes.",
     "categoria": "básico",
-    "lectura": 5
+    "lectura": 5,
+    "image": "/img/blog/certificado-energetico-venta.jpg"
   },
   {
     "slug": "rehabilitacion-energetica-edificios",
@@ -171,21 +173,22 @@
     "lectura": 8
   },
   {
-      "slug": "guia-ce3x-avanzada",
-      "titulo": "Guía CE3X avanzada: casos prácticos, errores reales y cómo registrar el CEE en cada CCAA",
-      "fecha": "2026-06-03",
-      "autor": "Javier Martínez",
-      "descripcion": "Casos prácticos de CE3X para técnicos certificadores: cómo subir la letra sin gastar, aerotermia, cerramientos, registros autonómicos y checklist de 10 puntos. Incluye video y podcast con análisis completo.",
-      "categoria": "técnicos",
-      "lectura": 12
+    "slug": "guia-ce3x-avanzada",
+    "titulo": "Guía CE3X avanzada: casos prácticos, errores reales y cómo registrar el CEE en cada CCAA",
+    "fecha": "2026-06-03",
+    "autor": "Javier Martínez",
+    "descripcion": "Casos prácticos de CE3X para técnicos certificadores: cómo subir la letra sin gastar, aerotermia, cerramientos, registros autonómicos y checklist de 10 puntos. Incluye video y podcast con análisis completo.",
+    "categoria": "técnicos",
+    "lectura": 12
   },
   {
-      "slug": "registro-centralizado-tecnicos-certificadores",
+    "slug": "registro-centralizado-tecnicos-certificadores",
     "titulo": "Registro centralizado de técnicos certificadores: ¿realidad o proyecto?",
     "fecha": "2026-05-31",
     "autor": "CertificadoYa",
     "descripcion": "Estado actual del registro centralizado de técnicos certificadores en España. RD 390/2021, situación por CCAA y perspectivas con la transposición de la EPBD 2024.",
     "categoria": "técnicos",
-    "lectura": 7
+    "lectura": 7,
+    "image": "/img/blog/registro-centralizado-tecnicos-certificadores.jpg"
   }
 ]
