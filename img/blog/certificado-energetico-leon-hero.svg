@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#1a1a2e"/>
+      <stop offset="100%" style="stop-color:#d97706"/>
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="630" fill="url(#bg)"/>
+  <rect x="100" y="150" width="250" height="350" rx="8" fill="#fff" opacity="0.15"/>
+  <rect x="120" y="180" width="50" height="60" rx="4" fill="#d97706" opacity="0.8"/>
+  <rect x="190" y="180" width="50" height="60" rx="4" fill="#d97706" opacity="0.8"/>
+  <rect x="260" y="180" width="50" height="60" rx="4" fill="#d97706" opacity="0.8"/>
+  <rect x="120" y="260" width="50" height="60" rx="4" fill="#d97706" opacity="0.8"/>
+  <rect x="190" y="260" width="50" height="60" rx="4" fill="#d97706" opacity="0.8"/>
+  <rect x="260" y="260" width="50" height="60" rx="4" fill="#d97706" opacity="0.8"/>
+  <rect x="120" y="340" width="50" height="60" rx="4" fill="#d97706" opacity="0.8"/>
+  <rect x="190" y="340" width="50" height="60" rx="4" fill="#d97706" opacity="0.8"/>
+  <rect x="260" y="340" width="50" height="60" rx="4" fill="#d97706" opacity="0.8"/>
+  <rect x="450" y="200" width="280" height="230" rx="12" fill="#fff"/>
+  <text x="590" y="240" text-anchor="middle" font-family="Arial,sans-serif" font-size="18" font-weight="bold" fill="#1a1a2e">Certificado Energético</text>
+  <rect x="480" y="260" width="220" height="35" rx="6" fill="#00a651"/>
+  <text x="590" y="283" text-anchor="middle" font-family="Arial,sans-serif" font-size="16" font-weight="bold" fill="#fff">A - 4 kWh/m²</text>
+  <rect x="480" y="305" width="220" height="35" rx="6" fill="#66bc2a"/>
+  <text x="590" y="328" text-anchor="middle" font-family="Arial,sans-serif" font-size="16" font-weight="bold" fill="#fff">B - 8 kWh/m²</text>
+  <rect x="480" y="350" width="220" height="35" rx="6" fill="#ffd700"/>
+  <text x="590" y="373" text-anchor="middle" font-family="Arial,sans-serif" font-size="16" font-weight="bold" fill="#1a1a2e">C - 12 kWh/m²</text>
+  <text x="590" y="415" text-anchor="middle" font-family="Arial,sans-serif" font-size="14" fill="#666">Desde 45€ · 48-96h</text>
+  <text x="600" y="80" text-anchor="middle" font-family="Arial,sans-serif" font-size="42" font-weight="bold" fill="#fff">Certificado Energético León</text>
+  <text x="600" y="120" text-anchor="middle" font-family="Arial,sans-serif" font-size="24" fill="#ccc">CertificadoYa</text>
+  <rect x="0" y="580" width="1200" height="50" fill="#ff6b35"/>
+  <text x="600" y="612" text-anchor="middle" font-family="Arial,sans-serif" font-size="18" font-weight="bold" fill="#fff">www.certificadoya.es</text>
+</svg>
