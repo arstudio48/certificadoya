@@ -90,7 +90,7 @@ def generate_block(prov_slugs, presupuesto_link='/#presupuesto-card'):
   </div>'''
 
 def main():
-    blog_dir = "/home/arturo/certificadoya/blog"
+    blog_dir = "C:/Users/artur/certificadoya/blog"
     articles = sorted(glob.glob(os.path.join(blog_dir, "*.html")))
     articles = [a for a in articles if not a.endswith("index.html") and not a.endswith("posts.json")]
     
