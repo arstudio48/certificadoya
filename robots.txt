@@ -1,5 +1,11 @@
 User-agent: *
-Disallow: 
+Disallow: /admin/
+Disallow: /facturas/
+Disallow: /inmobiliarias/
+Disallow: /data/
+Disallow: /_scripts/
+Disallow: /supabase/
+Allow: /
 
 Sitemap: https://www.certificadoya.es/sitemap.xml
 # GEO-001: Crawlers de IA
@@ -12,4 +18,16 @@ Allow: /
 User-agent: ClaudeBot
 Allow: /
 User-agent: Google-Extended
+Allow: /
+User-agent: anthropic-ai
+Allow: /
+User-agent: Applebot
+Allow: /
+User-agent: Amazonbot
+Allow: /
+User-agent: FacebookBot
+Allow: /
+User-agent: CCBot
+Allow: /
+User-agent: Bytespider
 Allow: /
