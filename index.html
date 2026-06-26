@@ -477,11 +477,28 @@
     "url": "https://www.certificadoya.es/",
     "image": "https://www.certificadoya.es/img/og-image.png",
     "telephone": "+346****3002",
+    "email": "aparejado@me.com",
     "priceRange": "€€",
     "areaServed": {"@type": "Country", "name": "España"},
+    "sameAs": [
+      "https://www.linkedin.com/company/certificadoya"
+    ],
+    "address": {
+      "@type": "PostalAddress",
+      "addressCountry": "ES"
+    },
+    "openingHoursSpecification": [
+      {
+        "@type": "OpeningHoursSpecification",
+        "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"],
+        "opens": "08:00",
+        "closes": "22:00"
+      }
+    ],
     "hasOfferCatalog": {
       "@type": "OfferCatalog",
       "name": "Certificado Energético (CEE)",
+      "description": "Emisión y registro del certificado de eficiencia energética para viviendas, locales y edificios en toda España.",
       "itemListElement": [
         {
           "@type": "Offer",
@@ -654,10 +671,48 @@
   {
     "@context": "https://schema.org",
     "@type": "Organization",
+    "@id": "https://www.certificadoya.es/#organization",
     "name": "CertificadoYa.es",
+    "alternateName": "CertificadoYa",
     "url": "https://certificadoya.es",
-    "description": "Marketplace de certificados de eficiencia energética (CEE) que conecta propietarios con técnicos certificados.",
-    "areaServed": "ES"
+    "description": "Marketplace de certificados de eficiencia energética (CEE) que conecta propietarios con técnicos certificados en toda España.",
+    "logo": "https://www.certificadoya.es/img/og-image.png",
+    "email": "aparejado@me.com",
+    "foundingDate": "2024",
+    "areaServed": "ES",
+    "sameAs": [
+      "https://www.linkedin.com/company/certificadoya"
+    ],
+    "contactPoint": {
+      "@type": "ContactPoint",
+      "contactType": "customer service",
+      "email": "aparejado@me.com",
+      "url": "https://www.certificadoya.es/",
+      "availableLanguage": ["Spanish", "English"]
+    }
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    "@id": "https://www.certificadoya.es/#website",
+    "url": "https://www.certificadoya.es/",
+    "name": "CertificadoYa",
+    "description": "Certificados de eficiencia energética (CEE) en toda España. Presupuesto instantáneo.",
+    "publisher": {
+      "@type": "Organization",
+      "@id": "https://www.certificadoya.es/#organization"
+    },
+    "inLanguage": "es-ES",
+    "potentialAction": {
+      "@type": "SearchAction",
+      "target": {
+        "@type": "EntryPoint",
+        "urlTemplate": "https://www.certificadoya.es/?q={search_term_string}"
+      },
+      "query-input": "required name=search_term_string"
+    }
   }
   </script>
   <!-- GEO-001:SCHEMA-FIN -->
