@@ -790,9 +790,16 @@
         try {
           const session = JSON.parse(savedSession);
           if (session.token && session.email) {
-            emailTecnico = session.email;
-            tecnicoData = session;
-            mostrarPanel();
+            // Verificar token contra el servidor antes de mostrar panel
+            fetch('https://wypgqpgjlookbhuaiyxa.supabase.co/functions/v1/verificar-login', {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json', 'Authorization': 'Bearer ' + session.token },
+              body: JSON.stringify({ email: session.email, otp: 'verify' })
+            })
+            .then(r => { if (r.ok) { emailTecnico = session.email; tecnicoData = session; mostrarPanel(); }
+              else { localStorage.removeItem('tec_session'); document.getElementById('login-email-input').focus(); }
+            })
+            .catch(() => { localStorage.removeItem('tec_session'); document.getElementById('login-email-input').focus(); });
             return;
           }
         } catch(e) {}
