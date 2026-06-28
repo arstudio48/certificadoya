@@ -1,0 +1,121 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500">
+  <defs>
+    <linearGradient id="sky" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#d4e8f7"/>
+      <stop offset="100%" style="stop-color:#eef5ea"/>
+    </linearGradient>
+    <linearGradient id="building1" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#8fa87a"/>
+      <stop offset="100%" style="stop-color:#6b8258"/>
+    </linearGradient>
+    <linearGradient id="building2" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#7a9b6a"/>
+      <stop offset="100%" style="stop-color:#5c7a4e"/>
+    </linearGradient>
+    <linearGradient id="label-g" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#16a34a"/>
+      <stop offset="100%" style="stop-color:#22c55e"/>
+    </linearGradient>
+    <linearGradient id="label-f" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#86b341"/>
+      <stop offset="100%" style="stop-color:#a3cb5b"/>
+    </linearGradient>
+  </defs>
+  <!-- Sky background -->
+  <rect width="800" height="500" fill="url(#sky)"/>
+  <!-- Sun -->
+  <circle cx="680" cy="70" r="35" fill="#fde047" opacity="0.8"/>
+  <circle cx="680" cy="70" r="28" fill="#fef08a"/>
+  <!-- Clouds -->
+  <g fill="#fff" opacity="0.7">
+    <ellipse cx="150" cy="60" rx="40" ry="15"/>
+    <ellipse cx="180" cy="55" rx="30" ry="12"/>
+    <ellipse cx="550" cy="90" rx="35" ry="12"/>
+    <ellipse cx="575" cy="85" rx="25" ry="10"/>
+  </g>
+  <!-- Building cluster - left -->
+  <rect x="40" y="140" width="90" height="200" rx="2" fill="#c4d4b5" stroke="#a0b890" stroke-width="1"/>
+  <rect x="45" y="150" width="22" height="28" rx="1" fill="#b0c4a0"/>
+  <rect x="75" y="150" width="22" height="28" rx="1" fill="#b0c4a0"/>
+  <rect x="45" y="185" width="22" height="28" rx="1" fill="#b0c4a0"/>
+  <rect x="75" y="185" width="22" height="28" rx="1" fill="#b0c4a0"/>
+  <rect x="45" y="220" width="22" height="28" rx="1" fill="#b0c4a0"/>
+  <rect x="75" y="220" width="22" height="28" rx="1" fill="#b0c4a0"/>
+  <rect x="45" y="255" width="22" height="28" rx="1" fill="#b0c4a0"/>
+  <rect x="75" y="255" width="22" height="28" rx="1" fill="#b0c4a0"/>
+  <rect x="40" y="340" width="90" height="5" fill="#8fa87a"/>
+  <!-- Building middle-left -->
+  <rect x="155" y="120" width="100" height="220" rx="2" fill="url(#building1)" stroke="#5a7048" stroke-width="1"/>
+  <rect x="162" y="130" width="28" height="32" rx="1" fill="#dce8d0"/>
+  <rect x="200" y="130" width="28" height="32" rx="1" fill="#dce8d0"/>
+  <rect x="162" y="170" width="28" height="32" rx="1" fill="#dce8d0"/>
+  <rect x="200" y="170" width="28" height="32" rx="1" fill="#dce8d0"/>
+  <rect x="162" y="210" width="28" height="32" rx="1" fill="#dce8d0"/>
+  <rect x="200" y="210" width="28" height="32" rx="1" fill="#dce8d0"/>
+  <rect x="162" y="250" width="28" height="32" rx="1" fill="#dce8d0"/>
+  <rect x="200" y="250" width="28" height="32" rx="1" fill="#dce8d0"/>
+  <rect x="162" y="290" width="28" height="32" rx="1" fill="#dce8d0"/>
+  <rect x="200" y="290" width="28" height="32" rx="1" fill="#dce8d0"/>
+  <!-- Building central (tallest) -->
+  <rect x="280" y="80" width="120" height="260" rx="2" fill="url(#building2)" stroke="#4a6a3a" stroke-width="1"/>
+  <rect x="288" y="92" width="30" height="34" rx="1" fill="#c4dbb5"/>
+  <rect x="328" y="92" width="30" height="34" rx="1" fill="#c4dbb5"/>
+  <rect x="368" y="92" width="24" height="34" rx="1" fill="#c4dbb5"/>
+  <rect x="288" y="134" width="30" height="34" rx="1" fill="#c4dbb5"/>
+  <rect x="328" y="134" width="30" height="34" rx="1" fill="#c4dbb5"/>
+  <rect x="368" y="134" width="24" height="34" rx="1" fill="#c4dbb5"/>
+  <rect x="288" y="176" width="30" height="34" rx="1" fill="#c4dbb5"/>
+  <rect x="328" y="176" width="30" height="34" rx="1" fill="#c4dbb5"/>
+  <rect x="368" y="176" width="24" height="34" rx="1" fill="#c4dbb5"/>
+  <rect x="288" y="218" width="30" height="34" rx="1" fill="#c4dbb5"/>
+  <rect x="328" y="218" width="30" height="34" rx="1" fill="#c4dbb5"/>
+  <rect x="368" y="218" width="24" height="34" rx="1" fill="#c4dbb5"/>
+  <rect x="288" y="260" width="30" height="34" rx="1" fill="#c4dbb5"/>
+  <rect x="328" y="260" width="30" height="34" rx="1" fill="#c4dbb5"/>
+  <rect x="368" y="260" width="24" height="34" rx="1" fill="#c4dbb5"/>
+  <!-- Building right -->
+  <rect x="425" y="150" width="100" height="190" rx="2" fill="#b8cbab" stroke="#97ad87" stroke-width="1"/>
+  <rect x="432" y="158" width="26" height="30" rx="1" fill="#e7efd8"/>
+  <rect x="468" y="158" width="26" height="30" rx="1" fill="#e7efd8"/>
+  <rect x="432" y="196" width="26" height="30" rx="1" fill="#e7efd8"/>
+  <rect x="468" y="196" width="26" height="30" rx="1" fill="#e7efd8"/>
+  <rect x="432" y="234" width="26" height="30" rx="1" fill="#e7efd8"/>
+  <rect x="468" y="234" width="26" height="30" rx="1" fill="#e7efd8"/>
+  <rect x="432" y="272" width="26" height="30" rx="1" fill="#e7efd8"/>
+  <rect x="468" y="272" width="26" height="30" rx="1" fill="#e7efd8"/>
+  <!-- Building far right -->
+  <rect x="550" y="180" width="85" height="160" rx="2" fill="#a8bf9a" stroke="#8da37e" stroke-width="1"/>
+  <rect x="556" y="190" width="22" height="26" rx="1" fill="#dce5cd"/>
+  <rect x="585" y="190" width="22" height="26" rx="1" fill="#dce5cd"/>
+  <rect x="556" y="224" width="22" height="26" rx="1" fill="#dce5cd"/>
+  <rect x="585" y="224" width="22" height="26" rx="1" fill="#dce5cd"/>
+  <rect x="556" y="258" width="22" height="26" rx="1" fill="#dce5cd"/>
+  <rect x="585" y="258" width="22" height="26" rx="1" fill="#dce5cd"/>
+  <!-- Trees -->
+  <g fill="#4a7a3a" opacity="0.6">
+    <circle cx="140" cy="330" r="12"/>
+    <circle cx="145" cy="322" r="10"/>
+    <circle cx="550" cy="340" r="10"/>
+    <circle cx="555" cy="333" r="8"/>
+  </g>
+  <!-- Ground -->
+  <rect x="0" y="340" width="800" height="160" fill="#eaf0e4"/>
+  <rect x="0" y="340" width="800" height="4" fill="#d4dfc8"/>
+  <!-- Energy label badge -->
+  <g transform="translate(660, 200)">
+    <rect x="0" y="0" width="90" height="120" rx="6" fill="#fff" stroke="#c8d8b8" stroke-width="1.5"/>
+    <text x="45" y="22" text-anchor="middle" font-family="Arial, sans-serif" font-size="9" font-weight="bold" fill="#6b7b5e">CEE</text>
+    <!-- A-G scale -->
+    <rect x="12" y="28" width="66" height="9" rx="2" fill="#22c55e"/>
+    <rect x="12" y="38" width="66" height="9" rx="2" fill="#86b341"/>
+    <rect x="12" y="48" width="66" height="9" rx="2" fill="#eab308"/>
+    <rect x="12" y="58" width="66" height="9" rx="2" fill="#f97316"/>
+    <rect x="12" y="68" width="66" height="9" rx="2" fill="#ef4444"/>
+    <text x="45" y="96" text-anchor="middle" font-family="Arial, sans-serif" font-size="18" font-weight="bold" fill="#16a34a">C</text>
+    <text x="45" y="110" text-anchor="middle" font-family="Arial, sans-serif" font-size="7" fill="#9aab8a">COMUNITARIO</text>
+  </g>
+  <!-- Title overlay -->
+  <rect x="0" y="420" width="800" height="80" fill="#2d3a1f" opacity="0.85"/>
+  <text x="400" y="448" text-anchor="middle" font-family="'DM Sans', Arial, sans-serif" font-size="22" font-weight="700" fill="#fff">Certificado energético comunidades</text>
+  <text x="400" y="476" text-anchor="middle" font-family="'DM Sans', Arial, sans-serif" font-size="14" fill="#c4dbb5">Obligaciones, precios y guía completa 2026</text>
+</svg>
