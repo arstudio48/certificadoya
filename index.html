@@ -289,6 +289,26 @@
 .calc-btn:hover { opacity: .9; }
 .calc-btn:active { transform: scale(.98); }
 .calc-btn-sec { background: transparent; border: 1.5px solid var(--f1-accent); color: var(--f1-accent); margin-top: .5rem; }
+.calc-btn-outline { background: #fff; border: 1.5px solid #d4a843; color: #8a6b1e; margin-top: .5rem; font-size: .82rem; width: 100%; padding: .7rem 1.2rem; border-radius: 8px; font-family: var(--font-sans); font-size: .9rem; font-weight: 700; cursor: pointer; transition: opacity .2s, transform .1s; }
+.calc-btn-outline:hover { opacity: .9; background: #fff9e6; }
+.calc-btn-outline:active { transform: scale(.98); }
+/* Dos opciones de pago */
+.calc-opciones { display: flex; gap: .75rem; margin-top: .5rem; }
+.calc-opcion { flex: 1; border: 1px solid #e5e7eb; border-radius: 10px; padding: .85rem; background: #fff; position: relative; }
+.calc-opcion-primary { border-color: #bbf7d0; background: #f0fdf4; }
+.calc-opcion-secondary { border-color: #e5d5b5; background: #fffcf2; }
+.calc-opcion-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: .25rem; }
+.calc-opcion-badge { font-size: .6rem; font-weight: 700; text-transform: uppercase; letter-spacing: .5px; color: #16a34a; background: #dcfce7; padding: 2px 6px; border-radius: 4px; }
+.calc-opcion-icon { font-size: 1.1rem; }
+.calc-opcion-title { font-size: .82rem; font-weight: 700; color: #1a2e1e; }
+.calc-opcion-price { margin: .3rem 0; font-size: 1.2rem; font-weight: 700; color: #16a34a; }
+.calc-opcion-price-note { font-size: .65rem; font-weight: 400; color: #8a9a8a; display: block; }
+.calc-opcion-features { margin: .25rem 0 .5rem; padding: 0; list-style: none; }
+.calc-opcion-features li { font-size: .72rem; color: #4a6a52; line-height: 1.5; }
+.calc-opciones-aviso { text-align: center; font-size: .72rem; color: #6b7b5e; margin-top: .6rem; padding: .4rem; background: #f5f7f5; border-radius: 6px; }
+@media(max-width:600px){
+  .calc-opciones { flex-direction: column; }
+}
 .calc-seguros {
   display: flex; gap: .75rem; justify-content: center;
   flex-wrap: wrap; font-size: .7rem; color: var(--f1-muted);
@@ -989,8 +1009,43 @@ var provSlugs = {}; provincias.forEach(function(p){provSlugs[p.slug]=p.nombre;})
           <div class="calc-resultado" id="calc-resultado" style="display:none">
             <div class="calc-resultado-desglose" id="calc-resultado-desglose"></div>
             <!-- [PENDIENTE-ARTURO: tabla de precios reales por tramo provincia/tipo/superficie] -->
-            <button class="calc-btn calc-btn-sec" id="calc-btn-reservar" onclick="irAReserva()">Reservar ahora →</button>
-            <p class="calc-resultado-aviso">Pago retenido de forma segura: solo se cobra cuando un técnico acepta tu encargo.</p>
+            <div class="calc-opciones" id="calc-opciones">
+              <!-- Opción A: Pago anticipado -->
+              <div class="calc-opcion calc-opcion-primary" id="calc-opc-pago">
+                <div class="calc-opcion-header">
+                  <span class="calc-opcion-badge">RECOMENDADO</span>
+                  <span class="calc-opcion-icon">🔒</span>
+                </div>
+                <div class="calc-opcion-title">Pago anticipado</div>
+                <div class="calc-opcion-price">
+                  <span class="calc-opcion-price-value" id="calc-opc-precio-pago">—</span>
+                </div>
+                <ul class="calc-opcion-features">
+                  <li>✅ Pago retenido: solo se cobra si hay técnico</li>
+                  <li>✅ Prioridad en asignación de técnico</li>
+                  <li>✅ Precio más bajo</li>
+                </ul>
+                <button class="calc-btn calc-btn-sec" id="calc-btn-reservar" onclick="irAReserva()">Reservar ahora →</button>
+              </div>
+              <!-- Opción B: Contra entrega -->
+              <div class="calc-opcion calc-opcion-secondary" id="calc-opc-ce">
+                <div class="calc-opcion-header">
+                  <span class="calc-opcion-icon">📋</span>
+                </div>
+                <div class="calc-opcion-title">Sin pago ahora</div>
+                <div class="calc-opcion-price">
+                  <span class="calc-opcion-price-value" id="calc-opc-precio-ce">—</span>
+                  <span class="calc-opcion-price-note">(pago contra entrega)</span>
+                </div>
+                <ul class="calc-opcion-features">
+                  <li>✅ No necesitas tarjeta ahora</li>
+                  <li>✅ Pagas cuando recibes el CEE</li>
+                  <li>✅ Sin compromiso</li>
+                </ul>
+                <button class="calc-btn calc-btn-outline" onclick="irAReservaContraEntrega()">Solicitar técnico →</button>
+              </div>
+            </div>
+            <div class="calc-opciones-aviso">💡 Ambos métodos son seguros. El técnico solo recibe su pago cuando el certificado está registrado.</div>
             <p class="calc-resultado-contacto">📞 <a href="tel:+346****0068">641 45 00 68</a> · <a href="https://wa.me/34641450068?text=Hola%2C%20quiero%20un%20presupuesto" target="_blank">WhatsApp</a> · <a href="mailto:info@certificadoya.es">info@certificadoya.es</a></p>
           </div>
         </div>
@@ -2353,6 +2408,10 @@ function calcularPrecioF1() {
   if (provincia) {
     document.getElementById('calc-inline-price').textContent = total + ' €';
     document.getElementById('calc-inline-detail').textContent = cfg.label + ' · ' + provNombre + ' · Todo incluido';
+    // Precios en las dos opciones
+    document.getElementById('calc-opc-precio-pago').textContent = total + ' €';
+    var precioCE = Math.round(total * 1.15);
+    document.getElementById('calc-opc-precio-ce').textContent = precioCE + ' €';
     var tasaDisplay = tasa > 0 ? '<div class="desglose-linea"><span>Tasa registro autonómico</span><span>' + tasa.toFixed(2) + ' €</span></div>' : '';
     desgloseEl.innerHTML =
       '<div class="desglose-linea"><span>Precio servicio</span><span>' + subtotal.toFixed(2) + ' €</span></div>' +
@@ -2429,7 +2488,20 @@ function irAReserva() {
     '&tipo=' + encodeURIComponent(data.tipo) +
     '&m2=' + encodeURIComponent(data.m2) +
     '&precio=' + encodeURIComponent(data.precio) +
-    '&email=' + encodeURIComponent(data.email || '');
+    '&email=' + encodeURIComponent(data.email || '') +
+    '&opcion=pago_anticipado';
+}
+
+function irAReservaContraEntrega() {
+  var data = window._ultimoPresupuesto;
+  if (!data || !data.precio) { calcularPrecioF1(); return; }
+  var precioCE = Math.round(data.precio * 1.15);
+  window.location.href = '/reserva/?provincia=' + encodeURIComponent(data.provincia) +
+    '&tipo=' + encodeURIComponent(data.tipo) +
+    '&m2=' + encodeURIComponent(data.m2) +
+    '&precio=' + encodeURIComponent(precioCE) +
+    '&email=' + encodeURIComponent(data.email || '') +
+    '&opcion=contra_entrega';
 }
 </script>
 
