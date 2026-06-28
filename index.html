@@ -1088,6 +1088,311 @@ var provSlugs = {}; provincias.forEach(function(p){provSlugs[p.slug]=p.nombre;})
     </div>
   </section>
 
+  <!-- TECNICOS -->
+  <section class="tecnicos-home" id="para-tecnicos" style="scroll-margin-top:80px">
+  <style>
+  .tecnicos-home {
+    background: linear-gradient(135deg, #0f2d1a 0%, #14532d 50%, #166534 100%) !important;
+    padding: 5rem 2rem !important;
+    position: relative;
+    overflow: hidden;
+  }
+  .tecnicos-home::before {
+    content: "";
+    position: absolute;
+    top: -80px; right: -80px;
+    width: 400px; height: 400px;
+    background: radial-gradient(circle, rgba(34,197,94,.15) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .tecnicos-home::after {
+    content: "";
+    position: absolute;
+    bottom: -60px; left: -60px;
+    width: 300px; height: 300px;
+    background: radial-gradient(circle, rgba(134,239,172,.1) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .tec-inner {
+    max-width: 1060px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 3.5rem;
+    align-items: center;
+    position: relative;
+    z-index: 1;
+  }
+  .tec-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: .4rem;
+    background: rgba(134,239,172,.2);
+    border: 1px solid rgba(134,239,172,.4);
+    color: #86efac !important;
+    font-size: .75rem;
+    font-weight: 700;
+    padding: .3rem .85rem;
+    border-radius: 20px;
+    margin-bottom: 1.25rem;
+    text-transform: uppercase;
+    letter-spacing: .06em;
+  }
+  .tec-headline {
+    font-size: 2.2rem;
+    font-weight: 800;
+    color: #fff !important;
+    line-height: 1.2;
+    margin: 0 0 1rem;
+  }
+  .tec-headline em {
+    font-style: normal;
+    color: #4ade80;
+  }
+  .tec-sub {
+    font-size: 1rem;
+    color: rgba(255,255,255,.75) !important;
+    line-height: 1.7;
+    margin: 0 0 2rem;
+  }
+  .tec-perks {
+    display: flex;
+    flex-direction: column;
+    gap: .75rem;
+    margin-bottom: 2.25rem;
+  }
+  .tec-perk {
+    display: flex;
+    align-items: flex-start;
+    gap: .75rem;
+    color: rgba(255,255,255,.9) !important;
+    font-size: .92rem;
+    line-height: 1.5;
+  }
+  .tec-perk-icon {
+    width: 22px; height: 22px;
+    background: #16a34a;
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
+    margin-top: 1px;
+  }
+  .tec-perk-icon svg { width: 13px; height: 13px; }
+  .tec-perk strong { color: #4ade80 !important; }
+  .tec-ctas {
+    display: flex;
+    gap: .85rem;
+    flex-wrap: wrap;
+    align-items: center;
+  }
+  .tec-cta-main {
+    display: inline-flex;
+    align-items: center;
+    gap: .5rem;
+    background: #16a34a;
+    color: #fff;
+    font-weight: 700;
+    font-size: .95rem;
+    padding: .85rem 2rem;
+    border-radius: 10px;
+    text-decoration: none;
+    transition: all .2s;
+    box-shadow: 0 4px 20px rgba(22,163,74,.5);
+  }
+  .tec-cta-main:hover { background: #15803d; transform: translateY(-2px); box-shadow: 0 6px 28px rgba(22,163,74,.6); }
+  .tec-cta-sec {
+    display: inline-flex;
+    align-items: center;
+    gap: .4rem;
+    color: rgba(255,255,255,.8);
+    font-size: .88rem;
+    font-weight: 600;
+    text-decoration: none;
+    border-bottom: 1px solid rgba(255,255,255,.3);
+    padding-bottom: 1px;
+    transition: color .15s, border-color .15s;
+  }
+  .tec-cta-sec:hover { color: #fff; border-color: rgba(255,255,255,.7); }
+  .tec-right {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+  .tec-step {
+    background: rgba(255,255,255,.07) !important;
+    border: 1px solid rgba(255,255,255,.12) !important;
+    border-radius: 14px;
+    padding: 1.25rem 1.4rem;
+    display: flex;
+    gap: 1.1rem;
+    align-items: flex-start;
+    transition: background .2s, border-color .2s;
+  }
+  .tec-step:hover {
+    background: rgba(255,255,255,.12) !important;
+    border-color: rgba(74,222,128,.35) !important;
+  }
+  .tec-step-num {
+    width: 36px; height: 36px;
+    background: linear-gradient(135deg, #16a34a, #4ade80);
+    border-radius: 10px;
+    display: flex; align-items: center; justify-content: center;
+    font-weight: 800;
+    font-size: 1rem;
+    color: #fff;
+    flex-shrink: 0;
+    box-shadow: 0 4px 12px rgba(22,163,74,.4);
+  }
+  .tec-step-title {
+    font-size: .97rem;
+    font-weight: 700;
+    color: #fff !important;
+    margin: 0 0 .3rem;
+  }
+  .tec-step-desc {
+    font-size: .82rem;
+    color: rgba(255,255,255,.65) !important;
+    line-height: 1.55;
+    margin: 0;
+  }
+  .tec-step-desc strong { color: #86efac !important; font-weight: 600; }
+  .tec-stats {
+    grid-column: 1 / -1;
+    display: flex;
+    gap: 0;
+    background: rgba(255,255,255,.06) !important;
+    border: 1px solid rgba(255,255,255,.1) !important;
+    border-radius: 14px;
+    overflow: hidden;
+    margin-top: 1rem;
+  }
+  .tec-stat {
+    flex: 1;
+    padding: 1.2rem 1rem;
+    text-align: center;
+    border-right: 1px solid rgba(255,255,255,.08);
+  }
+  .tec-stat:last-child { border-right: none; }
+  .tec-stat-val {
+    display: block;
+    font-size: 1.6rem;
+    font-weight: 800;
+    color: #4ade80 !important;
+    line-height: 1.1;
+    margin-bottom: .25rem;
+  }
+  .tec-stat-label {
+    font-size: .75rem;
+    color: rgba(255,255,255,.5) !important;
+    line-height: 1.3;
+  }
+  @media (max-width: 768px) {
+    .tec-inner { grid-template-columns: 1fr; gap: 2.5rem; }
+    .tec-headline { font-size: 1.7rem; }
+    .tec-stats { flex-wrap: wrap; }
+    .tec-stat { min-width: 33%; border-bottom: 1px solid rgba(255,255,255,.08); }
+  }
+  @media (max-width: 480px) {
+    .tec-stat { min-width: 50%; }
+    .tec-headline { font-size: 1.45rem; }
+  }
+  </style>
+
+    <div class="tec-inner">
+      <!-- LEFT: headline + perks + CTAs -->
+      <div class="tec-left">
+        <span class="tec-badge">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="#86efac"><path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"/></svg>
+          Para técnicos certificadores
+        </span>
+        <h2 class="tec-headline">
+          Consigue encargos<br><em>sin hacer publicidad</em>
+        </h2>
+        <p class="tec-sub">
+          Si eres arquitecto, aparejador o ingeniero, te enviamos clientes que ya tienen precio cerrado y solo esperan que les llames. Tú certifica. Del resto nos encargamos nosotros.
+        </p>
+        <div class="tec-perks">
+          <div class="tec-perk">
+            <span class="tec-perk-icon"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></span>
+            <span>Clientes filtrados por provincia y CP. <strong>Solo trabajos cerca de ti.</strong></span>
+          </div>
+          <div class="tec-perk">
+            <span class="tec-perk-icon"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></span>
+            <span>Registro 100% gratuito. <strong>Sin cuotas ni mensualidades.</strong></span>
+          </div>
+          <div class="tec-perk">
+            <span class="tec-perk-icon"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></span>
+            <span>Solo <strong>18% de comision</strong> por encargo — la mas baja del sector (competidores: ~30%).</span>
+          </div>
+          <div class="tec-perk">
+            <span class="tec-perk-icon"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></span>
+            <span>Pago retenido de forma segura. <strong>Cobras al completar el encargo.</strong></span>
+          </div>
+        </div>
+        <div class="tec-ctas">
+          <a href="/panel-tecnicos.html" class="tec-cta-main">
+            Registrarme gratis
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          </a>
+          <a href="/pool-encargos.html" class="tec-cta-sec">Ver encargos disponibles &rarr;</a>
+        </div>
+      </div>
+
+      <!-- RIGHT: pasos -->
+      <div class="tec-right">
+        <div class="tec-step">
+          <div class="tec-step-num">1</div>
+          <div>
+            <p class="tec-step-title">Te registras gratis en 2 minutos</p>
+            <p class="tec-step-desc">Verificamos tu colegiacion y en <strong>48-96h ya estas activo</strong> recibiendo encargos. Sin cuota de alta.</p>
+          </div>
+        </div>
+        <div class="tec-step">
+          <div class="tec-step-num">2</div>
+          <div>
+            <p class="tec-step-title">Recibes encargos con precio cerrado</p>
+            <p class="tec-step-desc">El cliente ya ha pagado. Tu recibes una notificacion, <strong>aceptas el encargo</strong> y contactas directamente.</p>
+          </div>
+        </div>
+        <div class="tec-step">
+          <div class="tec-step-num">3</div>
+          <div>
+            <p class="tec-step-title">Realizas la visita y emites el CEE</p>
+            <p class="tec-step-desc">Visita, medicion y certificado como siempre. <strong>Tu mandas en tu trabajo.</strong></p>
+          </div>
+        </div>
+        <div class="tec-step">
+          <div class="tec-step-num">4</div>
+          <div>
+            <p class="tec-step-title">Cobras tu tarifa completa</p>
+            <p class="tec-step-desc">El pago se libera automaticamente. Solo descontamos el <strong>18% de comision</strong> — y ya esta.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- STATS BAR -->
+      <div class="tec-stats">
+        <div class="tec-stat">
+          <span class="tec-stat-val">0 &euro;</span>
+          <span class="tec-stat-label">Cuota de alta</span>
+        </div>
+        <div class="tec-stat">
+          <span class="tec-stat-val">18%</span>
+          <span class="tec-stat-label">Comision por encargo<br>(la mas baja)</span>
+        </div>
+        <div class="tec-stat">
+          <span class="tec-stat-val">48h</span>
+          <span class="tec-stat-label">Para estar activo</span>
+        </div>
+        <div class="tec-stat">
+          <span class="tec-stat-val">50+</span>
+          <span class="tec-stat-label">Tecnicos en red nacional</span>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
   <section id="como-funciona" class="pasos-section" style="scroll-margin-top:80px">
     <span style="display:inline-block;background:#dcfce7;color:#3d5a1e;font-size:.78rem;font-weight:600;padding:.35rem .9rem;border-radius:20px;margin-bottom:.75rem">En 4 pasos</span>
     <h2>Así de fácil es conseguir tu certificado</h2>
@@ -1403,310 +1708,6 @@ var provSlugs = {}; provincias.forEach(function(p){provSlugs[p.slug]=p.nombre;})
     </div>
   </section>
 
-  <!-- TECNICOS -->
-  <section class="tecnicos-home" id="para-tecnicos" style="scroll-margin-top:80px">
-  <style>
-  .tecnicos-home {
-    background: linear-gradient(135deg, #0f2d1a 0%, #14532d 50%, #166534 100%) !important;
-    padding: 5rem 2rem !important;
-    position: relative;
-    overflow: hidden;
-  }
-  .tecnicos-home::before {
-    content: "";
-    position: absolute;
-    top: -80px; right: -80px;
-    width: 400px; height: 400px;
-    background: radial-gradient(circle, rgba(34,197,94,.15) 0%, transparent 70%);
-    pointer-events: none;
-  }
-  .tecnicos-home::after {
-    content: "";
-    position: absolute;
-    bottom: -60px; left: -60px;
-    width: 300px; height: 300px;
-    background: radial-gradient(circle, rgba(134,239,172,.1) 0%, transparent 70%);
-    pointer-events: none;
-  }
-  .tec-inner {
-    max-width: 1060px;
-    margin: 0 auto;
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 3.5rem;
-    align-items: center;
-    position: relative;
-    z-index: 1;
-  }
-  .tec-badge {
-    display: inline-flex;
-    align-items: center;
-    gap: .4rem;
-    background: rgba(134,239,172,.2);
-    border: 1px solid rgba(134,239,172,.4);
-    color: #86efac !important;
-    font-size: .75rem;
-    font-weight: 700;
-    padding: .3rem .85rem;
-    border-radius: 20px;
-    margin-bottom: 1.25rem;
-    text-transform: uppercase;
-    letter-spacing: .06em;
-  }
-  .tec-headline {
-    font-size: 2.2rem;
-    font-weight: 800;
-    color: #fff !important;
-    line-height: 1.2;
-    margin: 0 0 1rem;
-  }
-  .tec-headline em {
-    font-style: normal;
-    color: #4ade80;
-  }
-  .tec-sub {
-    font-size: 1rem;
-    color: rgba(255,255,255,.75) !important;
-    line-height: 1.7;
-    margin: 0 0 2rem;
-  }
-  .tec-perks {
-    display: flex;
-    flex-direction: column;
-    gap: .75rem;
-    margin-bottom: 2.25rem;
-  }
-  .tec-perk {
-    display: flex;
-    align-items: flex-start;
-    gap: .75rem;
-    color: rgba(255,255,255,.9) !important;
-    font-size: .92rem;
-    line-height: 1.5;
-  }
-  .tec-perk-icon {
-    width: 22px; height: 22px;
-    background: #16a34a;
-    border-radius: 50%;
-    display: flex; align-items: center; justify-content: center;
-    flex-shrink: 0;
-    margin-top: 1px;
-  }
-  .tec-perk-icon svg { width: 13px; height: 13px; }
-  .tec-perk strong { color: #4ade80 !important; }
-  .tec-ctas {
-    display: flex;
-    gap: .85rem;
-    flex-wrap: wrap;
-    align-items: center;
-  }
-  .tec-cta-main {
-    display: inline-flex;
-    align-items: center;
-    gap: .5rem;
-    background: #16a34a;
-    color: #fff;
-    font-weight: 700;
-    font-size: .95rem;
-    padding: .85rem 2rem;
-    border-radius: 10px;
-    text-decoration: none;
-    transition: all .2s;
-    box-shadow: 0 4px 20px rgba(22,163,74,.5);
-  }
-  .tec-cta-main:hover { background: #15803d; transform: translateY(-2px); box-shadow: 0 6px 28px rgba(22,163,74,.6); }
-  .tec-cta-sec {
-    display: inline-flex;
-    align-items: center;
-    gap: .4rem;
-    color: rgba(255,255,255,.8);
-    font-size: .88rem;
-    font-weight: 600;
-    text-decoration: none;
-    border-bottom: 1px solid rgba(255,255,255,.3);
-    padding-bottom: 1px;
-    transition: color .15s, border-color .15s;
-  }
-  .tec-cta-sec:hover { color: #fff; border-color: rgba(255,255,255,.7); }
-  .tec-right {
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
-  }
-  .tec-step {
-    background: rgba(255,255,255,.07) !important;
-    border: 1px solid rgba(255,255,255,.12) !important;
-    border-radius: 14px;
-    padding: 1.25rem 1.4rem;
-    display: flex;
-    gap: 1.1rem;
-    align-items: flex-start;
-    transition: background .2s, border-color .2s;
-  }
-  .tec-step:hover {
-    background: rgba(255,255,255,.12) !important;
-    border-color: rgba(74,222,128,.35) !important;
-  }
-  .tec-step-num {
-    width: 36px; height: 36px;
-    background: linear-gradient(135deg, #16a34a, #4ade80);
-    border-radius: 10px;
-    display: flex; align-items: center; justify-content: center;
-    font-weight: 800;
-    font-size: 1rem;
-    color: #fff;
-    flex-shrink: 0;
-    box-shadow: 0 4px 12px rgba(22,163,74,.4);
-  }
-  .tec-step-title {
-    font-size: .97rem;
-    font-weight: 700;
-    color: #fff !important;
-    margin: 0 0 .3rem;
-  }
-  .tec-step-desc {
-    font-size: .82rem;
-    color: rgba(255,255,255,.65) !important;
-    line-height: 1.55;
-    margin: 0;
-  }
-  .tec-step-desc strong { color: #86efac !important; font-weight: 600; }
-  .tec-stats {
-    grid-column: 1 / -1;
-    display: flex;
-    gap: 0;
-    background: rgba(255,255,255,.06) !important;
-    border: 1px solid rgba(255,255,255,.1) !important;
-    border-radius: 14px;
-    overflow: hidden;
-    margin-top: 1rem;
-  }
-  .tec-stat {
-    flex: 1;
-    padding: 1.2rem 1rem;
-    text-align: center;
-    border-right: 1px solid rgba(255,255,255,.08);
-  }
-  .tec-stat:last-child { border-right: none; }
-  .tec-stat-val {
-    display: block;
-    font-size: 1.6rem;
-    font-weight: 800;
-    color: #4ade80 !important;
-    line-height: 1.1;
-    margin-bottom: .25rem;
-  }
-  .tec-stat-label {
-    font-size: .75rem;
-    color: rgba(255,255,255,.5) !important;
-    line-height: 1.3;
-  }
-  @media (max-width: 768px) {
-    .tec-inner { grid-template-columns: 1fr; gap: 2.5rem; }
-    .tec-headline { font-size: 1.7rem; }
-    .tec-stats { flex-wrap: wrap; }
-    .tec-stat { min-width: 33%; border-bottom: 1px solid rgba(255,255,255,.08); }
-  }
-  @media (max-width: 480px) {
-    .tec-stat { min-width: 50%; }
-    .tec-headline { font-size: 1.45rem; }
-  }
-  </style>
-
-    <div class="tec-inner">
-      <!-- LEFT: headline + perks + CTAs -->
-      <div class="tec-left">
-        <span class="tec-badge">
-          <svg width="12" height="12" viewBox="0 0 24 24" fill="#86efac"><path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"/></svg>
-          Para técnicos certificadores
-        </span>
-        <h2 class="tec-headline">
-          Consigue encargos<br><em>sin hacer publicidad</em>
-        </h2>
-        <p class="tec-sub">
-          Si eres arquitecto, aparejador o ingeniero, te enviamos clientes que ya tienen precio cerrado y solo esperan que les llames. Tú certifica. Del resto nos encargamos nosotros.
-        </p>
-        <div class="tec-perks">
-          <div class="tec-perk">
-            <span class="tec-perk-icon"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></span>
-            <span>Clientes filtrados por provincia y CP. <strong>Solo trabajos cerca de ti.</strong></span>
-          </div>
-          <div class="tec-perk">
-            <span class="tec-perk-icon"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></span>
-            <span>Registro 100% gratuito. <strong>Sin cuotas ni mensualidades.</strong></span>
-          </div>
-          <div class="tec-perk">
-            <span class="tec-perk-icon"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></span>
-            <span>Solo <strong>18% de comision</strong> por encargo — la mas baja del sector (competidores: ~30%).</span>
-          </div>
-          <div class="tec-perk">
-            <span class="tec-perk-icon"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></span>
-            <span>Pago retenido de forma segura. <strong>Cobras al completar el encargo.</strong></span>
-          </div>
-        </div>
-        <div class="tec-ctas">
-          <a href="/panel-tecnicos.html" class="tec-cta-main">
-            Registrarme gratis
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-          </a>
-          <a href="/pool-encargos.html" class="tec-cta-sec">Ver encargos disponibles &rarr;</a>
-        </div>
-      </div>
-
-      <!-- RIGHT: pasos -->
-      <div class="tec-right">
-        <div class="tec-step">
-          <div class="tec-step-num">1</div>
-          <div>
-            <p class="tec-step-title">Te registras gratis en 2 minutos</p>
-            <p class="tec-step-desc">Verificamos tu colegiacion y en <strong>48-96h ya estas activo</strong> recibiendo encargos. Sin cuota de alta.</p>
-          </div>
-        </div>
-        <div class="tec-step">
-          <div class="tec-step-num">2</div>
-          <div>
-            <p class="tec-step-title">Recibes encargos con precio cerrado</p>
-            <p class="tec-step-desc">El cliente ya ha pagado. Tu recibes una notificacion, <strong>aceptas el encargo</strong> y contactas directamente.</p>
-          </div>
-        </div>
-        <div class="tec-step">
-          <div class="tec-step-num">3</div>
-          <div>
-            <p class="tec-step-title">Realizas la visita y emites el CEE</p>
-            <p class="tec-step-desc">Visita, medicion y certificado como siempre. <strong>Tu mandas en tu trabajo.</strong></p>
-          </div>
-        </div>
-        <div class="tec-step">
-          <div class="tec-step-num">4</div>
-          <div>
-            <p class="tec-step-title">Cobras tu tarifa completa</p>
-            <p class="tec-step-desc">El pago se libera automaticamente. Solo descontamos el <strong>18% de comision</strong> — y ya esta.</p>
-          </div>
-        </div>
-      </div>
-
-      <!-- STATS BAR -->
-      <div class="tec-stats">
-        <div class="tec-stat">
-          <span class="tec-stat-val">0 &euro;</span>
-          <span class="tec-stat-label">Cuota de alta</span>
-        </div>
-        <div class="tec-stat">
-          <span class="tec-stat-val">18%</span>
-          <span class="tec-stat-label">Comision por encargo<br>(la mas baja)</span>
-        </div>
-        <div class="tec-stat">
-          <span class="tec-stat-val">48h</span>
-          <span class="tec-stat-label">Para estar activo</span>
-        </div>
-        <div class="tec-stat">
-          <span class="tec-stat-val">50+</span>
-          <span class="tec-stat-label">Tecnicos en red nacional</span>
-        </div>
-      </div>
-
-    </div>
-  </section>
 </main>
 
 <style>
