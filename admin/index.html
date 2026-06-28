@@ -549,6 +549,12 @@
     <div class="section-header">
       <h2>Técnicos Registrados <span class="count-badge" id="tecnicos-count">0</span></h2>
     </div>
+    <div class="filter-bar" id="tecnicos-filters">
+      <button class="filter-btn active" data-tec-filtro="todos">Todos</button>
+      <button class="filter-btn" data-tec-filtro="pendientes">Pendientes</button>
+      <button class="filter-btn" data-tec-filtro="activos">Activos</button>
+      <button class="filter-btn" data-tec-filtro="rechazados">Rechazados</button>
+    </div>
     <div class="table-wrapper">
       <table>
         <thead>
@@ -557,12 +563,15 @@
             <th>Nombre</th>
             <th>Email</th>
             <th>Teléfono</th>
+            <th>Titulación</th>
             <th>Provincia</th>
+            <th>Estado</th>
             <th>Registro</th>
+            <th>Acción</th>
           </tr>
         </thead>
         <tbody id="tecnicos-tbody">
-          <tr><td colspan="6" class="loading">Cargando técnicos...</td></tr>
+          <tr><td colspan="9" class="loading">Cargando técnicos...</td></tr>
         </tbody>
       </table>
     </div>
@@ -617,6 +626,8 @@
 
   const ADMIN_EMAIL = 'aparejado@me.com';
   const ADMIN_PASS  = '013685';
+  const ADMIN_API_KEY = 'cy_adm_k3y_2026_c3rt1f1c4d0y4';
+  const EDGE_ADMIN_TECNICOS = EDGE_FUNCTION_URL + '/admin-tecnicos';
 
   // ─── State ───
   let leadsData = [];
@@ -710,6 +721,10 @@
           return [];
         }),
         apiGet('tecnicos').catch(function(e) {
+          console.warn('Error técnicos (directo):', e);
+          return [];
+        }),
+        fetchTecnicos().catch(function(e) {
           console.warn('Error técnicos:', e);
           return [];
         }),
@@ -878,6 +893,19 @@
   };
 
   // ─── Técnicos ───
+  async function fetchTecnicos() {
+    var url = EDGE_ADMIN_TECNICOS + '?' + new URLSearchParams({ filtro: tecnicosFilter });
+    var res = await fetch(url, {
+      headers: {
+        'x-admin-key': ADMIN_API_KEY,
+        'Content-Type': 'application/json'
+      }
+    });
+    if (!res.ok) throw new Error('Error ' + res.status + ' al obtener técnicos');
+    var json = await res.json();
+    return Array.isArray(json.tecnicos) ? json.tecnicos : [];
+  }
+
   function renderTecnicos() {
     var tbody = document.getElementById('tecnicos-tbody');
     var countEl = document.getElementById('tecnicos-count');
@@ -885,23 +913,120 @@
     countEl.textContent = tecnicosData.length;
 
     if (tecnicosData.length === 0) {
-      tbody.innerHTML = '<tr><td colspan="6" class="empty-state">No hay técnicos registrados</td></tr>';
+      tbody.innerHTML = '<tr><td colspan="9" class="empty-state">No hay técnicos' +
+        (tecnicosFilter !== 'todos' ? ' ' + tecnicosFilter : '') + '</td></tr>';
       return;
     }
 
     tbody.innerHTML = tecnicosData.map(function(t) {
       var fecha = t.created_at || t.fecha || t.registro || '';
-      var fDisplay = fecha ? fecha.slice(0, 10) : '—';
+      var fDisplay = fecha ? fecha.slice(0, 10) + ' ' + fecha.slice(11, 16) : '—';
+      var titulacion = t.titulacion || t.profesion || '—';
+      var provincias = t.provincia || t.provincias || '—';
+      var verificado = t.verificado === true;
+      var activo = t.activo !== false;
+      var estadoLabel, estadoClass;
+      if (verificado && activo) {
+        estadoLabel = 'Activo';
+        estadoClass = 'completado';
+      } else if (!verificado && activo) {
+        estadoLabel = 'Pendiente';
+        estadoClass = 'nuevo';
+      } else {
+        estadoLabel = 'Rechazado';
+        estadoClass = 'cancelado';
+      }
+      var puedeAprobar = !verificado && activo;
+      var puedeRechazar = verificado || activo;
       return '<tr>' +
-        '<td>' + (t.id || '—') + '</td>' +
-        '<td>' + escHtml(t.nombre || t.name || '—') + '</td>' +
+        '<td>' + (t.id ? t.id.slice(0, 8) : '—') + '</td>' +
+        '<td><strong>' + escHtml(t.nombre || '—') + '</strong></td>' +
         '<td>' + escHtml(t.email || '—') + '</td>' +
-        '<td>' + escHtml(t.telefono || t.phone || '—') + '</td>' +
-        '<td>' + escHtml(t.provincia || t.province || '—') + '</td>' +
+        '<td>' + escHtml(t.telefono || '—') + '</td>' +
+        '<td>' + escHtml(titulacion) + '</td>' +
+        '<td>' + escHtml(provincias) + '</td>' +
+        '<td><span class="status-badge ' + estadoClass + '">' + estadoLabel + '</span></td>' +
         '<td>' + fDisplay + '</td>' +
+        '<td style="white-space:nowrap">' +
+          (puedeAprobar
+            ? '<button class="btn-sm green" data-tecnico-id="' + (t.id || '') + '" onclick="window.__aprobarTecnico(event)" style="margin-right:4px">✅ Aprobar</button>'
+            : '') +
+          (puedeRechazar
+            ? '<button class="btn-sm" style="background:#fee2e2;color:#991b1b" data-tecnico-id="' + (t.id || '') + '" onclick="window.__rechazarTecnico(event)">❌ Rechazar</button>'
+            : '') +
+          (!puedeAprobar && !puedeRechazar ? '<span style="color:var(--color-tinta-tenue);font-size:.78rem;">—</span>' : '') +
+        '</td>' +
         '</tr>';
     }).join('');
   }
+
+  // Aprobar técnico
+  window.__aprobarTecnico = async function(e) {
+    var btn = e.currentTarget;
+    var tecnicoId = btn.getAttribute('data-tecnico-id');
+    if (!tecnicoId) return;
+    btn.disabled = true;
+    btn.textContent = 'Aprobando...';
+    try {
+      var res = await fetch(EDGE_ADMIN_TECNICOS, {
+        method: 'POST',
+        headers: {
+          'x-admin-key': ADMIN_API_KEY,
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ action: 'aprobar', tecnicoId: tecnicoId })
+      });
+      var json = await res.json();
+      if (json.success) {
+        showToast('✅ Técnico aprobado correctamente');
+        loadAllData();
+      } else {
+        showToast('Error: ' + (json.error || 'desconocido'), 'error');
+        btn.disabled = false;
+        btn.textContent = '✅ Aprobar';
+      }
+    } catch(err) {
+      showToast('Error de red: ' + err.message, 'error');
+      btn.disabled = false;
+      btn.textContent = '✅ Aprobar';
+    }
+  };
+
+  // Rechazar técnico
+  window.__rechazarTecnico = async function(e) {
+    var btn = e.currentTarget;
+    var tecnicoId = btn.getAttribute('data-tecnico-id');
+    if (!tecnicoId) return;
+    if (!confirm('¿Estás seguro de rechazar a este técnico?')) return;
+    btn.disabled = true;
+    btn.textContent = 'Rechazando...';
+    try {
+      var res = await fetch(EDGE_ADMIN_TECNICOS, {
+        method: 'POST',
+        headers: {
+          'x-admin-key': ADMIN_API_KEY,
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ action: 'rechazar', tecnicoId: tecnicoId })
+      });
+      var json = await res.json();
+      if (json.success) {
+        showToast('❌ Técnico rechazado');
+        loadAllData();
+      } else {
+        showToast('Error: ' + (json.error || 'desconocido'), 'error');
+        btn.disabled = false;
+        btn.textContent = '❌ Rechazar';
+      }
+    } catch(err) {
+      showToast('Error de red: ' + err.message, 'error');
+      btn.disabled = false;
+      btn.textContent = '❌ Rechazar';
+    }
+  };
+
+  // Filtro de técnicos
+  var tecnicosFilter = 'todos';
 
   // ─── Facturas ───
   function renderFacturas() {
@@ -983,6 +1108,16 @@
     btn.classList.add('active');
     pagosFilter = btn.getAttribute('data-filter');
     renderPagos();
+  });
+
+  // ─── Técnicos filters ───
+  document.addEventListener('click', function(e) {
+    var btn = e.target.closest('#tecnicos-filters .filter-btn');
+    if (!btn) return;
+    btn.parentElement.querySelectorAll('.filter-btn').forEach(function(b) { b.classList.remove('active'); });
+    btn.classList.add('active');
+    tecnicosFilter = btn.getAttribute('data-tec-filtro') || 'todos';
+    loadAllData();
   });
 
   // ─── Helpers ───
