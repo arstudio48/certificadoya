@@ -51,6 +51,7 @@ a{color:inherit;text-decoration:none}
 @keyframes spin{to{transform:rotate(360deg)}}
 .reserva-seguros{display:flex;justify-content:center;gap:1.5rem;margin-top:1.25rem;font-size:.7rem;color:#8a9a8a;flex-wrap:wrap}
 .reserva-seguros span{display:flex;align-items:center;gap:4px}
+.reserva-contra-note{margin-top:1rem;padding:.75rem;background:#fffcf2;border:1px solid #e5d5b5;border-radius:8px;font-size:.78rem;color:#6b5b1e;line-height:1.5}
 .reserva-error{display:none;background:#fef2f2;border:1px solid #fca5a5;border-radius:8px;padding:.75rem;margin-top:1rem;font-size:.82rem;color:#dc2626;text-align:center}
 .reserva-success{display:none;text-align:center;padding:1.5rem 0}
 .reserva-success-icon{font-size:3rem;margin-bottom:.75rem}
@@ -88,8 +89,8 @@ a{color:inherit;text-decoration:none}
 <main class="reserva-main">
   <div class="reserva-card">
     <div id="reserva-form">
-      <h1 class="reserva-h1">Confirma tu reserva</h1>
-      <p class="reserva-sub">Revisa tu presupuesto y completa tus datos para pagar de forma segura.</p>
+      <h1 class="reserva-h1" id="reserva-h1">Confirma tu reserva</h1>
+      <p class="reserva-sub" id="reserva-sub">Revisa tu presupuesto y completa tus datos para pagar de forma segura.</p>
 
       <div class="resumen-box" id="resumen-box">
         <div class="resumen-row"><span class="resumen-label">Provincia</span><span class="resumen-value" id="r-provincia">—</span></div>
@@ -98,33 +99,35 @@ a{color:inherit;text-decoration:none}
         <div class="resumen-row resumen-total"><span>Total</span><span id="r-precio">—</span></div>
       </div>
 
-      <div class="form-group">
-        <label for="reserva-nombre">Tu nombre completo</label>
+      <div class="form-group" id="fg-nombre">
+        <label for="reserva-nombre">Tu nombre completo *</label>
         <input type="text" id="reserva-nombre" class="form-input" placeholder="Ej: María García" autocomplete="name" required>
       </div>
-      <div class="form-group">
-        <label for="reserva-telefono">Teléfono móvil</label>
+      <div class="form-group" id="fg-telefono">
+        <label for="reserva-telefono">Teléfono móvil *</label>
         <input type="tel" id="reserva-telefono" class="form-input" placeholder="612 345 678" autocomplete="tel" required pattern="[0-9]{9}">
       </div>
 
-      <!-- Dirección del inmueble -->
-      <div class="form-group">
-        <label for="reserva-direccion">Dirección del inmueble</label>
-        <input type="text" id="reserva-direccion" class="form-input" placeholder="Calle Mayor">
-      </div>
-      <div style="display:flex;gap:.75rem">
-        <div class="form-group" style="flex:1">
-          <label for="reserva-numero">Número</label>
-          <input type="text" id="reserva-numero" class="form-input" placeholder="23">
+      <!-- Dirección del inmueble (oculto en contra_entrega) -->
+      <div id="fg-direccion-completa">
+        <div class="form-group">
+          <label for="reserva-direccion">Dirección del inmueble</label>
+          <input type="text" id="reserva-direccion" class="form-input" placeholder="Calle Mayor">
         </div>
-        <div class="form-group" style="flex:2">
-          <label for="reserva-ciudad">Ciudad</label>
-          <input type="text" id="reserva-ciudad" class="form-input" placeholder="Gijón">
+        <div style="display:flex;gap:.75rem">
+          <div class="form-group" style="flex:1">
+            <label for="reserva-numero">Número</label>
+            <input type="text" id="reserva-numero" class="form-input" placeholder="23">
+          </div>
+          <div class="form-group" style="flex:2">
+            <label for="reserva-ciudad">Ciudad</label>
+            <input type="text" id="reserva-ciudad" class="form-input" placeholder="Gijón">
+          </div>
         </div>
-      </div>
-      <div class="form-group">
-        <label for="reserva-cp">Código postal *</label>
-        <input type="text" id="reserva-cp" class="form-input" placeholder="33201" pattern="[0-9]{5}" required maxlength="5">
+        <div class="form-group">
+          <label for="reserva-cp">Código postal *</label>
+          <input type="text" id="reserva-cp" class="form-input" placeholder="33201" pattern="[0-9]{5}" required maxlength="5">
+        </div>
       </div>
 
       <div class="reserva-privacy">
@@ -134,24 +137,34 @@ a{color:inherit;text-decoration:none}
         </label>
       </div>
 
-      <button class="btn-pagar" id="btn-pagar" onclick="iniciarPago()">
-        <span class="btn-text">Pagar <span id="btn-precio">—</span> →</span>
+      <button class="btn-pagar" id="btn-pagar" onclick="manejarEnvio()">
+        <span class="btn-text" id="btn-texto">Pagar <span id="btn-precio">—</span> →</span>
         <span class="spinner"></span>
       </button>
 
-      <div class="reserva-seguros">
-        <span>🔒 Pago seguro Stripe</span>
+      <div class="reserva-seguros" id="reserva-seguros">
+        <span id="seguro-1">🔒 Pago seguro Stripe</span>
         <span>🔐 SSL encriptado</span>
-        <span>🛡️ Cobro solo si hay técnico</span>
+        <span id="seguro-3">🛡️ Cobro solo si hay técnico</span>
+      </div>
+
+      <div class="reserva-contra-note" id="reserva-contra-note" style="display:none">
+        <p>📋 No pagas nada ahora. Cuando un técnico acepte tu encargo y te entregue el CEE, te enviaremos un enlace de pago seguro.</p>
       </div>
 
       <div class="reserva-error" id="reserva-error"></div>
     </div>
 
-    <div class="reserva-success" id="reserva-success">
+    <div class="reserva-success" id="reserva-success-pago" style="display:none">
       <div class="reserva-success-icon">✅</div>
       <h2>¡Pago realizado con éxito!</h2>
       <p>Hemos recibido tu reserva. En las próximas 24h un técnico certificador de tu zona aceptará tu encargo.<br><br>Recibirás un email de confirmación en breve.</p>
+      <a href="/" class="btn-volver">Volver al inicio</a>
+    </div>
+    <div class="reserva-success" id="reserva-success-ce" style="display:none">
+      <div class="reserva-success-icon">📋</div>
+      <h2>¡Solicitud enviada!</h2>
+      <p>Hemos registrado tu solicitud. En breve un técnico certificador de tu zona contactará contigo.<br><br>Pagas solo cuando recibas el CEE. Sin compromiso.</p>
       <a href="/" class="btn-volver">Volver al inicio</a>
     </div>
   </div>
@@ -165,6 +178,8 @@ a{color:inherit;text-decoration:none}
   var m2 = params.get('m2') || params.get('superficie') || '';
   var precio = params.get('precio') || '';
   var email = params.get('email') || '';
+  var opcion = params.get('opcion') || 'pago_anticipado';
+  var esCE = opcion === 'contra_entrega';
 
   var tipoTexto = {piso:'Piso',unifamiliar:'Unifamiliar',local:'Local',oficina:'Oficina',nave:'Nave'};
   var provNombres = {
@@ -182,15 +197,102 @@ a{color:inherit;text-decoration:none}
   };
   var provNombre = provNombres[provincia] || provincia || '—';
   var supTexto = m2 ? m2 + ' m²' : '—';
+  var precioNum = parseFloat(precio) || 0;
 
   document.getElementById('r-provincia').textContent = provNombre;
   document.getElementById('r-tipo').textContent = tipoTexto[tipo] || tipo || '—';
   document.getElementById('r-superficie').textContent = supTexto;
   document.getElementById('r-precio').textContent = precio ? precio + ' €' : '—';
-  document.getElementById('btn-precio').textContent = precio ? precio + ' €' : '—';
 
-  window._reservaData = { provincia:provincia, provinciaNombre:provNombre, tipo, m2:parseInt(m2)||0, precio:parseFloat(precio)||0, email };
+  window._reservaData = { provincia:provincia, provinciaNombre:provNombre, tipo, m2:parseInt(m2)||0, precio:precioNum, email, opcion, esCE };
+
+  // Ajustar UI según opción
+  if (esCE) {
+    document.getElementById('reserva-h1').textContent = 'Solicita tu técnico certificador';
+    document.getElementById('reserva-sub').textContent = 'Sin pago ahora. Pagas solo cuando recibas el CEE.';
+    document.getElementById('btn-texto').innerHTML = 'Solicitar técnico sin pagar →';
+    document.getElementById('btn-precio').textContent = '';
+    document.getElementById('seguro-1').textContent = '📋 Sin pago ahora';
+    document.getElementById('seguro-3').textContent = '💳 Pago contra entrega';
+    document.getElementById('reserva-contra-note').style.display = 'block';
+    // Ocultar campos de dirección (no necesarios para la solicitud previa)
+    document.getElementById('fg-direccion-completa').style.display = 'none';
+  } else {
+    document.getElementById('btn-precio').textContent = precio ? precio + ' €' : '—';
+  }
 })();
+
+function manejarEnvio() {
+  var data = window._reservaData;
+  if (data && data.esCE) {
+    solicitarSinPago();
+  } else {
+    iniciarPago();
+  }
+}
+
+async function solicitarSinPago() {
+  var nombre = document.getElementById('reserva-nombre').value.trim();
+  var telefono = document.getElementById('reserva-telefono').value.trim();
+  var consent = document.getElementById('reserva-consent').checked;
+  var errorEl = document.getElementById('reserva-error');
+  var btn = document.getElementById('btn-pagar');
+  var data = window._reservaData;
+
+  errorEl.style.display = 'none';
+
+  if (!nombre || nombre.length < 3) { mostrarErrorReserva('Introduce tu nombre completo'); return; }
+  if (!telefono || !/^[0-9]{9}$/.test(telefono)) { mostrarErrorReserva('Introduce un teléfono válido (9 dígitos)'); return; }
+  if (!consent) { mostrarErrorReserva('Acepta la política de privacidad'); return; }
+  if (!data || !data.precio) { mostrarErrorReserva('Error: datos de presupuesto no válidos. Vuelve a calcular.'); return; }
+
+  btn.classList.add('cargando');
+  btn.disabled = true;
+
+  var tipoMap = { piso: 'piso', unifamiliar: 'unifamiliar', local: 'local', oficina: 'oficina', nave: 'nave' };
+
+  try {
+    // Guardar lead en Supabase
+    var res = await fetch('https://wypgqpgjlookbhuaiyxa.supabase.co/functions/v1/solicitar-servicio?action=solicitar', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'apikey': 'sb_publishable_MsDx5jVGtDAzoB3l3-8DiQ_BxWpChA0'
+      },
+      body: JSON.stringify({
+        email_cliente: data.email || '',
+        nombre_cliente: nombre,
+        telefono_cliente: telefono,
+        zona: data.provincia,
+        m2: data.m2,
+        tipo_inmueble: tipoMap[data.tipo] || data.tipo,
+        presupuesto_min: data.precio,
+        presupuesto_max: data.precio,
+        fuente: 'web-reserva-contra-entrega',
+        estado: 'pendiente_pago',
+        notas: 'Opción: contra entrega. Pagará al recibir el CEE.'
+      })
+    });
+
+    if (!res.ok) {
+      var errText = await res.text();
+      console.error('Error guardando lead CE:', errText);
+      mostrarErrorReserva('Error al enviar la solicitud. Inténtalo de nuevo.');
+      btn.classList.remove('cargando');
+      btn.disabled = false;
+      return;
+    }
+
+    // Mostrar éxito
+    document.getElementById('reserva-form').style.display = 'none';
+    document.getElementById('reserva-success-ce').style.display = 'block';
+  } catch (e) {
+    console.error('Error en solicitud sin pago:', e);
+    mostrarErrorReserva('Error de conexión. Inténtalo de nuevo.');
+    btn.classList.remove('cargando');
+    btn.disabled = false;
+  }
+}
 
 async function iniciarPago() {
   var nombre = document.getElementById('reserva-nombre').value.trim();
