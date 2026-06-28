@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chat — CertificadoYa</title>
+  <meta name="robots" content="noindex, nofollow">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <script data-goatcounter="https://certificadoya.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
+  <style>
+    *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+    body {
+      font-family: Outfit, -apple-system, sans-serif;
+      background: #f0f2ee; min-height: 100vh;
+      display: flex; flex-direction: column;
+    }
+    .header {
+      background: #1a2e0f; color: #d4edc9; padding: 14px 20px;
+      font-size: .85rem; text-align: center;
+    }
+    .header strong { color: #fff; }
+    .chat-container {
+      max-width: 500px; margin: 0 auto; width: 100%;
+      flex: 1; display: flex; flex-direction: column;
+    }
+    .chat-header {
+      background: #fff; padding: 16px 20px;
+      border-bottom: 1px solid #e5e7eb;
+    }
+    .chat-header h1 { font-size: 1rem; font-weight: 600; color: #1a1a1a; }
+    .chat-header p { font-size: .82rem; color: #6b7280; margin-top: 4px; }
+    .chat-messages {
+      flex: 1; overflow-y: auto; padding: 16px 20px;
+      display: flex; flex-direction: column; gap: 10px;
+      background: #f5f7f2;
+    }
+    .chat-msg {
+      max-width: 85%; padding: 10px 14px; border-radius: 12px;
+      font-size: .9rem; line-height: 1.45;
+    }
+    .chat-msg.tecnico {
+      align-self: flex-start; background: #e8f5e9; color: #1a1a1a;
+      border-bottom-left-radius: 4px;
+    }
+    .chat-msg.cliente {
+      align-self: flex-end; background: #16a34a; color: #fff;
+      border-bottom-right-radius: 4px;
+    }
+    .chat-msg .msg-time {
+      display: block; font-size: .7rem; opacity: .65; margin-top: 4px;
+    }
+    .chat-msg.cliente .msg-time { color: #d4f5d4; }
+    .chat-input-area {
+      display: flex; gap: 8px; padding: 12px 16px;
+      border-top: 1px solid #e5e7eb;
+      background: #fff;
+    }
+    .chat-input-area input {
+      flex: 1; padding: 12px 16px; border: 1px solid #d1d5db;
+      border-radius: 24px; font-size: .9rem; outline: none; font-family: inherit;
+    }
+    .chat-input-area input:focus { border-color: #16a34a; }
+    .chat-input-area button {
+      background: #16a34a; color: #fff; border: none;
+      border-radius: 50%; width: 44px; height: 44px;
+      font-size: 1.2rem; cursor: pointer; display: flex;
+      align-items: center; justify-content: center;
+      flex-shrink: 0;
+    }
+    .chat-input-area button:disabled { opacity: .5; cursor: default; }
+    .chat-empty { text-align: center; padding: 60px 20px; color: #6b7280; line-height: 1.6; }
+    .chat-loading { text-align: center; padding: 40px; color: #6b7280; }
+    .error-msg { text-align: center; padding: 60px 20px; color: #991b1b; }
+    .error-msg h2 { margin-bottom: 8px; font-size: 1.1rem; }
+  </style>
+</head>
+<body>
+  <div class="header">
+    💬 <strong>CertificadoYa</strong> · Comunicación con tu técnico
+  </div>
+  <div class="chat-container">
+    <div class="chat-header">
+      <h1 id="chatTitle">Chat con tu técnico</h1>
+      <p id="chatSubtitle">Mensajes sobre tu certificado energético</p>
+    </div>
+    <div class="chat-messages" id="chatMessages">
+      <div class="chat-loading">Conectando…</div>
+    </div>
+    <div class="chat-input-area" id="chatInputArea" style="display:none">
+      <input type="text" id="chatInput" placeholder="Escribe tu respuesta…"
+             onkeydown="if(event.key==='Enter')enviarMensaje()">
+      <button id="chatSendBtn" onclick="enviarMensaje()" disabled>➤</button>
+    </div>
+  </div>
+
+  <script>
+    const EDGE_FUNCTION_URL = 'https://wypgqpgjlookbhuaiyxa.supabase.co/functions/v1';
+
+    function getEncargoId() {
+      const params = new URLSearchParams(window.location.search);
+      return params.get('encargo');
+    }
+
+    async function cargarMensajes() {
+      const encargoId = getEncargoId();
+      if (!encargoId) {
+        document.getElementById('chatMessages').innerHTML =
+          '<div class="error-msg"><h2>🔗 Enlace inválido</h2><p>No se encontró el código del encargo. Revisa el enlace que recibiste por email.</p></div>';
+        return;
+      }
+
+      const container = document.getElementById('chatMessages');
+      try {
+        const res = await fetch(EDGE_FUNCTION_URL + '/mensajes-encargo?encargo_id=' + encargoId);
+        const data = await res.json();
+
+        if (!data.success) {
+          container.innerHTML = '<div class="error-msg"><h2>Error</h2><p>No pudimos cargar los mensajes. Inténtalo de nuevo.</p></div>';
+          return;
+        }
+
+        if (!data.mensajes || data.mensajes.length === 0) {
+          container.innerHTML = '<div class="chat-empty">💬 Aún no hay mensajes.<br>Cuando tu técnico te escriba, aparecerán aquí.</div>';
+          document.getElementById('chatInputArea').style.display = 'none';
+          return;
+        }
+
+        container.innerHTML = data.mensajes.map(m => {
+          const esTecnico = m.de_tecnico === true;
+          const hora = new Date(m.created_at).toLocaleString('es-ES', {
+            day: 'numeric', month: 'short', hour: '2-digit', minute: '2-digit'
+          });
+          return `<div class="chat-msg ${esTecnico ? 'tecnico' : 'cliente'}">
+            ${m.mensaje}
+            <span class="msg-time">${esTecnico ? 'Técnico' : 'Tú'} · ${hora}</span>
+          </div>`;
+        }).join('');
+
+        container.scrollTop = container.scrollHeight;
+        document.getElementById('chatInputArea').style.display = 'flex';
+      } catch (err) {
+        container.innerHTML = '<div class="error-msg"><h2>Error de conexión</h2><p>Verifica tu conexión a internet y recarga la página.</p></div>';
+      }
+    }
+
+    async function enviarMensaje() {
+      const encargoId = getEncargoId();
+      const input = document.getElementById('chatInput');
+      const btn = document.getElementById('chatSendBtn');
+      const texto = input.value.trim();
+      if (!texto || !encargoId) return;
+
+      btn.disabled = true;
+      try {
+        const res = await fetch(EDGE_FUNCTION_URL + '/mensajes-encargo', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            encargo_id: encargoId,
+            mensaje: texto,
+            de_tecnico: false
+          })
+        });
+        const data = await res.json();
+        if (!data.success) { alert('Error al enviar'); btn.disabled = false; return; }
+
+        input.value = '';
+        input.focus();
+        await cargarMensajes();
+      } catch (err) {
+        alert('Error de conexión');
+      }
+      btn.disabled = false;
+    }
+
+    document.addEventListener('DOMContentLoaded', function() {
+      cargarMensajes();
+      const input = document.getElementById('chatInput');
+      if (input) {
+        input.addEventListener('input', function() {
+          document.getElementById('chatSendBtn').disabled = !this.value.trim();
+        });
+      }
+    });
+  </script>
+</body>
+</html>
