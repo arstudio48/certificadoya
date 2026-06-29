@@ -1,27 +1,58 @@
-name: Deploy a GitHub Pages
+# GitHub Actions Workflow: Auto-minify and deploy certificadoya.es
+
+name: Auto-minify & Deploy
 
 on:
   push:
-    branches:
-      - main
-
-permissions:
-  contents: write
+    branches: [ main ]
 
 jobs:
-  deploy:
+  build-and-deploy:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout
+      - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: Desplegar en gh-pages
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Install dependencies
         run: |
-          git fetch origin gh-pages 2>/dev/null || true
-          git checkout gh-pages 2>/dev/null || git checkout --orphan gh-pages
-          git checkout main -- .
-          git config user.name "CertificadoYa Bot"
-          git config user.email "bot@certificadoya.es"
-          git add -A
-          git diff --cached --quiet || git commit -m "deploy: $(date +'%Y-%m-%d %H:%M')"
-          git push origin gh-pages
+          npm install -g html-minifier clean-css-cli
+
+      - name: Minify HTML
+        run: |
+          html-minifier \
+            --collapse-whitespace \
+            --remove-comments \
+            --remove-optional-tags \
+            --remove-redundant-attributes \
+            --remove-script-type-attributes \
+            --remove-tag-whitespace \
+            --use-short-doctype \
+            --minify-css true \
+            --minify-js true \
+            index.html -o index.min.html
+          mv index.min.html index.html
+
+      - name: Minify CSS
+        run: |
+          clean-css-cli style.css -o style.min.css
+          mv style.min.css style.css
+
+      - name: Deploy to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v4
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./
+          publish_branch: gh-pages
+          keep_files: true
+          force_orphan: true
+
+      - name: Notify on success
+        run: |
+          echo "✅ Deploy successful!"
+          echo "🌐 Site: https://certificadoya.es"
+          echo "⚡ Speed: https://pagespeed.web.dev/report?id=https://certificadoya.es"
