@@ -1,0 +1,95 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500" role="img" aria-label="Piscina residencial y etiqueta energética">
+  <defs>
+    <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#bce7ff"/>
+      <stop offset="100%" stop-color="#e7f7ff"/>
+    </linearGradient>
+    <linearGradient id="water" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#4aa8d8"/>
+      <stop offset="50%" stop-color="#2c7eb5"/>
+      <stop offset="100%" stop-color="#1d5b8a"/>
+    </linearGradient>
+    <linearGradient id="deck" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#e6d3a8"/>
+      <stop offset="100%" stop-color="#c9b07d"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Cielo -->
+  <rect width="800" height="280" fill="url(#sky)"/>
+
+  <!-- Sol -->
+  <circle cx="650" cy="90" r="40" fill="#ffd166"/>
+  <g stroke="#ffd166" stroke-width="3" stroke-linecap="round">
+    <line x1="650" y1="30" x2="650" y2="20"/>
+    <line x1="650" y1="160" x2="650" y2="150"/>
+    <line x1="710" y1="90" x2="720" y2="90"/>
+    <line x1="580" y1="90" x2="590" y2="90"/>
+    <line x1="694" y1="46" x2="701" y2="39"/>
+    <line x1="599" y1="141" x2="606" y2="134"/>
+    <line x1="694" y1="134" x2="701" y2="141"/>
+    <line x1="599" y1="39" x2="606" y2="46"/>
+  </g>
+
+  <!-- Palmeras / decoración fondo -->
+  <g fill="#3a8b5e">
+    <ellipse cx="60" cy="270" rx="35" ry="15"/>
+    <ellipse cx="80" cy="260" rx="30" ry="12"/>
+    <ellipse cx="40" cy="265" rx="30" ry="12"/>
+  </g>
+  <rect x="55" y="265" width="10" height="35" fill="#7a5230"/>
+
+  <g fill="#3a8b5e">
+    <ellipse cx="745" cy="270" rx="35" ry="15"/>
+    <ellipse cx="725" cy="260" rx="30" ry="12"/>
+    <ellipse cx="765" cy="265" rx="30" ry="12"/>
+  </g>
+  <rect x="740" y="265" width="10" height="35" fill="#7a5230"/>
+
+  <!-- Tarima / deck -->
+  <rect x="0" y="280" width="800" height="60" fill="url(#deck)"/>
+  <g stroke="#a08555" stroke-width="1" opacity="0.5">
+    <line x1="0" y1="295" x2="800" y2="295"/>
+    <line x1="0" y1="310" x2="800" y2="310"/>
+    <line x1="0" y1="325" x2="800" y2="325"/>
+  </g>
+
+  <!-- Piscina -->
+  <rect x="100" y="340" width="600" height="140" rx="10" fill="url(#water)"/>
+  <rect x="100" y="340" width="600" height="140" rx="10" fill="none" stroke="#0f3d5e" stroke-width="3"/>
+
+  <!-- Olas en piscina -->
+  <g fill="none" stroke="#a4d4ec" stroke-width="2" opacity="0.7">
+    <path d="M 120 380 Q 150 372 180 380 T 240 380 T 300 380 T 360 380 T 420 380 T 480 380 T 540 380 T 600 380 T 660 380"/>
+    <path d="M 120 410 Q 150 402 180 410 T 240 410 T 300 410 T 360 410 T 420 410 T 480 410 T 540 410 T 600 410 T 660 410"/>
+    <path d="M 120 440 Q 150 432 180 440 T 240 440 T 300 440 T 360 440 T 420 440 T 480 440 T 540 440 T 600 440 T 660 440"/>
+  </g>
+
+  <!-- Borde piscina (borde superior) -->
+  <rect x="90" y="335" width="620" height="8" fill="#e8e3d5" stroke="#a8a194" stroke-width="1"/>
+
+  <!-- Etiqueta energética flotante -->
+  <g transform="translate(330,40)">
+    <rect width="140" height="200" rx="10" fill="#ffffff" stroke="#1a3a5c" stroke-width="2"/>
+    <text x="70" y="28" text-anchor="middle" font-family="Arial, sans-serif" font-size="13" font-weight="700" fill="#1a3a5c">ENERGÍA</text>
+    <text x="70" y="44" text-anchor="middle" font-family="Arial, sans-serif" font-size="9" fill="#1a3a5c">kWh / m² año</text>
+    <!-- Letras A-G con colores oficiales -->
+    <rect x="15" y="55" width="110" height="18" fill="#1ba84a"/>
+    <text x="70" y="69" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" font-weight="700" fill="#fff">A</text>
+    <rect x="15" y="75" width="110" height="18" fill="#3ec06c"/>
+    <text x="70" y="89" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" font-weight="700" fill="#fff">B</text>
+    <rect x="15" y="95" width="110" height="18" fill="#fcdb00"/>
+    <text x="70" y="109" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" font-weight="700" fill="#000">C</text>
+    <rect x="15" y="115" width="110" height="18" fill="#f3b51a"/>
+    <text x="70" y="129" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" font-weight="700" fill="#fff">D</text>
+    <rect x="15" y="135" width="110" height="18" fill="#e97824"/>
+    <text x="70" y="149" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" font-weight="700" fill="#fff">E</text>
+    <rect x="15" y="155" width="110" height="18" fill="#d44a1c"/>
+    <text x="70" y="169" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" font-weight="700" fill="#fff">F</text>
+    <rect x="15" y="175" width="110" height="18" fill="#c61818"/>
+    <text x="70" y="189" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" font-weight="700" fill="#fff">G</text>
+  </g>
+
+  <!-- Título discreto abajo -->
+  <text x="400" y="495" text-anchor="middle" font-family="Arial, sans-serif" font-size="11" fill="#5a6a7e" font-style="italic">Certificado Energético y Piscina</text>
+</svg>
