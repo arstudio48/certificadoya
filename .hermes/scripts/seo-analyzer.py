@@ -137,14 +137,3 @@ for k, v in REPORT.items():
 score = round((1 - bad / max(len(REPORT), 1)) * 100)
 REPORT["score"] = score
 REPORT["timestamp"] = datetime.now().isoformat()
-
-print(f"\n🏆 Puntuación SEO técnica: {score}/100")
-
-# Save
-with open("/home/arturo/.hermes/home/seo-report.json", "w") as f:
-    json.dump(REPORT, f, indent=2)
-print("\n✅ Informe guardado en ~/.hermes/home/seo-report.json")
-
-# Output for cron delivery
-if score < 70:
-    print(f"\n⚠️  ALERTA: Puntuación baja ({score}). Revisar issues.")
