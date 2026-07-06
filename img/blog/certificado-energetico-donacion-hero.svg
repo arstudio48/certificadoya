@@ -1,0 +1,70 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#f8faf5"/>
+      <stop offset="100%" stop-color="#e8f0dc"/>
+    </linearGradient>
+    <linearGradient id="accent" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#547c24"/>
+      <stop offset="100%" stop-color="#3d5a1e"/>
+    </linearGradient>
+  </defs>
+  <rect width="800" height="500" fill="url(#bg)"/>
+  
+  <!-- Document icon -->
+  <g transform="translate(320, 100)">
+    <rect x="0" y="0" width="160" height="200" rx="8" fill="white" stroke="#dce8d0" stroke-width="2"/>
+    <rect x="20" y="30" width="100" height="8" rx="2" fill="#e8f0dc"/>
+    <rect x="20" y="50" width="80" height="8" rx="2" fill="#e8f0dc"/>
+    <rect x="20" y="70" width="120" height="8" rx="2" fill="#e8f0dc"/>
+    <rect x="20" y="100" width="60" height="8" rx="2" fill="#547c24" opacity="0.3"/>
+    <rect x="20" y="120" width="90" height="8" rx="2" fill="#e8f0dc"/>
+    <rect x="20" y="140" width="70" height="8" rx="2" fill="#e8f0dc"/>
+    
+    <!-- Green checkmark -->
+    <circle cx="130" cy="170" r="20" fill="url(#accent)"/>
+    <path d="M120 170 L128 178 L142 162" stroke="white" stroke-width="3" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+  </g>
+  
+  <!-- House icon -->
+  <g transform="translate(100, 180)">
+    <path d="M75 0 L150 60 L150 120 L0 120 L0 60 Z" fill="#547c24" opacity="0.15"/>
+    <path d="M75 10 L140 60 L140 110 L10 110 L10 60 Z" fill="white" stroke="#547c24" stroke-width="2"/>
+    <rect x="55" y="70" width="40" height="40" fill="#547c24" opacity="0.3" rx="2"/>
+    <rect x="20" y="40" width="30" height="25" fill="#547c24" opacity="0.2" rx="2"/>
+    <rect x="100" y="40" width="30" height="25" fill="#547c24" opacity="0.2" rx="2"/>
+  </g>
+  
+  <!-- Heart/donation symbol -->
+  <g transform="translate(580, 200)">
+    <path d="M60 30 C60 10, 30 0, 15 15 C0 0, -30 10, 15 40 L60 80 L105 40 C150 10, 120 0, 105 15 C90 0, 60 10, 60 30Z" fill="#547c24" opacity="0.2"/>
+    <path d="M60 35 C60 20, 35 10, 22 22 C9 10, -16 20, 22 45 L60 78 L98 45 C136 20, 111 10, 98 22 C85 10, 60 20, 60 35Z" fill="#547c24" opacity="0.4"/>
+  </g>
+  
+  <!-- Energy label -->
+  <g transform="translate(550, 50)">
+    <rect x="0" y="0" width="80" height="120" rx="6" fill="white" stroke="#dce8d0" stroke-width="1.5"/>
+    <rect x="8" y="8" width="64" height="14" rx="3" fill="#2d8a4e"/>
+    <text x="40" y="19" text-anchor="middle" fill="white" font-family="Arial,sans-serif" font-size="10" font-weight="bold">A</text>
+    <rect x="8" y="26" width="64" height="14" rx="3" fill="#547c24"/>
+    <text x="40" y="37" text-anchor="middle" fill="white" font-family="Arial,sans-serif" font-size="10" font-weight="bold">B</text>
+    <rect x="8" y="44" width="64" height="14" rx="3" fill="#8fb83e"/>
+    <text x="40" y="55" text-anchor="middle" fill="white" font-family="Arial,sans-serif" font-size="10" font-weight="bold">C</text>
+    <rect x="8" y="62" width="64" height="14" rx="3" fill="#c4a632"/>
+    <text x="40" y="73" text-anchor="middle" fill="white" font-family="Arial,sans-serif" font-size="10" font-weight="bold">D</text>
+    <rect x="8" y="80" width="64" height="14" rx="3" fill="#d97706"/>
+    <text x="40" y="91" text-anchor="middle" fill="white" font-family="Arial,sans-serif" font-size="10" font-weight="bold">E</text>
+    <rect x="8" y="98" width="64" height="14" rx="3" fill="#c0392b"/>
+    <text x="40" y="109" text-anchor="middle" fill="white" font-family="Arial,sans-serif" font-size="10" font-weight="bold">F</text>
+  </g>
+  
+  <!-- Text -->
+  <text x="400" y="380" text-anchor="middle" font-family="Arial,sans-serif" font-size="28" fill="#1a3a0a" font-weight="bold">Certificado Energético</text>
+  <text x="400" y="415" text-anchor="middle" font-family="Arial,sans-serif" font-size="22" fill="#547c24">y Donaciones</text>
+  <text x="400" y="450" text-anchor="middle" font-family="Arial,sans-serif" font-size="14" fill="#6b7b5e">Guía completa 2026</text>
+  
+  <!-- Decorative dots -->
+  <circle cx="50" cy="50" r="4" fill="#547c24" opacity="0.2"/>
+  <circle cx="750" cy="450" r="6" fill="#547c24" opacity="0.15"/>
+  <circle cx="700" cy="80" r="3" fill="#547c24" opacity="0.25"/>
+</svg>
