@@ -1,0 +1,29 @@
+<svg viewBox="0 0 800 450" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="g1" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#1a5c2a;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#2d8a4e;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+  <rect width="800" height="450" fill="url(#g1)" rx="12"/>
+  <rect x="50" y="60" width="160" height="330" rx="8" fill="rgba(255,255,255,0.15)"/>
+  <rect x="70" y="80" width="120" height="40" rx="4" fill="#22c55e"/>
+  <text x="130" y="107" font-family="Outfit,sans-serif" font-size="20" font-weight="bold" fill="#fff" text-anchor="middle">A</text>
+  <rect x="70" y="130" width="120" height="40" rx="4" fill="#4ade80"/>
+  <text x="130" y="157" font-family="Outfit,sans-serif" font-size="20" font-weight="bold" fill="#fff" text-anchor="middle">B</text>
+  <rect x="70" y="180" width="120" height="40" rx="4" fill="#a3e635"/>
+  <text x="130" y="207" font-family="Outfit,sans-serif" font-size="20" font-weight="bold" fill="#fff" text-anchor="middle">C</text>
+  <rect x="70" y="230" width="120" height="40" rx="4" fill="#facc15"/>
+  <text x="130" y="257" font-family="Outfit,sans-serif" font-size="20" font-weight="bold" fill="#fff" text-anchor="middle">D</text>
+  <rect x="70" y="280" width="120" height="40" rx="4" fill="#fb923c"/>
+  <text x="130" y="307" font-family="Outfit,sans-serif" font-size="20" font-weight="bold" fill="#fff" text-anchor="middle">E</text>
+  <rect x="70" y="330" width="120" height="40" rx="4" fill="#ef4444"/>
+  <text x="130" y="357" font-family="Outfit,sans-serif" font-size="20" font-weight="bold" fill="#fff" text-anchor="middle">F</text>
+  <rect x="70" y="380" width="120" height="40" rx="4" fill="#dc2626"/>
+  <text x="130" y="407" font-family="Outfit,sans-serif" font-size="20" font-weight="bold" fill="#fff" text-anchor="middle">G</text>
+  <circle cx="450" cy="180" r="80" fill="rgba(255,255,255,0.1)" stroke="rgba(255,255,255,0.3)" stroke-width="3"/>
+  <text x="450" y="195" font-family="Outfit,sans-serif" font-size="80" fill="#fff" text-anchor="middle">✓</text>
+  <text x="450" y="280" font-family="Outfit,sans-serif" font-size="28" font-weight="700" fill="#fff" text-anchor="middle">CERTIFICADO ENERGÉTICO</text>
+  <text x="450" y="315" font-family="Outfit,sans-serif" font-size="18" fill="rgba(255,255,255,0.8)" text-anchor="middle">Obligatorio para vender o alquilar en 2026</text>
+  <text x="450" y="350" font-family="Outfit,sans-serif" font-size="14" fill="rgba(255,255,255,0.6)" text-anchor="middle">Multas desde 300€ hasta 6.000€</text>
+</svg>
