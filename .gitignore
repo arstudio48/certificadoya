@@ -27,3 +27,4 @@ media-cxs/
 .netlify
 .aider*
 .env.supabase
+hermes-estado/
