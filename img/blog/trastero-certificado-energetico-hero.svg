@@ -1,0 +1,68 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500">
+  <defs>
+    <linearGradient id="wallGrad" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#e8e0d5"/>
+      <stop offset="100%" stop-color="#d4c9b8"/>
+    </linearGradient>
+    <linearGradient id="floorGrad" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#9e9688"/>
+      <stop offset="100%" stop-color="#7a7165"/>
+    </linearGradient>
+    <linearGradient id="ceilingGrad" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#c4bab0"/>
+      <stop offset="100%" stop-color="#b0a69c"/>
+    </linearGradient>
+    <filter id="shadow">
+      <feDropShadow dx="2" dy="4" stdDeviation="4" flood-opacity="0.15"/>
+    </filter>
+  </defs>
+  <!-- Ceiling -->
+  <rect x="0" y="0" width="800" height="60" fill="url(#ceilingGrad)"/>
+  <!-- Light fixture -->
+  <rect x="360" y="10" width="80" height="30" rx="4" fill="#f5f0e8" opacity="0.85"/>
+  <rect x="375" y="12" width="50" height="26" rx="3" fill="#fff9e0" opacity="0.7"/>
+  <!-- Walls -->
+  <rect x="0" y="60" width="800" height="320" fill="url(#wallGrad)"/>
+  <!-- Floor -->
+  <rect x="0" y="380" width="800" height="120" fill="url(#floorGrad)"/>
+  <line x1="0" y1="380" x2="800" y2="380" stroke="#a09585" stroke-width="1"/>
+  <!-- Door outline on right wall -->
+  <rect x="680" y="100" width="90" height="280" rx="3" fill="#c4b8a8" stroke="#b0a290" stroke-width="2"/>
+  <circle cx="760" cy="240" r="5" fill="#8a8070"/>
+  <!-- Shelving unit left -->
+  <rect x="50" y="120" width="180" height="260" fill="none" stroke="#b0a290" stroke-width="2.5" rx="1"/>
+  <!-- Shelf levels -->
+  <line x1="50" y1="180" x2="230" y2="180" stroke="#c0b5a0" stroke-width="2"/>
+  <line x1="50" y1="230" x2="230" y2="230" stroke="#c0b5a0" stroke-width="2"/>
+  <line x1="50" y1="280" x2="230" y2="280" stroke="#c0b5a0" stroke-width="2"/>
+  <!-- Boxes on shelves -->
+  <rect x="60" y="145" width="55" height="35" rx="2" fill="#d4956b" stroke="#c08055" stroke-width="1.5" filter="url(#shadow)"/>
+  <rect x="130" y="150" width="45" height="30" rx="2" fill="#e8d8c0" stroke="#d0c0a0" stroke-width="1" filter="url(#shadow)"/>
+  <rect x="55" y="195" width="65" height="35" rx="2" fill="#c0c0b8" stroke="#a8a8a0" stroke-width="1.5" filter="url(#shadow)"/>
+  <rect x="140" y="200" width="50" height="30" rx="2" fill="#f0e0c8" stroke="#d8c8a0" stroke-width="1" filter="url(#shadow)"/>
+  <rect x="65" y="250" width="40" height="30" rx="2" fill="#b8d0c0" stroke="#a0c0a8" stroke-width="1.5" filter="url(#shadow)"/>
+  <rect x="130" y="245" width="60" height="35" rx="2" fill="#e0d0c0" stroke="#c8b8a0" stroke-width="1" filter="url(#shadow)"/>
+  <!-- Floor boxes -->
+  <rect x="250" y="340" width="70" height="40" rx="3" fill="#d4956b" stroke="#c08055" stroke-width="1.5" filter="url(#shadow)"/>
+  <rect x="340" y="345" width="55" height="35" rx="3" fill="#f0e0c8" stroke="#d8c8a0" stroke-width="1" filter="url(#shadow)"/>
+  <rect x="410" y="338" width="80" height="42" rx="3" fill="#c0c0b8" stroke="#a8a8a0" stroke-width="1.5" filter="url(#shadow)"/>
+  <!-- Bicycle -->
+  <g transform="translate(530,250)">
+    <circle cx="30" cy="105" r="30" fill="none" stroke="#606060" stroke-width="4"/>
+    <circle cx="90" cy="105" r="30" fill="none" stroke="#606060" stroke-width="4"/>
+    <line x1="30" y1="105" x2="60" y2="75" stroke="#505050" stroke-width="3"/>
+    <line x1="90" y1="105" x2="60" y2="75" stroke="#505050" stroke-width="3"/>
+    <line x1="60" y1="75" x2="60" y2="40" stroke="#505050" stroke-width="3"/>
+    <line x1="30" y1="105" x2="90" y2="105" stroke="#606060" stroke-width="2.5"/>
+    <!-- handlebar -->
+    <line x1="55" y1="40" x2="75" y2="35" stroke="#505050" stroke-width="3"/>
+    <!-- seat -->
+    <line x1="55" y1="40" x2="50" y2="30" stroke="#404040" stroke-width="6"/>
+    <!-- pedals hint -->
+    <circle cx="60" cy="105" r="8" fill="none" stroke="#606060" stroke-width="2.5"/>
+  </g>
+  <!-- Light cone from ceiling -->
+  <polygon points="375,40 250,500 550,500" fill="#fff8e0" opacity="0.06"/>
+  <!-- Subtle label -->
+  <text x="400" y="480" text-anchor="middle" font-family="DM Sans, system-ui, sans-serif" font-size="14" fill="#a09585" opacity="0.6">Trastero en edificio residencial — ¿necesita CEE?</text>
+</svg>

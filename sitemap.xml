@@ -863,6 +863,12 @@
     <lastmod>2026-07-08</lastmod>
   </url>
   <url>
+    <loc>https://www.certificadoya.es/blog/certificado-energetico-inmobiliarias.html</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <lastmod>2026-07-08</lastmod>
+  </url>
+  <url>
     <loc>https://www.certificadoya.es/blog/auditor-energetico-alicante.html</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
@@ -1055,9 +1061,15 @@
     <lastmod>2026-07-04</lastmod>
   </url>
   <url>
-    <loc>https://www.certificadoya.es/blog/certificado-energetico-donacion.html</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-    <lastmod>2026-07-06</lastmod>
-  </url>
-</urlset>
+      <loc>https://www.certificadoya.es/blog/certificado-energetico-donacion.html</loc>
+      <changefreq>monthly</changefreq>
+      <priority>0.8</priority>
+      <lastmod>2026-07-06</lastmod>
+    </url>
+    <url>
+      <loc>https://www.certificadoya.es/blog/trastero-certificado-energetico.html</loc>
+      <changefreq>monthly</changefreq>
+      <priority>0.8</priority>
+      <lastmod>2026-07-13</lastmod>
+    </url>
+  </urlset>
