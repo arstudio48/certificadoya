@@ -28,3 +28,36 @@ media-cxs/
 .aider*
 .env.supabase
 hermes-estado/
+
+# ============================================================
+# Bloque defensivo añadido 2026-07-18 — evitar fugas por git add -A
+# ============================================================
+
+# Secretos y claves — cualquier variante en cualquier ruta
+**/service_key*
+**/keys.json
+**/*_key*.txt
+**/*_key*.json
+**/*nvkey*
+**/*.pem
+**/*.tok
+**/*.token
+**/.env
+**/.env.*
+!**/.env.example
+
+# Scripts temporales / scratch
+_*.py
+_*.json
+_*.txt
+_*.md
+scratch/
+_scratch/
+
+# Directorio de Hermes local
+.hermes/
+
+# Migraciones huérfanas fuera del flujo principal
+# (comentar si supabase/migrations/ es legítimo — verificar antes)
+# supabase/migrations/*.sql
+
