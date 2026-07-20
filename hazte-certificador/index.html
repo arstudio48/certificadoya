@@ -290,6 +290,13 @@ h1 span{color:var(--verde)}
           </select>
         </div>
         <div class="grupo">
+          <label style="display:flex;align-items:center;gap:10px;cursor:pointer;color:var(--texto);text-transform:none;letter-spacing:0;font-family:'DM Sans',sans-serif;font-size:15px">
+            <input type="checkbox" id="es_fp" name="es_fp" style="width:auto;flex-shrink:0;accent-color:var(--verde)">
+            Soy Formación Profesional (CFGS / Grado Medio-Superior en edificación o energía)
+          </label>
+          <p style="color:var(--texto-atenuado);font-size:13px;margin:8px 0 0">Si marcas esto, tu alta queda como <strong style="color:var(--oro)">pre-alta FP</strong>: te avisamos y activamos encargos cuando el RD 659/2025 permita que firmes CEE (final de mes / según noticias oficiales).</p>
+        </div>
+        <div class="grupo">
           <label for="mensaje">Comentarios (opcional)</label>
           <textarea id="mensaje" name="mensaje" placeholder="Software que usas, experiencia previa, dudas&hellip;"></textarea>
         </div>
@@ -315,7 +322,7 @@ const URL_F='https://wypgqpgjlookbhuaiyxa.supabase.co/functions/v1/alta-tecnico'
 form.addEventListener('submit',async(e)=>{
   e.preventDefault();btn.disabled=true;btn.textContent='Enviando...';
   msg.className='mensaje';msg.textContent='';
-  const d={nombre:document.getElementById('nombre').value.trim(),email:document.getElementById('email').value.trim().toLowerCase(),telefono:document.getElementById('telefono').value.trim(),provincia:document.getElementById('provincia').value,titulacion:document.getElementById('titulacion').value,modulos:document.getElementById('modulos').value,mensaje:document.getElementById('mensaje').value.trim(),origen:window.location.href,fecha:new Date().toISOString()};
+  const d={nombre:document.getElementById('nombre').value.trim(),email:document.getElementById('email').value.trim().toLowerCase(),telefono:document.getElementById('telefono').value.trim(),provincia:document.getElementById('provincia').value,titulacion:document.getElementById('titulacion').value,modulos:document.getElementById('modulos').value,es_fp:document.getElementById('es_fp').checked,mensaje:document.getElementById('mensaje').value.trim(),origen:window.location.href,fecha:new Date().toISOString()};
   try{
     const r=await fetch(URL_F,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(d)});
     const j=await r.json();

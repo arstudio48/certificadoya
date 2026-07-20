@@ -22,6 +22,7 @@ interface DatosAlta {
   provincia: string;
   titulacion: string;
   modulos: string;
+  es_fp?: boolean;
   mensaje?: string;
   origen?: string;
   fecha?: string;
@@ -178,6 +179,8 @@ serve(async (peticion) => {
         provincia: datos.provincia,
         titulacion: datos.titulacion,
         modulos_rd659: datos.modulos,
+        es_fp: datos.es_fp === true || datos.es_fp === "true" || datos.es_fp === "on",
+        puede_ejercer: false,
         mensaje: datos.mensaje || null,
         origen: datos.origen || null,
         token_confirmacion: token,

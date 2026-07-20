@@ -554,6 +554,7 @@
       <button class="filter-btn" data-tec-filtro="pendientes">Pendientes</button>
       <button class="filter-btn" data-tec-filtro="activos">Activos</button>
       <button class="filter-btn" data-tec-filtro="rechazados">Rechazados</button>
+      <button class="filter-btn" data-tec-filtro="fp">🎓 FP</button>
     </div>
     <div class="table-wrapper">
       <table>
@@ -565,13 +566,14 @@
             <th>Teléfono</th>
             <th>Titulación</th>
             <th>Provincia</th>
+            <th>FP</th>
             <th>Estado</th>
             <th>Registro</th>
             <th>Acción</th>
           </tr>
         </thead>
         <tbody id="tecnicos-tbody">
-          <tr><td colspan="9" class="loading">Cargando técnicos...</td></tr>
+          <tr><td colspan="10" class="loading">Cargando técnicos...</td></tr>
         </tbody>
       </table>
     </div>
@@ -910,7 +912,12 @@
     var tbody = document.getElementById('tecnicos-tbody');
     var countEl = document.getElementById('tecnicos-count');
 
-    countEl.textContent = tecnicosData.length;
+    var datosFiltrados = tecnicosData;
+    if (tecnicosFilter === 'fp') {
+      datosFiltrados = tecnicosData.filter(function(t) { return t.es_fp === true; });
+    }
+
+    countEl.textContent = datosFiltrados.length;
 
     if (tecnicosData.length === 0) {
       tbody.innerHTML = '<tr><td colspan="9" class="empty-state">No hay técnicos' +
@@ -918,7 +925,7 @@
       return;
     }
 
-    tbody.innerHTML = tecnicosData.map(function(t) {
+    tbody.innerHTML = datosFiltrados.map(function(t) {
       var fecha = t.created_at || t.fecha || t.registro || '';
       var fDisplay = fecha ? fecha.slice(0, 10) + ' ' + fecha.slice(11, 16) : '—';
       var titulacion = t.titulacion || t.profesion || '—';
@@ -945,6 +952,7 @@
         '<td>' + escHtml(t.telefono || '—') + '</td>' +
         '<td>' + escHtml(titulacion) + '</td>' +
         '<td>' + escHtml(provincias) + '</td>' +
+        '<td>' + (t.es_fp === true ? '<span style="color:#C9903A;font-weight:600">🎓 SÍ</span>' : '—') + '</td>' +
         '<td><span class="status-badge ' + estadoClass + '">' + estadoLabel + '</span></td>' +
         '<td>' + fDisplay + '</td>' +
         '<td style="white-space:nowrap">' +

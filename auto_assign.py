@@ -150,13 +150,15 @@ def mail_admin_asignado(lead, tecnico):
 
 
 def obtener_tecnicos_por_zona(prefijo_cp: str) -> list:
-    """Busca técnicos verificados y activos que cubran este prefijo CP (3 dígitos)"""
-    result = supabase.table('tecnicos').select('*') \
-        .eq('verificado', True) \
-        .eq('activo', True) \
-        .contains('cp_cobertura', [prefijo_cp]) \
-        .execute()
-    return result.data or []
+    """Busca técnicos verificados y activos que cubran este prefijo CP (3 dígitos).
+    REGLA FP (RD 659/2025): los técnicos es_fp=true NO reciben leads hasta que
+    puedan ejercer legalmente (puede_ejercer=false -> se excluyen)."""
+    result = supabase.table('tecnicos').select('*')         .eq('verificado', True)         .eq('activo', True)         .contains('cp_cobertura', [prefijo_cp])         .execute()
+    tecnicos = result.data or []
+    filtrados = [t for t in tecnicos if not (t.get('es_fp') is True and t.get('puede_ejercer') is not True)]
+    if len(filtrados) != len(tecnicos):
+        print(f"  i  {len(tecnicos)-len(filtrados)} tecnico(s) FP excluido(s) por no poder ejercer aun (RD 659/2025)")
+    return filtrados
 
 
 def asignar_leads(dry_run: bool = False):

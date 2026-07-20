@@ -1,0 +1,77 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#1a3a5c"/>
+      <stop offset="100%" stop-color="#2d6a4f"/>
+    </linearGradient>
+    <linearGradient id="card" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#ffffff"/>
+      <stop offset="100%" stop-color="#f0f4f0"/>
+    </linearGradient>
+    <linearGradient id="gold" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#f0c040"/>
+      <stop offset="100%" stop-color="#d4a020"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Background -->
+  <rect width="800" height="500" fill="url(#bg)"/>
+
+  <!-- Abstract building silhouette -->
+  <rect x="50" y="150" width="180" height="300" rx="4" fill="#1e4d3a" opacity="0.7"/>
+  <rect x="80" y="170" width="40" height="30" rx="2" fill="#f5d742" opacity="0.8"/>
+  <rect x="130" y="170" width="40" height="30" rx="2" fill="#f5d742" opacity="0.8"/>
+  <rect x="80" y="220" width="40" height="30" rx="2" fill="#f5d742" opacity="0.6"/>
+  <rect x="130" y="220" width="40" height="30" rx="2" fill="#f5d742" opacity="0.6"/>
+  <rect x="80" y="270" width="90" height="30" rx="2" fill="#f5d742" opacity="0.4"/>
+
+  <!-- Solar panel on roof -->
+  <rect x="60" y="140" width="160" height="15" rx="2" fill="#3a6b8f" opacity="0.9"/>
+  <line x1="100" y1="140" x2="100" y2="155" stroke="#4a8baf" stroke-width="0.5"/>
+  <line x1="140" y1="140" x2="140" y2="155" stroke="#4a8baf" stroke-width="0.5"/>
+  <line x1="180" y1="140" x2="180" y2="155" stroke="#4a8baf" stroke-width="0.5"/>
+
+  <!-- Right side building -->
+  <rect x="550" y="180" width="200" height="270" rx="4" fill="#1a4d3a" opacity="0.6"/>
+  <rect x="580" y="200" width="50" height="35" rx="2" fill="#f5d742" opacity="0.7"/>
+  <rect x="650" y="200" width="50" height="35" rx="2" fill="#f5d742" opacity="0.7"/>
+  <rect x="580" y="255" width="50" height="35" rx="2" fill="#f5d742" opacity="0.5"/>
+  <rect x="650" y="255" width="50" height="35" rx="2" fill="#f5d742" opacity="0.5"/>
+
+  <!-- Central card -->
+  <rect x="260" y="60" width="280" height="380" rx="16" fill="url(#card)" stroke="#dce8d0" stroke-width="1.5"/>
+  <!-- Shadow -->
+  <rect x="264" y="64" width="280" height="380" rx="16" fill="#000000" opacity="0.08"/>
+
+  <!-- AEAT form lines -->
+  <rect x="295" y="100" width="210" height="8" rx="2" fill="#dce8d0"/>
+  <rect x="295" y="120" width="180" height="8" rx="2" fill="#e8f0e4"/>
+  <rect x="295" y="140" width="190" height="8" rx="2" fill="#dce8d0"/>
+
+  <!-- Deduction percentages -->
+  <text x="400" y="210" text-anchor="middle" font-family="DM Sans, system-ui, sans-serif" font-size="52" font-weight="700" fill="url(#gold)">20% · 40% · 60%</text>
+
+  <!-- Underline -->
+  <rect x="310" y="230" width="180" height="3" rx="1.5" fill="#547c24"/>
+
+  <!-- Labels -->
+  <text x="400" y="270" text-anchor="middle" font-family="DM Sans, system-ui, sans-serif" font-size="18" font-weight="600" fill="#2d6a4f">Deducción IRPF</text>
+  <text x="400" y="295" text-anchor="middle" font-family="DM Sans, system-ui, sans-serif" font-size="14" fill="#6b7b5e">Obras de eficiencia energética</text>
+
+  <!-- Euro icon area -->
+  <circle cx="400" cy="345" r="28" fill="#f0c040" opacity="0.3"/>
+  <text x="400" y="355" text-anchor="middle" font-family="DM Sans, system-ui, sans-serif" font-size="28" font-weight="700" fill="#c48820">€</text>
+
+  <!-- Bottom text -->
+  <text x="400" y="410" text-anchor="middle" font-family="DM Sans, system-ui, sans-serif" font-size="12" fill="#9aab8a">Base acumulada hasta 15.000€</text>
+
+  <!-- Decorative dots left -->
+  <circle cx="70" cy="60" r="3" fill="#f5d742" opacity="0.5"/>
+  <circle cx="90" cy="80" r="2" fill="#f5d742" opacity="0.3"/>
+  <circle cx="120" cy="45" r="4" fill="#f5d742" opacity="0.4"/>
+
+  <!-- Decorative dots right -->
+  <circle cx="730" cy="80" r="3" fill="#f5d742" opacity="0.5"/>
+  <circle cx="700" cy="50" r="2" fill="#f5d742" opacity="0.3"/>
+  <circle cx="750" cy="100" r="4" fill="#f5d742" opacity="0.4"/>
+</svg>

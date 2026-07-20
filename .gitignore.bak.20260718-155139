@@ -1,0 +1,30 @@
+# Dependencias
+node_modules/
+
+# Variables de entorno (NUNCA subir al repo)
+.env
+.env.local
+
+# Supabase
+supabase/.temp/
+
+# Sistema
+.DS_Store
+Thumbs.db
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+
+# Media source files (raw copies, not served)
+media-cxs/
+
+# Vercel
+.vercel
+
+# Local Netlify folder
+.netlify
+.aider*
+.env.supabase
+hermes-estado/
