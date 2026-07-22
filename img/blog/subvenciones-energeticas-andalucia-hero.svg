@@ -1,0 +1,52 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500" fill="none" role="img" aria-label="Subvenciones energéticas Andalucía 2026 - Imagen hero">
+  <defs>
+    <linearGradient id="grad1" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#2e8b57"/>
+      <stop offset="100%" stop-color="#388e3c"/>
+    </linearGradient>
+    <linearGradient id="grad2" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#00bcd4"/>
+      <stop offset="100%" stop-color="#0097a7"/>
+    </linearGradient>
+    <filter id="shadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="4" dy="4" stdDeviation="3" comfort="3" opacity="0.3"/>
+    </filter>
+  </defs>
+  
+  <!-- Background -->
+  <rect width="800" height="500" fill="#f8f9fa"/>
+  
+  <!-- Sun rays / energy pattern -->
+  <g opacity="0.08">
+    <circle cx="400" cy="250" r="300" fill="url(#grad1)"/>
+  </g>
+  
+  <!-- Main content area -->
+  <rect x="80" y="120" width="640" height="260" rx="12" fill="white" filter="url(#shadow)"/>
+  
+  <!-- Title -->
+  <text x="400" y="180" font-family="DM Sans, Arial, sans-serif" font-size="28" font-weight="700" fill="#1b5e20" text-anchor="middle" dominant-baseline="middle">SUBVECIONES ENERGÉTICAS</text>
+  <text x="400" y="210" font-family="DM Sans, Arial, sans-serif" font-size="14" fill="#424242" text-anchor="middle" dominant-baseline="middle">Andalucía 2026</text>
+  
+  <!-- Key figures -->
+  <g font-family="DM Sans, Arial, sans-serif" font-size="16" font-weight="600">
+    <text x="180" y="250" fill="#388e3c">✓ Hasta 40% <tspan fill="#424242">de subvención</tspan></text>
+    <text x="400" y="250" fill="#00bcd4">✓ Hasta 21.400€ <tspan fill="#424242">paraguas integral</tspan></text>
+    <text x="620" y="250" fill="#1b5e20">✓ PIREE <tspan fill="#424242">y fondos UE</tspan></text>
+  </g>
+  
+  <!-- Accent bars -->
+  <rect x="80" y="280" width="640" height="4" fill="#e0e0e0" rx="2"/>
+  <rect x="80" y="280" width="220" height="4" fill="url(#grad1)" rx="2"/>
+  <rect x="320" y="280" width="180" height="4" fill="url(#grad2)" rx="2"/>
+  <rect x="520" y="280" width="140" height="4" fill="#ff9800" rx="2"/>
+  
+  <!-- Icon / decoration -->
+  <g transform="translate(650, 380)">
+    <rect x="-15" y="-15" width="30" height="30" fill="#ffb74d" rx="4"/>
+    <path d="M-5-5 L5 5 L-5 15 Z" fill="#ff9800"/>
+  </g>
+  
+  <!-- Footer text -->
+  <text x="400" y="480" font-family="DM Sans, Arial, sans-serif" font-size="11" fill="#9e9e9e" text-anchor="middle">Junta de Andalucía - Programa ADELANTE</text>
+</svg>
