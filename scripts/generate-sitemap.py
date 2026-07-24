@@ -2,7 +2,7 @@
 """Generate sitemap.xml for certificadoya.es, excluding redirect pages and noindex pages."""
 import os, datetime
 
-BASE_DIR = "/home/arturo/certificadoya"
+BASE_DIR = r"C:\Users\artur\certificadoya"
 SITE = "https://www.certificadoya.es"
 TODAY = datetime.date.today().isoformat()
 
