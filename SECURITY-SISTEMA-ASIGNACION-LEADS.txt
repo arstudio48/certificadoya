@@ -1,0 +1,383 @@
+═══════════════════════════════════════════════════════════════════════════════
+ANÁLISIS: SEGURIDAD EN ASIGNACIÓN DE LEADS — CERTIFICADOYA
+Imposibilitar fraude de técnicos saltándose el pago a plataforma
+═══════════════════════════════════════════════════════════════════════════════
+
+📊 SISTEMA ACTUAL (VULNERABILIDADES IDENTIFICADAS)
+═══════════════════════════════════════════════════════════════════════════════
+
+FLUJO ACTUAL (AUTO_ASSIGN.PY):
+  1. Cliente paga en Stripe (€69)
+  2. Webhook crea lead en BD (estado='nuevo')
+  3. Cron cada 30min ejecuta auto_assign.py
+  4. Script busca técnico por zona (CP)
+  5. Asigna lead + envía email técnico
+  6. Técnico recibe nombre+email+teléfono cliente
+  7. ⚠️ VULNERABILIDAD: Técnico contacta directo al cliente
+  8. Cliente paga técnico "en mano" sin comisión a plataforma
+  9. Lead registrado como "completado" sin verificación de pago real
+
+VULNERABILIDADES CRÍTICAS IDENTIFICADAS:
+
+❌ V1: CONTACTO DIRECTO NO MONITOREADO
+  • Técnico recibe email con teléfono/email cliente completo
+  • Puede contactar cliente FUERA de plataforma
+  • No hay barrera de control entre técnico y cliente
+  • Cliente puede pagar directamente al técnico evitando comisión
+
+❌ V2: SIN VERIFICACIÓN DE SERVICIO PRESTADO
+  • Sistema asume que técnico completó trabajo si lead estado='completado'
+  • No verifica que CEE fue efectivamente registrado en CCAA
+  • No verifica que PDF fue entregado
+  • Técnico puede reclamar comisión sin ejecutar trabajo
+
+❌ V3: PAGO TÉCNICO DESVINCULADO DE PAGO CLIENTE
+  • Pago cliente → Stripe (retiene 18% comisión)
+  • Pago técnico → se hace "cuando CEE registrado"
+  • Pero... ¿quién verifica que fue registrado?
+  • Técnico podría reclamar pago sin registrar en CCAA
+
+❌ V4: SIN AUDITORÍA DE ENTREGAS
+  • No hay firma digital de entrega PDF
+  • No hay confirmación cliente de recepción
+  • No hay timestamp de registro en CCAA
+  • No hay prueba de trabajo realizado
+
+❌ V5: SIN PENALIZACIÓN POR ABANDONO
+  • Si técnico abandona lead, cliente debe pagar DE NUEVO
+  • No hay reembolso automático si técnico no completa
+  • Lead "bloqueado" sin poder reasignar rápido
+
+═══════════════════════════════════════════════════════════════════════════════
+🔒 SOLUCIÓN: SISTEMA A PRUEBA DE FRAUDE (ARQUITECTURA)
+═══════════════════════════════════════════════════════════════════════════════
+
+PRINCIPIO RECTOR:
+  ★ EL PAGO NUNCA SE LIBERA HASTA QUE EL TRABAJO ESTÉ 100% VERIFICADO ★
+
+FASE 1: PAGO RETENIDO (CLIENTE)
+  ├─ Cliente paga €69 en Stripe
+  ├─ Stripe retiene 100% (no se libera a CertificadoYa aún)
+  ├─ Pago marcado como "pendiente" en BD (payment_status='held')
+  └─ Lead creado con estado='asignando'
+
+FASE 2: ASIGNACIÓN ENCRIPTADA (PLATAFORMA)
+  ├─ Auto_assign.py busca técnico idóneo por zona
+  ├─ Genera TOKEN_ASIGNACION único (no reutilizable)
+  ├─ Envía email técnico SIN datos cliente completos:
+  │  ✓ "Lead #12345 asignado a tu zona"
+  │  ✗ NO número de teléfono
+  │  ✗ NO email cliente directo
+  │  ✓ SÍ: link único https://certificadoya.es/lead/12345/accept?token=ABC123...
+  └─ Lead estado='pendiente_aceptacion'
+
+FASE 3: ACEPTACIÓN TÉCNICO (CON VINCULACIÓN)
+  ├─ Técnico hace click en link personalizado
+  ├─ Sistema verifica TOKEN_ASIGNACION (expira en 24h)
+  ├─ Técnico DEBE confirmar "Acepto realizar este trabajo"
+  ├─ Sistema genera SMART CONTRACT entre:
+  │  • CertificadoYa (plataforma)
+  │  • Técnico (prestador)
+  │  • Cliente (pagador — anónimo para técnico)
+  └─ Lead estado='aceptado', payment_status='held'
+
+FASE 4: DATOS CLIENTE ENCRIPTADOS (DESBLOQUEO)
+  ├─ Solo DESPUÉS de aceptar, técnico recibe:
+  │  ✓ Nombre cliente (solo si acepta trabajo)
+  │  ✓ Teléfono cliente (único, generado por plataforma)
+  │  ✗ Email cliente (enviamos nosotros en su nombre)
+  ├─ Teléfono encriptado con clave única por lead
+  ├─ Si técnico RECHAZA trabajo:
+  │  → Datos NO se desbloquean (privacidad cliente)
+  │  → Lead pasa a siguiente técnico (auto-reasignación)
+  └─ Lead estado='asignado'
+
+FASE 5: TRABAJO EN PROGRESO (HITOS VERIFICABLES)
+  Técnico debe reportar via plataforma:
+  ├─ Hito 1: "Visita confirmada" (con foto/timestamp)
+  ├─ Hito 2: "CE3X generado" (upload PDF previo)
+  ├─ Hito 3: "Enviado a registrar en CCAA" (foto comprobante)
+  └─ Lead estado='en_progreso'
+  
+  ⚠️ Si técnico se salta hitos:
+     • No puede pasar al siguiente
+     • Cliente no recibe servicio
+     • Pago PERMANECE retenido
+     • Lead se reasigna automáticamente a otro técnico
+
+FASE 6: REGISTRO EN CCAA (VERIFICACIÓN EXTERNA)
+  ├─ Técnico sube comprobante de registro oficial CCAA
+  │  (Resolución o número de trámite administrativo)
+  ├─ Sistema valida formato (OCR/IA para detectar fraude)
+  ├─ Sistema consulta registro CCAA (si API disponible)
+  └─ Lead estado='registrado'
+
+FASE 7: ENTREGA PDF + CLIENTE CONFIRMA (TRIPLE VERIFICACIÓN)
+  ├─ Técnico sube PDF CEE a plataforma
+  ├─ Sistema envía email cliente: "Tu CEE está listo"
+  ├─ Email contiene:
+  │  • PDF descargable
+  │  • Link de confirmación "He recibido y verificado el PDF"
+  │  ✗ NO datos técnico (privacidad)
+  ├─ Cliente DEBE confirmar recepción (obligatorio)
+  ├─ Sistema envía confirmación a técnico
+  └─ Lead estado='entrega_confirmada'
+
+FASE 8: LIBERACIÓN DE PAGOS (CASCADA AUTOMÁTICA)
+  ├─ Cuando estado='entrega_confirmada':
+  │
+  ├─ PAGO CLIENTE:
+  │  ├─ Stripe libera €69 a CertificadoYa (+ retiene comisión Stripe 2.9%)
+  │  ├─ CertificadoYa: €66.95 (97% del total)
+  │  └─ DISPONIBLE en 2-3 días hábiles
+  │
+  ├─ COMISIÓN PLATAFORMA:
+  │  ├─ CertificadoYa retiene €12.42 (18% comisión sobre €69)
+  │  └─ Registrado en BD: commission_paid=true
+  │
+  ├─ PAGO TÉCNICO:
+  │  ├─ Se calcula: €69 - €12.42 = €56.58
+  │  ├─ Si hay tasa CCAA (ej. Asturias 12.63€):
+  │  │  └─ Técnico recibe: €56.58 - €12.63 = €43.95
+  │  ├─ Si zona sin tasa:
+  │  │  └─ Técnico recibe: €56.58 (íntegro)
+  │  ├─ Pago enviado a técnico vía:
+  │  │  • Transferencia bancaria (si registró banco)
+  │  │  • Cartera digital interna (saldo)
+  │  │  • Stripe Connect (si verificado)
+  │  └─ Transferencia realizada automáticamente
+  │
+  └─ Lead estado='completado', payment_status='released'
+
+═══════════════════════════════════════════════════════════════════════════════
+🛡️ MECANISMOS ANTI-FRAUDE INTEGRADOS
+═══════════════════════════════════════════════════════════════════════════════
+
+A1: ENCRIPTACIÓN DE DATOS CLIENTE
+  • Teléfono cliente encriptado hasta aceptación
+  • Email cliente NUNCA se da a técnico (plataforma intermediaria)
+  • Si técnico contacta cliente directo, no tiene info verificada
+  • Cliente puede reportar contacto no autorizado
+
+A2: TOKENS ÚNICOS NO REUTILIZABLES
+  • Cada asignación = TOKEN único + expira en 24h
+  • Técnico NO PUEDE compartir token (vinculado a su ID)
+  • Si rechaza, nuevo token para próximo técnico
+  • Imposible "reenviar" lead a colega
+
+A3: HITOS OBLIGATORIOS
+  • Técnico NO PUEDE "saltar" a siguiente hito
+  • Plataforma valida:
+    ├─ Foto visita con timestamp (geolocalización opcional)
+    ├─ PDF CE3X (valida estructura XML CE3X)
+    ├─ Comprobante registro CCAA (OCR detecta falsificación)
+    └─ Confirmación cliente (no puede certificar técnico solo)
+
+A4: CONFIRMACIÓN CLIENTE OBLIGATORIA
+  • Sin confirmación cliente, pago NUNCA se libera
+  • Si cliente no confirma en 7 días:
+    ├─ Envío automático: "¿Has recibido tu CEE?"
+    ├─ Lead entra en "disputa"
+    ├─ Cliente puede abrir ticket de soporte
+    └─ Pago reembolsado si técnico no contactó
+
+A5: PENALIZACIÓN POR INCUMPLIMIENTO
+  • Si técnico rechaza 3+ leads consecutivos: suspension temporal (24h)
+  • Si técnico abandona lead sin actualización en 48h: reasignación inmediata
+  • Si envía comprobante falso (detectado OCR): baja permanente + pago reembolsado
+  • Todas las acciones auditadas en tabla 'auditoría_leads'
+
+A6: AUDITORÍA TOTAL
+  • Cada transición de estado = registro en BD con timestamp
+  • Tabla 'lead_audit': id, lead_id, acción, usuario, timestamp, ip, detalles
+  • Tabla 'payment_audit': id, lead_id, pago_id, acción, timestamp, monto
+  • Reportes descargables: "Historial completo de lead" (cliente + técnico + admin)
+
+A7: REEMBOLSOS AUTOMÁTICOS
+  • Si técnico rechaza: lead reasignado, cliente sin notificación
+  • Si técnico abandona (48h sin actualización): 
+    ├─ Email técnico: "Lead abandonado — será reasignado"
+    ├─ Lead se pasa a siguiente técnico
+    ├─ Técnico recibe "abandono" en historial
+    └─ Si 5+ abandonos: baja de plataforma
+  • Si cliente reporta incumplimiento:
+    ├─ Admin revisa auditoría
+    ├─ Si falta hito: reembolso automático + baja técnico
+    └─ Si completado pero cliente no satisfecho: caso por caso
+
+═══════════════════════════════════════════════════════════════════════════════
+📋 IMPLEMENTACIÓN TÉCNICA
+═══════════════════════════════════════════════════════════════════════════════
+
+CAMBIOS BD (Supabase):
+
+TABLA: leads (aumentar campos)
+  + payment_status: 'held' | 'released' | 'refunded' | 'disputed'
+  + token_asignacion: UUID (único por asignación, expira 24h)
+  + hito_visita_confirmada: boolean
+  + hito_ce3x_generado: boolean
+  + hito_registro_ccaa: boolean
+  + entrega_confirmada: boolean
+  + cliente_confirmo_recepcion: boolean
+  + timestamp_cliente_confirmacion: datetime
+  + comprobante_registro_ccaa: text (JSON con URL + OCR result)
+  + pdf_entregado_url: text (link seguro, expira 30 días)
+
+TABLA: lead_audit (nueva)
+  + id: UUID (PK)
+  + lead_id: UUID (FK)
+  + accion: text ('asignado', 'aceptado', 'rechazado', 'abandonado', 'completado')
+  + usuario_id: UUID (técnico o admin)
+  + timestamp: datetime
+  + ip_address: text
+  + detalles_json: text (metadata: geoloc, dispositivo, etc.)
+
+TABLA: payment_audit (nueva)
+  + id: UUID (PK)
+  + lead_id: UUID (FK)
+  + stripe_payment_id: text
+  + accion: text ('held', 'released', 'refunded')
+  + monto: numeric
+  + timestamp: datetime
+  + motivo: text
+
+TABLA: tecnico_stats (actualizar)
+  + leads_asignados: int
+  + leads_aceptados: int
+  + leads_completados: int
+  + leads_abandonados: int
+  + tasa_abandono: numeric (%)
+  + reembolsos_recibidos: int
+  + estado_suspension: boolean (si tasa_abandono > 20%)
+
+EDGE FUNCTIONS (nuevas/actualizar):
+
+1. assign-lead-secure/index.ts
+   • Input: lead_id
+   • Genera TOKEN_ASIGNACION (no reutilizable)
+   • Envía email técnico SOLO con link + numero lead
+   • Devuelve nada (no expone datos)
+
+2. accept-lead-secure/index.ts
+   • Input: token_asignacion, tecnico_id
+   • Valida token (no expirado, vinculado a técnico)
+   • Desbloquea datos cliente (nombre + teléfono encriptado)
+   • Crea smart contract lead-técnico
+   • Devuelve link para panel técnico
+
+3. reject-lead-secure/index.ts
+   • Input: lead_id, tecnico_id, motivo
+   • NO desbloquea datos cliente
+   • Reasigna lead a siguiente técnico
+   • Registra rechazo en lead_audit
+   • Devuelve: "Lead reasignado"
+
+4. update-lead-hito/index.ts
+   • Input: lead_id, hito, archivo (foto/PDF/comprobante)
+   • Valida token autorización (técnico actual)
+   • Sube archivo a Supabase Storage
+   • OCR en comprobantes (detecta fraude)
+   • Marca hito como completado
+   • Notifica cliente de progreso
+
+5. confirm-entrega-cliente/index.ts
+   • Input: lead_id, token_confirmacion
+   • Verifica token (único, expira 7 días)
+   • Marca cliente_confirmo_recepcion = true
+   • Dispara liberación de pagos (webhook)
+   • Notifica técnico: "Pago siendo procesado"
+
+6. release-payment-secure/index.ts
+   • Input: lead_id
+   • Valida todas las condiciones:
+     ✓ Estado = entrega_confirmada
+     ✓ Cliente confirmó recepción
+     ✓ Comprobante registro CCAA validado
+   • Llama Stripe API para liberar pago
+   • Calcula comisión + tasa CCAA
+   • Envía pago técnico (transferencia/Stripe Connect)
+   • Registra en payment_audit
+
+SCRIPTS (actualizar auto_assign.py):
+
+def assign_lead_secure():
+  """Nueva asignación segura"""
+  for lead in leads_nuevo:
+    tecnico = find_tecnico_by_zona(lead.cp)
+    if not tecnico:
+      notificar_admin("No hay técnico en zona")
+      continue
+    
+    # Generar token único
+    token = generate_secure_token()
+    lead.update({
+      'token_asignacion': token,
+      'estado': 'pendiente_aceptacion'
+    })
+    
+    # Email técnico SOLO con link (sin datos cliente)
+    send_email(tecnico.email, 
+      subject="Nuevo encargo en tu zona",
+      body=f"""Hola {tecnico.nombre},
+      
+Tienes un nuevo encargo asignado:
+Lead #{lead.id}
+
+Aceptar trabajo: https://certificadoya.es/lead/{lead.id}/accept?token={token}
+(válido por 24h)
+
+Este link es único para ti y no puede compartirse.
+
+Saludos,
+CertificadoYa""")
+    
+    # Audit log
+    audit_log(lead.id, 'asignado', tecnico.id)
+
+═══════════════════════════════════════════════════════════════════════════════
+💡 VENTAJAS vs SISTEMA ACTUAL
+═══════════════════════════════════════════════════════════════════════════════
+
+ANTES (vulnerable):
+  ✗ Técnico recibe email cliente directo
+  ✗ Puede saltarse plataforma completamente
+  ✗ Pago se libera aunque no complete trabajo
+  ✗ No hay auditoría de entregas
+  ✗ Sin verificación CCAA
+
+DESPUÉS (a prueba de fraude):
+  ✓ Técnico NUNCA recibe email cliente completo
+  ✓ IMPOSIBLE contactar directo (no tiene datos)
+  ✓ Pago RETENIDO hasta verificación total
+  ✓ Auditoría de cada hito (foto, PDF, comprobante)
+  ✓ Validación OCR de registro CCAA
+  ✓ Confirmación cliente obligatoria
+  ✓ Penalizaciones por incumplimiento
+  ✓ Reembolsos automáticos si fraude detectado
+
+═══════════════════════════════════════════════════════════════════════════════
+🚀 ROADMAP DE IMPLEMENTACIÓN
+═══════════════════════════════════════════════════════════════════════════════
+
+FASE 1 (esta semana): CAMBIOS BD + Edge Functions básicas
+  □ Migración SQL: agregar campos a leads + tablas audit
+  □ assign-lead-secure/ (generar token)
+  □ accept-lead-secure/ (desbloquear datos)
+  □ reject-lead-secure/ (reasignar)
+
+FASE 2 (próxima semana): HITOS + VALIDACIÓN
+  □ update-lead-hito/ (progreso técnico)
+  □ OCR para comprobantes (integración IA)
+  □ Validación formato CE3X (XML parsing)
+
+FASE 3: PAGOS + CLIENTE CONFIRMACIÓN
+  □ confirm-entrega-cliente/ (cliente confirma)
+  □ release-payment-secure/ (liberar Stripe)
+  □ Notificaciones en cascada
+
+FASE 4: AUDITORÍA + REPORTES
+  □ Dashboard de auditoría (admin)
+  □ Reportes descargables (cliente + técnico)
+  □ Alertas de fraude detectado
+
+═══════════════════════════════════════════════════════════════════════════════
