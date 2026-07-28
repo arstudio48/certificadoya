@@ -53,7 +53,9 @@ serve(async (req: Request) => {
       })
     }
 
-    const SUPABASE_URL = 'https://wypgqpgjlookbhuaiyxa.supabase.co'
+    const SUPABASE_URL = Deno.env.get('SUPABASE_URL') || 'https://wypgqpgjlookbhuaiyxa.supabase.co'
+
+    console.log('[solicitar-servicio] serviceKey length:', serviceKey ? serviceKey.length : 0)
 
     // Crear payload del lead
     const leadData = {
@@ -78,6 +80,7 @@ serve(async (req: Request) => {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
+        'apikey': serviceKey,
         'Authorization': `Bearer ${serviceKey}`,
         'Prefer': 'return=representation'
       },
