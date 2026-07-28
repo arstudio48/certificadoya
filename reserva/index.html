@@ -283,7 +283,18 @@ async function solicitarSinPago() {
       return;
     }
 
-    // Mostrar éxito
+    // Validar respuesta JSON
+    var result = await res.json();
+    
+    if (!result.success) {
+      console.error('Error en respuesta:', result.error);
+      mostrarErrorReserva(result.error || 'Error al procesar tu solicitud. Inténtalo de nuevo.');
+      btn.classList.remove('cargando');
+      btn.disabled = false;
+      return;
+    }
+
+    // Mostrar éxito SOLO si success === true
     document.getElementById('reserva-form').style.display = 'none';
     document.getElementById('reserva-success-ce').style.display = 'block';
   } catch (e) {

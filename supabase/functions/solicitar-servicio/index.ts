@@ -13,11 +13,17 @@ serve(async (req: Request) => {
   }
 
   try {
-    const { action, nombre_cliente, email_cliente, telefono_cliente, zona, m2, tipo_inmueble, presupuesto_min, presupuesto_max, fuente, estado, notas } = await req.json()
+    const body = await req.json()
+    const { action, nombre_cliente, email_cliente, telefono_cliente, zona, m2, tipo_inmueble, presupuesto_min, presupuesto_max, fuente, estado, notas } = body
+
+    console.log('[solicitar-servicio] Recibido:', { action, nombre_cliente, zona, email_cliente })
 
     // Solo aceptamos action='solicitar'
     if (action !== 'solicitar') {
-      return new Response(JSON.stringify({ error: 'action no válida' }), {
+      return new Response(JSON.stringify({ 
+        success: false, 
+        error: 'action no válida. Use action=solicitar' 
+      }), {
         status: 400,
         headers: { ...corsHeaders, 'Content-Type': 'application/json' }
       })
@@ -25,21 +31,29 @@ serve(async (req: Request) => {
 
     // Validación mínima
     if (!nombre_cliente || !telefono_cliente || !zona) {
-      return new Response(JSON.stringify({ error: 'Faltan campos requeridos: nombre, teléfono, zona' }), {
+      return new Response(JSON.stringify({ 
+        success: false,
+        error: 'Faltan campos requeridos: nombre_cliente, telefono_cliente, zona' 
+      }), {
         status: 400,
         headers: { ...corsHeaders, 'Content-Type': 'application/json' }
       })
     }
 
-    const SUPABASE_URL = 'https://wypgqpgjlookbhuaiyxa.supabase.co'
-    const SUPABASE_KEY = Deno.env.get('SUPABASE_SERVICE_KEY')
-    
-    if (!SUPABASE_KEY) {
-      return new Response(JSON.stringify({ error: 'Error de configuración del servidor' }), {
+    // Obtener SERVICE KEY (disponible en Edge Functions)
+    const serviceKey = Deno.env.get('SUPABASE_SERVICE_ROLE_KEY')
+    if (!serviceKey) {
+      console.error('[solicitar-servicio] ERROR: SUPABASE_SERVICE_ROLE_KEY no está configurado')
+      return new Response(JSON.stringify({ 
+        success: false,
+        error: 'Error de configuración del servidor (SERVICE_KEY)'
+      }), {
         status: 500,
         headers: { ...corsHeaders, 'Content-Type': 'application/json' }
       })
     }
+
+    const SUPABASE_URL = 'https://wypgqpgjlookbhuaiyxa.supabase.co'
 
     // Crear payload del lead
     const leadData = {
@@ -57,39 +71,66 @@ serve(async (req: Request) => {
       created_at: new Date().toISOString()
     }
 
-    // Insertar en Supabase
-    const res = await fetch(`${SUPABASE_URL}/rest/v1/leads`, {
+    console.log('[solicitar-servicio] Enviando a Supabase:', leadData)
+
+    // PASO 1: Insertar en Supabase usando SERVICE_KEY
+    const insertRes = await fetch(`${SUPABASE_URL}/rest/v1/leads`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
-        'apikey': SUPABASE_KEY,
-        'Authorization': `Bearer ${SUPABASE_KEY}`,
+        'Authorization': `Bearer ${serviceKey}`,
         'Prefer': 'return=representation'
       },
       body: JSON.stringify(leadData)
     })
 
-    // Si falla, devolver error
-    if (!res.ok) {
-      const errorData = await res.json()
-      console.error('Error Supabase:', errorData)
-      return new Response(JSON.stringify({ 
-        error: 'Error al guardar la solicitud',
-        details: errorData.message || errorData
-      }), {
-        status: res.status,
-        headers: { ...corsHeaders, 'Content-Type': 'application/json' }
-      })
+    const insertResponseText = await insertRes.text()
+    console.log('[solicitar-servicio] Response status:', insertRes.status)
+    console.log('[solicitar-servicio] Response body:', insertResponseText)
+
+    // Si falla, devolver error REAL
+    if (!insertRes.ok) {
+      try {
+        const errorData = JSON.parse(insertResponseText)
+        console.error('[solicitar-servicio] Error Supabase:', errorData)
+        return new Response(JSON.stringify({ 
+          success: false,
+          error: 'Error al guardar el lead en base de datos',
+          details: errorData.message || errorData
+        }), {
+          status: insertRes.status,
+          headers: { ...corsHeaders, 'Content-Type': 'application/json' }
+        })
+      } catch (_) {
+        return new Response(JSON.stringify({ 
+          success: false,
+          error: 'Error al procesar respuesta de servidor',
+          details: insertResponseText
+        }), {
+          status: insertRes.status,
+          headers: { ...corsHeaders, 'Content-Type': 'application/json' }
+        })
+      }
     }
 
-    // Éxito
-    const createdLead = await res.json()
-    
-    // Enviar email de confirmación (simple)
+    // PASO 2: Parsear la respuesta (debe ser array con el lead creado)
+    let createdLead
+    try {
+      const jsonResponse = JSON.parse(insertResponseText)
+      createdLead = Array.isArray(jsonResponse) ? jsonResponse[0] : jsonResponse
+    } catch (_) {
+      console.error('[solicitar-servicio] No se pudo parsear respuesta JSON')
+      createdLead = null
+    }
+
+    console.log('[solicitar-servicio] Lead creado:', createdLead)
+
+    // PASO 3: Enviar email de confirmación (opcional, no bloquea el flujo)
     const RESEND_API_KEY = Deno.env.get('RESEND_API_KEY')
     if (email_cliente && RESEND_API_KEY) {
       try {
-        await fetch('https://api.resend.com/emails', {
+        console.log('[solicitar-servicio] Enviando email a:', email_cliente)
+        const emailRes = await fetch('https://api.resend.com/emails', {
           method: 'POST',
           headers: {
             'Authorization': `Bearer ${RESEND_API_KEY}`,
@@ -104,7 +145,7 @@ serve(async (req: Request) => {
                 <div style="background:#fff;border-radius:12px;padding:30px;max-width:500px;margin:0 auto">
                   <h1 style="color:#16a34a;font-size:24px;margin:0 0 10px">✅ Solicitud recibida</h1>
                   <p style="color:#666;line-height:1.6">Hola ${nombre_cliente},</p>
-                  <p style="color:#666;line-height:1.6">Hemos recibido tu solicitud sin pago. En las próximas 24 horas, un técnico certificador de tu zona te contactará para aceptar el encargo.</p>
+                  <p style="color:#666;line-height:1.6">Hemos recibido tu solicitud. En las próximas 24 horas, un técnico certificador de tu zona te contactará.</p>
                   <div style="background:#f0faf2;border:1px solid #dce8d0;border-radius:8px;padding:15px;margin:20px 0">
                     <p style="color:#1a2e1e;font-weight:bold;margin:0 0 10px">Resumen:</p>
                     <p style="color:#6b7b5e;margin:5px 0"><strong>Provincia:</strong> ${zona}</p>
@@ -112,33 +153,36 @@ serve(async (req: Request) => {
                     <p style="color:#6b7b5e;margin:5px 0"><strong>Tipo:</strong> ${tipo_inmueble}</p>
                     <p style="color:#6b7b5e;margin:5px 0"><strong>Presupuesto:</strong> ${presupuesto_min}€</p>
                   </div>
-                  <p style="color:#666;line-height:1.6">Pagas solo cuando recibas tu CEE. Sin compromiso previo.</p>
+                  <p style="color:#666;line-height:1.6">Pagas solo cuando recibas tu CEE.</p>
                   <p style="color:#999;font-size:12px;margin-top:20px">📞 Si tienes preguntas, llama al 641 45 00 68</p>
                 </div>
               </div>
             `
           })
         })
+        console.log('[solicitar-servicio] Email enviado, status:', emailRes.status)
       } catch (emailError) {
-        console.error('Error enviando email:', emailError)
-        // No fallar si el email no se envía
+        console.error('[solicitar-servicio] Error enviando email:', emailError)
+        // No bloquear si falla el email
       }
     }
 
+    // PASO 4: Retornar ÉXITO
     return new Response(JSON.stringify({
       success: true,
       message: 'Solicitud recibida correctamente',
-      lead_id: createdLead[0]?.id || 'sin-id'
+      lead_id: createdLead?.id || 'sin-id'
     }), {
       status: 200,
       headers: { ...corsHeaders, 'Content-Type': 'application/json' }
     })
 
   } catch (error) {
-    console.error('Error:', error)
+    console.error('[solicitar-servicio] Error no capturado:', error)
     return new Response(JSON.stringify({ 
+      success: false,
       error: 'Error interno del servidor',
-      message: error.message
+      message: error instanceof Error ? error.message : String(error)
     }), {
       status: 500,
       headers: { ...corsHeaders, 'Content-Type': 'application/json' }
