@@ -1,0 +1,1 @@
+Crear instancia Oracle Always Free en eu-madrid-3, eu-frankfurt-1, uk-london-1 y us-ashburn-1

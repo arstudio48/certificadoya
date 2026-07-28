@@ -9,7 +9,9 @@
       "web": "https://ejemplo.com/manuel-garcia",
       "especialidad": "CE3X, certificación residencial",
       "experiencia": 8,
-      "disponible": true
+      "disponible": true,
+      "email": "manuel.garcia.lopez@certificadoya.es",
+      "email_validado": false
     },
     {
       "id": 2,
@@ -20,7 +22,9 @@
       "web": "https://ejemplo.com/ana-martinez",
       "especialidad": "HULC, edificios terciarios",
       "experiencia": 6,
-      "disponible": true
+      "disponible": true,
+      "email": "ana.martinez.ruiz@certificadoya.es",
+      "email_validado": false
     },
     {
       "id": 3,
@@ -31,7 +35,9 @@
       "web": "https://ejemplo.com/carlos-fernandez",
       "especialidad": "CE3X, certificación viviendas",
       "experiencia": 10,
-      "disponible": true
+      "disponible": true,
+      "email": "carlos.fernandez.perez@certificadoya.es",
+      "email_validado": false
     },
     {
       "id": 4,
@@ -42,7 +48,9 @@
       "web": "https://ejemplo.com/laura-sanchez",
       "especialidad": "CE3X, rehabilitación",
       "experiencia": 5,
-      "disponible": true
+      "disponible": true,
+      "email": "laura.sanchez.diaz@certificadoya.es",
+      "email_validado": false
     },
     {
       "id": 5,
@@ -53,7 +61,9 @@
       "web": "https://ejemplo.com/david-rodriguez",
       "especialidad": "CYPETHERAM, edificios nuevos",
       "experiencia": 7,
-      "disponible": true
+      "disponible": true,
+      "email": "david.rodriguez.gomez@certificadoya.es",
+      "email_validado": false
     },
     {
       "id": 6,

@@ -1,0 +1,221 @@
+═══════════════════════════════════════════════════════════════════════════════
+INTEGRACIÓN: PRECIOS +15% + TASAS DINÁMICAS CCAA
+═══════════════════════════════════════════════════════════════════════════════
+
+CAMBIO DE PRECIOS (28 julio 2026):
+
+  Base anterior: 57.00€
+  Base nueva:   65.55€  (+15%)
+  
+  Razón: Ajuste por inflación + costes administrativos RD 659/2025
+
+ESTRUCTURA FINAL DE PRECIO (con tasas):
+
+  MADRID (sin tasa):
+    Base: 65.55€ + Tasa: 0.00€ = TOTAL: 65.55€
+  
+  ASTURIAS (con tasa):
+    Base: 65.55€ + Tasa: 12.00€ = TOTAL: 77.55€
+  
+  CANTABRIA (con tasa):
+    Base: 65.55€ + Tasa: 8.50€ = TOTAL: 74.05€
+  
+  GALICIA (con tasa):
+    Base: 65.55€ + Tasa: 10.00€ = TOTAL: 75.55€
+  
+  LA RIOJA (con tasa):
+    Base: 65.55€ + Tasa: 6.00€ = TOTAL: 71.55€
+  
+  NAVARRA (con tasa):
+    Base: 65.55€ + Tasa: 7.50€ = TOTAL: 73.05€
+  
+  CASTILLA Y LEÓN (con tasa):
+    Base: 65.55€ + Tasa: 9.00€ = TOTAL: 74.55€
+  
+  MURCIA (con tasa):
+    Base: 65.55€ + Tasa: 5.00€ = TOTAL: 70.55€
+
+═══════════════════════════════════════════════════════════════════════════════
+MODIFICACIÓN DE index.html (calculador)
+═══════════════════════════════════════════════════════════════════════════════
+
+Buscar en el HTML la sección del presupuesto (busca "Tu email" o "presupuesto"):
+
+ANTES:
+  <div class="presupuesto">
+    <p>Presupuesto base: <strong>57€</strong></p>
+  </div>
+
+DESPUÉS:
+  <div class="presupuesto">
+    <p>Base (CEE + registro): <strong id="precio-base">65.55€</strong></p>
+    <p id="tasa-row" style="display:none;">
+      + Tasa de registro <span id="ccaa-nombre">CCAA</span>: 
+      <strong id="precio-tasa">0.00€</strong>
+      <small id="tasa-tooltip"></small>
+    </p>
+    <hr>
+    <p><strong>TOTAL: <span id="precio-total">65.55€</span></strong></p>
+    <small style="color:#999;">Actualizado: 28 julio 2026 (+15%)</small>
+  </div>
+
+═══════════════════════════════════════════════════════════════════════════════
+MODIFICACIÓN DE js/main.js (lógica de cálculo)
+═══════════════════════════════════════════════════════════════════════════════
+
+Reemplazar función calcularPrecio():
+
+ANTES:
+  function calcularPrecio(provincia) {
+    const basePrice = 57.00;
+    const tasa = PROVINCIA_TASAS[provincia]?.tasa || 0.00;
+    return basePrice + tasa;
+  }
+
+DESPUÉS:
+  function calcularPrecio(provincia) {
+    // PRECIOS ACTUALIZADOS +15% (28 julio 2026)
+    const basePrice = 65.55;  // antes 57.00€
+    const tasa = PROVINCIA_TASAS_2026[provincia]?.tasa || 0.00;
+    const total = basePrice + tasa;
+    
+    // Actualizar UI
+    document.getElementById('precio-base').textContent = basePrice.toFixed(2) + '€';
+    document.getElementById('precio-tasa').textContent = tasa.toFixed(2) + '€';
+    document.getElementById('precio-total').textContent = total.toFixed(2) + '€';
+    document.getElementById('ccaa-nombre').textContent = provincia;
+    
+    // Mostrar/ocultar fila de tasa
+    if (tasa > 0) {
+      document.getElementById('tasa-row').style.display = 'block';
+      const decreto = PROVINCIA_TASAS_2026[provincia].decreto;
+      document.getElementById('tasa-tooltip').textContent = `(${decreto})`;
+    } else {
+      document.getElementById('tasa-row').style.display = 'none';
+    }
+    
+    // Guardar para Stripe
+    document.getElementById('hidden-precio-base').value = basePrice;
+    document.getElementById('hidden-tasa-ccaa').value = tasa;
+    document.getElementById('hidden-total').value = total;
+    
+    return total;
+  }
+
+═══════════════════════════════════════════════════════════════════════════════
+MODIFICACIÓN DE Stripe (checkout)
+═══════════════════════════════════════════════════════════════════════════════
+
+En la Edge Function o backend que crea la sesión de Stripe:
+
+ANTES:
+  const amount = 57 * 100;  // centavos
+
+DESPUÉS:
+  const basePrice = 65.55;
+  const tasaCcaa = parseFloat(req.body.tasa_ccaa_provincia) || 0.00;
+  const totalAmount = basePrice + tasaCcaa;
+  const amount = Math.round(totalAmount * 100);  // convertir a centavos
+
+  // En description de Stripe:
+  const description = tasaCcaa > 0
+    ? `CEE ${m2}m² + Tasa registro ${provincia} (${basePrice}€ + ${tasaCcaa}€)`
+    : `CEE ${m2}m² (${basePrice}€)`;
+
+═══════════════════════════════════════════════════════════════════════════════
+TEST DE CÁLCULO (valores esperados)
+═══════════════════════════════════════════════════════════════════════════════
+
+Prueba en el navegador:
+
+  Provincia: "Madrid"
+  Esperado: 65.55€
+
+  Provincia: "Asturias"
+  Esperado: 77.55€ (65.55€ + 12.00€)
+
+  Provincia: "Cantabria"
+  Esperado: 74.05€ (65.55€ + 8.50€)
+
+  Provincia: "Galicia"
+  Esperado: 75.55€ (65.55€ + 10.00€)
+
+  Provincia: "La Rioja"
+  Esperado: 71.55€ (65.55€ + 6.00€)
+
+═══════════════════════════════════════════════════════════════════════════════
+ACTUALIZACIÓN DE BASE DE DATOS
+═══════════════════════════════════════════════════════════════════════════════
+
+Ejecutar en Supabase SQL:
+
+UPDATE ccaa_tasas
+SET base_obligatoria = 65.55
+WHERE activa = true;
+
+-- Verificar:
+SELECT ccaa, base_obligatoria, tasa_euros, (base_obligatoria + tasa_euros) as total
+FROM ccaa_tasas
+WHERE activa = true
+ORDER BY ccaa;
+
+Resultado esperado:
+┌──────────────────┬──────────────────────┬────────────────┬───────────┐
+│ ccaa             │ base_obligatoria     │ tasa_euros     │ total     │
+├──────────────────┼──────────────────────┼────────────────┼───────────┤
+│ Asturias         │ 65.55                │ 12.00          │ 77.55     │
+│ Cantabria        │ 65.55                │ 8.50           │ 74.05     │
+│ Castilla y León  │ 65.55                │ 9.00           │ 74.55     │
+│ Galicia          │ 65.55                │ 10.00          │ 75.55     │
+│ La Rioja         │ 65.55                │ 6.00           │ 71.55     │
+│ Madrid           │ 65.55                │ 0.00           │ 65.55     │
+│ Murcia           │ 65.55                │ 5.00           │ 70.55     │
+│ Navarra          │ 65.55                │ 7.50           │ 73.05     │
+│ ...              │ ...                  │ ...            │ ...       │
+└──────────────────┴──────────────────────┴────────────────┴───────────┘
+
+═══════════════════════════════════════════════════════════════════════════════
+COMUNICACIÓN A CLIENTES
+═══════════════════════════════════════════════════════════════════════════════
+
+Aviso en la web:
+
+  "⚠️ ACTUALIZACIÓN DE PRECIOS (28 julio 2026)
+   
+   Por ajuste de costes administrativos (RD 659/2025) e inflación,
+   los precios han sido actualizados un +15%:
+   
+   • Base: 57€ → 65.55€
+   • Tasas de registro por CCAA: ver calculador
+   
+   Total final = Base + Tasa regional (si aplica)"
+
+Email a clientes con leads pendientes:
+
+  Subject: "Actualización de precios CertificadoYa (28 julio)"
+  
+  "Hola [nombre],
+   
+   Tu certificado energético tiene precio actualizado:
+   
+   Zona: [provincia]
+   Precio anterior: 57€ + [tasa anterior]
+   Precio actual: 65.55€ + [tasa actual]
+   
+   Si contratas en 48h, aplicamos precio anterior como cortesía.
+   
+   Gracias."
+
+═══════════════════════════════════════════════════════════════════════════════
+VERIFICACIÓN POST-DEPLOY
+═══════════════════════════════════════════════════════════════════════════════
+
+□ index.html muestra base 65.55€ (actualizado)
+□ Calculador suma tasas dinámicamente
+□ Presupuesto recalcula al cambiar provincia
+□ Stripe recibe total correcto (base + tasa)
+□ Leads en BD guardan precio_base = 65.55
+□ Vista v_resumen_tasas_mes devuelve totales correctos
+□ Admin panel muestra base 65.55€ en tabla ccaa_tasas
+
+═══════════════════════════════════════════════════════════════════════════════

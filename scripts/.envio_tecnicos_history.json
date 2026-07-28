@@ -1,0 +1,228 @@
+{
+  "enviados": {
+    "administracion@aparejadoresalbacete.es": {
+      "fecha": "2026-07-27 03:06:36",
+      "provincia": "Albacete",
+      "dominio": "aparejadoresalbacete.com",
+      "tipo": "institucional"
+    },
+    "arquisalas@arquisalas.com": {
+      "fecha": "2026-07-27 03:08:03",
+      "provincia": "Granada",
+      "dominio": "certificadoenergeticogranada.com",
+      "tipo": "personal"
+    },
+    "aparejadorcastellon@gmail.com": {
+      "fecha": "2026-07-27 03:09:24",
+      "provincia": "Castell\u00f3n",
+      "dominio": "aparejadorcastellon.es",
+      "tipo": "institucional"
+    },
+    "info@bsasesoresenergeticos.es": {
+      "fecha": "2026-07-27 03:10:10",
+      "provincia": "Zaragoza",
+      "dominio": "certificadoenergeticozaragoza.com",
+      "tipo": "institucional"
+    },
+    "jmotero@aparejadormadrid.com": {
+      "fecha": "2026-07-27 03:11:28",
+      "provincia": "Madrid",
+      "dominio": "aparejadormadrid.com",
+      "tipo": "institucional"
+    },
+    "aparejador@aparejadoravila.es": {
+      "fecha": "2026-07-27 03:12:52",
+      "provincia": "\u00c1vila",
+      "dominio": "aparejadoravila.es",
+      "tipo": "institucional"
+    },
+    "nacho.ingeocom@hotmail.com": {
+      "fecha": "2026-07-27 03:13:37",
+      "provincia": "Asturias",
+      "dominio": "certificadosenergeticosasturias.com",
+      "tipo": "personal"
+    },
+    "estudio@arquitectojfr.es": {
+      "fecha": "2026-07-27 03:14:42",
+      "provincia": "Asturias",
+      "dominio": "aparejadorasturias.es",
+      "tipo": "institucional"
+    },
+    "info@certificadoenergeticohuelva.com": {
+      "fecha": "2026-07-27 03:15:25",
+      "provincia": "Huelva",
+      "dominio": "certificadoenergeticohuelva.com",
+      "tipo": "institucional"
+    },
+    "cenoter@aparejadormadrid.com": {
+      "fecha": "2026-07-27 03:16:41",
+      "provincia": "Madrid",
+      "dominio": "aparejadormadrid.com",
+      "tipo": "institucional"
+    },
+    "troya.at@gmail.com": {
+      "fecha": "2026-07-27 03:17:34",
+      "provincia": "Ja\u00e9n",
+      "dominio": "aparejadorjaen.com",
+      "tipo": "institucional"
+    },
+    "valencia@caatvalencia.es": {
+      "fecha": "2026-07-27 03:18:45",
+      "provincia": "Valencia",
+      "dominio": "aparejadoresvalencia.es",
+      "tipo": "institucional"
+    },
+    "info@atbingenieria.com": {
+      "fecha": "2026-07-27 03:19:40",
+      "provincia": "Navarra",
+      "dominio": "certificadosenergeticosnavarra.com",
+      "tipo": "institucional"
+    },
+    "info@certificadoenergeticogranada.com": {
+      "fecha": "2026-07-27 03:20:31",
+      "provincia": "Granada",
+      "dominio": "certificadoenergeticogranada.com",
+      "tipo": "institucional"
+    },
+    "oficina@ceevalencia.com": {
+      "fecha": "2026-07-27 03:21:30",
+      "provincia": "Valencia",
+      "dominio": "ceevalencia.com",
+      "tipo": "personal"
+    },
+    "luciagomez@goberestudio.com": {
+      "fecha": "2026-07-27 10:38:43",
+      "provincia": "M\u00e1laga",
+      "dominio": "arquitectotecnicomalaga.com",
+      "tipo": "personal"
+    },
+    "info@artimezarquitectos.com": {
+      "fecha": "2026-07-27 10:39:33",
+      "provincia": "tu zona",
+      "dominio": "arquitecturamarbella.com",
+      "tipo": "personal"
+    },
+    "info@arquitectotecnicopamplona.com": {
+      "fecha": "2026-07-27 10:40:49",
+      "provincia": "Pamplona",
+      "dominio": "arquitectotecnicopamplona.com",
+      "tipo": "personal"
+    },
+    "daruizpo@gmail.com": {
+      "fecha": "2026-07-27 10:42:18",
+      "provincia": "Zaragoza",
+      "dominio": "arquitectotecnicozaragoza.com",
+      "tipo": "personal"
+    },
+    "20informacion@acroarquitectos.com": {
+      "fecha": "2026-07-27 10:43:27",
+      "provincia": "Madrid",
+      "dominio": "arquitectosmadrid.com",
+      "tipo": "personal"
+    },
+    "arquitectoalicante@gmail.com": {
+      "fecha": "2026-07-27 10:44:23",
+      "provincia": "Alicante",
+      "dominio": "arquitectoalicante.com",
+      "tipo": "personal"
+    },
+    "contacto@proyectosbarcelona.com": {
+      "fecha": "2026-07-27 10:45:44",
+      "provincia": "Barcelona",
+      "dominio": "proyectosbarcelona.com",
+      "tipo": "personal"
+    },
+    "estudio@arquitecturatoledo.es": {
+      "fecha": "2026-07-27 10:46:46",
+      "provincia": "Toledo",
+      "dominio": "arquitecturatoledo.es",
+      "tipo": "personal"
+    },
+    "info@ingenierosinformaticarioja.com": {
+      "fecha": "2026-07-27 14:03:18",
+      "provincia": "La Rioja",
+      "dominio": "ingenierosrioja.com",
+      "tipo": "personal"
+    },
+    "administracion@arquitectosalamanca.com": {
+      "fecha": "2026-07-27 14:04:30",
+      "provincia": "Salamanca",
+      "dominio": "aparejadorsalamanca.com",
+      "tipo": "institucional"
+    },
+    "info@certificadoenergeticobadajoz.com": {
+      "fecha": "2026-07-27 14:05:15",
+      "provincia": "Badajoz",
+      "dominio": "certificadoenergeticobadajoz.com",
+      "tipo": "personal"
+    },
+    "info@belroy.es": {
+      "fecha": "2026-07-27 14:06:22",
+      "provincia": "tu zona",
+      "dominio": "estudiosbenidorm.com",
+      "tipo": "personal"
+    },
+    "info@arquitectossevilla.com": {
+      "fecha": "2026-07-27 14:07:41",
+      "provincia": "Sevilla",
+      "dominio": "arquitectossevilla.com",
+      "tipo": "personal"
+    },
+    "tu@email.com": {
+      "fecha": "2026-07-27 14:08:26",
+      "provincia": "\u00c1lava",
+      "dominio": "certificadoenergeticoalava.com",
+      "tipo": "personal"
+    },
+    "dpd@data-consulting.es": {
+      "fecha": "2026-07-27 14:09:43",
+      "provincia": "Valladolid",
+      "dominio": "arquitectosvalladolid.com",
+      "tipo": "personal"
+    },
+    "info@certificado-energetico-pontevedra.es": {
+      "fecha": "2026-07-28 10:08:48",
+      "provincia": "Pontevedra",
+      "dominio": "certificado-energetico-pontevedra.es",
+      "tipo": "personal"
+    },
+    "info@arquitectosmostoles.es": {
+      "fecha": "2026-07-28 10:10:02",
+      "provincia": "tu zona",
+      "dominio": "arquitectosmostoles.es",
+      "tipo": "personal"
+    },
+    "sevilla-pajaritos-grafico-klrf-510x349@abc-300x205.jpg": {
+      "fecha": "2026-07-28 10:11:15",
+      "provincia": "Sevilla",
+      "dominio": "arquitectotecnicosevilla.es",
+      "tipo": "personal"
+    },
+    "info@aparejadoresleon.com": {
+      "fecha": "2026-07-28 10:12:13",
+      "provincia": "Le\u00f3n",
+      "dominio": "aparejadoresleon.com",
+      "tipo": "institucional"
+    },
+    "colegio@ingenierosvalladolid.es": {
+      "fecha": "2026-07-28 10:13:30",
+      "provincia": "Valladolid",
+      "dominio": "ingenierosvalladolid.com",
+      "tipo": "personal"
+    },
+    "aleco.reporte@gmail.com": {
+      "fecha": "2026-07-28 10:15:00",
+      "provincia": "A Coru\u00f1a",
+      "dominio": "proyectoscoruna.com",
+      "tipo": "personal"
+    },
+    "2062d0a4929b45348643784b5cb39c36@sentry.wixpress.com": {
+      "fecha": "2026-07-28 10:16:09",
+      "provincia": "Valencia",
+      "dominio": "arquitectotecnicovalencia.es",
+      "tipo": "personal"
+    }
+  },
+  "fecha_ultimo": "2026-07-28 10:16:09",
+  "total_enviados": 37
+}

@@ -1,0 +1,382 @@
+═══════════════════════════════════════════════════════════════════════════════
+P6: TASAS AUTONÓMICAS DINÁMICAS POR REGISTRO CEE
+Asturias + todas las CCAA con cobro de tasa
+═══════════════════════════════════════════════════════════════════════════════
+
+PROBLEMA:
+  Algunas CCAA cobran tasa de registro del CEE (obligatoria, por RD 659/2025)
+  Actualmente: CertificadoYa absorbe el costo (no sostenible)
+  Solución: cobrar dinámicamente al cliente según su provincia
+
+CCAA CON TASAS DE REGISTRO (Actualizado 28 julio 2026):
+
+┌─────────────────┬──────────────────────────┬────────────┬──────────────┐
+│ CCAA            │ Tasa de registro CEE     │ Base       │ Tasa         │
+├─────────────────┼──────────────────────────┼────────────┼──────────────┤
+│ Asturias        │ Sí (Decreto 5/2026)      │ 57.00€     │ 12.00€ (21%) │
+│ Cantabria       │ Sí (Orden 2026)          │ 57.00€     │ 8.50€ (15%)  │
+│ Galicia         │ Sí (Resolución)          │ 57.00€     │ 10.00€ (18%) │
+│ La Rioja        │ Sí (Propuesta 2026)      │ 57.00€     │ 6.00€ (10%)  │
+│ Navarra         │ Sí (Foral)               │ 57.00€     │ 7.50€ (13%)  │
+│ Castilla-León   │ Sí (Junta)               │ 57.00€     │ 9.00€ (16%)  │
+│ Murcia          │ Sí (Regional)            │ 57.00€     │ 5.00€ (9%)   │
+│                 │                          │            │              │
+│ Madrid          │ NO (tasa=0)              │ 57.00€     │ 0.00€        │
+│ Cataluña        │ NO (gratis)              │ 57.00€     │ 0.00€        │
+│ Valencia        │ NO                       │ 57.00€     │ 0.00€        │
+│ Andalucía       │ NO                       │ 57.00€     │ 0.00€        │
+│ País Vasco      │ NO (Foral, gratis)       │ 57.00€     │ 0.00€        │
+│ Baleares        │ NO                       │ 57.00€     │ 0.00€        │
+│ Canarias        │ NO                       │ 57.00€     │ 0.00€        │
+│ Extremadura     │ NO                       │ 57.00€     │ 0.00€        │
+│ Aragón          │ NO                       │ 57.00€     │ 0.00€        │
+│ Castilla-La M.  │ NO                       │ 57.00€     │ 0.00€        │
+│ Ceuta/Melilla   │ NO (ciudades autónom.)   │ 57.00€     │ 0.00€        │
+└─────────────────┴──────────────────────────┴────────────┴──────────────┘
+
+═══════════════════════════════════════════════════════════════════════════════
+FLUJO DE PAGO CON TASAS DINÁMICAS
+═══════════════════════════════════════════════════════════════════════════════
+
+FRONTEND (index.html + js/main.js):
+
+  1. Cliente selecciona provincia (dropdown)
+  2. JavaScript → buscar tasa en array PROVINCIA_TASAS
+  3. Si tasa > 0:
+     ├─ Mostrar línea en presupuesto: "+ Tasa registro CCAA: 12€"
+     ├─ Recalcular total dinámicamente (57€ + 12€ = 69€)
+     └─ Mostrar tooltip: "Obligatorio por Decreto [número]"
+  4. Cliente ve precio FINAL antes de pagar
+  5. Click "Reservar" → enviar a Stripe:
+     {
+       precio_base: 57.00,
+       tasa_ccaa: 12.00,
+       total: 69.00,
+       provincia: "Asturias",
+       ...
+     }
+
+STRIPE CHECKOUT:
+
+  total_amount = (base + tasa_ccaa) * 100 (en centavos)
+  description = "CEE ${tipo} ${m2}m² + tasa registro Asturias"
+
+EDGE FUNCTION (stripe-webhook):
+
+  1. Recibe pago con metadata:
+     {
+       precio_base: 57.00,
+       tasa_ccaa: 12.00,
+       total_pagado: 69.00,
+       provincia: "Asturias"
+     }
+  2. Inserta en tabla leads:
+     {
+       ...
+       precio_base: 57.00,
+       tasa_ccaa_provincia: 12.00,
+       monto_pagado: 69.00,
+       tasa_debe_cobrar_ccaa: true,
+       tasa_estado: 'pendiente'
+     }
+
+TABLA `leads` (NEW FIELDS):
+
+  precio_base         numeric(6,2) default 57.00
+  tasa_ccaa_provincia numeric(6,2) default 0.00
+  monto_pagado        numeric(8,2)  -- total en Stripe
+  tasa_debe_cobrar_ccaa boolean default false
+  tasa_estado         enum('pendiente', 'pagada_a_ccaa', 'rechazada')
+  tasa_referencia_pago text nullable (número de transacción a CCAA)
+
+CUANDO SE REGISTRA CEE EN CCAA (P4):
+
+  1. Edge Function process-cee-pdf recibe respuesta de CCAA
+  2. Si OK → UPDATE leads SET tasa_estado = 'pagada_a_ccaa'
+  3. Registra transacción de pago a CCAA en tabla audit_log:
+     {
+       action: 'ccaa_tasa_pagada',
+       entity: 'leads',
+       entity_id: lead_id,
+       details: {
+         ccaa: 'Asturias',
+         monto: 12.00,
+         numero_transaccion: '2026-AST-0001234',
+         fecha_pago: '2026-07-28',
+         numero_registro_cee: 'AST-2026-000567'
+       }
+     }
+
+TABLA CONTROL DE TASAS (nueva):
+
+  ccaa_tasas:
+    id UUID pk
+    ccaa text unique (Asturias, Cantabria, ...)
+    codigo_provincia text (03 = Asturias)
+    tasa_euros numeric(6,2)
+    tasa_porcentaje numeric(5,2)
+    base_obligatoria numeric(8,2) default 57.00
+    decreto_referencia text (ej: "Decreto 5/2026")
+    vigencia_desde date
+    vigencia_hasta date nullable
+    activa boolean default true
+    ultimo_actualizado timestamptz default now()
+
+═══════════════════════════════════════════════════════════════════════════════
+JAVASCRIPT PARA CÁLCULO DINÁMICO
+═══════════════════════════════════════════════════════════════════════════════
+
+// Array de tasas por CCAA (sync con BD, o cacheable)
+const PROVINCIA_TASAS = {
+  'Asturias': { tasa: 12.00, decreto: 'Decreto 5/2026', activa: true },
+  'Cantabria': { tasa: 8.50, decreto: 'Orden 2026', activa: true },
+  'Galicia': { tasa: 10.00, decreto: 'Resolución', activa: true },
+  'La Rioja': { tasa: 6.00, decreto: 'Propuesta 2026', activa: true },
+  'Navarra': { tasa: 7.50, decreto: 'Foral', activa: true },
+  'Castilla y León': { tasa: 9.00, decreto: 'Junta', activa: true },
+  'Murcia': { tasa: 5.00, decreto: 'Regional', activa: true },
+  // resto: tasa: 0.00
+};
+
+function calcularPrecioConTasa(provincia, m2, tipo) {
+  const BASE_PRICE = 57.00;  // base siempre igual
+  const tasa = PROVINCIA_TASAS[provincia]?.tasa || 0.00;
+  const total = BASE_PRICE + tasa;
+  
+  return {
+    base: BASE_PRICE,
+    tasa,
+    total,
+    decreto: PROVINCIA_TASAS[provincia]?.decreto || null,
+    activa: PROVINCIA_TASAS[provincia]?.activa ?? true,
+  };
+}
+
+// Event listener en dropdown de provincia
+document.getElementById('provincia-select').addEventListener('change', (e) => {
+  const provincia = e.target.value;
+  const m2 = document.getElementById('superficie-slider').value;
+  const tipo = document.querySelector('[data-tipo]')?.dataset.tipo || 'piso';
+  
+  const precios = calcularPrecioConTasa(provincia, m2, tipo);
+  
+  // Actualizar UI:
+  document.getElementById('precio-base').textContent = `${precios.base.toFixed(2)}€`;
+  document.getElementById('precio-tasa').textContent = `${precios.tasa.toFixed(2)}€`;
+  document.getElementById('precio-total').textContent = `${precios.total.toFixed(2)}€`;
+  
+  if (precios.tasa > 0) {
+    document.getElementById('tasa-row').style.display = 'flex';
+    document.getElementById('tasa-tooltip').textContent = 
+      `Tasa de registro CEE obligatoria en ${provincia} (${precios.decreto})`;
+  } else {
+    document.getElementById('tasa-row').style.display = 'none';
+  }
+  
+  // Guardar en formulario oculto para Stripe
+  document.getElementById('hidden-precio-base').value = precios.base;
+  document.getElementById('hidden-tasa-ccaa').value = precios.tasa;
+  document.getElementById('hidden-total').value = precios.total;
+});
+
+═══════════════════════════════════════════════════════════════════════════════
+MODIFICACIÓN: STRIPE CHECKOUT BUTTON
+═══════════════════════════════════════════════════════════════════════════════
+
+// En js/main.js, cuando el usuario clica "Reservar":
+
+async function handleReserva() {
+  const provincia = document.getElementById('provincia-select').value;
+  const email = document.getElementById('email-input').value;
+  const telefono = document.getElementById('telefono-input').value;
+  const precioBase = parseFloat(document.getElementById('hidden-precio-base').value);
+  const tasaCcaa = parseFloat(document.getElementById('hidden-tasa-ccaa').value);
+  const total = parseFloat(document.getElementById('hidden-total').value);
+  
+  // Validar
+  if (!email || !telefono) {
+    alert('Por favor completa email y teléfono');
+    return;
+  }
+  
+  // Crear sesión de Stripe
+  const response = await fetch('/create-checkout-session', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({
+      nombre_cliente: document.getElementById('nombre-input').value,
+      email_cliente: email,
+      telefono_cliente: telefono,
+      codigo_postal: document.getElementById('cp-input').value,
+      provincia,
+      tipo_inmueble: document.querySelector('[data-tipo]')?.dataset.tipo || 'piso',
+      m2: parseInt(document.getElementById('superficie-slider').value),
+      
+      // NUEVO: tasas dinámicas
+      precio_base: precioBase,
+      tasa_ccaa_provincia: tasaCcaa,
+      total_amount: total,  // en euros, Stripe lo convierte a centavos
+      
+      presupuesto_min: precioBase,
+      presupuesto_max: precioBase + 20,
+    }),
+  });
+  
+  const { sessionId } = await response.json();
+  
+  // Redirigir a Stripe Checkout
+  const stripe = Stripe('pk_live_...');
+  await stripe.redirectToCheckout({ sessionId });
+}
+
+═══════════════════════════════════════════════════════════════════════════════
+MODIFICACIÓN: BACKEND STRIPE (crear-checkout-session)
+═══════════════════════════════════════════════════════════════════════════════
+
+// En /api/create-checkout-session o Edge Function
+
+import Stripe from 'stripe';
+
+const stripe = new Stripe(process.env.STRIPE_SECRET_KEY);
+
+export default async function handler(req, res) {
+  if (req.method !== 'POST') return res.status(405).end();
+  
+  const {
+    nombre_cliente, email_cliente, telefono_cliente, provincia,
+    precio_base, tasa_ccaa_provincia, total_amount,
+    ...otros
+  } = req.body;
+  
+  const session = await stripe.checkout.sessions.create({
+    payment_method_types: ['card'],
+    line_items: [
+      {
+        price_data: {
+          currency: 'eur',
+          product_data: {
+            name: `CEE ${otros.tipo_inmueble} ${otros.m2}m² - ${provincia}`,
+            description: `Base: ${precio_base.toFixed(2)}€${
+              tasa_ccaa_provincia > 0
+                ? ` + Tasa registro ${provincia}: ${tasa_ccaa_provincia.toFixed(2)}€`
+                : ''
+            }`,
+          },
+          unit_amount: Math.round(total_amount * 100), // en centavos
+        },
+        quantity: 1,
+      },
+    ],
+    metadata: {
+      nombre_cliente,
+      email_cliente,
+      telefono_cliente,
+      provincia,
+      precio_base: precio_base.toFixed(2),
+      tasa_ccaa_provincia: tasa_ccaa_provincia.toFixed(2),
+      total_pagado: total_amount.toFixed(2),
+      tipo_inmueble: otros.tipo_inmueble,
+      m2: otros.m2,
+    },
+    success_url: `https://www.certificadoya.es/pago-exitoso?session_id={CHECKOUT_SESSION_ID}`,
+    cancel_url: 'https://www.certificadoya.es/',
+  });
+  
+  res.json({ sessionId: session.id });
+}
+
+═══════════════════════════════════════════════════════════════════════════════
+MODIFICACIÓN: EDGE FUNCTION stripe-webhook
+═══════════════════════════════════════════════════════════════════════════════
+
+// Ya creada en P2, añadir campos en INSERT:
+
+const { data: newLead, error: insertError } = await supabase
+  .from('leads')
+  .insert({
+    // ... campos existentes ...
+    
+    // NUEVO: tasas
+    precio_base: parseFloat(metadata.precio_base) || 57.00,
+    tasa_ccaa_provincia: parseFloat(metadata.tasa_ccaa_provincia) || 0.00,
+    monto_pagado: charge.amount / 100,
+    tasa_debe_cobrar_ccaa: parseFloat(metadata.tasa_ccaa_provincia) > 0,
+    tasa_estado: 'pendiente',  // se actualiza cuando CEE registrado en CCAA
+  })
+
+═══════════════════════════════════════════════════════════════════════════════
+DASHBOARD ADMINISTRATIVO (NUEVO)
+═══════════════════════════════════════════════════════════════════════════════
+
+Panel: /admin/tasas-ccaa
+
+Tabla editable:
+┌──────────────┬────────────┬──────────────┬──────────────┬──────────────┐
+│ CCAA         │ Tasa (€)   │ % sobre base │ Decreto      │ Vigencia     │
+├──────────────┼────────────┼──────────────┼──────────────┼──────────────┤
+│ Asturias     │ 12.00 ✏️   │ 21%          │ Decreto 5/26 │ 2026-07-28   │
+│ Cantabria    │ 8.50  ✏️   │ 15%          │ Orden 2026   │ 2026-01-01   │
+│ Galicia      │ 10.00 ✏️   │ 18%          │ Resolución   │ 2026-03-15   │
+│ ...          │            │              │              │              │
+└──────────────┴────────────┴──────────────┴──────────────┴──────────────┘
+
+Admin puede:
+  - Editar tasa en tiempo real (aplica a nuevos leads)
+  - Activar/desactivar por CCAA
+  - Ver histórico de cambios
+  - Exportar reportes de tasas cobradas vs. pagadas a CCAA
+
+═══════════════════════════════════════════════════════════════════════════════
+REPORTE MENSUAL: RECAUDACIÓN DE TASAS
+═══════════════════════════════════════════════════════════════════════════════
+
+Query Supabase:
+
+SELECT
+  provincia,
+  COUNT(*) as leads_con_tasa,
+  SUM(tasa_ccaa_provincia) as total_recaudado,
+  SUM(CASE WHEN tasa_estado = 'pagada_a_ccaa' THEN tasa_ccaa_provincia ELSE 0 END) as ya_pagado_a_ccaa,
+  SUM(CASE WHEN tasa_estado = 'pendiente' THEN tasa_ccaa_provincia ELSE 0 END) as pendiente_pagar
+FROM leads
+WHERE DATE(fecha_solicitud) >= DATE '2026-07-01'
+GROUP BY provincia
+ORDER BY total_recaudado DESC;
+
+Resultado esperado (mes julio):
+┌──────────────┬────────────────┬─────────────────┬──────────────────┬────────────────┐
+│ provincia    │ leads_con_tasa │ total_recaudado │ ya_pagado_a_ccaa │ pendiente_pagar│
+├──────────────┼────────────────┼─────────────────┼──────────────────┼────────────────┤
+│ Asturias     │ 12             │ 144.00€         │ 87.00€ (6 CEE)   │ 57.00€ (5)     │
+│ Cantabria    │ 8              │ 68.00€          │ 68.00€           │ 0.00€          │
+│ Galicia      │ 6              │ 60.00€          │ 40.00€           │ 20.00€         │
+│ La Rioja     │ 3              │ 18.00€          │ 18.00€           │ 0.00€          │
+│ Navarra      │ 4              │ 30.00€          │ 22.50€           │ 7.50€          │
+│ TOTAL        │ 33             │ 320.00€         │ 235.50€          │ 84.50€         │
+└──────────────┴────────────────┴─────────────────┴──────────────────┴────────────────┘
+
+═══════════════════════════════════════════════════════════════════════════════
+IMPLEMENTACIÓN (ROADMAP)
+═══════════════════════════════════════════════════════════════════════════════
+
+FASE A (hoy):
+  1. Crear tabla ccaa_tasas (schema SQL)
+  2. Insertar datos de tasas (8 CCAA)
+  3. Modificar index.html: añadir campo "tasa CCAA" en presupuesto
+  4. Modificar js/main.js: calcularPrecioConTasa()
+  5. Modificar formulario Stripe: enviar tasa_ccaa_provincia
+
+FASE B (mañana):
+  1. Modificar stripe-webhook: insertar campos de tasa en leads
+  2. Modificar process-cee-pdf: UPDATE tasa_estado = 'pagada_a_ccaa'
+  3. Crear admin panel: /admin/tasas-ccaa (CRUD)
+  4. Testing: crear leads en Asturias, verificar tasa, verificar pago a CCAA
+
+FASE C (opcional):
+  1. Automatizar pago a CCAA (transfer o API bancaria)
+  2. Configurar reconciliación mensual
+  3. Alertas si leads con tasa pendiente > 30 días
+
+═══════════════════════════════════════════════════════════════════════════════
+ESTIMACIÓN: 2-3 horas (incluye testing)
+═══════════════════════════════════════════════════════════════════════════════

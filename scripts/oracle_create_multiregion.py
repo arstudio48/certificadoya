@@ -2,10 +2,16 @@
 """
 Oracle Cloud Free Tier — Crear instancia Always-Free probando regiones suscritas
 Consulta regiones suscritas y prueba solo esas hasta encontrar capacidad.
+
+Salidas:
+- ÉXITO|IP: cuando se crea la instancia (avisar + detener cron job)
+- [SILENT]: cuando no hay capacidad - silencio + reintentar
+- ERROR|mensaje: para otros errores (avisar)
 """
 import oci
 import base64
 import os
+import sys
 
 # Config base (se sobreescribe region por cada intento)
 CONFIG_PATH = r"C:\Users\artur\.oci\config"
@@ -16,7 +22,7 @@ SSH_PUB = r"C:\Users\artur\.ssh\id_rsa.pub"
 REGIONES_CANDIDATAS = ["eu-madrid-3", "eu-frankfurt-1", "uk-london-1", "us-ashburn-1"]
 
 CLOUD_INIT = """#cloud-config
-package_update: true
+packageUpdate: true
 packages:
   - curl
 runcmd:
@@ -32,7 +38,6 @@ def get_subscribed_regions(identity, compartimento):
         ).data
         return [r.region_name for r in regions]
     except Exception as e:
-        print(f"  ⚠ Error consultando regiones suscritas: {e}")
         return []
 
 def get_image(compute, compartimento, region):
@@ -83,6 +88,14 @@ def get_subnet(network, compute, compartimento, region):
     return subnet.id, vcn_id
 
 def intentar_region(region):
+    """Intenta crear instancia en la región.
+    
+    Retorna:
+        True: Éxito (instancia creada o ya existente)
+        False: Out of host capacity
+        None: Región no disponible (no suscrita)
+        raise: Otro error (ServiceError con código diferente)
+    """
     config = oci.config.from_file(CONFIG_PATH)
     config["region"] = region
     config["key_file"] = PRIVATE_KEY
@@ -91,14 +104,13 @@ def intentar_region(region):
     identity = oci.identity.IdentityClient(config)
     compartimento = config["tenancy"]
 
-    print(f"\n=== REGIÓN: {region} ===")
     # Verificar ADs
     ads = oci.pagination.list_call_get_all_results(
         identity.list_availability_domains, compartimento
     ).data
     if not ads:
-        print(f"  Sin ADs (región no suscrita?)")
-        return False
+        return None  # None = no probado, no suscrita
+
     ad = ads[0].name
 
     # Comprobar si ya existe instancia
@@ -107,8 +119,7 @@ def intentar_region(region):
     ).data
     running = [i for i in existing if i.lifecycle_state in ('RUNNING', 'PROVISIONING')]
     if running:
-        print(f"  ✅ Ya existe instancia en {region}: {running[0].id}")
-        return True
+        return True  # Éxito (ya existe)
 
     try:
         image_id = get_image(compute, compartimento, region)
@@ -119,58 +130,79 @@ def intentar_region(region):
             availability_domain=ad,
             shape="VM.Standard.A1.Flex",
             shape_config=oci.core.models.LaunchInstanceShapeConfigDetails(ocpus=2, memory_in_gbs=12),
-            source_details=oci.core.models.InstanceSourceViaImageDetails(source_type="image", image_id=image_id),
+            source_details=oci.core.models.InstanceSourceViaImageDetails(
+                source_type="image", image_id=image_id
+            ),
             create_vnic_details=oci.core.models.CreateVnicDetails(
                 subnet_id=subnet_id, assign_public_ip=True, display_name="vnic-public"
             ),
             metadata={
-                "ssh_authorized_keys": open(SSH_PUB).read().strip(),
                 "user_data": base64.b64encode(CLOUD_INIT.encode()).decode()
             }
         )
+        # Agregar clave SSH al metadata
+        metadata = details.metadata or {}
+        metadata["ssh_authorized_keys"] = open(SSH_PUB).read().strip()
+        details.metadata = metadata
+        
         instance = compute.launch_instance(details).data
-        print(f"  ✅ Instancia creada en {region}: {instance.id}")
         oci.wait_until(compute, compute.get_instance(instance.id), 'lifecycle_state', 'RUNNING')
-        vnics = oci.pagination.list_call_get_all_results(
-            compute.list_vnic_attachments, compartimento, instance_id=instance.id
-        ).data
-        vnic = network.get_vnic(vnics[0].vnic_id).data
-        print(f"  🌐 IP: {vnic.public_ip} | ssh ubuntu@{vnic.public_ip}")
-        return True
+        return True  # Éxito
+
     except oci.exceptions.ServiceError as e:
         if 'Out of host capacity' in str(e):
-            print(f"  ⏳ Sin capacidad en {region}")
-            return False
+            return False  # Fallo por capacidad
         else:
-            print(f"  ❌ Error en {region}: {e.message}")
-            return False
+            raise  # Re-raise para otros errores
 
 def main():
-    print("🔄 Consultando regiones suscritas...")
+    """
+    Main function - prints results to stdout.
+    Salidas segun instrucciones:
+    - ÉXITO|IP: cuando se crea la instancia (avisar al usuario + detener cron job)
+    - [SILENT]: cuando no hay capacidad - silencio + reintentar
+    - ERROR|mensaje: para otros errores (avisar)
+    """
     config = oci.config.from_file(CONFIG_PATH)
     config["key_file"] = PRIVATE_KEY
     identity = oci.identity.IdentityClient(config)
     compartimento = config["tenancy"]
     
     regiones_suscritas = get_subscribed_regions(identity, compartimento)
-    print(f"📍 Regiones suscritas: {regiones_suscritas}")
     
     # Filtrar solo regiones candidatas que están suscritas
     regiones_a_probar = [r for r in REGIONES_CANDIDATAS if r in regiones_suscritas]
     if not regiones_a_probar:
-        print("❌ Ninguna región candidata está suscrita. Ve a Console → Subscriptions → Add Region")
+        print("ERROR|Ninguna región candidata está suscrita. Suscribir regiones en Console")
         return
     
-    print(f"🎯 Probando: {regiones_a_probar}")
-    
+    # Intentar cada región
     for region in regiones_a_probar:
         try:
-            if intentar_region(region):
-                print(f"\n🎉 ÉXITO en {region}")
+            result = intentar_region(region)
+            if result is True:  # Éxito (instancia creada o ya existente)
+                # Obtener IP de la instancia
+                config["region"] = region
+                compute_config = oci.core.ComputeClient(config)
+                comp = config["tenancy"]
+                existing = oci.pagination.list_call_get_all_results(
+                    compute_config.list_instances, comp, display_name="certificadoya-oracle"
+                ).data
+                running = [i for i in existing if i.lifecycle_state in ('RUNNING', 'PROVISIONING')]
+                if running:
+                    vnics = oci.pagination.list_call_get_all_results(
+                        compute_config.list_vnic_attachments, comp, instance_id=running[0].id
+                    ).data
+                    vnic = oci.core.VirtualNetworkClient(config).get_vnic(vnics[0].vnic_id).data
+                    print(f"ÉXITO|{vnic.public_ip}")
                 return
+                
         except Exception as e:
-            print(f"  ⚠ {region}: {str(e)[:120]}")
-    print("\n❌ Sin capacidad en ninguna región suscrita. Reintentará en próximo ciclo.")
+            print(f"ERROR|{str(e)[:200]}")
+            raise  # Propagar error
+    
+    # Si llegamos aquí, todas las regiones fallaron por capacidad
+    print("[SILENT]")
 
 if __name__ == "__main__":
     main()

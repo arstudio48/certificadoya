@@ -1,0 +1,359 @@
+═══════════════════════════════════════════════════════════════════════════════
+🔄 FLUJO COMPLETO: ASIGNACIÓN TÉCNICO → ENTREGA → PAGOS — CertificadoYa
+═══════════════════════════════════════════════════════════════════════════════
+
+### 1️⃣ CLIENTE SOLICITA CERTIFICADO
+
+Cliente: www.certificadoya.es
+- Selecciona provincia / tipo / m²
+- Calcula presupuesto dinámico (69€ para piso 80m² Madrid)
+- Ingresa EMAIL ← ⚠️ TELÉFONO NO SOLICITADO AQUÍ (ES EL PROBLEMA)
+- Marca privacidad ✓
+- Elige: "Reservar" (pago anticipado) o "Solicitar técnico" (sin pago)
+
+Si "Reservar":
+  → Redirige a Stripe Checkout
+  → Cliente paga 69€
+  → Stripe notifica a Frontend (gracias.html)
+  → Frontend DEBERÍA llamar a Edge Function (pero NO LO HACE)
+  → Lead queda "huérfano" en estado "pendiente"
+
+═══════════════════════════════════════════════════════════════════════════════
+
+### 2️⃣ EDGE FUNCTION "solicitar-servicio" (Supabase)
+
+Endpoint: POST /functions/v1/solicitar-servicio
+
+Body esperado:
+{
+  action: "stripe_checkout_complete",
+  nombre_cliente: "María García",
+  email_cliente: "maria@example.com",
+  telefono_cliente: "641450068",  ← ⚠️ REQUERIDO para asignar técnico
+  codigo_postal: "28001",
+  tipo_inmueble: "piso",
+  provincia: "Madrid",
+  m2: 80,
+  presupuesto_min/max: 57/69,
+  fuente: "web-form",
+  estado: "pendiente",
+  stripe_payment_id: "pi_1234567890"
+}
+
+Lo que hace:
+1. Recibe datos del cliente desde Stripe webhook
+2. Valida teléfono:
+   - Si FALTA → guardar como lead estado "sin_contacto" (NO se asigna)
+   - Si EXISTE → guardar como lead estado "nuevo" (se asigna en 30 min)
+3. Inserta en tabla `leads` (Supabase)
+4. Registra pago en tabla `facturas` con stripe_payment_id
+5. Devuelve al cliente: "Gracias, técnico en 24h"
+6. Encola al cron de auto-asignación
+
+PROBLEMA ACTUAL:
+  ❌ No hay webhook de Stripe a Edge Function
+  ❌ Cliente solo proporciona EMAIL en calculadora
+  ❌ Edge Function nunca se invoca automáticamente con teléfono
+  ❌ Lead queda en "pendiente" y no se asigna
+
+═══════════════════════════════════════════════════════════════════════════════
+
+### 3️⃣ AUTO-ASIGNACIÓN DE TÉCNICOS (script Python)
+
+Script: auto_assign.py
+Cron: cada 30 minutos (*/30 en crontab)
+
+Algoritmo:
+1. SELECT leads WHERE estado='nuevo' AND telefono_cliente IS NOT NULL
+2. Para cada lead:
+   a. Extraer prefijo CP (3 dígitos, ej. "280" de "28001")
+   b. Buscar técnicos activos:
+      SELECT tecnicos WHERE
+        activo=true AND
+        cp_cobertura LIKE '280%' AND
+        modelo_pago IN ('lead', 'comision')
+   c. Aplicar round-robin (técnico con menos leads en esa zona este mes)
+   d. UPDATE leads SET
+        tecnico_id = [técnico],
+        estado = 'asignado',
+        fecha_asignacion = now()
+   e. Enviar email al técnico:
+      "Nuevo encargo en Madrid (CP 28001)
+       Cliente: María García
+       Teléfono: 641 45 00 68
+       Tipo: Piso de 80 m²
+       Presupuesto: 69€
+       [ Acepta: https://panel.certificadoya.es/encargo/lead_5 ]"
+
+PROBLEMAS:
+  ❌ Sin teléfono → no se asigna
+  ❌ Sin email técnico validado → no se notifica
+  ❌ Sin técnicos en zona → escala a admin (manual)
+
+═══════════════════════════════════════════════════════════════════════════════
+
+### 4️⃣ TÉCNICO ACEPTA/RECHAZA (Panel)
+
+Interfaz: panel-tecnicos.html → "MIS ENCARGOS NUEVOS"
+
+Tabla de leads con estado "asignado":
+┌─────────────────────────────────────────────────┐
+│ [NUEVO] María García - Madrid 28001             │
+│ Piso · 80 m² · 69€ · 641 45 00 68              │
+│ Asignado hace 2 horas                           │
+│ [ ✅ ACEPTAR ]  [ ❌ RECHAZAR ]                │
+└─────────────────────────────────────────────────┘
+
+Si ACEPTA (tecnólogo clica botón):
+  Edge Function (action='aceptar', leadId, tecnicoEmail)
+  ├─ Valida que el técnico esté activo
+  ├─ Descuenta 1 crédito de saldo (si modelo_pago='lead')
+  │  O bien: marca comisión 18% pendiente de pago
+  ├─ UPDATE leads SET estado='aceptado', fecha_aceptacion=now()
+  ├─ Envía email al CLIENTE:
+  │  "✅ Técnico confirmado: Juan López
+  │    Contacto: 616 123 456 / juan.lopez@example.com
+  │    Próximo paso: te llamará para fijar la visita"
+  ├─ Envía email al TÉCNICO:
+  │  "✅ Encargo aceptado. Lead: María García (28001)
+  │    Pago: 69€ × 18% = 12.42€ cuando registres el CEE en plataforma"
+  └─ Lead ahora en estado 'aceptado'
+
+Si RECHAZA:
+  Edge Function (action='rechazar', leadId, tecnicoEmail)
+  ├─ UPDATE leads SET estado='disponible', tecnico_id=NULL
+  ├─ Reintenta auto-asignación a otro técnico en zona
+  ├─ Email al CLIENTE: "Otro técnico está revisando tu encargo"
+  └─ Si no hay técnico en 48h → admin toma acción manual
+
+═══════════════════════════════════════════════════════════════════════════════
+
+### 5️⃣ TÉCNICO REALIZA VISITA Y GENERA CEE
+
+Flujo del técnico:
+1. Mide la vivienda in situ (horas/días)
+2. Ejecuta CE3X o herramienta equivalente
+3. Genera PDF del CEE
+4. Accede a panel-tecnicos.html → "MIS ENCARGOS EN PROGRESO"
+5. Sube PDF: drag-drop o "cargar archivo"
+6. Plataforma:
+   a. Valida PDF (estructura CE3X)
+   b. Extrae datos: calificación (A-G), fecha, validez (10 años)
+   c. Sube a Supabase Storage → /certificados/[uuid].pdf
+   d. Registra en tabla `certificados` con metadata
+   e. Edge Function intenta registrar en CCAA (RD 659/2025)
+   f. Si CCAA OK → UPDATE leads SET estado='registrado'
+   g. Si CCAA FALLA → notifica técnico de error de registro
+7. Email automático al CLIENTE:
+   "Tu certificado energético está listo
+    Archivo: [CEE_28001_2026_maria.pdf]
+    Enlace: https://certificadoya.es/certificados/[uuid]
+    Registro oficial: ✅ Verificado en CCAA de Madrid
+    Validez: hasta 28/07/2036
+    ¿Preguntas? 641 45 00 68"
+
+═══════════════════════════════════════════════════════════════════════════════
+
+### 6️⃣ ENTREGA Y VALIDEZ DEL CERTIFICADO
+
+Cliente recibe:
+  Email HTML con:
+    ✅ PDF adjunto (descargable)
+    ✅ Link de descarga directa
+    ✅ Confirmación de registro oficial
+    ✅ Fecha de validez (10 años)
+    ✅ Teléfono de soporte
+
+Certificado es válido:
+  - Desde: fecha de emisión por técnico
+  - Hasta: fecha + 10 años
+  - En toda España (válido en cualquier CCAA)
+  - Cumple RD 659/2025 (acreditación obligatoria)
+
+═══════════════════════════════════════════════════════════════════════════════
+
+### 7️⃣ PAGOS A TÉCNICOS
+
+Dos modelos disponibles:
+
+MODELO A: "Pago por lead" (pre-pago con saldo de créditos)
+──────────────────────────────────────────────────────────
+Cómo funciona:
+  1. Técnico compra 10 créditos → 1 crédito = 12€ (inversión: 120€)
+  2. Cada lead aceptado → descuenta automáticamente 1 crédito de saldo
+  3. Pago se deduce INMEDIATAMENTE al clicker "ACEPTAR"
+  4. Si CEE se registra → saldo se restaura (reembolso del 50%)
+  5. Si CEE no se registra → crédito perdido (penalización por inactividad)
+
+Tabla: `transacciones_tecnicos`
+  Gasto: -12€ (al aceptar lead)
+  Ingreso: +6€ (cuando CEE registrado) = neto -6€ por lead
+  Ingreso comisión: +12.42€ (18% del precio cliente, cuando CEE registrado)
+  Total neto técnico: 6.42€ por lead exitoso
+
+MODELO B: "Comisión por CEE registrado" (pago post-venta)
+─────────────────────────────────────────────────────────
+Cómo funciona:
+  1. Técnico acepta lead sin pagar nada
+  2. Realiza CEE (costo del técnico: variable, 40-60€ depending on tipo)
+  3. Carga PDF a plataforma
+  4. Edge Function registra automáticamente en CCAA
+  5. Si registro OK → generar factura a técnico:
+     Concepto: Comisión por CEE registrado
+     Base: 69€ (precio del cliente)
+     % para técnico: 18%
+     Total técnico: 69€ × 0.18 = 12.42€
+  6. Pago: Transferencia bancaria cada Jueves O acumula en cuenta
+
+Tabla: `facturas_tecnico` y `transacciones_tecnicos`
+  Estado: 'generada' → 'pagada' (Jueves)
+  Método pago: transferencia bancaria a cuenta registrada
+
+═══════════════════════════════════════════════════════════════════════════════
+
+### 8️⃣ ESTADO DEL LEAD EN TIEMPO REAL
+
+Ciclo de vida en tabla `leads`:
+
+ESTADO: nuevo
+────────────────
+Cuando: justo después de Edge Function (teléfono ✓)
+Qué pasa: cron auto-asignación en 30 minutos
+Duración: 0-30 min (raramente más)
+
+ESTADO: asignado
+────────────────
+Cuando: cron auto-asignación ejecutó
+Técnico: ya tiene email de notificación
+Qué pasa: espera que técnico acepte en panel
+Duración: 2-48 horas (técnico decide)
+Alerta: si >48h sin aceptar → escala a admin
+
+ESTADO: aceptado
+────────────────
+Cuando: técnico clic en "ACEPTAR" en panel
+Qué pasa: técnico realiza visita, mide, genera CEE
+Duración: 2-7 días (depende del técnico)
+
+ESTADO: registrado / completado
+────────────────────────────────
+Cuando: Edge Function valida CEE y lo registra en CCAA
+Qué pasa: cliente recibe email con PDF + confirmación
+Duración: final de ciclo de vida
+Factura: se genera a técnico automáticamente (18% comisión)
+
+═══════════════════════════════════════════════════════════════════════════════
+
+### 🚨 PROBLEMAS CRÍTICOS DETECTADOS
+
+⚠️ PROBLEMA 1: Sin teléfono en formulario
+  ├─ Cliente solo ingresa EMAIL en calculadora
+  ├─ Edge Function requiere teléfono para asignar
+  ├─ Resultado: lead queda en "sin_contacto" (no se asigna)
+  └─ SOLUCIÓN: Agregar campo teléfono OBLIGATORIO en form + validar
+
+⚠️ PROBLEMA 2: No hay webhook Stripe → Edge Function
+  ├─ Stripe cobra al cliente
+  ├─ Frontend redirige a gracias.html
+  ├─ Edge Function NUNCA se invoca con pago confirmado
+  ├─ Lead queda "huérfano" en estado "pendiente"
+  └─ SOLUCIÓN: Implementar webhook Stripe en Supabase
+
+⚠️ PROBLEMA 3: Email técnico no validado
+  ├─ Auto-asignación busca técnico por email
+  ├─ Técnicos se registran sin email o email incorrecto
+  ├─ Edge Function no encuentra al técnico
+  └─ SOLUCIÓN: Validar email técnico en registro (confirmación vía email)
+
+⚠️ PROBLEMA 4: No hay notificación si técnico rechaza
+  ├─ Técnico clica RECHAZAR
+  ├─ Lead vuelve a "disponible"
+  ├─ Cliente NO SABE que fue rechazado
+  └─ SOLUCIÓN: Email automático al cliente cuando se rechaza
+
+⚠️ PROBLEMA 5: Registro CEE en CCAA no automatizado
+  ├─ Técnico carga PDF manualmente
+  ├─ No hay call a API de CCAA (RD 659/2025)
+  ├─ Registro manual = retraso + errores
+  └─ SOLUCIÓN: Edge Function debe registrar vía API CCAA (RD 659/2025)
+
+⚠️ PROBLEMA 6: Sin validación de capacidad técnico
+  ├─ Auto-asignación no verifica si técnico tiene exceso de carga
+  ├─ Un técnico puede recibir 100 leads en 1 día
+  ├─ Colapso del sistema
+  └─ SOLUCIÓN: Limitar asignaciones por técnico/día (max 5-10)
+
+═══════════════════════════════════════════════════════════════════════════════
+
+### ✅ FLUJO CORRECTO (ESPERADO vs. ACTUAL)
+
+ESPERADO:
+  1. Cliente: email + TELÉFONO + provincia + tipo + m²
+  2. Cliente: paga 69€ en Stripe
+  3. Stripe webhook → Edge Function invocada
+  4. Edge Function: inserta lead estado 'nuevo'
+  5. Cron (30 min): auto-asigna a técnico en zona
+  6. Técnico: panel → Aceptar/Rechazar
+  7. Técnico: realiza visita + sube CEE
+  8. Edge Function: registra en CCAA
+  9. Cliente: email + PDF + confirmación oficial
+  10. Técnico: factura 12.42€ generada automáticamente
+  11. Técnico: pago via transferencia o saldo en cuenta
+
+ACTUAL (con problemas):
+  1. ❌ Cliente: solo EMAIL (sin teléfono)
+  2. ✓ Cliente: paga 69€ en Stripe
+  3. ❌ Stripe webhook: NO se invoca Edge Function
+  4. ❌ Edge Function: NUNCA se ejecuta → lead "huérfano"
+  5. ❌ Cron: no hay teléfono → NO asigna
+  6. ❌ Técnico: NUNCA recibe notificación
+  7. ❌ Lead: queda "pendiente" indefinidamente
+  8. ❌ Cliente: nunca recibe confirmación
+
+═══════════════════════════════════════════════════════════════════════════════
+
+### 📊 RESUMEN FINANCIERO POR TRANSACCIÓN
+
+Precio cliente: 69€
+
+Desglose:
+  Stripe fees (2.9% + 0.30€): -2.30€
+  Plataforma CertificadoYa (80%): +55.20€
+  Técnico (18%): +12.42€ (cuando CEE registrado)
+  ─────────────────────────────
+  Total: 67.62€ (2.38€ de Stripe)
+
+Flujo de dinero:
+  Cliente paga 69€ en Stripe
+      ↓ (Stripe retiene 2.30€)
+  CertificadoYa recibe: 66.70€
+      ├─ CertificadoYa opera: 54.28€ (81.4%)
+      └─ Técnico cobra: 12.42€ (18.6%)
+
+Si técnico usa "modelo lead" (pre-pago):
+  Técnico compra 10 créditos = 120€
+  Cada lead = -12€ (gasto)
+  CEE registrado = +6€ (reembolso 50%) = -6€ neto
+  Comisión 18% = +12.42€ (cuando registrado)
+  Total neto técnico: 6.42€ por lead
+
+═══════════════════════════════════════════════════════════════════════════════
+
+### CONCLUSIÓN
+
+CertificadoYa tiene el FLUJO diseñado correctamente pero EXECUTION tiene 6 fallos:
+
+1. ❌ Formulario sin teléfono → no asigna
+2. ❌ Sin webhook Stripe → leads huérfanos
+3. ❌ Email técnico no validado → notificaciones fallan
+4. ❌ Sin notificación de rechazo → cliente ignora estado
+5. ❌ Registro CCAA manual → retraso de 1-3 días
+6. ❌ Sin límite de asignaciones por técnico → colapso potencial
+
+PRIORIDAD DE FIXES:
+  1. Agregar teléfono obligatorio en formulario
+  2. Implementar webhook Stripe a Edge Function
+  3. Validar email técnico en registro
+  4. Auto-notificar al cliente en cada cambio de estado
+
+═══════════════════════════════════════════════════════════════════════════════
