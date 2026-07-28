@@ -105,3 +105,25 @@ if (typeof window !== 'undefined') {
     }
   };
 }
+
+
+  // Mostrar tasa en desglose (no solo en aviso)
+  window.actualizarDesgloseConTasa = function(provincia_slug, precioBase, iva, total) {
+    const datos = PROVINCIA_TASAS_2026_COMPLETO[provincia_slug];
+    const desglose = document.getElementById('calc-resultado-desglose');
+    
+    if (!desglose || !datos) return;
+    
+    // Agregar fila de tasa si existe
+    if (datos.tasa > 0) {
+      let html = desglose.innerHTML;
+      // Si no existe ya la línea de tasa, agregarla antes de "Total"
+      if (!html.includes('Tasa')) {
+        html = html.replace(
+          '<div class="desglose-linea-total">',
+          '<div class="desglose-linea"><span><strong>Tasa ' + datos.ccaa + '</strong></span><span><strong>' + datos.tasa.toFixed(2) + ' €</strong></span></div><div class="desglose-linea-total">'
+        );
+        desglose.innerHTML = html;
+      }
+    }
+  };
