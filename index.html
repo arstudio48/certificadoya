@@ -154,7 +154,7 @@ function acceptAnalyticsOnly() {
 <!-- web-vitals RUM (CWV reales de usuarios) -->
 <script type="module">
 import {onCLS,onFID,onLCP,onINP,onTTFB} from 'https://unpkg.com/web-vitals@4/dist/web-vitals.attribution.js';
-function sendVital(m){try{navigator.sendBeacon('/api/vitals',JSON.stringify({name:m.name,value:m.value,rating:m.rating,delta:m.delta,id:m.id,url:location.href,referrer:document.referrer,timestamp:Date.now()}))}catch(e){}}
+function sendVital(m){try{navigator.sendBeacon('https://wypgqpgjlookbhuaiyxa.supabase.co/functions/v1/vitals',JSON.stringify({name:m.name,value:m.value,rating:m.rating,delta:m.delta,id:m.id,url:location.href,referrer:document.referrer,timestamp:Date.now()}))}catch(e){}}
 onCLS(sendVital);onFID(sendVital);onLCP(sendVital);onINP(sendVital);onTTFB(sendVital);
 </script>
 
