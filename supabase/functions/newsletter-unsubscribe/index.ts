@@ -368,7 +368,44 @@ serve(async (req: Request) => {
         }
       )
 
-      if (!updateRes.ok) {
+      // ── Baja inmediata también en tecnicos (si existe como técnico) ──
+      const tecnicoRes = await fetch(
+        `${SUPABASE_URL}/rest/v1/tecnicos?email=eq.${encodeURIComponent(email)}&select=id`,
+        {
+          method: 'GET',
+          headers: {
+            'apikey': token,
+            'Authorization': `Bearer ${token}`
+          }
+        }
+      )
+      let tecnicoDesactivado = false
+      if (tecnicoRes.ok) {
+        const tecnicos = await tecnicoRes.json()
+        if (Array.isArray(tecnicos) && tecnicos.length > 0) {
+          const patchRes = await fetch(
+            `${SUPABASE_URL}/rest/v1/tecnicos?id=eq.${encodeURIComponent(tecnicos[0].id)}`,
+            {
+              method: 'PATCH',
+              headers: {
+                'Content-Type': 'application/json',
+                'apikey': token,
+                'Authorization': `Bearer ${token}`
+              },
+              body: JSON.stringify({
+                activo: false,
+                proximo_paso: 'baja_voluntaria',
+                seguimiento_notas: reason === 'otro' && reasonText
+                  ? `Baja voluntaria: otro: ${reasonText}`
+                  : `Baja voluntaria: ${reason}`
+              })
+            }
+          )
+          tecnicoDesactivado = patchRes.ok
+        }
+      }
+
+      if (!updateRes.ok && !tecnicoDesactivado) {
         const errText = await updateRes.text()
         console.error('Error actualizando suscriptor:', errText)
         return new Response(JSON.stringify({ error: 'No se encontró esa suscripción' }), {

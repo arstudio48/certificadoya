@@ -47,6 +47,19 @@ serve(async (req) => {
       ? tecnico.provincia.split(',').map(p => p.trim())
       : []
 
+    // Zonas ampliadas (CCAA, ciudades, pueblos, CPs) desde zonas_cobertura
+    let zonasCobertura: Record<string, string[]> = {}
+    const { data: tecnicoZonas } = await supabase
+      .from('tecnicos')
+      .select('zonas_cobertura')
+      .eq('id', tecnico.id)
+      .maybeSingle()
+    if (tecnicoZonas?.zonas_cobertura) {
+      zonasCobertura = tecnicoZonas.zonas_cobertura as Record<string, string[]>
+    }
+    const cps = zonasCobertura.cps || []
+    const ciudades = (zonasCobertura.ciudades || []).concat(zonasCobertura.pueblos || [])
+
     // Acepta GET (listar) y POST (aceptar/rechazar)
     if (req.method === 'GET') {
       // ============================================================
@@ -65,6 +78,18 @@ serve(async (req) => {
         // Usar OR con ilike para matching case-insensitive
         const filtros = provincias.map(p => `provincia.ilike.%${p}%`).join(',')
         query = query.or(filtros)
+      }
+
+      // Si el técnico tiene CPs concretos, filtrar también por código postal
+      if (cps.length > 0) {
+        const filtrosCp = cps.map(cp => `codigo_postal.ilike.${cp.trim()}%`).join(',')
+        query = query.or(filtrosCp)
+      }
+
+      // Si tiene ciudades/pueblos, filtrar por zona (ciudad/pueblo del lead)
+      if (ciudades.length > 0) {
+        const filtrosCiudad = ciudades.map(c => `zona.ilike.%${c}%`).join(',')
+        query = query.or(filtrosCiudad)
       }
 
       // Si es un estado específico

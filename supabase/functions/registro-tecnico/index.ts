@@ -77,7 +77,7 @@ serve(async (req) => {
       return new Response(JSON.stringify({ error: 'Este email ya está registrado. Te hemos enviado un email con instrucciones para acceder.' }), { status: 409, headers: { ...corsHeaders, 'Content-Type': 'application/json' } })
     }
 
-    // Insert technician
+    // Insert technician — verificado=true para que reciba leads automáticamente
     const { data, error } = await supabase
       .from('tecnicos')
       .insert({
@@ -87,8 +87,10 @@ serve(async (req) => {
         titulacion: titulacion || null,
         provincia: provincias || null,
         cp_cobertura: cp_cobertura || null,
-        verificado: false,
-        activo: true
+        verificado: true,
+        activo: true,
+        es_fp: false,
+        puede_ejercer: true
       })
       .select('id')
       .single()

@@ -44,14 +44,10 @@ serve(async (req) => {
       return new Response(JSON.stringify({ error: 'Código incorrecto' }), { status: 401, headers: { ...corsHeaders, 'Content-Type': 'application/json' } })
     }
 
-    // Comprobar que tiene provincias configuradas
+    // Ya no se bloquea al técnico sin provincias: puede entrar al panel
+    // y configurar sus zonas desde "Mi perfil". Se indica solo como aviso.
     const provincias = tecnico.provincia ? tecnico.provincia.split(',').map((p: string) => p.trim().toLowerCase()) : []
-    if (provincias.length === 0) {
-      return new Response(JSON.stringify({
-        error: 'Tu cuenta no tiene provincias de trabajo asignadas. Debes registrarte de nuevo y seleccionar al menos una provincia donde trabajes.',
-        necesitaRegistro: true
-      }), { status: 403, headers: { ...corsHeaders, 'Content-Type': 'application/json' } })
-    }
+    const sinZonas = provincias.length === 0
 
     // Generar token de sesión (válido 7 días)
     const sessionToken = crypto.randomUUID().replace(/-/g, '').slice(0, 32)
@@ -69,6 +65,7 @@ serve(async (req) => {
     return new Response(JSON.stringify({
       success: true,
       sessionToken,
+      necesitaZonas: sinZonas,
       tecnico: {
         id: tecnico.id,
         nombre: tecnico.nombre,
