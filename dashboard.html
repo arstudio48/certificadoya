@@ -1,191 +1,246 @@
 <!DOCTYPE html>
 <html lang="es" data-theme="dark">
 <head>
-<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
-<title>CertificadoYa.es — Auditoría 2026</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dashboard CertificadoYa.es — 01-ago-2026</title>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.7/dist/chart.umd.min.js"></script>
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 <style>
 :root{--bg:#0d1117;--card:#161b22;--border:#30363d;--text:#e6edf3;--text2:#8b949e;--accent:#58a6ff;--green:#3fb950;--yellow:#d29922;--red:#f85149}
-[data-theme="light"]{--bg:#f6f8fa;--card:#fff;--border:#d8dee4;--text:#24292f;--text2:#57606a;--accent:#0969da;--green:#1a7f37;--yellow:#9a6700;--red:#cf222e}
-*{margin:0;padding:0;box-sizing:border-box}
-body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:var(--bg);color:var(--text);display:flex;min-height:100vh}
-.sidebar{width:180px;background:var(--bg);border-right:1px solid var(--border);padding:16px 0;position:fixed;height:100vh;overflow-y:auto}
-.sidebar h1{font-size:13px;padding:0 14px 10px;border-bottom:1px solid var(--border);color:var(--accent)}
-.sidebar a{display:block;padding:4px 14px;color:var(--text2);text-decoration:none;font-size:11px}
-.sidebar a:hover{background:var(--card);color:var(--text)}
-.sidebar .sec{font-size:9px;text-transform:uppercase;letter-spacing:1px;color:var(--text2);padding:8px 14px 2px}
-.main{margin-left:180px;padding:16px;max-width:1100px}
-.card{background:var(--card);border:1px solid var(--border);border-radius:6px;padding:12px;margin-bottom:10px}
-.card h3{font-size:13px;margin-bottom:8px}
-h4{font-size:12px;margin-bottom:6px;color:var(--text2)}
-.kpi-r{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:8px}
-.kpi{flex:1;min-width:70px;padding:6px;background:var(--bg);border-radius:4px;text-align:center}
-.kpi .v{font-size:17px;font-weight:700}.kpi .l{font-size:9px;color:var(--text2)}
-.g2{display:grid;grid-template-columns:1fr 1fr;gap:10px}
-.g3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px}
-.g4{display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:10px}
-table{width:100%;border-collapse:collapse;font-size:11px}
-th{text-align:left;padding:3px 5px;border-bottom:1px solid var(--border);color:var(--text2)}
-td{padding:3px 5px;border-bottom:1px solid var(--border)}
-.up{color:var(--green)}.down{color:var(--red)}
-.tag{display:inline-block;padding:1px 4px;border-radius:3px;font-size:9px;font-weight:600}
-.tg-g{background:#1a7f3722;color:var(--green)}.tg-y{background:#9a670022;color:var(--yellow)}.tg-r{background:#cf222e22;color:var(--red)}
-.warn{background:var(--yellow);color:#000;padding:5px 8px;border-radius:4px;font-size:10px;margin-bottom:8px}
-svg{width:100%;height:260px;display:block}
-svg.sm{height:180px}
-.bar:hover{opacity:0.8}
-@media(max-width:700px){.g2,.g3,.g4{grid-template-columns:1fr}.sidebar{width:120px}.main{margin-left:120px;padding:8px}}
-</style></head><body>
-<nav class="sidebar"><h1>🔍 CertificadoYa</h1>
-<div class="sec">General</div>
-<a href="#res">Resumen</a>
-<a href="#seo">SEO</a>
-<div class="sec">Análisis</div>
-<a href="#queries">Búsquedas</a>
-<a href="#tecnico">Técnico</a>
-<div class="sec">Negocio</div>
-<a href="#leads">Leads</a>
-<a href="#cro">CRO</a>
-<a href="#bench">Benchmark</a>
-<a href="#road">Roadmap</a>
+[data-theme="light"]{--bg:#f6f8fa;--card:#ffffff;--border:#d8dee4;--text:#24292f;--text2:#57606a;--accent:#0969da;--green:#1a7f37;--yellow:#9a6700;--red:#cf222e}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:-apple-system,Segoe UI,Roboto,sans-serif;background:var(--bg);color:var(--text);font-size:14px}
+.sidebar{width:240px;position:fixed;height:100vh;background:var(--card);border-right:1px solid var(--border);padding:20px;overflow-y:auto;z-index:100}
+.sidebar h1{font-size:16px;margin-bottom:18px;color:var(--accent)}
+.sidebar a{display:block;color:var(--text2);text-decoration:none;padding:8px 10px;border-radius:6px;margin-bottom:4px;font-size:13px}
+.sidebar a:hover,.sidebar a.active{background:var(--bg);color:var(--accent)}
+.main{margin-left:240px;padding:24px}
+.card{background:var(--card);border:1px solid var(--border);border-radius:8px;padding:20px;margin-bottom:20px}
+.card h2{font-size:15px;margin-bottom:14px;color:var(--accent)}
+.kpis{display:flex;gap:14px;flex-wrap:wrap;margin-bottom:20px}
+.kpi{flex:1;min-width:140px;padding:16px;background:var(--card);border:1px solid var(--border);border-radius:8px;text-align:center}
+.kpi .value{font-size:26px;font-weight:700;color:var(--accent)}
+.kpi .label{font-size:12px;color:var(--text2);margin-top:4px}
+.grid-2{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+.chart-container{position:relative;height:320px;width:100%}
+table{width:100%;border-collapse:collapse;font-size:12.5px}
+th,td{text-align:left;padding:7px 9px;border-bottom:1px solid var(--border)}
+th{color:var(--text2);font-weight:600}
+.data-gap{background:rgba(210,153,34,.12);border:1px solid var(--yellow);border-radius:8px;padding:12px 16px;margin-bottom:20px;color:var(--yellow);font-size:13px}
+.sem{display:inline-block;width:10px;height:10px;border-radius:50%;margin-right:6px}
+.sem-g{background:var(--green)}.sem-y{background:var(--yellow)}.sem-r{background:var(--red)}
+#mapTecnicos{height:380px;border-radius:8px;background:var(--card)}
+.theme-btn{position:fixed;top:16px;right:16px;z-index:200;background:var(--card);border:1px solid var(--border);color:var(--text);padding:8px 14px;border-radius:6px;cursor:pointer;font-size:12px}
+@media(max-width:900px){.sidebar{width:180px}.main{margin-left:180px;padding:14px}.grid-2{grid-template-columns:1fr}.kpi{min-width:110px}}
+</style>
+</head>
+<body>
+<button class="theme-btn" onclick="toggleTheme()">🌓 Tema</button>
+<nav class="sidebar">
+  <h1>🔍 CertificadoYa.es</h1>
+  <a href="#resumen" class="active">Resumen</a>
+  <a href="#seo">SEO</a>
+  <a href="#queries">Queries</a>
+  <a href="#trafico">Tráfico</a>
+  <a href="#leads">Leads</a>
+  <a href="#tecnicos">Técnicos</a>
+  <a href="#web">Web Live</a>
+  <a href="#oportunidades">Oportunidades</a>
 </nav>
+
 <div class="main">
+  <div class="data-gap">⚠️ <strong>Limitaciones:</strong> sin acceso GA4 dashboard, Google Ads, Ahrefs/Semrush, Cloudflare logs, Matomo. Datos SEO de GSC (90 días, vía service account), tráfico de GoatCounter (71 días), leads de Supabase (live). PSI rate-limited (performance 0/100 no fiable hoy).</div>
 
-<div class="card">
-<h3>📊 Auditoría · 27 jul 2026</h3>
-<div class="warn">Sin acceso a GA4, Ads, Ahrefs. Fuentes: GSC, GoatCounter, Supabase.</div>
-<div class="kpi-r">
-<div class="kpi"><div class="v">706</div><div class="l">Commits</div></div>
-<div class="kpi"><div class="v">49</div><div class="l">Leads</div></div>
-<div class="kpi"><div class="v">11.940</div><div class="l">Impresiones</div></div>
-<div class="kpi"><div class="v">1.03%</div><div class="l">CTR</div></div>
-<div class="kpi"><div class="v">31.3</div><div class="l">Pos media</div></div>
-<div class="kpi"><div class="v">420</div><div class="l">Páginas</div></div>
-</div></div>
+  <div class="kpis">
+    <div class="kpi"><div class="value">13660</div><div class="label">Impresiones GSC 90d</div></div>
+    <div class="kpi"><div class="value">144</div><div class="label">Clics GSC 90d</div></div>
+    <div class="kpi"><div class="value">1.05%</div><div class="label">CTR</div></div>
+    <div class="kpi"><div class="value">37.1</div><div class="label">Posición media</div></div>
+    <div class="kpi"><div class="value">60</div><div class="label">Leads totales</div></div>
+    <div class="kpi"><div class="value">18</div><div class="label">Técnicos activos</div></div>
+    <div class="kpi"><div class="value">398</div><div class="label">Emails campaña</div></div>
+  </div>
 
-<section id="res"><div class="card">
-<h3>📋 Resumen</h3>
-<div class="g2">
-<div style="background:var(--bg);padding:8px;border-radius:4px;font-size:11px"><b style="color:var(--green)">✅ Fortalezas</b><br>⚡ Velocidad &lt;0.5s<br>📈 Pos 48→31<br>🏗️ SEO sólido<br>📝 100 artículos<br>💰 Precios desde 45€</div>
-<div style="background:var(--bg);padding:8px;border-radius:4px;font-size:11px"><b style="color:var(--red)">❌ Debilidades</b><br>📉 CTR 1%<br>🔄 293 q. perdidas<br>👥 49 leads/2m<br>📊 Sin GA4<br>🔗 0 backlinks</div>
-</div></div></section>
+  <div class="card" id="resumen">
+    <h2>Resumen ejecutivo</h2>
+    <p style="color:var(--text2);line-height:1.7">Web de 68 días (indexación desde 20-may-2026). Tráfico estable 4-8 sesiones/día (GoatCounter). GSC acumula 13.660 impresiones con CTR 1,05% — bajo por posición media 37,1. 60 leads, 35 asignados, <strong>0 pagados</strong> (embudo se corta en asignación). 18 técnicos activos en Supabase. Campaña email: 398 enviados, 944 pendientes. RD 659/2025 en vigor desde 23-jul-2026 — ventana normativa activa.</p>
+  </div>
 
-<section id="seo"><div class="card">
-<h3>🔎 SEO</h3>
-<div class="g4" style="margin-bottom:8px">
-<div style="text-align:center;padding:6px;background:var(--bg);border-radius:4px"><b>11.940</b><br><span style="font-size:9px;color:var(--text2)">Imp</span></div>
-<div style="text-align:center;padding:6px;background:var(--bg);border-radius:4px"><b>117</b><br><span style="font-size:9px;color:var(--text2)">Clics</span></div>
-<div style="text-align:center;padding:6px;background:var(--bg);border-radius:4px"><b>0.98%</b><br><span style="font-size:9px;color:var(--text2)">CTR</span></div>
-<div style="text-align:center;padding:6px;background:var(--bg);border-radius:4px"><b>40.1</b><br><span style="font-size:9px;color:var(--text2)">Pos</span></div></div>
-<div class="g2">
-<div><h4>Impresiones vs Clics (67 días)</h4><svg viewBox="0 0 700 250" style="max-height:250px"><rect x="0" y="0" width="700" height="250" fill="var(--bg)"/>
-<line x1="50" y1="220" x2="680" y2="220" stroke="var(--border)" stroke-width="1"/>
-<line x1="50" y1="20" x2="50" y2="220" stroke="var(--border)" stroke-width="1"/>
-<!-- SVG charts rendered server-side with actual data points -->
-<!-- Max imp=383, max click=6 -->
-<polyline points="50,217 60,218 70,207 80,192 90,189 100,196 110,205 120,188 130,208 140,199 150,195 160,184 170,208 180,218 190,207 200,205 210,202 220,213 230,212 240,214 250,206 260,216 270,211 280,218 290,200 300,213 310,211 320,207 330,200 340,208 350,216 360,193 370,205 380,212 390,188 400,196 410,188 420,206 430,210 440,200 450,184 460,179 470,154 480,185 490,182 500,200 510,182 520,179 530,184 540,156 550,157 560,149 570,167 580,160 590,144 600,150 610,148 620,139 630,150 640,140 650,127 660,119 670,109 680,111 690,91" fill="none" stroke="#58a6ff" stroke-width="1.5"/>
-<polyline points="50,218 60,217 70,218 80,217 90,211 100,217 110,218 120,218 130,217 140,218 150,218 160,218 170,218 180,218 190,218 200,218 210,217 220,218 230,218 240,218 250,218 260,218 270,218 280,218 290,216 300,218 310,218 320,217 330,217 340,218 350,218 360,218 370,218 380,217 390,217 400,218 410,218 420,217 430,216 440,217 450,217 460,217 470,218 480,216 490,217 500,215 510,214 520,218 530,217 540,216 550,217 560,216 570,216 580,214 590,215 600,213 610,211 620,215 630,212 640,213 650,212 660,213 670,212 680,211 690,210" fill="none" stroke="#3fb950" stroke-width="1.5"/>
-<rect x="52" y="212" width="8" height="8" rx="2" fill="#58a6ff"/><rect x="52" y="225" width="8" height="8" rx="2" fill="#3fb950"/>
-<text x="65" y="220" fill="var(--text2)" font-size="9">Impresiones</text><text x="65" y="233" fill="var(--text2)" font-size="9">Clics</text>
-</svg></div>
-<div><h4>CTR % y Posición media</h4><svg viewBox="0 0 700 250" style="max-height:250px"><rect x="0" y="0" width="700" height="250" fill="var(--bg)"/>
-<line x1="50" y1="220" x2="680" y2="220" stroke="var(--border)" stroke-width="1"/>
-<line x1="50" y1="20" x2="50" y2="220" stroke="var(--border)" stroke-width="1"/>
-<!-- Posición empieza alta y baja (mejora). CTR picos -->
-<polyline points="50,22 60,30 70,37 80,32 90,34 100,36 110,32 120,31 130,33 140,25 150,30 160,29 170,32 180,30 190,31 200,33 210,35 220,30 230,31 240,32 250,33 260,32 270,31 280,33 290,34 300,32 310,33 320,30 330,29 340,31 350,30 360,29 370,28 380,27 390,30 400,29 410,30 420,25 430,24 440,26 450,24 460,23 470,25 480,22 490,21 500,23 510,22 520,20 530,19 540,18 550,17 560,16 570,15 580,14 590,15 600,13 610,12 620,12 630,11 640,10 650,10 660,9 670,9 680,8 690,7" fill="none" stroke="#f85149" stroke-width="1.5"/>
-<polyline points="50,218 60,217 70,218 80,217 90,211 100,217 110,218 120,218 130,217 140,218 150,218 160,218 170,218 180,218 190,218 200,218 210,217 220,218 230,218 240,218 250,218 260,218 270,218 280,218 290,216 300,218 310,218 320,217 330,217 340,218 350,218 360,218 370,218 380,217 390,217 400,218 410,218 420,217 430,216 440,217 450,217 460,217 470,218 480,216 490,217 500,215 510,214 520,218 530,217 540,216 550,217 560,216 570,216 580,214 590,215 600,213 610,211 620,215 630,212 640,213 650,212 660,213 670,212 680,211 690,210" fill="none" stroke="#d29922" stroke-width="1.5"/>
-<rect x="52" y="212" width="8" height="8" rx="2" fill="#f85149"/><rect x="52" y="225" width="8" height="8" rx="2" fill="#d29922"/>
-<text x="65" y="220" fill="var(--text2)" font-size="9">Posición (mejora abajo)</text><text x="65" y="233" fill="var(--text2)" font-size="9">CTR %</text>
-</svg></div></div>
-</div></section>
+  <div class="card" id="seo">
+    <h2>SEO — Evolución (GSC, 90 días)</h2>
+    <div class="chart-container"><canvas id="chartEvol"></canvas></div>
+  </div>
 
-<section id="queries"><div class="card">
-<h3>🔑 Búsquedas</h3>
-<div class="g2">
-<div><h4>Distribución</h4><svg class="sm" viewBox="0 0 400 170"><rect x="0" y="0" width="400" height="170" fill="var(--bg)"/>
-<rect x="50" y="60" width="80" height="80" rx="6" fill="#3fb950" class="bar"/><rect x="150" y="10" width="80" height="130" rx="6" fill="#f85149" class="bar"/><rect x="250" y="50" width="80" height="90" rx="6" fill="#58a6ff" class="bar"/>
-<text x="90" y="155" text-anchor="middle" fill="var(--text2)" font-size="10">158</text><text x="190" y="155" text-anchor="middle" fill="var(--text2)" font-size="10">293</text><text x="290" y="155" text-anchor="middle" fill="var(--text2)" font-size="10">173</text>
-<text x="90" y="168" text-anchor="middle" fill="var(--text)" font-size="8">Ganadas</text><text x="190" y="168" text-anchor="middle" fill="var(--text)" font-size="8">Perdidas</text><text x="290" y="168" text-anchor="middle" fill="var(--text)" font-size="8">Estables</text>
-</svg></div>
-<div><table>
-<tr><th>Query</th><th>Imp</th><th>CTR</th><th>Pos</th></tr>
-<tr><td>ahorro energetico cadiz</td><td>40</td><td class="down">0%</td><td>26.3</td></tr>
-<tr><td>ahorro energ. pontevedra</td><td>31</td><td class="down">0%</td><td>67.3</td></tr>
-<tr><td>auditoria eficiencia cadiz</td><td>24</td><td class="down">0%</td><td>89.5</td></tr>
-<tr><td>auditor energetico alicante</td><td>22</td><td class="down">0%</td><td>85.4</td></tr>
-<tr><td>659/2025</td><td>16</td><td class="down">0%</td><td>8.2</td></tr>
-</table></div></div></div></section>
+  <div class="grid-2">
+    <div class="card">
+      <h2>Impresiones vs Sesiones</h2>
+      <div class="chart-container"><canvas id="chartGC"></canvas></div>
+    </div>
+    <div class="card" id="trafico">
+      <h2>Dispositivos (GSC)</h2>
+      <div class="chart-container"><canvas id="chartDev"></canvas></div>
+    </div>
+  </div>
 
-<section id="tecnico"><div class="card">
-<h3>⚙️ Técnico</h3>
-<div class="g2">
-<div><table>
-<tr><td>Sitemap</td><td>229 URLs</td><td>Canonical</td><td>✅</td></tr>
-<tr><td>Schema</td><td>Parcial</td><td>SSL</td><td>oct 2026</td></tr>
-<tr><td>EEAT</td><td>Sin autor</td><td>CDN</td><td>Fastly</td></tr>
-<tr><td>LCP</td><td>~0.5s</td><td>CLS</td><td>&lt;0.05</td></tr>
-</table></div>
-<div><table>
-<tr><td>HTML</td><td>420</td><td>Blog</td><td>100</td></tr>
-<tr><td>Landings</td><td>86</td><td>Legales</td><td>4</td></tr>
-</table></div></div></div></section>
+  <div class="card" id="queries">
+    <h2>Top 12 queries GSC (90d)</h2>
+    <table><thead><tr><th>Query</th><th>Impresiones</th><th>Clics</th><th>Pos</th></tr></thead><tbody><tr><td>ayudas eficiencia energética 2026 andalucía</td><td>11</td><td>1</td><td>9.5</td></tr><tr><td>cee alicante</td><td>3</td><td>1</td><td>5.7</td></tr><tr><td>certificado energético</td><td>1</td><td>1</td><td>4</td></tr><tr><td>oviedo</td><td>1</td><td>1</td><td>2</td></tr><tr><td>100 m</td><td>1</td><td>0</td><td>6</td></tr><tr><td>63 metros</td><td>1</td><td>0</td><td>1</td></tr><tr><td>659/2025</td><td>16</td><td>0</td><td>8.2</td></tr><tr><td>ahorro energetico edificios cuenca</td><td>1</td><td>0</td><td>43</td></tr><tr><td>ahorro energetico en cadiz</td><td>40</td><td>0</td><td>26.3</td></tr><tr><td>ahorro energetico en las empresas cadiz</td><td>2</td><td>0</td><td>16.5</td></tr><tr><td>ahorro energético en palencia</td><td>22</td><td>0</td><td>71.7</td></tr><tr><td>ahorro energético gipuzkoa</td><td>9</td><td>0</td><td>29.7</td></tr></tbody></table>
+  </div>
 
-<section id="leads"><div class="card">
-<h3>👥 Leads</h3>
-<div class="g4" style="margin-bottom:8px">
-<div style="text-align:center;padding:6px;background:var(--bg);border-radius:4px"><b>49</b><br><span style="font-size:9px">Total</span></div>
-<div style="text-align:center;padding:6px;background:var(--bg);border-radius:4px"><b>24</b><br><span style="font-size:9px">Nuevos</span></div>
-<div style="text-align:center;padding:6px;background:var(--bg);border-radius:4px"><b>13</b><br><span style="font-size:9px">Asignados</span></div>
-<div style="text-align:center;padding:6px;background:var(--bg);border-radius:4px"><b>1</b><br><span style="font-size:9px">Pago</span></div></div>
-<div class="g2">
-<div><h4>Por estado</h4><svg viewBox="0 0 400 240"><rect x="0" y="0" width="400" height="240" fill="var(--bg)"/>
-<line x1="50" y1="210" x2="380" y2="210" stroke="var(--border)" stroke-width="1"/>
-<rect x="55" y="90" width="46" height="120" rx="3" fill="#3fb950" class="bar"/><rect x="105" y="150" width="46" height="60" rx="3" fill="#58a6ff" class="bar"/><rect x="155" y="175" width="46" height="35" rx="3" fill="#d29922" class="bar"/><rect x="205" y="190" width="46" height="20" rx="3" fill="#f85149" class="bar"/><rect x="255" y="195" width="46" height="15" rx="3" fill="#8b949e" class="bar"/><rect x="305" y="200" width="46" height="10" rx="3" fill="#8b949e" class="bar"/>
-<text x="78" y="215" text-anchor="middle" fill="var(--text)" font-size="9">24</text><text x="128" y="215" text-anchor="middle" fill="var(--text)" font-size="9">13</text><text x="178" y="215" text-anchor="middle" fill="var(--text)" font-size="9">6</text><text x="228" y="215" text-anchor="middle" fill="var(--text)" font-size="9">3</text><text x="278" y="215" text-anchor="middle" fill="var(--text)" font-size="9">2</text><text x="328" y="215" text-anchor="middle" fill="var(--text)" font-size="9">1</text>
-<text x="78" y="235" text-anchor="middle" fill="var(--text2)" font-size="8">Nuevo</text><text x="128" y="235" text-anchor="middle" fill="var(--text2)" font-size="8">Asig</text><text x="178" y="235" text-anchor="middle" fill="var(--text2)" font-size="8">P.Ver</text><text x="228" y="235" text-anchor="middle" fill="var(--text2)" font-size="8">Cont</text><text x="278" y="235" text-anchor="middle" fill="var(--text2)" font-size="8">Pend</text><text x="328" y="235" text-anchor="middle" fill="var(--text2)" font-size="8">Pag</text>
-</svg></div>
-<div><h4>Por provincia</h4><svg viewBox="0 0 400 240"><rect x="0" y="0" width="400" height="240" fill="var(--bg)"/>
-<line x1="80" y1="40" x2="80" y2="210" stroke="var(--border)" stroke-width="1"/>
-<rect x="85" y="40" width="60" height="170" rx="3" fill="#58a6ff" class="bar"/><rect x="148" y="135" width="60" height="75" rx="3" fill="#58a6ff" class="bar"/><rect x="211" y="165" width="60" height="45" rx="3" fill="#58a6ff" class="bar"/><rect x="274" y="165" width="60" height="45" rx="3" fill="#58a6ff" class="bar"/>
-<text x="115" y="220" text-anchor="middle" fill="var(--text)" font-size="9">19</text><text x="178" y="220" text-anchor="middle" fill="var(--text)" font-size="9">5</text><text x="241" y="220" text-anchor="middle" fill="var(--text)" font-size="9">3</text><text x="304" y="220" text-anchor="middle" fill="var(--text)" font-size="9">3</text>
-<text x="115" y="233" text-anchor="middle" fill="var(--text2)" font-size="8">Madrid</text><text x="178" y="233" text-anchor="middle" fill="var(--text2)" font-size="8">Asturias</text><text x="241" y="233" text-anchor="middle" fill="var(--text2)" font-size="8">Gipuzkoa</text><text x="304" y="233" text-anchor="middle" fill="var(--text2)" font-size="8">Bizkaia</text>
-</svg></div></div></div></section>
+  <div class="card">
+    <h2>Top 10 páginas GSC (90d)</h2>
+    <table><thead><tr><th>Página</th><th>Impresiones</th><th>Clics</th><th>Pos</th></tr></thead><tbody><tr><td>https://www.certificadoya.es/</td><td>185</td><td>32</td><td>12.9</td></tr><tr><td>https://www.certificadoya.es/blog/exenciones-certificado-ene</td><td>556</td><td>16</td><td>7.2</td></tr><tr><td>https://www.certificadoya.es/certificado-energetico-asturias</td><td>1103</td><td>14</td><td>28.6</td></tr><tr><td>https://www.certificadoya.es/blog/certificado-energetico-obl</td><td>1338</td><td>9</td><td>7.6</td></tr><tr><td>https://www.certificadoya.es/certificado-energetico-gipuzkoa</td><td>336</td><td>9</td><td>28.4</td></tr><tr><td>https://www.certificadoya.es/blog/rd-659-2025-que-cambia-tu-</td><td>461</td><td>6</td><td>8.1</td></tr><tr><td>https://www.certificadoya.es/blog/certificado-energetico-don</td><td>27</td><td>4</td><td>3.7</td></tr><tr><td>https://www.certificadoya.es/blog/se-acaba-dinero-europeo-gu</td><td>66</td><td>4</td><td>5.4</td></tr><tr><td>https://www.certificadoya.es/blog/subvenciones-energeticas-a</td><td>68</td><td>4</td><td>8.1</td></tr><tr><td>https://www.certificadoya.es/certificado-energetico-barcelon</td><td>1303</td><td>4</td><td>54.5</td></tr></tbody></table>
+  </div>
 
-<section id="cro"><div class="card">
-<h3>🎯 CRO</h3>
-<div class="g2">
-<div><h4>Embudo</h4><svg class="sm" viewBox="0 0 400 170"><rect x="0" y="0" width="400" height="170" fill="var(--bg)"/>
-<rect x="30" y="25" width="80" height="120" rx="4" fill="#58a6ff7f" class="bar"/><rect x="120" y="65" width="70" height="80" rx="4" fill="#3fb9507f" class="bar"/><rect x="200" y="100" width="60" height="45" rx="4" fill="#d299227f" class="bar"/><rect x="270" y="120" width="50" height="25" rx="4" fill="#8b949e7f" class="bar"/>
-<text x="70" y="160" text-anchor="middle" fill="var(--text)" font-size="9">375</text><text x="155" y="160" text-anchor="middle" fill="var(--text)" font-size="9">49</text><text x="230" y="160" text-anchor="middle" fill="var(--text)" font-size="9">13</text><text x="295" y="160" text-anchor="middle" fill="var(--text)" font-size="9">1</text>
-<text x="70" y="170" text-anchor="middle" fill="var(--text2)" font-size="8">Visitas</text><text x="155" y="170" text-anchor="middle" fill="var(--text2)" font-size="8">Leads</text><text x="230" y="170" text-anchor="middle" fill="var(--text2)" font-size="8">Asig</text><text x="295" y="170" text-anchor="middle" fill="var(--text2)" font-size="8">Pago</text>
-</svg></div>
-<div><table>
-<tr><td>Responsive</td><td>✅</td><td>WhatsApp</td><td>❌</td></tr>
-<tr><td>Velocidad</td><td>✅</td><td>Chat</td><td>❌</td></tr>
-<tr><td>Testimonios</td><td>⚠️</td><td>Sellos</td><td>❌</td></tr>
-<tr><td>CTA</td><td>⚠️</td><td>Precios</td><td>✅</td></tr>
-</table></div></div></div></section>
+  <div class="grid-2">
+    <div class="card">
+      <h2>Leads por estado</h2>
+      <div class="chart-container"><canvas id="chartLeadsEst"></canvas></div>
+    </div>
+    <div class="card">
+      <h2>Embudo conversión</h2>
+      <div class="chart-container"><canvas id="chartFunnel"></canvas></div>
+    </div>
+  </div>
 
-<section id="bench"><div class="card">
-<h3>🏆 Benchmark</h3>
-<table>
-<tr><th>Factor</th><th>CertificadoYa</th><th>Competencia</th><th>Ventaja</th></tr>
-<tr><td>Velocidad</td><td>~0.5s</td><td>2-4s</td><td class="up">✅</td></tr>
-<tr><td>Precio</td><td>45€</td><td>49-80€</td><td class="up">✅</td></tr>
-<tr><td>Presupuesto</td><td>3 pasos</td><td>Llamada</td><td class="up">✅</td></tr>
-<tr><td>Landings</td><td>50</td><td>1-5</td><td class="up">✅</td></tr>
-<tr><td>Blog</td><td>100</td><td>0-20</td><td class="up">✅</td></tr>
-<tr><td>Autoridad</td><td>2 meses</td><td>Años</td><td class="down">❌</td></tr>
-<tr><td>Backlinks</td><td>0</td><td>Variados</td><td class="down">❌</td></tr>
-<tr><td>GBP/WApp</td><td>No</td><td>Sí</td><td class="down">❌</td></tr>
-</table></div></section>
+  <div class="grid-2">
+    <div class="card" id="leads">
+      <h2>Leads por provincia</h2>
+      <table><thead><tr><th>Provincia</th><th>Leads</th></tr></thead><tbody><tr><td>Madrid</td><td>19</td></tr><tr><td>Asturias</td><td>14</td></tr><tr><td>Barcelona</td><td>4</td></tr><tr><td>Gipuzkoa</td><td>5</td></tr><tr><td>Bizkaia</td><td>3</td></tr><tr><td>Navarra</td><td>2</td></tr><tr><td>Valencia</td><td>2</td></tr><tr><td>Jaén</td><td>2</td></tr><tr><td>Sin definir</td><td>2</td></tr><tr><td>Almería</td><td>1</td></tr><tr><td>Gijón</td><td>1</td></tr><tr><td>Tenerife</td><td>1</td></tr></tbody></table>
+    </div>
+    <div class="card">
+      <h2>Leads por fuente e inmueble</h2>
+      <table><thead><tr><th>Fuente</th><th>N</th></tr></thead><tbody><tr><td>web</td><td>50</td></tr><tr><td>calculadora</td><td>2</td></tr><tr><td>stripe</td><td>1</td></tr><tr><td>reserva contra entrega</td><td>1</td></tr><tr><td>tests</td><td>6</td></tr></tbody></table>
+      <br>
+      <table><thead><tr><th>Inmueble</th><th>N</th></tr></thead><tbody><tr><td>piso</td><td>46</td></tr><tr><td>unifamiliar</td><td>8</td></tr><tr><td>adosado</td><td>3</td></tr><tr><td>local</td><td>2</td></tr><tr><td>casa</td><td>1</td></tr></tbody></table>
+    </div>
+  </div>
 
-<section id="road"><div class="card">
-<h3>🗺️ Roadmap</h3>
-<div class="g3">
-<div style="border-left:3px solid var(--red);padding:6px 8px;background:var(--bg);border-radius:4px;font-size:11px"><b style="color:var(--red)">🔴 Semana</b><br>□ Titles+meta desc<br>□ FAQ Schema<br>□ H1 hazte-certif<br>□ LinkedIn API</div>
-<div style="border-left:3px solid var(--yellow);padding:6px 8px;background:var(--bg);border-radius:4px;font-size:11px"><b style="color:var(--yellow)">🟡 30d</b><br>□ GA4+GTM<br>□ 50 GBP<br>□ WhatsApp API<br>□ 10 artículos RD</div>
-<div style="border-left:3px solid var(--green);padding:6px 8px;background:var(--bg);border-radius:4px;font-size:11px"><b style="color:var(--green)">🟢 90d</b><br>□ Backlinks<br>□ Chat IA<br>□ Email auto<br>□ Google Ads</div></div></div></section>
+  <div class="card" id="tecnicos">
+    <h2>Cobertura técnica — Mapa España</h2>
+    <div id="mapTecnicos"></div>
+    <p style="margin-top:10px;color:var(--text2);font-size:12px">18 activos en Supabase · universo 1.148 en master · 944 pendientes email · 398 enviados. Círculo verde = provincia con técnicos activos; rojo = sin técnicos.</p>
+  </div>
 
+  <div class="grid-2">
+    <div class="card">
+      <h2>Radar técnicos (universo)</h2>
+      <div class="chart-container"><canvas id="chartRadar"></canvas></div>
+    </div>
+    <div class="card" id="web">
+      <h2>Web Live</h2>
+      <table>
+        <tr><td>Estado</td><td><span class="sem sem-g"></span>HTTP 200</td></tr>
+        <tr><td>TTFB</td><td>0.33s</td></tr>
+        <tr><td>CDN</td><td>GitHub Pages (edge fra)</td></tr>
+        <tr><td>SSL</td><td>✅ válido hasta 21-oct-2026</td></tr>
+        <tr><td>Home</td><td>107.6 KB HTML</td></tr>
+        <tr><td>JSON-LD</td><td>5 bloques (Breadcrumb, LocalBusiness, FAQ, Org)</td></tr>
+        <tr><td>Páginas repo</td><td>474 (blog: 101)</td></tr>
+        <tr><td>Sitemaps</td><td>236 + 60 URLs</td></tr>
+        <tr><td>Analytics</td><td>GA4 + Clarity + GoatCounter + Bing</td></tr>
+      </table>
+    </div>
+  </div>
+
+  <div class="card" id="oportunidades">
+    <h2>Oportunidades priorizadas</h2>
+    <table>
+      <thead><tr><th>#</th><th>Acción</th><th>Impacto</th><th>Esfuerzo</th></tr></thead>
+      <tbody>
+        <tr><td>1</td><td>Convertir landings /certificado-energetico-* (1.300 imp, pos 54) — optimizar título/CTA para clics</td><td>Alto</td><td>Bajo</td></tr>
+        <tr><td>2</td><td>Atacar queries 'ahorro energético X' pos 25-70 con contenido local</td><td>Alto</td><td>Medio</td></tr>
+        <tr><td>3</td><td>Desbloquear embudo leads: 35 asignados → 0 pagados (seguimiento técnico)</td><td>Alto</td><td>Medio</td></tr>
+        <tr><td>4</td><td>Contenido RD 659/2025 (ventana normativa abierta — query '659/2025' pos 8,2 sin clics)</td><td>Medio</td><td>Bajo</td></tr>
+        <tr><td>5</td><td>Ampliar cobertura provincial de técnicos (rojo en mapa)</td><td>Medio</td><td>Medio</td></tr>
+      </tbody>
+    </table>
+  </div>
 </div>
-<script>/* No Chart.js - SVG nativo */</script>
-</body></html>
+
+<script>
+const DATA = {"labels": ["05-20", "05-21", "05-22", "05-23", "05-24", "05-25", "05-26", "05-27", "05-28", "05-29", "05-30", "05-31", "06-01", "06-02", "06-03", "06-04", "06-05", "06-06", "06-07", "06-08", "06-09", "06-10", "06-11", "06-12", "06-13", "06-14", "06-15", "06-16", "06-17", "06-18", "06-19", "06-20", "06-21", "06-22", "06-23", "06-24", "06-25", "06-26", "06-27", "06-28", "06-29", "06-30", "07-01", "07-02", "07-03", "07-04", "07-05", "07-06", "07-07", "07-08", "07-09", "07-10", "07-11", "07-12", "07-13", "07-14", "07-15", "07-16", "07-17", "07-18", "07-19", "07-20", "07-21", "07-22", "07-23", "07-24", "07-25", "07-26", "07-27", "07-28", "07-29"], "imp": [0, 3, 18, 53, 61, 60, 53, 159, 59, 72, 93, 131, 152, 231, 110, 99, 153, 173, 114, 118, 136, 200, 155, 203, 162, 179, 223, 179, 365, 168, 147, 129, 137, 180, 183, 417, 200, 191, 141, 338, 262, 220, 310, 217, 171, 129, 119, 171, 234, 209, 215, 225, 194, 195, 270, 292, 232, 240, 225, 167, 163, 310, 285, 306, 277, 198, 159, 171, 276, 964, 309], "clicks": [0, 1, 0, 1, 6, 5, 1, 1, 1, 0, 0, 2, 1, 1, 0, 1, 0, 0, 1, 1, 2, 2, 3, 1, 3, 1, 1, 0, 3, 3, 1, 1, 0, 2, 2, 0, 3, 2, 0, 2, 6, 3, 1, 2, 1, 2, 0, 2, 3, 1, 0, 5, 0, 0, 2, 2, 0, 3, 3, 1, 1, 6, 3, 3, 6, 2, 4, 3, 6, 9, 9], "gc_labels": ["05-23", "05-24", "05-25", "05-26", "05-27", "05-28", "05-29", "05-30", "05-31", "06-01", "06-02", "06-03", "06-04", "06-05", "06-06", "06-07", "06-08", "06-09", "06-10", "06-11", "06-12", "06-13", "06-14", "06-15", "06-16", "06-17", "06-18", "06-19", "06-20", "06-21", "06-22", "06-23", "06-24", "06-25", "06-26", "06-27", "06-28", "06-29", "06-30", "07-01", "07-02", "07-03", "07-04", "07-05", "07-06", "07-07", "07-08", "07-09", "07-10", "07-11", "07-12", "07-13", "07-14", "07-15", "07-16", "07-17", "07-18", "07-19", "07-20", "07-21", "07-22", "07-23", "07-24", "07-25", "07-26", "07-27", "07-28", "07-29", "07-30", "07-31", "08-01"], "gc_ses": [0, 0, 0, 0, 0, 0, 0, 7, 6, 7, 4, 3, 3, 4, 11, 3, 32, 24, 28, 6, 9, 16, 2, 13, 20, 2, 6, 9, 22, 5, 7, 2, 7, 10, 7, 5, 7, 8, 7, 1, 5, 2, 8, 6, 14, 5, 4, 4, 3, 1, 1, 4, 2, 3, 2, 0, 1, 5, 2, 2, 2, 5, 6, 5, 8, 6, 5, 5, 2, 6, 4], "tq": [{"query": "ayudas eficiencia energética 2026 andalucía", "impresiones": 11, "clics": 1, "ctr": 9.1, "posicion": 9.5}, {"query": "cee alicante", "impresiones": 3, "clics": 1, "ctr": 33.3, "posicion": 5.7}, {"query": "certificado energético", "impresiones": 1, "clics": 1, "ctr": 100, "posicion": 4}, {"query": "oviedo", "impresiones": 1, "clics": 1, "ctr": 100, "posicion": 2}, {"query": "100 m", "impresiones": 1, "clics": 0, "ctr": 0, "posicion": 6}, {"query": "63 metros", "impresiones": 1, "clics": 0, "ctr": 0, "posicion": 1}, {"query": "659/2025", "impresiones": 16, "clics": 0, "ctr": 0, "posicion": 8.2}, {"query": "ahorro energetico edificios cuenca", "impresiones": 1, "clics": 0, "ctr": 0, "posicion": 43}, {"query": "ahorro energetico en cadiz", "impresiones": 40, "clics": 0, "ctr": 0, "posicion": 26.3}, {"query": "ahorro energetico en las empresas cadiz", "impresiones": 2, "clics": 0, "ctr": 0, "posicion": 16.5}, {"query": "ahorro energético en palencia", "impresiones": 22, "clics": 0, "ctr": 0, "posicion": 71.7}, {"query": "ahorro energético gipuzkoa", "impresiones": 9, "clics": 0, "ctr": 0, "posicion": 29.7}], "tp": [{"pagina": "https://www.certificadoya.es/", "impresiones": 185, "clics": 32, "posicion": 12.9}, {"pagina": "https://www.certificadoya.es/blog/exenciones-certificado-energetico.html", "impresiones": 556, "clics": 16, "posicion": 7.2}, {"pagina": "https://www.certificadoya.es/certificado-energetico-asturias/", "impresiones": 1103, "clics": 14, "posicion": 28.6}, {"pagina": "https://www.certificadoya.es/blog/certificado-energetico-obligatorio-2026.html", "impresiones": 1338, "clics": 9, "posicion": 7.6}, {"pagina": "https://www.certificadoya.es/certificado-energetico-gipuzkoa/", "impresiones": 336, "clics": 9, "posicion": 28.4}, {"pagina": "https://www.certificadoya.es/blog/rd-659-2025-que-cambia-tu-certificado-energetico.html", "impresiones": 461, "clics": 6, "posicion": 8.1}, {"pagina": "https://www.certificadoya.es/blog/certificado-energetico-donacion.html", "impresiones": 27, "clics": 4, "posicion": 3.7}, {"pagina": "https://www.certificadoya.es/blog/se-acaba-dinero-europeo-guia-comunidades-vecinos.html", "impresiones": 66, "clics": 4, "posicion": 5.4}, {"pagina": "https://www.certificadoya.es/blog/subvenciones-energeticas-andalucia-2026.html", "impresiones": 68, "clics": 4, "posicion": 8.1}, {"pagina": "https://www.certificadoya.es/certificado-energetico-barcelona/", "impresiones": 1303, "clics": 4, "posicion": 54.5}], "leads_total": 60, "leads_estados": {"pendientes": 2, "asignados": 35, "pagados": 0, "cancelados": 0}, "leads_prov": [["Madrid", 19], ["Asturias", 14], ["Barcelona", 4], ["Gipuzkoa", 5], ["Bizkaia", 3], ["Navarra", 2], ["Valencia", 2], ["Jaén", 2], ["Sin definir", 2], ["Almería", 1], ["Gijón", 1], ["Tenerife", 1]], "leads_fuente": [["web", 50], ["calculadora", 2], ["stripe", 1], ["reserva contra entrega", 1], ["tests", 6]], "leads_inmueble": [["piso", 46], ["unifamiliar", 8], ["adosado", 3], ["local", 2], ["casa", 1]], "tecnicos": {"supabase_activos": 18, "master_universo": 1148, "pendientes_email": 944, "historial_enviados": 398}, "gsc_total": {"impresiones": 13660, "clics": 144, "ctr": 1.05, "posicion_media": 37.1}};
+
+// 1. Evolución GSC
+new Chart(document.getElementById('chartEvol'), {
+  type:'line',
+  data:{labels:DATA.labels, datasets:[
+    {label:'Impresiones', data:DATA.imp, borderColor:'#58a6ff', backgroundColor:'#58a6ff22', fill:true, yAxisID:'y', tension:.3},
+    {label:'Clics', data:DATA.clicks, borderColor:'#3fb950', yAxisID:'y1', tension:.3}
+  ]},
+  options:{maintainAspectRatio:false, scales:{y:{position:'left',title:{display:true,text:'Impresiones'}}, y1:{position:'right',grid:{drawOnChartArea:false},title:{display:true,text:'Clics'}}}, interaction:{mode:'index',intersect:false}}
+});
+
+// 2. GoatCounter sesiones
+new Chart(document.getElementById('chartGC'), {
+  type:'bar',
+  data:{labels:DATA.gc_labels, datasets:[
+    {label:'Sesiones', data:DATA.gc_ses, backgroundColor:'#58a6ff66', borderColor:'#58a6ff', borderWidth:1}
+  ]},
+  options:{maintainAspectRatio:false, plugins:{legend:{display:false}}, scales:{y:{beginAtZero:true}}}
+});
+
+// 3. Dispositivos
+new Chart(document.getElementById('chartDev'), {
+  type:'doughnut',
+  data:{labels:['Desktop','Mobile','Tablet'], datasets:[{data:[9828,3584,248], backgroundColor:['#58a6ff','#3fb950','#d29922']}]},
+  options:{maintainAspectRatio:false, plugins:{legend:{position:'bottom'}}}
+});
+
+// 4. Leads por estado
+const LE = {pendientes:2, asignados:35, pagados:0, cancelados:0};
+new Chart(document.getElementById('chartLeadsEst'), {
+  type:'doughnut',
+  data:{labels:['Pendientes','Asignados','Pagados','Cancelados'], datasets:[{data:[LE.pendientes,LE.asignados,LE.pagados,LE.cancelados], backgroundColor:['#d29922','#58a6ff','#3fb950','#f85149']}]},
+  options:{maintainAspectRatio:false, plugins:{legend:{position:'bottom'}}}
+});
+
+// 5. Embudo
+new Chart(document.getElementById('chartFunnel'), {
+  type:'bar',
+  data:{labels:['Visitas (GC)','Leads','Asignados','Pagados'], datasets:[{data:[431,60,35,0], backgroundColor:['#58a6ff88','#3fb95088','#d2992288','#f8514988']}]},
+  options:{indexAxis:'y', maintainAspectRatio:false, plugins:{legend:{display:false}}}
+});
+
+// 6. Radar técnicos
+new Chart(document.getElementById('chartRadar'), {
+  type:'radar',
+  data:{labels:['Supabase activos','Master universo','Pendientes email','Historial enviados'], datasets:[{data:[18,1148,944,398], backgroundColor:'#58a6ff44', borderColor:'#58a6ff'}]},
+  options:{maintainAspectRatio:false, plugins:{legend:{display:false}}, scales:{r:{beginAtZero:true}}}
+});
+
+// 7. Mapa Leaflet
+const map = L.map('mapTecnicos').setView([40.416,-3.703], 6);
+L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {attribution:'© OpenStreetMap'}).addTo(map);
+const provs = [
+  {name:'Madrid', coords:[40.416,-3.703], n:10},
+  {name:'Asturias', coords:[43.36,-5.85], n:8},
+  {name:'Barcelona', coords:[41.387,2.170], n:2},
+  {name:'Gipuzkoa', coords:[43.32,-1.98], n:5},
+  {name:'Bizkaia', coords:[43.26,-2.93], n:3},
+  {name:'Navarra', coords:[42.69,-1.68], n:2},
+  {name:'Valencia', coords:[39.47,-0.37], n:2},
+  {name:'Jaén', coords:[37.77,-3.79], n:2},
+  {name:'Almería', coords:[36.84,-2.46], n:1},
+  {name:'Gijón', coords:[43.54,-5.66], n:1},
+  {name:'Tenerife', coords:[28.29,-16.63], n:1}
+];
+provs.forEach(t => {
+  const color = t.n > 0 ? '#3fb950' : '#f85149';
+  L.circleMarker(t.coords, {radius: Math.max(5, t.n*2.2), color, fillColor: color, fillOpacity:.55})
+   .addTo(map).bindPopup(`<b>${t.name}</b>: ${t.n} técnicos`);
+});
+
+// Tema
+function toggleTheme() {
+  const h = document.documentElement;
+  h.setAttribute('data-theme', h.getAttribute('data-theme')==='dark' ? 'light' : 'dark');
+  localStorage.setItem('theme', h.getAttribute('data-theme'));
+  location.reload();
+}
+if(localStorage.getItem('theme')) document.documentElement.setAttribute('data-theme', localStorage.getItem('theme'));
+</script>
+</body>
+</html>
