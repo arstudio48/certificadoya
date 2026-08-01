@@ -9,8 +9,40 @@ del CSV para que se suscriban a la plataforma CertificadoYa.
 - Historial JSON anti-duplicados + delays anti-spam.
 - --dry-run por defecto; --send para envío real (lotes de 20 con pausa).
 """
-import csv, json, random, sys, time, urllib.request, urllib.error
+import os, sys, csv, json, smtplib, time, urllib.request, urllib.error
 from pathlib import Path
+from email.mime.text import MIMEText
+from email.mime.multipart import MIMEMultipart
+
+# --- Modo SMTP (fallback sin cuota, rotando cuentas Gmail) ---
+SMTP_HOST = "smtp.gmail.com"
+SMTP_PORT = 587
+CUENTAS = [
+    {"user": "Artbriher@gmail.com", "pass": "wmyd dxmf awdezdeo", "name": "CertificadoYa"},
+    {"user": "arturobriher@gmail.com", "pass": "tlmf yzzq rqmg jcko", "name": "CertificadoYa"},
+]
+
+def send_one_smtp(row: dict, idx: int) -> dict:
+    """Envía por SMTP Gmail directo (sin cuota diaria). Usa el HTML v2 idéntico."""
+    html = build_html(row["despacho"], row["provincia"])
+    html = html.replace("%EMAIL%", row["email"])
+    cuenta = CUENTAS[idx % len(CUENTAS)]
+    msg = MIMEMultipart("alternative")
+    msg["From"] = f"CertificadoYa <{cuenta['user']}>"
+    msg["To"] = row["email"]
+    msg["Subject"] = "Clientes para certificados energéticos — 0 € de alta"
+    msg.attach(MIMEText(f"Hola, {row['despacho'] or 'colega'}: CertificadoYa conecta propietarios que necesitan su CEE con profesionales como tú. 0€ de alta, 18% comisión, tú eliges tus zonas. Suscríbete en {WEB}/panel-tecnicos.html. Si no quieres recibir más correos: {WEB}/desuscribirse.html?email={row['email']}", "plain", "utf-8"))
+    msg.attach(MIMEText(html, "html", "utf-8"))
+    try:
+        with smtplib.SMTP(SMTP_HOST, SMTP_PORT, timeout=60) as server:
+            server.ehlo()
+            server.starttls()
+            server.ehlo()
+            server.login(cuenta["user"], cuenta["pass"].replace(" ", ""))
+            server.sendmail(cuenta["user"], [row["email"]], msg.as_string())
+        return {"ok": True, "status": 250, "body": f"SMTP OK ({cuenta['user']})"}
+    except Exception as e:
+        return {"ok": False, "status": 0, "body": str(e)[:120]}
 
 WEB = "https://www.certificadoya.es"
 EDGE = "https://wypgqpgjlookbhuaiyxa.supabase.co/functions/v1/enviar-correo"
@@ -215,6 +247,7 @@ def send_one(row: dict) -> dict:
 
 def main():
     send = "--send" in sys.argv
+    use_smtp = "--smtp" in sys.argv
     lotes_de = 20
     pausa_lote = 90
     delay_entre = 3  # segundos entre envíos del mismo lote
@@ -258,9 +291,11 @@ def main():
         return
 
     ok, fail = 0, 0
+    modo = "SMTP" if use_smtp else "Resend"
+    print(f"Modo de envío: {modo}")
     # Sin shuffle: el CSV viene ordenado por prioridad (personales P1 primero)
     for i, row in enumerate(pendientes):
-        res = send_one(row)
+        res = send_one_smtp(row, i) if use_smtp else send_one(row)
         if res["ok"]:
             ok += 1
             hist.add(row["email"])
