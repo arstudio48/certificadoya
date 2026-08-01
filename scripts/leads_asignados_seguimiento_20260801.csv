@@ -1,0 +1,36 @@
+posicion,nombre_cliente,provincia,telefono_cliente,email_cliente,tecnico_asignado,tecnico_existe,created_at,ultimo_contacto,dias_sin_contacto,tiene_telefono,tiene_email,email_notificado_asignacion
+1,JUAN JOSE,Asturias,603397822,JUANJOXIN@GMAIL.COM,arturo briceño hernan,True,2026-06-02 14:17:35.492451+00,2026-06-09 11:28:30.886754+00,53,True,True,True
+2,Laura,Barcelona,691658471,laura.galea@microsoft.com,Arquitectobarcelona,True,2026-06-03 20:39:11.313259+00,2026-06-09 11:28:30.886754+00,53,True,True,True
+3,carmen,Cantabria,605574086,cargalesp@gmail.com,Aparejadorcantabria,True,2026-06-15 10:13:35.784025+00,,47,True,True,False
+4,Propietario Simulación,asturias,+346****1111,prop@simulacion.com,arturo briceño hernan,True,2026-06-03 09:53:29.067588+00,2026-06-16 00:00:00+00,46,True,True,True
+5,Cliente Completo,Asturias,+346****2222,cliente@test.com,arturo briceño hernan,True,2026-06-03 09:56:27.931751+00,2026-06-16 00:00:00+00,46,True,True,True
+6,Iñigo,Bizkaia,675717537,inigo13131@gmail.com,Aparejador Bilbao,True,2026-06-16 07:45:56.849797+00,,46,True,True,False
+7,Iñigo,Bizkaia,675717537,,Aparejador Bilbao,True,2026-06-16 07:46:30.870401+00,,46,True,False,False
+8,Carlos,Gipuzkoa,610494617,,Www,True,2026-06-17 13:19:37.322329+00,,45,True,False,False
+9,Daniel,Barcelona,656711295,danistsj@gmail.com,Arquitectobarcelona,True,2026-06-19 14:00:09.988857+00,,43,True,True,True
+10,test-final2@test.com,Madrid,,test-final2@test.com,arturo briceño hernan,True,2026-06-19 16:15:00.654776+00,,42,False,True,True
+11,prod-test@test.com,Madrid,,prod-test@test.com,arturo briceño hernan,True,2026-06-19 16:16:26.179999+00,,42,False,True,True
+12,Miguel,Huelva,608349139,miguel.4.mateos@gmail.com,Arquitectohuelva,True,2026-06-22 14:17:28.696168+00,,40,True,True,False
+13,almeria ,Almería,676858479,almu.abad.martin@gmail.com,Aparejadoresalmeria,True,2026-06-22 16:13:54.6314+00,,39,True,True,False
+14,jorge ,Navarra,659565671,jrivaspelu@hotmail.com,Aparejadorespamplona,True,2026-06-23 13:31:40.571202+00,,39,True,True,False
+15,jorge,Navarra,659565671,,Aparejadorespamplona,True,2026-06-23 13:32:11.036976+00,,39,True,False,False
+16,Cliente Prueba,Madrid,600000002,cliente-prueba@test.com,arturo briceño hernan,True,2026-06-27 03:57:29.377963+00,,35,True,True,True
+17,Cliente Prueba 2,Madrid,600000003,cliente2@test.com,arturo briceño hernan,True,2026-06-27 03:59:27.422105+00,,35,True,True,True
+18,Cliente Final,Madrid,600000004,cliente-final@test.com,arturo briceño hernan,True,2026-06-27 04:01:24.836251+00,,35,True,True,True
+19,Prueba Final,Madrid,600000007,final@test.com,arturo briceño hernan,True,2026-06-27 04:02:05.280132+00,,35,True,True,True
+20,Test Service Key,Madrid,600000008,,arturo briceño hernan,True,2026-06-27 04:02:17.495456+00,,35,True,False,True
+21,Erika,Bizkaia,626199274,erikaf7@yahoo.es,Aparejador Bilbao,True,2026-07-01 16:00:21.434811+00,,31,True,True,False
+22,José Ángel Hernández Beriain ,Tenerife,647120005,hernandezberiain@yahoo.es,Aparejadortenerife,True,2026-07-01 17:32:47.637406+00,,30,True,True,False
+23,Paloma,Madrid,654697454,paloma_carmona@hotmail.com,arturo briceño hernan,True,2026-07-02 16:12:50.319471+00,,29,True,True,True
+24,Eva María Marín Perera,,675408830,ismaeltaco35@gmail.com,Manuel Lajos Couselo,True,2026-07-08 03:44:29.097124+00,,24,True,True,True
+25,Jesús,Valencia,625567669,,Ceevalencia,True,2026-07-13 18:19:17.019655+00,,18,True,False,False
+26,JULIAN,Jaén,625888620,,Aparejadorjaen,True,2026-07-15 04:21:00.515621+00,,17,True,False,False
+27,JULIAN GARCIA MESA,Jaén,625888620,juliangarcia57@hotmail.com,Aparejadorjaen,True,2026-07-15 11:26:00.312723+00,,17,True,True,False
+28,mario,Asturias,610521868,,arturo briceño hernan,True,2026-07-17 11:58:07.771163+00,,15,True,False,False
+29,Javi,Gipuzkoa,615748112,mikelgarmendia@hotmail.com,Www,True,2026-07-20 11:53:25.366839+00,,12,True,True,False
+30,Juan,Gipuzkoa,628044426,,Www,True,2026-07-22 15:04:55.874236+00,,10,True,False,False
+31,BEATRIZ,Albacete,606540992,,Aparejadoresalbacete,True,2026-07-23 17:47:16.932112+00,,8,True,False,False
+32,Belen,Asturias,614431972,,Manuel Lajos Couselo,True,2026-07-24 09:32:50.79417+00,,8,True,False,False
+33,mathias,Valencia,744483622,mathiasgodding@yahoo.nl,Ceevalencia,True,2026-07-27 18:24:51.473024+00,,4,True,True,False
+34,mikel,Gipuzkoa,688735820,mikelgarmendia@hotmail.com,Www,True,2026-07-28 11:40:01.045509+00,,4,True,True,False
+35,Mikel ,Gipuzkoa,688745820,mikelgarmendia@hotmail.com,Www,True,2026-07-28 11:40:28.09479+00,,4,True,True,False
