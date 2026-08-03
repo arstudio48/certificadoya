@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Dashboard CertificadoYa.es — 01-ago-2026</title>
+<title>Dashboard CertificadoYa.es — 02-ago-2026</title>
 <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.7/dist/chart.umd.min.js"></script>
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
@@ -58,14 +58,16 @@ th{color:var(--text2);font-weight:600}
     <div class="kpi"><div class="value">144</div><div class="label">Clics GSC 90d</div></div>
     <div class="kpi"><div class="value">1.05%</div><div class="label">CTR</div></div>
     <div class="kpi"><div class="value">37.1</div><div class="label">Posición media</div></div>
-    <div class="kpi"><div class="value">60</div><div class="label">Leads totales</div></div>
-    <div class="kpi"><div class="value">18</div><div class="label">Técnicos activos</div></div>
-    <div class="kpi"><div class="value">398</div><div class="label">Emails campaña</div></div>
+    <div class="kpi"><div class="value">40</div><div class="label">Leads reales</div></div>
+    <div class="kpi"><div class="value">29</div><div class="label">Con técnico</div></div>
+    <div class="kpi"><div class="value">0</div><div class="label">Pagados</div></div>
+    <div class="kpi"><div class="value">26</div><div class="label">Técnicos activos</div></div>
+    <div class="kpi"><div class="value">695</div><div class="label">Emails campaña</div></div>
   </div>
 
   <div class="card" id="resumen">
     <h2>Resumen ejecutivo</h2>
-    <p style="color:var(--text2);line-height:1.7">Web de 68 días (indexación desde 20-may-2026). Tráfico estable 4-8 sesiones/día (GoatCounter). GSC acumula 13.660 impresiones con CTR 1,05% — bajo por posición media 37,1. 60 leads, 35 asignados, <strong>0 pagados</strong> (embudo se corta en asignación). 18 técnicos activos en Supabase. Campaña email: 398 enviados, 944 pendientes. RD 659/2025 en vigor desde 23-jul-2026 — ventana normativa activa.</p>
+    <p style="color:var(--text2);line-height:1.7">Web de 70 días (indexación desde 20-may-2026). Tráfico estable 4-8 sesiones/día (GoatCounter). GSC acumula 13.660 impresiones con CTR 1,05% — bajo por posición media 37,1. <strong>40 leads reales</strong> (no test), 29 asignados a técnico, <strong>0 pagados</strong> (embudo se corta en asignación). 26 técnicos activos+verificados en Supabase, con 4 sin provincia asignada (no reciben leads) y 1 excluido (dueño). Campaña email: 695 enviados (297 vía Brevo con dominio verificado), 442 pendientes. RD 659/2025 en vigor desde 23-jul-2026 — ventana normativa activa.</p>
   </div>
 
   <div class="card" id="seo">
@@ -108,20 +110,21 @@ th{color:var(--text2);font-weight:600}
   <div class="grid-2">
     <div class="card" id="leads">
       <h2>Leads por provincia</h2>
-      <table><thead><tr><th>Provincia</th><th>Leads</th></tr></thead><tbody><tr><td>Madrid</td><td>19</td></tr><tr><td>Asturias</td><td>14</td></tr><tr><td>Barcelona</td><td>4</td></tr><tr><td>Gipuzkoa</td><td>5</td></tr><tr><td>Bizkaia</td><td>3</td></tr><tr><td>Navarra</td><td>2</td></tr><tr><td>Valencia</td><td>2</td></tr><tr><td>Jaén</td><td>2</td></tr><tr><td>Sin definir</td><td>2</td></tr><tr><td>Almería</td><td>1</td></tr><tr><td>Gijón</td><td>1</td></tr><tr><td>Tenerife</td><td>1</td></tr></tbody></table>
+      <table><thead><tr><th>Provincia</th><th>Leads</th></tr></thead><tbody>
+        <tr><td>Asturias</td><td>6</td></tr><tr><td>Madrid</td><td>6</td></tr><tr><td>Barcelona</td><td>4</td></tr><tr><td>Bizkaia</td><td>3</td></tr><tr><td>Navarra</td><td>2</td></tr><tr><td>Jaén</td><td>2</td></tr><tr><td>Valencia</td><td>2</td></tr><tr><td>Cantabria</td><td>2</td></tr><tr><td>Almería</td><td>1</td></tr><tr><td>Gijón</td><td>1</td></tr><tr><td>Tenerife</td><td>1</td></tr><tr><td>Ciudad Real</td><td>1</td></tr><tr><td>Albacete</td><td>1</td></tr><tr><td>Sin definir</td><td>1</td></tr><tr><td>Zamora</td><td>1</td></tr><tr><td>Huelva</td><td>1</td></tr></tbody></table>
     </div>
     <div class="card">
       <h2>Leads por fuente e inmueble</h2>
-      <table><thead><tr><th>Fuente</th><th>N</th></tr></thead><tbody><tr><td>web</td><td>50</td></tr><tr><td>calculadora</td><td>2</td></tr><tr><td>stripe</td><td>1</td></tr><tr><td>reserva contra entrega</td><td>1</td></tr><tr><td>tests</td><td>6</td></tr></tbody></table>
+      <table><thead><tr><th>Fuente</th><th>N</th></tr></thead><tbody><tr><td>web</td><td>41</td></tr><tr><td>calculadora</td><td>2</td></tr><tr><td>stripe</td><td>1</td></tr><tr><td>reserva contra entrega</td><td>1</td></tr><tr><td>test/verif</td><td>6</td></tr></tbody></table>
       <br>
-      <table><thead><tr><th>Inmueble</th><th>N</th></tr></thead><tbody><tr><td>piso</td><td>46</td></tr><tr><td>unifamiliar</td><td>8</td></tr><tr><td>adosado</td><td>3</td></tr><tr><td>local</td><td>2</td></tr><tr><td>casa</td><td>1</td></tr></tbody></table>
+      <table><thead><tr><th>Inmueble</th><th>N</th></tr></thead><tbody><tr><td>piso</td><td>38</td></tr><tr><td>unifamiliar</td><td>8</td></tr><tr><td>adosado</td><td>3</td></tr><tr><td>local</td><td>2</td></tr></tbody></table>
     </div>
   </div>
 
   <div class="card" id="tecnicos">
     <h2>Cobertura técnica — Mapa España</h2>
     <div id="mapTecnicos"></div>
-    <p style="margin-top:10px;color:var(--text2);font-size:12px">18 activos en Supabase · universo 1.148 en master · 944 pendientes email · 398 enviados. Círculo verde = provincia con técnicos activos; rojo = sin técnicos.</p>
+    <p style="margin-top:10px;color:var(--text2);font-size:12px">22 activos en Supabase · universo 1.148 en master · 442 pendientes email · 695 enviados (297 hoy Brevo). Círculo verde = provincia con técnicos activos; rojo = sin técnicos.</p>
   </div>
 
   <div class="grid-2">
@@ -152,7 +155,7 @@ th{color:var(--text2);font-weight:600}
       <tbody>
         <tr><td>1</td><td>Convertir landings /certificado-energetico-* (1.300 imp, pos 54) — optimizar título/CTA para clics</td><td>Alto</td><td>Bajo</td></tr>
         <tr><td>2</td><td>Atacar queries 'ahorro energético X' pos 25-70 con contenido local</td><td>Alto</td><td>Medio</td></tr>
-        <tr><td>3</td><td>Desbloquear embudo leads: 35 asignados → 0 pagados (seguimiento técnico)</td><td>Alto</td><td>Medio</td></tr>
+        <tr><td>3</td><td>Desbloquear embudo leads: 29 asignados → 0 pagados (seguimiento técnico — Paloma Madrid y otros asignados pendientes de activar)</td><td>Alto</td><td>Medio</td></tr>
         <tr><td>4</td><td>Contenido RD 659/2025 (ventana normativa abierta — query '659/2025' pos 8,2 sin clics)</td><td>Medio</td><td>Bajo</td></tr>
         <tr><td>5</td><td>Ampliar cobertura provincial de técnicos (rojo en mapa)</td><td>Medio</td><td>Medio</td></tr>
       </tbody>
@@ -190,24 +193,24 @@ new Chart(document.getElementById('chartDev'), {
 });
 
 // 4. Leads por estado
-const LE = {pendientes:2, asignados:35, pagados:0, cancelados:0};
+const LE = {pendientes:3, asignados:24, pend_tecnico:6, pagados:0, descartados:1, sin_tecnico:6};
 new Chart(document.getElementById('chartLeadsEst'), {
   type:'doughnut',
-  data:{labels:['Pendientes','Asignados','Pagados','Cancelados'], datasets:[{data:[LE.pendientes,LE.asignados,LE.pagados,LE.cancelados], backgroundColor:['#d29922','#58a6ff','#3fb950','#f85149']}]},
+  data:{labels:['Pendientes','Asignados','Pend. técnico','Pagados','Descartados','Sin técnico'], datasets:[{data:[LE.pendientes,LE.asignados,LE.pend_tecnico,LE.pagados,LE.descartados,LE.sin_tecnico], backgroundColor:['#d29922','#58a6ff','#8b949e','#3fb950','#f85149','#6e7681']}]},
   options:{maintainAspectRatio:false, plugins:{legend:{position:'bottom'}}}
 });
 
 // 5. Embudo
 new Chart(document.getElementById('chartFunnel'), {
   type:'bar',
-  data:{labels:['Visitas (GC)','Leads','Asignados','Pagados'], datasets:[{data:[431,60,35,0], backgroundColor:['#58a6ff88','#3fb95088','#d2992288','#f8514988']}]},
+  data:{labels:['Visitas (GC)','Leads','Asignados','Pagados'], datasets:[{data:[431,40,29,0], backgroundColor:['#58a6ff88','#3fb95088','#d2992288','#f8514988']}]},
   options:{indexAxis:'y', maintainAspectRatio:false, plugins:{legend:{display:false}}}
 });
 
 // 6. Radar técnicos
 new Chart(document.getElementById('chartRadar'), {
   type:'radar',
-  data:{labels:['Supabase activos','Master universo','Pendientes email','Historial enviados'], datasets:[{data:[18,1148,944,398], backgroundColor:'#58a6ff44', borderColor:'#58a6ff'}]},
+  data:{labels:['Supabase activos','Master universo','Pendientes email','Historial enviados'], datasets:[{data:[26,1148,442,695], backgroundColor:'#58a6ff44', borderColor:'#58a6ff'}]},
   options:{maintainAspectRatio:false, plugins:{legend:{display:false}}, scales:{r:{beginAtZero:true}}}
 });
 
@@ -215,17 +218,21 @@ new Chart(document.getElementById('chartRadar'), {
 const map = L.map('mapTecnicos').setView([40.416,-3.703], 6);
 L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {attribution:'© OpenStreetMap'}).addTo(map);
 const provs = [
-  {name:'Madrid', coords:[40.416,-3.703], n:10},
-  {name:'Asturias', coords:[43.36,-5.85], n:8},
-  {name:'Barcelona', coords:[41.387,2.170], n:2},
-  {name:'Gipuzkoa', coords:[43.32,-1.98], n:5},
-  {name:'Bizkaia', coords:[43.26,-2.93], n:3},
-  {name:'Navarra', coords:[42.69,-1.68], n:2},
-  {name:'Valencia', coords:[39.47,-0.37], n:2},
-  {name:'Jaén', coords:[37.77,-3.79], n:2},
+  {name:'Madrid', coords:[40.416,-3.703], n:1},
+  {name:'Asturias', coords:[43.36,-5.85], n:1},
+  {name:'Barcelona', coords:[41.387,2.170], n:1},
+  {name:'Gipuzkoa', coords:[43.32,-1.98], n:1},
+  {name:'Bizkaia', coords:[43.26,-2.93], n:1},
+  {name:'Navarra', coords:[42.69,-1.68], n:1},
+  {name:'Valencia', coords:[39.47,-0.37], n:1},
+  {name:'Jaén', coords:[37.77,-3.79], n:1},
+  {name:'Cádiz', coords:[36.53,-6.29], n:1},
   {name:'Almería', coords:[36.84,-2.46], n:1},
-  {name:'Gijón', coords:[43.54,-5.66], n:1},
-  {name:'Tenerife', coords:[28.29,-16.63], n:1}
+  {name:'Tenerife', coords:[28.29,-16.63], n:1},
+  {name:'Albacete', coords:[38.99,-1.85], n:1},
+  {name:'Zaragoza', coords:[41.65,-0.88], n:1},
+  {name:'Cantabria', coords:[43.46,-3.81], n:1},
+  {name:'Huelva', coords:[37.26,-6.94], n:1}
 ];
 provs.forEach(t => {
   const color = t.n > 0 ? '#3fb950' : '#f85149';
