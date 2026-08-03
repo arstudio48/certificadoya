@@ -130,7 +130,7 @@ th{color:var(--text2);font-weight:600}
   <div class="card" id="tecnicos">
     <h2>Cobertura técnica — Mapa España</h2>
     <div id="mapTecnicos"></div>
-    <p style="margin-top:10px;color:var(--text2);font-size:12px">26 activos en Supabase (verificados) · universo 1.148 en master · círculo verde = provincia con técnicos activos; tamaño = nº de técnicos. 4 técnicos aún sin provincia asignada (no reciben leads).</p>
+    <p style="margin-top:10px;color:var(--text2);font-size:12px">25 activos en Supabase (verificados, dueño excluido de asignación) · universo 1.148 en master · círculo verde = provincia con técnicos asignables; naranja = 1 técnico; tamaño = nº de técnicos. Madrid, Ciudad Real y Zamora muestran 0 asignables hoy (gap de captación: leads huérfanos).</p>
   </div>
 
   <div class="grid-2">
@@ -257,9 +257,9 @@ const COORDS_PROV = {
   'Zamora':[42.00,-5.15],'Alicante':[38.34,-0.49],'Melilla':[35.17,-2.94],'Ceuta':[35.54,-5.31],
   'Las Palmas':[28.12,-15.44],'Santa Cruz':[28.29,-16.63],
 };
-// Fallback estático (si la EF falla o tarda)
+// Fallback estático (si la EF falla o tarda) — ya descuenta al dueño excluido (arturo)
 const provs_fallback = [
-  {name:'Madrid', n:1},{name:'Asturias', n:3},{name:'Barcelona', n:2},{name:'Albacete', n:3},
+  {name:'Madrid', n:0},{name:'Asturias', n:2},{name:'Barcelona', n:2},{name:'Albacete', n:3},
   {name:'Zaragoza', n:2},{name:'Huelva', n:2},{name:'Cantabria', n:1},{name:'A Coruña', n:1}
 ];
 function datosFallback(){
