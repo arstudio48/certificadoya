@@ -214,34 +214,59 @@ new Chart(document.getElementById('chartRadar'), {
   options:{maintainAspectRatio:false, plugins:{legend:{display:false}}, scales:{r:{beginAtZero:true}}}
 });
 
-// 7. Mapa Leaflet
+// 7. Mapa Leaflet — estático + dinámico desde Supabase (Edge Function mapa-tecnicos)
 const map = L.map('mapTecnicos').setView([40.416,-3.703], 6);
 L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {attribution:'© OpenStreetMap'}).addTo(map);
-const provs = [
-  {name:'Madrid', coords:[40.416,-3.703], n:1},
-  {name:'Asturias', coords:[43.36,-5.85], n:3},
-  {name:'Barcelona', coords:[41.387,2.170], n:2},
-  {name:'Gipuzkoa', coords:[43.32,-1.98], n:1},
-  {name:'Bizkaia', coords:[43.26,-2.93], n:1},
-  {name:'Navarra', coords:[42.69,-1.68], n:1},
-  {name:'Valencia', coords:[39.47,-0.37], n:1},
-  {name:'Jaén', coords:[37.77,-3.79], n:1},
-  {name:'Cádiz', coords:[36.53,-6.29], n:1},
-  {name:'Almería', coords:[36.84,-2.46], n:1},
-  {name:'Tenerife', coords:[28.29,-16.63], n:1},
-  {name:'Albacete', coords:[38.99,-1.85], n:3},
-  {name:'Zaragoza', coords:[41.65,-0.88], n:2},
-  {name:'Cantabria', coords:[43.46,-3.81], n:1},
-  {name:'Huelva', coords:[37.26,-6.94], n:2},
-  {name:'A Coruña', coords:[43.36,-8.41], n:1},
-  {name:'Huesca', coords:[42.14,-0.41], n:1},
-  {name:'Teruel', coords:[40.34,-1.10], n:1}
+const COORDS_PROV = {
+  'Madrid':[40.416,-3.703],'Asturias':[43.36,-5.85],'Barcelona':[41.387,2.170],
+  'Gipuzkoa':[43.32,-1.98],'Bizkaia':[43.26,-2.93],'Navarra':[42.69,-1.68],
+  'Valencia':[39.47,-0.37],'Jaén':[37.77,-3.79],'Cádiz':[36.53,-6.29],
+  'Almería':[36.84,-2.46],'Tenerife':[28.29,-16.63],'Albacete':[38.99,-1.85],
+  'Zaragoza':[41.65,-0.88],'Cantabria':[43.46,-3.81],'Huelva':[37.26,-6.94],
+  'A Coruña':[43.36,-8.41],'Huesca':[42.14,-0.41],'Teruel':[40.34,-1.10],
+  'Cádiz':[36.53,-6.29],'Lugo':[43.01,-7.55],'Ourense':[42.34,-7.86],'Pontevedra':[42.43,-8.64],
+  'León':[42.59,-5.57],'Palencia':[42.01,-4.53],'Valladolid':[41.65,-4.72],'Salamanca':[40.97,-5.66],
+  'Segovia':[40.94,-4.11],'Ávila':[40.65,-4.70],'Soria':[41.77,-3.22],'Burgos':[42.46,-3.68],
+  'La Rioja':[42.46,-2.44],'Guadalajara':[40.99,-3.16],'Cuenca':[40.25,-2.83],'Toledo':[39.86,-4.02],
+  'Ciudad Real':[38.74,-3.39],'Badajoz':[38.88,-7.16],'Cáceres':[39.98,-6.14],'Sevilla':[37.62,-5.57],
+  'Málaga':[36.72,-4.48],'Granada':[36.73,-3.69],'Jaén':[37.77,-3.79],'Alicante':[38.34,-0.49],
+  'Castellón':[39.66,-0.06],'Lleida':[40.75,-0.03],'Girona':[41.97,2.53],'Tarragona':[41.11,1.03],
+  'Zamora':[42.00,-5.15],'Alicante':[38.34,-0.49],'Melilla':[35.17,-2.94],'Ceuta':[35.54,-5.31],
+  'Las Palmas':[28.12,-15.44],'Santa Cruz':[28.29,-16.63],
+};
+// Fallback estático (si la EF falla o tarda)
+const provs_fallback = [
+  {name:'Madrid', n:1},{name:'Asturias', n:3},{name:'Barcelona', n:2},{name:'Albacete', n:3},
+  {name:'Zaragoza', n:2},{name:'Huelva', n:2},{name:'Cantabria', n:1},{name:'A Coruña', n:1}
 ];
-provs.forEach(t => {
-  const color = t.n > 0 ? '#3fb950' : '#f85149';
-  L.circleMarker(t.coords, {radius: Math.max(5, t.n*2.2), color, fillColor: color, fillOpacity:.55})
-   .addTo(map).bindPopup(`<b>${t.name}</b>: ${t.n} técnicos`);
-});
+function datosFallback(){
+  const m={};
+  provs_fallback.forEach(p=>{ m[p.name]=p.n; });
+  return m;
+}
+async function cargarMapa(){
+  let prov_n;
+  try{
+    const r=await fetch('https://wypgqpgjlookbhuaiyxa.supabase.co/functions/v1/mapa-tecnicos');
+    if(!r.ok) throw new Error('EF error');
+    const d=await r.json();
+    const m={}; (d.provincias||[]).forEach(p=>{ const key=normaliza(p.provincia); m[key]=p.n; });
+    prov_n=m;
+  }catch(e){
+    prov_n=datosFallback(); // fallback
+  }
+  Object.entries(COORDS_PROV).forEach(([prov,coords])=>{
+    const n=prov_n[normaliza(prov)]||0;
+    if(n===0) return; // no dibujar provincias sin técnicos
+    const color=n>1?'#3fb950':'#f0883e';
+    L.circleMarker(coords,{radius:Math.max(6,n*2.4),color,fillColor:color,fillOpacity:.6})
+      .addTo(map).bindPopup(`<b>${prov}</b>: ${n} técnicos`);
+  });
+}
+function normaliza(prov){
+  return (prov||'').trim().toLowerCase().replace(/-/g,' ');
+}
+cargarMapa();
 
 // Tema
 function toggleTheme() {
