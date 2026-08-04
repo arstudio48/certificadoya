@@ -23,6 +23,10 @@
     .lead a.btn { display: inline-block; background: #14894f; color: #fff; padding: 8px 14px; border-radius: 8px; text-decoration: none; font-size: 13px; margin-top: 8px; }
     .empty { text-align: center; color: #5c6b63; padding: 40px 0; }
     .badge { display:inline-block; background:#f2f8f4; color:#0f6b3d; font-size:11px; padding:3px 8px; border-radius:10px; margin-left:8px; }
+    .reenvio-box { margin-top:18px; border-top:1px solid #eef0ee; padding-top:14px; }
+    .reenvio-box input { width:100%; padding:10px 12px; border:1px solid #cfd8d3; border-radius:8px; font-size:14px; margin:4px 0; box-sizing:border-box; }
+    .btn-reenvio { background:#5c6b63; color:#fff; border:0; padding:10px 16px; border-radius:8px; font-size:14px; font-weight:600; cursor:pointer; width:100%; }
+    .btn-reenvio:hover { background:#46544d; }
     footer { text-align: center; color: #9fb4a8; font-size: 12px; padding: 20px; }
   </style>
 </head>
@@ -38,6 +42,12 @@
       <input id="token" placeholder="Tu código de técnico" autocomplete="off">
       <button onclick="cargar()">Acceder</button>
       <p id="msg" style="color:#c0392b;font-size:13px;min-height:18px;"></p>
+      <div class="reenvio-box">
+        <p style="font-size:13px;color:#5c6b63;margin:14px 0 6px;">¿Perdiste tu código? Te lo reenviamos:</p>
+        <input id="emailReenvio" type="email" placeholder="Tu email de técnico" autocomplete="email">
+        <button class="btn-reenvio" onclick="reenviarCodigo()">Reenviar código</button>
+        <p id="msgReenvio" style="font-size:12px;color:#16a34a;min-height:16px;"></p>
+      </div>
     </div>
 
     <div id="panel" style="display:none;">
@@ -96,6 +106,31 @@
           <p style="font-size:12px;color:#888;margin-top:6px;">Tienes los datos del inmueble para emitir el CEE. El contacto con el cliente va por el chat de la plataforma: así se garantiza tu pago (82%) y la protección de ambas partes. El teléfono directo no se facilita para evitar que el cliente y tú cerréis por fuera y pierdas la cobertura de CertificadoYa.</p>
         </div>
       `).join('');
+    }
+
+    async function reenviarCodigo() {
+      const email = document.getElementById('emailReenvio').value.trim();
+      const msg = document.getElementById('msgReenvio');
+      if (!email) { msg.style.color = '#c0392b'; msg.textContent = 'Escribe tu email.'; return; }
+      msg.style.color = '#5c6b63'; msg.textContent = 'Enviando…';
+      try {
+        const res = await fetch('https://wypgqpgjlookbhuaiyxa.supabase.co/functions/v1/reenviar-token', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ email })
+        });
+        const data = await res.json();
+        if (res.ok && data.success) {
+          msg.style.color = '#16a34a';
+          msg.textContent = '✅ Código reenviado a tu email. Revisa tu bandeja (y spam).';
+        } else {
+          msg.style.color = '#c0392b';
+          msg.textContent = data.error || 'No pudimos reenviar el código.';
+        }
+      } catch (e) {
+        msg.style.color = '#c0392b';
+        msg.textContent = 'Error de conexión. Inténtalo de nuevo.';
+      }
     }
 
     // Permitir acceso por ?token= en la URL

@@ -50,6 +50,7 @@ function htmlBienvenida(nombre: string, token: string): string {
     <div style="text-align:center;margin:28px 0;">
       <a href="${panelUrl}" style="background:#00ffbb;color:#000;padding:14px 28px;border-radius:8px;text-decoration:none;font-weight:600;font-size:15px;display:inline-block;">Acceder a mi panel de técnicos</a>
     </div>
+    ${token ? `<p style="color:#8a8a92;font-size:12px;line-height:1.5;word-break:break-all;">Tu código de acceso: <code style="color:#00ffbb;background:#0e1a14;padding:2px 6px;border-radius:4px;">${token}</code><br>En móvil el enlace de arriba lo rellena solo. En PC/tablet, cópialo en el campo "Tu código de técnico".</p>` : ''}
 
     <p style="color:#8a8a92;font-size:13px;line-height:1.6;">Desde el panel puedes ver tus encargos, seleccionar leads disponibles y gestionar tu saldo. Si tienes dudas, responde a este correo.</p>
 
