@@ -87,12 +87,13 @@
         <div class="lead">
           <h3>Encargo #${l.id?.slice(0,8) || ''} <span class="badge">${l.estado}</span></h3>
           <table>
-            <tr><td>Zona</td><td>${l.provincia || ('CP ' + l.codigo_postal)}</td></tr>
+            <tr><td>Cliente</td><td>${l.nombre_cliente || '—'}</td></tr>
+            <tr><td>Zona / CP</td><td>${l.provincia || ''}${l.codigo_postal ? ' (CP ' + l.codigo_postal + ')' : ''}</td></tr>
             ${l.m2 ? `<tr><td>Inmueble</td><td>${l.m2} m²${l.tipo_inmueble ? ' - ' + l.tipo_inmueble : ''}</td></tr>` : ''}
             <tr><td>Pago cliente</td><td>✅ retenido en CertificadoYa</td></tr>
           </table>
           <a class="btn" href="https://www.certificadoya.es/chat.html?encargo=${l.id}">💬 Contactar al cliente (chat)</a>
-          <p style="font-size:12px;color:#888;margin-top:6px;">El contacto directo solo se habilita tras cerrar el servicio en la plataforma, para garantizar tu pago (82%) y la protección de ambas partes.</p>
+          <p style="font-size:12px;color:#888;margin-top:6px;">Tienes los datos del inmueble para emitir el CEE. El contacto con el cliente va por el chat de la plataforma: así se garantiza tu pago (82%) y la protección de ambas partes. El teléfono directo no se facilita para evitar que el cliente y tú cerréis por fuera y pierdas la cobertura de CertificadoYa.</p>
         </div>
       `).join('');
     }
