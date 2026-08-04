@@ -73,7 +73,7 @@
 
       const { data: tecnico, error } = await sb
         .from('tecnicos')
-        .select('id, nombre, leads_recibidos')
+        .select('id, nombre, leads_recibidos', { headers: { 'x-tecnico-token': token } })
         .eq('token', token)
         .maybeSingle();
 
