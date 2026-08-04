@@ -86,12 +86,14 @@ serve(async (req) => {
     const body = await req.json()
     const { email, token, todos } = body
 
-    // Modo "todos": enviar a todos los técnicos activos
+    // Modo "todos": enviar a todos los técnicos activos dados de alta en las últimas 24h
     if (todos === true) {
+      const hace24h = new Date(Date.now() - 24 * 3600 * 1000).toISOString()
       const { data: tecnicos, error } = await supabase
         .from('tecnicos')
-        .select('id, nombre, email, token, activo')
+        .select('id, nombre, email, token, activo, created_at')
         .eq('activo', true)
+        .gte('created_at', hace24h)
       if (error) throw error
       const resultados = []
       for (const t of tecnicos || []) {
