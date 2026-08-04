@@ -14,7 +14,7 @@ serve(async (req: Request) => {
 
   try {
     const body = await req.json()
-    const { action, nombre_cliente, email_cliente, telefono_cliente, zona, m2, tipo_inmueble, presupuesto_min, presupuesto_max, fuente, estado, notas } = body
+    const { action, nombre_cliente, email_cliente, telefono_cliente, zona, m2, tipo_inmueble, presupuesto_min, presupuesto_max, fuente, estado, notas, stripe_payment_id } = body
 
     console.log('[solicitar-servicio] Recibido:', { action, nombre_cliente, zona, email_cliente })
 
@@ -68,7 +68,13 @@ serve(async (req: Request) => {
       presupuesto_min: parseInt(presupuesto_min) || null,
       presupuesto_max: parseInt(presupuesto_max) || null,
       fuente: fuente || 'web-sin-pago',
-      estado: estado || 'nuevo',
+      // ⚠️ ANTI-ELUSIÓN: sin pago confirmado (stripe_payment_id) el lead NO se auto-asigna.
+      // Queda en 'pendiente_pago' (el cron solo asigna 'nuevo'), obligando al cliente a pagar
+      // antes de que un técnico pueda contactarle y saltarse la comisión del 18%.
+      estado: (stripe_payment_id || (body as any).payment_intent || (body as any).charge_id)
+        ? (estado || 'nuevo')
+        : 'pendiente_pago',
+      stripe_payment_id: stripe_payment_id || (body as any).payment_intent || (body as any).charge_id || null,
       notas: notas || null,
       created_at: new Date().toISOString()
     }
