@@ -85,14 +85,14 @@
       }
       cont.innerHTML = leads.map(l => `
         <div class="lead">
-          <h3>${l.nombre_cliente} <span class="badge">${l.estado}</span></h3>
+          <h3>Encargo #${l.id?.slice(0,8) || ''} <span class="badge">${l.estado}</span></h3>
           <table>
-            <tr><td>Teléfono</td><td><a href="tel:${l.telefono_cliente}">${l.telefono_cliente}</a></td></tr>
-            ${l.email_cliente ? `<tr><td>Email</td><td>${l.email_cliente}</td></tr>` : ''}
             <tr><td>Zona</td><td>${l.provincia || ('CP ' + l.codigo_postal)}</td></tr>
             ${l.m2 ? `<tr><td>Inmueble</td><td>${l.m2} m²${l.tipo_inmueble ? ' - ' + l.tipo_inmueble : ''}</td></tr>` : ''}
+            <tr><td>Pago cliente</td><td>✅ retenido en CertificadoYa</td></tr>
           </table>
-          <a class="btn" href="https://wa.me/${l.telefono_cliente?.replace(/\D/g,'')}">Contactar por WhatsApp</a>
+          <a class="btn" href="https://www.certificadoya.es/chat.html?encargo=${l.id}">💬 Contactar al cliente (chat)</a>
+          <p style="font-size:12px;color:#888;margin-top:6px;">El contacto directo solo se habilita tras cerrar el servicio en la plataforma, para garantizar tu pago (82%) y la protección de ambas partes.</p>
         </div>
       `).join('');
     }

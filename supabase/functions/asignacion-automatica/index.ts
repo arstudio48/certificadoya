@@ -192,44 +192,27 @@ async function notificarAsignacion(leadId: string, tecnicoId: string, limitrofeA
   let html: string;
   let subject: string;
 
-  if (esPrimeros) {
-    // Email completo con datos del lead + instrucciones de onboarding
-    subject = `📋 Nuevo encargo en ${lead.provincia || lead.codigo_postal}${limitrofeAsignacion ? " (zona próxima)" : ""} — CertificadoYa (${recibidos}/3)`;
-    html = `
+  // ⚠️ ANTI-ELUSIÓN: NUNCA se envían teléfono/email del cliente en claro al técnico.
+  // El contacto se hace SOLO a través del chat de la plataforma (chat.html?encargo=ID),
+  // de modo que CertificadoYa mantiene la intermediación y la comisión del 18%.
+  const chatUrl = `${WEB}/chat.html?encargo=${leadId}`;
+  subject = `📋 Nuevo encargo en ${lead.provincia || lead.codigo_postal}${limitrofeAsignacion ? " (zona próxima)" : ""} — CertificadoYa`;
+  html = `
     <div style="font-family: sans-serif; max-width: 600px; margin: 0 auto;">
       <h2 style="color: #16a34a;">📋 Nuevo encargo asignado</h2>
-      <p>Hola <strong>${tecnico.nombre}</strong>, tienes un nuevo encargo en <strong>${lead.provincia || lead.codigo_postal}</strong>:</p>
+      <p>Hola <strong>${tecnico.nombre}</strong>, tienes un nuevo encargo en <strong>${lead.provincia || lead.codigo_postal}</strong>${lead.m2 ? `, ${lead.m2} m²${lead.tipo_inmueble ? " (" + lead.tipo_inmueble + ")" : ""}` : ""}.</p>
       ${avisoZona}
-      <table style="width: 100%; border-collapse: collapse;">
-        <tr><td style="padding: 8px; border-bottom: 1px solid #eee; font-weight: 600;">Cliente</td><td style="padding: 8px; border-bottom: 1px solid #eee;">${lead.nombre_cliente}</td></tr>
-        <tr><td style="padding: 8px; border-bottom: 1px solid #eee; font-weight: 600;">Teléfono</td><td style="padding: 8px; border-bottom: 1px solid #eee;"><a href="tel:${lead.telefono_cliente}">${lead.telefono_cliente}</a></td></tr>
-        ${lead.email_cliente ? `<tr><td style="padding: 8px; border-bottom: 1px solid #eee; font-weight: 600;">Email</td><td style="padding: 8px; border-bottom: 1px solid #eee;">${lead.email_cliente}</td></tr>` : ""}
-        ${lead.m2 ? `<tr><td style="padding: 8px; border-bottom: 1px solid #eee; font-weight: 600;">Inmueble</td><td style="padding: 8px; border-bottom: 1px solid #eee;">${lead.m2} m²${lead.tipo_inmueble ? " - " + lead.tipo_inmueble : ""}</td></tr>` : ""}
-      </table>
       <div style="background:#f2f8f4; border-radius:12px; padding:18px 20px; margin:18px 0; font-size:14px; line-height:1.7; color:#1a2b23;">
         <strong style="color:#0f6b3d;">Cómo funciona CertificadoYa:</strong><br>
-        1. <strong>Contactas al cliente</strong> por teléfono/WhatsApp para acordar la visita.<br>
-        2. <strong>Haces la visita y emites el CEE</strong> como siempre (tú eres el técnico colegiado).<br>
-        3. <strong>El cliente ya pagó</strong> — el cobro está retenido de forma segura.<br>
-        4. <strong>Cobras tú</strong> al completar el encargo (comisión 18% que restamos). Pago vía Stripe o transferencia.<br>
-        5. Subes el certificado y nosotros gestionamos el registro oficial.
+        1. <strong>Contactas al cliente desde el chat de la plataforma</strong> (botón abajo). El cliente ya pagó a CertificadoYa.<br>
+        2. <strong>Acordáis la visita y emites el CEE</strong> como técnico colegiado.<br>
+        3. <strong>Subes el certificado</strong> y nosotros gestionamos el registro oficial.<br>
+        4. <strong>Cobras tú (82%)</strong> al completar — la comisión del 18% se resta automáticamente.<br><br>
+        <span style="color:#b45309;">El contacto directo (teléfono/email fuera de la plataforma) no está disponible hasta que el servicio se cierra en CertificadoYa, para garantizar la protección de ambas partes y tu pago.</span>
       </div>
-      <p style="margin-top: 20px;"><a href="${panelUrl}" style="background:#16a34a;color:white;padding:10px 20px;border-radius:8px;text-decoration:none;">Ver mis encargos en el panel</a></p>
-      <p style="color:#888;font-size:12px;">Este es el encargo nº ${recibidos} de tus 3 primeros. A partir del 4º, te avisaremos con un enlace a tu panel (sin datos en el email) para tu comodidad.</p>
+      <p style="margin-top: 20px;"><a href="${chatUrl}" style="background:#16a34a;color:white;padding:10px 20px;border-radius:8px;text-decoration:none;">💬 Contactar al cliente (chat de CertificadoYa)</a></p>
+      <p style="color:#888;font-size:12px;">Este es el encargo nº ${recibidos}. El cliente ya pagó y el importe está retenido hasta la entrega del CEE.</p>
     </div>`;
-  } else {
-    // Email breve con enlace a página desindexada (sin datos del lead)
-    subject = `📋 Tienes un nuevo encargo en CertificadoYa — míralo en tu panel`;
-    html = `
-    <div style="font-family: sans-serif; max-width: 600px; margin: 0 auto;">
-      <h2 style="color: #16a34a;">📋 Nuevo encargo disponible</h2>
-      <p>Hola <strong>${tecnico.nombre}</strong>, tienes un nuevo encargo asignado en <strong>${lead.provincia || lead.codigo_postal}</strong>.</p>
-      ${avisoZona}
-      <p>Por privacidad y comodidad, los datos del cliente están en tu panel privado (no indexable):</p>
-      <p style="margin-top: 20px;"><a href="${panelUrl}" style="background:#16a34a;color:white;padding:10px 20px;border-radius:8px;text-decoration:none;">Abrir mi panel de encargos →</a></p>
-      <p style="color:#888;font-size:12px;">Recordatorio: contactas al cliente, emites el CEE, y cobras al completar (comisión 18%). El cliente ya pagó y el importe está retenido.</p>
-    </div>`;
-  }
 
   await fetch(SUPABASE_URL_EXT + "/functions/v1/enviar-correo", {
     method: "POST",
