@@ -23,11 +23,23 @@ serve(async (req) => {
   }
 
   try {
-    const { lead_id, tecnico_id, token } = await req.json()
+    const { lead_id, tecnico_id, token, registro_cee, pdf_url } = await req.json()
 
     if (!lead_id || !tecnico_id || !token) {
       return new Response(JSON.stringify({ error: 'Faltan datos' }), {
         status: 400, headers: { ...corsHeaders, 'Content-Type': 'application/json' }
+      })
+    }
+
+    // ⚠️ ANTI-ELUSIÓN (Capa 2): sin evidencia de entrega (nº de registro CEE o PDF),
+    // el servicio NO se cierra ni se paga al técnico. El 82% queda retenido en CertificadoYa
+    // hasta que el técnico aporte prueba de que emitió y registró el certificado.
+    if (!registro_cee && !pdf_url) {
+      return new Response(JSON.stringify({
+        error: 'Debes adjuntar el nº de registro del CEE o el PDF del certificado para cobrar. El pago se libera tras verificar la entrega.',
+        requiere_evidencia: true
+      }), {
+        status: 422, headers: { ...corsHeaders, 'Content-Type': 'application/json' }
       })
     }
 
@@ -45,25 +57,44 @@ serve(async (req) => {
       })
     }
 
-    // Cambiar estado a completado
+    // Guardar evidencia y dejar en pendiente_verificacion (NO pagar aún).
+    // El payout (82% al técnico, 18% para ti) solo se libera tras que CertificadoYa
+    // verifique el registro del CEE. El técnico no cobra hasta entregar prueba real.
     const { error: updateError } = await supabase
       .from('leads')
-      .update({ estado: 'completado', completado_at: new Date().toISOString() })
+      .update({
+        estado: 'pendiente_verificacion',
+        registro_cee: registro_cee || null,
+        pdf_certificado_url: pdf_url || null,
+        completado_at: new Date().toISOString()
+      })
       .eq('id', lead_id)
 
     if (updateError) {
-      return new Response(JSON.stringify({ error: 'Error al actualizar lead' }), {
-        status: 500, headers: { ...corsHeaders, 'Content-Type': 'application/json' }
-      })
+      return new Response(JSON.stringify({ error: 'Error al actualizar lead' }),
+        { status: 500, headers: { ...corsHeaders, 'Content-Type': 'application/json' } })
     }
 
-    // Llamar a stripe-payout para procesar el pago al técnico
-    const payoutUrl = `${supabaseUrl}/functions/v1/stripe-payout`
-    fetch(payoutUrl, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${supabaseServiceKey}` },
-      body: JSON.stringify({ lead_id, tecnico_id })
-    }).catch(e => console.error('Error calling stripe-payout:', e))
+    // Notificar a CertificadoYa para verificar el registro antes de liberar el pago.
+    try {
+      await fetch(`${supabaseUrl}/functions/v1/notificar-lead`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${supabaseServiceKey}` },
+        body: JSON.stringify({
+          nombre_cliente: lead.nombre_cliente,
+          email_cliente: lead.email_cliente,
+          telefono_cliente: '',
+          provincia: lead.zona,
+          tipo_inmueble: lead.tipo_inmueble,
+          m2: lead.m2,
+          presupuesto_min: lead.presupuesto_min,
+          presupuesto_max: lead.presupuesto_max,
+          fuente: 'verificacion_pendiente',
+          estado: 'pendiente_verificacion',
+          nota: `Técnico ${tecnico_id} entregó evidencia (registro: ${registro_cee || 'n/a'}, pdf: ${pdf_url ? 'sí' : 'no'}). Verificar y liberar pago.`
+        })
+      })
+    } catch (_) { /* no crítico */ }
 
     // Enviar email de reseña al cliente
     const emailCliente = lead.email_cliente || ''
@@ -94,7 +125,7 @@ serve(async (req) => {
                     Tu opinión nos ayuda a mejorar y a que otros propietarios confíen en nosotros.<br>
                     Solo te llevará 30 segundos.
                   </p>
-                  <a href="https://www.certificadoya.es/resena?lead=${lead_id}" 
+                  <a href="https://www.certificadooya.es/resena?lead=${lead_id}"
                      style="display:inline-block;background:#16a34a;color:#fff;padding:.7rem 2rem;border-radius:8px;text-decoration:none;font-weight:600;margin-top:12px">
                     Dejar reseña ⭐
                   </a>
@@ -109,7 +140,7 @@ serve(async (req) => {
       } catch (_) { /* email no crítico */ }
     }
 
-    return new Response(JSON.stringify({ success: true }), {
+    return new Response(JSON.stringify({ success: true, estado: 'pendiente_verificacion', mensaje: 'Evidencia recibida. El pago se libera tras verificar el registro del CEE.' }), {
       headers: { ...corsHeaders, 'Content-Type': 'application/json' }
     })
   } catch (error) {
