@@ -84,7 +84,7 @@
 
       const { data: leads } = await sb
         .from('leads')
-        .select('id, nombre_cliente, email_cliente, telefono_cliente, codigo_postal, provincia, m2, tipo_inmueble, estado, created_at')
+        .select('id, nombre_cliente, codigo_postal, provincia, m2, tipo_inmueble, estado, datos_liberados, created_at')
         .eq('tecnico_asignado', tecnico.id)
         .order('created_at', { ascending: false });
 
