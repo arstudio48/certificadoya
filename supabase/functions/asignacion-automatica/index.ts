@@ -271,6 +271,15 @@ serve(async (req) => {
       return new Response(JSON.stringify({ success: true, message: "Ya asignado", tecnico_id: lead.tecnico_asignado }), { headers: { ...corsHeaders, "Content-Type": "application/json" } });
     }
 
+    // ⚠️ ANTI-ELUSIÓN ESTRICTO: sin pago confirmado (stripe_payment_intent) el lead
+    // NO se asigna. Queda en 'pendiente_pago' para que el cliente pague primero.
+    // El técnico solo ve superficies e importes (nunca datos de contacto del cliente)
+    // hasta que hay pago → datos_liberados=true.
+    if (!lead.stripe_payment_intent && !lead.es_test) {
+      await supabase.from("leads").update({ estado: "pendiente_pago" }).eq("id", leadId);
+      return new Response(JSON.stringify({ success: false, message: "Lead sin pago confirmado: no se asigna hasta que el cliente pague", reintentar: false }), { headers: { ...corsHeaders, "Content-Type": "application/json" } });
+    }
+
     const resultado = await buscarTecnicoConFallback(lead.provincia || "", leadId, excluir);
 
     if (!resultado) {

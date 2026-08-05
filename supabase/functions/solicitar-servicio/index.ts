@@ -55,6 +55,20 @@ serve(async (req: Request) => {
 
     const SUPABASE_URL = Deno.env.get('SUPABASE_URL') || 'https://wypgqpgjlookbhuaiyxa.supabase.co'
 
+    // Calcular importe_pactado por m² × zona (CCAA) desde zonas_precio
+    let importePactado = 0
+    try {
+      const m2lead = parseInt(m2) || 80
+      const zoneRes = await fetch(`${SUPABASE_URL}/rest/v1/zonas_precio?provincia=eq.${encodeURIComponent(zona.trim())}&activo=eq.true&select=precio_m2_min,precio_m2_max`, {
+        headers: { 'apikey': serviceKey, 'Authorization': `Bearer ${serviceKey}` }
+      })
+      const zones = await zoneRes.json()
+      const z = (zones && zones[0]) || { precio_m2_min: '0.45', precio_m2_max: '0.85' }
+      const min = parseFloat(z.precio_m2_min) || 0.45
+      const max = parseFloat(z.precio_m2_max) || 0.85
+      importePactado = Math.round(m2lead * ((min + max) / 2) * 100) / 100
+    } catch (_) { importePactado = 0 }
+
     console.log('[solicitar-servicio] serviceKey length:', serviceKey ? serviceKey.length : 0)
 
     // Crear payload del lead
@@ -75,6 +89,7 @@ serve(async (req: Request) => {
         ? (estado || 'nuevo')
         : 'pendiente_pago',
       stripe_payment_id: stripe_payment_id || (body as any).payment_intent || (body as any).charge_id || null,
+      importe_pactado: importePactado,
       notas: notas || null,
       created_at: new Date().toISOString()
     }
