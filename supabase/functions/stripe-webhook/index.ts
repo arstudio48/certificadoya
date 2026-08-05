@@ -11,18 +11,43 @@ const STRIPE_WEBHOOK_SECRET = Deno.env.get("STRIPE_WEBHOOK_SECRET") ?? ""
 const SUPABASE_URL = Deno.env.get("SUPABASE_URL") ?? ""
 const SUPABASE_SERVICE_ROLE_KEY = Deno.env.get("SUPABASE_SERVICE_ROLE_KEY") ?? ""
 
-// Función para verificar firma del webhook
-function verifyWebhookSignature(
+// Función para verificar firma del webhook (HMAC-SHA256 estilo Stripe, Web Crypto)
+async function verifyWebhookSignature(
   payload: string,
   signature: string,
   secret: string
-): boolean {
-  const encoder = new TextEncoder()
-  const secretBytes = encoder.encode(secret)
-  const messageBytes = encoder.encode(payload)
-
-  // Implementación simplificada: en producción usar crypto.subtle
-  return signature.startsWith("t_") // Placeholder para validación Stripe
+): Promise<boolean> {
+  if (!signature || !secret) return false
+  const parts = signature.split(",")
+  let ts = ""
+  let v1 = ""
+  for (const p of parts) {
+    const [k, v] = p.split("=")
+    if (k === "t") ts = v
+    if (k === "v1") v1 = v
+  }
+  if (!ts || !v1) return false
+  const key = await crypto.subtle.importKey(
+    "raw",
+    new TextEncoder().encode(secret),
+    { name: "HMAC", hash: "SHA-256" },
+    false,
+    ["sign"]
+  )
+  const sigBuf = await crypto.subtle.sign(
+    "HMAC",
+    key,
+    new TextEncoder().encode(`${ts}.${payload}`)
+  )
+  const expected = Array.from(new Uint8Array(sigBuf))
+    .map((b) => b.toString(16).padStart(2, "0"))
+    .join("")
+  if (expected.length !== v1.length) return false
+  let diff = 0
+  for (let i = 0; i < expected.length; i++) {
+    diff |= expected.charCodeAt(i) ^ v1.charCodeAt(i)
+  }
+  return diff === 0
 }
 
 serve(async (req: Request) => {
@@ -35,7 +60,7 @@ serve(async (req: Request) => {
     const body = await req.text()
 
     // Validar firma de Stripe
-    if (!verifyWebhookSignature(body, signature, STRIPE_WEBHOOK_SECRET)) {
+    if (!await verifyWebhookSignature(body, signature, STRIPE_WEBHOOK_SECRET)) {
       console.error("Firma de webhook inválida")
       return new Response(JSON.stringify({ error: "Firma inválida" }), {
         status: 401,
@@ -105,9 +130,7 @@ serve(async (req: Request) => {
           presupuesto_max,
           fuente: "web-stripe",
           estado: "nuevo", // Auto-asignación se ejecutará en 30 min
-          stripe_payment_id: charge.id,
-          monto_pagado: charge.amount / 100, // Stripe usa centavos
-          fecha_solicitud: new Date().toISOString(),
+          stripe_payment_intent: charge.id,
         })
         .select()
 
