@@ -1,9 +1,3 @@
-<<<<<<< Updated upstream
-# GitHub Actions Workflow: Deploy certificadoya.es (publicación selectiva)
-# Publica SOLO la web (sin informes/, .hermes/, scripts/, supabase/, venv...) en rama gh-pages.
-# Corregido 06-ago-2026 por Cástor: el deploy nativo de Pages hacía timeout con el repo de 700MB.
-=======
->>>>>>> Stashed changes
 name: Deploy certificadoya.es (web-only)
 
 on:
@@ -18,47 +12,19 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
-  build-and-deploy:
+  deploy:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout code
+      - name: Checkout
         uses: actions/checkout@v4
-        with:
-          fetch-depth: 1
 
-      - name: Preparar dist con SOLO la web
+      - name: Desplegar en gh-pages
         run: |
-          mkdir -p dist
-          # copiar todo, excluyendo directorios/archivos no-web (trabajo interno)
-          rsync -a --exclude='.git' --exclude='.github' --exclude='.hermes' \
-                --exclude='_scripts' --exclude='scripts' --exclude='_artifacts' \
-                --exclude='supabase' --exclude='informes' --exclude='media/descargables_internos' \
-                --exclude='venv_new' --exclude='__pycache__' --exclude='config' \
-                --exclude='data' --exclude='datos' --exclude='facturas' \
-                --exclude='herramientas' --exclude='instancias' --exclude='propuestas' \
-                --exclude='prototipos' --exclude='reserva' --exclude='workers' \
-                --exclude='*.bak*' --exclude='*.disabled' --exclude='_*.py' \
-                --exclude='.env' --exclude='.env.*' --exclude='keys.json' --exclude='service_key*' \
-                --exclude='*.pem' --exclude='*.tok' --exclude='*.sql' \
-                ./ dist/
-          # sanity: la web debe estar en dist/
-          test -f dist/index.html && echo "OK index.html en dist/"
-          test -f dist/CNAME && echo "OK CNAME en dist/"
-          du -sh dist
-
-      - name: Deploy a rama gh-pages
-        uses: peaceiris/actions-gh-pages@v4
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./dist
-          publish_branch: gh-pages
-          force_orphan: false
-
-      - name: Notify
-        run: |
-          echo "✅ Web publicada en rama gh-pages (solo web, sin basura interna)"
-<<<<<<< Updated upstream
-          echo "🌐 https://certificadoya.es"
-=======
-          echo "🌐 https://certificadoya.es/"
->>>>>>> Stashed changes
+          git fetch origin gh-pages 2>/dev/null || true
+          git checkout gh-pages 2>/dev/null || git checkout --orphan gh-pages
+          git checkout main -- .
+          git config user.name "CertificadoYa Bot"
+          git config user.email "bot@certificadoya.es"
+          git add -A
+          git diff --cached --quiet || git commit -m "deploy: $(date +'%Y-%m-%d %H:%M')"
+          git push origin gh-pages
