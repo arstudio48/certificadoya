@@ -1,6 +1,9 @@
+<<<<<<< Updated upstream
 # GitHub Actions Workflow: Deploy certificadoya.es (publicación selectiva)
 # Publica SOLO la web (sin informes/, .hermes/, scripts/, supabase/, venv...) en rama gh-pages.
 # Corregido 06-ago-2026 por Cástor: el deploy nativo de Pages hacía timeout con el repo de 700MB.
+=======
+>>>>>>> Stashed changes
 name: Deploy certificadoya.es (web-only)
 
 on:
@@ -54,4 +57,8 @@ jobs:
       - name: Notify
         run: |
           echo "✅ Web publicada en rama gh-pages (solo web, sin basura interna)"
+<<<<<<< Updated upstream
           echo "🌐 https://certificadoya.es"
+=======
+          echo "🌐 https://certificadoya.es/"
+>>>>>>> Stashed changes
