@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500" role="img" aria-label="RD 659/2025 obligatorio certificado energético venta y alquiler">
+  <defs>
+    <linearGradient id="bg3" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#fefce8"/>
+      <stop offset="1" stop-color="#fef9c3"/>
+    </linearGradient>
+  </defs>
+  <rect width="800" height="500" fill="url(#bg3)"/>
+  <!-- documento -->
+  <g transform="translate(250,120)">
+    <rect x="0" y="0" width="300" height="380" rx="8" fill="#fff" stroke="#16a34a" stroke-width="2"/>
+    <rect x="25" y="30" width="250" height="40" rx="4" fill="#16a34a"/>
+    <text x="150" y="56" text-anchor="middle" font-size="18" fill="#fff" font-weight="bold" font-family="Arial">RD 659/2025</text>
+    <rect x="25" y="90" width="250" height="12" rx="6" fill="#d1fae5"/>
+    <rect x="25" y="115" width="250" height="12" rx="6" fill="#d1fae5"/>
+    <rect x="25" y="140" width="200" height="12" rx="6" fill="#d1fae5"/>
+    <rect x="25" y="175" width="250" height="12" rx="6" fill="#d1fae5"/>
+    <rect x="25" y="200" width="250" height="12" rx="6" fill="#d1fae5"/>
+    <rect x="25" y="225" width="230" height="12" rx="6" fill="#d1fae5"/>
+    <!-- sello -->
+    <circle cx="150" cy="310" r="45" fill="none" stroke="#16a34a" stroke-width="2"/>
+    <circle cx="150" cy="310" r="36" fill="none" stroke="#16a34a" stroke-width="1.5"/>
+    <text x="150" y="308" text-anchor="middle" font-size="12" fill="#166534" font-family="Arial">OBLIGATORIO</text>
+    <text x="150" y="324" text-anchor="middle" font-size="12" fill="#166534" font-family="Arial">VENTA · ALQUILER</text>
+  </g>
+  <text x="400" y="60" text-anchor="middle" font-family="Arial" font-size="34" font-weight="bold" fill="#1f2937">RD 659/2025: Certificado obligatorio</text>
+  <text x="400" y="90" text-anchor="middle" font-family="Arial" font-size="16" fill="#4b5563">Entrada en vigor 23 jul 2026 · desde 45€ · técnicos competentes</text>
+</svg>

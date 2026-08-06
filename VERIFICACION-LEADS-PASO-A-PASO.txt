@@ -1,0 +1,196 @@
+═══════════════════════════════════════════════════════════════════════════════
+PLAN DE VERIFICACIÓN: SISTEMA DE CAPTACIÓN DE LEADS (ARREGLADO)
+═══════════════════════════════════════════════════════════════════════════════
+
+CAMBIOS REALIZADOS:
+═══════════════════
+
+1. ✅ Edge Function `solicitar-servicio` reescrito:
+   - Usa SUPABASE_SERVICE_ROLE_KEY (no apikey pública)
+   - Validación clara de input
+   - Logging detallado en cada paso
+   - Retorna `{success: false, error: "..."}` si falla
+   - NO miente: solo `success: true` si realmente se creó
+
+2. ✅ Frontend `/reserva/index.html` actualizado:
+   - Valida `result.success` ANTES de mostrar éxito
+   - Si falla, muestra error real: `result.error`
+   - No engaña al usuario
+
+3. ✅ SQL RLS creado: `SUPABASE-RLS-FIX.sql`
+   - Políticas para permitir INSERT anon
+   - Debe ejecutarse en Supabase Dashboard
+
+
+VERIFICACIÓN: PASO A PASO
+═════════════════════════
+
+🔴 PASO 1: APLICAR SQL FIX EN SUPABASE DASHBOARD
+────────────────────────────────────────────────
+LINK: https://app.supabase.com/project/wypgqpgjlookbhuaiyxa/sql/editor
+ACCIONES:
+  1. Copiar contenido de: SUPABASE-RLS-FIX.sql
+  2. Pegar en SQL editor
+  3. Clic "Run"
+  4. Verificar: No hay errores (verde)
+
+ESPERADO:
+  ```
+  Query executed successfully
+  ```
+
+ERROR SI:
+  ❌ "Syntax error" → revisar comillas, sintaxis
+  ❌ "Relation \"leads\" does not exist" → tabla no existe (PROBLEMA)
+  ❌ "Policy already exists" → OK, es esperado (puede ignorarse)
+
+
+🟡 PASO 2: VERIFICAR EDGE FUNCTION DEPLOYADO
+──────────────────────────────────────────────
+LINK: https://app.supabase.com/project/wypgqpgjlookbhuaiyxa/functions/solicitar-servicio
+
+COMPROBAR:
+  1. Code tab → verifica que tiene logging `console.log`
+  2. Environment variables → verifica SUPABASE_SERVICE_ROLE_KEY existe
+  3. Recent invocations → debe haber nuevos logs
+
+ESPERADO:
+  - [solicitar-servicio] Recibido: { action, nombre_cliente, zona, ... }
+  - [solicitar-servicio] Enviando a Supabase: { leadData }
+  - [solicitar-servicio] Response status: 201 (Created)
+  - [solicitar-servicio] Lead creado: { id, nombre, ... }
+
+ERRORES TÍPICOS:
+  ❌ "SUPABASE_SERVICE_ROLE_KEY no está configurado" → Configurar env var
+  ❌ "Error Supabase: { code: '42501', message: 'RLS violation' }" → SQL fix no aplicado
+  ❌ "Error al procesar respuesta de servidor" → Respuesta mal formada
+
+
+🟢 PASO 3: PROBAR FORMULARIO EN WWW.CERTIFICADOYA.ES
+───────────────────────────────────────────────────
+INSTRUCCIONES:
+  1. Abrir: https://www.certificadoya.es
+  2. Seleccionar provincia: ASTURIAS
+  3. Seleccionar tipo: UNIFAMILIAR
+  4. Superficie: 315 m²
+  5. Clic "Solicitar técnico sin pagar" (botón azul oscuro)
+  6. Llenar formulario:
+     - Nombre: Arturo Briceño Hernán
+     - Teléfono: 608563002
+     - Aceptar checkbox
+  7. Clic "Solicitar técnico sin pagar →"
+
+ESPERADO (ÉXITO):
+  ✅ Botón hace "loading" (spinner)
+  ✅ Espera 2-3 segundos
+  ✅ Muestra mensaje: "¡Solicitud enviada!"
+  ✅ Ícono: 📋
+  ✅ Texto: "Hemos registrado tu solicitud. En breve un técnico..."
+
+POSIBLES ERRORES:
+  ❌ "Error de conexión. Inténtalo de nuevo."
+     → Problema en Edge Function
+     → Revisar logs en Supabase Dashboard
+     → Verificar SUPABASE_SERVICE_ROLE_KEY
+  
+  ❌ "Error al procesar tu solicitud"
+     → response.error contiene detalles
+     → Revisar console.log en browser (F12 → Console)
+  
+  ❌ Muestra "Éxito" pero NO aparece lead en BD
+     → Edge Function miente (revisa logs)
+     → RLS aún bloquea INSERT
+
+
+🔵 PASO 4: VERIFICAR LEAD EN SUPABASE
+──────────────────────────────────────
+LINK: https://app.supabase.com/project/wypgqpgjlookbhuaiyxa/editor/tables/leads
+
+COMPROBAR:
+  1. Tabla "leads" visible
+  2. Clic "leads" en sidebar
+  3. Scroll derecha si es necesario
+  4. Último lead debe tener:
+     - nombre_cliente: "Arturo Briceño Hernán" (o similar)
+     - telefono_cliente: "608563002"
+     - provincia: "asturias"
+     - created_at: AHORA (timestamp reciente)
+     - fuente: "web-sin-pago"
+     - estado: "nuevo"
+
+ESPERADO:
+  Tabla llena, al menos 1 fila reciente con datos del formulario
+
+ERROR SI:
+  ❌ Tabla vacía → Lead NO se creó
+  ❌ Datos incompletos → JSON malformado en frontend
+
+
+🟣 PASO 5: VERIFICAR AUTO-ASSIGN (CRON)
+────────────────────────────────────────
+LINK: https://app.supabase.com/project/wypgqpgjlookbhuaiyxa/editor/tables/leads
+
+COMPROBAR:
+  1. Lead recién creado debe tener:
+     - estado: "nuevo" → cambia a "pendiente_tecnico" (auto-assign)
+     - tecnico_asignado: NOT NULL (id del técnico)
+     - fecha_asignacion: timestamp
+
+TIEMPO:
+  - Auto-assign corre cada 5 minutos (ver `auto_assign.py`)
+  - Esperar 5-10 minutos máximo
+
+ESPERADO:
+  ✅ Estado cambió automáticamente a "pendiente_tecnico"
+  ✅ Tiene técnico_asignado
+  ✅ Técnico recibe email con detalles del lead
+
+ERROR SI:
+  ❌ Estado sigue siendo "nuevo" después 10 min
+  ❌ No hay email al técnico
+  → auto_assign.py no se ejecutó
+  → Ver cronjob en Hermes: `hermes cron list`
+
+
+RESUMEN DE FALLOS ARREGLADOS:
+════════════════════════════
+
+| Fallo | Causa | Solución |
+|-------|-------|----------|
+| ❌ RLS 42501 | apikey pública no tiene permisos | SQL: crear POLICY anon insert |
+| ❌ Edge Function miente | try-catch silenciador | Retorna error real si falla |
+| ❌ Frontend cree "éxito" | No valida response.success | Valida `result.success` ahora |
+| ❌ Tabla vacía | INSERT fallaba silenciosamente | Logging + validación clara |
+| ❌ Sin verificación | No hay checksum | Frontend valida success/error |
+
+ROLLBACK (si algo falla):
+════════════════════════
+
+Git:
+  git revert 52a9fc7  # Revert cambios
+
+Supabase:
+  DROP POLICY "Allow public inserts on leads" ON leads;
+  DROP POLICY "Allow public read on leads" ON leads;
+  -- Restaurar policies anteriores
+
+
+PRUEBA FINAL:
+═════════════
+
+Ejecutar TODO en este orden:
+
+1. Aplicar SQL en Supabase Dashboard ← CRÍTICO
+2. Esperar 30 segundos
+3. Abrir www.certificadoya.es
+4. Llenar formulario exactamente como se indica
+5. Clic "Solicitar técnico sin pagar →"
+6. Esperar 3 segundos
+7. Verificar:
+   - ¿Muestra "¡Solicitud enviada!"? SÍ ✅ / NO ❌
+   - ¿Lead aparece en Supabase? SÍ ✅ / NO ❌
+   - ¿Técnico recibió email? SÍ ✅ / NO ❌
+   - ¿Auto-assign cambió estado? SÍ ✅ / NO ❌
+
+Si TODO es ✅: SISTEMA FUNCIONA
+Si algo es ❌: Revisar sección "Posibles errores" correspondiente

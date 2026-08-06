@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="es" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dashboard CertificadoYa.es — 02-ago-2026</title>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.7/dist/chart.umd.min.js"></script>
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<style>
+:root{--bg:#0d1117;--card:#161b22;--border:#30363d;--text:#e6edf3;--text2:#8b949e;--accent:#58a6ff;--green:#3fb950;--yellow:#d29922;--red:#f85149}
+[data-theme="light"]{--bg:#f6f8fa;--card:#ffffff;--border:#d8dee4;--text:#24292f;--text2:#57606a;--accent:#0969da;--green:#1a7f37;--yellow:#9a6700;--red:#cf222e}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:-apple-system,Segoe UI,Roboto,sans-serif;background:var(--bg);color:var(--text);font-size:14px}
+.sidebar{width:240px;position:fixed;height:100vh;background:var(--card);border-right:1px solid var(--border);padding:20px;overflow-y:auto;z-index:100}
+.sidebar h1{font-size:16px;margin-bottom:18px;color:var(--accent)}
+.sidebar a{display:block;color:var(--text2);text-decoration:none;padding:8px 10px;border-radius:6px;margin-bottom:4px;font-size:13px}
+.sidebar a:hover,.sidebar a.active{background:var(--bg);color:var(--accent)}
+.main{margin-left:240px;padding:24px}
+.card{background:var(--card);border:1px solid var(--border);border-radius:8px;padding:20px;margin-bottom:20px}
+.card h2{font-size:15px;margin-bottom:14px;color:var(--accent)}
+.kpis{display:flex;gap:14px;flex-wrap:wrap;margin-bottom:20px}
+.kpi{flex:1;min-width:140px;padding:16px;background:var(--card);border:1px solid var(--border);border-radius:8px;text-align:center}
+.kpi .value{font-size:26px;font-weight:700;color:var(--accent)}
+.kpi .label{font-size:12px;color:var(--text2);margin-top:4px}
+.grid-2{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+.chart-container{position:relative;height:320px;width:100%}
+table{width:100%;border-collapse:collapse;font-size:12.5px}
+th,td{text-align:left;padding:7px 9px;border-bottom:1px solid var(--border)}
+th{color:var(--text2);font-weight:600}
+.data-gap{background:rgba(210,153,34,.12);border:1px solid var(--yellow);border-radius:8px;padding:12px 16px;margin-bottom:20px;color:var(--yellow);font-size:13px}
+.sem{display:inline-block;width:10px;height:10px;border-radius:50%;margin-right:6px}
+.sem-g{background:var(--green)}.sem-y{background:var(--yellow)}.sem-r{background:var(--red)}
+#mapTecnicos{height:380px;border-radius:8px;background:var(--card)}
+.theme-btn{position:fixed;top:16px;right:16px;z-index:200;background:var(--card);border:1px solid var(--border);color:var(--text);padding:8px 14px;border-radius:6px;cursor:pointer;font-size:12px}
+@media(max-width:900px){.sidebar{width:180px}.main{margin-left:180px;padding:14px}.grid-2{grid-template-columns:1fr}.kpi{min-width:110px}}
+</style>
+</head>
+<body>
+<button class="theme-btn" onclick="toggleTheme()">🌓 Tema</button>
+<nav class="sidebar">
+  <h1>🔍 CertificadoYa.es</h1>
+  <a href="#resumen" class="active">Resumen</a>
+  <a href="#seo">SEO</a>
+  <a href="#queries">Queries</a>
+  <a href="#trafico">Tráfico</a>
+  <a href="#leads">Leads</a>
+  <a href="#tecnicos">Técnicos</a>
+  <a href="#web">Web Live</a>
+  <a href="#oportunidades">Oportunidades</a>
+</nav>
+
+<div class="main">
+  <div class="data-gap">⚠️ <strong>Limitaciones:</strong> sin acceso GA4 dashboard, Google Ads, Ahrefs/Semrush, Cloudflare logs, Matomo. Datos SEO de GSC (90 días, vía service account), tráfico de GoatCounter (71 días), leads de Supabase (live). PSI rate-limited (performance 0/100 no fiable hoy).</div>
+
+  <div class="kpis">
+    <div class="kpi"><div class="value">13660</div><div class="label">Impresiones GSC 90d</div></div>
+    <div class="kpi"><div class="value">144</div><div class="label">Clics GSC 90d</div></div>
+    <div class="kpi"><div class="value">1.05%</div><div class="label">CTR</div></div>
+    <div class="kpi"><div class="value">37.1</div><div class="label">Posición media</div></div>
+    <div class="kpi"><div class="value">40</div><div class="label">Leads reales</div></div>
+    <div class="kpi"><div class="value">29</div><div class="label">Con técnico</div></div>
+    <div class="kpi"><div class="value">0</div><div class="label">Pagados</div></div>
+    <div class="kpi"><div class="value">26</div><div class="label">Técnicos activos</div></div>
+    <div class="kpi"><div class="value">695</div><div class="label">Emails campaña</div></div>
+  </div>
+
+  <div class="card" id="resumen">
+    <h2>Resumen ejecutivo</h2>
+    <p style="color:var(--text2);line-height:1.7">Web de 70 días (indexación desde 20-may-2026). Tráfico estable 4-8 sesiones/día (GoatCounter). GSC acumula 13.660 impresiones con CTR 1,05% — bajo por posición media 37,1. <strong>40 leads reales</strong> (no test), 29 asignados a técnico, <strong>0 pagados</strong> (embudo se corta en asignación). 26 técnicos activos+verificados en Supabase, con 4 sin provincia asignada (no reciben leads) y 1 excluido (dueño). Campaña email: 695 enviados (297 vía Brevo con dominio verificado), 442 pendientes. RD 659/2025 en vigor desde 23-jul-2026 — ventana normativa activa.</p>
+  </div>
+
+  <div class="card" id="seo">
+    <h2>SEO — Evolución (GSC, 90 días)</h2>
+    <div class="chart-container"><canvas id="chartEvol"></canvas></div>
+  </div>
+
+  <div class="grid-2">
+    <div class="card">
+      <h2>Impresiones vs Sesiones</h2>
+      <div class="chart-container"><canvas id="chartGC"></canvas></div>
+    </div>
+    <div class="card" id="trafico">
+          <h2>Dispositivos (GSC)</h2>
+          <div class="chart-container"><canvas id="chartDev"></canvas></div>
+        </div>
+      </div>
+
+      <div class="card" id="posicion">
+        <h2>Posición media diaria (GSC, desde inicio)</h2>
+        <div class="chart-container"><canvas id="chartPos"></canvas></div>
+        <p style="margin-top:10px;color:var(--text2);font-size:12px">Hay buen progreso: la posición media pasó de ~60 al inicio (mayo) a ~15-20 en julio (menor = mejor). Picos = días con pocas impresiones, ruido.</p>
+      </div>
+
+  <div class="card" id="queries">
+    <h2>Top 12 queries GSC (90d)</h2>
+    <table><thead><tr><th>Query</th><th>Impresiones</th><th>Clics</th><th>Pos</th></tr></thead><tbody><tr><td>ayudas eficiencia energética 2026 andalucía</td><td>11</td><td>1</td><td>9.5</td></tr><tr><td>cee alicante</td><td>3</td><td>1</td><td>5.7</td></tr><tr><td>certificado energético</td><td>1</td><td>1</td><td>4</td></tr><tr><td>oviedo</td><td>1</td><td>1</td><td>2</td></tr><tr><td>100 m</td><td>1</td><td>0</td><td>6</td></tr><tr><td>63 metros</td><td>1</td><td>0</td><td>1</td></tr><tr><td>659/2025</td><td>16</td><td>0</td><td>8.2</td></tr><tr><td>ahorro energetico edificios cuenca</td><td>1</td><td>0</td><td>43</td></tr><tr><td>ahorro energetico en cadiz</td><td>40</td><td>0</td><td>26.3</td></tr><tr><td>ahorro energetico en las empresas cadiz</td><td>2</td><td>0</td><td>16.5</td></tr><tr><td>ahorro energético en palencia</td><td>22</td><td>0</td><td>71.7</td></tr><tr><td>ahorro energético gipuzkoa</td><td>9</td><td>0</td><td>29.7</td></tr></tbody></table>
+  </div>
+
+  <div class="card">
+    <h2>Top 10 páginas GSC (90d)</h2>
+    <table><thead><tr><th>Página</th><th>Impresiones</th><th>Clics</th><th>Pos</th></tr></thead><tbody><tr><td>https://www.certificadoya.es/</td><td>185</td><td>32</td><td>12.9</td></tr><tr><td>https://www.certificadoya.es/blog/exenciones-certificado-ene</td><td>556</td><td>16</td><td>7.2</td></tr><tr><td>https://www.certificadoya.es/certificado-energetico-asturias</td><td>1103</td><td>14</td><td>28.6</td></tr><tr><td>https://www.certificadoya.es/blog/certificado-energetico-obl</td><td>1338</td><td>9</td><td>7.6</td></tr><tr><td>https://www.certificadoya.es/certificado-energetico-gipuzkoa</td><td>336</td><td>9</td><td>28.4</td></tr><tr><td>https://www.certificadoya.es/blog/rd-659-2025-que-cambia-tu-</td><td>461</td><td>6</td><td>8.1</td></tr><tr><td>https://www.certificadoya.es/blog/certificado-energetico-don</td><td>27</td><td>4</td><td>3.7</td></tr><tr><td>https://www.certificadoya.es/blog/se-acaba-dinero-europeo-gu</td><td>66</td><td>4</td><td>5.4</td></tr><tr><td>https://www.certificadoya.es/blog/subvenciones-energeticas-a</td><td>68</td><td>4</td><td>8.1</td></tr><tr><td>https://www.certificadoya.es/certificado-energetico-barcelon</td><td>1303</td><td>4</td><td>54.5</td></tr></tbody></table>
+  </div>
+
+  <div class="grid-2">
+    <div class="card">
+      <h2>Leads por estado</h2>
+      <div class="chart-container"><canvas id="chartLeadsEst"></canvas></div>
+    </div>
+    <div class="card">
+      <h2>Embudo conversión</h2>
+      <div class="chart-container"><canvas id="chartFunnel"></canvas></div>
+    </div>
+  </div>
+
+  <div class="grid-2">
+    <div class="card" id="leads">
+      <h2>Leads por provincia</h2>
+      <table><thead><tr><th>Provincia</th><th>Leads</th></tr></thead><tbody>
+        <tr><td>Asturias</td><td>6</td></tr><tr><td>Madrid</td><td>6</td></tr><tr><td>Barcelona</td><td>4</td></tr><tr><td>Bizkaia</td><td>3</td></tr><tr><td>Navarra</td><td>2</td></tr><tr><td>Jaén</td><td>2</td></tr><tr><td>Valencia</td><td>2</td></tr><tr><td>Cantabria</td><td>2</td></tr><tr><td>Almería</td><td>1</td></tr><tr><td>Gijón</td><td>1</td></tr><tr><td>Tenerife</td><td>1</td></tr><tr><td>Ciudad Real</td><td>1</td></tr><tr><td>Albacete</td><td>1</td></tr><tr><td>Sin definir</td><td>1</td></tr><tr><td>Zamora</td><td>1</td></tr><tr><td>Huelva</td><td>1</td></tr></tbody></table>
+    </div>
+    <div class="card">
+      <h2>Leads por fuente e inmueble</h2>
+      <table><thead><tr><th>Fuente</th><th>N</th></tr></thead><tbody><tr><td>web</td><td>41</td></tr><tr><td>calculadora</td><td>2</td></tr><tr><td>stripe</td><td>1</td></tr><tr><td>reserva contra entrega</td><td>1</td></tr><tr><td>test/verif</td><td>6</td></tr></tbody></table>
+      <br>
+      <table><thead><tr><th>Inmueble</th><th>N</th></tr></thead><tbody><tr><td>piso</td><td>38</td></tr><tr><td>unifamiliar</td><td>8</td></tr><tr><td>adosado</td><td>3</td></tr><tr><td>local</td><td>2</td></tr></tbody></table>
+    </div>
+  </div>
+
+  <div class="card" id="tecnicos">
+    <h2>Cobertura técnica — Mapa España</h2>
+    <div id="mapTecnicos"></div>
+    <p style="margin-top:10px;color:var(--text2);font-size:12px">25 activos en Supabase (verificados, dueño excluido de asignación) · universo 1.148 en master · círculo verde = provincia con técnicos asignables; naranja = 1 técnico; tamaño = nº de técnicos. Madrid, Ciudad Real y Zamora muestran 0 asignables hoy (gap de captación: leads huérfanos).</p>
+  </div>
+
+  <div class="grid-2">
+    <div class="card">
+      <h2>Radar técnicos (universo)</h2>
+      <div class="chart-container"><canvas id="chartRadar"></canvas></div>
+    </div>
+    <div class="card" id="web">
+      <h2>Web Live</h2>
+      <table>
+        <tr><td>Estado</td><td><span class="sem sem-g"></span>HTTP 200</td></tr>
+        <tr><td>TTFB</td><td>0.33s</td></tr>
+        <tr><td>CDN</td><td>GitHub Pages (edge fra)</td></tr>
+        <tr><td>SSL</td><td>válido hasta 21-oct-2026</td></tr>
+        <tr><td>Home</td><td>107.6 KB HTML</td></tr>
+        <tr><td>Analytics</td><td>GA4 + Clarity + GoatCounter + Bing</td></tr>
+      </table>
+    </div>
+
+    <div class="card">
+      <h2>Clientes con lead asignado — pendientes de pago (20)</h2>
+      <p style="color:var(--text2);font-size:12px">Importe calculado por m² × zona (CCAA) desde zonas_precio. Total: 1792.90 EUR (18% CertificadoYa = 322.72 EUR). Sin pago confirmado (Stripe) el técnico solo ve superficie e importe, nunca datos de contacto del cliente.</p>
+      <table><thead><tr><th>Cliente</th><th>Email</th><th>Prov</th><th>m²</th><th>Tipo</th><th>Importe</th><th>Técnico</th><th>Estado</th></tr></thead><tbody>
+      <tr><td>Paloma</td><td>paloma_carmona@hotmail.com</td><td>Madrid</td><td>80</td><td>piso</td><td>78.00€</td><td>ISAAC LIDON CASTILLO</td><td>pendiente_tecnico</td></tr>
+      <tr><td>iñaki</td><td>yaizaibai@hotmail.com</td><td>Cantabria</td><td>500</td><td>unifamiliar</td><td>325.00€</td><td>Aparejadorcantabria</td><td>pendiente_tecnico</td></tr>
+      <tr><td>Mikel</td><td>mikelgarmendia@hotmail.com</td><td>Gipuzkoa</td><td>78</td><td>piso</td><td>50.70€</td><td>Www</td><td>asignado</td></tr>
+      <tr><td>mikel</td><td>mikelgarmendia@hotmail.com</td><td>Gipuzkoa</td><td>78</td><td>piso</td><td>50.70€</td><td>Www</td><td>asignado</td></tr>
+      <tr><td>mathias</td><td>mathiasgodding@yahoo.nl</td><td>Valencia</td><td>96</td><td>piso</td><td>62.40€</td><td>Ceevalencia</td><td>asignado</td></tr>
+      <tr><td>celia</td><td>mesientoestallar@gmail.com</td><td>Asturias</td><td>76</td><td>piso</td><td>55.10€</td><td>Manuel</td><td>pendiente_tecnico</td></tr>
+      <tr><td>Javi</td><td>mikelgarmendia@hotmail.com</td><td>Gipuzkoa</td><td>80</td><td>piso</td><td>52.00€</td><td>Www</td><td>asignado</td></tr>
+      <tr><td>JULIAN GARCIA MESA</td><td>juliangarcia57@hotmail.com</td><td>Jaén</td><td>70</td><td>piso</td><td>45.50€</td><td>Aparejadorjaen</td><td>asignado</td></tr>
+      <tr><td>Eva María Marín Perera</td><td>ismaeltaco35@gmail.com</td><td>—</td><td>80</td><td>piso</td><td>52.00€</td><td>Manuel</td><td>asignado</td></tr>
+      <tr><td>José Ángel Hernández Beriain</td><td>hernandezberiain@yahoo.es</td><td>Tenerife</td><td>90</td><td>piso</td><td>58.50€</td><td>Aparejadortenerife</td><td>asignado</td></tr>
+      <tr><td>Erika</td><td>erikaf7@yahoo.es</td><td>Bizkaia</td><td>75</td><td>piso</td><td>48.75€</td><td>Aparejador Bilbao</td><td>asignado</td></tr>
+      <tr><td>jorge</td><td>jrivaspelu@hotmail.com</td><td>Navarra</td><td>37</td><td>local</td><td>24.05€</td><td>Aparejadorespamplona</td><td>asignado</td></tr>
+      <tr><td>almeria</td><td>almu.abad.martin@gmail.com</td><td>Almería</td><td>90</td><td>piso</td><td>58.50€</td><td>Aparejadoresalmeria</td><td>asignado</td></tr>
+      <tr><td>Miguel</td><td>miguel.4.mateos@gmail.com</td><td>Huelva</td><td>80</td><td>piso</td><td>52.00€</td><td>Arquitectohuelva</td><td>asignado</td></tr>
+      <tr><td>Daniel</td><td>danistsj@gmail.com</td><td>Barcelona</td><td>95</td><td>piso</td><td>99.75€</td><td>Arquitectobarcelona</td><td>asignado</td></tr>
+      <tr><td>Iñigo</td><td>—</td><td>Bizkaia</td><td>63</td><td>piso</td><td>40.95€</td><td>Aparejador Bilbao</td><td>asignado</td></tr>
+      <tr><td>carmen</td><td>cargalesp@gmail.com</td><td>Cantabria</td><td>75</td><td>piso</td><td>48.75€</td><td>Aparejadorcantabria</td><td>asignado</td></tr>
+      <tr><td>ASIER</td><td>skalibur008@hotmail.com</td><td>Zamora</td><td>99</td><td>piso</td><td>64.35€</td><td>ISAAC LIDON CASTILLO</td><td>pendiente_tecnico</td></tr>
+      <tr><td>Laura</td><td>laura.galea@microsoft.com</td><td>Barcelona</td><td>280</td><td>piso</td><td>294.00€</td><td>Arquitectobarcelona</td><td>asignado</td></tr>
+      <tr><td>JUAN JOSE</td><td>JUANJOXIN@GMAIL.COM</td><td>Asturias</td><td>362</td><td>piso</td><td>262.45€</td><td>Manuel</td><td>pendiente_tecnico</td></tr>
+      </tbody></table>
+    </div>
+
+    <div class="card">
+      <h2>Técnicos con leads asignados y características (12)</h2>
+      <table><thead><tr><th>Técnico</th><th>Provincia</th><th>Modelo</th><th>Saldo</th><th>Verif</th><th>Leads rec</th><th>Leads sin pagar</th></tr></thead><tbody>
+      <tr><td>ISAAC LIDON CASTILLO</td><td>—</td><td>premium</td><td>0</td><td>Sí</td><td>2</td><td>2</td></tr>
+      <tr><td>Aparejadorcantabria</td><td>Cantabria</td><td>premium</td><td>0</td><td>Sí</td><td>2</td><td>2</td></tr>
+      <tr><td>Www</td><td>Gipuzkoa</td><td>premium</td><td>0</td><td>Sí</td><td>3</td><td>3</td></tr>
+      <tr><td>Ceevalencia</td><td>Valencia</td><td>premium</td><td>0</td><td>Sí</td><td>1</td><td>1</td></tr>
+      <tr><td>Manuel</td><td>—</td><td>premium</td><td>0</td><td>Sí</td><td>3</td><td>3</td></tr>
+      <tr><td>Aparejadorjaen</td><td>Jaén</td><td>premium</td><td>0</td><td>Sí</td><td>1</td><td>1</td></tr>
+      <tr><td>Aparejadortenerife</td><td>Tenerife</td><td>premium</td><td>0</td><td>Sí</td><td>1</td><td>1</td></tr>
+      <tr><td>Aparejador Bilbao</td><td>Bizkaia</td><td>premium</td><td>0</td><td>Sí</td><td>2</td><td>2</td></tr>
+      <tr><td>Aparejadorespamplona</td><td>Navarra</td><td>premium</td><td>0</td><td>Sí</td><td>1</td><td>1</td></tr>
+      <tr><td>Aparejadoresalmeria</td><td>Almería</td><td>premium</td><td>0</td><td>Sí</td><td>1</td><td>1</td></tr>
+      <tr><td>Arquitectohuelva</td><td>Huelva</td><td>premium</td><td>0</td><td>Sí</td><td>1</td><td>1</td></tr>
+      <tr><td>Arquitectobarcelona</td><td>Barcelona</td><td>premium</td><td>0</td><td>Sí</td><td>2</td><td>2</td></tr>
+      </tbody></table>
+    </div>
+
+    <div class="card">
+      <h2>Estado sistema anti-elusión (18%)</h2>
+      <table>
+        <tr><td>Asignación sin pago</td><td><span class="sem sem-r"></span>BLOQUEADA (asignacion-automatica exige stripe_payment_intent)</td></tr>
+        <tr><td>Contacto técnico-cliente</td><td><span class="sem sem-g"></span>Solo chat plataforma (tel/email ocultos)</td></tr>
+        <tr><td>Importe en registros</td><td><span class="sem sem-g"></span>SIEMPRE presente (importe_pactado)</td></tr>
+        <tr><td>Stripe webhook</td><td><span class="sem sem-g"></span>Activo (HMAC-SHA256 real, commit 3f03f2cc)</td></tr>
+        <tr><td>Leads reales sin pagar</td><td>20 (disparando cobro Stripe live)</td></tr>
+      </table>
+    </div>
+  </div>
+
+  <div class="card" id="oportunidades">
+    <h2>Oportunidades priorizadas</h2>
+    <table>
+      <thead><tr><th>#</th><th>Acción</th><th>Impacto</th><th>Esfuerzo</th></tr></thead>
+      <tbody>
+        <tr><td>1</td><td>Convertir landings /certificado-energetico-* (1.300 imp, pos 54) — optimizar título/CTA para clics</td><td>Alto</td><td>Bajo</td></tr>
+        <tr><td>2</td><td>Atacar queries 'ahorro energético X' pos 25-70 con contenido local</td><td>Alto</td><td>Medio</td></tr>
+        <tr><td>3</td><td>Desbloquear embudo leads: 29 asignados → 0 pagados (seguimiento técnico — Paloma Madrid y otros asignados pendientes de activar)</td><td>Alto</td><td>Medio</td></tr>
+        <tr><td>4</td><td>Contenido RD 659/2025 (ventana normativa abierta — query '659/2025' pos 8,2 sin clics)</td><td>Medio</td><td>Bajo</td></tr>
+        <tr><td>5</td><td>Ampliar cobertura provincial de técnicos (rojo en mapa)</td><td>Medio</td><td>Medio</td></tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<script>
+const DATA = {"labels": ["05-20", "05-21", "05-22", "05-23", "05-24", "05-25", "05-26", "05-27", "05-28", "05-29", "05-30", "05-31", "06-01", "06-02", "06-03", "06-04", "06-05", "06-06", "06-07", "06-08", "06-09", "06-10", "06-11", "06-12", "06-13", "06-14", "06-15", "06-16", "06-17", "06-18", "06-19", "06-20", "06-21", "06-22", "06-23", "06-24", "06-25", "06-26", "06-27", "06-28", "06-29", "06-30", "07-01", "07-02", "07-03", "07-04", "07-05", "07-06", "07-07", "07-08", "07-09", "07-10", "07-11", "07-12", "07-13", "07-14", "07-15", "07-16", "07-17", "07-18", "07-19", "07-20", "07-21", "07-22", "07-23", "07-24", "07-25", "07-26", "07-27", "07-28", "07-29"], "imp": [0, 3, 18, 53, 61, 60, 53, 159, 59, 72, 93, 131, 152, 231, 110, 99, 153, 173, 114, 118, 136, 200, 155, 203, 162, 179, 223, 179, 365, 168, 147, 129, 137, 180, 183, 417, 200, 191, 141, 338, 262, 220, 310, 217, 171, 129, 119, 171, 234, 209, 215, 225, 194, 195, 270, 292, 232, 240, 225, 167, 163, 310, 285, 306, 277, 198, 159, 171, 276, 964, 309], "clicks": [0, 1, 0, 1, 6, 5, 1, 1, 1, 0, 0, 2, 1, 1, 0, 1, 0, 0, 1, 1, 2, 2, 3, 1, 3, 1, 1, 0, 3, 3, 1, 1, 0, 2, 2, 0, 3, 2, 0, 2, 6, 3, 1, 2, 1, 2, 0, 2, 3, 1, 0, 5, 0, 0, 2, 2, 0, 3, 3, 1, 1, 6, 3, 3, 6, 2, 4, 3, 6, 9, 9], "gc_labels": ["05-23", "05-24", "05-25", "05-26", "05-27", "05-28", "05-29", "05-30", "05-31", "06-01", "06-02", "06-03", "06-04", "06-05", "06-06", "06-07", "06-08", "06-09", "06-10", "06-11", "06-12", "06-13", "06-14", "06-15", "06-16", "06-17", "06-18", "06-19", "06-20", "06-21", "06-22", "06-23", "06-24", "06-25", "06-26", "06-27", "06-28", "06-29", "06-30", "07-01", "07-02", "07-03", "07-04", "07-05", "07-06", "07-07", "07-08", "07-09", "07-10", "07-11", "07-12", "07-13", "07-14", "07-15", "07-16", "07-17", "07-18", "07-19", "07-20", "07-21", "07-22", "07-23", "07-24", "07-25", "07-26", "07-27", "07-28", "07-29", "07-30", "07-31", "08-01"], "gc_ses": [0, 0, 0, 0, 0, 0, 0, 7, 6, 7, 4, 3, 3, 4, 11, 3, 32, 24, 28, 6, 9, 16, 2, 13, 20, 2, 6, 9, 22, 5, 7, 2, 7, 10, 7, 5, 7, 8, 7, 1, 5, 2, 8, 6, 14, 5, 4, 4, 3, 1, 1, 4, 2, 3, 2, 0, 1, 5, 2, 2, 2, 5, 6, 5, 8, 6, 5, 5, 2, 6, 4], "tq": [{"query": "ayudas eficiencia energética 2026 andalucía", "impresiones": 11, "clics": 1, "ctr": 9.1, "posicion": 9.5}, {"query": "cee alicante", "impresiones": 3, "clics": 1, "ctr": 33.3, "posicion": 5.7}, {"query": "certificado energético", "impresiones": 1, "clics": 1, "ctr": 100, "posicion": 4}, {"query": "oviedo", "impresiones": 1, "clics": 1, "ctr": 100, "posicion": 2}, {"query": "100 m", "impresiones": 1, "clics": 0, "ctr": 0, "posicion": 6}, {"query": "63 metros", "impresiones": 1, "clics": 0, "ctr": 0, "posicion": 1}, {"query": "659/2025", "impresiones": 16, "clics": 0, "ctr": 0, "posicion": 8.2}, {"query": "ahorro energetico edificios cuenca", "impresiones": 1, "clics": 0, "ctr": 0, "posicion": 43}, {"query": "ahorro energetico en cadiz", "impresiones": 40, "clics": 0, "ctr": 0, "posicion": 26.3}, {"query": "ahorro energetico en las empresas cadiz", "impresiones": 2, "clics": 0, "ctr": 0, "posicion": 16.5}, {"query": "ahorro energético en palencia", "impresiones": 22, "clics": 0, "ctr": 0, "posicion": 71.7}, {"query": "ahorro energético gipuzkoa", "impresiones": 9, "clics": 0, "ctr": 0, "posicion": 29.7}], "tp": [{"pagina": "https://www.certificadoya.es/", "impresiones": 185, "clics": 32, "posicion": 12.9}, {"pagina": "https://www.certificadoya.es/blog/exenciones-certificado-energetico.html", "impresiones": 556, "clics": 16, "posicion": 7.2}, {"pagina": "https://www.certificadoya.es/certificado-energetico-asturias/", "impresiones": 1103, "clics": 14, "posicion": 28.6}, {"pagina": "https://www.certificadoya.es/blog/certificado-energetico-obligatorio-2026.html", "impresiones": 1338, "clics": 9, "posicion": 7.6}, {"pagina": "https://www.certificadoya.es/certificado-energetico-gipuzkoa/", "impresiones": 336, "clics": 9, "posicion": 28.4}, {"pagina": "https://www.certificadoya.es/blog/rd-659-2025-que-cambia-tu-certificado-energetico.html", "impresiones": 461, "clics": 6, "posicion": 8.1}, {"pagina": "https://www.certificadoya.es/blog/certificado-energetico-donacion.html", "impresiones": 27, "clics": 4, "posicion": 3.7}, {"pagina": "https://www.certificadoya.es/blog/se-acaba-dinero-europeo-guia-comunidades-vecinos.html", "impresiones": 66, "clics": 4, "posicion": 5.4}, {"pagina": "https://www.certificadoya.es/blog/subvenciones-energeticas-andalucia-2026.html", "impresiones": 68, "clics": 4, "posicion": 8.1}, {"pagina": "https://www.certificadoya.es/certificado-energetico-barcelona/", "impresiones": 1303, "clics": 4, "posicion": 54.5}], "leads_total": 60, "leads_estados": {"pendientes": 2, "asignados": 35, "pagados": 0, "cancelados": 0}, "leads_prov": [["Madrid", 19], ["Asturias", 14], ["Barcelona", 4], ["Gipuzkoa", 5], ["Bizkaia", 3], ["Navarra", 2], ["Valencia", 2], ["Jaén", 2], ["Sin definir", 2], ["Almería", 1], ["Gijón", 1], ["Tenerife", 1]], "leads_fuente": [["web", 50], ["calculadora", 2], ["stripe", 1], ["reserva contra entrega", 1], ["tests", 6]], "leads_inmueble": [["piso", 46], ["unifamiliar", 8], ["adosado", 3], ["local", 2], ["casa", 1]], "tecnicos": {"supabase_activos": 26, "master_universo": 1148, "pendientes_email": 944, "historial_enviados": 398}, "pos":[0, 1, 47.44444444444444, 64.45283018867924, 58.14754098360656, 51.516666666666666, 62.83018867924528, 62.264150943396224, 55.03389830508475, 58.81944444444444, 55.236559139784944, 38.87786259541985, 37.10526315789474, 52.2034632034632, 47.10909090909091, 57.323232323232325, 53.60130718954248, 62.51445086705202, 61.29824561403509, 53.13559322033898, 49.80882352941177, 55.775, 47.438709677419354, 52.891625615763544, 56.123456790123456, 49.899441340782126, 44.29596412556054, 47.70391061452514, 49.47397260273973, 41.029761904761905, 47.54421768707483, 51.44186046511628, 48.21897810218978, 38.35, 43.66120218579235, 52.09592326139089, 37.13, 37.92670157068063, 45.333333333333336, 38.455621301775146, 35.55343511450382, 31.522727272727273, 44.8741935483871, 32.12903225806451, 35.01754385964912, 43.49612403100775, 45.924369747899156, 35.60233918128655, 36.17094017094017, 34.35885167464115, 26.153488372093022, 27.782222222222224, 44.27835051546392, 34.312820512820515, 26.562962962962963, 27.575342465753426, 27.538793103448278, 25.466666666666665, 27.822222222222223, 38.32934131736527, 34.79141104294479, 30.648387096774194, 23.480701754385965, 22.398692810457515, 20.90974729241877, 23.666666666666668, 30.169811320754718, 29.22222222222222, 19.27536231884058, 12.857883817427386, 20.12297734627832],"gsc_total": {"impresiones": 13660, "clics": 144, "ctr": 1.05, "posicion_media": 37.1}};
+
+// 1. Evolución GSC
+new Chart(document.getElementById('chartEvol'), {
+  type:'line',
+  data:{labels:DATA.labels, datasets:[
+    {label:'Impresiones', data:DATA.imp, borderColor:'#58a6ff', backgroundColor:'#58a6ff22', fill:true, yAxisID:'y', tension:.3},
+    {label:'Clics', data:DATA.clicks, borderColor:'#3fb950', yAxisID:'y1', tension:.3}
+  ]},
+  options:{maintainAspectRatio:false, scales:{y:{position:'left',title:{display:true,text:'Impresiones'}}, y1:{position:'right',grid:{drawOnChartArea:false},title:{display:true,text:'Clics'}}}, interaction:{mode:'index',intersect:false}}
+});
+
+// 2. GoatCounter sesiones
+new Chart(document.getElementById('chartGC'), {
+  type:'bar',
+  data:{labels:DATA.gc_labels, datasets:[
+    {label:'Sesiones', data:DATA.gc_ses, backgroundColor:'#58a6ff66', borderColor:'#58a6ff', borderWidth:1}
+  ]},
+  options:{maintainAspectRatio:false, plugins:{legend:{display:false}}, scales:{y:{beginAtZero:true}}}
+});
+
+// 2b. Posicion media diaria (menor = mejor, y invertido para que 'arriba' = 1a posicion)
+new Chart(document.getElementById('chartPos'), {
+  type:'line',
+  data:{labels:DATA.labels, datasets:[
+    {label:'Posición media', data:DATA.pos, borderColor:'#f0883e', backgroundColor:'#f0883e22', fill:false, tension:.3, pointRadius:2}
+  ]},
+  options:{
+    maintainAspectRatio:false,
+    plugins:{legend:{display:false}},
+    scales:{
+      y:{title:{display:true,text:'Posición (menor=mejor)'}, reverse:true, beginAtZero:true},
+      x:{ticks:{maxTicksLimit:12}}
+    },
+    interaction:{mode:'index',intersect:false}
+  }
+});
+
+// 3. Dispositivos
+new Chart(document.getElementById('chartDev'), {
+  type:'doughnut',
+  data:{labels:['Desktop','Mobile','Tablet'], datasets:[{data:[9828,3584,248], backgroundColor:['#58a6ff','#3fb950','#d29922']}]},
+  options:{maintainAspectRatio:false, plugins:{legend:{position:'bottom'}}}
+});
+
+// 4. Leads por estado
+const LE = {pendientes:3, asignados:24, pend_tecnico:6, pagados:0, descartados:1, sin_tecnico:6};
+new Chart(document.getElementById('chartLeadsEst'), {
+  type:'doughnut',
+  data:{labels:['Pendientes','Asignados','Pend. técnico','Pagados','Descartados','Sin técnico'], datasets:[{data:[LE.pendientes,LE.asignados,LE.pend_tecnico,LE.pagados,LE.descartados,LE.sin_tecnico], backgroundColor:['#d29922','#58a6ff','#8b949e','#3fb950','#f85149','#6e7681']}]},
+  options:{maintainAspectRatio:false, plugins:{legend:{position:'bottom'}}}
+});
+
+// 5. Embudo
+new Chart(document.getElementById('chartFunnel'), {
+  type:'bar',
+  data:{labels:['Visitas (GC)','Leads','Asignados','Pagados'], datasets:[{data:[431,40,29,0], backgroundColor:['#58a6ff88','#3fb95088','#d2992288','#f8514988']}]},
+  options:{indexAxis:'y', maintainAspectRatio:false, plugins:{legend:{display:false}}}
+});
+
+// 6. Radar técnicos
+new Chart(document.getElementById('chartRadar'), {
+  type:'radar',
+  data:{labels:['Supabase activos','Master universo','Pendientes email','Historial enviados'], datasets:[{data:[26,1148,442,695], backgroundColor:'#58a6ff44', borderColor:'#58a6ff'}]},
+  options:{maintainAspectRatio:false, plugins:{legend:{display:false}}, scales:{r:{beginAtZero:true}}}
+});
+
+// 7. Mapa Leaflet — estático + dinámico desde Supabase (Edge Function mapa-tecnicos)
+const map = L.map('mapTecnicos').setView([40.416,-3.703], 6);
+L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {attribution:'© OpenStreetMap'}).addTo(map);
+const COORDS_PROV = {
+  'Madrid':[40.416,-3.703],'Asturias':[43.36,-5.85],'Barcelona':[41.387,2.170],
+  'Gipuzkoa':[43.32,-1.98],'Bizkaia':[43.26,-2.93],'Navarra':[42.69,-1.68],
+  'Valencia':[39.47,-0.37],'Jaén':[37.77,-3.79],'Cádiz':[36.53,-6.29],
+  'Almería':[36.84,-2.46],'Tenerife':[28.29,-16.63],'Albacete':[38.99,-1.85],
+  'Zaragoza':[41.65,-0.88],'Cantabria':[43.46,-3.81],'Huelva':[37.26,-6.94],
+  'A Coruña':[43.36,-8.41],'Huesca':[42.14,-0.41],'Teruel':[40.34,-1.10],
+  'Cádiz':[36.53,-6.29],'Lugo':[43.01,-7.55],'Ourense':[42.34,-7.86],'Pontevedra':[42.43,-8.64],
+  'León':[42.59,-5.57],'Palencia':[42.01,-4.53],'Valladolid':[41.65,-4.72],'Salamanca':[40.97,-5.66],
+  'Segovia':[40.94,-4.11],'Ávila':[40.65,-4.70],'Soria':[41.77,-3.22],'Burgos':[42.46,-3.68],
+  'La Rioja':[42.46,-2.44],'Guadalajara':[40.99,-3.16],'Cuenca':[40.25,-2.83],'Toledo':[39.86,-4.02],
+  'Ciudad Real':[38.74,-3.39],'Badajoz':[38.88,-7.16],'Cáceres':[39.98,-6.14],'Sevilla':[37.62,-5.57],
+  'Málaga':[36.72,-4.48],'Granada':[36.73,-3.69],'Jaén':[37.77,-3.79],'Alicante':[38.34,-0.49],
+  'Castellón':[39.66,-0.06],'Lleida':[40.75,-0.03],'Girona':[41.97,2.53],'Tarragona':[41.11,1.03],
+  'Zamora':[42.00,-5.15],'Alicante':[38.34,-0.49],'Melilla':[35.17,-2.94],'Ceuta':[35.54,-5.31],
+  'Las Palmas':[28.12,-15.44],'Santa Cruz':[28.29,-16.63],
+};
+// Fallback estático (si la EF falla o tarda) — ya descuenta al dueño excluido (arturo)
+const provs_fallback = [
+  {name:'Madrid', n:0},{name:'Asturias', n:2},{name:'Barcelona', n:2},{name:'Albacete', n:3},
+  {name:'Zaragoza', n:2},{name:'Huelva', n:2},{name:'Cantabria', n:1},{name:'A Coruña', n:1}
+];
+function datosFallback(){
+  const m={};
+  provs_fallback.forEach(p=>{ m[p.name]=p.n; });
+  return m;
+}
+async function cargarMapa(){
+  let prov_n;
+  try{
+    const r=await fetch('https://wypgqpgjlookbhuaiyxa.supabase.co/functions/v1/mapa-tecnicos');
+    if(!r.ok) throw new Error('EF error');
+    const d=await r.json();
+    const m={}; (d.provincias||[]).forEach(p=>{ const key=normaliza(p.provincia); m[key]=p.n; });
+    prov_n=m;
+  }catch(e){
+    prov_n=datosFallback(); // fallback
+  }
+  Object.entries(COORDS_PROV).forEach(([prov,coords])=>{
+    const n=prov_n[normaliza(prov)]||0;
+    if(n===0) return; // no dibujar provincias sin técnicos
+    const color=n>1?'#3fb950':'#f0883e';
+    L.circleMarker(coords,{radius:Math.max(6,n*2.4),color,fillColor:color,fillOpacity:.6})
+      .addTo(map).bindPopup(`<b>${prov}</b>: ${n} técnicos`);
+  });
+}
+function normaliza(prov){
+  return (prov||'').trim().toLowerCase().replace(/-/g,' ');
+}
+cargarMapa();
+
+// Tema
+function toggleTheme() {
+  const h = document.documentElement;
+  h.setAttribute('data-theme', h.getAttribute('data-theme')==='dark' ? 'light' : 'dark');
+  localStorage.setItem('theme', h.getAttribute('data-theme'));
+  location.reload();
+}
+if(localStorage.getItem('theme')) document.documentElement.setAttribute('data-theme', localStorage.getItem('theme'));
+</script>
+</body>
+</html>

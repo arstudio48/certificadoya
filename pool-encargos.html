@@ -561,6 +561,44 @@
       animation: slideUp .25s ease;
     }
     @keyframes slideUp { from { transform: translateY(100%); } to { transform: translateY(0); } }
+
+    /* ===== COMPLETE MODAL ===== */
+    .complete-overlay {
+      display: none; position: fixed; z-index: 1100; inset: 0;
+      background: rgba(0,0,0,.45); backdrop-filter: blur(3px);
+      justify-content: center; align-items: center; padding: 1rem;
+    }
+    .complete-overlay.show { display: flex; }
+    .complete-modal {
+      background: #fff; width: 100%; max-width: 460px;
+      border-radius: 16px; padding: 24px; position: relative;
+      box-shadow: 0 12px 40px rgba(0,0,0,.18);
+      animation: modalPop .22s ease;
+    }
+    @keyframes modalPop { from { transform: scale(.96); opacity: 0; } to { transform: scale(1); opacity: 1; } }
+    .complete-modal h3 { font-size: 1.1rem; font-weight: 700; margin: 0 0 4px; color: var(--text); }
+    .complete-modal .complete-sub { font-size: .86rem; color: var(--text-light); margin: 0 0 18px; line-height: 1.5; }
+    .complete-file-box {
+      border: 2px dashed var(--border); border-radius: 12px;
+      padding: 22px 16px; text-align: center; cursor: pointer;
+      transition: border-color .15s, background .15s; margin-bottom: 14px;
+    }
+    .complete-file-box:hover, .complete-file-box.drag { border-color: var(--primary); background: #f0fdf4; }
+    .complete-file-box .cfb-icon { font-size: 1.8rem; display: block; margin-bottom: 6px; }
+    .complete-file-box .cfb-text { font-size: .86rem; color: var(--text-light); }
+    .complete-file-box .cfb-text strong { color: var(--primary); }
+    .complete-file-name {
+      display: none; font-size: .85rem; color: var(--primary);
+      background: #f0fdf4; border-radius: 8px; padding: 8px 12px; margin-bottom: 14px;
+      word-break: break-all;
+    }
+    .complete-actions { display: flex; gap: 10px; justify-content: flex-end; margin-top: 6px; }
+    .complete-actions button { border: none; border-radius: 10px; padding: 11px 18px; font-size: .9rem; font-weight: 600; cursor: pointer; transition: opacity .15s; }
+    .complete-actions .btn-cancel { background: #f1f5f4; color: var(--text-light); }
+    .complete-actions .btn-submit { background: var(--primary, #16a34a); color: #fff; }
+    .complete-actions button:disabled { opacity: .55; cursor: not-allowed; }
+    .complete-close { position: absolute; top: 12px; right: 14px; background: none; border: none; font-size: 1.4rem; cursor: pointer; color: var(--text-light); }
+    @keyframes slideUp { from { transform: translateY(100%); } to { transform: translateY(0); } }
     .chat-header {
       display: flex; justify-content: space-between; align-items: center;
       padding: 16px 20px; border-bottom: 1px solid var(--border);
@@ -762,6 +800,9 @@
         </button>
         <button class="tab-btn" data-tab="ganancias" onclick="cambiarTab('ganancias')">
           💰 Mis ganancias
+        </button>
+        <button class="tab-btn" data-tab="perfil" onclick="cambiarTab('perfil')">
+          ⚙️ Mi perfil
         </button>
       </div>
 
@@ -981,6 +1022,10 @@
         }));
 
         mostrarPanel();
+        // Si el técnico no tiene zonas configuradas, llevarlo directo a "Mi perfil"
+        if (data.necesitaZonas) {
+          cambiarTab('perfil');
+        }
       } catch (err) {
         mostrarError('codigo-error', 'Error de conexión.');
         btn.disabled = false;
@@ -1048,6 +1093,9 @@
           break;
         case 'ganancias':
           cargarGanancias();
+          break;
+        case 'perfil':
+          cargarMiPerfil();
           break;
       }
     }
@@ -1278,9 +1326,12 @@
       } else if (context === 'mis-trabajos') {
         const unread = lead.mensajes_no_leidos || 0;
         const badge = unread > 0 ? `<span class="chat-unread-badge">${unread}</span>` : '';
+        const btnCompletar = (lead.estado === 'asignado' || lead.estado === 'pendiente')
+          ? `<button class="btn-complete" onclick="abrirCompletarModal('${lead.id}')">✅ Completar</button>`
+          : `<span style="font-size:.82rem;color:var(--text-light)">${lead.estado === 'completado' ? 'Completado ✓' : ''}</span>`;
         actions = `
           <button class="btn-chat-sm" onclick="abrirChat('${lead.id}')">💬 Chat${badge}</button>
-          <button class="btn-complete" onclick="completarLead('${lead.id}')">✅ Completar</button>`;
+          ${btnCompletar}`;
       } else if (context === 'completados') {
         const importe = lead.precio_tecnico ? `${lead.precio_tecnico}€` : '';
         actions = `<span style="font-size:.82rem;color:var(--text-light)">${importe} ${lead.estado === 'pagado' ? '✅ Cobrado' : '⏳ Pendiente'}</span>`;
@@ -1347,36 +1398,123 @@
       }
     }
 
-    async function completarLead(leadId) {
-      const session = JSON.parse(localStorage.getItem('tec_session'));
-      const card = document.querySelector(`.lead-card[data-lead-id="${leadId}"]`);
-      const btn = card?.querySelector('.btn-complete');
-      if (btn) { btn.disabled = true; btn.textContent = '⏳...'; }
+    let completeLeadId = null;
+    let completeFile = null;
 
+    function abrirCompletarModal(leadId) {
+      completeLeadId = leadId;
+      completeFile = null;
+      document.getElementById('completeFileName').style.display = 'none';
+      document.getElementById('completeFileInput').value = '';
+      document.getElementById('completeSubmitBtn').disabled = false;
+      document.getElementById('completeSubmitBtn').textContent = '✅ Completar trabajo';
+      const lead = (leadsAsignados || []).find(l => l.id === leadId);
+      if (lead) {
+        document.getElementById('completeSub').textContent =
+          `Adjunta el certificado energético de ${lead.nombre_cliente || 'este encargo'} y marca el trabajo como completado.`;
+      }
+      document.getElementById('completeOverlay').classList.add('show');
+    }
+
+    function cerrarCompletarModal() {
+      document.getElementById('completeOverlay').classList.remove('show');
+      completeLeadId = null;
+      completeFile = null;
+    }
+
+    function handleCompleteFile(file) {
+      if (!file) return;
+      if (file.type !== 'application/pdf' && !/\.pdf$/i.test(file.name)) {
+        mostrarToast('El certificado debe ser un PDF', 'error');
+        return;
+      }
+      if (file.size > 10 * 1024 * 1024) {
+        mostrarToast('El PDF no puede superar 10 MB', 'error');
+        return;
+      }
+      completeFile = file;
+      const nameEl = document.getElementById('completeFileName');
+      nameEl.textContent = '📄 ' + file.name + ' (' + (file.size / 1024 / 1024).toFixed(2) + ' MB)';
+      nameEl.style.display = 'block';
+    }
+
+    async function confirmarCompletar() {
+      const btn = document.getElementById('completeSubmitBtn');
+      if (!completeLeadId) return;
+      if (!completeFile) {
+        mostrarToast('Adjunta el certificado PDF antes de completar', 'error');
+        return;
+      }
+      btn.disabled = true;
+      btn.textContent = '⏳ Subiendo certificado...';
       try {
+        // Subir certificado al bucket
+        const session = JSON.parse(localStorage.getItem('tec_session'));
+        const storagePath = 'certificados/' + completeLeadId + '-' + Date.now() + '-' + completeFile.name.replace(/[^a-zA-Z0-9._-]/g, '_');
+        const uploadRes = await fetch('https://wypgqpgjlookbhuaiyxa.supabase.co/storage/v1/object/' + storagePath, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/pdf',
+            'Authorization': 'Bearer ' + (session?.token || ''),
+            'apikey': 'sb_publishable_MsDx5jVGtDAzoB3l3-8DiQ_BxWpChA0'
+          },
+          body: completeFile
+        });
+        if (!uploadRes.ok) {
+          const errText = await uploadRes.text();
+          throw new Error('Error al subir certificado (' + uploadRes.status + '): ' + errText.slice(0, 120));
+        }
+        const certificadoUrl = 'https://wypgqpgjlookbhuaiyxa.supabase.co/storage/v1/object/public/' + storagePath;
+
+        btn.textContent = '⏳ Completando...';
         const res = await fetch(EDGE_FUNCTION_URL + '/pool-leads', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
             'Authorization': 'Bearer ' + session.token
           },
-          body: JSON.stringify({ action: 'completar', leadId })
+          body: JSON.stringify({
+            action: 'completar',
+            leadId: completeLeadId,
+            certificado_url: certificadoUrl,
+            certificado_nombre: completeFile.name
+          })
         });
         const data = await res.json();
 
         if (!res.ok) {
           mostrarToast(data.error || 'Error', 'error');
-          if (btn) { btn.disabled = false; btn.textContent = '✅ Completar'; }
+          btn.disabled = false;
+          btn.textContent = '✅ Completar trabajo';
           return;
         }
 
-        mostrarToast('✅ Trabajo marcado como completado', 'success');
+        mostrarToast('✅ Trabajo completado. Certificado adjuntado.', 'success');
+        cerrarCompletarModal();
         setTimeout(() => cambiarTab('mis-trabajos'), 500);
       } catch (err) {
-        mostrarToast('Error de conexión', 'error');
-        if (btn) { btn.disabled = false; btn.textContent = '✅ Completar'; }
+        mostrarToast(err.message || 'Error de conexión', 'error');
+        btn.disabled = false;
+        btn.textContent = '✅ Completar trabajo';
       }
     }
+
+    // Drag & drop + selector de archivo
+    document.addEventListener('DOMContentLoaded', () => {
+      const box = document.getElementById('completeFileBox');
+      const input = document.getElementById('completeFileInput');
+      if (!box || !input) return;
+      box.addEventListener('dragover', e => { e.preventDefault(); box.classList.add('drag'); });
+      box.addEventListener('dragleave', () => box.classList.remove('drag'));
+      box.addEventListener('drop', e => {
+        e.preventDefault();
+        box.classList.remove('drag');
+        if (e.dataTransfer.files.length) handleCompleteFile(e.dataTransfer.files[0]);
+      });
+      input.addEventListener('change', () => {
+        if (input.files.length) handleCompleteFile(input.files[0]);
+      });
+    });
 
     async function rechazarLead(leadId) {
       const session = JSON.parse(localStorage.getItem('tec_session'));
@@ -1565,6 +1703,25 @@
   </div>
 </div>
 
+<!-- ===== COMPLETE MODAL ===== -->
+<div class="complete-overlay" id="completeOverlay" onclick="if(event.target===this)cerrarCompletarModal()">
+  <div class="complete-modal">
+    <button class="complete-close" onclick="cerrarCompletarModal()">✕</button>
+    <h3>✅ Completar trabajo</h3>
+    <p class="complete-sub" id="completeSub">Adjunta el certificado energético entregado al cliente y marca el encargo como completado.</p>
+    <div class="complete-file-box" id="completeFileBox" onclick="document.getElementById('completeFileInput').click()">
+      <span class="cfb-icon">📎</span>
+      <span class="cfb-text">Haz clic para adjuntar el <strong>certificado (PDF)</strong><br>o arrastra el archivo aquí</span>
+    </div>
+    <input type="file" id="completeFileInput" accept=".pdf,application/pdf" style="display:none">
+    <div class="complete-file-name" id="completeFileName"></div>
+    <div class="complete-actions">
+      <button class="btn-cancel" onclick="cerrarCompletarModal()">Cancelar</button>
+      <button class="btn-submit" id="completeSubmitBtn" onclick="confirmarCompletar()">✅ Completar trabajo</button>
+    </div>
+  </div>
+</div>
+
 <script>
 // ===== CHAT FUNCTIONS =====
 let chatLeadId = null;
@@ -1674,6 +1831,242 @@ document.addEventListener('DOMContentLoaded', function() {
     });
   }
 });
+
+// ==============================================================
+// MI PERFIL — ver y modificar datos y zonas de trabajo
+// ==============================================================
+
+const CCAA_PROVINCIAS = {
+  'Andalucía': ['Almería', 'Cádiz', 'Córdoba', 'Granada', 'Huelva', 'Jaén', 'Málaga', 'Sevilla'],
+  'Aragón': ['Huesca', 'Teruel', 'Zaragoza'],
+  'Asturias': ['Asturias'],
+  'Baleares': ['Islas Baleares'],
+  'Canarias': ['Las Palmas', 'Santa Cruz de Tenerife'],
+  'Cantabria': ['Cantabria'],
+  'Castilla-La Mancha': ['Albacete', 'Ciudad Real', 'Cuenca', 'Guadalajara', 'Toledo'],
+  'Castilla y León': ['Ávila', 'Burgos', 'León', 'Palencia', 'Salamanca', 'Segovia', 'Soria', 'Valladolid', 'Zamora'],
+  'Cataluña': ['Barcelona', 'Girona', 'Lleida', 'Tarragona'],
+  'Comunidad de Madrid': ['Madrid'],
+  'Comunidad Valenciana': ['Alicante', 'Castellón', 'Valencia'],
+  'Extremadura': ['Badajoz', 'Cáceres'],
+  'Galicia': ['A Coruña', 'Lugo', 'Ourense', 'Pontevedra'],
+  'La Rioja': ['La Rioja'],
+  'Navarra': ['Navarra'],
+  'País Vasco': ['Álava', 'Bizkaia', 'Gipuzkoa'],
+  'Región de Murcia': ['Murcia'],
+  'Ceuta y Melilla': ['Ceuta', 'Melilla']
+};
+
+function escapeHtmlPerfil(s) {
+  return String(s ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+}
+
+function titulacionLabel(v) {
+  const map = {
+    'arquitecto': 'Arquitecto',
+    'aparejador': 'Aparejador / Arquitecto técnico',
+    'ingeniero-edificacion': 'Ingeniero de Edificación',
+    'ingeniero-industrial': 'Ingeniero Industrial',
+    'ingeniero-tecnico': 'Ingeniero Técnico',
+    'fp-edificacion': 'FP Edificación y Obra Civil',
+    'otro': 'Otra titulación habilitante'
+  };
+  return map[v] || v || '';
+}
+
+async function cargarMiPerfil() {
+  const content = document.getElementById('tab-content');
+  content.innerHTML = '<div style="text-align:center;padding:3rem"><div class="spinner"></div><p style="color:var(--text-lighter)">Cargando tu perfil...</p></div>';
+
+  const session = JSON.parse(localStorage.getItem('tec_session'));
+  if (!session?.token) { cerrarSesion(); return; }
+
+  try {
+    const res = await fetch(EDGE_FUNCTION_URL + '/actualizar-perfil-tecnico', {
+      headers: { 'Authorization': 'Bearer ' + session.token }
+    });
+    if (res.status === 401) { cerrarSesion(); return; }
+    const data = await res.json();
+    if (!data.success) { content.innerHTML = '<div class="empty-state"><h3>Error</h3><p>' + escapeHtmlPerfil(data.error) + '</p></div>'; return; }
+    renderMiPerfil(data.tecnico);
+  } catch (err) {
+    content.innerHTML = '<div class="empty-state"><h3>Error de conexión</h3><p>No se pudo cargar tu perfil.</p></div>';
+  }
+}
+
+function renderMiPerfil(t) {
+  const content = document.getElementById('tab-content');
+  const zonas = t.zonas || { ccaa: [], provincias: [], ciudades: [], pueblos: [], cps: [] };
+
+  // Checkboxes de CCAA (con sus provincias en multiselect)
+  const ccaaOptions = Object.keys(CCAA_PROVINCIAS).map(ccaa => {
+    const checked = (zonas.ccaa || []).includes(ccaa) ? 'checked' : '';
+    return `<label style="display:flex;align-items:center;gap:.4rem;font-size:.85rem;cursor:pointer;padding:.2rem 0">
+      <input type="checkbox" class="ccaa-check" value="${escapeHtmlPerfil(ccaa)}" ${checked} onchange="toggleCcaaProvincias(this)"> ${escapeHtmlPerfil(ccaa)}</label>`;
+  }).join('');
+
+  // Provincias (las de las CCAA marcadas + las ya guardadas)
+  const ccaaMarcadas = new Set((zonas.ccaa || []));
+  let provinciasDisponibles = [];
+  Object.entries(CCAA_PROVINCIAS).forEach(([ccaa, provs]) => {
+    if (ccaaMarcadas.has(ccaa)) provinciasDisponibles = provinciasDisponibles.concat(provs);
+  });
+  (zonas.provincias || []).forEach(p => { if (!provinciasDisponibles.includes(p)) provinciasDisponibles.push(p); });
+
+  const provinciasOptions = provinciasDisponibles.map(p => {
+    const sel = (zonas.provincias || []).includes(p) ? 'selected' : '';
+    return `<option value="${escapeHtmlPerfil(p)}" ${sel}>${escapeHtmlPerfil(p)}</option>`;
+  }).join('');
+
+  content.innerHTML = `
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:1.5rem" class="perfil-grid">
+    <div style="background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius);padding:1.5rem">
+      <h3 style="font-size:1.05rem;margin-bottom:1.25rem;font-weight:700">👤 Datos personales</h3>
+      <div style="display:flex;flex-direction:column;gap:.9rem">
+        <div>
+          <label style="display:block;font-size:.8rem;font-weight:600;color:var(--text-light);margin-bottom:.3rem">Nombre</label>
+          <input id="pf-nombre" value="${escapeHtmlPerfil(t.nombre)}" style="width:100%;padding:.65rem .8rem;border:1.5px solid var(--border);border-radius:8px;font-family:var(--font);font-size:.9rem">
+        </div>
+        <div>
+          <label style="display:block;font-size:.8rem;font-weight:600;color:var(--text-light);margin-bottom:.3rem">Apellidos</label>
+          <input id="pf-apellidos" value="${escapeHtmlPerfil(t.apellidos || '')}" style="width:100%;padding:.65rem .8rem;border:1.5px solid var(--border);border-radius:8px;font-family:var(--font);font-size:.9rem">
+        </div>
+        <div>
+          <label style="display:block;font-size:.8rem;font-weight:600;color:var(--text-light);margin-bottom:.3rem">Teléfono</label>
+          <input id="pf-telefono" value="${escapeHtmlPerfil(t.telefono || '')}" style="width:100%;padding:.65rem .8rem;border:1.5px solid var(--border);border-radius:8px;font-family:var(--font);font-size:.9rem">
+        </div>
+        <div>
+          <label style="display:block;font-size:.8rem;font-weight:600;color:var(--text-light);margin-bottom:.3rem">Titulación</label>
+          <select id="pf-titulacion" style="width:100%;padding:.65rem .8rem;border:1.5px solid var(--border);border-radius:8px;font-family:var(--font);font-size:.9rem">
+            <option value="">Selecciona...</option>
+            <option value="arquitecto">Arquitecto</option>
+            <option value="aparejador">Aparejador / Arquitecto técnico</option>
+            <option value="ingeniero-edificacion">Ingeniero de Edificación</option>
+            <option value="ingeniero-industrial">Ingeniero Industrial</option>
+            <option value="ingeniero-tecnico">Ingeniero Técnico</option>
+            <option value="fp-edificacion">FP Edificación y Obra Civil</option>
+            <option value="otro">Otra titulación habilitante</option>
+          </select>
+        </div>
+        <div>
+          <label style="display:block;font-size:.8rem;font-weight:600;color:var(--text-light);margin-bottom:.3rem">Nº colegiado</label>
+          <input id="pf-colegiado" value="${escapeHtmlPerfil(t.numero_colegiado || '')}" style="width:100%;padding:.65rem .8rem;border:1.5px solid var(--border);border-radius:8px;font-family:var(--font);font-size:.9rem">
+        </div>
+        <div>
+          <label style="display:block;font-size:.8rem;font-weight:600;color:var(--text-light);margin-bottom:.3rem">Biografía / presentación</label>
+          <textarea id="pf-biografia" rows="3" style="width:100%;padding:.65rem .8rem;border:1.5px solid var(--border);border-radius:8px;font-family:var(--font);font-size:.9rem">${escapeHtmlPerfil(t.biografia || '')}</textarea>
+        </div>
+      </div>
+    </div>
+
+    <div style="background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius);padding:1.5rem">
+      <h3 style="font-size:1.05rem;margin-bottom:.25rem;font-weight:700">📍 Zonas de trabajo</h3>
+      <p style="font-size:.8rem;color:var(--text-light);margin-bottom:1rem">Elige comunidades autónomas, provincias, ciudades/pueblos o códigos postales. Recibirás encargos de esas zonas.</p>
+      <div style="display:flex;flex-direction:column;gap:1rem">
+        <div>
+          <label style="display:block;font-size:.8rem;font-weight:600;color:var(--text-light);margin-bottom:.3rem">Comunidades autónomas</label>
+          <div id="pf-ccaa-list" style="display:grid;grid-template-columns:1fr 1fr;gap:.1rem .75rem;max-height:190px;overflow-y:auto;border:1.5px solid var(--border);border-radius:8px;padding:.6rem .8rem;background:#fafbfa">
+            ${ccaaOptions}
+          </div>
+        </div>
+        <div>
+          <label style="display:block;font-size:.8rem;font-weight:600;color:var(--text-light);margin-bottom:.3rem">Provincias</label>
+          <select id="pf-provincias" multiple style="width:100%;min-height:110px;padding:.6rem .8rem;border:1.5px solid var(--border);border-radius:8px;font-family:var(--font);font-size:.88rem">
+            ${provinciasOptions}
+          </select>
+          <span style="font-size:.72rem;color:var(--text-lighter)">Ctrl (Cmd en Mac) para varias</span>
+        </div>
+        <div>
+          <label style="display:block;font-size:.8rem;font-weight:600;color:var(--text-light);margin-bottom:.3rem">Ciudades o pueblos</label>
+          <input id="pf-ciudades" value="${escapeHtmlPerfil((zonas.ciudades || []).concat(zonas.pueblos || []).join(', '))}" placeholder="Ej: Santiago de Compostela, Vigo, A Coruña" style="width:100%;padding:.65rem .8rem;border:1.5px solid var(--border);border-radius:8px;font-family:var(--font);font-size:.9rem">
+        </div>
+        <div>
+          <label style="display:block;font-size:.8rem;font-weight:600;color:var(--text-light);margin-bottom:.3rem">Códigos postales</label>
+          <input id="pf-cps" value="${escapeHtmlPerfil((zonas.cps || []).join(', '))}" placeholder="Ej: 15701, 36201-36205, 28001" style="width:100%;padding:.65rem .8rem;border:1.5px solid var(--border);border-radius:8px;font-family:var(--font);font-size:.9rem">
+        </div>
+        <button class="btn btn-primary" onclick="guardarMiPerfil()" style="margin-top:.25rem">💾 Guardar cambios</button>
+        <p id="pf-msg" style="font-size:.85rem;color:var(--primary-dark);margin-top:.5rem;display:none"></p>
+      </div>
+    </div>
+  </div>
+  <style>@media(max-width:768px){ .perfil-grid{grid-template-columns:1fr !important} }</style>`;
+
+  // Precargar titulación
+  document.getElementById('pf-titulacion').value = t.titulacion || '';
+}
+
+function toggleCcaaProvincias(checkbox) {
+  const ccaa = checkbox.value;
+  const provSelect = document.getElementById('pf-provincias');
+  const provinciasCcaa = CCAA_PROVINCIAS[ccaa] || [];
+  const seleccionadas = new Set(Array.from(provSelect.selectedOptions).map(o => o.value));
+
+  // Añadir o quitar las provincias de la CCAA del multiselect
+  if (checkbox.checked) {
+    provinciasCcaa.forEach(p => {
+      const opt = Array.from(provSelect.options).find(o => o.value === p);
+      if (!opt) provSelect.add(new Option(p, p));
+      const o2 = Array.from(provSelect.options).find(o => o.value === p);
+      if (o2) o2.selected = true;
+    });
+  } else {
+    provinciasCcaa.forEach(p => {
+      const opt = Array.from(provSelect.options).find(o => o.value === p);
+      if (opt) opt.remove();
+    });
+  }
+}
+
+async function guardarMiPerfil() {
+  const btn = document.querySelector('.perfil-grid .btn-primary');
+  if (btn) { btn.disabled = true; btn.textContent = 'Guardando...'; }
+
+  const session = JSON.parse(localStorage.getItem('tec_session'));
+  const ccaa = Array.from(document.querySelectorAll('.ccaa-check:checked')).map(c => c.value);
+  const provincias = Array.from(document.getElementById('pf-provincias').selectedOptions).map(o => o.value);
+  const ciudadesPueblos = document.getElementById('pf-ciudades').value.split(',').map(s => s.trim()).filter(Boolean);
+  const cps = document.getElementById('pf-cps').value.split(',').map(s => s.trim()).filter(Boolean);
+
+  const payload = {
+    nombre: document.getElementById('pf-nombre').value.trim(),
+    apellidos: document.getElementById('pf-apellidos').value.trim(),
+    telefono: document.getElementById('pf-telefono').value.trim(),
+    titulacion: document.getElementById('pf-titulacion').value,
+    numero_colegiado: document.getElementById('pf-colegiado').value.trim(),
+    biografia: document.getElementById('pf-biografia').value.trim(),
+    ccaa,
+    provincias,
+    ciudades: ciudadesPueblos,
+    cps
+  };
+
+  const msg = document.getElementById('pf-msg');
+
+  try {
+    const res = await fetch(EDGE_FUNCTION_URL + '/actualizar-perfil-tecnico', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', 'Authorization': 'Bearer ' + session.token },
+      body: JSON.stringify(payload)
+    });
+    const data = await res.json();
+    if (!data.success) throw new Error(data.error || 'Error al guardar');
+
+    msg.style.display = 'block';
+    msg.style.color = 'var(--primary-dark)';
+    msg.textContent = '✅ Perfil actualizado correctamente.';
+
+    // Actualizar nombre en cabecera si cambió
+    if (payload.nombre) document.getElementById('panel-user-name').textContent = '👤 ' + payload.nombre;
+
+    // Recargar datos frescos
+    setTimeout(cargarMiPerfil, 800);
+  } catch (err) {
+    msg.style.display = 'block';
+    msg.style.color = '#dc2626';
+    msg.textContent = '❌ ' + (err.message || 'Error al guardar');
+  }
+  if (btn) { btn.disabled = false; btn.textContent = '💾 Guardar cambios'; }
+}
 </script>
 </body>
 </html>

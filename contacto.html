@@ -5,35 +5,182 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="robots" content="index, follow">
   <title>Contacto — CertificadoYa</title>
-  <meta name="description" content="Contacta con CertificadoYa. Escríbenos por WhatsApp, llámanos o escríbenos. Te ayudamos con tu certificado energético.">
+  <meta name="description" content="Contacta con CertificadoYa. Escríbenos por WhatsApp, llámanos o envíanos un mensaje. Te ayudamos con tu certificado de eficiencia energética en toda España.">
   <link rel="canonical" href="https://www.certificadoya.es/contacto.html">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Source+Sans+3:wght@300;400;500;600&family=Source+Code+Pro:wght@400;500;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="/css/style.min.css">
   <style>
-.contact-container { max-width: 700px; margin: 2rem auto; padding: 2rem; }
-    .contact-container h1 { font-size: 1.8rem; margin-bottom: 1rem; color: #2d3a1f; }
-    .contact-container h2 { font-size: 1.2rem; margin: 1.5rem 0 .5rem; color: #16a34a; }
-    .contact-container p { color: #4b5563; line-height: 1.7; margin-bottom: .5rem; }
-    .contact-methods { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin: 1.5rem 0; }
-</style>
-<script data-goatcounter="https://certificadoya.goatcounter.com/count"
-        async src="//gc.zgo.at/count.js"></script>
-  <style>
-/* B4: UX móvil mejorada — hero, CTA, header */
+/* ===== Sistema de diseño Contacto — Stripe-light adaptado a CertificadoYa ===== */
+:root{
+  --cya-bg:#f7faf7;
+  --cya-surface:#ffffff;
+  --cya-navy:#0c2a1a;        /* verde bosque profundo = heading */
+  --cya-green:#16a34a;       /* verde marca */
+  --cya-green-hover:#128a41;
+  --cya-body:#48645a;
+  --cya-label:#2b4a3d;
+  --cya-border:#e2efe6;
+  --cya-border-soft:#d1e8da;
+  --cya-shadow: rgba(16,101,52,0.20) 0px 30px 45px -30px, rgba(0,0,0,0.10) 0px 18px 36px -18px;
+  --cya-shadow-ambient: rgba(16,101,52,0.10) 0px 15px 35px 0px;
+  --cya-radius:8px;
+}
+.contact-hero{
+  background: radial-gradient(1200px 400px at 15% -10%, #e9f7ee 0%, rgba(233,247,238,0) 55%),
+              radial-gradient(900px 360px at 90% 0%, rgba(22,163,74,.08) 0%, rgba(22,163,74,0) 50%),
+              var(--cya-bg);
+  border-bottom:1px solid var(--cya-border);
+  padding:3.5rem 1.5rem 3rem;
+}
+.cy-hero-inner{max-width:1080px;margin:0 auto;display:grid;grid-template-columns:1.2fr .8fr;gap:3rem;align-items:center}
+.cy-hero-copy{max-width:620px}
+.cy-hero-photo{position:relative}
+.cy-hero-photo img{
+  width:100%;height:auto;border-radius:14px;display:block;
+  box-shadow:var(--cya-shadow);
+  border:1px solid var(--cya-border-soft);
+}
+.cy-hero-photo .photo-badge{
+  position:absolute;left:-14px;bottom:22px;
+  background:var(--cya-surface);border:1px solid var(--cya-border);
+  border-radius:10px;padding:.65rem 1rem;
+  box-shadow:var(--cya-shadow-ambient);
+  font-family:'Source Sans 3',sans-serif;font-size:.82rem;color:var(--cya-navy);
+  display:flex;align-items:center;gap:.5rem;
+}
+.cy-hero-photo .photo-badge .dot{width:8px;height:8px;border-radius:50%;background:#25D366;flex:none}
+.cy-eyebrow{
+  display:inline-flex;align-items:center;gap:.45rem;
+  font:400 .78rem 'Source Code Pro',ui-monospace,monospace;
+  letter-spacing:.09em;text-transform:uppercase;
+  color:var(--cya-green);background:rgba(22,163,74,.08);
+  border:1px solid var(--cya-border-strong);border-radius:20px;
+  padding:.32rem .85rem;margin-bottom:1.1rem;
+  font-feature-settings:"tnum";
+}
+.cy-eyebrow::before{content:"";width:6px;height:6px;border-radius:50%;background:var(--cya-green)}
+.cy-hero h1{
+  font-family:'Source Sans 3',system-ui,-apple-system,'Segoe UI',Roboto,sans-serif;
+  font-size:clamp(2rem,4.6vw,3.1rem);font-weight:300;
+  letter-spacing:-.02em;color:var(--cya-navy);line-height:1.08;
+  margin:0 0 .9rem;
+  font-feature-settings:"ss01";
+}
+.cy-hero p{
+  font-size:1.05rem;font-weight:300;line-height:1.45;color:var(--cya-body,#48645a);
+  font-family:'Source Sans 3',system-ui,sans-serif;font-feature-settings:"ss01";
+}
+.cy-trust{display:flex;gap:1.4rem;margin-top:1.6rem;flex-wrap:wrap}
+.cy-trust-item{display:flex;align-items:center;gap:.5rem;font-size:.88rem;color:var(--cya-navy);font-weight:500}
+.cy-trust-item .t-ic{
+  width:30px;height:30px;border-radius:7px;display:grid;place-items:center;
+  background:rgba(22,163,74,.1);border:1px solid var(--cya-border-soft);
+  font-size:.95rem;
+}
+.contact-container{max-width:1080px;margin:0 auto;padding:0 1.25rem}
+.cy-strip{max-width:700px;margin:2.2rem auto 4rem}
+
+/* Tarjetas de canales */
+.contact-methods{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;margin:0 0 1.4rem}
+.contact-card{
+  background:var(--cya-surface);
+  border:1px solid var(--cya-border);border-radius:var(--cya-radius);
+  padding:1.5rem 1.25rem;text-align:left;
+  box-shadow:var(--cya-ambient);
+  transition:transform .18s ease, box-shadow .18s ease, border-color .18s ease;
+  display:flex;flex-direction:column;gap:.4rem;
+}
+.contact-card:hover{transform:translateY(-3px);box-shadow:var(--cya-shadow);border-color:var(--cya-border-strong)}
+.contact-card .icon{
+  width:44px;height:44px;border-radius:var(--cya-radius);
+  display:grid;place-items:center;font-size:1.4rem;
+  color:var(--cya-green);background:rgba(22,163,74,.08);
+  border:1px solid var(--cya-border-soft,#d6e9de);margin-bottom:.3rem;
+}
+.contact-card strong{font-family:'Source Sans 3',sans-serif;font-size:1.02rem;font-weight:600;color:var(--cya-navy)}
+.contact-card a{color:var(--cya-green);font-weight:500;text-decoration:none;font-feature-settings:"tnum"}
+.contact-card a:hover{color:var(--cya-green-hover,#15803f);text-decoration:underline}
+.contact-card small{font-size:.8rem;color:var(--cya-body,#64748d);line-height:1.35}
+
+.whatsapp-box{
+  background:linear-gradient(135deg,#0c2a1e 0%,#14532d 100%);
+  color:#fff;border-radius:var(--cya-radius);
+  padding:1.3rem 1.5rem;margin:0 0 1rem;
+  display:flex;align-items:center;justify-content:space-between;gap:1rem;flex-wrap:wrap;
+  box-shadow:rgba(22,101,52,.28) 0px 30px 45px -30px, rgba(0,0,0,.28) 0px 18px 36px -18px;
+}
+.whatsapp-box p{font-size:1rem;font-weight:500;margin:0;color:#fff}
+.whatsapp-box .wa-sub{font-size:.8rem;font-weight:300;color:rgba(255,255,255,.72);margin-top:.15rem}
+.whatsapp-box a{
+  display:inline-flex;align-items:center;gap:.45rem;
+  background:#25D366;color:#06321b;font-weight:600;font-size:.95rem;
+  padding:.7rem 1.15rem;border-radius:var(--cya-radius);text-decoration:none;
+  box-shadow:0 6px 18px rgba(37,211,102,.38);transition:background .15s ease, transform .15s ease;
+}
+.whatsapp-box a:hover{background:#22c55e;transform:translateY(-1px)}
+
+/* Formulario */
+.cy-form-card{
+  background:var(--cya-surface);border:1px solid var(--cya-border);
+  border-radius:8px;box-shadow:var(--cya-shadow);
+  padding:2rem 1.75rem;max-width:720px;margin:0 auto;
+}
+.cy-form-card h2{
+  font-family:'Source Sans 3',sans-serif;font-weight:300;letter-spacing:-.015em;
+  color:var(--cya-navy);font-size:1.7rem;margin:0 0 .4rem;
+  font-feature-settings:"ss01";
+}
+.cy-form-card .cy-form-note{font-size:.95rem;color:var(--cya-body,#48645a);line-height:1.45;margin:0 0 1.6rem;font-weight:300}
+.contact-form{display:grid;grid-template-columns:1fr 1fr;gap:1.1rem 1rem}
+.contact-form .full{grid-column:1/-1}
+.contact-form label{font-size:.85rem;font-weight:600;color:var(--cya-label,#273951);margin-bottom:.35rem;display:block}
+.contact-form input,.contact-form select,.contact-form textarea{
+  width:100%;box-sizing:border-box;
+  border:1px solid var(--cya-border-strong);border-radius:var(--cya-radius);
+  padding:.75rem .9rem;font-family:'Source Sans 3',system-ui,sans-serif;font-size:.98rem;color:var(--cya-navy);
+  background:#fcfefc;transition:border-color .15s ease, box-shadow .15s ease;
+}
+.contact-form textarea{min-height:130px;resize:vertical}
+.contact-form input::placeholder,.contact-form textarea::placeholder{color:#8fa89c}
+.contact-form input:focus,.contact-form select:focus,.contact-form textarea:focus{
+  outline:none;border-color:var(--cya-green);
+  box-shadow:0 0 0 3px rgba(22,163,74,.14);
+}
+.contact-form select{appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath fill='%2316a34a' d='M6 8 0 0h12z'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right .9rem center;padding-right:2.2rem}
+.cy-consent{grid-column:1/-1;font-size:.78rem;color:#93a9a0;text-align:center;margin-top:-.2rem}
+.cy-consent a{color:var(--cya-green);text-decoration:underline}
+.contact-form button{
+  grid-column:1/-1;justify-self:center;
+  background:var(--cya-green);color:#fff;font-family:'Source Sans 3',sans-serif;
+  font-size:1.02rem;font-weight:600;border:none;border-radius:var(--cya-radius);
+  padding:.85rem 2.4rem;cursor:pointer;min-height:48px;
+  box-shadow:0 8px 18px rgba(22,163,74,.3);transition:background .18s ease, transform .15s ease;
+}
+.contact-form button:hover{background:var(--cya-green-hover,#15803f);transform:translateY(-1px)}
+
+.cy-extra{margin:2.2rem 0 3.5rem;text-align:center;font-size:.9rem;color:var(--cya-body,#48645a)}
+.cy-extra a{color:var(--cya-green);font-weight:500}
+
+/* @media responsive */
+@media(max-width:900px){.contact-methods{grid-template-columns:1fr}.cy-hero-inner{grid-template-columns:1fr;gap:2rem}.cy-hero-photo{max-width:440px;margin:0 auto}}
+@media(max-width:560px){
+  .contact-form{grid-template-columns:1fr}
+  .contact-form .full{grid-column:1}
+  .whatsapp-box{flex-direction:column;align-items:flex-start}
+  .cy-hero{padding:2.4rem 1rem 2.2rem}
+  .cy-hero-photo .photo-badge{left:10px;bottom:14px}
+}
 @media (max-width:480px){
   .hero-content h1{font-size:1.3rem !important;line-height:1.3}
   .hero-content p{font-size:.85rem !important;line-height:1.4}
   .btn-cta{padding:.7rem 1rem !important;font-size:.85rem !important;min-height:44px}
   .header-inner{padding:0 .75rem !important;min-height:56px}
-
-  .presupuesto-card-v2{padding:1rem 1rem 5rem !important}
-  .precio-destacado{margin-bottom:.6rem !important}
-  .resultado-box{padding:.75rem !important}
-  footer{padding:1.5rem 1rem !important}
-  .footer-grid{grid-template-columns:1fr !important;gap:1rem}
+}
 </style>
+<script data-goatcounter="https://certificadoya.goatcounter.com/count"
+        async src="//gc.zgo.at/count.js"></script>
   <link rel="stylesheet" href="/css/tema-claro-certificadoya.css">
   <link rel="icon" type="image/png" sizes="32x32" href="/img/favicon-32.png">
   <link rel="icon" type="image/png" sizes="16x16" href="/img/favicon-16.png">
@@ -88,73 +235,112 @@
   </div>
 </header>
 
-<div class="contact-container">
-  <h1>Contacto</h1>
-  <p>¿Necesitas un certificado de eficiencia energética o tienes alguna duda? Estamos aquí para ayudarte. Elige el canal que prefieras:</p>
+<main>
+  <section class="cy-hero">
+      <div class="cy-hero-inner">
+        <div class="cy-hero-copy">
+          <span class="cy-eyebrow">Contáctanos · respondemos en 24-48h</span>
+          <h1>Habla con el equipo que te<br>consigue tu certificado energético</h1>
+          <p>Sube el valor de tu vivienda y cumple la normativa. Elige el canal que prefieras, estamos en toda España.</p>
+          <div class="cy-trust">
+            <span class="cy-trust-item"><span class="t-ic">✓</span> Técnicos colegiados verificados</span>
+            <span class="cy-trust-item"><span class="t-ic">⏱</span> Certificado en 24-72h</span>
+            <span class="cy-trust-item"><span class="t-ic">🛡</span> Datos protegidos RGPD</span>
+          </div>
+        </div>
+        <div class="cy-hero-photo">
+          <img src="/img/contacto-hero.jpg" alt="Técnica de CertificadoYa realizando una inspección de eficiencia energética" width="900" height="1125">
+          <div class="photo-badge"><span class="dot"></span> Asesora en línea ahora</div>
+        </div>
+      </div>
+    </section>
 
-  <div class="whatsapp-box">
-    <p style="margin:0 0 .3rem;font-size:.95rem">💬 Escríbenos por WhatsApp</p>
-    <a href="https://wa.me/34641450068?text=Hola%2C%20necesito%20un%20certificado%20energ%C3%A9tico" target="_blank" rel="noopener">Abrir chat de WhatsApp →</a>
-  </div>
+  <div class="contact-container">
+    <div class="cy-actions">
 
-  <div class="contact-methods">
-    <div class="contact-card">
-      <div class="icon">📞</div>
-      <p style="margin:0"><strong>Teléfono</strong></p>
-      <a href="tel:+34641450068">641 45 00 68</a>
-      <p style="font-size:.8rem;color:#6b7280;margin:.3rem 0 0">Lun-Vie 9:00–19:00</p>
+      <div class="whatsapp-box whatsapp-bar">
+        <div>
+          <p>💬 WhatsApp — el canal más rápido</p>
+          <p class="wa-sub">Escríbenos y recibe respuesta en minutos · Lun–Vie 9:00–19:00</p>
+        </div>
+        <a href="https://wa.me/34641450068?text=Hola%2C%20necesito%20un%20certificado%20energ%C3%A9tico" target="_blank" rel="noopener">Abrir chat de WhatsApp →</a>
+      </div>
+
+      <div class="contact-methods">
+        <div class="contact-card">
+          <div class="icon">📞</div>
+          <strong>Teléfono</strong>
+          <a href="tel:+34641450068">641 45 00 68</a>
+          <p class="contact-card-sub">Personal Lun–Vie de 9:00 a 19:00</p>
+        </div>
+        <div class="contact-card">
+          <div class="icon">📧</div>
+          <strong>Email</strong>
+          <a href="mailto:info@certificadoya.es">info@certificadoya.es</a>
+          <p class="contact-card-sub">Respondemos entre 48 y 96 horas</p>
+        </div>
+        <div class="contact-card">
+          <div class="icon">💰</div>
+          <strong>Presupuesto instantáneo</strong>
+          <a href="/#presupuesto">Calcular precio →</a>
+          <p class="contact-card-sub">Desde 45 € · sin compromiso</p>
+        </div>
+      </div>
+
     </div>
-    <div class="contact-card">
-      <div class="icon">📧</div>
-      <p style="margin:0"><strong>Email</strong></p>
-      <a href="mailto:info@certificadoya.es">info@certificadoya.es</a>
-      <p style="font-size:.8rem;color:#6b7280;margin:.3rem 0 0">Respondemos en 48-96h</p>
+
+    <div class="cy-form-card">
+      <h2>Envíanos un mensaje</h2>
+      <p class="cy-form-note">Cuéntanos qué necesitas y te contestará un asesor real. Sin letra pequeña.</p>
+      <form class="contact-form" action="https://formsubmit.co/info@certificadoya.es" method="POST">
+        <input type="hidden" name="_subject" value="Nuevo contacto desde certificadoya.es">
+        <input type="hidden" name="_captcha" value="false">
+        <input type="hidden" name="_next" value="https://www.certificadoya.es/contacto.html?enviado=ok">
+
+        <div>
+          <label for="nombre">Nombre *</label>
+          <input type="text" id="nombre" name="nombre" required placeholder="Tu nombre completo">
+        </div>
+        <div>
+          <label for="email">Email *</label>
+          <input type="email" id="email" name="email" required placeholder="tu@email.com">
+        </div>
+        <div>
+          <label for="telefono">Teléfono</label>
+          <input type="tel" id="telefono" name="telefono" placeholder="600 000 000">
+        </div>
+        <div>
+          <label for="asunto">Asunto</label>
+          <select id="asunto" name="asunto">
+            <option value="certificado">Necesito un certificado energético</option>
+            <option value="presupuesto">Consulta sobre presupuesto</option>
+            <option value="tecnico">Soy técnico y quiero registrarme</option>
+            <option value="otro">Otra consulta</option>
+          </select>
+        </div>
+        <div class="full">
+          <label for="mensaje">Mensaje *</label>
+          <textarea id="mensaje" name="mensaje" required placeholder="Cuéntanos en qué podemos ayudarte..."></textarea>
+        </div>
+
+        <p class="cy-consent">Al enviar aceptas nuestra
+          <a href="/legal/privacidad.html">política de privacidad</a>.
+        </p>
+
+        <button type="submit">Enviar mensaje</button>
+      </form>
     </div>
+
+    <p class="cy-extra">¿Necesitas información sobre registros y normativas autonómicas? Consulta nuestra página de <a href="/organismos-contacto.html">organismos oficiales</a>.</p>
   </div>
-
-  <h2>Envíanos un mensaje</h2>
-  <form class="contact-form" action="https://formsubmit.co/info@certificadoya.es" method="POST">
-    <input type="hidden" name="_subject" value="Nuevo contacto desde certificadoya.es">
-    <input type="hidden" name="_captcha" value="false">
-    <input type="hidden" name="_next" value="https://www.certificadoya.es/contacto.html?enviado=ok">
-
-    <label for="nombre">Nombre *</label>
-    <input type="text" id="nombre" name="nombre" required placeholder="Tu nombre completo">
-
-    <label for="email">Email *</label>
-    <input type="email" id="email" name="email" required placeholder="tu@email.com">
-
-    <label for="telefono">Teléfono</label>
-    <input type="tel" id="telefono" name="telefono" placeholder="600 000 000">
-
-    <label for="asunto">Asunto</label>
-    <select id="asunto" name="asunto">
-      <option value="certificado">Necesito un certificado energético</option>
-      <option value="presupuesto">Consulta sobre presupuesto</option>
-      <option value="tecnico">Soy técnico y quiero registrarme</option>
-      <option value="otro">Otra consulta</option>
-    </select>
-
-    <label for="mensaje">Mensaje *</label>
-    <textarea id="mensaje" name="mensaje" required placeholder="Cuéntanos en qué podemos ayudarte..."></textarea>
-
-    <p style="font-size:.78rem;color:#9aab8a;margin-top:-.5rem;margin-bottom:.75rem;text-align:center">
-      Al enviar aceptas nuestra
-      <a href="/legal/privacidad.html" style="color:#16a34a;text-decoration:underline">política de privacidad</a>.
-    </p>
-
-    <button type="submit">Enviar mensaje</button>
-  </form>
-
-  <p style="margin-top:1.5rem;font-size:.85rem;color:#6b7280">También puedes consultar nuestra sección de <a href="/organismos-contacto.html" style="color:#16a34a">organismos oficiales</a> para información sobre registros y normativas autonómicas.</p>
-</div>
+</main>
 
 <footer class="footer-v2">
   <div class="footer-grid">
     <div class="footer-brand"><span class="footer-logo">CertificadoYa</span><p>Certificados de eficiencia energética (CEE) en toda España. Técnicos colegiados verificados. Presupuesto instantáneo desde 45€.</p><p style="font-size:.78rem;margin-top:.5rem">📞 <a href="tel:+34641450068" style="color:#16a34a">641 45 00 68</a> · 📧 <a href="mailto:info@certificadoya.es" style="color:#16a34a">info@certificadoya.es</a></p></div>
     <div class="footer-links"><strong>Servicios</strong><a href="/">Certificado energético</a><a href="/#presupuesto">Presupuesto instantáneo</a><a href="/organismos-contacto.html">Organismos oficiales</a><a href="/descargables/plantilla-informe-energetico.pdf">Plantilla descargable (PDF)</a></div>
     <div class="footer-links"><strong>Para técnicos</strong><a href="/panel-tecnicos.html">Registro de técnicos</a><a href="/blog/?cat=tecnicos">Blog técnico</a><a href="/blog/guia-ce3x-tecnicos.html">Guía CE3X</a></div>
-    <div class="footer-links"><strong>Legal</strong><a href="/legal/aviso-legal.html">Aviso legal</a><a href="/legal/privacidad.html">Privacidad</a><a href="/legal/cookies.html">Cookies</a><a href="/contacto.html">Contacto</a></div>
+    <div class="footer-links"><strong>Legal</strong><a href="/aviso-legal.html">Aviso legal</a><a href="/legal/privacidad.html">Privacidad</a><a href="/legal/cookies.html">Cookies</a><a href="/contacto.html">Contacto</a></div>
   </div>
   <p class="footer-bottom">© 2026 CertificadoYa — ArtStudio · Todas las provincias de España</p>
 </footer>
@@ -193,8 +379,9 @@
     if (e.key === 'Escape' && overlay.classList.contains('open')) closeM();
   });
 })();
+</script>
 
-
+<script>
 /* Acordeon overlay con animación suave */
 function toggleSection(id){
   var c=document.getElementById('accordion-'+id);
@@ -224,7 +411,8 @@ function toggleSection(id){
     var a=b.querySelector('.accordion-arrow');
     if(a)a.textContent='\u25BE';
   }
-}</script>
+}
+</script>
 <script src="/js/chatbot.js" defer></script>
 </body>
 </html>

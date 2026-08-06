@@ -1,0 +1,1 @@
+[{'DMs enviados': 10, 'intentados': 50, 'errores': ['checkpoint', 'captcha']}

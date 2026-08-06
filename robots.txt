@@ -8,6 +8,7 @@ Disallow: /supabase/
 Allow: /
 
 Sitemap: https://www.certificadoya.es/sitemap.xml
+Sitemap: https://www.certificadoya.es/sitemap-certificados.xml
 # GEO-001: Crawlers de IA
 User-agent: GPTBot
 Allow: /

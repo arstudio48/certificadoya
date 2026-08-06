@@ -1,0 +1,202 @@
+═══════════════════════════════════════════════════════════════════════════════
+EDGE FUNCTIONS CREADAS — REFERENCIA RÁPIDA
+═══════════════════════════════════════════════════════════════════════════════
+
+### P2: stripe-webhook/index.ts
+────────────────────────────────────────────────────────────────────────────────
+Endpoint: POST /functions/v1/stripe-webhook
+Disparado por: Webhook de Stripe (charge.succeeded, payment_intent.succeeded)
+
+Flujo:
+  1. Recibe evento de Stripe con firma
+  2. Valida firma con STRIPE_WEBHOOK_SECRET
+  3. Extrae datos de pago: nombre, email, teléfono, CP, provincia, m², tipo, monto
+  4. Inserta en tabla `leads` con estado='nuevo'
+  5. Registra en audit_log para trazabilidad
+  6. Retorna leadId (para seguimiento)
+
+Variables de entorno requeridas:
+  STRIPE_WEBHOOK_SECRET = whsec_live_*** (desde Stripe Dashboard)
+  SUPABASE_URL = https://wypgqpgjlookbhuaiyxa.supabase.co
+  SUPABASE_SERVICE_ROLE_KEY = eyJhbG... (key de admin)
+
+Respuesta exitosa (200):
+  {
+    "success": true,
+    "leadId": "lead_uuid",
+    "message": "Lead creado. Auto-asignación se ejecutará en 30 min."
+  }
+
+Tabla insertada: leads
+  {
+    id, nombre_cliente, email_cliente, telefono_cliente, codigo_postal, provincia,
+    tipo_inmueble, m2, presupuesto_min, presupuesto_max,
+    fuente: "web-stripe", estado: "nuevo", stripe_payment_id, monto_pagado, fecha_solicitud
+  }
+
+Deploy:
+  supabase functions deploy stripe-webhook
+
+Test (local):
+  curl -X POST http://localhost:54321/functions/v1/stripe-webhook \
+    -H "stripe-signature: t_test" \
+    -H "Content-Type: application/json" \
+    -d '{"type":"charge.succeeded","data":{"object":{...}}}'
+
+═══════════════════════════════════════════════════════════════════════════════
+
+### P5: notify-client/index.ts
+────────────────────────────────────────────────────────────────────────────────
+Endpoint: POST /functions/v1/notify-client
+Disparado por: Cambio en campo `leads.estado` (vía trigger o manual)
+
+Flujo:
+  1. Recibe: lead, estado (nuevo/asignado/aceptado/rechazado/registrado/completado)
+  2. Genera email HTML según estado
+  3. Envía vía RESEND API (gratis: 100/día)
+  4. Registra envío en tabla `notificaciones` (auditoría)
+
+Variables de entorno requeridas:
+  RESEND_API_KEY = re_*** (desde https://resend.com)
+  SUPABASE_URL, SUPABASE_SERVICE_ROLE_KEY
+
+Estados y emails:
+  
+  nuevo → "Tu solicitud fue recibida" 
+    └─ Cliente: Próximos pasos, timing
+  
+  asignado → "Técnico confirmado: [nombre] [teléfono]"
+    └─ Cliente: Datos del técnico
+  
+  aceptado → "El técnico aceptó tu encargo"
+    └─ Cliente: Visita programada en 24-48h
+  
+  rechazado → "Buscando otro técnico"
+    └─ Cliente: Tranquilizante, reintento en 24h
+  
+  registrado → "CEE registrado y listo"
+    └─ Cliente: PDF, calificación, número_registro, validez
+  
+  completado → "Transacción completada"
+    └─ Cliente: Cierre, contacto
+
+Respuesta exitosa (200):
+  {
+    "success": true,
+    "message": "Email enviado"
+  }
+
+Tabla registrada: notificaciones
+  {
+    id, lead_id, email_dest, estado_trigger, asunto, body_html,
+    enviado_at, success (bool), error_log
+  }
+
+Deploy:
+  supabase functions deploy notify-client
+
+Invocar manualmente (para testing):
+  POST /functions/v1/notify-client
+  {
+    "lead": {
+      "id": "lead_uuid",
+      "nombre_cliente": "María García",
+      "email_cliente": "maria@example.com"
+    },
+    "estado": "nuevo",
+    "tecnico": { "nombre": "Juan López", "telefono": "616123456", "email": "juan@tech.com" },
+    "certificado": { "calificacion": "C", "numero_registro": "2026-CEE-12345", "fecha_vencimiento": "2036-07-28", "pdf_url": "..." }
+  }
+
+═══════════════════════════════════════════════════════════════════════════════
+
+### CONFIGURACIÓN EN STRIPE DASHBOARD (manual, 2 minutos)
+────────────────────────────────────────────────────────────────────────────────
+
+1. Ir a: https://dashboard.stripe.com/webhooks
+2. Crear nuevo endpoint:
+   URL: https://wypgqpgjlookbhuaiyxa.supabase.co/functions/v1/stripe-webhook
+3. Eventos a escuchar:
+   ✓ charge.succeeded
+   ✓ payment_intent.succeeded
+4. Copiar "Signing secret" (comienza con "whsec_live_")
+5. Pegar en Supabase .env: STRIPE_WEBHOOK_SECRET = whsec_live_...
+
+Test desde Stripe:
+  Dashboard → Webhooks → endpoint → "Send test webhook"
+  Debería crear un lead en Supabase con estado 'nuevo'
+
+═══════════════════════════════════════════════════════════════════════════════
+
+### CONFIGURACIÓN EN RESEND (OPTIONAL, 2 minutos)
+────────────────────────────────────────────────────────────────────────────────
+
+1. Crear cuenta en https://resend.com (gratis: 100 emails/día)
+2. Ir a: https://resend.com/api-keys
+3. Crear nueva API key
+4. Pegar en Supabase .env: RESEND_API_KEY = re_...
+
+Alternativa: usar SMTP (iCloud)
+  SMTP_HOST = smtp.mail.me.com
+  SMTP_PORT = 587
+  SMTP_USER = aparejado@me.com
+  SMTP_PASS = [app password]
+
+═══════════════════════════════════════════════════════════════════════════════
+
+### TABLAS SUPABASE REQUERIDAS
+────────────────────────────────────────────────────────────────────────────────
+
+Ya existen (modificadas):
+  leads:
+    + stripe_payment_id (text)
+    + monto_pagado (numeric)
+    + fuente (text default 'web-form')
+    + estado (text default 'pendiente')
+
+Crear nuevas:
+  
+  audit_log:
+    id UUID pk
+    action text
+    entity text
+    entity_id UUID fk
+    details jsonb
+    created_at timestamptz default now()
+
+  notificaciones:
+    id UUID pk
+    lead_id UUID fk leads.id
+    email_dest text
+    estado_trigger text (nuevo/asignado/aceptado/...)
+    asunto text
+    body_html text
+    enviado_at timestamptz default now()
+    success boolean
+    error_log text nullable
+
+  email_confirmations:
+    id UUID pk
+    tecnico_id UUID fk tecnicos.id
+    token text unique
+    expires_at timestamptz
+    created_at timestamptz default now()
+
+═══════════════════════════════════════════════════════════════════════════════
+
+### DEPLOY FINAL (comando único)
+────────────────────────────────────────────────────────────────────────────────
+
+# Dentro del directorio del proyecto:
+
+supabase functions deploy stripe-webhook notify-client
+
+# Verificar:
+
+supabase functions list
+
+# Debería mostrar:
+#   stripe-webhook      https://...supabase.co/functions/v1/stripe-webhook
+#   notify-client        https://...supabase.co/functions/v1/notify-client
+
+═══════════════════════════════════════════════════════════════════════════════

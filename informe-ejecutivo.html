@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="es" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Informe Ejecutivo CertificadoYa.es — 01-ago-2026</title>
+<style>
+:root{--bg:#0d1117;--card:#161b22;--border:#30363d;--text:#e6edf3;--text2:#8b949e;--accent:#58a6ff;--green:#3fb950;--yellow:#d29922;--red:#f85149}
+[data-theme="light"]{--bg:#f6f8fa;--card:#ffffff;--border:#d8dee4;--text:#24292f;--text2:#57606a;--accent:#0969da;--green:#1a7f37;--yellow:#9a6700;--red:#cf222e}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:-apple-system,Segoe UI,Roboto,sans-serif;background:var(--bg);color:var(--text);font-size:14px;padding:40px;max-width:980px;margin:0 auto;line-height:1.6}
+h1{font-size:26px;color:var(--accent);margin-bottom:4px}
+h2{font-size:17px;color:var(--accent);margin:30px 0 12px;border-bottom:1px solid var(--border);padding-bottom:6px}
+h3{font-size:14px;margin:14px 0 6px}
+.sub{color:var(--text2);font-size:13px;margin-bottom:24px}
+.kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin:20px 0}
+.kpi{background:var(--card);border:1px solid var(--border);border-radius:8px;padding:16px;text-align:center}
+.kpi .v{font-size:24px;font-weight:700;color:var(--accent)}
+.kpi .l{font-size:11.5px;color:var(--text2)}
+.card{background:var(--card);border:1px solid var(--border);border-radius:8px;padding:20px;margin-bottom:16px}
+.grid-2{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+table{width:100%;border-collapse:collapse;font-size:13px}
+th,td{padding:7px 10px;border-bottom:1px solid var(--border);text-align:left}
+th{color:var(--text2);font-weight:600}
+.sem{display:inline-block;width:10px;height:10px;border-radius:50%;margin-right:6px}
+.sem-g{background:var(--green)}.sem-y{background:var(--yellow)}.sem-r{background:var(--red)}
+ul{padding-left:20px}li{margin-bottom:6px}
+.print{color:var(--text2);font-size:12px;margin-top:40px;text-align:center}
+@media print{body{padding:12px}}
+</style>
+</head>
+<body>
+<h1>📊 Informe Ejecutivo — CertificadoYa.es</h1>
+<div class="sub">Extracción: 01-ago-2026 02:50 CEST · Fuentes: GSC (90d), GoatCounter (71d), Supabase (live), curl · Web operativa desde 20-may-2026 (68 días)</div>
+
+<div class="kpis">
+  <div class="kpi"><div class="v">13660</div><div class="l">Impresiones 90d</div></div>
+  <div class="kpi"><div class="v">144</div><div class="l">Clics 90d</div></div>
+  <div class="kpi"><div class="v">1.05%</div><div class="l">CTR medio</div></div>
+  <div class="kpi"><div class="v">37.1</div><div class="l">Posición media</div></div>
+</div>
+<div class="kpis">
+  <div class="kpi"><div class="v">431</div><div class="l">Sesiones 71d</div></div>
+  <div class="kpi"><div class="v">60</div><div class="l">Leads</div></div>
+  <div class="kpi"><div class="v">35</div><div class="l">Asignados</div></div>
+  <div class="kpi"><div class="v">0</div><div class="l">Pagados</div></div>
+</div>
+
+<h2>Semáforo de salud</h2>
+<div class="grid-2">
+<div class="card"><table>
+  <tr><td>Disponibilidad</td><td><span class="sem sem-g"></span>HTTP 200 · TTFB 0.33s</td></tr>
+  <tr><td>SSL</td><td><span class="sem sem-g"></span>Válido hasta 21-oct-2026</td></tr>
+  <tr><td>SEO técnico</td><td><span class="sem sem-g"></span>Canonical, sitemaps, robots, JSON-LD OK</td></tr>
+  <tr><td>Visibilidad Google</td><td><span class="sem sem-y"></span>13.660 imp pero pos media 37,1</td></tr>
+  <tr><td>CTR</td><td><span class="sem sem-r"></span>1,05% (bajo, por posición)</td></tr>
+  <tr><td>Tráfico web</td><td><span class="sem sem-y"></span>4-8 sesiones/día estable</td></tr>
+</table></div>
+<div class="card"><table>
+  <tr><td>Embudo leads</td><td><span class="sem sem-r"></span>35 asignados → 0 pagados</td></tr>
+  <tr><td>Cobertura técnicos</td><td><span class="sem sem-y"></span>18 activos, 11 provincias</td></tr>
+  <tr><td>Captación email</td><td><span class="sem sem-g"></span>398 enviados, cron activo</td></tr>
+  <tr><td>Analytics</td><td><span class="sem sem-g"></span>GA4 + Clarity + GoatCounter + Bing</td></tr>
+  <tr><td>Contenido normativo</td><td><span class="sem sem-g"></span>RD 659/2025 cubierto, pos 8,2</td></tr>
+  <tr><td>Core Web Vitals</td><td><span class="sem sem-y"></span>PSI rate-limited hoy; RUM activo</td></tr>
+</table></div>
+</div>
+
+<h2>Fortalezas vs Debilidades</h2>
+<div class="grid-2">
+<div class="card"><h3>✅ Fortalezas</h3><ul>
+  <li>Web ultrarrápida (TTFB 0.33s, GitHub CDN)</li>
+  <li>SEO técnico impecable: 5 bloques JSON-LD, sitemaps, canonical</li>
+  <li>Ventana normativa RD 659/2025 aprovechada (pos 8,2 en '659/2025')</li>
+  <li>Blog con 101 artículos, varios en pos 3-8</li>
+  <li>Pipeline captación email automatizado (944 pendientes, 12 días de campaña)</li>
+  <li>Analytics completo sin cookies invasivas (Consent Mode v2)</li>
+</ul></div>
+<div class="card"><h3>❌ Debilidades</h3><ul>
+  <li><strong>0 leads pagados</strong> de 60 — el negocio no cierra</li>
+  <li>CTR 1,05% por posición media 37,1 (fuera de top 10)</li>
+  <li>Tráfico bajo: 4-8 sesiones/día (web de 68 días, normal pero mejorable)</li>
+  <li>Landings provincia sin clics (pos 25-70)</li>
+  <li>18 técnicos solo en 11 provincias — resto sin cobertura</li>
+  <li>Duplicidad /aviso-legal vs /legal/aviso-legal.html sin resolver</li>
+</ul></div>
+</div>
+
+<h2>Embudo completo</h2>
+<div class="card"><table>
+  <thead><tr><th>Etapa</th><th>Cantidad</th><th>% del anterior</th><th>Interpretación</th></tr></thead>
+  <tbody>
+    <tr><td>Sesiones (71d)</td><td>431</td><td>—</td><td>Base de tráfico</td></tr>
+    <tr><td>Leads</td><td>60</td><td>13,9%</td><td>Conversión visita→lead razonable</td></tr>
+    <tr><td>Asignados</td><td>35</td><td>58,3%</td><td>Asignación OK</td></tr>
+    <tr><td>Pagados</td><td>0</td><td>0%</td><td><strong>PUNTO DE FRACASO</strong> — el técnico no cierra</td></tr>
+  </tbody>
+</table></div>
+
+<h2>Top 5 oportunidades por ROI</h2>
+<div class="card"><table>
+  <thead><tr><th>#</th><th>Oportunidad</th><th>Impacto</th><th>Esfuerzo</th><th>Coste</th></tr></thead>
+  <tbody>
+    <tr><td>1</td><td>Desbloquear pago: seguimiento automático a los 35 leads asignados (recordatorio técnico + cliente)</td><td>Alto</td><td>Bajo</td><td>0€</td></tr>
+    <tr><td>2</td><td>Optimizar landings /certificado-energetico-* (1.303 imp, pos 54): título + CTA + precio</td><td>Alto</td><td>Bajo</td><td>0€</td></tr>
+    <tr><td>3</td><td>Contenido local 'ahorro energético [provincia]' para queries pos 25-70</td><td>Medio</td><td>Medio</td><td>0€</td></tr>
+    <tr><td>4</td><td>Ampliar cobertura técnica provincial (rojo en mapa) — feed técnicos</td><td>Medio</td><td>Medio</td><td>0€</td></tr>
+    <tr><td>5</td><td>Consolidar '/certificado-energetico' canónica (1.300 imp sin clics por duplicidad)</td><td>Medio</td><td>Bajo</td><td>0€</td></tr>
+  </tbody>
+</table></div>
+
+<h2>Conclusiones (evidence-based)</h2>
+<div class="card"><ul>
+  <li>La web funciona y capta (60 leads, 13,9% conversión visita→lead) — el problema NO es tráfico ni captación de leads.</li>
+  <li><strong>El cuello de botella es monetización: 0/35 asignados pagan.</strong> Sin eso, cada lead es coste sin retorno.</li>
+  <li>El CTR bajo es consecuencia de posición (37,1 media), no de snippets: prioridad es contenido/estructura, no reescritura de titles.</li>
+  <li>La ventana RD 659/2025 (23-jul-2026) es la mejor palanca SEO actual — pos 8,2 sin clics en '659/2025'.</li>
+  <li>El tráfico es normal para 68 días de vida; el crecimiento compuesto llegará con contenido estable (freeze de estructura recomendado).</li>
+  <li>El pipeline de captación de técnicos (1.148 en universo) está adelantado a la demanda real: 18 activos bastan para 60 leads.</li>
+  <li>Riesgo legal pendiente: duplicidad de aviso legal (canonical sin unificar).</li>
+</ul></div>
+
+<h2>Plan de acción inmediata (8 pasos)</h2>
+<div class="card"><ol>
+  <li><strong>HOY:</strong> Seguimiento a los 35 leads asignados sin pago (email/SMS recordatorio técnico + cliente).</li>
+  <li><strong>HOY:</strong> Unificar aviso legal (301 de /legal/aviso-legal.html → /aviso-legal.html).</li>
+  <li><strong>Esta semana:</strong> Optimizar 3 landings /certificado-energetico-* de mayor volumen (título con precio + CTA + trust).</li>
+  <li><strong>Esta semana:</strong> 2 artículos RD 659/2025 (inscripción técnicos, obligatoriedad venta/alquiler).</li>
+  <li><strong>Esta semana:</strong> Activar recordatorio automático de pago en el panel técnico (encargos pendientes).</li>
+  <li><strong>30 días:</strong> Contenido local ahorro energético para 5 provincias sin técnico (SEO + captación).</li>
+  <li><strong>30 días:</strong> Revisar asignación automática: leads sin técnico → pool público (pool-encargos.html ya existe, 60 sesiones).</li>
+  <li><strong>90 días:</strong> Freeze de estructura de URLs; medir GSC 28d vs 28d para validar crecimiento compuesto.</li>
+</ol></div>
+
+<div class="print">CertificadoYa.es · Informe generado por Cástor (Hermes) · 01-ago-2026</div>
+</body>
+</html>

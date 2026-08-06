@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex, nofollow">
+  <title>Panel del Técnico — CertificadoYa</title>
+  <style>
+    * { box-sizing: border-box; }
+    body { font-family: -apple-system, 'Segoe UI', Roboto, sans-serif; margin: 0; background: #eef2f0; color: #1a2b23; }
+    .wrap { max-width: 720px; margin: 0 auto; padding: 24px 16px; }
+    header { background: linear-gradient(135deg,#0f6b3d,#14894f); color: #fff; padding: 20px 24px; border-radius: 14px; margin-bottom: 20px; }
+    header h1 { margin: 0; font-size: 20px; }
+    header p { margin: 4px 0 0; color: #bff0d4; font-size: 13px; }
+    .login { background: #fff; border-radius: 12px; padding: 24px; box-shadow: 0 4px 16px rgba(16,44,32,.08); }
+    .login input { width: 100%; padding: 12px; border: 1px solid #cfd8d3; border-radius: 8px; font-size: 15px; margin: 8px 0; }
+    .login button { background: #14894f; color: #fff; border: 0; padding: 12px 20px; border-radius: 8px; font-size: 15px; font-weight: 600; cursor: pointer; width: 100%; }
+    .lead { background: #fff; border-radius: 12px; padding: 18px 20px; margin-bottom: 14px; box-shadow: 0 2px 10px rgba(16,44,32,.06); border-left: 4px solid #14894f; }
+    .lead h3 { margin: 0 0 8px; font-size: 16px; }
+    .lead table { width: 100%; border-collapse: collapse; font-size: 14px; }
+    .lead td { padding: 5px 0; border-bottom: 1px solid #f0f0f0; }
+    .lead td:first-child { color: #5c6b63; font-weight: 600; width: 38%; }
+    .lead a.btn { display: inline-block; background: #14894f; color: #fff; padding: 8px 14px; border-radius: 8px; text-decoration: none; font-size: 13px; margin-top: 8px; }
+    .empty { text-align: center; color: #5c6b63; padding: 40px 0; }
+    .badge { display:inline-block; background:#f2f8f4; color:#0f6b3d; font-size:11px; padding:3px 8px; border-radius:10px; margin-left:8px; }
+    .reenvio-box { margin-top:18px; border-top:1px solid #eef0ee; padding-top:14px; }
+    .reenvio-box input { width:100%; padding:10px 12px; border:1px solid #cfd8d3; border-radius:8px; font-size:14px; margin:4px 0; box-sizing:border-box; }
+    .btn-reenvio { background:#5c6b63; color:#fff; border:0; padding:10px 16px; border-radius:8px; font-size:14px; font-weight:600; cursor:pointer; width:100%; }
+    .btn-reenvio:hover { background:#46544d; }
+    footer { text-align: center; color: #9fb4a8; font-size: 12px; padding: 20px; }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <header>
+      <h1>Certificado<span style="color:#bff0d4;">Ya</span> · Panel del Técnico</h1>
+      <p>Tus encargos asignados · Pagos retenidos hasta completar</p>
+    </header>
+
+    <div id="login" class="login">
+      <p style="margin-top:0;font-size:14px;color:#5c6b63;">Introduce tu código de técnico (te lo enviamos por email) para ver tus encargos:</p>
+      <input id="token" placeholder="Tu código de técnico" autocomplete="off">
+      <button onclick="cargar()">Acceder</button>
+      <p id="msg" style="color:#c0392b;font-size:13px;min-height:18px;"></p>
+      <div class="reenvio-box">
+        <p style="font-size:13px;color:#5c6b63;margin:14px 0 6px;">¿Perdiste tu código? Te lo reenviamos:</p>
+        <input id="emailReenvio" type="email" placeholder="Tu email de técnico" autocomplete="email">
+        <button class="btn-reenvio" onclick="reenviarCodigo()">Reenviar código</button>
+        <p id="msgReenvio" style="font-size:12px;color:#16a34a;min-height:16px;"></p>
+      </div>
+    </div>
+
+    <div id="panel" style="display:none;">
+      <div id="leads"></div>
+    </div>
+
+    <footer>CertificadoYa · certificadoya.es · Este panel es privado y no indexable</footer>
+  </div>
+
+  <script type="module">
+    import { createClient } from 'https://esm.sh/@supabase/supabase-js@2';
+
+    const SUPABASE_URL = 'https://wypgqpgjlookbhuaiyxa.supabase.co';
+    const SUPABASE_ANON = 'sb_publishable_MsDx5jVGtDAzoB3l3-8DiQ_BxWpChA0';
+
+    const sb = createClient(SUPABASE_URL, SUPABASE_ANON);
+
+    async function cargar() {
+      const token = document.getElementById('token').value.trim();
+      const msg = document.getElementById('msg');
+      if (!token) { msg.textContent = 'Introduce tu código.'; return; }
+      msg.textContent = 'Cargando…';
+
+      const { data: tecnico, error } = await sb
+        .from('tecnicos')
+        .select('id, nombre, leads_recibidos', { headers: { 'x-tecnico-token': token } })
+        .eq('token', token)
+        .maybeSingle();
+
+      if (error || !tecnico) { msg.textContent = 'Código no válido.'; return; }
+
+      document.getElementById('login').style.display = 'none';
+      document.getElementById('panel').style.display = 'block';
+
+      const { data: leads } = await sb
+        .from('leads')
+        .select('id, nombre_cliente, codigo_postal, provincia, m2, tipo_inmueble, estado, datos_liberados, created_at')
+        .eq('tecnico_asignado', tecnico.id)
+        .order('created_at', { ascending: false });
+
+      const cont = document.getElementById('leads');
+      if (!leads || leads.length === 0) {
+        cont.innerHTML = '<div class="empty">Aún no tienes encargos asignados. Te avisaremos por email cuando tengas uno.</div>';
+        return;
+      }
+      cont.innerHTML = leads.map(l => `
+        <div class="lead">
+          <h3>Encargo #${l.id?.slice(0,8) || ''} <span class="badge">${l.estado}</span></h3>
+          <table>
+            <tr><td>Cliente</td><td>${l.nombre_cliente || '—'}</td></tr>
+            <tr><td>Zona / CP</td><td>${l.provincia || ''}${l.codigo_postal ? ' (CP ' + l.codigo_postal + ')' : ''}</td></tr>
+            ${l.m2 ? `<tr><td>Inmueble</td><td>${l.m2} m²${l.tipo_inmueble ? ' - ' + l.tipo_inmueble : ''}</td></tr>` : ''}
+            <tr><td>Pago cliente</td><td>✅ retenido en CertificadoYa</td></tr>
+          </table>
+          <a class="btn" href="https://www.certificadoya.es/chat.html?encargo=${l.id}">💬 Contactar al cliente (chat)</a>
+          <p style="font-size:12px;color:#888;margin-top:6px;">Tienes los datos del inmueble para emitir el CEE. El contacto con el cliente va por el chat de la plataforma: así se garantiza tu pago (82%) y la protección de ambas partes. El teléfono directo no se facilita para evitar que el cliente y tú cerréis por fuera y pierdas la cobertura de CertificadoYa.</p>
+        </div>
+      `).join('');
+    }
+
+    async function reenviarCodigo() {
+      const email = document.getElementById('emailReenvio').value.trim();
+      const msg = document.getElementById('msgReenvio');
+      if (!email) { msg.style.color = '#c0392b'; msg.textContent = 'Escribe tu email.'; return; }
+      msg.style.color = '#5c6b63'; msg.textContent = 'Enviando…';
+      try {
+        const res = await fetch('https://wypgqpgjlookbhuaiyxa.supabase.co/functions/v1/reenviar-token', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ email })
+        });
+        const data = await res.json();
+        if (res.ok && data.success) {
+          msg.style.color = '#16a34a';
+          msg.textContent = '✅ Código reenviado a tu email. Revisa tu bandeja (y spam).';
+        } else {
+          msg.style.color = '#c0392b';
+          msg.textContent = data.error || 'No pudimos reenviar el código.';
+        }
+      } catch (e) {
+        msg.style.color = '#c0392b';
+        msg.textContent = 'Error de conexión. Inténtalo de nuevo.';
+      }
+    }
+
+    // Permitir acceso por ?token= en la URL
+    const params = new URLSearchParams(location.search);
+    const t = params.get('token');
+    if (t) { document.getElementById('token').value = t; cargar(); }
+  </script>
+</body>
+</html>

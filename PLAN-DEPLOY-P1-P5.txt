@@ -1,0 +1,330 @@
+═══════════════════════════════════════════════════════════════════════════════
+PLAN DE DEPLOY — SOLUCIÓN COMPLETA (P1-P5)
+CertificadoYa.es — Fecha: 28 de julio de 2026
+═══════════════════════════════════════════════════════════════════════════════
+
+OBJETIVO: Resolver 5 problemas críticos en el flujo de pagos y asignación técnicos.
+
+═══════════════════════════════════════════════════════════════════════════════
+P1: CAMPO TELÉFONO OBLIGATORIO EN FORMULARIO
+═══════════════════════════════════════════════════════════════════════════════
+
+CAMBIOS:
+  Archivo: index.html (formulario principal)
+  ├─ Añadir campo <input type="tel" required /> ANTES de "Tu email"
+  ├─ Validaciones: 9-12 dígitos españoles, +34, 6XX, etc.
+  ├─ Styling: icon + inline validation
+  └─ Integración Stripe: enviar telefono_cliente en metadata
+
+  Archivo: js/main.js (lógica de presupuesto)
+  ├─ Función validatePhone(tel) con regex
+  ├─ Deshabilitar "Reservar" si teléfono no válido
+  ├─ Mostrar feedback al usuario en tiempo real
+  └─ Enviar tel en body a checkout.session
+
+TESTING:
+  ✓ Formulario renderiza con campo teléfono
+  ✓ Validaciones funcionan (rojo/verde)
+  ✓ No se puede pagar sin teléfono válido
+  ✓ Teléfono se envía en Stripe metadata
+
+DEPLOY: git commit + git push origin main (GitHub Pages ~30s)
+
+═══════════════════════════════════════════════════════════════════════════════
+P2: WEBHOOK STRIPE → EDGE FUNCTION
+═══════════════════════════════════════════════════════════════════════════════
+
+CAMBIOS:
+  Archivo: supabase/functions/stripe-webhook/index.ts (NUEVA)
+  ├─ POST endpoint: /functions/v1/stripe-webhook
+  ├─ Recibe eventos Stripe: charge.succeeded, payment_intent.succeeded
+  ├─ Valida firma con STRIPE_WEBHOOK_SECRET
+  ├─ Extrae: customer, amount, metadata (nombre, email, teléfono, cp, provincia)
+  ├─ Inserta en tabla `leads` con estado='nuevo'
+  ├─ Llama endpoint auto_assign.py (HTTP POST a PC2)
+  └─ Retorna 200 OK
+
+  Archivo: .env (variables de entorno)
+  ├─ STRIPE_WEBHOOK_SECRET = whsec_live_***
+  ├─ SUPABASE_URL, SUPABASE_SERVICE_ROLE_KEY
+  └─ AUTO_ASSIGN_ENDPOINT = https://pc2-internal/auto_assign
+
+  Archivo: Stripe Dashboard (manual)
+  ├─ Webhook endpoint: https://wypgqpgjlookbhuaiyxa.supabase.co/functions/v1/stripe-webhook
+  ├─ Eventos: charge.succeeded, payment_intent.succeeded
+  └─ Copiar signing_secret a .env
+
+TESTING:
+  ✓ Webhook recibe eventos de Stripe
+  ✓ Valida firma correctamente
+  ✓ Lead se inserta en Supabase
+  ✓ Auto-asignación se dispara
+  ✓ Técnico recibe notificación
+
+DEPLOY: 
+  1. supabase functions deploy stripe-webhook
+  2. Actualizar .env en Supabase
+  3. Configurar webhook en Stripe Dashboard
+  4. Test: pago de prueba desde index.html
+
+═══════════════════════════════════════════════════════════════════════════════
+P3: VALIDAR EMAIL TÉCNICO EN REGISTRO
+═══════════════════════════════════════════════════════════════════════════════
+
+CAMBIOS:
+  Archivo: panel-tecnicos.html (formulario de registro)
+  ├─ Campo email: type="email" required, pattern RFC 5322
+  ├─ Deshabilitar envío si email no válido
+  └─ Mostrar estado de confirmación
+
+  Archivo: supabase/functions/send-email-confirmation/index.ts (NUEVA)
+  ├─ Triggered por INSERT en `tecnicos`
+  ├─ Genera token único (JWT con exp=24h)
+  ├─ Envía email: "Confirma tu email: [link]"
+  ├─ Link: /confirmar-email?token=[JWT]
+  └─ Almacena token en tabla `email_confirmations`
+
+  Archivo: supabase/functions/confirm-email/index.ts (NUEVA)
+  ├─ Valida token JWT
+  ├─ UPDATE tecnicos SET email_validado=true
+  ├─ DELETE email_confirmations (limpia tokens)
+  ├─ Activa técnico (activo=true)
+  └─ Retorna confirmación HTML
+
+  Archivo: auto_assign.py (modificar)
+  ├─ Añadir filtro: WHERE email_validado=true
+  └─ Evita asignar a técnicos sin email verificado
+
+TESTING:
+  ✓ Técnico registra con email
+  ✓ Recibe email de confirmación
+  ✓ Click en link confirma email
+  ✓ auto_assign.py solo asigna a técnicos validados
+  ✓ Técnico inactivo hasta confirmar email
+
+DEPLOY:
+  1. ALTER TABLE tecnicos ADD COLUMN email_validado BOOLEAN DEFAULT false
+  2. supabase functions deploy send-email-confirmation confirm-email
+  3. Actualizar panel-tecnicos.html con validación
+  4. Test: registro de técnico nuevo → email → confirmación
+
+═══════════════════════════════════════════════════════════════════════════════
+P4: AUTO-REGISTRAR CEE EN CCAA (RD 659/2025)
+═══════════════════════════════════════════════════════════════════════════════
+
+CAMBIOS:
+  Archivo: panel-tecnicos.html (upload de CEE)
+  ├─ Input file: accept=".pdf"
+  ├─ Drag-drop para subir PDF
+  ├─ Progress bar de carga
+  └─ Validaciones: tamaño, formato
+
+  Archivo: supabase/functions/process-cee-pdf/index.ts (NUEVA)
+  ├─ Storage trigger: on INSERT certificados
+  ├─ Descarga PDF de storage
+  ├─ Extrae datos:
+  │  ├─ pdftotext → parsea CE3X format
+  │  ├─ Obtiene: propietario, CP, provincia, calificación (A-G), fecha
+  │  └─ Valida estructura CE3X
+  ├─ Determina CCAA por provincia
+  ├─ Llama API CCAA correspondiente (ver tabla abajo)
+  ├─ Registra CEE autom. (RD 659/2025)
+  ├─ Almacena número_registro en tabla certificados
+  ├─ UPDATE leads SET estado='registrado'
+  └─ Envía email al cliente + técnico
+
+  Archivo: CCAA API Endpoints (tabla):
+  
+  CCAA          URL Endpoint                        Autenticación
+  ────────────────────────────────────────────────────────────────
+  Madrid        https://www.madrid.org/cert-api     OAuth2 + key
+  Cataluña      https://gencat.cat/enesCertificats  API key
+  Valencia      https://www.gva.es/registro-cee     OAuth2
+  Andalucía     https://www.junta-andalucia.es/ee   API key
+  País Vasco    https://www.euskadi.eus/cee-api     OAuth2
+  Castilla-La M https://www.castillalamancha.es/cee API key
+  Galicia       https://www.xunta.gal/cee-registro  OAuth2
+  Asturias      https://www.asturias.es/cee-api     API key
+  Canarias      https://www.canarias.es/ee-api      OAuth2
+  Murcia        https://www.carm.es/cee-api         API key
+  (resto)       Registrador Central MITECO          API oficial
+
+TESTING:
+  ✓ Técnico sube PDF desde panel
+  ✓ Extracción de datos correcta
+  ✓ Registro en CCAA exitoso
+  ✓ número_registro se almacena
+  ✓ Cliente recibe email con confirmación oficial
+  ✓ Lead actualizado a 'completado'
+
+DEPLOY:
+  1. supabase functions deploy process-cee-pdf
+  2. Configurar .env con CCAA API keys
+  3. Instalar pdftotext en Deno runtime (o usar library)
+  4. Test: subir PDF desde panel → verificar registro en CCAA
+
+═══════════════════════════════════════════════════════════════════════════════
+P5: NOTIFICAR CLIENTE EN CADA CAMBIO DE ESTADO
+═══════════════════════════════════════════════════════════════════════════════
+
+CAMBIOS:
+  Archivo: supabase/functions/notify-client/index.ts (NUEVA)
+  ├─ Trigger: UPDATE en tabla `leads`
+  ├─ Detecta cambio en campo `estado`
+  ├─ Según estado → genera email HTML
+  │  ├─ nuevo → "Tu solicitud fue recibida"
+  │  ├─ asignado → "Técnico confirmado: [nombre] [teléfono]"
+  │  ├─ aceptado → "El técnico [nombre] aceptó tu encargo"
+  │  ├─ rechazado → "Otro técnico está revisando tu pedido"
+  │  ├─ registrado → "CEE listo: PDF + confirmación + validez"
+  │  └─ completado → "Transacción finalizada"
+  ├─ Envía vía Resend API o SMTP (iCloud)
+  ├─ Registra envío en tabla `notificaciones`
+  └─ Auditoría: timestamp, status, error_log
+
+  Archivo: Tabla `notificaciones` (NUEVA)
+  ├─ id (UUID)
+  ├─ lead_id (FK)
+  ├─ email_dest
+  ├─ estado_trigger
+  ├─ asunto
+  ├─ body_html
+  ├─ enviado_at
+  ├─ resend_id
+  └─ error_log (si falló)
+
+  Archivo: .env (variables)
+  ├─ RESEND_API_KEY = re_***  (gratis: 100/día)
+  ├─ O SMTP_HOST, SMTP_USER, SMTP_PASS (iCloud)
+  └─ EMAIL_FROM = notificaciones@certificadoya.es
+
+TEMPLATES HTML:
+  
+  ├─ nuevo.html
+  │  └─ "Hemos recibido tu solicitud. En 24h tendrás técnico confirmado."
+  │
+  ├─ asignado.html
+  │  └─ "Técnico: [nombre] [teléfono] [email]"
+  │     "Próximo: te llamará para fijar visita"
+  │
+  ├─ aceptado.html
+  │  └─ "Encargo aceptado. Se programará visita en 24-48h."
+  │
+  ├─ rechazado.html
+  │  └─ "No fue compatible. Otro técnico está revisando tu pedido."
+  │
+  ├─ registrado.html
+  │  └─ "CEE registrado oficialmente ✓
+  │     Archivo: [URL PDF]
+  │     Válido hasta: [fecha+10años]
+  │     Registro: [número_registro]"
+  │
+  └─ completado.html
+     └─ "Transacción finalizada. ¿Necesitas algo más?"
+
+TESTING:
+  ✓ Lead se crea → email "recibido" al cliente
+  ✓ Lead se asigna → email con datos técnico
+  ✓ Lead se acepta → email confirmación
+  ✓ Lead se rechaza → email "otro técnico"
+  ✓ CEE se registra → email con PDF + número oficial
+  ✓ Auditoría: todos los emails en tabla notificaciones
+
+DEPLOY:
+  1. CREATE TABLE notificaciones (schema en archivo)
+  2. supabase functions deploy notify-client
+  3. Configurar .env con RESEND_API_KEY
+  4. Test: crear lead → verificar emails recibidos
+
+═══════════════════════════════════════════════════════════════════════════════
+CRONOGRAMA DE DEPLOY
+═══════════════════════════════════════════════════════════════════════════════
+
+Dependencias:
+  P1 (Teléfono) → independiente, deploy INMEDIATO
+  P2 (Webhook) → requiere P1 (para recibir teléfono)
+  P3 (Email técnico) → independiente, deploy junto con P2
+  P4 (CCAA) → requiere tabla certificados, independiente
+  P5 (Notificaciones) → requiere P2 (leads deben estar en BD)
+
+SECUENCIA RECOMENDADA:
+
+  BLOQUE A (hoy, 28 julio, mañana):
+    ├─ P1: Agregar teléfono → deploy index.html (5 min)
+    ├─ P3: Validar email técnico → deploy functions + alter table (10 min)
+    └─ Test manual: registro técnico con confirmación email (5 min)
+
+  BLOQUE B (hoy tarde):
+    ├─ P2: Webhook Stripe → deploy function (10 min)
+    ├─ P5: Notificaciones → deploy function (10 min)
+    └─ Test: pago de prueba → verificar lead + emails (15 min)
+
+  BLOQUE C (mañana):
+    ├─ P4: CCAA API → deploy function (15 min, requiere testing regional)
+    └─ Test: subir PDF → verificar registro oficial (20 min)
+
+TOTAL: ~90 minutos de development + testing
+
+═══════════════════════════════════════════════════════════════════════════════
+VERIFICACIÓN POST-DEPLOY
+═══════════════════════════════════════════════════════════════════════════════
+
+CHECKLIST:
+
+□ P1: Formulario web con teléfono obligatorio (verificar en live)
+□ P2: Webhook activo recibiendo pagos Stripe
+□ P2: Leads se crean en Supabase con estado 'nuevo'
+□ P2: Auto-asignación se ejecuta y asigna técnico
+□ P3: Técnicos solo se activan tras confirmar email
+□ P3: auto_assign.py filtra por email_validado=true
+□ P4: CEE PDF se procesa y extrae datos
+□ P4: Registro en CCAA se ejecuta automáticamente
+□ P4: número_registro se almacena en BD
+□ P5: Cliente recibe email en cada cambio de estado
+□ P5: Auditoría en tabla notificaciones completa
+
+═══════════════════════════════════════════════════════════════════════════════
+ROLLBACK PLAN (si algo falla)
+═══════════════════════════════════════════════════════════════════════════════
+
+P1 (Teléfono): 
+  ✓ Git revert última commit → index.html vuelve a versión sin teléfono
+
+P2 (Webhook):
+  ✓ supabase functions delete stripe-webhook
+  ✓ Frontend sigue funcionando (aunque sin auto-asignación)
+
+P3 (Email técnico):
+  ✓ ALTER TABLE tecnicos DROP COLUMN email_validado
+  ✓ supabase functions delete send-email-confirmation confirm-email
+  ✓ Técnicos vuelven a activarse sin validación
+
+P4 (CCAA):
+  ✓ supabase functions delete process-cee-pdf
+  ✓ Técnicos suben PDF (sin registrar automáticamente)
+
+P5 (Notificaciones):
+  ✓ supabase functions delete notify-client
+  ✓ Clientes no reciben emails automáticos
+  ✓ Admin continúa notificando manualmente
+
+═══════════════════════════════════════════════════════════════════════════════
+MÉTRICAS DE ÉXITO
+═══════════════════════════════════════════════════════════════════════════════
+
+Antes (problema):
+  - 0% de leads con teléfono
+  - 0% de auto-asignaciones (leads huérfanos)
+  - 2-3 días de demora en registro CCAA
+  - 0 notificaciones automáticas a cliente
+
+Después (objetivo):
+  - 100% de leads con teléfono válido
+  - 95%+ de auto-asignaciones exitosas (en 30 min)
+  - <1 hora de demora en registro CCAA (automático)
+  - 5 notificaciones automáticas por ciclo de vida
+
+Objetivo final:
+  Ciclo cliente completo: 48-96h (sin delays por falta de teléfono/email)
+
+═══════════════════════════════════════════════════════════════════════════════

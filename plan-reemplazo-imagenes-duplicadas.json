@@ -1,0 +1,54 @@
+{
+  "/img/etiqueta-energetica.svg": {
+    "articulos": [
+      "certificado-energetico-alquiler-habitaciones.html",
+      "certificado-energetico-online.html",
+      "deducciones-fiscales-rehabilitacion-energetica-2026.html",
+      "directiva-ue-2024-1275-rehabilitacion-obligatoria.html",
+      "etiqueta-energetica-edificios.html",
+      "guia-ce3x-tecnicos.html",
+      "normativa-certificado-energetico-2026.html",
+      "vivienda-nueva-certificado-energetico.html"
+    ],
+    "nuevas_imagenes": [
+      "/img/blog/etiqueta-energetica-calificaciones-v2.svg",
+      "/img/blog/escala-consumo-energetico-v2.svg",
+      "/img/blog/eficiencia-energetica-chart-v2.svg",
+      "/img/blog/etiqueta-ce3x-v2.svg",
+      "/img/blog/calificacion-edificios-v2.svg",
+      "/img/blog/rangos-consumo-kWh-v2.svg",
+      "/img/blog/escala-energetica-viviendas-v2.svg",
+      "/img/blog/etiqueta-cee-profesional-v2.svg"
+    ]
+  },
+  "/img/blog/deducciones-fiscales-eficiencia-energetica-hero.svg": {
+    "articulos": [
+      "deducciones-fiscales-rehabilitacion-energetica-2026.html",
+      "index.html"
+    ],
+    "nuevas_imagenes": [
+      "/img/blog/ahorro-fiscal-renovacion-v2.svg",
+      "/img/blog/deduccion-impuestos-energetica-v2.svg"
+    ]
+  },
+  "/img/blog/reforma-obligatoria-hero.jpg": {
+    "articulos": [
+      "certificado-energetico-alquiler-habitaciones.html",
+      "index.html"
+    ],
+    "nuevas_imagenes": [
+      "/img/blog/rehabilitacion-termica-fachada-v2.jpg",
+      "/img/blog/mejora-aislamiento-vivienda-v2.jpg"
+    ]
+  },
+  "/img/blog/subvenciones-energeticas-andalucia-hero.svg": {
+    "articulos": [
+      "index.html",
+      "subvenciones-energeticas-andalucia-2026.html"
+    ],
+    "nuevas_imagenes": [
+      "/img/blog/ayudas-andalucia-eficiencia-v2.svg",
+      "/img/blog/subvenciones-energia-andalucia-v2.svg"
+    ]
+  }
+}
