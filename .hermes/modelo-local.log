@@ -1,0 +1,59 @@
+2026-05-29 09:58:47,726 [INFO] ============================================================
+2026-05-29 09:58:47,727 [INFO] CertificadoYa — Servicio de Modelos Locales
+2026-05-29 09:58:47,727 [INFO] GPU: RTX 4060 8GB
+2026-05-29 09:58:47,727 [INFO] Puerto: 8118
+2026-05-29 09:58:47,727 [INFO] Modelos: qwen2.5-coder:7b-instruct-q4_K_M, qwen2.5:7b-instruct-q4_K_M, gemma3:4b, phi4-mini:3.8b-q4_K_M, llama3.1:8b, llama3.2:3b
+2026-05-29 09:58:47,727 [INFO] ============================================================
+2026-05-29 09:58:47,731 [INFO] Ollama OK → sirviendo en http://0.0.0.0:8118
+2026-05-29 09:58:47,738 [INFO] [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:8118
+ * Running on http://172.27.232.141:8118
+2026-05-29 09:58:47,738 [INFO] [33mPress CTRL+C to quit[0m
+2026-05-29 09:59:00,837 [INFO] 127.0.0.1 - - [29/May/2026 09:59:00] "GET /health HTTP/1.1" 200 -
+2026-05-29 09:59:09,099 [INFO] 127.0.0.1 - - [29/May/2026 09:59:09] "GET /health HTTP/1.1" 200 -
+2026-05-29 09:59:11,350 [INFO] → POST /api/generate  model=llama3.2:3b  prompt_len=41
+2026-05-29 09:59:19,496 [INFO] 127.0.0.1 - - [29/May/2026 09:59:19] "POST /generate HTTP/1.1" 200 -
+2026-05-29 09:59:22,498 [INFO] → POST /api/generate  model=qwen2.5:7b-instruct-q4_K_M  prompt_len=87
+2026-05-29 09:59:39,243 [INFO] 127.0.0.1 - - [29/May/2026 09:59:39] "POST /generate HTTP/1.1" 200 -
+2026-05-29 09:59:41,634 [INFO] → POST /api/chat  model=qwen2.5:7b-instruct-q4_K_M  msgs=1
+2026-05-29 09:59:52,923 [INFO] 127.0.0.1 - - [29/May/2026 09:59:52] "POST /chat HTTP/1.1" 200 -
+2026-05-29 09:59:55,454 [INFO] → POST /api/generate  model=qwen2.5:7b-instruct-q4_K_M  prompt_len=193
+2026-05-29 10:00:02,540 [INFO] 127.0.0.1 - - [29/May/2026 10:00:02] "POST /generar-presupuesto HTTP/1.1" 200 -
+2026-05-29 10:00:04,965 [INFO] → POST /api/chat  model=qwen2.5:7b-instruct-q4_K_M  msgs=2
+2026-05-29 10:00:09,300 [INFO] 127.0.0.1 - - [29/May/2026 10:00:09] "POST /responder-faq HTTP/1.1" 200 -
+2026-05-29 10:00:37,496 [INFO] ============================================================
+2026-05-29 10:00:37,496 [INFO] CertificadoYa — Servicio de Modelos Locales
+2026-05-29 10:00:37,496 [INFO] GPU: RTX 4060 8GB
+2026-05-29 10:00:37,496 [INFO] Puerto: 8118
+2026-05-29 10:00:37,496 [INFO] Modelos: qwen2.5-coder:7b-instruct-q4_K_M, qwen2.5:7b-instruct-q4_K_M, gemma3:4b, phi4-mini:3.8b-q4_K_M, llama3.1:8b, llama3.2:3b
+2026-05-29 10:00:37,496 [INFO] ============================================================
+2026-05-29 10:00:37,499 [INFO] Ollama OK → sirviendo en http://0.0.0.0:8118
+2026-05-29 10:00:37,505 [INFO] [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:8118
+ * Running on http://172.27.232.141:8118
+2026-05-29 10:00:37,505 [INFO] [33mPress CTRL+C to quit[0m
+2026-05-29 10:00:37,934 [INFO] 127.0.0.1 - - [29/May/2026 10:00:37] "GET /health HTTP/1.1" 200 -
+2026-05-29 10:00:37,964 [INFO] 127.0.0.1 - - [29/May/2026 10:00:37] "GET /health HTTP/1.1" 200 -
+2026-05-29 10:00:40,508 [INFO] 127.0.0.1 - - [29/May/2026 10:00:40] "GET /health HTTP/1.1" 200 -
+2026-05-29 10:00:46,298 [INFO] ============================================================
+2026-05-29 10:00:46,298 [INFO] CertificadoYa — Servicio de Modelos Locales
+2026-05-29 10:00:46,298 [INFO] GPU: RTX 4060 8GB
+2026-05-29 10:00:46,298 [INFO] Puerto: 8118
+2026-05-29 10:00:46,298 [INFO] Modelos: qwen2.5-coder:7b-instruct-q4_K_M, qwen2.5:7b-instruct-q4_K_M, gemma3:4b, phi4-mini:3.8b-q4_K_M, llama3.1:8b, llama3.2:3b
+2026-05-29 10:00:46,298 [INFO] ============================================================
+2026-05-29 10:00:46,302 [INFO] Ollama OK → sirviendo en http://0.0.0.0:8118
+2026-05-29 10:00:46,307 [INFO] [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:8118
+ * Running on http://172.27.232.141:8118
+2026-05-29 10:00:46,307 [INFO] [33mPress CTRL+C to quit[0m
+2026-05-29 10:00:46,763 [INFO] 127.0.0.1 - - [29/May/2026 10:00:46] "GET /health HTTP/1.1" 200 -
+2026-05-29 10:00:46,813 [INFO] 127.0.0.1 - - [29/May/2026 10:00:46] "GET /health HTTP/1.1" 200 -
+2026-05-29 10:00:48,985 [INFO] 127.0.0.1 - - [29/May/2026 10:00:48] "GET /health HTTP/1.1" 200 -
+2026-05-29 10:01:16,385 [INFO] 127.0.0.1 - - [29/May/2026 10:01:16] "GET /health HTTP/1.1" 200 -
+2026-05-29 10:01:19,852 [INFO] → POST /api/generate  model=qwen2.5:7b-instruct-q4_K_M  prompt_len=171
+2026-05-29 10:01:25,586 [INFO] 127.0.0.1 - - [29/May/2026 10:01:25] "POST /generar-presupuesto HTTP/1.1" 200 -
+2026-05-29 10:01:29,153 [INFO] → POST /api/chat  model=qwen2.5:7b-instruct-q4_K_M  msgs=2
+2026-05-29 10:01:35,668 [INFO] 127.0.0.1 - - [29/May/2026 10:01:35] "POST /responder-faq HTTP/1.1" 200 -

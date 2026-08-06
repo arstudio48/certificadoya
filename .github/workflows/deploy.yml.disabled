@@ -1,0 +1,60 @@
+# GitHub Actions Workflow: Auto-minify and deploy certificadoya.es
+
+name: Auto-minify & Deploy
+
+on:
+  push:
+    branches: [ main ]
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Install dependencies
+        run: |
+          npm install -g html-minifier-terser clean-css-cli
+
+      - name: Minify HTML
+        continue-on-error: true
+        run: |
+          npx html-minifier-terser \
+            --collapse-whitespace \
+            --remove-comments \
+            --remove-optional-tags \
+            --remove-redundant-attributes \
+            --remove-script-type-attributes \
+            --remove-tag-whitespace \
+            --use-short-doctype \
+            --minify-css true \
+            --minify-js true \
+            index.html -o index.min.html
+          mv index.min.html index.html
+
+      - name: Minify CSS
+        continue-on-error: true
+        run: |
+          npx clean-css-cli style.css -o style.min.css
+          mv style.min.css style.css
+
+      - name: Deploy to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v4
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./
+          publish_branch: gh-pages
+          keep_files: true
+          force_orphan: true
+
+      - name: Notify on success
+        run: |
+          echo "✅ Deploy successful!"
+          echo "🌐 Site: https://certificadoya.es"
+          echo "⚡ Speed: https://pagespeed.web.dev/report?id=https://certificadoya.es"

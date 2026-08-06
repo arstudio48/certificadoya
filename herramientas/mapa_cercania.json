@@ -1,0 +1,2053 @@
+{
+  "a-coruna": {
+    "slug": "a-coruna",
+    "nombre": "A Coruña",
+    "ccaa": "galicia",
+    "vecinas": [
+      {
+        "slug": "lugo",
+        "nombre": "Lugo"
+      },
+      {
+        "slug": "pontevedra",
+        "nombre": "Pontevedra"
+      }
+    ]
+  },
+  "alava": {
+    "slug": "alava",
+    "nombre": "Álava",
+    "ccaa": "pais-vasco",
+    "vecinas": [
+      {
+        "slug": "bizkaia",
+        "nombre": "Bizkaia"
+      },
+      {
+        "slug": "gipuzkoa",
+        "nombre": "Gipuzkoa"
+      },
+      {
+        "slug": "burgos",
+        "nombre": "Burgos"
+      },
+      {
+        "slug": "la-rioja",
+        "nombre": "La Rioja"
+      },
+      {
+        "slug": "navarra",
+        "nombre": "Navarra"
+      }
+    ]
+  },
+  "albacete": {
+    "slug": "albacete",
+    "nombre": "Albacete",
+    "ccaa": "castilla-mancha",
+    "vecinas": [
+      {
+        "slug": "ciudad-real",
+        "nombre": "Ciudad Real"
+      },
+      {
+        "slug": "cuenca",
+        "nombre": "Cuenca"
+      },
+      {
+        "slug": "valencia",
+        "nombre": "Valencia"
+      },
+      {
+        "slug": "alicante",
+        "nombre": "Alicante"
+      },
+      {
+        "slug": "murcia",
+        "nombre": "Murcia"
+      },
+      {
+        "slug": "jaen",
+        "nombre": "Jaén"
+      }
+    ]
+  },
+  "alcala-de-henares": {
+    "slug": "alcala-de-henares",
+    "nombre": "Alcalá de Henares",
+    "ccaa": "madrid",
+    "vecinas": [
+      {
+        "slug": "avila",
+        "nombre": "Ávila"
+      },
+      {
+        "slug": "segovia",
+        "nombre": "Segovia"
+      },
+      {
+        "slug": "guadalajara",
+        "nombre": "Guadalajara"
+      },
+      {
+        "slug": "cuenca",
+        "nombre": "Cuenca"
+      },
+      {
+        "slug": "toledo",
+        "nombre": "Toledo"
+      }
+    ]
+  },
+  "alcobendas": {
+    "slug": "alcobendas",
+    "nombre": "Alcobendas",
+    "ccaa": "madrid",
+    "vecinas": [
+      {
+        "slug": "avila",
+        "nombre": "Ávila"
+      },
+      {
+        "slug": "segovia",
+        "nombre": "Segovia"
+      },
+      {
+        "slug": "guadalajara",
+        "nombre": "Guadalajara"
+      },
+      {
+        "slug": "cuenca",
+        "nombre": "Cuenca"
+      },
+      {
+        "slug": "toledo",
+        "nombre": "Toledo"
+      }
+    ]
+  },
+  "alcorcon": {
+    "slug": "alcorcon",
+    "nombre": "Alcorcón",
+    "ccaa": "madrid",
+    "vecinas": [
+      {
+        "slug": "avila",
+        "nombre": "Ávila"
+      },
+      {
+        "slug": "segovia",
+        "nombre": "Segovia"
+      },
+      {
+        "slug": "guadalajara",
+        "nombre": "Guadalajara"
+      },
+      {
+        "slug": "cuenca",
+        "nombre": "Cuenca"
+      },
+      {
+        "slug": "toledo",
+        "nombre": "Toledo"
+      }
+    ]
+  },
+  "alicante": {
+    "slug": "alicante",
+    "nombre": "Alicante",
+    "ccaa": "valencia",
+    "vecinas": [
+      {
+        "slug": "valencia",
+        "nombre": "Valencia"
+      },
+      {
+        "slug": "albacete",
+        "nombre": "Albacete"
+      },
+      {
+        "slug": "murcia",
+        "nombre": "Murcia"
+      }
+    ]
+  },
+  "almeria": {
+    "slug": "almeria",
+    "nombre": "Almería",
+    "ccaa": "andalucia",
+    "vecinas": [
+      {
+        "slug": "granada",
+        "nombre": "Granada"
+      },
+      {
+        "slug": "murcia",
+        "nombre": "Murcia"
+      }
+    ]
+  },
+  "alquiler-asturias": {
+    "slug": "alquiler-asturias",
+    "nombre": "alquiler en Asturias",
+    "ccaa": "asturias",
+    "vecinas": [
+      {
+        "slug": "lugo",
+        "nombre": "Lugo"
+      },
+      {
+        "slug": "leon",
+        "nombre": "León"
+      },
+      {
+        "slug": "cantabria",
+        "nombre": "Cantabria"
+      }
+    ]
+  },
+  "alquiler-madrid": {
+    "slug": "alquiler-madrid",
+    "nombre": "alquiler en Madrid",
+    "ccaa": "madrid",
+    "vecinas": [
+      {
+        "slug": "avila",
+        "nombre": "Ávila"
+      },
+      {
+        "slug": "segovia",
+        "nombre": "Segovia"
+      },
+      {
+        "slug": "guadalajara",
+        "nombre": "Guadalajara"
+      },
+      {
+        "slug": "cuenca",
+        "nombre": "Cuenca"
+      },
+      {
+        "slug": "toledo",
+        "nombre": "Toledo"
+      }
+    ]
+  },
+  "asturias": {
+    "slug": "asturias",
+    "nombre": "Asturias",
+    "ccaa": "asturias",
+    "vecinas": [
+      {
+        "slug": "lugo",
+        "nombre": "Lugo"
+      },
+      {
+        "slug": "leon",
+        "nombre": "León"
+      },
+      {
+        "slug": "cantabria",
+        "nombre": "Cantabria"
+      }
+    ]
+  },
+  "avila": {
+    "slug": "avila",
+    "nombre": "Ávila",
+    "ccaa": "castilla-leon",
+    "vecinas": [
+      {
+        "slug": "segovia",
+        "nombre": "Segovia"
+      },
+      {
+        "slug": "valladolid",
+        "nombre": "Valladolid"
+      },
+      {
+        "slug": "zamora",
+        "nombre": "Zamora"
+      },
+      {
+        "slug": "salamanca",
+        "nombre": "Salamanca"
+      },
+      {
+        "slug": "madrid",
+        "nombre": "Madrid"
+      },
+      {
+        "slug": "toledo",
+        "nombre": "Toledo"
+      }
+    ]
+  },
+  "aviles": {
+    "slug": "aviles",
+    "nombre": "Avilés",
+    "ccaa": "asturias",
+    "vecinas": [
+      {
+        "slug": "asturias",
+        "nombre": "Asturias"
+      }
+    ]
+  },
+  "badajoz": {
+    "slug": "badajoz",
+    "nombre": "Badajoz",
+    "ccaa": "extremadura",
+    "vecinas": [
+      {
+        "slug": "caceres",
+        "nombre": "Cáceres"
+      },
+      {
+        "slug": "ciudad-real",
+        "nombre": "Ciudad Real"
+      },
+      {
+        "slug": "cordoba",
+        "nombre": "Córdoba"
+      },
+      {
+        "slug": "sevilla",
+        "nombre": "Sevilla"
+      },
+      {
+        "slug": "huelva",
+        "nombre": "Huelva"
+      }
+    ]
+  },
+  "baleares": {
+    "slug": "baleares",
+    "nombre": "Islas Baleares",
+    "ccaa": "baleares",
+    "vecinas": [
+      {
+        "slug": "a-coruna",
+        "nombre": "A Coruña"
+      },
+      {
+        "slug": "alava",
+        "nombre": "Álava"
+      },
+      {
+        "slug": "albacete",
+        "nombre": "Albacete"
+      },
+      {
+        "slug": "alicante",
+        "nombre": "Alicante"
+      },
+      {
+        "slug": "almeria",
+        "nombre": "Almería"
+      },
+      {
+        "slug": "asturias",
+        "nombre": "Asturias"
+      }
+    ]
+  },
+  "barato-madrid": {
+    "slug": "barato-madrid",
+    "nombre": "barato en Madrid",
+    "ccaa": "madrid",
+    "vecinas": [
+      {
+        "slug": "avila",
+        "nombre": "Ávila"
+      },
+      {
+        "slug": "segovia",
+        "nombre": "Segovia"
+      },
+      {
+        "slug": "guadalajara",
+        "nombre": "Guadalajara"
+      },
+      {
+        "slug": "cuenca",
+        "nombre": "Cuenca"
+      },
+      {
+        "slug": "toledo",
+        "nombre": "Toledo"
+      }
+    ]
+  },
+  "barcelona": {
+    "slug": "barcelona",
+    "nombre": "Barcelona",
+    "ccaa": "cataluna",
+    "vecinas": [
+      {
+        "slug": "girona",
+        "nombre": "Girona"
+      },
+      {
+        "slug": "lleida",
+        "nombre": "Lleida"
+      },
+      {
+        "slug": "tarragona",
+        "nombre": "Tarragona"
+      }
+    ]
+  },
+  "benidorm": {
+    "slug": "benidorm",
+    "nombre": "Benidorm",
+    "ccaa": "valencia",
+    "vecinas": [
+      {
+        "slug": "valencia",
+        "nombre": "Valencia"
+      },
+      {
+        "slug": "albacete",
+        "nombre": "Albacete"
+      },
+      {
+        "slug": "murcia",
+        "nombre": "Murcia"
+      },
+      {
+        "slug": "castellon",
+        "nombre": "Castellón"
+      }
+    ]
+  },
+  "bilbao": {
+    "slug": "bilbao",
+    "nombre": "Bilbao",
+    "ccaa": "pais-vasco",
+    "vecinas": [
+      {
+        "slug": "alava",
+        "nombre": "Álava"
+      }
+    ]
+  },
+  "bizkaia": {
+    "slug": "bizkaia",
+    "nombre": "Bizkaia",
+    "ccaa": "pais-vasco",
+    "vecinas": [
+      {
+        "slug": "alava",
+        "nombre": "Álava"
+      }
+    ]
+  },
+  "burgos": {
+    "slug": "burgos",
+    "nombre": "Burgos",
+    "ccaa": "castilla-leon",
+    "vecinas": [
+      {
+        "slug": "palencia",
+        "nombre": "Palencia"
+      },
+      {
+        "slug": "valladolid",
+        "nombre": "Valladolid"
+      },
+      {
+        "slug": "segovia",
+        "nombre": "Segovia"
+      },
+      {
+        "slug": "soria",
+        "nombre": "Soria"
+      },
+      {
+        "slug": "la-rioja",
+        "nombre": "La Rioja"
+      },
+      {
+        "slug": "alava",
+        "nombre": "Álava"
+      }
+    ]
+  },
+  "caceres": {
+    "slug": "caceres",
+    "nombre": "Cáceres",
+    "ccaa": "extremadura",
+    "vecinas": [
+      {
+        "slug": "badajoz",
+        "nombre": "Badajoz"
+      },
+      {
+        "slug": "ciudad-real",
+        "nombre": "Ciudad Real"
+      },
+      {
+        "slug": "toledo",
+        "nombre": "Toledo"
+      },
+      {
+        "slug": "avila",
+        "nombre": "Ávila"
+      },
+      {
+        "slug": "salamanca",
+        "nombre": "Salamanca"
+      }
+    ]
+  },
+  "cadiz": {
+    "slug": "cadiz",
+    "nombre": "Cádiz",
+    "ccaa": "andalucia",
+    "vecinas": [
+      {
+        "slug": "sevilla",
+        "nombre": "Sevilla"
+      },
+      {
+        "slug": "malaga",
+        "nombre": "Málaga"
+      },
+      {
+        "slug": "huelva",
+        "nombre": "Huelva"
+      }
+    ]
+  },
+  "cantabria": {
+    "slug": "cantabria",
+    "nombre": "Cantabria",
+    "ccaa": "cantabria",
+    "vecinas": [
+      {
+        "slug": "asturias",
+        "nombre": "Asturias"
+      },
+      {
+        "slug": "leon",
+        "nombre": "León"
+      },
+      {
+        "slug": "palencia",
+        "nombre": "Palencia"
+      },
+      {
+        "slug": "burgos",
+        "nombre": "Burgos"
+      },
+      {
+        "slug": "bizkaia",
+        "nombre": "Bizkaia"
+      }
+    ]
+  },
+  "castellon": {
+    "slug": "castellon",
+    "nombre": "Castellón",
+    "ccaa": "valencia",
+    "vecinas": [
+      {
+        "slug": "valencia",
+        "nombre": "Valencia"
+      },
+      {
+        "slug": "teruel",
+        "nombre": "Teruel"
+      },
+      {
+        "slug": "tarragona",
+        "nombre": "Tarragona"
+      }
+    ]
+  },
+  "ceuta": {
+    "slug": "ceuta",
+    "nombre": "Ceuta",
+    "ccaa": "ceuta",
+    "vecinas": [
+      {
+        "slug": "a-coruna",
+        "nombre": "A Coruña"
+      },
+      {
+        "slug": "alava",
+        "nombre": "Álava"
+      },
+      {
+        "slug": "albacete",
+        "nombre": "Albacete"
+      },
+      {
+        "slug": "alicante",
+        "nombre": "Alicante"
+      },
+      {
+        "slug": "almeria",
+        "nombre": "Almería"
+      },
+      {
+        "slug": "asturias",
+        "nombre": "Asturias"
+      }
+    ]
+  },
+  "chamartin": {
+    "slug": "chamartin",
+    "nombre": "Chamartín",
+    "ccaa": "madrid",
+    "vecinas": [
+      {
+        "slug": "avila",
+        "nombre": "Ávila"
+      },
+      {
+        "slug": "segovia",
+        "nombre": "Segovia"
+      },
+      {
+        "slug": "guadalajara",
+        "nombre": "Guadalajara"
+      },
+      {
+        "slug": "cuenca",
+        "nombre": "Cuenca"
+      },
+      {
+        "slug": "toledo",
+        "nombre": "Toledo"
+      }
+    ]
+  },
+  "chamberi": {
+    "slug": "chamberi",
+    "nombre": "Chamberí",
+    "ccaa": "madrid",
+    "vecinas": [
+      {
+        "slug": "avila",
+        "nombre": "Ávila"
+      },
+      {
+        "slug": "segovia",
+        "nombre": "Segovia"
+      },
+      {
+        "slug": "guadalajara",
+        "nombre": "Guadalajara"
+      },
+      {
+        "slug": "cuenca",
+        "nombre": "Cuenca"
+      },
+      {
+        "slug": "toledo",
+        "nombre": "Toledo"
+      }
+    ]
+  },
+  "ciudad-real": {
+    "slug": "ciudad-real",
+    "nombre": "Ciudad Real",
+    "ccaa": "castilla-mancha",
+    "vecinas": [
+      {
+        "slug": "toledo",
+        "nombre": "Toledo"
+      },
+      {
+        "slug": "cuenca",
+        "nombre": "Cuenca"
+      },
+      {
+        "slug": "albacete",
+        "nombre": "Albacete"
+      },
+      {
+        "slug": "badajoz",
+        "nombre": "Badajoz"
+      },
+      {
+        "slug": "caceres",
+        "nombre": "Cáceres"
+      },
+      {
+        "slug": "jaen",
+        "nombre": "Jaén"
+      }
+    ]
+  },
+  "cordoba": {
+    "slug": "cordoba",
+    "nombre": "Córdoba",
+    "ccaa": "andalucia",
+    "vecinas": [
+      {
+        "slug": "sevilla",
+        "nombre": "Sevilla"
+      },
+      {
+        "slug": "jaen",
+        "nombre": "Jaén"
+      },
+      {
+        "slug": "malaga",
+        "nombre": "Málaga"
+      },
+      {
+        "slug": "granada",
+        "nombre": "Granada"
+      },
+      {
+        "slug": "badajoz",
+        "nombre": "Badajoz"
+      },
+      {
+        "slug": "ciudad-real",
+        "nombre": "Ciudad Real"
+      }
+    ]
+  },
+  "coruna": {
+    "slug": "coruna",
+    "nombre": "A Coruña",
+    "ccaa": "galicia",
+    "vecinas": [
+      {
+        "slug": "lugo",
+        "nombre": "Lugo"
+      },
+      {
+        "slug": "a-coruna",
+        "nombre": "A Coruña"
+      },
+      {
+        "slug": "ourense",
+        "nombre": "Ourense"
+      },
+      {
+        "slug": "pontevedra",
+        "nombre": "Pontevedra"
+      }
+    ]
+  },
+  "cuenca": {
+    "slug": "cuenca",
+    "nombre": "Cuenca",
+    "ccaa": "castilla-mancha",
+    "vecinas": [
+      {
+        "slug": "guadalajara",
+        "nombre": "Guadalajara"
+      },
+      {
+        "slug": "toledo",
+        "nombre": "Toledo"
+      },
+      {
+        "slug": "ciudad-real",
+        "nombre": "Ciudad Real"
+      },
+      {
+        "slug": "albacete",
+        "nombre": "Albacete"
+      },
+      {
+        "slug": "madrid",
+        "nombre": "Madrid"
+      },
+      {
+        "slug": "valencia",
+        "nombre": "Valencia"
+      }
+    ]
+  },
+  "fuenlabrada": {
+    "slug": "fuenlabrada",
+    "nombre": "Fuenlabrada",
+    "ccaa": "madrid",
+    "vecinas": [
+      {
+        "slug": "avila",
+        "nombre": "Ávila"
+      },
+      {
+        "slug": "segovia",
+        "nombre": "Segovia"
+      },
+      {
+        "slug": "guadalajara",
+        "nombre": "Guadalajara"
+      },
+      {
+        "slug": "cuenca",
+        "nombre": "Cuenca"
+      },
+      {
+        "slug": "toledo",
+        "nombre": "Toledo"
+      }
+    ]
+  },
+  "getafe": {
+    "slug": "getafe",
+    "nombre": "Getafe",
+    "ccaa": "madrid",
+    "vecinas": [
+      {
+        "slug": "avila",
+        "nombre": "Ávila"
+      },
+      {
+        "slug": "segovia",
+        "nombre": "Segovia"
+      },
+      {
+        "slug": "guadalajara",
+        "nombre": "Guadalajara"
+      },
+      {
+        "slug": "cuenca",
+        "nombre": "Cuenca"
+      },
+      {
+        "slug": "toledo",
+        "nombre": "Toledo"
+      }
+    ]
+  },
+  "gijon": {
+    "slug": "gijon",
+    "nombre": "Gijón",
+    "ccaa": "asturias",
+    "vecinas": [
+      {
+        "slug": "lugo",
+        "nombre": "Lugo"
+      },
+      {
+        "slug": "leon",
+        "nombre": "León"
+      },
+      {
+        "slug": "cantabria",
+        "nombre": "Cantabria"
+      }
+    ]
+  },
+  "gipuzkoa": {
+    "slug": "gipuzkoa",
+    "nombre": "Gipuzkoa",
+    "ccaa": "pais-vasco",
+    "vecinas": [
+      {
+        "slug": "alava",
+        "nombre": "Álava"
+      }
+    ]
+  },
+  "girona": {
+    "slug": "girona",
+    "nombre": "Girona",
+    "ccaa": "cataluna",
+    "vecinas": [
+      {
+        "slug": "barcelona",
+        "nombre": "Barcelona"
+      },
+      {
+        "slug": "lleida",
+        "nombre": "Lleida"
+      }
+    ]
+  },
+  "granada": {
+    "slug": "granada",
+    "nombre": "Granada",
+    "ccaa": "andalucia",
+    "vecinas": [
+      {
+        "slug": "jaen",
+        "nombre": "Jaén"
+      },
+      {
+        "slug": "cordoba",
+        "nombre": "Córdoba"
+      },
+      {
+        "slug": "malaga",
+        "nombre": "Málaga"
+      },
+      {
+        "slug": "almeria",
+        "nombre": "Almería"
+      },
+      {
+        "slug": "murcia",
+        "nombre": "Murcia"
+      },
+      {
+        "slug": "albacete",
+        "nombre": "Albacete"
+      }
+    ]
+  },
+  "guadalajara": {
+    "slug": "guadalajara",
+    "nombre": "Guadalajara",
+    "ccaa": "castilla-mancha",
+    "vecinas": [
+      {
+        "slug": "cuenca",
+        "nombre": "Cuenca"
+      },
+      {
+        "slug": "madrid",
+        "nombre": "Madrid"
+      },
+      {
+        "slug": "teruel",
+        "nombre": "Teruel"
+      },
+      {
+        "slug": "zaragoza",
+        "nombre": "Zaragoza"
+      },
+      {
+        "slug": "soria",
+        "nombre": "Soria"
+      },
+      {
+        "slug": "segovia",
+        "nombre": "Segovia"
+      }
+    ]
+  },
+  "huelva": {
+    "slug": "huelva",
+    "nombre": "Huelva",
+    "ccaa": "andalucia",
+    "vecinas": [
+      {
+        "slug": "sevilla",
+        "nombre": "Sevilla"
+      },
+      {
+        "slug": "cadiz",
+        "nombre": "Cádiz"
+      },
+      {
+        "slug": "badajoz",
+        "nombre": "Badajoz"
+      }
+    ]
+  },
+  "huesca": {
+    "slug": "huesca",
+    "nombre": "Huesca",
+    "ccaa": "aragon",
+    "vecinas": [
+      {
+        "slug": "zaragoza",
+        "nombre": "Zaragoza"
+      },
+      {
+        "slug": "lleida",
+        "nombre": "Lleida"
+      },
+      {
+        "slug": "navarra",
+        "nombre": "Navarra"
+      }
+    ]
+  },
+  "jaen": {
+    "slug": "jaen",
+    "nombre": "Jaén",
+    "ccaa": "andalucia",
+    "vecinas": [
+      {
+        "slug": "granada",
+        "nombre": "Granada"
+      },
+      {
+        "slug": "cordoba",
+        "nombre": "Córdoba"
+      },
+      {
+        "slug": "ciudad-real",
+        "nombre": "Ciudad Real"
+      },
+      {
+        "slug": "albacete",
+        "nombre": "Albacete"
+      },
+      {
+        "slug": "murcia",
+        "nombre": "Murcia"
+      }
+    ]
+  },
+  "la-rioja": {
+    "slug": "la-rioja",
+    "nombre": "La Rioja",
+    "ccaa": "la-rioja",
+    "vecinas": [
+      {
+        "slug": "alava",
+        "nombre": "Álava"
+      },
+      {
+        "slug": "burgos",
+        "nombre": "Burgos"
+      },
+      {
+        "slug": "soria",
+        "nombre": "Soria"
+      },
+      {
+        "slug": "zaragoza",
+        "nombre": "Zaragoza"
+      },
+      {
+        "slug": "navarra",
+        "nombre": "Navarra"
+      }
+    ]
+  },
+  "langreo": {
+    "slug": "langreo",
+    "nombre": "Langreo",
+    "ccaa": "asturias",
+    "vecinas": [
+      {
+        "slug": "lugo",
+        "nombre": "Lugo"
+      },
+      {
+        "slug": "leon",
+        "nombre": "León"
+      },
+      {
+        "slug": "cantabria",
+        "nombre": "Cantabria"
+      }
+    ]
+  },
+  "las-palmas": {
+    "slug": "las-palmas",
+    "nombre": "Las Palmas",
+    "ccaa": "canarias",
+    "vecinas": [
+      {
+        "slug": "tenerife",
+        "nombre": "Tenerife"
+      }
+    ]
+  },
+  "leganes": {
+    "slug": "leganes",
+    "nombre": "Leganés",
+    "ccaa": "madrid",
+    "vecinas": [
+      {
+        "slug": "avila",
+        "nombre": "Ávila"
+      },
+      {
+        "slug": "segovia",
+        "nombre": "Segovia"
+      },
+      {
+        "slug": "guadalajara",
+        "nombre": "Guadalajara"
+      },
+      {
+        "slug": "cuenca",
+        "nombre": "Cuenca"
+      },
+      {
+        "slug": "toledo",
+        "nombre": "Toledo"
+      }
+    ]
+  },
+  "leon": {
+    "slug": "leon",
+    "nombre": "León",
+    "ccaa": "castilla-leon",
+    "vecinas": [
+      {
+        "slug": "palencia",
+        "nombre": "Palencia"
+      },
+      {
+        "slug": "valladolid",
+        "nombre": "Valladolid"
+      },
+      {
+        "slug": "zamora",
+        "nombre": "Zamora"
+      },
+      {
+        "slug": "asturias",
+        "nombre": "Asturias"
+      },
+      {
+        "slug": "cantabria",
+        "nombre": "Cantabria"
+      },
+      {
+        "slug": "ourense",
+        "nombre": "Ourense"
+      }
+    ]
+  },
+  "lleida": {
+    "slug": "lleida",
+    "nombre": "Lleida",
+    "ccaa": "cataluna",
+    "vecinas": [
+      {
+        "slug": "barcelona",
+        "nombre": "Barcelona"
+      },
+      {
+        "slug": "girona",
+        "nombre": "Girona"
+      },
+      {
+        "slug": "tarragona",
+        "nombre": "Tarragona"
+      },
+      {
+        "slug": "zaragoza",
+        "nombre": "Zaragoza"
+      },
+      {
+        "slug": "huesca",
+        "nombre": "Huesca"
+      }
+    ]
+  },
+  "lugo": {
+    "slug": "lugo",
+    "nombre": "Lugo",
+    "ccaa": "galicia",
+    "vecinas": [
+      {
+        "slug": "a-coruna",
+        "nombre": "A Coruña"
+      },
+      {
+        "slug": "pontevedra",
+        "nombre": "Pontevedra"
+      },
+      {
+        "slug": "ourense",
+        "nombre": "Ourense"
+      },
+      {
+        "slug": "leon",
+        "nombre": "León"
+      },
+      {
+        "slug": "asturias",
+        "nombre": "Asturias"
+      }
+    ]
+  },
+  "madrid": {
+    "slug": "madrid",
+    "nombre": "Madrid",
+    "ccaa": "madrid",
+    "vecinas": [
+      {
+        "slug": "avila",
+        "nombre": "Ávila"
+      },
+      {
+        "slug": "segovia",
+        "nombre": "Segovia"
+      },
+      {
+        "slug": "guadalajara",
+        "nombre": "Guadalajara"
+      },
+      {
+        "slug": "cuenca",
+        "nombre": "Cuenca"
+      },
+      {
+        "slug": "toledo",
+        "nombre": "Toledo"
+      }
+    ]
+  },
+  "madrid-centro": {
+    "slug": "madrid-centro",
+    "nombre": "Madrid Centro",
+    "ccaa": "madrid",
+    "vecinas": [
+      {
+        "slug": "avila",
+        "nombre": "Ávila"
+      },
+      {
+        "slug": "segovia",
+        "nombre": "Segovia"
+      },
+      {
+        "slug": "guadalajara",
+        "nombre": "Guadalajara"
+      },
+      {
+        "slug": "cuenca",
+        "nombre": "Cuenca"
+      },
+      {
+        "slug": "toledo",
+        "nombre": "Toledo"
+      }
+    ]
+  },
+  "malaga": {
+    "slug": "malaga",
+    "nombre": "Málaga",
+    "ccaa": "andalucia",
+    "vecinas": [
+      {
+        "slug": "cadiz",
+        "nombre": "Cádiz"
+      },
+      {
+        "slug": "sevilla",
+        "nombre": "Sevilla"
+      },
+      {
+        "slug": "cordoba",
+        "nombre": "Córdoba"
+      },
+      {
+        "slug": "granada",
+        "nombre": "Granada"
+      }
+    ]
+  },
+  "melilla": {
+    "slug": "melilla",
+    "nombre": "Melilla",
+    "ccaa": "melilla",
+    "vecinas": [
+      {
+        "slug": "a-coruna",
+        "nombre": "A Coruña"
+      },
+      {
+        "slug": "alava",
+        "nombre": "Álava"
+      },
+      {
+        "slug": "albacete",
+        "nombre": "Albacete"
+      },
+      {
+        "slug": "alicante",
+        "nombre": "Alicante"
+      },
+      {
+        "slug": "almeria",
+        "nombre": "Almería"
+      },
+      {
+        "slug": "asturias",
+        "nombre": "Asturias"
+      }
+    ]
+  },
+  "mieres": {
+    "slug": "mieres",
+    "nombre": "mieres",
+    "ccaa": "asturias",
+    "vecinas": [
+      {
+        "slug": "asturias",
+        "nombre": "Asturias"
+      }
+    ]
+  },
+  "mismo-dia-madrid": {
+    "slug": "mismo-dia-madrid",
+    "nombre": "Madrid mismo día",
+    "ccaa": "madrid",
+    "vecinas": [
+      {
+        "slug": "avila",
+        "nombre": "Ávila"
+      },
+      {
+        "slug": "segovia",
+        "nombre": "Segovia"
+      },
+      {
+        "slug": "guadalajara",
+        "nombre": "Guadalajara"
+      },
+      {
+        "slug": "cuenca",
+        "nombre": "Cuenca"
+      },
+      {
+        "slug": "toledo",
+        "nombre": "Toledo"
+      }
+    ]
+  },
+  "mostoles": {
+    "slug": "mostoles",
+    "nombre": "Móstoles",
+    "ccaa": "madrid",
+    "vecinas": [
+      {
+        "slug": "avila",
+        "nombre": "Ávila"
+      },
+      {
+        "slug": "segovia",
+        "nombre": "Segovia"
+      },
+      {
+        "slug": "guadalajara",
+        "nombre": "Guadalajara"
+      },
+      {
+        "slug": "cuenca",
+        "nombre": "Cuenca"
+      },
+      {
+        "slug": "toledo",
+        "nombre": "Toledo"
+      }
+    ]
+  },
+  "murcia": {
+    "slug": "murcia",
+    "nombre": "Murcia",
+    "ccaa": "murcia",
+    "vecinas": [
+      {
+        "slug": "alicante",
+        "nombre": "Alicante"
+      },
+      {
+        "slug": "albacete",
+        "nombre": "Albacete"
+      },
+      {
+        "slug": "granada",
+        "nombre": "Granada"
+      },
+      {
+        "slug": "almeria",
+        "nombre": "Almería"
+      }
+    ]
+  },
+  "navarra": {
+    "slug": "navarra",
+    "nombre": "Navarra",
+    "ccaa": "navarra",
+    "vecinas": [
+      {
+        "slug": "alava",
+        "nombre": "Álava"
+      },
+      {
+        "slug": "gipuzkoa",
+        "nombre": "Gipuzkoa"
+      },
+      {
+        "slug": "la-rioja",
+        "nombre": "La Rioja"
+      },
+      {
+        "slug": "zaragoza",
+        "nombre": "Zaragoza"
+      },
+      {
+        "slug": "huesca",
+        "nombre": "Huesca"
+      }
+    ]
+  },
+  "ourense": {
+    "slug": "ourense",
+    "nombre": "Ourense",
+    "ccaa": "galicia",
+    "vecinas": [
+      {
+        "slug": "lugo",
+        "nombre": "Lugo"
+      },
+      {
+        "slug": "pontevedra",
+        "nombre": "Pontevedra"
+      },
+      {
+        "slug": "leon",
+        "nombre": "León"
+      },
+      {
+        "slug": "zamora",
+        "nombre": "Zamora"
+      }
+    ]
+  },
+  "oviedo": {
+    "slug": "oviedo",
+    "nombre": "Oviedo",
+    "ccaa": "asturias",
+    "vecinas": [
+      {
+        "slug": "lugo",
+        "nombre": "Lugo"
+      },
+      {
+        "slug": "leon",
+        "nombre": "León"
+      },
+      {
+        "slug": "cantabria",
+        "nombre": "Cantabria"
+      }
+    ]
+  },
+  "palencia": {
+    "slug": "palencia",
+    "nombre": "Palencia",
+    "ccaa": "castilla-leon",
+    "vecinas": [
+      {
+        "slug": "burgos",
+        "nombre": "Burgos"
+      },
+      {
+        "slug": "valladolid",
+        "nombre": "Valladolid"
+      },
+      {
+        "slug": "leon",
+        "nombre": "León"
+      },
+      {
+        "slug": "cantabria",
+        "nombre": "Cantabria"
+      }
+    ]
+  },
+  "pontevedra": {
+    "slug": "pontevedra",
+    "nombre": "Pontevedra",
+    "ccaa": "galicia",
+    "vecinas": [
+      {
+        "slug": "a-coruna",
+        "nombre": "A Coruña"
+      },
+      {
+        "slug": "lugo",
+        "nombre": "Lugo"
+      },
+      {
+        "slug": "ourense",
+        "nombre": "Ourense"
+      }
+    ]
+  },
+  "pozuelo": {
+    "slug": "pozuelo",
+    "nombre": "Pozuelo de Alarcón",
+    "ccaa": "madrid",
+    "vecinas": [
+      {
+        "slug": "avila",
+        "nombre": "Ávila"
+      },
+      {
+        "slug": "segovia",
+        "nombre": "Segovia"
+      },
+      {
+        "slug": "guadalajara",
+        "nombre": "Guadalajara"
+      },
+      {
+        "slug": "cuenca",
+        "nombre": "Cuenca"
+      },
+      {
+        "slug": "toledo",
+        "nombre": "Toledo"
+      }
+    ]
+  },
+  "precio-asturias": {
+    "slug": "precio-asturias",
+    "nombre": "precio en Asturias",
+    "ccaa": "asturias",
+    "vecinas": [
+      {
+        "slug": "lugo",
+        "nombre": "Lugo"
+      },
+      {
+        "slug": "leon",
+        "nombre": "León"
+      },
+      {
+        "slug": "cantabria",
+        "nombre": "Cantabria"
+      }
+    ]
+  },
+  "retiro": {
+    "slug": "retiro",
+    "nombre": "Retiro",
+    "ccaa": "madrid",
+    "vecinas": [
+      {
+        "slug": "avila",
+        "nombre": "Ávila"
+      },
+      {
+        "slug": "segovia",
+        "nombre": "Segovia"
+      },
+      {
+        "slug": "guadalajara",
+        "nombre": "Guadalajara"
+      },
+      {
+        "slug": "cuenca",
+        "nombre": "Cuenca"
+      },
+      {
+        "slug": "toledo",
+        "nombre": "Toledo"
+      }
+    ]
+  },
+  "salamanca": {
+    "slug": "salamanca",
+    "nombre": "Salamanca",
+    "ccaa": "castilla-leon",
+    "vecinas": [
+      {
+        "slug": "zamora",
+        "nombre": "Zamora"
+      },
+      {
+        "slug": "valladolid",
+        "nombre": "Valladolid"
+      },
+      {
+        "slug": "avila",
+        "nombre": "Ávila"
+      },
+      {
+        "slug": "caceres",
+        "nombre": "Cáceres"
+      }
+    ]
+  },
+  "salamanca-madrid": {
+    "slug": "salamanca-madrid",
+    "nombre": "Salamanca (Madrid)",
+    "ccaa": "madrid",
+    "vecinas": [
+      {
+        "slug": "avila",
+        "nombre": "Ávila"
+      },
+      {
+        "slug": "segovia",
+        "nombre": "Segovia"
+      },
+      {
+        "slug": "guadalajara",
+        "nombre": "Guadalajara"
+      },
+      {
+        "slug": "cuenca",
+        "nombre": "Cuenca"
+      },
+      {
+        "slug": "toledo",
+        "nombre": "Toledo"
+      }
+    ]
+  },
+  "segovia": {
+    "slug": "segovia",
+    "nombre": "Segovia",
+    "ccaa": "castilla-leon",
+    "vecinas": [
+      {
+        "slug": "avila",
+        "nombre": "Ávila"
+      },
+      {
+        "slug": "valladolid",
+        "nombre": "Valladolid"
+      },
+      {
+        "slug": "burgos",
+        "nombre": "Burgos"
+      },
+      {
+        "slug": "soria",
+        "nombre": "Soria"
+      },
+      {
+        "slug": "madrid",
+        "nombre": "Madrid"
+      },
+      {
+        "slug": "guadalajara",
+        "nombre": "Guadalajara"
+      }
+    ]
+  },
+  "sevilla": {
+    "slug": "sevilla",
+    "nombre": "Sevilla",
+    "ccaa": "andalucia",
+    "vecinas": [
+      {
+        "slug": "huelva",
+        "nombre": "Huelva"
+      },
+      {
+        "slug": "cordoba",
+        "nombre": "Córdoba"
+      },
+      {
+        "slug": "malaga",
+        "nombre": "Málaga"
+      },
+      {
+        "slug": "cadiz",
+        "nombre": "Cádiz"
+      },
+      {
+        "slug": "badajoz",
+        "nombre": "Badajoz"
+      }
+    ]
+  },
+  "siero": {
+    "slug": "siero",
+    "nombre": "Siero",
+    "ccaa": "asturias",
+    "vecinas": [
+      {
+        "slug": "lugo",
+        "nombre": "Lugo"
+      },
+      {
+        "slug": "leon",
+        "nombre": "León"
+      },
+      {
+        "slug": "cantabria",
+        "nombre": "Cantabria"
+      }
+    ]
+  },
+  "soria": {
+    "slug": "soria",
+    "nombre": "Soria",
+    "ccaa": "castilla-leon",
+    "vecinas": [
+      {
+        "slug": "burgos",
+        "nombre": "Burgos"
+      },
+      {
+        "slug": "segovia",
+        "nombre": "Segovia"
+      },
+      {
+        "slug": "la-rioja",
+        "nombre": "La Rioja"
+      },
+      {
+        "slug": "zaragoza",
+        "nombre": "Zaragoza"
+      },
+      {
+        "slug": "guadalajara",
+        "nombre": "Guadalajara"
+      }
+    ]
+  },
+  "tarragona": {
+    "slug": "tarragona",
+    "nombre": "Tarragona",
+    "ccaa": "cataluna",
+    "vecinas": [
+      {
+        "slug": "barcelona",
+        "nombre": "Barcelona"
+      },
+      {
+        "slug": "lleida",
+        "nombre": "Lleida"
+      },
+      {
+        "slug": "zaragoza",
+        "nombre": "Zaragoza"
+      },
+      {
+        "slug": "teruel",
+        "nombre": "Teruel"
+      },
+      {
+        "slug": "castellon",
+        "nombre": "Castellón"
+      }
+    ]
+  },
+  "tenerife": {
+    "slug": "tenerife",
+    "nombre": "Tenerife",
+    "ccaa": "canarias",
+    "vecinas": [
+      {
+        "slug": "las-palmas",
+        "nombre": "Las Palmas"
+      }
+    ]
+  },
+  "teruel": {
+    "slug": "teruel",
+    "nombre": "Teruel",
+    "ccaa": "aragon",
+    "vecinas": [
+      {
+        "slug": "zaragoza",
+        "nombre": "Zaragoza"
+      },
+      {
+        "slug": "tarragona",
+        "nombre": "Tarragona"
+      },
+      {
+        "slug": "castellon",
+        "nombre": "Castellón"
+      },
+      {
+        "slug": "valencia",
+        "nombre": "Valencia"
+      },
+      {
+        "slug": "cuenca",
+        "nombre": "Cuenca"
+      },
+      {
+        "slug": "guadalajara",
+        "nombre": "Guadalajara"
+      }
+    ]
+  },
+  "tetuan": {
+    "slug": "tetuan",
+    "nombre": "Tetuán",
+    "ccaa": "madrid",
+    "vecinas": [
+      {
+        "slug": "avila",
+        "nombre": "Ávila"
+      },
+      {
+        "slug": "segovia",
+        "nombre": "Segovia"
+      },
+      {
+        "slug": "guadalajara",
+        "nombre": "Guadalajara"
+      },
+      {
+        "slug": "cuenca",
+        "nombre": "Cuenca"
+      },
+      {
+        "slug": "toledo",
+        "nombre": "Toledo"
+      }
+    ]
+  },
+  "toledo": {
+    "slug": "toledo",
+    "nombre": "Toledo",
+    "ccaa": "castilla-mancha",
+    "vecinas": [
+      {
+        "slug": "ciudad-real",
+        "nombre": "Ciudad Real"
+      },
+      {
+        "slug": "cuenca",
+        "nombre": "Cuenca"
+      },
+      {
+        "slug": "guadalajara",
+        "nombre": "Guadalajara"
+      },
+      {
+        "slug": "madrid",
+        "nombre": "Madrid"
+      },
+      {
+        "slug": "avila",
+        "nombre": "Ávila"
+      },
+      {
+        "slug": "caceres",
+        "nombre": "Cáceres"
+      }
+    ]
+  },
+  "urgente-asturias": {
+    "slug": "urgente-asturias",
+    "nombre": "urgente en Asturias",
+    "ccaa": "asturias",
+    "vecinas": [
+      {
+        "slug": "lugo",
+        "nombre": "Lugo"
+      },
+      {
+        "slug": "leon",
+        "nombre": "León"
+      },
+      {
+        "slug": "cantabria",
+        "nombre": "Cantabria"
+      }
+    ]
+  },
+  "urgente-madrid": {
+    "slug": "urgente-madrid",
+    "nombre": "urgente en Madrid",
+    "ccaa": "madrid",
+    "vecinas": [
+      {
+        "slug": "avila",
+        "nombre": "Ávila"
+      },
+      {
+        "slug": "segovia",
+        "nombre": "Segovia"
+      },
+      {
+        "slug": "guadalajara",
+        "nombre": "Guadalajara"
+      },
+      {
+        "slug": "cuenca",
+        "nombre": "Cuenca"
+      },
+      {
+        "slug": "toledo",
+        "nombre": "Toledo"
+      }
+    ]
+  },
+  "valencia": {
+    "slug": "valencia",
+    "nombre": "Valencia",
+    "ccaa": "valencia",
+    "vecinas": [
+      {
+        "slug": "castellon",
+        "nombre": "Castellón"
+      },
+      {
+        "slug": "alicante",
+        "nombre": "Alicante"
+      },
+      {
+        "slug": "teruel",
+        "nombre": "Teruel"
+      },
+      {
+        "slug": "cuenca",
+        "nombre": "Cuenca"
+      },
+      {
+        "slug": "albacete",
+        "nombre": "Albacete"
+      }
+    ]
+  },
+  "valladolid": {
+    "slug": "valladolid",
+    "nombre": "Valladolid",
+    "ccaa": "castilla-leon",
+    "vecinas": [
+      {
+        "slug": "leon",
+        "nombre": "León"
+      },
+      {
+        "slug": "palencia",
+        "nombre": "Palencia"
+      },
+      {
+        "slug": "burgos",
+        "nombre": "Burgos"
+      },
+      {
+        "slug": "segovia",
+        "nombre": "Segovia"
+      },
+      {
+        "slug": "avila",
+        "nombre": "Ávila"
+      },
+      {
+        "slug": "zamora",
+        "nombre": "Zamora"
+      }
+    ]
+  },
+  "venta-vivienda-asturias": {
+    "slug": "venta-vivienda-asturias",
+    "nombre": "venta de vivienda en Asturias",
+    "ccaa": "asturias",
+    "vecinas": [
+      {
+        "slug": "lugo",
+        "nombre": "Lugo"
+      },
+      {
+        "slug": "leon",
+        "nombre": "León"
+      },
+      {
+        "slug": "cantabria",
+        "nombre": "Cantabria"
+      }
+    ]
+  },
+  "venta-vivienda-madrid": {
+    "slug": "venta-vivienda-madrid",
+    "nombre": "venta de vivienda en Madrid",
+    "ccaa": "madrid",
+    "vecinas": [
+      {
+        "slug": "avila",
+        "nombre": "Ávila"
+      },
+      {
+        "slug": "segovia",
+        "nombre": "Segovia"
+      },
+      {
+        "slug": "guadalajara",
+        "nombre": "Guadalajara"
+      },
+      {
+        "slug": "cuenca",
+        "nombre": "Cuenca"
+      },
+      {
+        "slug": "toledo",
+        "nombre": "Toledo"
+      }
+    ]
+  },
+  "villaviciosa": {
+    "slug": "villaviciosa",
+    "nombre": "Villaviciosa",
+    "ccaa": "asturias",
+    "vecinas": [
+      {
+        "slug": "lugo",
+        "nombre": "Lugo"
+      },
+      {
+        "slug": "leon",
+        "nombre": "León"
+      },
+      {
+        "slug": "cantabria",
+        "nombre": "Cantabria"
+      }
+    ]
+  },
+  "zamora": {
+    "slug": "zamora",
+    "nombre": "Zamora",
+    "ccaa": "castilla-leon",
+    "vecinas": [
+      {
+        "slug": "leon",
+        "nombre": "León"
+      },
+      {
+        "slug": "valladolid",
+        "nombre": "Valladolid"
+      },
+      {
+        "slug": "salamanca",
+        "nombre": "Salamanca"
+      },
+      {
+        "slug": "lugo",
+        "nombre": "Lugo"
+      },
+      {
+        "slug": "ourense",
+        "nombre": "Ourense"
+      }
+    ]
+  },
+  "zaragoza": {
+    "slug": "zaragoza",
+    "nombre": "Zaragoza",
+    "ccaa": "aragon",
+    "vecinas": [
+      {
+        "slug": "huesca",
+        "nombre": "Huesca"
+      },
+      {
+        "slug": "teruel",
+        "nombre": "Teruel"
+      },
+      {
+        "slug": "navarra",
+        "nombre": "Navarra"
+      },
+      {
+        "slug": "la-rioja",
+        "nombre": "La Rioja"
+      },
+      {
+        "slug": "soria",
+        "nombre": "Soria"
+      },
+      {
+        "slug": "guadalajara",
+        "nombre": "Guadalajara"
+      }
+    ]
+  }
+}

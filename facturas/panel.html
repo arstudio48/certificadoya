@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mis Facturas — CertificadoYa</title>
+  <meta name="robots" content="noindex, nofollow">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600;9..40,700;9..40,800&display=swap" rel="stylesheet">
+  <link rel="icon" type="image/png" sizes="32x32" href="/img/favicon-32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/img/favicon-16.png">
+  <style>
+    *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+    :root {
+      --primary: #16a34a;
+      --primary-dark: #15803d;
+      --bg: #f5f7f5;
+      --bg-card: #ffffff;
+      --text: #20201f;
+      --text-light: #6b7280;
+      --text-lighter: #9ca3af;
+      --border: #e5e7eb;
+      --radius: 12px;
+      --radius-sm: 8px;
+      --font: 'DM Sans', -apple-system, sans-serif;
+    }
+    body {
+      font-family: var(--font);
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+      min-height: 100vh;
+    }
+    a { color: var(--primary); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+
+    @keyframes spin { to { transform: rotate(360deg); } }
+    @keyframes slideUp { from { opacity:0; transform:translateY(16px); } to { opacity:1; transform:translateY(0); } }
+    .spinner {
+      width: 24px; height: 24px;
+      border: 3px solid #dce8d0;
+      border-top-color: var(--primary);
+      border-radius: 50%;
+      animation: spin .6s linear infinite;
+      margin: 0 auto 1rem;
+    }
+
+    .header {
+      background: #fff;
+      border-bottom: 1px solid var(--border);
+      box-shadow: 0 1px 4px rgba(0,0,0,.03);
+    }
+    .header-inner {
+      max-width: 900px; margin:0 auto; padding: 0 2rem;
+      display: flex; align-items: center; justify-content: space-between; height: 64px;
+    }
+    .logo { display:flex; align-items:center; gap:.75rem; text-decoration:none; }
+    .logo img { height:44px !important; width:auto; }
+
+    .container {
+      max-width: 900px; margin: 0 auto;
+      padding: 2rem;
+    }
+
+    .card {
+      background: var(--bg-card);
+      border-radius: var(--radius);
+      padding: 2rem;
+      box-shadow: 0 4px 24px rgba(0,0,0,.06);
+      border: 1px solid var(--border);
+      animation: slideUp .4s ease;
+    }
+
+    .card h1 {
+      font-size: 1.3rem;
+      font-weight: 700;
+      margin-bottom: .35rem;
+    }
+    .card .sub {
+      color: var(--text-light);
+      font-size: .9rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .search-box {
+      display: flex; gap: .75rem; margin-bottom: 1.5rem;
+    }
+    .search-box input {
+      flex: 1;
+      padding: .8rem 1rem;
+      border: 2px solid var(--border);
+      border-radius: var(--radius-sm);
+      font-size: .95rem;
+      font-family: var(--font);
+      outline: none;
+      transition: border-color .2s;
+    }
+    .search-box input:focus {
+      border-color: var(--primary);
+      box-shadow: 0 0 0 3px rgba(22,163,74,.12);
+    }
+    .btn {
+      padding: .8rem 1.5rem;
+      border: none; border-radius: var(--radius-sm);
+      font-family: var(--font); font-weight: 600; font-size: .95rem;
+      cursor: pointer;
+      background: var(--primary); color: white;
+      transition: background .15s;
+      white-space: nowrap;
+    }
+    .btn:hover { background: var(--primary-dark); }
+    .btn:disabled { background: #a0b88a; cursor: not-allowed; }
+
+    .factura-item {
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      padding: 1rem 1.25rem;
+      margin-bottom: .75rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      transition: border-color .2s;
+    }
+    .factura-item:hover { border-color: var(--primary); }
+    .factura-item .info h3 {
+      font-size: .95rem;
+      font-weight: 600;
+      margin-bottom: .2rem;
+    }
+    .factura-item .info p {
+      font-size: .82rem;
+      color: var(--text-light);
+    }
+    .factura-item .total {
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: var(--primary);
+      white-space: nowrap;
+    }
+    .btn-ver {
+      background: transparent;
+      border: 1.5px solid var(--border);
+      padding: .5rem 1rem;
+      border-radius: var(--radius-sm);
+      font-family: var(--font);
+      font-size: .82rem;
+      cursor: pointer;
+      color: var(--text-light);
+      transition: all .15s;
+    }
+    .btn-ver:hover { border-color: var(--primary); color: var(--primary); }
+
+    .empty-state {
+      text-align: center; padding: 2rem 1rem;
+      color: var(--text-lighter);
+    }
+    .empty-state .icon { font-size: 3rem; margin-bottom: .75rem; }
+
+    .toast {
+      position: fixed; bottom: 2rem; right: 2rem;
+      padding: .85rem 1.5rem;
+      border-radius: var(--radius);
+      font-size: .9rem; font-weight: 500;
+      color: white;
+      opacity: 0; transform: translateY(10px);
+      transition: all .3s ease;
+      z-index: 999;
+    }
+    .toast.show { opacity: 1; transform: translateY(0); }
+    .toast-success { background: var(--primary); }
+    .toast-error { background: #dc2626; }
+
+    @media (max-width: 600px) {
+      .container { padding: 1rem; }
+      .card { padding: 1.25rem; }
+      .search-box { flex-direction: column; }
+      .factura-item { flex-direction: column; gap: .75rem; align-items: flex-start; }
+      .factura-item .right { width: 100%; display: flex; justify-content: space-between; align-items: center; }
+    }
+  </style>
+</head>
+<body>
+  <header class="header">
+    <div class="header-inner">
+      <a href="/" class="logo">
+        <img src="/img/logo-certificadoya-lockup.svg" alt="CertificadoYa">
+      </a>
+      <a href="/" style="font-size:.85rem;color:var(--text-light)">← Volver</a>
+    </div>
+  </header>
+
+  <div class="container">
+    <div class="card">
+      <h1>📄 Mis Facturas</h1>
+      <p class="sub">Introduce tu email para consultar tus facturas.</p>
+
+      <div class="search-box">
+        <input type="email" id="email-input" placeholder="tu@email.com" autocomplete="email" autofocus>
+        <button class="btn" id="btn-buscar" onclick="buscarFacturas()">🔍 Buscar</button>
+      </div>
+
+      <div id="resultados">
+        <div class="empty-state">
+          <div class="icon">📄</div>
+          <h3>Introduce tu email</h3>
+          <p>Para ver tus facturas, introduce el email que usaste al contratar el servicio.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="toast" id="toast"></div>
+
+  <script>
+    const EDGE_FUNCTION_URL = 'https://wypgqpgjlookbhuaiyxa.supabase.co/functions/v1';
+
+    document.getElementById('email-input').addEventListener('keydown', function(e) {
+      if (e.key === 'Enter') buscarFacturas();
+    });
+
+    async function buscarFacturas() {
+      const email = document.getElementById('email-input').value.trim();
+      if (!email || !email.includes('@')) {
+        mostrarToast('Introduce un email válido.', 'error');
+        return;
+      }
+
+      const container = document.getElementById('resultados');
+      container.innerHTML = '<div style="text-align:center;padding:2rem"><div class="spinner"></div><p style="color:var(--text-lighter)">Buscando facturas...</p></div>';
+
+      try {
+        const res = await fetch(EDGE_FUNCTION_URL + '/gestion-facturas?action=pdf-email', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ cliente_email: email })
+        });
+
+        if (!res.ok) {
+          container.innerHTML = '<div class="empty-state"><div class="icon">⚠️</div><h3>Error</h3><p>No se pudieron cargar las facturas.</p></div>';
+          return;
+        }
+
+        const data = await res.json();
+
+        if (!data.success || !data.facturas || data.facturas.length === 0) {
+          container.innerHTML = '<div class="empty-state"><div class="icon">📄</div><h3>Sin facturas</h3><p>No encontramos facturas asociadas a este email.</p></div>';
+          return;
+        }
+
+        container.innerHTML = '<p style="font-size:.85rem;color:var(--text-light);margin-bottom:1rem">Se encontraron <strong>' + data.facturas.length + '</strong> factura(s)</p>' +
+          data.facturas.map(function(f) {
+            const fecha = f.created_at ? new Date(f.created_at).toLocaleDateString('es-ES', {
+              day: '2-digit', month: 'short', year: 'numeric'
+            }) : '—';
+            return '<div class="factura-item">' +
+              '<div class="info">' +
+                '<h3>' + f.num_factura + '</h3>' +
+                '<p>' + f.concepto + ' · ' + fecha + '</p>' +
+              '</div>' +
+              '<div class="right">' +
+                '<span class="total">' + parseFloat(f.total).toFixed(2) + ' €</span>' +
+                ' <button class="btn-ver" onclick="verFactura(' + f.id + ')">👁️ Ver</button>' +
+              '</div>' +
+            '</div>';
+          }).join('');
+      } catch (err) {
+        container.innerHTML = '<div class="empty-state"><div class="icon">⚠️</div><h3>Error de conexión</h3></div>';
+        mostrarToast('Error al buscar facturas', 'error');
+      }
+    }
+
+    function verFactura(id) {
+      window.open(EDGE_FUNCTION_URL + '/gestion-facturas?action=pdf&id=' + id, '_blank');
+    }
+
+    function mostrarToast(msg, tipo) {
+      const toast = document.getElementById('toast');
+      toast.textContent = msg;
+      toast.className = 'toast toast-' + tipo + ' show';
+      setTimeout(function() { toast.classList.remove('show'); }, 3000);
+    }
+  </script>
+</body>
+</html>
