@@ -61,3 +61,5 @@ _scratch/
 # (comentar si supabase/migrations/ es legítimo — verificar antes)
 # supabase/migrations/*.sql
 
+# Dashboard privado: conservar solo en el PC, nunca publicar
+/dashboard.html
