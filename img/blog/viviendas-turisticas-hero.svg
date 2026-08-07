@@ -1,0 +1,49 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500" role="img" aria-labelledby="t d">
+<title id="t">Certificado energético para viviendas turísticas</title>
+<desc id="d">Edificio de apartamentos turísticos con etiqueta energética A-G de CertificadoYa</desc>
+<defs>
+  <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
+    <stop offset="0" stop-color="#0f2a1f"/><stop offset="1" stop-color="#2d5a3a"/>
+  </linearGradient>
+  <linearGradient id="bldg" x1="0" y1="0" x2="0" y2="1">
+    <stop offset="0" stop-color="#dce8d0"/><stop offset="1" stop-color="#b9cdab"/>
+  </linearGradient>
+  <linearGradient id="badge" x1="0" y1="0" x2="0" y2="1">
+    <stop offset="0" stop-color="#16a34a"/><stop offset="1" stop-color="#3d5a1e"/>
+  </linearGradient>
+</defs>
+<rect width="800" height="500" fill="url(#sky)"/>
+<circle cx="660" cy="95" r="45" fill="#f4d35e"/>
+<circle cx="660" cy="95" r="60" fill="#f4d35e" opacity="0.25"/>
+<path d="M0 420 Q120 380 240 410 T520 400 T800 415 L800 500 L0 500 Z" fill="#1c3a2a"/>
+<!-- edificio centro -->
+<rect x="120" y="150" width="300" height="280" rx="6" fill="#e8efe2" stroke="#2d3a1f" stroke-width="2"/>
+<!-- ventanas -->
+<g fill="#8fb8a0">
+  <rect x="145" y="180" width="45" height="45" rx="3"/><rect x="210" y="180" width="45" height="45" rx="3"/><rect x="275" y="180" width="45" height="45" rx="3"/><rect x="340" y="180" width="45" height="45" rx="3"/>
+  <rect x="145" y="245" width="45" height="45" rx="3"/><rect x="210" y="245" width="45" height="45" rx="3"/><rect x="275" y="245" width="45" height="45" rx="3"/><rect x="340" y="245" width="45" height="45" rx="3"/>
+  <rect x="145" y="310" width="45" height="45" rx="3"/><rect x="210" y="310" width="45" height="45" rx="3"/><rect x="275" y="310" width="45" height="45" rx="3"/><rect x="340" y="310" width="45" height="45" rx="3"/>
+</g>
+<!-- puertas balcón vitrina -->
+<rect x="190" y="375" width="70" height="55" rx="3" fill="#7a5a2e"/>
+<rect x="290" y="375" width="70" height="55" rx="3" fill="#7a5a2e"/>
+<!-- suelo -->
+<rect x="0" y="430" width="800" height="70" fill="#24401f"/>
+<circle cx="60" cy="410" r="28" fill="#0d1f14" opacity="0.35"/>
+<circle cx="720" cy="410" r="28" fill="#0d1f14" opacity="0.35"/>
+<ellipse cx="60" cy="455" rx="40" ry="9" fill="#0d1f14" opacity="0.5"/>
+<ellipse cx="720" cy="455" rx="40" ry="9" fill="#0d1f14" opacity="0.5"/>
+<!-- etiqueta energética -->
+<g transform="translate(500,120)">
+  <rect width="215" height="290" rx="10" fill="#ffffff" stroke="#2d3a1f" stroke-width="2"/>
+  <text x="107" y="26" text-anchor="middle" font-family="Arial,sans-serif" font-size="15" font-weight="700" fill="#2d3a1f">EFICIENCIA</text>
+  <rect x="18" y="38" width="179" height="34" rx="4" fill="#16a34a"/><text x="107" y="61" text-anchor="middle" font-family="Arial,sans-serif" font-size="15" font-weight="700" fill="#fff">A</text>
+  <rect x="18" y="75" width="165" height="34" rx="4" fill="#a3cd4a"/><text x="30" y="98" font-family="Arial,sans-serif" font-size="15" font-weight="700" fill="#fff">B</text>
+  <rect x="18" y="112" width="151" height="34" rx="4" fill="#cdd82e"/><text x="30" y="135" font-family="Arial,sans-serif" font-size="15" font-weight="700" fill="#fff">C</text>
+  <rect x="18" y="146" width="137" height="34" rx="4" fill="#f2b705"/><text x="30" y="169" font-family="Arial,sans-serif" font-size="15" font-weight="700" fill="#fff">D</text>
+  <rect x="18" y="180" width="123" height="34" rx="4" fill="#f29c05"/><text x="30" y="203" font-family="Arial,sans-serif" font-size="15" font-weight="700" fill="#fff">E</text>
+  <rect x="18" y="214" width="109" height="34" rx="4" fill="#e65e00"/><text x="30" y="237" font-family="Arial,sans-serif" font-size="15" font-weight="700" fill="#fff">F</text>
+  <rect x="18" y="248" width="95" height="34" rx="4" fill="#c62828"/><text x="30" y="271" font-family="Arial,sans-serif" font-size="15" font-weight="700" fill="#fff">G</text>
+</g>
+<text x="400" y="478" text-anchor="middle" font-family="Arial,sans-serif" font-size="15" font-weight="700" fill="#e3f0d3">certificadoya.es · Certificado energético vivienda turística</text>
+</svg>
