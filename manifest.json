@@ -1,0 +1,36 @@
+{
+  "name": "CertificadoYa",
+  "short_name": "CertificadoYa",
+  "description": "Certificados de eficiencia energética (CEE) en toda España. Técnicos verificados. Presupuesto instantáneo desde 45€.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#f7faf7",
+  "theme_color": "#16a34a",
+  "orientation": "portrait-primary",
+  "icons": [
+    {
+      "src": "/img/favicon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/img/favicon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/img/apple-touch-icon-180.png",
+      "sizes": "180x180",
+      "type": "image/png",
+      "purpose": "apple touch icon"
+    }
+  ],
+  "categories": [
+    "business",
+    "utilities"
+  ],
+  "lang": "es",
+  "dir": "ltr"
+}
