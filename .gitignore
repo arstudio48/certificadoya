@@ -63,6 +63,3 @@ _scratch/
 
 # Dashboard privado: conservar solo en el PC, nunca publicar
 /dashboard.html
-
-# Dashboard privado: nunca publicar
-/dashboard.html
