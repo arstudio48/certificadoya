@@ -9,26 +9,26 @@ Allow: /
 
 Sitemap: https://www.certificadoya.es/sitemap.xml
 Sitemap: https://www.certificadoya.es/sitemap-certificados.xml
-# GEO-001: Crawlers de IA
+# GEO-001: Crawlers de IA entrenamiento — bloqueados (no aportan tráfico, extraen contenido)
 User-agent: GPTBot
-Allow: /
+Disallow: /
 User-agent: ChatGPT-User
-Allow: /
+Disallow: /
 User-agent: PerplexityBot
-Allow: /
+Disallow: /
 User-agent: ClaudeBot
-Allow: /
+Disallow: /
 User-agent: Google-Extended
-Allow: /
+Disallow: /
 User-agent: anthropic-ai
-Allow: /
+Disallow: /
 User-agent: Applebot
-Allow: /
+Disallow: /
 User-agent: Amazonbot
-Allow: /
+Disallow: /
 User-agent: FacebookBot
-Allow: /
+Disallow: /
 User-agent: CCBot
-Allow: /
+Disallow: /
 User-agent: Bytespider
-Allow: /
+Disallow: /
