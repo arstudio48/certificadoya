@@ -1,271 +1,5 @@
 {
  "labels": [
-  "05-20",
-  "05-21",
-  "05-22",
-  "05-23",
-  "05-24",
-  "05-25",
-  "05-26",
-  "05-27",
-  "05-28",
-  "05-29",
-  "05-30",
-  "05-31",
-  "06-01",
-  "06-02",
-  "06-03",
-  "06-04",
-  "06-05",
-  "06-06",
-  "06-07",
-  "06-08",
-  "06-09",
-  "06-10",
-  "06-11",
-  "06-12",
-  "06-13",
-  "06-14",
-  "06-15",
-  "06-16",
-  "06-17",
-  "06-18",
-  "06-19",
-  "06-20",
-  "06-21",
-  "06-22",
-  "06-23",
-  "06-24",
-  "06-25",
-  "06-26",
-  "06-27",
-  "06-28",
-  "06-29",
-  "06-30",
-  "07-01",
-  "07-02",
-  "07-03",
-  "07-04",
-  "07-05",
-  "07-06",
-  "07-07",
-  "07-08",
-  "07-09",
-  "07-10",
-  "07-11",
-  "07-12",
-  "07-13",
-  "07-14",
-  "07-15",
-  "07-16",
-  "07-17",
-  "07-18",
-  "07-19",
-  "07-20",
-  "07-21",
-  "07-22",
-  "07-23",
-  "07-24",
-  "07-25",
-  "07-26",
-  "07-27",
-  "07-28",
-  "07-29"
- ],
- "imp": [
-  0,
-  3,
-  18,
-  53,
-  61,
-  60,
-  53,
-  159,
-  59,
-  72,
-  93,
-  131,
-  152,
-  231,
-  110,
-  99,
-  153,
-  173,
-  114,
-  118,
-  136,
-  200,
-  155,
-  203,
-  162,
-  179,
-  223,
-  179,
-  365,
-  168,
-  147,
-  129,
-  137,
-  180,
-  183,
-  417,
-  200,
-  191,
-  141,
-  338,
-  262,
-  220,
-  310,
-  217,
-  171,
-  129,
-  119,
-  171,
-  234,
-  209,
-  215,
-  225,
-  194,
-  195,
-  270,
-  292,
-  232,
-  240,
-  225,
-  167,
-  163,
-  310,
-  285,
-  306,
-  277,
-  198,
-  159,
-  171,
-  276,
-  964,
-  309
- ],
- "clicks": [
-  0,
-  1,
-  0,
-  1,
-  6,
-  5,
-  1,
-  1,
-  1,
-  0,
-  0,
-  2,
-  1,
-  1,
-  0,
-  1,
-  0,
-  0,
-  1,
-  1,
-  2,
-  2,
-  3,
-  1,
-  3,
-  1,
-  1,
-  0,
-  3,
-  3,
-  1,
-  1,
-  0,
-  2,
-  2,
-  0,
-  3,
-  2,
-  0,
-  2,
-  6,
-  3,
-  1,
-  2,
-  1,
-  2,
-  0,
-  2,
-  3,
-  1,
-  0,
-  5,
-  0,
-  0,
-  2,
-  2,
-  0,
-  3,
-  3,
-  1,
-  1,
-  6,
-  3,
-  3,
-  6,
-  2,
-  4,
-  3,
-  6,
-  9,
-  9
- ],
- "gc_labels": [
-  "05-23",
-  "05-24",
-  "05-25",
-  "05-26",
-  "05-27",
-  "05-28",
-  "05-29",
-  "05-30",
-  "05-31",
-  "06-01",
-  "06-02",
-  "06-03",
-  "06-04",
-  "06-05",
-  "06-06",
-  "06-07",
-  "06-08",
-  "06-09",
-  "06-10",
-  "06-11",
-  "06-12",
-  "06-13",
-  "06-14",
-  "06-15",
-  "06-16",
-  "06-17",
-  "06-18",
-  "06-19",
-  "06-20",
-  "06-21",
-  "06-22",
-  "06-23",
-  "06-24",
-  "06-25",
-  "06-26",
-  "06-27",
-  "06-28",
-  "06-29",
-  "06-30",
-  "07-01",
-  "07-02",
-  "07-03",
-  "07-04",
-  "07-05",
-  "07-06",
-  "07-07",
-  "07-08",
   "07-09",
   "07-10",
   "07-11",
@@ -289,80 +23,140 @@
   "07-29",
   "07-30",
   "07-31",
-  "08-01"
+  "08-01",
+  "08-02",
+  "08-03",
+  "08-04",
+  "08-05",
+  "08-06"
+ ],
+ "imp": [
+  215,
+  225,
+  194,
+  195,
+  270,
+  292,
+  232,
+  240,
+  225,
+  167,
+  163,
+  310,
+  285,
+  306,
+  277,
+  198,
+  159,
+  171,
+  276,
+  964,
+  309,
+  295,
+  262,
+  309,
+  184,
+  279,
+  347,
+  396,
+  330
+ ],
+ "clicks": [
+  0,
+  5,
+  0,
+  0,
+  2,
+  2,
+  0,
+  3,
+  3,
+  1,
+  1,
+  6,
+  3,
+  3,
+  6,
+  2,
+  4,
+  3,
+  6,
+  9,
+  9,
+  4,
+  2,
+  1,
+  3,
+  7,
+  5,
+  6,
+  6
+ ],
+ "gc_labels": [
+  "07-09",
+  "07-10",
+  "07-11",
+  "07-12",
+  "07-13",
+  "07-14",
+  "07-15",
+  "07-16",
+  "07-17",
+  "07-18",
+  "07-19",
+  "07-20",
+  "07-21",
+  "07-22",
+  "07-23",
+  "07-24",
+  "07-25",
+  "07-26",
+  "07-27",
+  "07-28",
+  "07-29",
+  "07-30",
+  "07-31",
+  "08-01",
+  "08-02",
+  "08-03",
+  "08-04",
+  "08-05",
+  "08-06",
+  "08-07",
+  "08-08"
  ],
  "gc_ses": [
-  0,
-  0,
-  0,
-  0,
-  0,
-  0,
-  0,
-  7,
-  6,
-  7,
   4,
   3,
-  3,
+  1,
+  1,
   4,
-  11,
-  3,
-  32,
-  24,
-  28,
-  6,
-  9,
-  16,
   2,
+  3,
+  2,
+  0,
+  1,
+  5,
+  2,
+  2,
+  2,
+  5,
+  6,
+  5,
+  8,
+  6,
+  5,
+  5,
+  2,
+  6,
   13,
-  20,
-  2,
-  6,
-  9,
-  22,
-  5,
-  7,
-  2,
-  7,
-  10,
-  7,
-  5,
-  7,
   8,
-  7,
-  1,
-  5,
-  2,
-  8,
-  6,
+  25,
   14,
+  10,
   5,
-  4,
-  4,
-  3,
-  1,
-  1,
-  4,
-  2,
-  3,
-  2,
-  0,
-  1,
-  5,
-  2,
-  2,
-  2,
-  5,
-  6,
-  5,
-  8,
-  6,
-  5,
-  5,
-  2,
-  6,
-  4
+  14,
+  0
  ],
  "tq": [
   {
@@ -373,27 +167,6 @@
    "posicion": 9.5
   },
   {
-   "query": "cee alicante",
-   "impresiones": 3,
-   "clics": 1,
-   "ctr": 33.3,
-   "posicion": 5.7
-  },
-  {
-   "query": "certificado energético",
-   "impresiones": 1,
-   "clics": 1,
-   "ctr": 100,
-   "posicion": 4
-  },
-  {
-   "query": "oviedo",
-   "impresiones": 1,
-   "clics": 1,
-   "ctr": 100,
-   "posicion": 2
-  },
-  {
    "query": "100 m",
    "impresiones": 1,
    "clics": 0,
@@ -401,32 +174,39 @@
    "posicion": 6
   },
   {
-   "query": "63 metros",
+   "query": "123m",
    "impresiones": 1,
    "clics": 0,
    "ctr": 0,
-   "posicion": 1
+   "posicion": 3
+  },
+  {
+   "query": "60",
+   "impresiones": 1,
+   "clics": 0,
+   "ctr": 0,
+   "posicion": 2
   },
   {
    "query": "659/2025",
-   "impresiones": 16,
+   "impresiones": 1,
    "clics": 0,
    "ctr": 0,
-   "posicion": 8.2
+   "posicion": 11
   },
   {
    "query": "ahorro energetico edificios cuenca",
    "impresiones": 1,
    "clics": 0,
    "ctr": 0,
-   "posicion": 43
+   "posicion": 83
   },
   {
    "query": "ahorro energetico en cadiz",
-   "impresiones": 40,
+   "impresiones": 54,
    "clics": 0,
    "ctr": 0,
-   "posicion": 26.3
+   "posicion": 9.8
   },
   {
    "query": "ahorro energetico en las empresas cadiz",
@@ -436,68 +216,76 @@
    "posicion": 16.5
   },
   {
-   "query": "ahorro energético en palencia",
-   "impresiones": 22,
+   "query": "ahorro energético pontevedra",
+   "impresiones": 1,
    "clics": 0,
    "ctr": 0,
-   "posicion": 71.7
+   "posicion": 68
   },
   {
-   "query": "ahorro energético gipuzkoa",
+   "query": "aislamiento",
+   "impresiones": 1,
+   "clics": 0,
+   "ctr": 0,
+   "posicion": 5
+  },
+  {
+   "query": "asesoramiento en tarifas energéticas en cádiz",
+   "impresiones": 3,
+   "clics": 0,
+   "ctr": 0,
+   "posicion": 60.7
+  },
+  {
+   "query": "asesoría energética en palencia",
    "impresiones": 9,
    "clics": 0,
    "ctr": 0,
-   "posicion": 29.7
+   "posicion": 88.7
   }
  ],
  "tp": [
   {
-   "pagina": "https://www.certificadoya.es/",
-   "impresiones": 185,
-   "clics": 32,
-   "posicion": 12.9
+   "pagina": "https://www.certificadoya.es/blog/exenciones-certificado-energetico.html",
+   "impresiones": 915,
+   "clics": 24,
+   "posicion": 7.0
   },
   {
-   "pagina": "https://www.certificadoya.es/blog/exenciones-certificado-energetico.html",
-   "impresiones": 556,
-   "clics": 16,
-   "posicion": 7.2
+   "pagina": "https://www.certificadoya.es/",
+   "impresiones": 118,
+   "clics": 14,
+   "posicion": 11.9
   },
   {
    "pagina": "https://www.certificadoya.es/certificado-energetico-asturias/",
-   "impresiones": 1103,
+   "impresiones": 593,
    "clics": 14,
-   "posicion": 28.6
+   "posicion": 18.0
   },
   {
    "pagina": "https://www.certificadoya.es/blog/certificado-energetico-obligatorio-2026.html",
-   "impresiones": 1338,
-   "clics": 9,
-   "posicion": 7.6
+   "impresiones": 1245,
+   "clics": 8,
+   "posicion": 7.8
+  },
+  {
+   "pagina": "https://www.certificadoya.es/certificado-energetico-albacete/",
+   "impresiones": 96,
+   "clics": 5,
+   "posicion": 12.2
   },
   {
    "pagina": "https://www.certificadoya.es/certificado-energetico-gipuzkoa/",
-   "impresiones": 336,
-   "clics": 9,
-   "posicion": 28.4
-  },
-  {
-   "pagina": "https://www.certificadoya.es/blog/rd-659-2025-que-cambia-tu-certificado-energetico.html",
-   "impresiones": 461,
-   "clics": 6,
-   "posicion": 8.1
+   "impresiones": 200,
+   "clics": 5,
+   "posicion": 27.2
   },
   {
    "pagina": "https://www.certificadoya.es/blog/certificado-energetico-donacion.html",
-   "impresiones": 27,
+   "impresiones": 24,
    "clics": 4,
-   "posicion": 3.7
-  },
-  {
-   "pagina": "https://www.certificadoya.es/blog/se-acaba-dinero-europeo-guia-comunidades-vecinos.html",
-   "impresiones": 66,
-   "clics": 4,
-   "posicion": 5.4
+   "posicion": 3.6
   },
   {
    "pagina": "https://www.certificadoya.es/blog/subvenciones-energeticas-andalucia-2026.html",
@@ -506,46 +294,49 @@
    "posicion": 8.1
   },
   {
-   "pagina": "https://www.certificadoya.es/certificado-energetico-barcelona/",
-   "impresiones": 1303,
-   "clics": 4,
-   "posicion": 54.5
+   "pagina": "https://www.certificadoya.es/valencia.html",
+   "impresiones": 66,
+   "clics": 3,
+   "posicion": 26.5
+  },
+  {
+   "pagina": "https://www.certificadoya.es/blog/certificado-energetico-piscina.html",
+   "impresiones": 12,
+   "clics": 2,
+   "posicion": 1.8
   }
  ],
- "leads_total": 60,
+ "leads_total": 35,
  "leads_estados": {
-  "pendientes": 2,
-  "asignados": 35,
-  "pagados": 0,
-  "cancelados": 0
+  "asignado": 23,
+  "pendientes": 8,
+  "descartado": 2,
+  "pagado": 1,
+  "pendiente_pago": 1
  },
  "leads_prov": [
   [
-   "Madrid",
-   19
-  ],
-  [
    "Asturias",
-   14
-  ],
-  [
-   "Barcelona",
-   4
+   5
   ],
   [
    "Gipuzkoa",
    5
   ],
   [
+   "Madrid",
+   4
+  ],
+  [
    "Bizkaia",
    3
   ],
   [
-   "Navarra",
+   "Barcelona",
    2
   ],
   [
-   "Valencia",
+   "Navarra",
    2
   ],
   [
@@ -553,11 +344,27 @@
    2
   ],
   [
-   "Sin definir",
+   "Valencia",
    2
   ],
   [
+   "Cantabria",
+   2
+  ],
+  [
+   "Zamora",
+   1
+  ],
+  [
    "Almería",
+   1
+  ],
+  [
+   "Huelva",
+   1
+  ],
+  [
+   "Tenerife",
    1
   ],
   [
@@ -565,64 +372,48 @@
    1
   ],
   [
-   "Tenerife",
+   "Ciudad Real",
+   1
+  ],
+  [
+   "Albacete",
+   1
+  ],
+  [
+   "Sin definir",
    1
   ]
  ],
  "leads_fuente": [
   [
    "web",
-   50
+   33
   ],
   [
-   "calculadora",
-   2
+   "web-stripe",
+   1
   ],
   [
    "stripe",
    1
-  ],
-  [
-   "reserva contra entrega",
-   1
-  ],
-  [
-   "tests",
-   6
   ]
  ],
  "leads_inmueble": [
   [
-   "piso",
-   46
-  ],
-  [
-   "unifamiliar",
-   8
-  ],
-  [
-   "adosado",
-   3
-  ],
-  [
-   "local",
-   2
-  ],
-  [
-   "casa",
-   1
+   "propietario",
+   35
   ]
  ],
  "tecnicos": {
-  "supabase_activos": 18,
+  "supabase_activos": 28,
   "master_universo": 1148,
   "pendientes_email": 944,
   "historial_enviados": 398
  },
  "gsc_total": {
-  "impresiones": 13660,
-  "clics": 144,
-  "ctr": 1.05,
-  "posicion_media": 37.1
+  "impresiones": 8075,
+  "clics": 102,
+  "ctr": 1.26,
+  "posicion_media": 24.4
  }
 }
